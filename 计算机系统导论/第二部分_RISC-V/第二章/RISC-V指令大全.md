@@ -137,16 +137,16 @@ imm12,10-5 | rs2 | rs1 | funct3 | imm4-1,11 | opcode
 ```
 
 ### 完整指令列表
-| 指令格式               | funct3 | 功能说明                     | 适用架构 | 使用示例                     |
-|------------------------|--------|------------------------------|----------|------------------------------|
-| `beq rs1, rs2, target` | 000    | 若rs1 == rs2，跳转           | RV32I/RV64I | `beq x10, x11, equal`    |
-| `bne rs1, rs2, target` | 001    | 若rs1 != rs2，跳转           | RV32I/RV64I | `bne x10, x11, not_equal`|
-| `blt rs1, rs2, target` | 100    | 若rs1 < rs2（有符号），跳转   | RV32I/RV64I | `blt x10, x11, less`     |
-| `bge rs1, rs2, target` | 101    | 若rs1 >= rs2（有符号），跳转  | RV32I/RV64I | `bge x10, x11, greater`  |
-| `ble rs1, rs2, target` | 110    | 若rs1 <= rs2（有符号），跳转  | RV32I/RV64I | `ble x10, x11, less_or_equal` |
-| `bgt rs1, rs2, target` | 111    | 若rs1 > rs2（有符号），跳转   | RV32I/RV64I | `bgt x10, x11, greater`  |
-| `bltu rs1, rs2, target`| 110    | 若rs1 < rs2（无符号），跳转   | RV32I/RV64I | `bltu x10, x11, less_u`  |
-| `bgeu rs1, rs2, target`| 111    | 若rs1 >= rs2（无符号），跳转  | RV32I/RV64I | `bgeu x10, x11, greater_u` |
+| 指令格式                    | funct3 | 功能说明                | 适用架构        | 使用示例                          |
+| ----------------------- | ------ | ------------------- | ----------- | ----------------------------- |
+| `beq rs1, rs2, target`  | 000    | 若rs1 == rs2，跳转      | RV32I/RV64I | `beq x10, x11, equal`         |
+| `bne rs1, rs2, target`  | 001    | 若rs1 != rs2，跳转      | RV32I/RV64I | `bne x10, x11, not_equal`     |
+| `blt rs1, rs2, target`  | 100    | 若rs1 < rs2（有符号），跳转  | RV32I/RV64I | `blt x10, x11, less`          |
+| `bge rs1, rs2, target`  | 101    | 若rs1 >= rs2（有符号），跳转 | RV32I/RV64I | `bge x10, x11, greater`       |
+| `ble rs1, rs2, target`  | 110    | 若rs1 <= rs2（有符号），跳转 | RV32I/RV64I | `ble x10, x11, less_or_equal` |
+| `bgt rs1, rs2, target`  | 111    | 若rs1 > rs2（有符号），跳转  | RV32I/RV64I | `bgt x10, x11, greater`       |
+| `bltu rs1, rs2, target` | 110    | 若rs1 < rs2（无符号），跳转  | RV32I/RV64I | `bltu x10, x11, less_u`       |
+| `bgeu rs1, rs2, target` | 111    | 若rs1 >= rs2（无符号），跳转 | RV32I/RV64I | `bgeu x10, x11, greater_u`    |
 
 ## 六、U型指令格式（Upper Immediate）
 用于加载高位立即数，立即数长度为20位。
