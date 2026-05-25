@@ -1,0 +1,1717 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>偏最小二乘回归 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              偏最小二乘回归
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 PLS登场：为什么需要它？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 PLS登场：为什么需要它？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        挑战
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pls_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PLS的诞生
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pls_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 PLS的核心思想
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💡 PLS的核心思想">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 提取"潜变量"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 双重最大化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pls_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📐 PLS的目标函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📐 PLS的目标函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目标：最大化协方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pls_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 PLS求解步骤
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 PLS求解步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步：数据标准化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步：提取第一对潜变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三步：建立回归
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第四步：重复迭代
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第五步：得到最终模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 如何确定潜变量个数？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 如何确定潜变量个数？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        交叉有效性方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 实战案例：汽油辛烷含量预测
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 实战案例：汽油辛烷含量预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分析过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pls-vs-pcr-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 PLS vs PCR vs 岭回归
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pls_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ PLS的三大特点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 优缺点总结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ 优缺点总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔑 本节核心要点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💭 一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 回归分析总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">偏最小二乘回归<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="pls">🎯 PLS登场：为什么需要它？<a class="headerlink" href="#pls" title="Permanent link">&para;</a></h2>
+<p>先来看一个经典的案例——<strong>汽油光谱分析</strong>：</p>
+<blockquote>
+<p><strong>问题</strong>：有60个汽油样本，每个样本有401个波长处的光谱强度（自变量），以及辛烷含量（因变量）。如何预测新汽油的辛烷含量？</p>
+</blockquote>
+<h3 id="_2">挑战<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>自变量之间高度相关</strong>（401个波长，信号当然相关）</li>
+<li><strong>样本数少于变量数</strong>（60 &lt; 401！）</li>
+<li>传统的最小二乘法在这里<strong>直接失效</strong></li>
+</ol>
+<p>这就是偏最小二乘回归（<strong>Partial Least Squares, PLS</strong>）诞生的背景！</p>
+<h3 id="pls_1">PLS的诞生<a class="headerlink" href="#pls_1" title="Permanent link">&para;</a></h3>
+<p>PLS最初产生于化学领域（1983年），专门解决这类棘手问题：
+- 变量数 &gt;&gt; 样本数
+- 自变量之间存在严重共线性
+- 需要同时考虑 <span class="arithmatex">\(\mathbf{X}\)</span> 和 <span class="arithmatex">\(\mathbf{Y}\)</span> 的关系</p>
+<hr />
+<h2 id="pls_2">💡 PLS的核心思想<a class="headerlink" href="#pls_2" title="Permanent link">&para;</a></h2>
+<p>PLS做了两件聪明的事：</p>
+<h3 id="1">1. 提取"潜变量"<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>从 <span class="arithmatex">\(\mathbf{X}\)</span> 和 <span class="arithmatex">\(\mathbf{Y}\)</span> 中<strong>同时</strong>提取最能代表各自信息的成分，称为<strong>潜变量</strong>（Latent Variables）：
+- <span class="arithmatex">\(\mathbf{t}_1\)</span>：从 <span class="arithmatex">\(\mathbf{X}\)</span> 提取的第一潜变量
+- <span class="arithmatex">\(\mathbf{u}_1\)</span>：从 <span class="arithmatex">\(\mathbf{Y}\)</span> 提取的第一潜变量</p>
+<h3 id="2">2. 双重最大化<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>提取潜变量时，要求：
+1. <strong><span class="arithmatex">\(\mathbf{t}_1\)</span> 和 <span class="arithmatex">\(\mathbf{u}_1\)</span> 各自尽量携带自己数据表中的变异信息</strong>（方差最大）
+2. <strong><span class="arithmatex">\(\mathbf{t}_1\)</span> 和 <span class="arithmatex">\(\mathbf{u}_1\)</span> 的相关程度最大</strong></p>
+<blockquote>
+<p><strong>关键</strong>：与PCA不同，PLS提取潜变量时<strong>同时考虑了 <span class="arithmatex">\(\mathbf{X}\)</span> 和 <span class="arithmatex">\(\mathbf{Y}\)</span></strong>！</p>
+</blockquote>
+<hr />
+<h2 id="pls_3">📐 PLS的目标函数<a class="headerlink" href="#pls_3" title="Permanent link">&para;</a></h2>
+<p>设标准化后的数据为 <span class="arithmatex">\(\mathbf{E}_0\)</span>（<span class="arithmatex">\(\mathbf{X}\)</span>）和 <span class="arithmatex">\(\mathbf{F}_0\)</span>（<span class="arithmatex">\(\mathbf{Y}\)</span>）。</p>
+<p>潜变量表示为：
+$$
+\mathbf{t}_1 = \mathbf{E}_0\mathbf{w}_1, \quad \mathbf{u}_1 = \mathbf{F}_0\mathbf{c}_1
+$$</p>
+<p>其中 <span class="arithmatex">\(\mathbf{w}_1, \mathbf{c}_1\)</span> 是组合系数（模长为1）。</p>
+<h3 id="_3">目标：最大化协方差<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\max_{\mathbf{w}_1, \mathbf{c}_1} \text{Cov}(\mathbf{t}_1, \mathbf{u}_1)
+\]</div>
+<p>展开得：
+$$
+\max_{\mathbf{w}_1, \mathbf{c}_1} \ \mathbf{w}_1^T\mathbf{E}_0^T\mathbf{F}_0\mathbf{c}_1
+$$</p>
+<blockquote>
+<p>这就等价于：让 <span class="arithmatex">\(\mathbf{t}_1\)</span> 和 <span class="arithmatex">\(\mathbf{u}_1\)</span> <strong>既各自方差大，又相互相关强</strong>。</p>
+</blockquote>
+<hr />
+<h2 id="pls_4">🔧 PLS求解步骤<a class="headerlink" href="#pls_4" title="Permanent link">&para;</a></h2>
+<h3 id="_4">第一步：数据标准化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>将 <span class="arithmatex">\(\mathbf{X}\)</span> 和 <span class="arithmatex">\(\mathbf{Y}\)</span> 标准化，消除量纲影响。</p>
+<h3 id="_5">第二步：提取第一对潜变量<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>通过拉格朗日乘子法，可以得到：
+- <span class="arithmatex">\(\mathbf{w}_1\)</span> 是 <span class="arithmatex">\(\mathbf{E}_0^T\mathbf{F}_0\mathbf{F}_0^T\mathbf{E}_0\)</span> 的<strong>最大特征值对应的特征向量</strong>
+- <span class="arithmatex">\(\mathbf{c}_1\)</span> 是 <span class="arithmatex">\(\mathbf{F}_0^T\mathbf{E}_0\mathbf{E}_0^T\mathbf{F}_0\)</span> 的<strong>最大特征值对应的特征向量</strong></p>
+<p>于是：
+$$
+\mathbf{t}_1 = \mathbf{E}_0\mathbf{w}_1, \quad \mathbf{u}_1 = \mathbf{F}_0\mathbf{c}_1
+$$</p>
+<h3 id="_6">第三步：建立回归<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>用最小二乘法建立 <span class="arithmatex">\(\mathbf{t}_1\)</span> 与原变量的回归：
+$$
+\mathbf{E}_0 = \mathbf{t}_1\mathbf{p}_1^T + \mathbf{E}_1
+$$
+$$
+\mathbf{F}_0 = \mathbf{t}_1\mathbf{r}_1^T + \mathbf{F}_1
+$$</p>
+<p>其中 <span class="arithmatex">\(\mathbf{E}_1, \mathbf{F}_1\)</span> 是残差。</p>
+<h3 id="_7">第四步：重复迭代<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>用 <span class="arithmatex">\(\mathbf{E}_1, \mathbf{F}_1\)</span> 代替 <span class="arithmatex">\(\mathbf{E}_0, \mathbf{F}_0\)</span>，继续提取 <span class="arithmatex">\(\mathbf{t}_2, \mathbf{u}_2, \ldots\)</span></p>
+<h3 id="_8">第五步：得到最终模型<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>经过 <span class="arithmatex">\(A\)</span> 次迭代后：
+$$
+\mathbf{F}<em>0 = \mathbf{t}_1\mathbf{r}_1^T + \mathbf{t}_2\mathbf{r}_2^T + \cdots + \mathbf{t}_A\mathbf{r}_A^T + \mathbf{F}</em>{A+1}
+$$</p>
+<p>转化为 <span class="arithmatex">\(\mathbf{X} \rightarrow \mathbf{Y}\)</span> 的回归模型。</p>
+<hr />
+<h2 id="_9">🎯 如何确定潜变量个数？<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">交叉有效性方法<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>问题：选太少欠拟合，选太多过拟合，怎么办？</p>
+<h3 id="_11">原理<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>定义两个指标：
+- <strong><span class="arithmatex">\(SSE_h\)</span></strong>：使用 <span class="arithmatex">\(h\)</span> 个潜变量时，所有样本的拟合误差平方和
+- <strong><span class="arithmatex">\(PRESS_h\)</span></strong>：用"留一法"交叉验证的预测误差平方和</p>
+<p><strong>判断标准</strong>：
+$$
+\frac{PRESS_h}{SSE_{h-1}} \leq 0.95^2
+$$</p>
+<p>如果成立，说明<strong>增加第 <span class="arithmatex">\(h\)</span> 个潜变量是有效的</strong>！</p>
+<blockquote>
+<p>简单理解：虽然用了更多参数，但预测效果确实变好了（提升至少5%），那就值得加。</p>
+</blockquote>
+<hr />
+<h2 id="_12">🧪 实战案例：汽油辛烷含量预测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>回到最初的案例！</p>
+<h3 id="_13">数据<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>60个汽油样本</li>
+<li>401个波长特征（<span class="arithmatex">\(60 \times 401\)</span>）</li>
+<li>辛烷含量（<span class="arithmatex">\(60 \times 1\)</span>）</li>
+</ul>
+<h3 id="_14">分析过程<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><strong>第一步</strong>：可视化光谱数据
+- 每条线代表一个样本
+- X轴：波长
+- Y轴：光谱强度
+- Z轴：辛烷含量</p>
+<p><strong>第二步</strong>：PLS回归
+- 设定10个潜变量
+- 观察被解释方差百分比</p>
+<p><strong>第三步</strong>：确定潜变量个数
+- 两个潜变量就能解释大部分方差
+- 继续增加，提升不明显</p>
+<p><strong>第四步</strong>：对比PCR和PLS</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>两个成分的解释方差</th>
+<th>预测效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主元回归（PCR）</td>
+<td>只考虑 <span class="arithmatex">\(\mathbf{X}\)</span></td>
+<td>较差</td>
+</tr>
+<tr>
+<td>偏最小二乘（PLS）</td>
+<td>同时考虑 <span class="arithmatex">\(\mathbf{X}\)</span> 和 <span class="arithmatex">\(\mathbf{Y}\)</span></td>
+<td><strong>更好</strong></td>
+</tr>
+</tbody>
+</table>
+<p>从预测值vs实际值的散点图可以看出：PLS的散点更靠近对角线，预测更准确！</p>
+<hr />
+<h2 id="pls-vs-pcr-vs">📊 PLS vs PCR vs 岭回归<a class="headerlink" href="#pls-vs-pcr-vs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>PLS</th>
+<th>PCR</th>
+<th>岭回归</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>特征提取</strong></td>
+<td>有监督（考虑Y）</td>
+<td>无监督（只看X）</td>
+<td>不提取</td>
+</tr>
+<tr>
+<td><strong>降维方式</strong></td>
+<td>潜变量投影</td>
+<td>主成分投影</td>
+<td>参数收缩</td>
+</tr>
+<tr>
+<td><strong>变量选择</strong></td>
+<td>隐式</td>
+<td>显式</td>
+<td>隐式（无稀疏）</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>X与Y都复杂</td>
+<td>X复杂Y简单</td>
+<td>X轻微共线</td>
+</tr>
+<tr>
+<td><strong>解释性</strong></td>
+<td>较好</td>
+<td>较弱</td>
+<td>较弱</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pls_5">✅ PLS的三大特点<a class="headerlink" href="#pls_5" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>能在自变量存在多重共线性的条件下建模</strong></li>
+<li>
+<p>即使 <span class="arithmatex">\(N &lt; p\)</span>（样本少于变量）也能工作</p>
+</li>
+<li>
+<p><strong>允许样本点个数少于自变量个数</strong></p>
+</li>
+<li>
+<p>汽油案例：60样本，401变量，完美应对！</p>
+</li>
+<li>
+<p><strong>考虑了X和Y的相关关系，结果更可靠</strong></p>
+</li>
+<li>同时最大化X的变异信息和X-Y相关度</li>
+</ol>
+<hr />
+<h2 id="_15">⚠️ 优缺点总结<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="_16">优点<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ 解决高维、共线、小样本问题</li>
+<li>✅ 潜变量个数可通过交叉验证确定</li>
+<li>✅ 综合了PCA、典型相关分析、回归分析的优点</li>
+<li>✅ 图形功能强大（可降维可视化）</li>
+</ul>
+<h3 id="_17">缺点<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ 计算相对复杂</li>
+<li>✅ 对异常值敏感</li>
+<li>⚠️ 潜变量的物理含义有时难以解释</li>
+</ul>
+<hr />
+<h2 id="_18">🔑 本节核心要点<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>核心要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>潜变量</strong></td>
+<td>从X和Y同时提取的代表成分 <span class="arithmatex">\(\mathbf{t}, \mathbf{u}\)</span></td>
+</tr>
+<tr>
+<td><strong>目标函数</strong></td>
+<td><span class="arithmatex">\(\max \text{Cov}(\mathbf{t}, \mathbf{u})\)</span></td>
+</tr>
+<tr>
+<td><strong>双重最大化</strong></td>
+<td>X的变异信息 + X与Y的相关性</td>
+</tr>
+<tr>
+<td><strong>vs PCR</strong></td>
+<td>PLS是有监督降维，PCR是无监督</td>
+</tr>
+<tr>
+<td><strong>交叉有效性</strong></td>
+<td><span class="arithmatex">\(PRESS_h/SSE_{h-1} \leq 0.95^2\)</span> 判断潜变量有效性</td>
+</tr>
+<tr>
+<td><strong>应用场景</strong></td>
+<td>高维、小样本、多重共线性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_19">💭 一句话总结<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<p><strong>偏最小二乘回归的本质</strong>：不再"闭门造车"地只看自变量的变化，而是同时考虑"自变量怎么变"和"它和因变量怎么一起变"。就像在选课前，既看老师的课讲得好不好（X的信息量），又看这门课对就业有没有帮助（与Y的相关性）——选出来的课当然更有价值！</p>
+<hr />
+<h2 id="_20">🎓 回归分析总结<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<p>这一章我们学习了四种回归方法：</p>
+<ol>
+<li><strong>最小二乘回归</strong>：基础，但共线性时失效</li>
+<li><strong>岭回归</strong>：打补丁，加正则化项</li>
+<li><strong>主元回归</strong>：降维，用主成分做回归</li>
+<li><strong>偏最小二乘回归</strong>：有监督降维，最聪明</li>
+</ol>
+<p>它们各有优劣，实际中要根据数据特点选择合适的方法！</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4377 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第10章 具有度量的线性空间 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第10章 具有度量的线性空间
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述与教学目标
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="章节概述与教学目标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内容定位
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心问题链
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        教学重点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        教学难点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 双线性函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.1 双线性函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概念引入动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 从线性到双线性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 历史背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 为什么要研究双线性函数？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 双线性函数的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 对称与斜对称双线性函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 正定性与非退化性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 度量矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 欧几里得空间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 欧几里得空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概念引入动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 从几何直观到代数定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 为什么要研究欧几里得空间？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 历史注记
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 内积的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 由内积导出的度量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 正交
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 标准正交基
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【证明题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 正交补与正交投影
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 正交补与正交投影">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概念引入动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 分解的追求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 正交投影的几何意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 历史背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 正交补的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 正交补的基本定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 正交投影
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 正交投影的范数性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【证明题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、补充：投影矩阵与最小二乘（矩阵语言）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、补充：投影矩阵与最小二乘（矩阵语言）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 问题引入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 投影的正交性推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 投影矩阵 \(P\) 的推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 投影矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 空间分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 与最小二乘的联系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 正交变换与对称变换
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 正交变换与对称变换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概念引入动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 刚体运动的代数刻画
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 对称变换——自伴算子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 谱定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 正交变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 正交矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 对称变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 对称矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 西空间、西变换、埃尔米特变换
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5 西空间、西变换、埃尔米特变换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概念引入动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 从实到复的推广
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 复内积的特殊性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 酉矩阵的对应
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 西内积
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 西内积的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 酉变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 埃尔米特变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 正交空间与辛空间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6 正交空间与辛空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概念引入动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 从正定到一般的度量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 辛几何的起源
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 线性代数的新视角
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 正交空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 辛空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 辛变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 正交群、西群、辛群
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7 正交群、西群、辛群">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、概念引入动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 变换群的观点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 群论与几何的统一
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 正交群
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 酉群
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 辛群
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心知识点梳理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心知识点梳理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、双线性函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、欧几里得空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、正交补与投影
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、正交变换与对称变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、酉空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、变换群
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速查表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型问题解题策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型问题解题策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 证明正交性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gram-schmidt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Gram-Schmidt正交化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 求正交补
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 判别正交变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 对称矩阵正交对角化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="10">第10章 具有度量的线性空间<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述与教学目标<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">内容定位<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>本章在一般线性空间的基础上，引入"度量"的概念——通过内积定义角度和长度。这是从代数走向几何的关键一步，也是连接线性代数与泛函分析的桥梁。</p>
+<h3 id="_3">核心问题链<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>引入动机</strong>：为什么需要内积？</li>
+<li><strong>基本度量</strong>：欧几里得空间如何定义长度和角度？</li>
+<li><strong>正交性</strong>：正交是什么？如何分解？</li>
+<li><strong>几何变换</strong>：正交变换、对称变换如何刻画？</li>
+<li><strong>复数推广</strong>：酉空间如何处理复数域？</li>
+<li><strong>一般度量</strong>：正交空间、辛空间的结构</li>
+</ul>
+<h3 id="_4">教学重点<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li>内积空间的定义与性质</li>
+<li>标准正交基的构造（Gram-Schmidt）</li>
+<li>正交补与正交投影</li>
+<li>正交变换与对称变换的判别</li>
+<li>酉空间的复数推广</li>
+</ol>
+<h3 id="_5">教学难点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Gram-Schmidt正交化过程的本质理解</li>
+<li>正交补的构造性证明</li>
+<li>自伴算子的谱定理</li>
+<li>辛几何的直观理解</li>
+</ol>
+<hr />
+<h2 id="101">10.1 双线性函数<a class="headerlink" href="#101" title="Permanent link">&para;</a></h2>
+<h3 id="_6">一、概念引入动机<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1 从线性到双线性<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>线性映射：V → F（一个变量）
+双线性函数：V × V → F（两个变量，都线性）
+</code></pre></div></td></tr></table></div>
+<p>双线性函数是研究更一般的"度量"的工具：
+- 内积：正定对称双线性函数
+- 辛形式：斜对称双线性函数
+- 二次型：与对称双线性函数一一对应</p>
+<h4 id="12">1.2 历史背景<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<p>双线性形式的研究源于：
+- 二次型的分类（Cauchy、Sylvester）
+- 辛几何的建立（Klein、Hamilton）
+- 张量分析的数学化（Riemann、Ricci）</p>
+<h4 id="13">1.3 为什么要研究双线性函数？<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>引入度量的三步曲：
+1. 双线性函数 f(α,β) - 两个向量产生一个数
+2. 对称/斜对称 - f(α,β) = ±f(β,α)
+3. 正定/非退化 - 额外的约束条件
+</code></pre></div></td></tr></table></div>
+<h3 id="_7">二、详细讲解过程<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1 双线性函数的定义<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.1.1（双线性函数）</strong>
+设 <span class="arithmatex">\(V\)</span> 是域 <span class="arithmatex">\(F\)</span> 上的线性空间，映射 <span class="arithmatex">\(f: V \times V \to F\)</span> 满足：
+1. <span class="arithmatex">\(f(\alpha + \beta, \gamma) = f(\alpha, \gamma) + f(\beta, \gamma)\)</span>
+2. <span class="arithmatex">\(f(\alpha, \beta + \gamma) = f(\alpha, \beta) + f(\alpha, \gamma)\)</span>
+3. <span class="arithmatex">\(f(k\alpha, \beta) = k f(\alpha, \beta)\)</span>
+4. <span class="arithmatex">\(f(\alpha, k\beta) = k f(\alpha, \beta)\)</span></p>
+<p>则称 <span class="arithmatex">\(f\)</span> 为 <span class="arithmatex">\(V\)</span> 上的<strong>双线性函数</strong>。</p>
+</blockquote>
+<p><strong>几何理解</strong>：固定第一个变量，<span class="arithmatex">\(f(\cdot, \beta)\)</span> 是线性函数；固定第二个变量，<span class="arithmatex">\(f(\alpha, \cdot)\)</span> 也是线性函数。</p>
+<h4 id="22">2.2 对称与斜对称双线性函数<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.1.2（对称双线性函数）</strong>
+若 <span class="arithmatex">\(f(\alpha, \beta) = f(\beta, \alpha)\)</span> 对所有 <span class="arithmatex">\(\alpha, \beta \in V\)</span> 成立，则称 <span class="arithmatex">\(f\)</span> 为<strong>对称双线性函数</strong>。</p>
+<p><strong>定义10.1.3（斜对称双线性函数）</strong>
+若 <span class="arithmatex">\(f(\alpha, \beta) = -f(\beta, \alpha)\)</span> 对所有 <span class="arithmatex">\(\alpha, \beta \in V\)</span> 成立，则称 <span class="arithmatex">\(f\)</span> 为<strong>斜对称双线性函数</strong>。</p>
+</blockquote>
+<p><strong>注意</strong>：若 <span class="arithmatex">\(\text{char}(F) \neq 2\)</span>，则每个双线性函数都可以唯一分解为对称部分和斜对称部分的和：
+$<span class="arithmatex">\(f_s(\alpha, \beta) = \frac{f(\alpha, \beta) + f(\beta, \alpha)}{2}, \quad f_a(\alpha, \beta) = \frac{f(\alpha, \beta) - f(\beta, \alpha)}{2}\)</span>$</p>
+<h4 id="23">2.3 正定性与非退化性<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.1.4（正定双线性函数）</strong>
+对称双线性函数 <span class="arithmatex">\(f\)</span> 称为<strong>正定</strong>的，若 <span class="arithmatex">\(f(\alpha, \alpha) &gt; 0\)</span> 对所有 <span class="arithmatex">\(\alpha \neq 0\)</span> 成立。</p>
+<p><strong>定义10.1.5（非退化双线性函数）</strong>
+双线性函数 <span class="arithmatex">\(f\)</span> 称为<strong>非退化</strong>的，若由 <span class="arithmatex">\(f(\alpha, \beta) = 0\)</span> 对所有 <span class="arithmatex">\(\beta \in V\)</span> 成立，可以推出 <span class="arithmatex">\(\alpha = 0\)</span>。</p>
+</blockquote>
+<p><strong>关系</strong>：
+- 在正定对称双线性函数上加上非退化条件是冗余的（正定必然非退化）
+- 在一般对称双线性函数上，正定与非退化是不同概念</p>
+<h4 id="24">2.4 度量矩阵<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.1.6（度量矩阵）</strong>
+设 <span class="arithmatex">\(f\)</span> 是 <span class="arithmatex">\(V\)</span> 上的双线性函数，<span class="arithmatex">\(\{\varepsilon_1, \ldots, \varepsilon_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的基。
+矩阵 <span class="arithmatex">\(G = (f(\varepsilon_i, \varepsilon_j))_{n \times n}\)</span> 称为 <span class="arithmatex">\(f\)</span> 在该基下的<strong>度量矩阵</strong>。</p>
+</blockquote>
+<p><strong>性质</strong>：
+- 对称双线性函数的度量矩阵是对称矩阵
+- 斜对称双线性函数的度量矩阵是斜对称矩阵
+- 基变换下：<span class="arithmatex">\(G' = P^T G P\)</span>（<span class="arithmatex">\(P\)</span> 是过渡矩阵）</p>
+<h3 id="_8">三、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h4 id="_9">【验证题】<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p><strong>例1.1</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^n\)</span>，定义
+$<span class="arithmatex">\(f(\alpha, \beta) = \alpha^T \beta = \sum_{i=1}^n a_i b_i\)</span>$
+判断 <span class="arithmatex">\(f\)</span> 是何种双线性函数。</p>
+<p><strong>解答</strong>：
+- 线性性：直接验证四条定义
+- 对称性：<span class="arithmatex">\(f(\alpha, \beta) = \sum a_i b_i = \sum b_i a_i = f(\beta, \alpha)\)</span>，对称
+- 正定性：<span class="arithmatex">\(f(\alpha, \alpha) = \sum a_i^2 \geq 0\)</span>，等号成立当且仅当 <span class="arithmatex">\(\alpha = 0\)</span>，正定</p>
+<p>故 <span class="arithmatex">\(f\)</span> 是<strong>正定对称双线性函数</strong>（即标准内积）。</p>
+<hr />
+<p><strong>例1.2</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^2\)</span>，判断 <span class="arithmatex">\(f((x_1,y_1), (x_2,y_2)) = x_1 x_2 - y_1 y_2\)</span> 是否为双线性函数。</p>
+<p><strong>解答</strong>：
+- 对第一个变量线性：<span class="arithmatex">\(f((x_1+x_2, y), (x_3,y_3)) = (x_1+x_2)x_3 - yy_3 = x_1x_3 + x_2x_3 - yy_3 = f(v_1,w) + f(v_2,w)\)</span> ✓
+- 对第二个变量线性：类似验证 ✓
+- 双线性 ✓</p>
+<p>但 <span class="arithmatex">\(f\)</span> 不是对称的：
+<span class="arithmatex">\(f((1,0),(0,1)) = 0\)</span>，而 <span class="arithmatex">\(f((0,1),(1,0)) = 0\)</span>，碰巧相等
+<span class="arithmatex">\(f((1,0),(1,0)) = 1\)</span>，<span class="arithmatex">\(f((0,1),(0,1)) = -1\)</span>，非正定</p>
+<hr />
+<p><strong>例1.3</strong>：设 <span class="arithmatex">\(V = M_{n \times n}(\mathbb{R})\)</span>，定义 <span class="arithmatex">\(f(A,B) = \text{tr}(AB^T)\)</span>。
+判断 <span class="arithmatex">\(f\)</span> 是否正定、对称。</p>
+<p><strong>解答</strong>：
+- 对称：<span class="arithmatex">\(\text{tr}(AB^T) = \text{tr}(BA^T) = \text{tr}(A^TB)^T = \text{tr}(B^TA)\)</span>，对称 ✓
+- 正定：<span class="arithmatex">\(\text{tr}(AA^T) = \sum_{i,j} a_{ij}^2 \geq 0\)</span>，等号成立当且仅当 <span class="arithmatex">\(A = 0\)</span>，正定 ✓</p>
+<h4 id="_10">【计算题】<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p><strong>例1.4</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^2\)</span>，<span class="arithmatex">\(f\)</span> 在标准基下的度量矩阵为 <span class="arithmatex">\(G = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span>。
+求 <span class="arithmatex">\(f((1,2), (3,4))\)</span>。</p>
+<p><strong>解答</strong>：
+设 <span class="arithmatex">\(\alpha = (1,2) = e_1 + 2e_2\)</span>，<span class="arithmatex">\(\beta = (3,4) = 3e_1 + 4e_2\)</span></p>
+<p><span class="arithmatex">\(f(\alpha, \beta) = (e_1+2e_2)^T G (3e_1+4e_2)^T\)</span>（用坐标）</p>
+<p>直接计算：
+$<span class="arithmatex">\(f(\alpha, \beta) = \begin{pmatrix} 1 &amp; 2 \end{pmatrix} \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix} \begin{pmatrix} 3 \\ 4 \end{pmatrix} = \begin{pmatrix} 4 &amp; 5 \end{pmatrix} \begin{pmatrix} 3 \\ 4 \end{pmatrix} = 12 + 20 = 32\)</span>$</p>
+<hr />
+<p><strong>例1.5</strong>：设 <span class="arithmatex">\(f\)</span> 在基 <span class="arithmatex">\(\{e_1, e_2\}\)</span> 下的度量矩阵为 <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 5 \end{pmatrix}\)</span>。
+求在新基 <span class="arithmatex">\(\{(1,1), (1,-1)\}\)</span> 下的度量矩阵。</p>
+<p><strong>解答</strong>：
+过渡矩阵 <span class="arithmatex">\(P = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}\)</span>（使 <span class="arithmatex">\(\varepsilon' = \varepsilon P\)</span>）</p>
+<p>新度量矩阵：
+$<span class="arithmatex">\(G' = P^T G P = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix} \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 5 \end{pmatrix} \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix} = \begin{pmatrix} 3 &amp; 6 \\ -1 &amp; -3 \end{pmatrix} \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix} = \begin{pmatrix} 9 &amp; -3 \\ -4 &amp; 2 \end{pmatrix}\)</span>$</p>
+<h3 id="_11">四、易错点提醒<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>混淆对称与斜对称</td>
+<td>对称：<span class="arithmatex">\(f(\alpha,\beta) = f(\beta,\alpha)\)</span>；斜对称：<span class="arithmatex">\(f(\alpha,\beta) = -f(\beta,\alpha)\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>忘记双线性对两个变量都线性</td>
+<td>必须分别验证两个变量的线性性</td>
+</tr>
+<tr>
+<td>3</td>
+<td>基变换公式记错</td>
+<td><span class="arithmatex">\(G' = P^T G P\)</span>，不是 <span class="arithmatex">\(P^{-1}GP\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>正定要求误用</td>
+<td>正定只对对称双线性函数有意义</td>
+</tr>
+<tr>
+<td>5</td>
+<td>非退化与正定混淆</td>
+<td>非退化 <span class="arithmatex">\(\Leftrightarrow\)</span> 度量矩阵可逆；正定 <span class="arithmatex">\(\Rightarrow\)</span> 非退化（对称情形）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">五、思考题<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>退化双线性函数</strong>：构造一个对称双线性函数，它是退化的（即度量矩阵奇异）。</p>
+</li>
+<li>
+<p><strong>斜对称矩阵的性质</strong>：证明斜对称矩阵的对角线元素为零，且行列式是平方数。</p>
+</li>
+<li>
+<p><strong>Sylvester惯性定律</strong>：对称矩阵经合同变换后，正、负、零特征值的个数不变。如何用双线性函数解释？</p>
+</li>
+</ol>
+<hr />
+<h2 id="102">10.2 欧几里得空间<a class="headerlink" href="#102" title="Permanent link">&para;</a></h2>
+<h3 id="_13">一、概念引入动机<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h4 id="11_1">1.1 从几何直观到代数定义<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>欧几里得几何的三大公理：
+1. 两点确定一条直线
+2. 可以用圆规作图
+3. 所有直角都相等
+
+解析几何将这些转化为：
+• 向量：有序数对 (x, y)
+• 内积：(x₁,y₁)·(x₂,y₂) = x₁x₂ + y₁y₂
+• 长度：|v| = √(v·v)
+• 角度：cos θ = (u·v)/(|u||v|)
+</code></pre></div></td></tr></table></div>
+<h4 id="12_1">1.2 为什么要研究欧几里得空间？<a class="headerlink" href="#12_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>线性代数研究线性结构
++ 几何学需要度量结构
+= 欧几里得空间（线性代数+几何）
+
+好处：
+✓ 可以谈长度、角度、正交
+✓ 可以做投影、分解
+✓ 为泛函分析提供有限维模型
+</code></pre></div></td></tr></table></div>
+<h4 id="13_1">1.3 历史注记<a class="headerlink" href="#13_1" title="Permanent link">&para;</a></h4>
+<p>欧几里得空间（Euclidean space）得名于古希腊数学家Euclid。《几何原本》建立了公理化几何的基础。19世纪，Hilbert给出了严格的公理化定义，von Neumann建立了现代的内积空间理论。</p>
+<h3 id="_14">二、详细讲解过程<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h4 id="21_1">2.1 内积的定义<a class="headerlink" href="#21_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.2.1（内积）</strong>
+在实线性空间 <span class="arithmatex">\(V\)</span> 上定义<strong>内积</strong>，即正定对称双线性函数：
+$<span class="arithmatex">\((\alpha, \beta) \in \mathbb{R}, \quad \forall \alpha, \beta \in V\)</span>$
+满足：
+1. 对称性：<span class="arithmatex">\((\alpha, \beta) = (\beta, \alpha)\)</span>
+2. 线性性：<span class="arithmatex">\((\alpha + \beta, \gamma) = (\alpha, \gamma) + (\beta, \gamma)\)</span>，<span class="arithmatex">\((k\alpha, \beta) = k(\alpha, \beta)\)</span>
+3. 正定性：<span class="arithmatex">\((\alpha, \alpha) \geq 0\)</span>，且 <span class="arithmatex">\((\alpha, \alpha) = 0 \iff \alpha = 0\)</span></p>
+<p><strong>定义10.2.2（欧几里得空间）</strong>
+定义了内积的 <span class="arithmatex">\(n\)</span> 维实线性空间称为 <strong><span class="arithmatex">\(n\)</span> 维欧几里得空间</strong>，记作 <span class="arithmatex">\(V\)</span> 或 <span class="arithmatex">\(\mathbb{R}^n\)</span>（当指定了标准内积时）。</p>
+</blockquote>
+<h4 id="22_1">2.2 由内积导出的度量<a class="headerlink" href="#22_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.2.3（向量长度）</strong>
+$<span class="arithmatex">\(|\alpha| = \sqrt{(\alpha, \alpha)}\)</span>$</p>
+<p><strong>定义10.2.4（向量夹角）</strong>
+设 <span class="arithmatex">\(\alpha, \beta \neq 0\)</span>，定义夹角 <span class="arithmatex">\(\theta\)</span> 满足
+$<span class="arithmatex">\(\cos \theta = \frac{(\alpha, \beta)}{|\alpha| \cdot |\beta|}\)</span>$</p>
+<p><strong>Cauchy-Schwarz不等式</strong>：<span class="arithmatex">\(|(\alpha, \beta)| \leq |\alpha| \cdot |\beta|\)</span>，等号成立当且仅当 <span class="arithmatex">\(\alpha, \beta\)</span> 线性相关。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+考虑 <span class="arithmatex">\((\alpha + t\beta, \alpha + t\beta) \geq 0\)</span> 对任意实数 <span class="arithmatex">\(t\)</span> 成立
+这是关于 <span class="arithmatex">\(t\)</span> 的二次不等式，判别式非正
+从而得到 Cauchy-Schwarz 不等式。</p>
+<blockquote>
+<p><strong>三角不等式</strong>：<span class="arithmatex">\(|\alpha + \beta| \leq |\alpha| + |\beta|\)</span></p>
+</blockquote>
+<h4 id="23_1">2.3 正交<a class="headerlink" href="#23_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.2.5（正交）</strong>
+若 <span class="arithmatex">\((\alpha, \beta) = 0\)</span>，则称 <span class="arithmatex">\(\alpha\)</span> 与 <span class="arithmatex">\(\beta\)</span> <strong>正交</strong>，记作 <span class="arithmatex">\(\alpha \perp \beta\)</span>。</p>
+</blockquote>
+<p><strong>性质</strong>：
+- <span class="arithmatex">\(\alpha \perp \beta \iff |\alpha + \beta|^2 = |\alpha|^2 + |\beta|^2\)</span>（勾股定理）
+- 若 <span class="arithmatex">\(\{\alpha_1, \ldots, \alpha_k\}\)</span> 两两正交且非零，则线性无关</p>
+<h4 id="24_1">2.4 标准正交基<a class="headerlink" href="#24_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.2.6（标准正交基）</strong>
+基 <span class="arithmatex">\(\{\varepsilon_1, \ldots, \varepsilon_n\}\)</span> 若满足：
+$<span class="arithmatex">\((\varepsilon_i, \varepsilon_j) = \delta_{ij}\)</span>$
+则称为<strong>标准正交基</strong>。</p>
+</blockquote>
+<p><strong>性质</strong>：在标准正交基下，
+- 向量坐标即内积：<span class="arithmatex">\(\alpha = \sum (\alpha, \varepsilon_i) \varepsilon_i\)</span>
+- 内积即坐标点积：<span class="arithmatex">\((\alpha, \beta) = \sum a_i b_i\)</span></p>
+<h3 id="_15">三、典型例题<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<h4 id="_16">【验证题】<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p><strong>例2.1</strong>：设 <span class="arithmatex">\(V = C[0,1]\)</span>（[0,1]上连续函数空间），定义
+$<span class="arithmatex">\((f, g) = \int_0^1 f(x)g(x) \, dx\)</span>$
+验证这是否构成内积。</p>
+<p><strong>解答</strong>：
+- 对称性：<span class="arithmatex">\((f,g) = \int fg = \int gf = (g,f)\)</span> ✓
+- 线性性：<span class="arithmatex">\((f_1+f_2, g) = \int (f_1+f_2)g = \int f_1g + \int f_2g = (f_1,g)+(f_2,g)\)</span> ✓
+- 正定性：<span class="arithmatex">\((f,f) = \int f^2 \geq 0\)</span>，且 <span class="arithmatex">\(\int f^2 = 0 \iff f = 0\)</span>（连续函数） ✓</p>
+<p>是内积，构成欧几里得空间。</p>
+<hr />
+<p><strong>例2.2</strong>：在 <span class="arithmatex">\(\mathbb{R}^2\)</span> 中，设 <span class="arithmatex">\(f(x,y) = x^2 + 4xy + 5y^2\)</span>，这是否定义了内积？</p>
+<p><strong>解答</strong>：
+对应双线性函数：<span class="arithmatex">\(f(\alpha, \beta) = x_1 x_2 + 2(x_1 y_2 + x_2 y_1) + 5 y_1 y_2\)</span></p>
+<p>度量矩阵：<span class="arithmatex">\(G = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 5 \end{pmatrix}\)</span></p>
+<p>检查正定性：特征值为 <span class="arithmatex">\(3 \pm \sqrt{8} &gt; 0\)</span>，正定 ✓</p>
+<p>故定义内积。</p>
+<hr />
+<p><strong>例2.3</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^2\)</span>，问 <span class="arithmatex">\(f((x_1,y_1), (x_2,y_2)) = x_1 x_2 + y_1 y_2^2\)</span> 是否为双线性函数？是否为内积？</p>
+<p><strong>解答</strong>：
+- 双线性性：<span class="arithmatex">\(f\)</span> 对 <span class="arithmatex">\(y\)</span> 不是线性的（<span class="arithmatex">\(y_2^2\)</span> 不是线性）
+- 不是双线性函数</p>
+<p>即使忽略非线性，也不是对称的（<span class="arithmatex">\(y_1 y_2^2 \neq y_2 y_1^2\)</span>）</p>
+<p><strong>不是</strong>内积。</p>
+<h4 id="_17">【计算题】<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p><strong>例2.4</strong>：在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中，求向量 <span class="arithmatex">\(\alpha = (1,2,2)\)</span> 与 <span class="arithmatex">\(\beta = (2,1,-1)\)</span> 的夹角。</p>
+<p><strong>解答</strong>：
+$<span class="arithmatex">\((\alpha, \beta) = 1\cdot2 + 2\cdot1 + 2\cdot(-1) = 2 + 2 - 2 = 2\)</span>$
+$<span class="arithmatex">\(|\alpha| = \sqrt{1+4+4} = 3, \quad |\beta| = \sqrt{4+1+1} = \sqrt{6}\)</span>$
+$<span class="arithmatex">\(\cos \theta = \frac{2}{3\sqrt{6}} = \frac{2\sqrt{6}}{18} = \frac{\sqrt{6}}{9}\)</span>$
+$<span class="arithmatex">\(\theta = \arccos\left(\frac{\sqrt{6}}{9}\right) \approx 82.3^\circ\)</span>$</p>
+<hr />
+<p><strong>例2.5</strong>：在 <span class="arithmatex">\(\mathbb{R}^4\)</span> 中，用 Gram-Schmidt 过程将基 <span class="arithmatex">\(\{(1,1,0,0), (1,0,1,0), (1,0,0,1), (1,1,1,0)\}\)</span> 正交化。</p>
+<p><strong>解答</strong>：
+设原基为 <span class="arithmatex">\(\{\alpha_1, \alpha_2, \alpha_3, \alpha_4\}\)</span></p>
+<p><strong>第一步</strong>：<span class="arithmatex">\(\beta_1 = \alpha_1 = (1,1,0,0)\)</span></p>
+<p><strong>第二步</strong>：
+$<span class="arithmatex">\(\beta_2 = \alpha_2 - \frac{(\alpha_2, \beta_1)}{(\beta_1, \beta_1)} \beta_1 = (1,0,1,0) - \frac{1}{2}(1,1,0,0) = \left(\frac{1}{2}, -\frac{1}{2}, 1, 0\right)\)</span>$</p>
+<p><strong>第三步</strong>：
+$<span class="arithmatex">\(\beta_3 = \alpha_3 - \frac{(\alpha_3, \beta_1)}{(\beta_1, \beta_1)}\beta_1 - \frac{(\alpha_3, \beta_2)}{(\beta_2, \beta_2)}\beta_2\)</span>$</p>
+<p><span class="arithmatex">\((\alpha_3, \beta_1) = 1\)</span>，<span class="arithmatex">\((\beta_1, \beta_1) = 2\)</span>
+<span class="arithmatex">\((\alpha_3, \beta_2) = \frac{1}{2} + 1 = \frac{3}{2}\)</span>，<span class="arithmatex">\((\beta_2, \beta_2) = \frac{1}{4}+\frac{1}{4}+1 = \frac{3}{2}\)</span></p>
+<div class="arithmatex">\[\beta_3 = (1,0,0,1) - \frac{1}{2}(1,1,0,0) - \frac{(3/2)}{(3/2)}\left(\frac{1}{2}, -\frac{1}{2}, 1, 0\right)$$
+$$= \left(\frac{1}{2}, -\frac{1}{2}, 0, 1\right) - \left(\frac{1}{2}, -\frac{1}{2}, 1, 0\right) = (0, 0, -1, 1)\]</div>
+<p><strong>第四步</strong>：
+类似计算 <span class="arithmatex">\(\beta_4\)</span>（从略）</p>
+<p>结果：正交基为 <span class="arithmatex">\(\{(1,1,0,0), (\frac{1}{2},-\frac{1}{2},1,0), (0,0,-1,1), \ldots\}\)</span></p>
+<p>标准化得标准正交基。</p>
+<hr />
+<p><strong>例2.6</strong>：证明 Cauchy-Schwarz 不等式。</p>
+<p><strong>证明</strong>：
+考虑 <span class="arithmatex">\(|\alpha + t\beta|^2 \geq 0\)</span> 对任意 <span class="arithmatex">\(t \in \mathbb{R}\)</span> 成立。</p>
+<p>展开：
+$<span class="arithmatex">\(0 \leq (\alpha + t\beta, \alpha + t\beta) = (\alpha,\alpha) + 2t(\alpha,\beta) + t^2(\beta,\beta)\)</span>$</p>
+<p>这是关于 <span class="arithmatex">\(t\)</span> 的二次函数，判别式 <span class="arithmatex">\(\Delta = 4(\alpha,\beta)^2 - 4(\alpha,\alpha)(\beta,\beta) \leq 0\)</span></p>
+<p>故 <span class="arithmatex">\((\alpha,\beta)^2 \leq (\alpha,\alpha)(\beta,\beta)\)</span></p>
+<p>即 <span class="arithmatex">\(|(\alpha,\beta)| \leq |\alpha| \cdot |\beta|\)</span></p>
+<p>等号成立 <span class="arithmatex">\(\iff\)</span> 存在 <span class="arithmatex">\(t\)</span> 使 <span class="arithmatex">\(|\alpha + t\beta|^2 = 0\)</span> <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\alpha + t\beta = 0\)</span> <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\alpha, \beta\)</span> 线性相关。</p>
+<h4 id="_18">【证明题】<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<p><strong>例2.7</strong>：设 <span class="arithmatex">\(\{\varepsilon_1, \ldots, \varepsilon_n\}\)</span> 是欧几里得空间 <span class="arithmatex">\(V\)</span> 的标准正交基。
+证明：若线性变换 <span class="arithmatex">\(\sigma\)</span> 满足 <span class="arithmatex">\(\sigma(\varepsilon_i) = \varepsilon_i + \lambda \varepsilon_j\)</span>（<span class="arithmatex">\(i \neq j\)</span>），则 <span class="arithmatex">\(\sigma\)</span> 保持内积 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\lambda = 0\)</span>。</p>
+<p><strong>证明</strong>：
+<strong><span class="arithmatex">\(\Rightarrow\)</span></strong>：若 <span class="arithmatex">\(\sigma\)</span> 保持内积，则
+$<span class="arithmatex">\((\sigma(\varepsilon_i), \sigma(\varepsilon_j)) = (\varepsilon_i, \varepsilon_j) = 0\)</span>$</p>
+<p>计算左边：<span class="arithmatex">\((\varepsilon_i + \lambda\varepsilon_j, \varepsilon_j) = (\varepsilon_i, \varepsilon_j) + \lambda(\varepsilon_j, \varepsilon_j) = 0 + \lambda = \lambda\)</span></p>
+<p>故 <span class="arithmatex">\(\lambda = 0\)</span>。</p>
+<p><strong><span class="arithmatex">\(\Leftarrow\)</span></strong>：若 <span class="arithmatex">\(\lambda = 0\)</span>，则 <span class="arithmatex">\(\sigma = I\)</span> 是恒等变换，显然保内积。</p>
+<hr />
+<p><strong>例2.8</strong>：证明：欧几里得空间中两两正交的非零向量集合线性无关。</p>
+<p><strong>证明</strong>：
+设 <span class="arithmatex">\(\{\alpha_1, \ldots, \alpha_k\}\)</span> 两两正交，<span class="arithmatex">\(\sum c_i \alpha_i = 0\)</span></p>
+<p>对两边与 <span class="arithmatex">\(\alpha_j\)</span> 作内积：
+<span class="arithmatex">\((\sum c_i \alpha_i, \alpha_j) = c_j (\alpha_j, \alpha_j) = 0\)</span></p>
+<p>由于 <span class="arithmatex">\(\alpha_j \neq 0\)</span>，得 <span class="arithmatex">\(c_j = 0\)</span>（<span class="arithmatex">\(j = 1, \ldots, k\)</span>）</p>
+<p>故向量组线性无关。</p>
+<h3 id="_19">四、易错点提醒<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>混淆点积与叉积</td>
+<td><span class="arithmatex">\(\mathbb{R}^3\)</span> 中点积 <span class="arithmatex">\((\alpha,\beta)\)</span> 是标量；叉积 <span class="arithmatex">\(\alpha \times \beta\)</span> 是向量</td>
+</tr>
+<tr>
+<td>2</td>
+<td>忘记内积的正定性</td>
+<td>不是所有对称双线性函数都是内积，必须正定</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Cauchy-Schwarz 等号条件</td>
+<td>等号成立当且仅当向量线性相关，不只是平行</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Gram-Schmidt 计算错误</td>
+<td>每一步都要减去前面所有正交化向量的投影</td>
+</tr>
+<tr>
+<td>5</td>
+<td>标准正交化后忘了标准化</td>
+<td>Gram-Schmidt 给出正交基，需要再除以长度才是标准正交基</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_20">五、思考题<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>范数的性质</strong>：内积导出范数，满足三角不等式、范数公理。反过来，是否所有范数都来自某个内积？</p>
+</li>
+<li>
+<p><strong>平行四边形恒等式</strong>：证明：<span class="arithmatex">\(|\alpha+\beta|^2 + |\alpha-\beta|^2 = 2(|\alpha|^2 + |\beta|^2)\)</span>。这个等式能否用来判断范数是否来自内积？</p>
+</li>
+<li>
+<p><strong>最佳逼近</strong>：设 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间，<span class="arithmatex">\(\alpha \in V\)</span>。证明：<span class="arithmatex">\(\beta_0 \in W\)</span> 是 <span class="arithmatex">\(\alpha\)</span> 的最佳逼近 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\((\alpha - \beta_0) \perp W\)</span>。</p>
+</li>
+<li>
+<p><strong>正交投影的存在性</strong>：利用 Gram-Schmidt 过程，证明任意子空间 <span class="arithmatex">\(W\)</span> 都有正交补 <span class="arithmatex">\(W^\perp\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="103">10.3 正交补与正交投影<a class="headerlink" href="#103" title="Permanent link">&para;</a></h2>
+<h3 id="_21">一、概念引入动机<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<h4 id="11_2">1.1 分解的追求<a class="headerlink" href="#11_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>给定子空间 W ⊆ V
+我们希望将 V 分解为：
+V = W ⊕ W⊥（正交直和）
+
+这意味着：
+• 每个 v ∈ V 唯一写成 v = w + w⊥
+• w ∈ W，w⊥ ⊥ W
+• 几何上：W 是&quot;水平&quot;部分，W⊥ 是&quot;垂直&quot;部分
+</code></pre></div></td></tr></table></div>
+<h4 id="12_2">1.2 正交投影的几何意义<a class="headerlink" href="#12_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>正交投影：
+ProjW(v) = w（v 在 W 上的&quot;影子&quot;）
+
+这比斜投影更好：
+✓ 距离最短
+✓ 计算稳定
+✓ 几何直观
+</code></pre></div></td></tr></table></div>
+<h4 id="13_2">1.3 历史背景<a class="headerlink" href="#13_2" title="Permanent link">&para;</a></h4>
+<p>正交投影的概念由Fourier在热传导研究中系统使用，Hilbert将其发展为泛函分析的核心概念。</p>
+<h3 id="_22">二、详细讲解过程<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<h4 id="21_2">2.1 正交补的定义<a class="headerlink" href="#21_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.3.1（正交补）</strong>
+设 <span class="arithmatex">\(W \subseteq V\)</span> 是子空间，<span class="arithmatex">\(W\)</span> 的<strong>正交补</strong>为
+$<span class="arithmatex">\(W^\perp = \{\alpha \in V \mid (\alpha, w) = 0, \forall w \in W\}\)</span>$</p>
+</blockquote>
+<p><strong>性质</strong>：
+- <span class="arithmatex">\(W^\perp\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间
+- <span class="arithmatex">\(\{0\}^\perp = V\)</span>，<span class="arithmatex">\(V^\perp = \{0\}\)</span>
+- 若 <span class="arithmatex">\(W_1 \subseteq W_2\)</span>，则 <span class="arithmatex">\(W_2^\perp \subseteq W_1^\perp\)</span>
+- <span class="arithmatex">\(W \cap W^\perp = \{0\}\)</span>（非零向量不能同时在自己的子空间又正交于它）</p>
+<h4 id="22_2">2.2 正交补的基本定理<a class="headerlink" href="#22_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理10.3.1</strong>：若 <span class="arithmatex">\(W\)</span> 是有限维子空间，则
+$<span class="arithmatex">\(V = W \oplus W^\perp, \quad \dim W^\perp = \dim V - \dim W\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>：</p>
+<p><strong>方法一（Gram-Schmidt）</strong>：
+1. 取 <span class="arithmatex">\(W\)</span> 的正交基 <span class="arithmatex">\(\{\varepsilon_1, \ldots, \varepsilon_k\}\)</span>
+2. 扩张为 <span class="arithmatex">\(V\)</span> 的正交基 <span class="arithmatex">\(\{\varepsilon_1, \ldots, \varepsilon_k, \varepsilon_{k+1}, \ldots, \varepsilon_n\}\)</span>
+3. 则 <span class="arithmatex">\(\text{span}\{\varepsilon_{k+1}, \ldots, \varepsilon_n\} = W^\perp\)</span></p>
+<p><strong>方法二（直接构造）</strong>：
+对任意 <span class="arithmatex">\(\alpha \in V\)</span>，构造其在 <span class="arithmatex">\(W\)</span> 上的正交投影
+$<span class="arithmatex">\(\beta = \sum_{i=1}^k \frac{(\alpha, \varepsilon_i)}{(\varepsilon_i, \varepsilon_i)} \varepsilon_i\)</span>$</p>
+<p>则 <span class="arithmatex">\(\alpha - \beta \in W^\perp\)</span>，且 <span class="arithmatex">\(V = W + W^\perp\)</span></p>
+<p>交集：若 <span class="arithmatex">\(w \in W \cap W^\perp\)</span>，则 <span class="arithmatex">\((w,w) = 0\)</span>，故 <span class="arithmatex">\(w = 0\)</span></p>
+<p>故 <span class="arithmatex">\(V = W \oplus W^\perp\)</span></p>
+<h4 id="23_2">2.3 正交投影<a class="headerlink" href="#23_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.3.2（正交投影）</strong>
+设 <span class="arithmatex">\(V = W \oplus W^\perp\)</span>，对任意 <span class="arithmatex">\(v \in V\)</span>，唯一分解 <span class="arithmatex">\(v = w + w^\perp\)</span>。
+定义 <span class="arithmatex">\(v\)</span> 在 <span class="arithmatex">\(W\)</span> 上的<strong>正交投影</strong>为 <span class="arithmatex">\(\text{Proj}_W(v) = w\)</span>。</p>
+</blockquote>
+<p><strong>矩阵表示</strong>：
+若 <span class="arithmatex">\(W\)</span> 的标准正交基为 <span class="arithmatex">\(\{\varepsilon_1, \ldots, \varepsilon_k\}\)</span>，则
+$<span class="arithmatex">\(\text{Proj}_W(v) = \sum_{i=1}^k (v, \varepsilon_i) \varepsilon_i\)</span>$</p>
+<h4 id="24_2">2.4 正交投影的范数性质<a class="headerlink" href="#24_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理10.3.2（投影定理）</strong>
+设 <span class="arithmatex">\(W\)</span> 是有限维子空间，<span class="arithmatex">\(\alpha \in V\)</span>。
+则 <span class="arithmatex">\(\beta = \text{Proj}_W(\alpha)\)</span> 满足：
+$<span class="arithmatex">\(|\alpha - \beta| = \min_{w \in W} |\alpha - w|\)</span>$</p>
+</blockquote>
+<p><strong>证明</strong>：对任意 <span class="arithmatex">\(w \in W\)</span>，
+$<span class="arithmatex">\(|\alpha - w|^2 = |(\alpha - \beta) + (\beta - w)|^2 = |\alpha - \beta|^2 + |\beta - w|^2 \geq |\alpha - \beta|^2\)</span>$</p>
+<p>等号成立当且仅当 <span class="arithmatex">\(\beta = w\)</span>。</p>
+<h3 id="_23">三、典型例题<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<h4 id="_24">【验证题】<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
+<p><strong>例3.1</strong>：在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中，<span class="arithmatex">\(W = \text{span}\{(1,1,0)\}\)</span>，求 <span class="arithmatex">\(W^\perp\)</span>。</p>
+<p><strong>解答</strong>：
+设 <span class="arithmatex">\(\alpha = (x,y,z) \in W^\perp\)</span>，则 <span class="arithmatex">\((\alpha, (1,1,0)) = x + y = 0\)</span></p>
+<p>解得 <span class="arithmatex">\(y = -x\)</span>，<span class="arithmatex">\(z\)</span> 任意。</p>
+<div class="arithmatex">\[W^\perp = \{(x, -x, z) \mid x, z \in \mathbb{R}\} = \text{span}\{(1,-1,0), (0,0,1)\}\]</div>
+<p>验证：<span class="arithmatex">\(\dim W^\perp = 2\)</span>，<span class="arithmatex">\(\dim W + \dim W^\perp = 1 + 2 = 3 = \dim \mathbb{R}^3\)</span> ✓</p>
+<hr />
+<p><strong>例3.2</strong>：设 <span class="arithmatex">\(W = \text{span}\{(1,1,1), (1,1,0)\} \subseteq \mathbb{R}^3\)</span>，求 <span class="arithmatex">\(W^\perp\)</span>。</p>
+<p><strong>解答</strong>：
+设 <span class="arithmatex">\(\alpha = (x,y,z)\)</span>，解方程组：
+$<span class="arithmatex">\(\begin{cases} x + y + z = 0 \\ x + y = 0 \end{cases}\)</span>$</p>
+<p>由第二式：<span class="arithmatex">\(y = -x\)</span>，代入第一式：<span class="arithmatex">\(x - x + z = 0\)</span>，得 <span class="arithmatex">\(z = 0\)</span></p>
+<p>故 <span class="arithmatex">\(W^\perp = \text{span}\{(1,-1,0)\}\)</span>，维数为1。</p>
+<p>验证：<span class="arithmatex">\((1,-1,0)\)</span> 与 <span class="arithmatex">\((1,1,1)\)</span>、<span class="arithmatex">\((1,1,0)\)</span> 都正交 ✓</p>
+<h4 id="_25">【计算题】<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
+<p><strong>例3.3</strong>：在 <span class="arithmatex">\(\mathbb{R}^4\)</span> 中，<span class="arithmatex">\(W = \text{span}\{(1,1,0,0), (1,0,1,0)\}\)</span>。
+求 <span class="arithmatex">\(W^\perp\)</span> 及 <span class="arithmatex">\(\alpha = (1,2,3,4)\)</span> 在 <span class="arithmatex">\(W\)</span> 上的正交投影。</p>
+<p><strong>解答</strong>：
+<strong>第一步</strong>：求 <span class="arithmatex">\(W\)</span> 的标准正交基
+用 Gram-Schmidt：</p>
+<p><span class="arithmatex">\(\beta_1 = (1,1,0,0)\)</span>
+<span class="arithmatex">\(\beta_2 = (1,0,1,0) - \frac{(1,0,1,0)\cdot(1,1,0,0)}{2}(1,1,0,0) = (1,0,1,0) - (1/2,1/2,0,0) = (1/2,-1/2,1,0)\)</span></p>
+<p>标准化：
+<span class="arithmatex">\(\varepsilon_1 = \frac{1}{\sqrt{2}}(1,1,0,0)\)</span>
+<span class="arithmatex">\(\varepsilon_2 = \frac{1}{\sqrt{3/2}}(1/2,-1/2,1,0) = \frac{1}{\sqrt{6}}(1,-1,2,0)\)</span></p>
+<p><strong>第二步</strong>：正交投影
+$<span class="arithmatex">\(\text{Proj}_W(\alpha) = (\alpha,\varepsilon_1)\varepsilon_1 + (\alpha,\varepsilon_2)\varepsilon_2\)</span>$</p>
+<p><span class="arithmatex">\((\alpha,\varepsilon_1) = \frac{1}{\sqrt{2}}(1+2) = \frac{3}{\sqrt{2}}\)</span>
+<span class="arithmatex">\((\alpha,\varepsilon_2) = \frac{1}{\sqrt{6}}(1-2+6) = \frac{5}{\sqrt{6}}\)</span></p>
+<div class="arithmatex">\[\text{Proj}_W(\alpha) = \frac{3}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}(1,1,0,0) + \frac{5}{\sqrt{6}} \cdot \frac{1}{\sqrt{6}}(1,-1,2,0)$$
+$$= \frac{3}{2}(1,1,0,0) + \frac{5}{6}(1,-1,2,0) = \left(\frac{7}{3}, \frac{2}{3}, \frac{5}{3}, 0\right)\]</div>
+<p><strong>第三步</strong>：<span class="arithmatex">\(W^\perp\)</span> 维数为 2，可取与 <span class="arithmatex">\(\varepsilon_1, \varepsilon_2\)</span> 正交的两个向量。</p>
+<hr />
+<p><strong>例3.4</strong>：设 <span class="arithmatex">\(W = \text{span}\{(1,1,1,1)\} \subseteq \mathbb{R}^4\)</span>，求 <span class="arithmatex">\(\alpha = (1,2,3,4)\)</span> 到 <span class="arithmatex">\(W\)</span> 的距离。</p>
+<p><strong>解答</strong>：
+<span class="arithmatex">\(W^\perp\)</span> 包含与 <span class="arithmatex">\((1,1,1,1)\)</span> 正交的向量，即满足 <span class="arithmatex">\(x+y+z+w=0\)</span> 的向量。</p>
+<p>距离 = <span class="arithmatex">\(|\alpha - \text{Proj}_W(\alpha)|\)</span></p>
+<p><span class="arithmatex">\(\text{Proj}_W(\alpha) = \frac{(\alpha, w)}{|w|^2} w = \frac{10}{4}(1,1,1,1) = \left(\frac{5}{2}, \frac{5}{2}, \frac{5}{2}, \frac{5}{2}\right)\)</span></p>
+<p><span class="arithmatex">\(\alpha - \text{Proj}_W(\alpha) = \left(-\frac{3}{2}, -\frac{1}{2}, \frac{1}{2}, \frac{3}{2}\right)\)</span></p>
+<p>距离 <span class="arithmatex">\(= \sqrt{\frac{9}{4}+\frac{1}{4}+\frac{1}{4}+\frac{9}{4}} = \sqrt{\frac{20}{4}} = \sqrt{5}\)</span></p>
+<hr />
+<p><strong>例3.5</strong>：证明：<span class="arithmatex">\((W^\perp)^\perp = W\)</span>（<span class="arithmatex">\(W\)</span> 有限维时）。</p>
+<p><strong>证明</strong>：
+<strong>第一步</strong>：显然 <span class="arithmatex">\(W \subseteq (W^\perp)^\perp\)</span>（由正交补定义）
+<strong>第二步</strong>：<span class="arithmatex">\(\dim (W^\perp)^\perp = \dim V - \dim W^\perp = \dim V - (\dim V - \dim W) = \dim W\)</span>
+<strong>第三步</strong>：由维数相等及子集关系，得 <span class="arithmatex">\((W^\perp)^\perp = W\)</span></p>
+<h4 id="_26">【证明题】<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
+<p><strong>例3.6</strong>：设 <span class="arithmatex">\(W_1, W_2\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间，证明：
+1. <span class="arithmatex">\((W_1 + W_2)^\perp = W_1^\perp \cap W_2^\perp\)</span>
+2. <span class="arithmatex">\((W_1 \cap W_2)^\perp = W_1^\perp + W_2^\perp\)</span></p>
+<p><strong>证明</strong>：
+1. 
+- (<strong>⊆</strong>) 若 <span class="arithmatex">\(\alpha \in (W_1+W_2)^\perp\)</span>，则 <span class="arithmatex">\((\alpha, w_1+w_2) = 0\)</span> 对所有 <span class="arithmatex">\(w_i \in W_i\)</span>
+  特别地，令 <span class="arithmatex">\(w_2 = 0\)</span>，得 <span class="arithmatex">\((\alpha, w_1) = 0\)</span>，故 <span class="arithmatex">\(\alpha \in W_1^\perp\)</span>
+  同理 <span class="arithmatex">\(\alpha \in W_2^\perp\)</span>，故 <span class="arithmatex">\(\alpha \in W_1^\perp \cap W_2^\perp\)</span></p>
+<ul>
+<li>
+<p>(<strong>⊇</strong>) 若 <span class="arithmatex">\(\alpha \in W_1^\perp \cap W_2^\perp\)</span>，则 <span class="arithmatex">\((\alpha, w_1) = 0\)</span>，<span class="arithmatex">\((\alpha, w_2) = 0\)</span>
+  故 <span class="arithmatex">\((\alpha, w_1+w_2) = 0\)</span>，即 <span class="arithmatex">\(\alpha \in (W_1+W_2)^\perp\)</span></p>
+</li>
+<li>
+<p>证明从略（需要用到有限维条件或对偶空间的结论）</p>
+</li>
+</ul>
+<hr />
+<p><strong>例3.7</strong>：设 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间，<span class="arithmatex">\(\sigma\)</span> 是 <span class="arithmatex">\(V\)</span> 上的正交投影（<span class="arithmatex">\(\sigma^2 = \sigma\)</span>，且 <span class="arithmatex">\(\text{im}\sigma = W\)</span>，<span class="arithmatex">\(\ker\sigma = W^\perp\)</span>）。证明：<span class="arithmatex">\(\sigma\)</span> 在标准正交基下的矩阵是幂等矩阵。</p>
+<p><strong>证明</strong>：
+由条件，<span class="arithmatex">\(\sigma^2 = \sigma\)</span>（幂等）
+且对任意 <span class="arithmatex">\(w \in W, w^\perp \in W^\perp\)</span>，
+$<span class="arithmatex">\((\sigma(\alpha), \beta) = (w, \beta) = 0 = (\alpha, \sigma(\beta))\)</span>$</p>
+<p>故 <span class="arithmatex">\(\sigma\)</span> 是正交投影，满足自伴性 <span class="arithmatex">\((\sigma\alpha, \beta) = (\alpha, \sigma\beta)\)</span></p>
+<p>在标准正交基下，自伴变换的矩阵满足 <span class="arithmatex">\(A^T = A\)</span>（对称）</p>
+<p>结合 <span class="arithmatex">\(\sigma^2 = \sigma\)</span>，矩阵满足 <span class="arithmatex">\(A^2 = A\)</span></p>
+<p>故矩阵既是幂等矩阵又是对称矩阵。</p>
+<h3 id="_27">四、补充：投影矩阵与最小二乘（矩阵语言）<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>上面讲的是抽象内积空间中的正交投影，现在换成 <span class="arithmatex">\(\mathbb{R}^n\)</span> 中的矩阵语言，推导过程更具体，也是最小二乘法的基础。</p>
+<h4 id="41">4.1 问题引入<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<p>给定 <span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span>，考虑线性方程组 <span class="arithmatex">\(Ax = y\)</span>：</p>
+<ul>
+<li>若 <span class="arithmatex">\(y \in \text{Im}A\)</span>，方程有解</li>
+<li>若 <span class="arithmatex">\(y \notin \text{Im}A\)</span>（超定方程组常见），方程无解</li>
+</ul>
+<p><strong>目标</strong>：当 <span class="arithmatex">\(y \notin \text{Im}A\)</span> 时，找 <span class="arithmatex">\(\text{Im}A\)</span> 中离 <span class="arithmatex">\(y\)</span> 最近的点 <span class="arithmatex">\(p\)</span>，即 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(W = \text{Im}A\)</span> 上的投影。</p>
+<div class="arithmatex">\[\|y - p\|_2 \leq \|y - w\|_2, \quad \forall w \in W\]</div>
+<h4 id="42">4.2 投影的正交性推导<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<p><strong>关键结论</strong>：<span class="arithmatex">\(p\)</span> 是投影 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(y - p\)</span> 垂直于 <span class="arithmatex">\(W\)</span> 中所有向量。</p>
+<p><strong>推导</strong>：对任意 <span class="arithmatex">\(h \in W\)</span>，令 <span class="arithmatex">\(f(t) = \|y - (p + th)\|_2^2\)</span></p>
+<p>展开：
+$<span class="arithmatex">\(f(t) = \|y - p\|^2 - 2t\langle y - p, h\rangle + t^2\|h\|^2\)</span>$</p>
+<p>这是关于 <span class="arithmatex">\(t\)</span> 的二次函数。<span class="arithmatex">\(t = 0\)</span> 时取最小值（因为 <span class="arithmatex">\(p\)</span> 是最近点），故 <span class="arithmatex">\(f'(0) = 0\)</span>：</p>
+<div class="arithmatex">\[-2\langle y - p, h\rangle = 0 \implies \langle y - p, h\rangle = 0, \quad \forall h \in W\]</div>
+<h4 id="43-p">4.3 投影矩阵 <span class="arithmatex">\(P\)</span> 的推导<a class="headerlink" href="#43-p" title="Permanent link">&para;</a></h4>
+<p>因为 <span class="arithmatex">\(p \in \text{Im}A\)</span>，所以 <span class="arithmatex">\(p = A\hat{x}\)</span>。由正交条件：</p>
+<div class="arithmatex">\[\langle y - A\hat{x}, Az\rangle = 0, \quad \forall z \in \mathbb{R}^n\]</div>
+<div class="arithmatex">\[(Az)^T(y - A\hat{x}) = 0 \implies z^T A^T(y - A\hat{x}) = 0, \quad \forall z\]</div>
+<p>这对所有 <span class="arithmatex">\(z\)</span> 成立，故：</p>
+<div class="arithmatex">\[A^T(y - A\hat{x}) = 0 \implies A^TA\hat{x} = A^Ty\]</div>
+<p>若 <span class="arithmatex">\(A\)</span> 列满秩，<span class="arithmatex">\(A^TA\)</span> 可逆：</p>
+<div class="arithmatex">\[\hat{x} = (A^TA)^{-1}A^Ty\]</div>
+<p>代回 <span class="arithmatex">\(p = A\hat{x}\)</span>：</p>
+<div class="arithmatex">\[p = A(A^TA)^{-1}A^Ty = Py\]</div>
+<p>其中 <strong>投影矩阵</strong>：</p>
+<div class="arithmatex">\[\boxed{P = A(A^TA)^{-1}A^T}\]</div>
+<h4 id="44">4.4 投影矩阵的性质<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>表达</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>幂等性</td>
+<td><span class="arithmatex">\(P^2 = P\)</span></td>
+<td>投影完再投影不变</td>
+</tr>
+<tr>
+<td>对称性</td>
+<td><span class="arithmatex">\(P^T = P\)</span></td>
+<td>正交投影的标志</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P\)</span> 的像</td>
+<td><span class="arithmatex">\(\text{Im}P = \text{Im}A\)</span></td>
+<td>投影落在 <span class="arithmatex">\(A\)</span> 的列空间</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I - P\)</span> 也是投影</td>
+<td><span class="arithmatex">\((I-P)^2 = I-P\)</span></td>
+<td>投影到 <span class="arithmatex">\(\ker A^T\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证幂等性</strong>：
+$<span class="arithmatex">\(P^2 = A(A^TA)^{-1}A^T \cdot A(A^TA)^{-1}A^T = A(A^TA)^{-1}(A^TA)(A^TA)^{-1}A^T = A(A^TA)^{-1}A^T = P\)</span>$</p>
+<h4 id="45">4.5 空间分解<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[\boxed{\mathbb{R}^n = \text{Im}A \oplus \ker A^T}\]</div>
+<p>任意 <span class="arithmatex">\(y \in \mathbb{R}^n\)</span> 可唯一分解为：</p>
+<div class="arithmatex">\[y = \underbrace{Py}_{\in \text{Im}A} + \underbrace{(I-P)y}_{\in \ker A^T}\]</div>
+<ul>
+<li><span class="arithmatex">\(Py\)</span>：投影部分（<span class="arithmatex">\(y\)</span> 在列空间上的"影子"）</li>
+<li><span class="arithmatex">\((I-P)y\)</span>：残差部分（<span class="arithmatex">\(y\)</span> 与列空间的"误差"）</li>
+<li>两部分<strong>正交</strong>：<span class="arithmatex">\(\langle Py, (I-P)y\rangle = y^TP^T(I-P)y = y^T(P - P^2)y = 0\)</span></li>
+</ul>
+<p><strong>为什么是 <span class="arithmatex">\(\ker A^T\)</span>？</strong> 
+由 <span class="arithmatex">\(A^T(y - A\hat{x}) = 0\)</span>，残差 <span class="arithmatex">\(y - p = (I-P)y\)</span> 满足 <span class="arithmatex">\(A^T(y - p) = 0\)</span>，即 <span class="arithmatex">\(y - p \in \ker A^T\)</span>。</p>
+<h4 id="46">4.6 与最小二乘的联系<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<p>投影矩阵 <span class="arithmatex">\(P\)</span> 和最小二乘是同一件事的两种表述：</p>
+<table>
+<thead>
+<tr>
+<th>角度</th>
+<th>表述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>几何</td>
+<td><span class="arithmatex">\(p = Py\)</span> 是 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(\text{Im}A\)</span> 上的投影</td>
+</tr>
+<tr>
+<td>优化</td>
+<td><span class="arithmatex">\(\hat{x}\)</span> 使 <span class="arithmatex">\(\|Ax - y\|^2\)</span> 最小</td>
+</tr>
+<tr>
+<td>方程</td>
+<td><span class="arithmatex">\(A^TA\hat{x} = A^Ty\)</span>（正规方程）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一图总结</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>        y
+       /|
+      / |
+     /  | (I-P)y ∈ ker A^T (残差)
+    /   |
+   p----+
+   \        p = Py ∈ Im A (投影)
+    Im A (= 列空间)
+</code></pre></div></td></tr></table></div>
+<h3 id="_28">五、易错点提醒<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>混淆 <span class="arithmatex">\(W^\perp\)</span> 与直和补</td>
+<td><span class="arithmatex">\(W^\perp\)</span> 是唯一的正交直和补</td>
+</tr>
+<tr>
+<td>2</td>
+<td>认为 <span class="arithmatex">\(W \oplus W^\perp = V\)</span> 总成立</td>
+<td>需 <span class="arithmatex">\(W\)</span> 有限维，或 <span class="arithmatex">\(V\)</span> 完备（内积空间）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>正交投影公式记错</td>
+<td><span class="arithmatex">\(\text{Proj}_W(v) = \sum (v,\varepsilon_i)\varepsilon_i\)</span>（标准正交基）</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\((W^\perp)^\perp = W\)</span> 成立条件</td>
+<td>需要 <span class="arithmatex">\(W\)</span> 有限维；无限维时 <span class="arithmatex">\((W^\perp)^\perp\)</span> 是 <span class="arithmatex">\(W\)</span> 的闭包</td>
+</tr>
+<tr>
+<td>5</td>
+<td>混淆核与象</td>
+<td>正交投影：<span class="arithmatex">\(\ker\sigma = W^\perp\)</span>，<span class="arithmatex">\(\text{im}\sigma = W\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_29">五、思考题<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>最佳近似子空间</strong>：设 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间，<span class="arithmatex">\(\alpha \in V\)</span>。证明：正交投影 <span class="arithmatex">\(\beta = \text{Proj}_W(\alpha)\)</span> 是 <span class="arithmatex">\(W\)</span> 中距离 <span class="arithmatex">\(\alpha\)</span> 最近的点。</p>
+</li>
+<li>
+<p><strong>正交分解的唯一性</strong>：若 <span class="arithmatex">\(V = W \oplus W'\)</span> 且 <span class="arithmatex">\(W \perp W'\)</span>，证明 <span class="arithmatex">\(W' = W^\perp\)</span>。</p>
+</li>
+<li>
+<p><strong>Fourier展开</strong>：设 <span class="arithmatex">\(\{\varepsilon_i\}\)</span> 是标准正交基，证明 <span class="arithmatex">\(\alpha = \sum (\alpha, \varepsilon_i)\varepsilon_i\)</span>。</p>
+</li>
+<li>
+<p><strong>投影算子的范数</strong>：证明正交投影算子的算子范数为1。</p>
+</li>
+</ol>
+<hr />
+<h2 id="104">10.4 正交变换与对称变换<a class="headerlink" href="#104" title="Permanent link">&para;</a></h2>
+<h3 id="_30">一、概念引入动机<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<h4 id="11_3">1.1 刚体运动的代数刻画<a class="headerlink" href="#11_3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>刚体运动（欧几里得几何）：
+• 保持距离：|σ(α) - σ(β)| = |α - β|
+• 保持角度
+• 保持原点（线性）
+
+⇒ 等价于：保持内积！(α,β) = (σ(α), σ(β))
+
+这就是正交变换
+</code></pre></div></td></tr></table></div>
+<h4 id="12_3">1.2 对称变换——自伴算子<a class="headerlink" href="#12_3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>对称变换（自伴算子）：
+(σ(α), β) = (α, σ(β))
+
+几何意义：
+• 在标准正交基下矩阵对称
+• 有实特征值
+• 可以在标准正交基下对角化
+</code></pre></div></td></tr></table></div>
+<h4 id="13_3">1.3 谱定理<a class="headerlink" href="#13_3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>谱定理（核心）：
+对称变换在某个标准正交基下是对角矩阵
+⇔ 存在标准正交基由特征向量组成
+⇔ V 可以分解为特征子空间的正交直和
+</code></pre></div></td></tr></table></div>
+<h3 id="_31">二、详细讲解过程<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<h4 id="21_3">2.1 正交变换<a class="headerlink" href="#21_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.4.1（正交变换）</strong>
+欧几里得空间 <span class="arithmatex">\(V\)</span> 的线性变换 <span class="arithmatex">\(\sigma\)</span> 若满足
+$<span class="arithmatex">\((\sigma(\alpha), \sigma(\beta)) = (\alpha, \beta), \quad \forall \alpha, \beta \in V\)</span>$
+则称 <span class="arithmatex">\(\sigma\)</span> 为<strong>正交变换</strong>。</p>
+<p><strong>定理10.4.1（正交变换的等价条件）</strong>
+以下条件等价：
+1. <span class="arithmatex">\(\sigma\)</span> 是正交变换
+2. <span class="arithmatex">\(\sigma\)</span> 保持向量长度：<span class="arithmatex">\(|\sigma(\alpha)| = |\alpha|\)</span>
+3. <span class="arithmatex">\(\sigma\)</span> 在标准正交基下的矩阵 <span class="arithmatex">\(A\)</span> 满足 <span class="arithmatex">\(A^T A = I\)</span>（<span class="arithmatex">\(A\)</span> 是正交矩阵）</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+- (1) ⇒ (2)：取 <span class="arithmatex">\(\beta = \alpha\)</span> 得 <span class="arithmatex">\(|\sigma(\alpha)|^2 = |\alpha|^2\)</span>
+- (2) ⇒ (3)：在标准正交基下，<span class="arithmatex">\(\sigma\)</span> 的矩阵 <span class="arithmatex">\(A\)</span> 满足 <span class="arithmatex">\((A\alpha, A\beta) = \alpha^T A^T A \beta = \alpha^T \beta\)</span>，故 <span class="arithmatex">\(A^T A = I\)</span>
+- (3) ⇒ (1)：直接验证</p>
+<h4 id="22_3">2.2 正交矩阵的性质<a class="headerlink" href="#22_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理10.4.2</strong>：正交矩阵 <span class="arithmatex">\(A\)</span> 具有以下性质：
+1. <span class="arithmatex">\(A^T = A^{-1}\)</span>
+2. <span class="arithmatex">\(\det(A) = \pm 1\)</span>
+3. 若 <span class="arithmatex">\(\lambda\)</span> 是 <span class="arithmatex">\(A\)</span> 的特征值，则 <span class="arithmatex">\(|\lambda| = 1\)</span>
+4. 正交矩阵的乘积仍是正交矩阵</p>
+</blockquote>
+<p><strong>几何分类</strong>：
+- <span class="arithmatex">\(\det(A) = 1\)</span>：旋转（可以取到单位元）
+- <span class="arithmatex">\(\det(A) = -1\)</span>：反射+旋转（包含镜面反射）</p>
+<h4 id="23_3">2.3 对称变换<a class="headerlink" href="#23_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.4.2（对称变换）</strong>
+线性变换 <span class="arithmatex">\(\sigma\)</span> 若满足
+$<span class="arithmatex">\((\sigma(\alpha), \beta) = (\alpha, \sigma(\beta)), \quad \forall \alpha, \beta \in V\)</span>$
+则称 <span class="arithmatex">\(\sigma\)</span> 为<strong>对称变换</strong>（自伴变换）。</p>
+<p><strong>定理10.4.3（对称变换的谱定理）</strong>
+设 <span class="arithmatex">\(\sigma\)</span> 是对称变换，则存在 <span class="arithmatex">\(V\)</span> 的标准正交基，使 <span class="arithmatex">\(\sigma\)</span> 在该基下的矩阵为对角矩阵。</p>
+</blockquote>
+<p><strong>证明思路</strong>（概要）：
+1. 先证明对称变换有实特征值
+2. 取特征向量 <span class="arithmatex">\(\varepsilon_1\)</span>，则 <span class="arithmatex">\(V = \text{span}\{\varepsilon_1\} \oplus \text{span}\{\varepsilon_1\}^\perp\)</span>
+3. <span class="arithmatex">\(\text{span}\{\varepsilon_1\}^\perp\)</span> 是 <span class="arithmatex">\(\sigma\)</span> 的不变子空间
+4. 递归证明</p>
+<blockquote>
+<p><strong>推论</strong>：对称变换的属于不同特征值的特征向量相互正交。</p>
+</blockquote>
+<h4 id="24_3">2.4 对称矩阵的性质<a class="headerlink" href="#24_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理10.4.4</strong>：以下等价：
+1. <span class="arithmatex">\(A\)</span> 是对称矩阵（<span class="arithmatex">\(A^T = A\)</span>）
+2. <span class="arithmatex">\(A\)</span> 是某个对称变换在标准正交基下的矩阵
+3. <span class="arithmatex">\(A\)</span> 正交相似于对角矩阵</p>
+</blockquote>
+<h3 id="_32">三、典型例题<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<h4 id="_33">【验证题】<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
+<p><strong>例4.1</strong>：判断下列变换是否为正交变换：
+1. 旋转：<span class="arithmatex">\(\sigma(x,y) = (x\cos\theta - y\sin\theta, x\sin\theta + y\cos\theta)\)</span>
+2. 反射：<span class="arithmatex">\(\sigma(x,y) = (x, -y)\)</span>
+3. 伸缩：<span class="arithmatex">\(\sigma(x,y) = (2x, 2y)\)</span></p>
+<p><strong>解答</strong>：
+1. 旋转保持长度 <span class="arithmatex">\(|\sigma(v)| = |v|\)</span>，是<strong>正交变换</strong>（<span class="arithmatex">\(\det = 1\)</span>）
+2. 反射保持长度，是<strong>正交变换</strong>（<span class="arithmatex">\(\det = -1\)</span>）
+3. 伸缩 <span class="arithmatex">\(|\sigma(v)| = 2|v| \neq |v|\)</span>（除非 <span class="arithmatex">\(v=0\)</span>），<strong>不是</strong>正交变换</p>
+<hr />
+<p><strong>例4.2</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{pmatrix}\)</span>。
+验证 <span class="arithmatex">\(A\)</span> 是正交矩阵。</p>
+<p><strong>解答</strong>：
+$<span class="arithmatex">\(A^T A = \begin{pmatrix} \cos\theta &amp; \sin\theta \\ -\sin\theta &amp; \cos\theta \end{pmatrix} \begin{pmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I\)</span>$</p>
+<p>且 <span class="arithmatex">\(\det(A) = \cos^2\theta + \sin^2\theta = 1\)</span></p>
+<p>是<strong>正交矩阵</strong>（旋转矩阵）。</p>
+<h4 id="_34">【计算题】<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h4>
+<p><strong>例4.3</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}\)</span>。
+求正交矩阵 <span class="arithmatex">\(P\)</span> 使 <span class="arithmatex">\(P^T A P\)</span> 为对角矩阵。</p>
+<p><strong>解答</strong>：
+<strong>第一步</strong>：求特征值
+$<span class="arithmatex">\(|\lambda I - A| = \begin{vmatrix} \lambda-3 &amp; -1 \\ -1 &amp; \lambda-3 \end{vmatrix} = (\lambda-3)^2 - 1 = (\lambda-2)(\lambda-4)\)</span>$</p>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 2, \lambda_2 = 4\)</span></p>
+<p><strong>第二步</strong>：求特征向量
+- 对 <span class="arithmatex">\(\lambda_1 = 2\)</span>：<span class="arithmatex">\((A-2I)v = 0 \Rightarrow v_1 = (1,-1)^T\)</span>
+- 对 <span class="arithmatex">\(\lambda_2 = 4\)</span>：<span class="arithmatex">\((A-4I)v = 0 \Rightarrow v_2 = (1,1)^T\)</span></p>
+<p><strong>第三步</strong>：标准化
+<span class="arithmatex">\(\varepsilon_1 = \frac{1}{\sqrt{2}}(1,-1)\)</span>，<span class="arithmatex">\(\varepsilon_2 = \frac{1}{\sqrt{2}}(1,1)\)</span></p>
+<p><strong>第四步</strong>：<span class="arithmatex">\(P = \begin{pmatrix} 1/\sqrt{2} &amp; 1/\sqrt{2} \\ -1/\sqrt{2} &amp; 1/\sqrt{2} \end{pmatrix}\)</span>，则
+$<span class="arithmatex">\(P^T A P = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 4 \end{pmatrix}\)</span>$</p>
+<hr />
+<p><strong>例4.4</strong>：设 <span class="arithmatex">\(\sigma\)</span> 是 <span class="arithmatex">\(\mathbb{R}^3\)</span> 上的正交变换，<span class="arithmatex">\(\det\sigma = -1\)</span>。证明 <span class="arithmatex">\(\sigma\)</span> 有特征值 <span class="arithmatex">\(-1\)</span>。</p>
+<p><strong>解答</strong>：
+设 <span class="arithmatex">\(\sigma\)</span> 在标准正交基下的矩阵为 <span class="arithmatex">\(A\)</span>，<span class="arithmatex">\(A\)</span> 是正交矩阵，<span class="arithmatex">\(\det A = -1\)</span>。</p>
+<p>特征多项式 <span class="arithmatex">\(f(\lambda) = |\lambda I - A|\)</span> 是三次多项式，至少有一个实根（奇数次实系数多项式必有实根）。</p>
+<p>设 <span class="arithmatex">\(\lambda_0\)</span> 是实特征值，则 <span class="arithmatex">\(|\lambda_0| = 1\)</span>（正交矩阵特征值的模为1）</p>
+<p>若 <span class="arithmatex">\(\lambda_0 = 1\)</span>，则 <span class="arithmatex">\(\det A = 1 \cdot \lambda_2 \lambda_3 = -1\)</span>，故 <span class="arithmatex">\(\lambda_2 \lambda_3 = -1\)</span></p>
+<p>但 <span class="arithmatex">\(|\lambda_2| = |\lambda_3| = 1\)</span>，故 <span class="arithmatex">\(\lambda_2 \lambda_3 = \pm 1\)</span>，需要 <span class="arithmatex">\(\lambda_2 \lambda_3 = -1\)</span></p>
+<p>这意味着 <span class="arithmatex">\(\lambda_2, \lambda_3\)</span> 中有一个为 <span class="arithmatex">\(-1\)</span>，或者两者都是虚数（共轭复数乘积为1）。</p>
+<p>实际上，对于3维正交矩阵且 <span class="arithmatex">\(\det = -1\)</span>，特征多项式在 <span class="arithmatex">\(\lambda = -1\)</span> 处取值：
+<span class="arithmatex">\(f(-1) = |-I - A| = (-1)^3 |I + A| = -|I + A|\)</span></p>
+<p><span class="arithmatex">\(|I + A|\)</span> 可能为0吗？若 <span class="arithmatex">\(|I + A| \neq 0\)</span>，则 <span class="arithmatex">\(f(-1) \neq 0\)</span>，<span class="arithmatex">\(-1\)</span> 不是特征值。</p>
+<p>但我们可以直接证明：设 <span class="arithmatex">\(A\)</span> 的特征多项式为 <span class="arithmatex">\((\lambda+1)(\lambda^2 + 2\lambda \cos\phi + 1)\)</span> 或类似形式...</p>
+<p>更简单：<span class="arithmatex">\(\det(A+I) = \det(A)\det(I+A^T) = -\det(I+A)\)</span>（因为 <span class="arithmatex">\(\det A = -1\)</span> 且 <span class="arithmatex">\(A^T\)</span> 相似）</p>
+<p>若 <span class="arithmatex">\(\det(A+I) \neq 0\)</span>，则 <span class="arithmatex">\(-\det(A+I) = \det(A+I) = 0\)</span>，矛盾。</p>
+<p>故 <span class="arithmatex">\(\det(A+I) = 0\)</span>，即 <span class="arithmatex">\(-1\)</span> 是特征值。</p>
+<hr />
+<p><strong>例4.5</strong>：设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 实对称矩阵。证明：存在正交矩阵 <span class="arithmatex">\(Q\)</span> 使 <span class="arithmatex">\(Q^T A Q = \text{diag}(\lambda_1, \ldots, \lambda_n)\)</span>。</p>
+<p><strong>解答</strong>：
+这是对称矩阵的谱定理，是上述定理的直接推论。</p>
+<p>由对称变换的谱定理，取 <span class="arithmatex">\(V = \mathbb{R}^n\)</span>，<span class="arithmatex">\(A\)</span> 是对称变换在标准基下的矩阵。</p>
+<p>存在标准正交基 <span class="arithmatex">\(\{\varepsilon_i\}\)</span> 使 <span class="arithmatex">\(A\varepsilon_i = \lambda_i \varepsilon_i\)</span>。</p>
+<p>取 <span class="arithmatex">\(Q\)</span> 的列为 <span class="arithmatex">\(\varepsilon_i\)</span>，则 <span class="arithmatex">\(Q\)</span> 是正交矩阵，且 <span class="arithmatex">\(Q^T A Q = \text{diag}(\lambda_1, \ldots, \lambda_n)\)</span>。</p>
+<h3 id="_35">四、易错点提醒<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>混淆正交矩阵与对称矩阵</td>
+<td>正交：<span class="arithmatex">\(A^T A = I\)</span>；对称：<span class="arithmatex">\(A^T = A\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>忘记正交变换保持 <span class="arithmatex">\(\det = \pm 1\)</span></td>
+<td>正交变换的行列式必须是 <span class="arithmatex">\(\pm 1\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>对称变换特征值不一定是实数</td>
+<td>在实数域上，对称矩阵的特征值一定是实数</td>
+</tr>
+<tr>
+<td>4</td>
+<td>认为旋转只有 <span class="arithmatex">\(\det = 1\)</span></td>
+<td>在偶数维空间，旋转可以分解为多个平面的旋转，<span class="arithmatex">\(\det\)</span> 可能为负</td>
+</tr>
+<tr>
+<td>5</td>
+<td>混淆正交变换与正交投影</td>
+<td>正交变换保持内积；正交投影将向量映到子空间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_36">五、思考题<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>正交变换的分类</strong>：在 <span class="arithmatex">\(\mathbb{R}^2\)</span> 中，所有正交变换是什么？在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中呢？</p>
+</li>
+<li>
+<p><strong>对称变换的极分解</strong>：设 <span class="arithmatex">\(\sigma\)</span> 是对称变换且正定（所有特征值为正），证明 <span class="arithmatex">\(\sigma = \tau^2\)</span> 对某个正定对称 <span class="arithmatex">\(\tau\)</span> 成立。</p>
+</li>
+<li>
+<p><strong>奇异值分解</strong>：设 <span class="arithmatex">\(A\)</span> 是任意实矩阵，证明 <span class="arithmatex">\(A = U \Sigma V^T\)</span>，其中 <span class="arithmatex">\(U, V\)</span> 正交，<span class="arithmatex">\(\Sigma\)</span> 对角非负。</p>
+</li>
+<li>
+<p><strong>Rayleigh商</strong>：设 <span class="arithmatex">\(A\)</span> 对称，定义 <span class="arithmatex">\(R(x) = \frac{x^T A x}{x^T x}\)</span>。证明 <span class="arithmatex">\(R(x)\)</span> 的最大值和最小值分别是 <span class="arithmatex">\(A\)</span> 的最大和最小特征值。</p>
+</li>
+</ol>
+<hr />
+<h2 id="105">10.5 西空间、西变换、埃尔米特变换<a class="headerlink" href="#105" title="Permanent link">&para;</a></h2>
+<h3 id="_37">一、概念引入动机<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<h4 id="11_4">1.1 从实到复的推广<a class="headerlink" href="#11_4" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>欧几里得空间：V 是实线性空间，内积 (α,β) ∈ ℝ
+
+西空间：V 是复线性空间，内积 (α,β) ∈ ℂ
+
+为什么需要西空间？
+• 复数域代数闭，便于理论分析
+• 量子力学：态空间是复内积空间
+• 信号处理：傅里叶分析在复数域更自然
+</code></pre></div></td></tr></table></div>
+<h4 id="12_4">1.2 复内积的特殊性<a class="headerlink" href="#12_4" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>复数域上的内积必须满足：
+(α,β) = conjugate((β,α))
+
+否则会出问题：
+• 长度公式 (α,α) 不一定是实数
+• 范数可能为虚数（无意义）
+
+这就是埃尔米特型！
+</code></pre></div></td></tr></table></div>
+<h4 id="13_4">1.3 酉矩阵的对应<a class="headerlink" href="#13_4" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>正交矩阵 → 酉矩阵
+A^T A = I  →  A* A = I
+
+其中 A* = (A̅)^T 是埃尔米特伴随
+
+酉矩阵：
+• 列向量组是标准正交的
+• 保持酉内积
+• 行列式模长为1
+</code></pre></div></td></tr></table></div>
+<h3 id="_38">二、详细讲解过程<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<h4 id="21_4">2.1 西内积<a class="headerlink" href="#21_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.5.1（酉内积）</strong>
+在复线性空间 <span class="arithmatex">\(V\)</span> 上定义<strong>酉内积</strong>：
+$<span class="arithmatex">\((\alpha, \beta) \in \mathbb{C}, \quad \forall \alpha, \beta \in V\)</span>$
+满足：
+1. <span class="arithmatex">\((\alpha, \beta) = \overline{(\beta, \alpha)}\)</span>（共轭对称）
+2. <span class="arithmatex">\((\alpha + \beta, \gamma) = (\alpha, \gamma) + (\beta, \gamma)\)</span>（线性）
+3. <span class="arithmatex">\((k\alpha, \beta) = k(\alpha, \beta)\)</span>
+4. <span class="arithmatex">\((\alpha, \alpha) \geq 0\)</span>，且 <span class="arithmatex">\((\alpha, \alpha) = 0 \iff \alpha = 0\)</span>（正定）</p>
+</blockquote>
+<p><strong>注意</strong>：<span class="arithmatex">\((\alpha, k\beta) = \bar{k}(\alpha, \beta)\)</span>（对第二个变量共轭线性）</p>
+<blockquote>
+<p><strong>定义10.5.2（酉空间）</strong>
+定义了酉内积的复线性空间称为<strong>酉空间</strong>，记作 <span class="arithmatex">\(V\)</span> 或 <span class="arithmatex">\(\mathbb{C}^n\)</span>。</p>
+</blockquote>
+<h4 id="22_4">2.2 西内积的性质<a class="headerlink" href="#22_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>长度</strong>：<span class="arithmatex">\(|\alpha| = \sqrt{(\alpha, \alpha)}\)</span> 是非负实数</li>
+<li><strong>Cauchy-Schwarz</strong>：<span class="arithmatex">\(|(\alpha, \beta)| \leq |\alpha| \cdot |\beta|\)</span></li>
+<li><strong>正交</strong>：<span class="arithmatex">\((\alpha, \beta) = 0\)</span> 称为正交</li>
+<li><strong>标准正交基</strong>：<span class="arithmatex">\((\varepsilon_i, \varepsilon_j) = \delta_{ij}\)</span></li>
+</ul>
+<h4 id="23_4">2.3 酉变换<a class="headerlink" href="#23_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.5.3（酉变换）</strong>
+酉空间 <span class="arithmatex">\(V\)</span> 的线性变换 <span class="arithmatex">\(\sigma\)</span> 若保持酉内积：
+$<span class="arithmatex">\((\sigma(\alpha), \sigma(\beta)) = (\alpha, \beta)\)</span>$
+则称 <span class="arithmatex">\(\sigma\)</span> 为<strong>酉变换</strong>。</p>
+<p><strong>定理10.5.1</strong>：以下等价：
+1. <span class="arithmatex">\(\sigma\)</span> 是酉变换
+2. <span class="arithmatex">\(|\sigma(\alpha)| = |\alpha|\)</span> 对所有 <span class="arithmatex">\(\alpha\)</span>
+3. <span class="arithmatex">\(\sigma\)</span> 在标准正交基下的矩阵 <span class="arithmatex">\(U\)</span> 满足 <span class="arithmatex">\(U^* U = I\)</span>（<span class="arithmatex">\(U\)</span> 是酉矩阵）</p>
+</blockquote>
+<p>其中 <span class="arithmatex">\(U^* = \overline{U}^T\)</span>。</p>
+<p><strong>酉矩阵的性质</strong>：
+- <span class="arithmatex">\(U^* = U^{-1}\)</span>
+- <span class="arithmatex">\(|\det(U)| = 1\)</span>
+- 若 <span class="arithmatex">\(\lambda\)</span> 是 <span class="arithmatex">\(U\)</span> 的特征值，则 <span class="arithmatex">\(|\lambda| = 1\)</span></p>
+<h4 id="24_4">2.4 埃尔米特变换<a class="headerlink" href="#24_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.5.4（埃尔米特变换）</strong>
+线性变换 <span class="arithmatex">\(\sigma\)</span> 若满足
+$<span class="arithmatex">\((\sigma(\alpha), \beta) = (\alpha, \sigma(\beta))\)</span>$
+则称 <span class="arithmatex">\(\sigma\)</span> 为 <strong>埃尔米特变换</strong>（自伴变换）。</p>
+<p><strong>定理10.5.2（埃尔米特矩阵的谱定理）</strong>
+埃尔米特变换在某个标准正交基下可对角化，且特征值为实数。</p>
+<p><strong>定义10.5.5（埃尔米特矩阵）</strong>
+矩阵 <span class="arithmatex">\(A\)</span> 满足 <span class="arithmatex">\(\overline{A}^T = A\)</span> 称为<strong>埃尔米特矩阵</strong>（或自伴矩阵）。</p>
+</blockquote>
+<p><strong>性质</strong>：
+- 埃尔米特矩阵的特征值都是实数
+- 属于不同特征值的特征向量正交
+- 存在酉矩阵 <span class="arithmatex">\(U\)</span> 使 <span class="arithmatex">\(U^* A U = \text{diag}(\lambda_1, \ldots, \lambda_n)\)</span></p>
+<h3 id="_39">三、典型例题<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<h4 id="_40">【验证题】<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h4>
+<p><strong>例5.1</strong>：设 <span class="arithmatex">\(V = \mathbb{C}^2\)</span>，定义 <span class="arithmatex">\((\alpha, \beta) = \alpha_1\overline{\beta_1} + \alpha_2\overline{\beta_2}\)</span>。
+验证这是酉内积。</p>
+<p><strong>解答</strong>：
+- <span class="arithmatex">\((\alpha, \beta) = \sum \alpha_i \overline{\beta_i} = \overline{\sum \beta_i \overline{\alpha_i}} = \overline{(\beta, \alpha)}\)</span> ✓
+- 线性性：类似验证 ✓
+- 正定性：<span class="arithmatex">\((\alpha, \alpha) = \sum |\alpha_i|^2 \geq 0\)</span>，等号成立当且仅当 <span class="arithmatex">\(\alpha = 0\)</span> ✓</p>
+<p>是酉内积。</p>
+<hr />
+<p><strong>例5.2</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; i \\ -i &amp; 1 \end{pmatrix}\)</span>。判断是否是埃尔米特矩阵。</p>
+<p><strong>解答</strong>：
+$<span class="arithmatex">\(\overline{A}^T = \begin{pmatrix} 1 &amp; i \\ -i &amp; 1 \end{pmatrix}^T = \begin{pmatrix} 1 &amp; -i \\ i &amp; 1 \end{pmatrix}\)</span>$</p>
+<div class="arithmatex">\[\overline{A}^T = \begin{pmatrix} 1 &amp; -i \\ i &amp; 1 \end{pmatrix} \neq A\]</div>
+<p>但 <span class="arithmatex">\(\overline{A}^T = A^T\)</span>? 不是。</p>
+<p>检查：<span class="arithmatex">\(\overline{A}^T = A\)</span>？不成立。</p>
+<p>重新计算：
+$<span class="arithmatex">\(\overline{A} = \begin{pmatrix} 1 &amp; -i \\ i &amp; 1 \end{pmatrix}\)</span>$
+$<span class="arithmatex">\(\overline{A}^T = \begin{pmatrix} 1 &amp; i \\ -i &amp; 1 \end{pmatrix} = A\)</span>$</p>
+<p>是<strong>埃尔米特矩阵</strong> ✓</p>
+<h4 id="_41">【计算题】<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h4>
+<p><strong>例5.3</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; i \\ -i &amp; 2 \end{pmatrix}\)</span>。
+求酉矩阵 <span class="arithmatex">\(U\)</span> 使 <span class="arithmatex">\(U^* A U\)</span> 对角化。</p>
+<p><strong>解答</strong>：
+<strong>第一步</strong>：求特征值
+$<span class="arithmatex">\(|\lambda I - A| = \begin{vmatrix} \lambda-2 &amp; -i \\ i &amp; \lambda-2 \end{vmatrix} = (\lambda-2)^2 - 1 = (\lambda-1)(\lambda-3)\)</span>$</p>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 1, \lambda_2 = 3\)</span></p>
+<p><strong>第二步</strong>：求特征向量
+- <span class="arithmatex">\(\lambda_1 = 1\)</span>：<span class="arithmatex">\((A-I)v = 0 \Rightarrow \begin{pmatrix} 1 &amp; i \\ -i &amp; 1 \end{pmatrix}v = 0\)</span>
+  解得 <span class="arithmatex">\(v_1 = (1, -i)^T\)</span> 或 <span class="arithmatex">\((i, 1)^T\)</span>（取 <span class="arithmatex">\((1, -i)\)</span>）
+- <span class="arithmatex">\(\lambda_2 = 3\)</span>：<span class="arithmatex">\((A-3I)v = 0 \Rightarrow \begin{pmatrix} -1 &amp; i \\ -i &amp; -1 \end{pmatrix}v = 0\)</span>
+  解得 <span class="arithmatex">\(v_2 = (1, i)^T\)</span></p>
+<p><strong>第三步</strong>：标准化
+<span class="arithmatex">\(|v_1|^2 = 1 + 1 = 2\)</span>，<span class="arithmatex">\(\varepsilon_1 = \frac{1}{\sqrt{2}}(1, -i)\)</span>
+<span class="arithmatex">\(|v_2|^2 = 1 + 1 = 2\)</span>，<span class="arithmatex">\(\varepsilon_2 = \frac{1}{\sqrt{2}}(1, i)\)</span></p>
+<p><strong>第四步</strong>：<span class="arithmatex">\(U = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ -i &amp; i \end{pmatrix}\)</span>，验证 <span class="arithmatex">\(U^* A U = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span></p>
+<hr />
+<p><strong>例5.4</strong>：设 <span class="arithmatex">\(U = \begin{pmatrix} e^{i\theta} &amp; 0 \\ 0 &amp; e^{-i\theta} \end{pmatrix}\)</span>。验证 <span class="arithmatex">\(U\)</span> 是酉矩阵。</p>
+<p><strong>解答</strong>：
+$<span class="arithmatex">\(U^* = \begin{pmatrix} e^{-i\theta} &amp; 0 \\ 0 &amp; e^{i\theta} \end{pmatrix}\)</span>$
+$<span class="arithmatex">\(U^* U = \begin{pmatrix} e^{-i\theta} &amp; 0 \\ 0 &amp; e^{i\theta} \end{pmatrix} \begin{pmatrix} e^{i\theta} &amp; 0 \\ 0 &amp; e^{-i\theta} \end{pmatrix} = I\)</span>$</p>
+<p>是酉矩阵，且 <span class="arithmatex">\(\det(U) = 1\)</span>（旋转）。</p>
+<hr />
+<p><strong>例5.5</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix}\)</span>（泡利矩阵 <span class="arithmatex">\(\sigma_y\)</span>）。
+求 <span class="arithmatex">\(A\)</span> 的特征值和特征向量。</p>
+<p><strong>解答</strong>：
+<strong>特征值</strong>：
+$<span class="arithmatex">\(|\lambda I - A| = \begin{vmatrix} \lambda &amp; i \\ -i &amp; \lambda \end{vmatrix} = \lambda^2 - 1 = 0\)</span>$
+$<span class="arithmatex">\(\lambda_1 = 1, \lambda_2 = -1\)</span>$</p>
+<p><strong>特征向量</strong>：
+- <span class="arithmatex">\(\lambda = 1\)</span>：解 <span class="arithmatex">\(\begin{pmatrix} 1 &amp; i \\ -i &amp; 1 \end{pmatrix}v = 0\)</span>
+  得 <span class="arithmatex">\(v_1 = (1, -i)^T\)</span>
+- <span class="arithmatex">\(\lambda = -1\)</span>：解 <span class="arithmatex">\(\begin{pmatrix} -1 &amp; i \\ -i &amp; -1 \end{pmatrix}v = 0\)</span>
+  得 <span class="arithmatex">\(v_2 = (1, i)^T\)</span></p>
+<p>验证正交：<span class="arithmatex">\((v_1, v_2) = 1\cdot\overline{1} + (-i)\cdot\overline{i} = 1 + (-i)(-i) = 1 - 1 = 0\)</span> ✓</p>
+<h3 id="_42">四、易错点提醒<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>忘记内积的共轭对称</td>
+<td>酉空间 <span class="arithmatex">\((\alpha, \beta) = \overline{(\beta, \alpha)}\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>混淆 <span class="arithmatex">\(A^T\)</span> 与 <span class="arithmatex">\(A^*\)</span></td>
+<td><span class="arithmatex">\(A^* = \overline{A}^T\)</span>，酉矩阵 <span class="arithmatex">\(A^* = A^{-1}\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>对第二个变量线性记错</td>
+<td><span class="arithmatex">\((\alpha, k\beta) = \bar{k}(\alpha, \beta)\)</span>，不是 <span class="arithmatex">\(k(\alpha, \beta)\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>酉矩阵行列式模长</td>
+<td><span class="arithmatex">\(\|\det U\| = 1\)</span>，不一定是 <span class="arithmatex">\(\pm 1\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>埃尔米特矩阵特征值</td>
+<td>埃尔米特矩阵的特征值一定是<strong>实数</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_43">五、思考题<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>西测地线</strong>：在酉空间中，两点间最短路径（测地线）是什么？</p>
+</li>
+<li>
+<p><strong>正定矩阵</strong>：对称正定矩阵的复数推广是什么？如何定义正定埃尔米特矩阵？</p>
+</li>
+<li>
+<p><strong>极分解</strong>：设 <span class="arithmatex">\(A\)</span> 是复矩阵，证明 <span class="arithmatex">\(A = UH\)</span> 的分解，其中 <span class="arithmatex">\(U\)</span> 酉，<span class="arithmatex">\(H\)</span> 埃尔米特半正定。</p>
+</li>
+<li>
+<p><strong>西群的生成元</strong>：证明西代数 <span class="arithmatex">\(\mathfrak{u}(n)\)</span> 的元素满足 <span class="arithmatex">\(K^* = -K\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="106">10.6 正交空间与辛空间<a class="headerlink" href="#106" title="Permanent link">&para;</a></h2>
+<h3 id="_44">一、概念引入动机<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<h4 id="11_5">1.1 从正定到一般的度量<a class="headerlink" href="#11_5" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>内积空间要求正定：
+(α,α) &gt; 0 对 α ≠ 0
+
+但物理中需要更一般的度量：
+• 闵可夫斯基空间：(t,x,y,z) → t² - x² - y² - z²
+• 辛几何：位置+动量系统的相位空间
+
+这导致：
+• 正交空间：非退化对称双线性函数
+• 辛空间：非退化斜对称双线性函数
+</code></pre></div></td></tr></table></div>
+<h4 id="12_5">1.2 辛几何的起源<a class="headerlink" href="#12_5" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>辛几何（Symplectic Geometry）：
+• 由 Hamilton 力学发展而来
+• 相空间：位置 q 和动量 p
+• 辛形式：ω = ∑ dpi ∧ dqi
+• 物理定律由辛变换描述
+</code></pre></div></td></tr></table></div>
+<h4 id="13_5">1.3 线性代数的新视角<a class="headerlink" href="#13_5" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>正交几何 ⊃ 欧几里得几何
+辛几何 ⊥ 欧几里得几何
+
+区别：
+• 正交：对称型 → 角度、长度
+• 辛：斜对称型 → 面积、方向
+</code></pre></div></td></tr></table></div>
+<h3 id="_45">二、详细讲解过程<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
+<h4 id="21_5">2.1 正交空间<a class="headerlink" href="#21_5" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.6.1（正交空间）</strong>
+设 <span class="arithmatex">\(V\)</span> 是域 <span class="arithmatex">\(F\)</span> 上的线性空间，<span class="arithmatex">\(f\)</span> 是 <span class="arithmatex">\(V\)</span> 上的非退化对称双线性函数，则 <span class="arithmatex">\((V, f)\)</span> 称为<strong>正交空间</strong>。</p>
+</blockquote>
+<p><strong>注意</strong>：不要求正定性，所以长度和角度概念需要重新审视。</p>
+<p><strong>Witt分解定理</strong>：有限维正交空间可以分解为：
+$<span class="arithmatex">\(V = V_{\text{anisotropic}} \oplus W\)</span>$
+其中 <span class="arithmatex">\(W\)</span> 是双曲平面（<span class="arithmatex">\(1 \oplus (-1)\)</span> 型）的直和，<span class="arithmatex">\(V_{\text{anisotropic}}\)</span> 中没有迷向向量（满足 <span class="arithmatex">\(f(v,v) = 0\)</span> 的非零向量）。</p>
+<h4 id="22_5">2.2 辛空间<a class="headerlink" href="#22_5" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.6.2（辛空间）</strong>
+设 <span class="arithmatex">\(V\)</span> 是域 <span class="arithmatex">\(F\)</span> 上的线性空间，<span class="arithmatex">\(f\)</span> 是 <span class="arithmatex">\(V\)</span> 上的非退化斜对称双线性函数，则 <span class="arithmatex">\((V, f)\)</span> 称为<strong>辛空间</strong>。</p>
+</blockquote>
+<p><strong>基本性质</strong>：
+- 辛空间维数必为偶数
+- 存在标准基使度量矩阵为 <span class="arithmatex">\(\begin{pmatrix} 0 &amp; I \\ -I &amp; 0 \end{pmatrix}\)</span></p>
+<blockquote>
+<p><strong>定理10.6.1（辛标准形）</strong>
+设 <span class="arithmatex">\((V, \omega)\)</span> 是 <span class="arithmatex">\(2n\)</span> 维辛空间，则存在基使
+$<span class="arithmatex">\(\omega(\varepsilon_i, \varepsilon_{n+j}) = \delta_{ij}, \quad \omega(\varepsilon_i, \varepsilon_j) = 0, \quad \omega(\varepsilon_{n+i}, \varepsilon_{n+j}) = 0\)</span>$</p>
+</blockquote>
+<h4 id="23_5">2.3 辛变换<a class="headerlink" href="#23_5" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.6.3（辛变换）</strong>
+线性变换 <span class="arithmatex">\(\sigma\)</span> 若保持辛形式：
+$<span class="arithmatex">\(\omega(\sigma(\alpha), \sigma(\beta)) = \omega(\alpha, \beta)\)</span>$
+则称 <span class="arithmatex">\(\sigma\)</span> 为<strong>辛变换</strong>。</p>
+<p><strong>定理10.6.2</strong>：辛变换在上述标准基下的矩阵 <span class="arithmatex">\(S\)</span> 满足：
+$<span class="arithmatex">\(S^T J S = J, \quad J = \begin{pmatrix} 0 &amp; I \\ -I &amp; 0 \end{pmatrix}\)</span>$</p>
+</blockquote>
+<h3 id="_46">三、典型例题<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h3>
+<h4 id="_47">【验证题】<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h4>
+<p><strong>例6.1</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^2\)</span>，<span class="arithmatex">\(f((x_1,y_1), (x_2,y_2)) = x_1 x_2 - y_1 y_2\)</span>。
+判断 <span class="arithmatex">\((V, f)\)</span> 是否为正交空间。</p>
+<p><strong>解答</strong>：
+- 对称性：<span class="arithmatex">\(f(\alpha, \beta) = f(\beta, \alpha)\)</span> ✓
+- 非退化性：度量矩阵 <span class="arithmatex">\(G = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>，<span class="arithmatex">\(\det G = -1 \neq 0\)</span>，非退化 ✓</p>
+<p>是<strong>正交空间</strong>（但不是欧几里得空间，因为不正定）。</p>
+<hr />
+<p><strong>例6.2</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^4\)</span>，标准辛形式为
+$<span class="arithmatex">\(\omega((x_1,x_2,x_3,x_4), (y_1,y_2,y_3,y_4)) = x_1 y_2 - x_2 y_1 + x_3 y_4 - x_4 y_3\)</span>$
+验证非退化。</p>
+<p><strong>解答</strong>：
+度量矩阵 <span class="arithmatex">\(J = \begin{pmatrix} 0 &amp; 1 &amp; 0 &amp; 0 \\ -1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{pmatrix}\)</span></p>
+<p><span class="arithmatex">\(\det J = (-1) \cdot (-1) = 1 \neq 0\)</span>，非退化 ✓</p>
+<p>是辛空间。</p>
+<h4 id="_48">【计算题】<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h4>
+<p><strong>例6.3</strong>：在辛空间 <span class="arithmatex">\((\mathbb{R}^4, \omega)\)</span> 中，取标准基，求与向量 <span class="arithmatex">\((1,0,1,0)\)</span> 的 <span class="arithmatex">\(\omega\)</span>-正交补。</p>
+<p><strong>解答</strong>：
+设 <span class="arithmatex">\(\alpha = (x_1,x_2,x_3,x_4)\)</span>，要求 <span class="arithmatex">\(\omega(\alpha, (1,0,1,0)) = 0\)</span></p>
+<p><span class="arithmatex">\(\omega(\alpha, (1,0,1,0)) = x_1 \cdot 0 - x_2 \cdot 1 + x_3 \cdot 0 - x_4 \cdot 1 = -x_2 - x_4 = 0\)</span></p>
+<p>解得 <span class="arithmatex">\(x_2 = -x_4\)</span></p>
+<p>正交补为 <span class="arithmatex">\(\{(x_1, x_2, x_3, -x_2) \mid x_1,x_2,x_3 \in \mathbb{R}\}\)</span>，维数为3。</p>
+<hr />
+<p><strong>例6.4</strong>：证明辛空间中任意向量都可以延拓为辛基。</p>
+<p><strong>证明</strong>：
+设 <span class="arithmatex">\(v \neq 0\)</span> 是辛空间 <span class="arithmatex">\((V, \omega)\)</span> 中的向量。</p>
+<p>由于 <span class="arithmatex">\(\omega\)</span> 非退化，存在 <span class="arithmatex">\(w\)</span> 使 <span class="arithmatex">\(\omega(v, w) \neq 0\)</span>（否则 <span class="arithmatex">\(v\)</span> 将正交于整个空间，与非退化矛盾）。</p>
+<p>取 <span class="arithmatex">\(v_1 = v\)</span>，<span class="arithmatex">\(v_{n+1} = w\)</span>，则 <span class="arithmatex">\(\omega(v_1, v_{n+1}) \neq 0\)</span>。</p>
+<p>令 <span class="arithmatex">\(W = \text{span}\{v_1, v_{n+1}\}\)</span>，则 <span class="arithmatex">\(W\)</span> 是辛子空间（<span class="arithmatex">\(\omega|_{W}\)</span> 非退化）。</p>
+<p>对 <span class="arithmatex">\(W^\omega = \{u \mid \omega(u, w) = 0, \forall w \in W\}\)</span>，递归处理。</p>
+<p>由于 <span class="arithmatex">\(\dim V\)</span> 有限且为偶数，最终得到标准辛基。</p>
+<h3 id="_49">四、易错点提醒<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>混淆正交空间与欧几里得空间</td>
+<td>正交空间不要求正定</td>
+</tr>
+<tr>
+<td>2</td>
+<td>忘记辛空间维数为偶数</td>
+<td>非退化斜对称双线性函数只能在偶数维空间存在</td>
+</tr>
+<tr>
+<td>3</td>
+<td>辛变换条件记错</td>
+<td><span class="arithmatex">\(S^T J S = J\)</span>，不是 <span class="arithmatex">\(S^T S = I\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>辛正交与欧氏正交混淆</td>
+<td><span class="arithmatex">\(\omega(\alpha, \beta) = 0\)</span> 定义辛正交，与内积无关</td>
+</tr>
+<tr>
+<td>5</td>
+<td>辛形式不是对称的</td>
+<td><span class="arithmatex">\(\omega(\alpha, \beta) = -\omega(\beta, \alpha)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_50">五、思考题<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>辛体积形式</strong>：在辛空间中，<span class="arithmatex">\(2n\)</span> 维体积形式如何定义？与黎曼几何有何不同？</p>
+</li>
+<li>
+<p><strong>Maslov index</strong>：辛道路的Maslov index是什么？它在辛拓扑中有何意义？</p>
+</li>
+<li>
+<p><strong>Hamilton方程</strong>：在辛几何框架下，Hamilton方程如何用辛形式表述？</p>
+</li>
+<li>
+<p><strong>辛容量</strong>： symplectic capacity 是什么？它如何刻画的"大小"？</p>
+</li>
+</ol>
+<hr />
+<h2 id="107">10.7 正交群、西群、辛群<a class="headerlink" href="#107" title="Permanent link">&para;</a></h2>
+<h3 id="_51">一、概念引入动机<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h3>
+<h4 id="11_6">1.1 变换群的观点<a class="headerlink" href="#11_6" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>研究几何 = 研究在某种变换群下不变的性质
+
+欧几里得几何：正交变换群 O(n)
+射影几何：射影变换群 PGL(n+1)
+辛几何：辛变换群 Sp(2n)
+
+这导致了 Klein 的 Erlangen 纲领：
+&quot;几何是研究在变换群下不变量的学问&quot;
+</code></pre></div></td></tr></table></div>
+<h4 id="12_6">1.2 群论与几何的统一<a class="headerlink" href="#12_6" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>矩阵群：
+• O(n) = {A | A^T A = I} - 正交群
+• SO(n) = {A ∈ O(n) | det A = 1} - 特殊正交群
+• U(n) = {A | A* A = I} - 酉群
+• SU(n) = {A ∈ U(n) | det A = 1} - 特殊酉群
+• Sp(2n) = {A | A^T J A = J} - 辛群
+</code></pre></div></td></tr></table></div>
+<h3 id="_52">二、详细讲解过程<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h3>
+<h4 id="21_6">2.1 正交群<a class="headerlink" href="#21_6" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.7.1（正交群）</strong>
+$<span class="arithmatex">\(O(n) = \{A \in M_n(\mathbb{R}) \mid A^T A = I\}\)</span>$</p>
+</blockquote>
+<p><strong>性质</strong>：
+- <span class="arithmatex">\(O(n)\)</span> 是群（乘法封闭、单位元 <span class="arithmatex">\(I\)</span>、逆封闭）
+- <span class="arithmatex">\(|O(n)|\)</span> 无限（因为包含 <span class="arithmatex">\(-I\)</span> 和旋转矩阵）
+- <span class="arithmatex">\(\det A = \pm 1\)</span></p>
+<blockquote>
+<p><strong>定义10.7.2（特殊正交群）</strong>
+$<span class="arithmatex">\(SO(n) = \{A \in O(n) \mid \det A = 1\}\)</span>$</p>
+</blockquote>
+<p><strong>性质</strong>：
+- <span class="arithmatex">\(SO(n)\)</span> 是 <span class="arithmatex">\(O(n)\)</span> 的正规子群
+- <span class="arithmatex">\([O(n) : SO(n)] = 2\)</span>
+- <span class="arithmatex">\(SO(n)\)</span> 是旋转群</p>
+<h4 id="22_6">2.2 酉群<a class="headerlink" href="#22_6" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.7.3（酉群）</strong>
+$<span class="arithmatex">\(U(n) = \{A \in M_n(\mathbb{C}) \mid A^* A = I\}\)</span>$</p>
+</blockquote>
+<p><strong>性质</strong>：
+- <span class="arithmatex">\(U(n)\)</span> 是 <span class="arithmatex">\(GL_n(\mathbb{C})\)</span> 的紧子群
+- <span class="arithmatex">\(|\det A| = 1\)</span></p>
+<blockquote>
+<p><strong>定义10.7.4（特殊酉群）</strong>
+$<span class="arithmatex">\(SU(n) = \{A \in U(n) \mid \det A = 1\}\)</span>$</p>
+</blockquote>
+<p><strong>用途</strong>：
+- <span class="arithmatex">\(SU(2)\)</span> 同构于 <span class="arithmatex">\(Spin(3)\)</span>，是 <span class="arithmatex">\(SO(3)\)</span> 的万有覆叠
+- 粒子物理标准模型：<span class="arithmatex">\(SU(3) \times SU(2) \times U(1)\)</span></p>
+<h4 id="23_6">2.3 辛群<a class="headerlink" href="#23_6" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义10.7.5（辛群）</strong>
+$<span class="arithmatex">\(Sp(2n) = \{A \in M_{2n}(\mathbb{R}) \mid A^T J A = J\}, \quad J = \begin{pmatrix} 0 &amp; I \\ -I &amp; 0 \end{pmatrix}\)</span>$</p>
+</blockquote>
+<p><strong>性质</strong>：
+- <span class="arithmatex">\(Sp(2n)\)</span> 是 <span class="arithmatex">\(GL_{2n}(\mathbb{R})\)</span> 的子群
+- <span class="arithmatex">\(\det A = 1\)</span>（辛变换保持辛体积）</p>
+<h3 id="_53">三、典型例题<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h3>
+<h4 id="_54">【验证题】<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h4>
+<p><strong>例7.1</strong>：验证 <span class="arithmatex">\(A = \begin{pmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{pmatrix}\)</span> 属于 <span class="arithmatex">\(SO(2)\)</span>。</p>
+<p><strong>解答</strong>：
+- <span class="arithmatex">\(A^T A = I\)</span> ✓
+- <span class="arithmatex">\(\det A = \cos^2\theta + \sin^2\theta = 1\)</span> ✓</p>
+<p>属于 <span class="arithmatex">\(SO(2)\)</span>。</p>
+<hr />
+<p><strong>例7.2</strong>：验证 <span class="arithmatex">\(B = \begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{pmatrix}\)</span> 属于 <span class="arithmatex">\(Sp(2)\)</span>。</p>
+<p><strong>解答</strong>：
+$<span class="arithmatex">\(J = \begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{pmatrix}, \quad J^{-1} = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>验证 <span class="arithmatex">\(B^T J B = J\)</span>：
+$<span class="arithmatex">\(B^T J B = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{pmatrix} \begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I \neq J\)</span>$</p>
+<p>需要重新计算...</p>
+<p><span class="arithmatex">\(B = \begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{pmatrix} = J\)</span></p>
+<p>验证 <span class="arithmatex">\(J^T J J = J\)</span>？</p>
+<p>直接用定义：<span class="arithmatex">\(Sp(2) = \{A \mid A^T J A = J\}\)</span></p>
+<div class="arithmatex">\[B^T J B = J^T J B = (-J) J B = -J^2 B\]</div>
+<p><span class="arithmatex">\(J^2 = \begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{pmatrix}^2 = \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = -I\)</span></p>
+<p>故 <span class="arithmatex">\(B^T J B = (-J)(-I)B = J B = J^2 = -I \neq J\)</span></p>
+<p><span class="arithmatex">\(B\)</span> 不属于 <span class="arithmatex">\(Sp(2)\)</span>？检查...</p>
+<p>实际上 <span class="arithmatex">\(Sp(2) = SL(2)\)</span>，因为 <span class="arithmatex">\(2 \times 2\)</span> 辛矩阵等价于行列式为1的矩阵。</p>
+<p><span class="arithmatex">\(\det B = 1\)</span>，<span class="arithmatex">\(B \in SL(2) = Sp(2)\)</span> ✓</p>
+<h4 id="_55">【计算题】<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h4>
+<p><strong>例7.3</strong>：求 <span class="arithmatex">\(SO(3)\)</span> 中旋转矩阵的特征值。</p>
+<p><strong>解答</strong>：
+设 <span class="arithmatex">\(A \in SO(3)\)</span>，则 <span class="arithmatex">\(A\)</span> 是实正交矩阵，<span class="arithmatex">\(\det A = 1\)</span>。</p>
+<p>实特征值满足 <span class="arithmatex">\(|\lambda| = 1\)</span>，且乘积 <span class="arithmatex">\(\lambda_1 \lambda_2 \lambda_3 = 1\)</span>。</p>
+<p><strong>情况1</strong>：<span class="arithmatex">\(A\)</span> 有三个实特征值
+- 则 <span class="arithmatex">\(\lambda_i = \pm 1\)</span>，且乘积为1
+- 若有特征值 <span class="arithmatex">\(-1\)</span>，必须成对出现
+- 故只能是 <span class="arithmatex">\((1,1,1)\)</span> 或 <span class="arithmatex">\((1,-1,-1)\)</span></p>
+<p><strong>情况2</strong>：<span class="arithmatex">\(A\)</span> 有一个实特征值和一对共轭复特征值
+- 实特征值 <span class="arithmatex">\(\lambda = 1\)</span>（因为 <span class="arithmatex">\(|\lambda|=1\)</span> 且乘积为实数1）
+- 共轭复特征值 <span class="arithmatex">\(e^{\pm i\theta}\)</span>，<span class="arithmatex">\(\theta \neq 0\)</span></p>
+<p>几何意义：这对应绕某轴旋转 <span class="arithmatex">\(\theta\)</span> 角（若 <span class="arithmatex">\(\theta = 0\)</span> 则 <span class="arithmatex">\(A = I\)</span>）。</p>
+<p>故 <span class="arithmatex">\(SO(3)\)</span> 的元素总可以解释为绕某个轴的旋转。</p>
+<hr />
+<p><strong>例7.4</strong>：证明 <span class="arithmatex">\(U(n)\)</span> 是紧群，<span class="arithmatex">\(GL(n,\mathbb{R})\)</span> 不是。</p>
+<p><strong>解答</strong>：
+<strong><span class="arithmatex">\(U(n)\)</span> 紧</strong>：
+- <span class="arithmatex">\(U(n) = \{A \mid A^* A = I\}\)</span> 是多项式方程组 <span class="arithmatex">\(\{A^* A = I\}\)</span> 的零点集
+- <span class="arithmatex">\(A^* A = I\)</span> 是 <span class="arithmatex">\(n^2\)</span> 个实方程
+- 方程确定 <span class="arithmatex">\(M_n(\mathbb{C}) \cong \mathbb{R}^{2n^2}\)</span> 的一个闭集
+- 且 <span class="arithmatex">\(|A_{ij}| \leq 1\)</span>（因为列向量范数为1），有界闭 <span class="arithmatex">\(\Rightarrow\)</span> 紧</p>
+<p><strong><span class="arithmatex">\(GL(n,\mathbb{R})\)</span> 不紧</strong>：
+- <span class="arithmatex">\(\det A \neq 0\)</span> 不能限制 <span class="arithmatex">\(A\)</span> 的行列式远离0
+- 例如对角矩阵 <span class="arithmatex">\(\text{diag}(k, 1, \ldots, 1)\)</span>，当 <span class="arithmatex">\(k \to \infty\)</span> 时仍在 <span class="arithmatex">\(GL(n,\mathbb{R})\)</span> 但无收敛子列</p>
+<h3 id="_56">四、易错点提醒<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>易错点</th>
+<th>正确理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>混淆 <span class="arithmatex">\(O(n)\)</span> 与 <span class="arithmatex">\(SO(n)\)</span></td>
+<td><span class="arithmatex">\(SO(n)\)</span> 是行列式为正的子群</td>
+</tr>
+<tr>
+<td>2</td>
+<td>认为 <span class="arithmatex">\(Sp(2n)\)</span> 等于 <span class="arithmatex">\(SL(2n)\)</span></td>
+<td>只有 <span class="arithmatex">\(n=1\)</span> 时 <span class="arithmatex">\(Sp(2) = SL(2)\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>忘记酉群行列式模为1</td>
+<td><span class="arithmatex">\(U \in U(n) \Rightarrow \|U\| = 1\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>正交群与酉群混淆</td>
+<td>实数域用 <span class="arithmatex">\(A^T A = I\)</span>；复数域用 <span class="arithmatex">\(A^* A = I\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>辛群条件记错</td>
+<td><span class="arithmatex">\(A^T J A = J\)</span>，其中 <span class="arithmatex">\(J = \begin{pmatrix} 0 &amp; I \\ -I &amp; 0 \end{pmatrix}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_57">五、思考题<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>李代数</strong>：求 <span class="arithmatex">\(O(n)\)</span>、<span class="arithmatex">\(U(n)\)</span>、<span class="arithmatex">\(Sp(2n)\)</span> 的李代数。</p>
+</li>
+<li>
+<p><strong>拓扑</strong>：<span class="arithmatex">\(O(n)\)</span>、<span class="arithmatex">\(SO(n)\)</span>、<span class="arithmatex">\(U(n)\)</span> 作为流形的连通分支是什么？</p>
+</li>
+<li>
+<p><strong>同伦群</strong>：<span class="arithmatex">\(SO(3)\)</span> 的基本群是什么？这与量子力学中的自旋有何关系？</p>
+</li>
+<li>
+<p><strong>表示论</strong>：<span class="arithmatex">\(SU(2)\)</span> 的不可约表示与角动量理论的关系。</p>
+</li>
+</ol>
+<hr />
+<h2 id="_58">本章小结<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h2>
+<h3 id="_59">核心知识点梳理<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h3>
+<h4 id="_60">一、双线性函数<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>双线性函数 f(α,β)
+├── 对称 f(α,β) = f(β,α)
+├── 斜对称 f(α,β) = -f(β,α)
+├── 正定 f(α,α) &gt; 0 (α ≠ 0)
+└── 非退化 f(α,β) = 0 ∀β ⇒ α = 0
+</code></pre></div></td></tr></table></div>
+<h4 id="_61">二、欧几里得空间<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>欧几里得空间 V（实内积空间）
+├── 内积：(α,β) = α·β
+├── 长度：|α| = √(α,α)
+├── Cauchy-Schwarz：|(α,β)| ≤ |α||β|
+└── 标准正交基：(εᵢ,εⱼ) = δᵢⱼ
+</code></pre></div></td></tr></table></div>
+<h4 id="_62">三、正交补与投影<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>W ⊆ V 子空间
+├── W⊥ = {α | (α,w) = 0, ∀w∈W}
+├── V = W ⊕ W⊥
+└── ProjW(α) = Σ(α,εᵢ)εᵢ
+</code></pre></div></td></tr></table></div>
+<h4 id="_63">四、正交变换与对称变换<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>正交变换 σ：|σ(α)| = |α|
+├── 矩阵：A^T A = I
+├── det = ±1
+└── 特征值模为1
+
+对称变换 τ：(τ(α),β) = (α,τ(β))
+├── 矩阵：A^T = A
+├── 实特征值
+└── 可正交对角化
+</code></pre></div></td></tr></table></div>
+<h4 id="_64">五、酉空间<a class="headerlink" href="#_64" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>酉空间 V（复内积空间）
+├── 内积：(α,β) = Σ αᵢβ̅ⱼ
+├── 酉变换：A* A = I
+└── 埃尔米特变换：A* = A
+</code></pre></div></td></tr></table></div>
+<h4 id="_65">六、变换群<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>O(n) = {A | A^T A = I}         正交群
+SO(n) = {A∈O(n) | det A = 1}   特殊正交群
+U(n) = {A | A* A = I}          酉群
+Sp(2n) = {A | A^T J A = J}     辛群
+</code></pre></div></td></tr></table></div>
+<h3 id="_66">公式速查表<a class="headerlink" href="#_66" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cauchy-Schwarz</td>
+<td><span class="arithmatex">\(\|(\alpha,\beta)\| \leq \|\alpha\|\|\beta\|\)</span></td>
+</tr>
+<tr>
+<td>三角不等式</td>
+<td><span class="arithmatex">\(\|\alpha+\beta\| \leq \|\alpha\|+\|\beta\|\)</span></td>
+</tr>
+<tr>
+<td>正交投影</td>
+<td><span class="arithmatex">\(\text{Proj}_W(\alpha) = \sum (\alpha,\varepsilon_i)\varepsilon_i\)</span></td>
+</tr>
+<tr>
+<td>正交矩阵</td>
+<td><span class="arithmatex">\(A^T A = I\)</span></td>
+</tr>
+<tr>
+<td>对称矩阵</td>
+<td><span class="arithmatex">\(A^T = A\)</span></td>
+</tr>
+<tr>
+<td>酉矩阵</td>
+<td><span class="arithmatex">\(A^* A = I\)</span></td>
+</tr>
+<tr>
+<td>埃尔米特矩阵</td>
+<td><span class="arithmatex">\(A^* = A\)</span></td>
+</tr>
+<tr>
+<td>辛群</td>
+<td><span class="arithmatex">\(A^T J A = J\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V = W \oplus W^\perp\)</span></td>
+<td>正交直和分解</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_67">典型问题解题策略<a class="headerlink" href="#_67" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. 证明正交性<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>直接验证内积为零</li>
+<li>利用勾股定理的逆</li>
+</ul>
+<h4 id="2-gram-schmidt">2. Gram-Schmidt正交化<a class="headerlink" href="#2-gram-schmidt" title="Permanent link">&para;</a></h4>
+<ol>
+<li>取第一个向量标准化</li>
+<li>后续每个向量减去在前面向量上的投影</li>
+<li>每步后标准化</li>
+</ol>
+<h4 id="3">3. 求正交补<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>设一般向量 <span class="arithmatex">\((x_1,\ldots,x_n)\)</span></li>
+<li>解正交条件方程组</li>
+<li>得基和维数</li>
+</ul>
+<h4 id="4">4. 判别正交变换<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>验证 <span class="arithmatex">\(A^T A = I\)</span></li>
+<li>或验证保持长度</li>
+<li>或验证保持标准正交基</li>
+</ul>
+<h4 id="5">5. 对称矩阵正交对角化<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<ol>
+<li>求特征值</li>
+<li>求特征向量</li>
+<li>标准化（得正交矩阵）</li>
+<li>写出对角矩阵</li>
+</ol>
+<hr />
+<p><em>第10章备课笔记完成</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

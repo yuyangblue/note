@@ -1,0 +1,3186 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第3章 n维向量空间 \(K^n\) - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-n-kn" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第3章 n维向量空间 \(K^n\)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-n-kn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 n维向量空间 \(K^n\) 及其子空间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 n维向量空间 \(K^n\) 及其子空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入向量空间？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、n维向量的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、n维向量的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、n维向量的运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-kn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、n维向量空间 \(K^n\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、子空间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、子空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究子空间？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1 【验证题】验证子空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2 【计算题】求向量的运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 线性相关与线性无关的向量组
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 线性相关与线性无关的向量组">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究线性相关性？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、线性组合
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、线性组合">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、线性相关与线性无关
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、线性相关与线性无关">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、重要结论
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例3 【判断题】判断线性相关性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例4 【证明题】线性无关的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例5 【计算题】判断抽象向量的线性相关性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 极大线性无关组，向量组的秩
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 极大线性无关组，向量组的秩">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入极大线性无关组？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、极大线性无关组
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、极大线性无关组">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、向量组的秩
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、向量组的秩">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、重要引理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例6 【计算题】求向量组的秩和极大线性无关组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例7 【综合题】证明向量组秩的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-kn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 向量空间 \(K^n\) 及其子空间的基与维数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 向量空间 \(K^n\) 及其子空间的基与维数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入基与维数？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、基与维数的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、基与维数的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、标准基
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、重要定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例8 【计算题】求子空间的维数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例9 【验证题】验证基与维数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 矩阵的秩
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 矩阵的秩">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究矩阵的秩？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、行秩与列秩
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例10 【计算题】求矩阵的秩
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例11 【证明题】证明秩的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 线性方程组有解的充分必要条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 线性方程组有解的充分必要条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心定理引入】为什么要研究方程组有解的判别？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例12 【讨论题】讨论参数对解的影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 齐次线性方程组的解集的结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 齐次线性方程组的解集的结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究解集的结构？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础解系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例13 【计算题】求齐次方程组的基础解系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 非齐次线性方程组的解集的结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.8 非齐次线性方程组的解集的结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要单独研究非齐次方程组？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解集结构定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例14 【计算题】求非齐次方程组的通解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解题方法总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速记
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="3-n-kn">第3章 n维向量空间 <span class="arithmatex">\(K^n\)</span><a class="headerlink" href="#3-n-kn" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章从线性方程组的研究自然引出n维向量空间的概念，研究向量组的<strong>线性相关性</strong>、<strong>极大线性无关组</strong>、<strong>向量组的秩</strong>，以及<strong>矩阵的秩</strong>，建立线性方程组有解的充分必要条件，并讨论解集的结构。</p>
+<hr />
+<h2 id="31-n-kn">3.1 n维向量空间 <span class="arithmatex">\(K^n\)</span> 及其子空间<a class="headerlink" href="#31-n-kn" title="Permanent link">&para;</a></h2>
+<h3 id="_2">【概念引入动机】为什么要引入向量空间？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>在线性方程组的研究中，我们发现：
+- 每个方程的系数可以看成一个 <strong>n维向量</strong>（行向量）
+- 每个未知量的系数形成一个 <strong>n维向量组</strong></p>
+<p>把方程组写成向量形式：
+$<span class="arithmatex">\(x_1\alpha_1 + x_2\alpha_2 + \cdots + x_n\alpha_n = \beta\)</span>$</p>
+<p>这样，方程组有解的问题就转化为：常数向量 <span class="arithmatex">\(\beta\)</span> 能否由系数向量组线性表示。这推动了向量空间理论的建立。</p>
+<h3 id="n">一、n维向量的定义<a class="headerlink" href="#n" title="Permanent link">&para;</a></h3>
+<h4 id="_3">定义<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>n维向量</strong>：数域 <span class="arithmatex">\(K\)</span> 上 <span class="arithmatex">\(n\)</span> 个有序数组成的有序数组，记作
+$<span class="arithmatex">\(\alpha = (a_1, a_2, \ldots, a_n)' \quad \text{或} \quad \alpha = \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_n \end{pmatrix}\)</span>$</li>
+</ul>
+<p>其中 <span class="arithmatex">\(a_i \in K\)</span> 称为 <span class="arithmatex">\(\alpha\)</span> 的第 <span class="arithmatex">\(i\)</span> 个分量。</p>
+<p><strong>注意</strong>：向量既可以写成行向量也可以写成列向量，在不同场合灵活使用。</p>
+<h3 id="n_1">二、n维向量的运算<a class="headerlink" href="#n_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>相等</strong>：<span class="arithmatex">\((a_1,\ldots,a_n)' = (b_1,\ldots,b_n)' \iff a_i = b_i, \ i=1,\ldots,n\)</span></p>
+</li>
+<li>
+<p><strong>加法</strong>：
+$<span class="arithmatex">\(\alpha + \beta = (a_1+b_1, a_2+b_2, \ldots, a_n+b_n)'\)</span>$</p>
+</li>
+<li>
+<p><strong>数量乘法</strong>（数乘）：
+$<span class="arithmatex">\(k\alpha = (ka_1, ka_2, \ldots, ka_n)', \quad k \in K\)</span>$</p>
+</li>
+</ul>
+<h3 id="n-kn">三、n维向量空间 <span class="arithmatex">\(K^n\)</span><a class="headerlink" href="#n-kn" title="Permanent link">&para;</a></h3>
+<p>定义了加法和数量乘法运算的集合 <span class="arithmatex">\(K^n\)</span> 满足八条运算法则：</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>运算法则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(\alpha + \beta = \beta + \alpha\)</span></td>
+<td>加法交换律</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\((\alpha + \beta) + \gamma = \alpha + (\beta + \gamma)\)</span></td>
+<td>加法结合律</td>
+</tr>
+<tr>
+<td>3</td>
+<td>存在零向量 <span class="arithmatex">\(\mathbf{0}\)</span>，使 <span class="arithmatex">\(\alpha + \mathbf{0} = \alpha\)</span></td>
+<td>零元素存在</td>
+</tr>
+<tr>
+<td>4</td>
+<td>存在负向量 <span class="arithmatex">\(-\alpha\)</span>，使 <span class="arithmatex">\(\alpha + (-\alpha) = \mathbf{0}\)</span></td>
+<td>负元素存在</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(1\alpha = \alpha\)</span></td>
+<td>单位1的作用</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\((kl)\alpha = k(l\alpha)\)</span></td>
+<td>数量乘法结合律</td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(k(\alpha + \beta) = k\alpha + k\beta\)</span></td>
+<td>分配律（对向量）</td>
+</tr>
+<tr>
+<td>8</td>
+<td><span class="arithmatex">\((k+l)\alpha = k\alpha + l\alpha\)</span></td>
+<td>分配律（对数量）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>定义</strong>：满足以上八条运算规律的集合 <span class="arithmatex">\(K^n\)</span> 称为 <strong>n维向量空间</strong>。</p>
+</blockquote>
+<h3 id="_4">四、子空间<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="_5">【概念引入动机】为什么要研究子空间？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>在研究 <span class="arithmatex">\(K^n\)</span> 时，我们经常遇到一些"更小的集合"，它们本身也构成向量空间。例如：
+- 齐次线性方程组的解集就是一个子空间
+- 矩阵的行空间、列空间都是子空间</p>
+<h4 id="_6">定义<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>子空间</strong>：设 <span class="arithmatex">\(U \subseteq K^n\)</span>，若 <span class="arithmatex">\(U\)</span> 非空，且对加法和数量乘法<strong>封闭</strong>（即 <span class="arithmatex">\(\alpha, \beta \in U \Rightarrow \alpha + \beta \in U\)</span>，<span class="arithmatex">\(k\alpha \in U\)</span>），则称 <span class="arithmatex">\(U\)</span> 为 <span class="arithmatex">\(K^n\)</span> 的一个<strong>子空间</strong>。</p>
+</blockquote>
+<p><strong>等价条件</strong>：
+$<span class="arithmatex">\(U \text{ 是子空间} \iff U \neq \emptyset \text{ 且 } k\alpha + l\beta \in U \quad (\forall k,l \in K, \alpha,\beta \in U)\)</span>$</p>
+<hr />
+<h3 id="_7">典型例题<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="1">例1 【验证题】验证子空间<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判断下列集合是否为 <span class="arithmatex">\(K^n\)</span> 的子空间：</p>
+<p>(1) <span class="arithmatex">\(W_1 = \{(a_1, a_2, \ldots, a_n)' \mid a_1 + a_2 + \cdots + a_n = 0\}\)</span>
+(2) <span class="arithmatex">\(W_2 = \{(1, a_2, \ldots, a_n)' \mid a_i \in K\}\)</span></p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) 验证 <span class="arithmatex">\(W_1\)</span> 是子空间</strong>：</p>
+<ul>
+<li>
+<p><strong>非空</strong>：零向量 <span class="arithmatex">\((0,0,\ldots,0)'\)</span> 满足 <span class="arithmatex">\(0+0+\cdots+0 = 0\)</span>，所以 <span class="arithmatex">\(\mathbf{0} \in W_1\)</span></p>
+</li>
+<li>
+<p><strong>加法封闭</strong>：设 <span class="arithmatex">\(\alpha = (a_1,\ldots,a_n)'\)</span>, <span class="arithmatex">\(\beta = (b_1,\ldots,b_n)' \in W_1\)</span>，则
+$<span class="arithmatex">\(\sum_{i=1}^{n} (a_i + b_i) = \sum a_i + \sum b_i = 0 + 0 = 0\)</span>$
+所以 <span class="arithmatex">\(\alpha + \beta \in W_1\)</span></p>
+</li>
+<li>
+<p><strong>数乘封闭</strong>：设 <span class="arithmatex">\(\alpha \in W_1\)</span>, <span class="arithmatex">\(k \in K\)</span>，则
+$<span class="arithmatex">\(\sum_{i=1}^{n} (ka_i) = k\sum_{i=1}^{n} a_i = k \cdot 0 = 0\)</span>$
+所以 <span class="arithmatex">\(k\alpha \in W_1\)</span></p>
+</li>
+</ul>
+<p><strong>结论</strong>：<span class="arithmatex">\(W_1\)</span> 是子空间（几何上，这是一个过原点的超平面）。</p>
+<p><strong>(2) 验证 <span class="arithmatex">\(W_2\)</span> 不是子空间</strong>：</p>
+<ul>
+<li><strong>非空</strong>：显然 <span class="arithmatex">\(W_2\)</span> 非空</li>
+<li><strong>但</strong>：零向量 <span class="arithmatex">\(\mathbf{0} \notin W_2\)</span>（因为第一个分量为1）</li>
+<li>所以 <span class="arithmatex">\(W_2\)</span> <strong>不是子空间</strong></li>
+</ul>
+<p><strong>关键思路</strong>：
+1. 检查是否<strong>非空</strong>（通常检查零向量是否在集合中）
+2. 检查<strong>加法封闭</strong>
+3. 检查<strong>数乘封闭</strong></p>
+<p><strong>易错点警示</strong>：
+- ❌ 忘记检查零向量
+- ❌ 只检查"是否是集合"，忘了检查运算封闭性</p>
+<hr />
+<h4 id="2">例2 【计算题】求向量的运算<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：已知 <span class="arithmatex">\(\alpha = (1, 2, -1)'\)</span>，<span class="arithmatex">\(\beta = (3, -1, 2)'\)</span>，计算：
+(1) <span class="arithmatex">\(2\alpha + 3\beta\)</span>
+(2) <span class="arithmatex">\(\alpha - \beta\)</span>
+(3) 验证加法交换律</p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1)</strong> <span class="arithmatex">\(2\alpha + 3\beta = 2(1,2,-1) + 3(3,-1,2) = (2,4,-2) + (9,-3,6) = (11, 1, 4)'\)</span></p>
+<p><strong>(2)</strong> <span class="arithmatex">\(\alpha - \beta = (1-3, 2-(-1), -1-2)' = (-2, 3, -3)'\)</span></p>
+<p><strong>(3)</strong> 验证加法交换律：
+$<span class="arithmatex">\(\alpha + \beta = (1+3, 2+(-1), -1+2)' = (4, 1, 1)'\)</span>$
+$<span class="arithmatex">\(\beta + \alpha = (3+1, -1+2, 2+(-1))' = (4, 1, 1)'\)</span>$</p>
+<p>所以 <span class="arithmatex">\(\alpha + \beta = \beta + \alpha\)</span>。</p>
+<hr />
+<h3 id="_8">易错点提醒<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆向量相等</strong></li>
+<li>必须所有分量都相等才相等</li>
+<li>
+<p><span class="arithmatex">\((1,2) \neq (2,1)\)</span></p>
+</li>
+<li>
+<p><strong>子空间判别不全</strong></p>
+</li>
+<li>三个条件缺一不可：非空、加法封闭、数乘封闭</li>
+<li>
+<p>最重要的是检查零向量</p>
+</li>
+<li>
+<p><strong>子空间误解</strong></p>
+</li>
+<li>子空间必须<strong>包含原点</strong></li>
+<li>不过原点的平面不是子空间</li>
+</ol>
+<hr />
+<h3 id="_9">思考题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（验证）</strong> 判断 <span class="arithmatex">\(W = \{(a, b, a+b) \mid a,b \in K\}\)</span> 是否为 <span class="arithmatex">\(K^3\)</span> 的子空间。</p>
+</li>
+<li>
+<p><strong>（验证）</strong> 判断 <span class="arithmatex">\(W = \{(a, b, c) \mid a^2 = b^2\}\)</span> 是否为 <span class="arithmatex">\(K^3\)</span> 的子空间。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(\alpha_1 = (1,1,0)\)</span>，<span class="arithmatex">\(\alpha_2 = (0,1,1)\)</span>，求 <span class="arithmatex">\(2\alpha_1 - 3\alpha_2\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="32">3.2 线性相关与线性无关的向量组<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
+<h3 id="_10">【概念引入动机】为什么要研究线性相关性？<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>线性相关性是向量空间理论的核心概念。考虑向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span>：</p>
+<ul>
+<li>如果某个向量可以由其他向量<strong>线性表示</strong>，那它可能是"多余的"</li>
+<li>如果每个向量<strong>都不能</strong>由其他向量表示，它们就是相互独立的</li>
+</ul>
+<p><strong>判断方法</strong>：设线性组合 <span class="arithmatex">\(k_1\alpha_1 + k_2\alpha_2 + \cdots + k_s\alpha_s = \mathbf{0}\)</span>
+- 如果存在<strong>非零解</strong>（不全为零的 <span class="arithmatex">\(k_i\)</span>），则线性<strong>相关</strong>
+- 如果只有<strong>零解</strong>（所有 <span class="arithmatex">\(k_i = 0\)</span>），则线性<strong>无关</strong></p>
+<h3 id="_11">一、线性组合<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h4 id="_12">定义<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>设 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s \in K^n\)</span>，则
+$<span class="arithmatex">\(\beta = k_1\alpha_1 + k_2\alpha_2 + \cdots + k_s\alpha_s\)</span>$
+称为 <span class="arithmatex">\(\beta\)</span> 由 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> 的<strong>线性组合</strong>，其中 <span class="arithmatex">\(k_1, k_2, \ldots, k_s \in K\)</span> 称为<strong>系数</strong>。</p>
+<p><strong>几何理解</strong>：
+- 在 <span class="arithmatex">\(K^2\)</span> 中：两个不共线的向量可以线性表示平面上所有向量
+- 在 <span class="arithmatex">\(K^3\)</span> 中：三个不共面的向量可以线性表示空间中所有向量</p>
+<h3 id="_13">二、线性相关与线性无关<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h4 id="_14">定义<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>线性相关</strong>：如果存在<strong>不全为0</strong>的数 <span class="arithmatex">\(k_1, k_2, \ldots, k_s\)</span>，使得
+$<span class="arithmatex">\(k_1\alpha_1 + k_2\alpha_2 + \cdots + k_s\alpha_s = \mathbf{0}\)</span>$
+则称向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> <strong>线性相关</strong>。</p>
+<p><strong>线性无关</strong>：如果上述等式只在 <span class="arithmatex">\(k_1 = k_2 = \cdots = k_s = 0\)</span> 时成立，则称向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> <strong>线性无关</strong>。</p>
+</blockquote>
+<p><strong>等价的表述</strong>：
+- <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> 线性无关 <span class="arithmatex">\(\iff\)</span> 若 <span class="arithmatex">\(\sum k_i\alpha_i = \mathbf{0}\)</span>，则 <span class="arithmatex">\(k_1 = k_2 = \cdots = k_s = 0\)</span>
+- <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> 线性相关 <span class="arithmatex">\(\iff\)</span> 至少有一个向量可以由其余向量线性表示</p>
+<h3 id="_15">三、重要结论<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>结论</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单个零向量</td>
+<td>线性相关</td>
+<td>因为 <span class="arithmatex">\(1 \cdot \mathbf{0} = \mathbf{0}\)</span></td>
+</tr>
+<tr>
+<td>单个非零向量</td>
+<td>线性无关</td>
+<td>只有零系数才能让它等于零</td>
+</tr>
+<tr>
+<td>两个向量</td>
+<td>线性相关 ⟺ 成比例</td>
+<td><span class="arithmatex">\(\alpha_2 = k\alpha_1\)</span></td>
+</tr>
+<tr>
+<td>含零向量</td>
+<td>一定线性相关</td>
+<td>零向量可以由其他向量表示</td>
+</tr>
+<tr>
+<td>部分相关 ⇒ 整体相关</td>
+<td>包含零向量或有倍数关系</td>
+<td>添加更多向量后仍相关</td>
+</tr>
+<tr>
+<td>整体无关 ⇒ 部分无关</td>
+<td>任意子集都线性无关</td>
+<td>反过来不一定成立</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_16">典型例题<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<h4 id="3">例3 【判断题】判断线性相关性<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判断向量组 <span class="arithmatex">\(\alpha_1 = (1,2,3)'\)</span>，<span class="arithmatex">\(\alpha_2 = (4,5,6)'\)</span>，<span class="arithmatex">\(\alpha_3 = (7,8,9)'\)</span> 是否线性相关？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：观察法</strong>
+观察发现：<span class="arithmatex">\(\alpha_2 - \alpha_1 = (3,3,3)'\)</span>，<span class="arithmatex">\(\alpha_3 - \alpha_2 = (3,3,3)'\)</span>，所以 <span class="arithmatex">\(\alpha_3 - \alpha_2 = \alpha_2 - \alpha_1\)</span>，即 <span class="arithmatex">\(\alpha_1 + \alpha_3 = 2\alpha_2\)</span>。</p>
+<p>因此存在非零系数 <span class="arithmatex">\(1, -2, 1\)</span> 使得：
+$<span class="arithmatex">\(1 \cdot \alpha_1 + (-2) \cdot \alpha_2 + 1 \cdot \alpha_3 = \mathbf{0}\)</span>$</p>
+<p>向量组<strong>线性相关</strong>。</p>
+<p><strong>方法2：解方程组</strong></p>
+<p>设 <span class="arithmatex">\(k_1\alpha_1 + k_2\alpha_2 + k_3\alpha_3 = \mathbf{0}\)</span>，即
+$<span class="arithmatex">\(k_1(1,2,3) + k_2(4,5,6) + k_3(7,8,9) = (0,0,0)\)</span>$</p>
+<p>得到方程组：
+$<span class="arithmatex">\(\begin{cases} k_1 + 4k_2 + 7k_3 = 0 \\ 2k_1 + 5k_2 + 8k_3 = 0 \\ 3k_1 + 6k_2 + 9k_3 = 0 \end{cases}\)</span>$</p>
+<p>系数矩阵为：
+$<span class="arithmatex">\(\begin{pmatrix} 1 &amp; 4 &amp; 7 \\ 2 &amp; 5 &amp; 8 \\ 3 &amp; 6 &amp; 9 \end{pmatrix} \xrightarrow{\text{化简}} \begin{pmatrix} 1 &amp; 4 &amp; 7 \\ 0 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>有 <span class="arithmatex">\(n - r = 3 - 2 = 1\)</span> 个自由未知量，存在非零解，所以线性相关。</p>
+<p><strong>关键思路</strong>：通过解齐次线性方程组判断是否存在非零系数。</p>
+<hr />
+<h4 id="4">例4 【证明题】线性无关的证明<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：证明：若向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> 线性无关，则它们的部分组也线性无关。</p>
+<p><strong>解答</strong>（反证法）：</p>
+<p><strong>假设</strong>：存在某个部分组线性相关。</p>
+<p>不失一般性，设 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_t\)</span>（<span class="arithmatex">\(t &lt; s\)</span>）线性相关。</p>
+<p>则存在<strong>不全为零</strong>的数 <span class="arithmatex">\(k_1, k_2, \ldots, k_t\)</span>，使得：
+$<span class="arithmatex">\(k_1\alpha_1 + k_2\alpha_2 + \cdots + k_t\alpha_t = \mathbf{0}\)</span>$</p>
+<p>取 <span class="arithmatex">\(k_{t+1} = k_{t+2} = \cdots = k_s = 0\)</span>，则：
+$<span class="arithmatex">\(k_1\alpha_1 + k_2\alpha_2 + \cdots + k_t\alpha_t + k_{t+1}\alpha_{t+1} + \cdots + k_s\alpha_s = \mathbf{0}\)</span>$</p>
+<p>这说明整个向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> 线性相关，与已知条件<strong>矛盾</strong>。</p>
+<p>因此假设不成立，原命题成立。</p>
+<p><strong>结论</strong>：线性无关向量组的<strong>任意部分组</strong>都线性无关。</p>
+<p><strong>逆否命题</strong>：若向量组线性相关，则<strong>至少有一个</strong>向量可以由其余向量线性表示。</p>
+<hr />
+<h4 id="5">例5 【计算题】判断抽象向量的线性相关性<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \alpha_3\)</span> 线性无关，判断下列向量组的线性相关性：
+(1) <span class="arithmatex">\(\alpha_1 + \alpha_2\)</span>, <span class="arithmatex">\(\alpha_2 + \alpha_3\)</span>, <span class="arithmatex">\(\alpha_3 + \alpha_1\)</span>
+(2) <span class="arithmatex">\(\alpha_1\)</span>, <span class="arithmatex">\(\alpha_1 + \alpha_2\)</span>, <span class="arithmatex">\(\alpha_1 + \alpha_2 + \alpha_3\)</span></p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) 判断 <span class="arithmatex">\(\beta_1 = \alpha_1 + \alpha_2\)</span>, <span class="arithmatex">\(\beta_2 = \alpha_2 + \alpha_3\)</span>, <span class="arithmatex">\(\beta_3 = \alpha_3 + \alpha_1\)</span></strong>：</p>
+<p>设 <span class="arithmatex">\(k_1\beta_1 + k_2\beta_2 + k_3\beta_3 = \mathbf{0}\)</span>，即：
+$<span class="arithmatex">\(k_1(\alpha_1 + \alpha_2) + k_2(\alpha_2 + \alpha_3) + k_3(\alpha_3 + \alpha_1) = \mathbf{0}\)</span>$</p>
+<p>整理得：
+$<span class="arithmatex">\((k_1 + k_3)\alpha_1 + (k_1 + k_2)\alpha_2 + (k_2 + k_3)\alpha_3 = \mathbf{0}\)</span>$</p>
+<p>由于 <span class="arithmatex">\(\alpha_1, \alpha_2, \alpha_3\)</span> 线性无关，所以：
+$<span class="arithmatex">\(\begin{cases} k_1 + k_3 = 0 \\ k_1 + k_2 = 0 \\ k_2 + k_3 = 0 \end{cases}\)</span>$</p>
+<p>解得：<span class="arithmatex">\(k_1 = k_2 = k_3 = 0\)</span>。</p>
+<p>因此 <span class="arithmatex">\(\beta_1, \beta_2, \beta_3\)</span> <strong>线性无关</strong>。</p>
+<p><strong>(2) 判断 <span class="arithmatex">\(\gamma_1 = \alpha_1\)</span>, <span class="arithmatex">\(\gamma_2 = \alpha_1 + \alpha_2\)</span>, <span class="arithmatex">\(\gamma_3 = \alpha_1 + \alpha_2 + \alpha_3\)</span></strong>：</p>
+<p>设 <span class="arithmatex">\(l_1\gamma_1 + l_2\gamma_2 + l_3\gamma_3 = \mathbf{0}\)</span>，即：
+$<span class="arithmatex">\(l_1\alpha_1 + l_2(\alpha_1 + \alpha_2) + l_3(\alpha_1 + \alpha_2 + \alpha_3) = \mathbf{0}\)</span>$</p>
+<p>整理得：
+$<span class="arithmatex">\((l_1 + l_2 + l_3)\alpha_1 + (l_2 + l_3)\alpha_2 + l_3\alpha_3 = \mathbf{0}\)</span>$</p>
+<p>由于 <span class="arithmatex">\(\alpha_1, \alpha_2, \alpha_3\)</span> 线性无关，所以：
+$<span class="arithmatex">\(\begin{cases} l_1 + l_2 + l_3 = 0 \\ l_2 + l_3 = 0 \\ l_3 = 0 \end{cases}\)</span>$</p>
+<p>解得 <span class="arithmatex">\(l_3 = 0\)</span>，<span class="arithmatex">\(l_2 = 0\)</span>，<span class="arithmatex">\(l_1 = 0\)</span>。</p>
+<p>因此 <span class="arithmatex">\(\gamma_1, \gamma_2, \gamma_3\)</span> <strong>线性无关</strong>。</p>
+<p><strong>关键思路</strong>：把待判断的向量用已知线性无关的向量表示，转化为齐次方程组的求解问题。</p>
+<hr />
+<h3 id="_17">易错点提醒<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆"线性相关"和"函数相关"</strong></li>
+<li>线性相关是向量之间的线性组合关系</li>
+<li>
+<p>不是一般函数意义上的"依赖"</p>
+</li>
+<li>
+<p><strong>线性组合系数不全为零</strong></p>
+</li>
+<li>"不全为零"意味着至少有一个不为零</li>
+<li>
+<p>不是"全部不为零"</p>
+</li>
+<li>
+<p><strong>单个向量的情况</strong></p>
+</li>
+<li>单个零向量线性相关</li>
+<li>单个非零向量线性无关</li>
+</ol>
+<hr />
+<h3 id="_18">思考题<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（判断）</strong> 判断向量组 <span class="arithmatex">\((1,1,1)\)</span>，<span class="arithmatex">\((1,2,3)\)</span>，<span class="arithmatex">\((2,3,4)\)</span> 是否线性相关。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> 线性相关，且 <span class="arithmatex">\(\alpha_1 \neq \mathbf{0}\)</span>，则至少有一个向量可以由它前面的向量线性表示。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 讨论向量个数 <span class="arithmatex">\(s\)</span> 与维数 <span class="arithmatex">\(n\)</span> 的关系对线性相关性的影响：
+   (a) 若 <span class="arithmatex">\(s &gt; n\)</span>，则向量组必线性相关
+   (b) 若 <span class="arithmatex">\(s \leq n\)</span>，向量组可能相关也可能无关</p>
+</li>
+</ol>
+<hr />
+<h2 id="33">3.3 极大线性无关组，向量组的秩<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
+<h3 id="_19">【概念引入动机】为什么要引入极大线性无关组？<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>在线性相关的向量组中，有些向量是"多余的"——可以由其他向量表示。我们希望找到一个"最小的"能代表整个向量组的线性无关部分组，这就是<strong>极大线性无关组</strong>。</p>
+<h3 id="_20">一、极大线性无关组<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h4 id="_21">定义<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>极大线性无关组</strong>：向量组的一个部分组称为<strong>极大线性无关组</strong>，如果：
+1. 这个部分组本身<strong>线性无关</strong>
+2. 从向量组的其余向量中<strong>任取一个</strong>添进去，得到的新的部分组都<strong>线性相关</strong></p>
+</blockquote>
+<p><strong>等价定义</strong>：向量组的极大线性无关组是能够表示整个向量组的线性无关部分组。</p>
+<p><strong>直观理解</strong>：
+- "极大"是指再添加任何向量就会变成线性相关
+- 不是"数量最多"，而是"不能再添加"</p>
+<h3 id="_22">二、向量组的秩<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<h4 id="_23">定义<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>向量组的秩</strong>：向量组的极大线性无关组所含向量的个数称为这个向量组的<strong>秩</strong>，记作
+$<span class="arithmatex">\(\text{rank}\{\alpha_1, \alpha_2, \ldots, \alpha_s\}\)</span>$</p>
+</blockquote>
+<p><strong>重要性质</strong>：
+- 向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> <strong>线性无关</strong> ⟺ 它的秩等于它所含向量的个数 <span class="arithmatex">\(s\)</span>
+- 向量组与它的极大线性无关组<strong>等价</strong></p>
+<h3 id="_24">三、重要引理<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>引理（表出与相关）</strong>：如果向量组 <span class="arithmatex">\(\beta_1, \beta_2, \ldots, \beta_t\)</span> 可以由向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> <strong>线性表出</strong>，且 <span class="arithmatex">\(t &gt; s\)</span>，则 <span class="arithmatex">\(\beta_1, \beta_2, \ldots, \beta_t\)</span> <strong>线性相关</strong>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+设 <span class="arithmatex">\(\beta_j = \sum_{i=1}^{s} c_{ij}\alpha_i\)</span>，构造齐次方程组。</p>
+<p><strong>重要推论</strong>：
+- 若向量组线性无关，则它所含向量个数不大于它能表示的任何向量组所含向量个数</p>
+<hr />
+<h3 id="_25">典型例题<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<h4 id="6">例6 【计算题】求向量组的秩和极大线性无关组<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求向量组 <span class="arithmatex">\(\alpha_1 = (1,2,5)'\)</span>，<span class="arithmatex">\(\alpha_2 = (2,4,10)'\)</span>，<span class="arithmatex">\(\alpha_3 = (1,3,7)'\)</span> 的一个极大线性无关组和秩。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：观察法</strong></p>
+<ul>
+<li><span class="arithmatex">\(\alpha_2 = 2\alpha_1\)</span>，所以 <span class="arithmatex">\(\alpha_1, \alpha_2\)</span> <strong>线性相关</strong></li>
+<li>考察 <span class="arithmatex">\(\alpha_1, \alpha_3\)</span>：设 <span class="arithmatex">\(k_1\alpha_1 + k_2\alpha_3 = 0\)</span>，得到：
+$<span class="arithmatex">\(\begin{cases} k_1 + k_2 = 0 \\ 2k_1 + 3k_2 = 0 \\ 5k_1 + 7k_2 = 0 \end{cases} \Rightarrow k_1 = k_2 = 0\)</span>$</li>
+</ul>
+<p>所以 <span class="arithmatex">\(\alpha_1, \alpha_3\)</span> <strong>线性无关</strong>。</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(\{\alpha_1, \alpha_3\}\)</span> 是一个极大线性无关组，<strong>秩为2</strong>。</p>
+<p><strong>方法2：矩阵法（更系统）</strong></p>
+<p>将向量写成矩阵的列：
+$<span class="arithmatex">\(A = (\alpha_1, \alpha_2, \alpha_3) = \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 2 &amp; 4 &amp; 3 \\ 5 &amp; 10 &amp; 7 \end{pmatrix}\)</span>$</p>
+<p>对 <span class="arithmatex">\(A\)</span> 进行初等行变换：
+$<span class="arithmatex">\(A \xrightarrow{r_2-2r_1} \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 0 &amp; 1 \\ 5 &amp; 10 &amp; 7 \end{pmatrix} \xrightarrow{r_3-5r_1} \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 2 \end{pmatrix} \xrightarrow{r_3-2r_2} \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>非零列数为2，所以<strong>秩为2</strong>。</p>
+<p>取第1列和第3列（主元所在列对应的原向量）：
+<span class="arithmatex">\(\{\alpha_1, \alpha_3\}\)</span> 是一个极大线性无关组。</p>
+<p><strong>关键思路</strong>：
+1. 通过逐步筛选，找出线性无关的最大组
+2. 秩等于向量组中线性无关向量的最大个数</p>
+<hr />
+<h4 id="7">例7 【综合题】证明向量组秩的性质<a class="headerlink" href="#7" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设向量组 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s\)</span> 的秩为 <span class="arithmatex">\(r\)</span>，证明：若 <span class="arithmatex">\(\alpha_{i_1}, \alpha_{i_2}, \ldots, \alpha_{i_r}\)</span> 是 <span class="arithmatex">\(r\)</span> 个线性无关的向量，则它们一定是极大线性无关组。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>证明</strong>：</p>
+<p><strong>(1) 线性无关</strong>：已知条件已给出。</p>
+<p><strong>(2) 极大性</strong>：需要证明添加任意一个向量后都线性相关。</p>
+<p>取任意 <span class="arithmatex">\(\alpha_j\)</span>（<span class="arithmatex">\(j \neq i_1, i_2, \ldots, i_r\)</span>），要证 <span class="arithmatex">\(\alpha_{i_1}, \ldots, \alpha_{i_r}, \alpha_j\)</span> 线性相关。</p>
+<p>由于原向量组的秩为 <span class="arithmatex">\(r\)</span>，所以任何 <span class="arithmatex">\(r+1\)</span> 个向量都线性相关（否则秩会大于 <span class="arithmatex">\(r\)</span>）。</p>
+<p>因此，<span class="arithmatex">\(r+1\)</span> 个向量 <span class="arithmatex">\(\alpha_{i_1}, \ldots, \alpha_{i_r}, \alpha_j\)</span> <strong>线性相关</strong>。</p>
+<p>所以 <span class="arithmatex">\(\alpha_{i_1}, \ldots, \alpha_{i_r}\)</span> 是<strong>极大线性无关组</strong>。</p>
+<p><strong>关键思路</strong>：利用秩的定义——秩是极大线性无关组所含向量的个数。</p>
+<hr />
+<h3 id="_26">易错点提醒<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆向量组的秩与矩阵的秩</strong></li>
+<li>向量组的秩是极大线性无关组含有的向量个数</li>
+<li>
+<p>矩阵的秩是行秩 = 列秩（后续定义）</p>
+</li>
+<li>
+<p><strong>极大线性无关组不唯一</strong></p>
+</li>
+<li>同一向量组可能有多个极大线性无关组</li>
+<li>
+<p>但它们所含向量个数相同（等于秩）</p>
+</li>
+<li>
+<p><strong>秩的取值范围</strong></p>
+</li>
+<li><span class="arithmatex">\(0 \leq \text{rank} \leq \min\{s, n\}\)</span></li>
+<li>全是零向量的向量组，秩为0</li>
+</ol>
+<hr />
+<h3 id="_27">思考题<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求向量组 <span class="arithmatex">\((1,1,0)\)</span>，<span class="arithmatex">\((1,0,1)\)</span>，<span class="arithmatex">\((0,1,1)\)</span>，<span class="arithmatex">\((1,1,1)\)</span> 的秩和极大线性无关组。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若向量组 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_s\)</span> 的秩为 <span class="arithmatex">\(r\)</span>，则任意 <span class="arithmatex">\(r\)</span> 个线性无关的向量都是极大线性无关组。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 讨论向量组的秩与向量个数的关系：
+   (a) 若秩 = 向量个数，则向量组线性无关
+   (b) 若秩 &lt; 向量个数，则向量组线性相关</p>
+</li>
+</ol>
+<hr />
+<h2 id="34-kn">3.4 向量空间 <span class="arithmatex">\(K^n\)</span> 及其子空间的基与维数<a class="headerlink" href="#34-kn" title="Permanent link">&para;</a></h2>
+<h3 id="_28">【概念引入动机】为什么要引入基与维数？<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p>在 <span class="arithmatex">\(K^n\)</span> 中，有无数个向量。为了研究方便，我们需要一个"坐标系"——用少数几个向量来表示所有向量。这就是<strong>基</strong>的概念。</p>
+<p>类似于平面直角坐标系中的 <span class="arithmatex">\((1,0)\)</span> 和 <span class="arithmatex">\((0,1)\)</span>，<span class="arithmatex">\(K^n\)</span> 的基就是一组"坐标轴向量"。</p>
+<h3 id="_29">一、基与维数的定义<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<h4 id="_30">定义<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>基</strong>：子空间 <span class="arithmatex">\(U\)</span> 的一个<strong>基</strong>是 <span class="arithmatex">\(U\)</span> 中满足以下两个条件的向量组：
+1. <strong>线性无关</strong>
+2. <strong>能生成（线性表示）<span class="arithmatex">\(U\)</span> 中所有向量</strong></p>
+<p><strong>维数</strong>：子空间 <span class="arithmatex">\(U\)</span> 的一个基所含向量的个数称为 <span class="arithmatex">\(U\)</span> 的<strong>维数</strong>，记作 <span class="arithmatex">\(\dim U\)</span>。</p>
+</blockquote>
+<p><strong>等价定义</strong>：
+- <span class="arithmatex">\(K^n\)</span> 中，<span class="arithmatex">\(\dim K^n = n\)</span>
+- <span class="arithmatex">\(\{e_1, e_2, \ldots, e_n\}\)</span>（标准基）是一个基</p>
+<h3 id="_31">二、标准基<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[e_1 = (1,0,\ldots,0)', \ e_2 = (0,1,\ldots,0)', \ \ldots, \ e_n = (0,0,\ldots,1)'\]</div>
+<p>是 <span class="arithmatex">\(K^n\)</span> 的一个基，称为<strong>标准基</strong>。</p>
+<h3 id="_32">三、重要定理<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(K^n\)</span> 的每一个非零子空间都有一个基；任意两个基所含向量个数相等。</p>
+</blockquote>
+<p><strong>证明思路</strong>（简要）：
+1. 从子空间中取一个非零向量，逐渐添加向量保持线性无关，直到不能再添加
+2. 利用维数不变量定理（若能由 <span class="arithmatex">\(m\)</span> 个向量线性表示，则 <span class="arithmatex">\(m \geq\)</span> 基的向量数）</p>
+<hr />
+<h3 id="_33">典型例题<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<h4 id="8">例8 【计算题】求子空间的维数<a class="headerlink" href="#8" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(W = \{(a, b, c, d) \mid a + b = 0, c = d\}\)</span>，求 <span class="arithmatex">\(\dim W\)</span> 和一组基。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>确定 <span class="arithmatex">\(W\)</span> 的结构</strong>：
+- <span class="arithmatex">\(a + b = 0 \Rightarrow b = -a\)</span>
+- <span class="arithmatex">\(c = d\)</span></p>
+<p>所以 <span class="arithmatex">\(W\)</span> 中的向量形如：<span class="arithmatex">\((a, -a, c, c) = a(1, -1, 0, 0) + c(0, 0, 1, 1)\)</span></p>
+<p><strong>找基</strong>：显然 <span class="arithmatex">\(\beta_1 = (1, -1, 0, 0)\)</span> 和 <span class="arithmatex">\(\beta_2 = (0, 0, 1, 1)\)</span>：
+- 线性无关（不成比例）
+- 能生成 <span class="arithmatex">\(W\)</span> 中的所有向量</p>
+<p><strong>维数</strong>：<span class="arithmatex">\(\dim W = 2\)</span></p>
+<p><strong>验证</strong>：<span class="arithmatex">\(W\)</span> 的参数表示中有 2 个自由参数（<span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(c\)</span>），所以维数为 2。</p>
+<p><strong>关键思路</strong>：把 <span class="arithmatex">\(W\)</span> 用参数表示，找出能生成 <span class="arithmatex">\(W\)</span> 的线性无关向量组。</p>
+<hr />
+<h4 id="9">例9 【验证题】验证基与维数<a class="headerlink" href="#9" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：证明：<span class="arithmatex">\(K^3\)</span> 中，<span class="arithmatex">\(\alpha_1 = (1,1,0)\)</span>，<span class="arithmatex">\(\alpha_2 = (0,1,1)\)</span>，<span class="arithmatex">\(\alpha_3 = (1,0,1)\)</span> 是一组基，并求向量 <span class="arithmatex">\(\beta = (1,2,3)\)</span> 在这组基下的坐标。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) 验证是基</strong>：</p>
+<p>设 <span class="arithmatex">\(k_1\alpha_1 + k_2\alpha_2 + k_3\alpha_3 = \mathbf{0}\)</span>，即：
+$<span class="arithmatex">\(k_1(1,1,0) + k_2(0,1,1) + k_3(1,0,1) = (0,0,0)\)</span>$</p>
+<p>得到方程组：
+$<span class="arithmatex">\(\begin{cases} k_1 + k_3 = 0 \\ k_1 + k_2 = 0 \\ k_2 + k_3 = 0 \end{cases}\)</span>$</p>
+<p>解得 <span class="arithmatex">\(k_1 = k_2 = k_3 = 0\)</span>，所以 <span class="arithmatex">\(\alpha_1, \alpha_2, \alpha_3\)</span> 线性无关，是 <span class="arithmatex">\(K^3\)</span> 的一组基。</p>
+<p><strong>(2) 求坐标</strong>：</p>
+<p>设 <span class="arithmatex">\(\beta = x_1\alpha_1 + x_2\alpha_2 + x_3\alpha_3\)</span>，即：
+$<span class="arithmatex">\(x_1(1,1,0) + x_2(0,1,1) + x_3(1,0,1) = (1,2,3)\)</span>$</p>
+<p>得到方程组：
+$<span class="arithmatex">\(\begin{cases} x_1 + x_3 = 1 \\ x_1 + x_2 = 2 \\ x_2 + x_3 = 3 \end{cases}\)</span>$</p>
+<p>解得：<span class="arithmatex">\(x_1 = 0\)</span>，<span class="arithmatex">\(x_2 = 2\)</span>，<span class="arithmatex">\(x_3 = 1\)</span>。</p>
+<p>所以 <span class="arithmatex">\(\beta\)</span> 在基 <span class="arithmatex">\(\{\alpha_1, \alpha_2, \alpha_3\}\)</span> 下的坐标为 <span class="arithmatex">\((0, 2, 1)\)</span>。</p>
+<p><strong>关键思路</strong>：
+1. 验证线性无关 = 验证是基（3个向量线性无关就是 <span class="arithmatex">\(K^3\)</span> 的基）
+2. 求坐标 = 解线性方程组</p>
+<hr />
+<h3 id="_34">易错点提醒<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆"维数"与"向量个数"</strong></li>
+<li>维数是基所含向量的个数</li>
+<li>
+<p>不是子空间中向量的个数</p>
+</li>
+<li>
+<p><strong>维数为0的情况</strong></p>
+</li>
+<li>只含零向量的子空间，维数为0</li>
+<li>
+<p>它没有基</p>
+</li>
+<li>
+<p><strong>基不唯一</strong></p>
+</li>
+<li>同一子空间有无数组基</li>
+<li>但维数唯一</li>
+</ol>
+<hr />
+<h3 id="_35">思考题<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求 <span class="arithmatex">\(W = \{(a, b, a+b, a-b) \mid a,b \in K\}\)</span> 的维数和一组基。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(\dim U = r\)</span>，则 <span class="arithmatex">\(U\)</span> 中任意 <span class="arithmatex">\(r\)</span> 个线性无关的向量都是 <span class="arithmatex">\(U\)</span> 的基。</p>
+</li>
+<li>
+<p><strong>（坐标）</strong> 设 <span class="arithmatex">\(\alpha_1 = (1,1)\)</span>，<span class="arithmatex">\(\alpha_2 = (1,-1)\)</span> 是 <span class="arithmatex">\(K^2\)</span> 的一组基，求 <span class="arithmatex">\((3, 1)\)</span> 在这组基下的坐标。</p>
+</li>
+</ol>
+<hr />
+<h2 id="35">3.5 矩阵的秩<a class="headerlink" href="#35" title="Permanent link">&para;</a></h2>
+<h3 id="_36">【概念引入动机】为什么要研究矩阵的秩？<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<p>矩阵的秩是线性代数中最重要的概念之一：
+1. <strong>行秩</strong> = 行向量组的秩
+2. <strong>列秩</strong> = 列向量组的秩</p>
+<p>我们将要证明：<strong>行秩 = 列秩</strong>，这就是<strong>矩阵的秩</strong>。这一定理建立了向量组理论与矩阵理论的联系。</p>
+<h3 id="_37">一、行秩与列秩<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>行向量组</strong>：矩阵的每一行称为一个行向量</li>
+<li><strong>列向量组</strong>：矩阵的每一列称为一个列向量</li>
+<li><strong>行秩</strong>：行向量组的秩</li>
+<li><strong>列秩</strong>：列向量组的秩</li>
+</ul>
+<h3 id="_38">二、核心定理<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：矩阵的<strong>行秩等于列秩</strong>，统一称为矩阵的<strong>秩</strong>，记作 <span class="arithmatex">\(\text{rank}(A)\)</span>。</p>
+</blockquote>
+<p><strong>证明思路</strong>（简要）：
+1. 利用初等行变换不改变列秩
+2. 任何矩阵相抵于标准形 <span class="arithmatex">\(\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>
+3. 标准形的行秩 = 列秩 = <span class="arithmatex">\(r\)</span></p>
+<hr />
+<h3 id="_39">典型例题<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<h4 id="10">例10 【计算题】求矩阵的秩<a class="headerlink" href="#10" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 2 &amp; 4 &amp; 6 &amp; 8 \\ 3 &amp; 6 &amp; 9 &amp; 12 \end{pmatrix}\)</span> 的秩。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：行变换法</strong></p>
+<p>对 <span class="arithmatex">\(A\)</span> 进行初等行变换：
+$<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 2 &amp; 4 &amp; 6 &amp; 8 \\ 3 &amp; 6 &amp; 9 &amp; 12 \end{pmatrix} \xrightarrow{r_2-2r_1} \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 3 &amp; 6 &amp; 9 &amp; 12 \end{pmatrix}\)</span>$</p>
+<div class="arithmatex">\[r_3-3r_1 \to r_3: \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}\]</div>
+<p>非零行数为 1，所以 <span class="arithmatex">\(\text{rank}(A) = 1\)</span>。</p>
+<p><strong>方法2：观察法</strong></p>
+<p>第二行 = 2 × 第一行，第三行 = 3 × 第一行，所以行向量组线性相关。</p>
+<p>第一行本身线性无关（因为非零），所以 <span class="arithmatex">\(\text{rank}(A) = 1\)</span>。</p>
+<p><strong>关键思路</strong>：用初等行变换将矩阵化为阶梯形，非零行数就是秩。</p>
+<hr />
+<h4 id="11">例11 【证明题】证明秩的性质<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m \times n\)</span> 矩阵，<span class="arithmatex">\(B\)</span> 是 <span class="arithmatex">\(n \times s\)</span> 矩阵，证明：<span class="arithmatex">\(\text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\}\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) 证明 <span class="arithmatex">\(\text{rank}(AB) \leq \text{rank}(A)\)</span></strong>：</p>
+<p>设 <span class="arithmatex">\(AB = C\)</span>，则 <span class="arithmatex">\(C\)</span> 的列向量组可以由 <span class="arithmatex">\(A\)</span> 的列向量组线性表示。</p>
+<p>因为 <span class="arithmatex">\(C_j = A(b_{1j}, b_{2j}, \ldots, b_{nj})^T = \sum_{i=1}^{n} b_{ij}A_i\)</span>（<span class="arithmatex">\(C_j\)</span> 表示 <span class="arithmatex">\(C\)</span> 的第 <span class="arithmatex">\(j\)</span> 列，<span class="arithmatex">\(A_i\)</span> 表示 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(i\)</span> 列）。</p>
+<p>所以 <span class="arithmatex">\(\text{Col}(C) \subseteq \text{Col}(A)\)</span>，因此 <span class="arithmatex">\(\text{rank}(C) \leq \text{rank}(A)\)</span>。</p>
+<p><strong>(2) 证明 <span class="arithmatex">\(\text{rank}(AB) \leq \text{rank}(B)\)</span></strong>：</p>
+<p>由转置性质：<span class="arithmatex">\((AB)^T = B^T A^T\)</span>，且 <span class="arithmatex">\(\text{rank}(AB) = \text{rank}((AB)^T)\)</span>。</p>
+<p>所以 <span class="arithmatex">\(\text{rank}(AB) = \text{rank}(B^T A^T) \leq \text{rank}(B^T) = \text{rank}(B)\)</span>。</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(\text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\}\)</span>。</p>
+<p><strong>关键思路</strong>：利用矩阵乘法与列空间的包含关系。</p>
+<hr />
+<h3 id="_40">易错点提醒<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆"矩阵的秩"与"向量组的秩"</strong></li>
+<li>记号类似，但含义不同</li>
+<li>
+<p>向量组的秩用 <span class="arithmatex">\(\text{rank}\{\alpha_1, \ldots\}\)</span></p>
+</li>
+<li>
+<p><strong>初等变换不改变秩</strong></p>
+</li>
+<li>行变换和列变换都不改变秩</li>
+<li>
+<p>这是求秩的理论基础</p>
+</li>
+<li>
+<p><strong>满秩矩阵</strong></p>
+</li>
+<li><span class="arithmatex">\(n \times n\)</span> 矩阵：<span class="arithmatex">\(\text{rank}(A) = n\)</span> 时，<span class="arithmatex">\(A\)</span> 满秩，可逆</li>
+<li>行列式判别：<span class="arithmatex">\(|A| \neq 0 \iff \text{rank}(A) = n\)</span></li>
+</ol>
+<hr />
+<h3 id="_41">思考题<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求矩阵 <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \end{pmatrix}\)</span> 的秩。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(\text{rank}(A) = r\)</span>，则存在可逆矩阵 <span class="arithmatex">\(P, Q\)</span> 使得 <span class="arithmatex">\(PAQ = \begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>。</p>
+</li>
+<li>
+<p><strong>（判断）</strong> 判断正误并说明理由：
+   (a) 若 <span class="arithmatex">\(A \neq 0\)</span>，则 <span class="arithmatex">\(\text{rank}(A) \geq 1\)</span>
+   (b) 若 <span class="arithmatex">\(\text{rank}(A) = n\)</span>，则 <span class="arithmatex">\(|A| \neq 0\)</span></p>
+</li>
+</ol>
+<hr />
+<h2 id="36">3.6 线性方程组有解的充分必要条件<a class="headerlink" href="#36" title="Permanent link">&para;</a></h2>
+<h3 id="_42">【核心定理引入】为什么要研究方程组有解的判别？<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<p>我们已经知道，可以用高斯消元法求解方程组。但能否在不解方程组的情况下，直接从系数判断是否有解？</p>
+<p>这就要用到<strong>秩</strong>的概念。</p>
+<h3 id="_43">定理<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理（线性方程组有解判别）</strong>：n元线性方程组
+$<span class="arithmatex">\(x_1\alpha_1 + x_2\alpha_2 + \cdots + x_n\alpha_n = \beta\)</span>$
+有解的充分必要条件是：
+$<span class="arithmatex">\(\text{rank}\{\alpha_1, \alpha_2, \ldots, \alpha_n\} = \text{rank}\{\alpha_1, \alpha_2, \ldots, \alpha_n, \beta\}\)</span>$</p>
+<p>即：<strong>系数矩阵的秩等于增广矩阵的秩</strong>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. <strong>必要性</strong>：若有解，则 <span class="arithmatex">\(\beta\)</span> 可以由 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_n\)</span> 线性表示，所以两向量组等价，秩相等。
+2. <strong>充分性</strong>：若两秩相等，则 <span class="arithmatex">\(\beta\)</span> 可以由 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_n\)</span> 线性表示，系数即为解。</p>
+<hr />
+<h3 id="_44">典型例题<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<h4 id="12">例12 【讨论题】讨论参数对解的影响<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：讨论下述方程组有解、无解的条件：
+$<span class="arithmatex">\(\begin{cases} x_1 + 2x_2 + 3x_3 = 1 \\ 2x_1 + 4x_2 + (k+3)x_3 = 2k \\ 3x_1 + 6x_2 + 9x_3 = 3 \end{cases}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p>写出增广矩阵：
+$<span class="arithmatex">\(\bar{A} = \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 1 \\ 2 &amp; 4 &amp; k+3 &amp; 2k \\ 3 &amp; 6 &amp; 9 &amp; 3 \end{pmatrix}\)</span>$</p>
+<p><strong>初等行变换</strong>：
+$<span class="arithmatex">\(r_2 - 2r_1 \to r_2: \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 1 \\ 0 &amp; 0 &amp; k-3 &amp; 2k-2 \\ 3 &amp; 6 &amp; 9 &amp; 3 \end{pmatrix}\)</span>$</p>
+<div class="arithmatex">\[r_3 - 3r_1 \to r_3: \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 1 \\ 0 &amp; 0 &amp; k-3 &amp; 2k-2 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}\]</div>
+<p><strong>讨论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>条件</th>
+<th>系数矩阵秩</th>
+<th>增广矩阵秩</th>
+<th>解的情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(k \neq 3\)</span></td>
+<td><span class="arithmatex">\(k-3 \neq 0\)</span></td>
+<td>2</td>
+<td>2</td>
+<td>有解（有 <span class="arithmatex">\(3-2=1\)</span> 个自由未知量）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(k = 3\)</span></td>
+<td><span class="arithmatex">\(k-3 = 0\)</span></td>
+<td>1</td>
+<td>取决于 <span class="arithmatex">\(2k-2\)</span></td>
+<td>见下</td>
+</tr>
+</tbody>
+</table>
+<p>当 <span class="arithmatex">\(k = 3\)</span> 时：
+- <span class="arithmatex">\(r_2\)</span> 变为 <span class="arithmatex">\((0, 0, 0, 4)\)</span>
+- 出现 "0 = 4"，矛盾</p>
+<p>所以 <span class="arithmatex">\(k = 3\)</span> 时方程组<strong>无解</strong>。</p>
+<p><strong>结论</strong>：
+- <span class="arithmatex">\(k = 3\)</span>：无解
+- <span class="arithmatex">\(k \neq 3\)</span>：有解（无穷多解）</p>
+<hr />
+<h3 id="_45">易错点提醒<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>忘记增广矩阵最后一列</strong></li>
+<li>增广矩阵包含常数项</li>
+<li>
+<p>只考虑系数矩阵是不够的</p>
+</li>
+<li>
+<p><strong>漏掉参数讨论</strong></p>
+</li>
+<li>当参数使某行全为零时，可能影响秩</li>
+<li>要对参数分类讨论</li>
+</ol>
+<hr />
+<h3 id="_46">思考题<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（判断）</strong> 判断下述方程组是否有解：
+   $<span class="arithmatex">\(\begin{cases} x_1 + x_2 = 1 \\ 2x_1 + 2x_2 = 2 \\ 3x_1 + 3x_2 = 3 \end{cases}\)</span>$</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 讨论参数 <span class="arithmatex">\(a\)</span> 的取值使方程组有解、无解：
+   $<span class="arithmatex">\(\begin{cases} ax_1 + x_2 + x_3 = 1 \\ x_1 + ax_2 + x_3 = 1 \\ x_1 + x_2 + ax_3 = 1 \end{cases}\)</span>$</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 有解 <span class="arithmatex">\(\iff \mathbf{b}\)</span> 属于 <span class="arithmatex">\(A\)</span> 的列空间。</p>
+</li>
+</ol>
+<hr />
+<h2 id="37">3.7 齐次线性方程组的解集的结构<a class="headerlink" href="#37" title="Permanent link">&para;</a></h2>
+<h3 id="_47">【概念引入动机】为什么要研究解集的结构？<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h3>
+<p>齐次线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 一定有解（零解）。但如果有非零解，解集的结构是什么？</p>
+<p>答案是：<strong>解集构成一个子空间</strong>，维数为 <span class="arithmatex">\(n - \text{rank}(A)\)</span>。</p>
+<h3 id="_48">解空间<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h3>
+<p>n元齐次线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 的所有解组成的集合构成 <span class="arithmatex">\(K^n\)</span> 的一个子空间，称为<strong>解空间</strong>。</p>
+<h3 id="_49">定理<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(s \times n\)</span> 矩阵，则齐次线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 的解空间的维数为：
+$<span class="arithmatex">\(\dim W = n - \text{rank}(A)\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. 设 <span class="arithmatex">\(\text{rank}(A) = r\)</span>，则阶梯形矩阵有 <span class="arithmatex">\(r\)</span> 个主元
+2. 有 <span class="arithmatex">\(n - r\)</span> 个自由未知量
+3. 解空间由 <span class="arithmatex">\(n - r\)</span> 个线性无关的解向量生成</p>
+<h3 id="_50">基础解系<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>基础解系</strong>：解空间的基。即 <span class="arithmatex">\(n - \text{rank}(A)\)</span> 个线性无关的解向量，它们可以线性表示所有解。</p>
+</blockquote>
+<hr />
+<h3 id="_51">典型例题<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h3>
+<h4 id="13">例13 【计算题】求齐次方程组的基础解系<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求下述齐次线性方程组的基础解系和通解：
+$<span class="arithmatex">\(\begin{cases} x_1 + x_2 - 3x_3 - x_4 = 0 \\ 3x_1 + 2x_2 - 4x_3 + 2x_4 = 0 \\ x_1 - 2x_2 + 2x_3 - 3x_4 = 0 \end{cases}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步</strong>：写系数矩阵并化为阶梯形：
+$<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 &amp; -3 &amp; -1 \\ 3 &amp; 2 &amp; -4 &amp; 2 \\ 1 &amp; -2 &amp; 2 &amp; -3 \end{pmatrix} \xrightarrow{\text{行变换}} \begin{pmatrix} 1 &amp; 1 &amp; -3 &amp; -1 \\ 0 &amp; 1 &amp; -5 &amp; -1 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p><span class="arithmatex">\(\text{rank}(A) = 2\)</span>，所以 <span class="arithmatex">\(n - r = 4 - 2 = 2\)</span>，基础解系含 2 个解向量。</p>
+<p><strong>第二步</strong>：写出同解方程组：
+$<span class="arithmatex">\(\begin{cases} x_1 + x_2 - 3x_3 - x_4 = 0 \\ x_2 - 5x_3 - x_4 = 0 \end{cases}\)</span>$</p>
+<p>令 <span class="arithmatex">\(x_3 = t_1\)</span>，<span class="arithmatex">\(x_4 = t_2\)</span>（自由未知量），则：
+$<span class="arithmatex">\(x_2 = 5t_1 + t_2\)</span>$
+$<span class="arithmatex">\(x_1 = -x_2 + 3x_3 + x_4 = -(5t_1 + t_2) + 3t_1 + t_2 = -2t_1\)</span>$</p>
+<p><strong>第三步</strong>：写出通解：
+$<span class="arithmatex">\(\begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} = t_1 \begin{pmatrix} -2 \\ 5 \\ 1 \\ 0 \end{pmatrix} + t_2 \begin{pmatrix} 0 \\ 1 \\ 0 \\ 1 \end{pmatrix}\)</span>$</p>
+<p><strong>第四步</strong>：取基础解系：
+$<span class="arithmatex">\(\eta_1 = (-2, 5, 1, 0)', \quad \eta_2 = (0, 1, 0, 1)'\)</span>$</p>
+<p><strong>验证</strong>：<span class="arithmatex">\(\eta_1, \eta_2\)</span> 线性无关，且 <span class="arithmatex">\(A\eta_1 = A\eta_2 = \mathbf{0}\)</span>。</p>
+<p><strong>关键思路</strong>：
+1. 化为阶梯形，确定自由未知量个数
+2. 用自由未知量表示其他变量
+3. 基础解系就是各自由未知量取 1（其他取 0）时得到的解向量</p>
+<hr />
+<h3 id="_52">易错点提醒<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆"自由未知量个数"与"基础解系向量个数"</strong></li>
+<li>自由未知量个数 = <span class="arithmatex">\(n - r\)</span></li>
+<li>基础解系向量个数 = <span class="arithmatex">\(n - r\)</span></li>
+<li>
+<p>两者相等</p>
+</li>
+<li>
+<p><strong>基础解系不唯一</strong></p>
+</li>
+<li>任何 <span class="arithmatex">\(n - r\)</span> 个线性无关的解向量都是基础解系</li>
+<li>
+<p>可以取不同的自由变量组合</p>
+</li>
+<li>
+<p><strong>忘记验证线性无关</strong></p>
+</li>
+<li>取的向量必须线性无关</li>
+<li>否则不能作为基</li>
+</ol>
+<hr />
+<h3 id="_53">思考题<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求下述齐次方程组的基础解系：
+   $<span class="arithmatex">\(\begin{cases} x_1 + 2x_2 + 3x_3 + 4x_4 = 0 \\ 2x_1 + 3x_2 + 4x_3 + 5x_4 = 0 \end{cases}\)</span>$</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 矩阵，<span class="arithmatex">\(\text{rank}(A) = n-1\)</span>，证明：<span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 的基础解系只含 1 个向量。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m \times n\)</span> 矩阵，<span class="arithmatex">\(n &gt; m\)</span>，讨论 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 是否有非零解。</p>
+</li>
+</ol>
+<hr />
+<h2 id="38">3.8 非齐次线性方程组的解集的结构<a class="headerlink" href="#38" title="Permanent link">&para;</a></h2>
+<h3 id="_54">【概念引入动机】为什么要单独研究非齐次方程组？<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h3>
+<p>非齐次方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 与齐次方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 有密切联系：
+- 若 <span class="arithmatex">\(\gamma_0\)</span> 是非齐次方程组的<strong>一个特解</strong>
+- 若 <span class="arithmatex">\(\eta\)</span> 是齐次方程组的<strong>通解</strong></p>
+<p>则 <span class="arithmatex">\(\gamma_0 + \eta\)</span> 也是非齐次方程组的解。</p>
+<h3 id="_55">解集结构定理<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：设 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 为非齐次线性方程组。
+- 若有解，则<strong>通解 = 特解 + 齐次方程组的通解</strong></p>
+<p><strong>通解形式</strong>：设 <span class="arithmatex">\(\gamma_0\)</span> 为一个特解，<span class="arithmatex">\(\eta_1, \eta_2, \ldots, \eta_{n-r}\)</span> 为导出组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 的基础解系，则通解为：
+$<span class="arithmatex">\(\gamma = \gamma_0 + k_1\eta_1 + k_2\eta_2 + \cdots + k_{n-r}\eta_{n-r}\)</span>$</p>
+</blockquote>
+<hr />
+<h3 id="_56">典型例题<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h3>
+<h4 id="14">例14 【计算题】求非齐次方程组的通解<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求下述线性方程组的通解：
+$<span class="arithmatex">\(\begin{cases} x_1 + 2x_2 + 3x_3 + 4x_4 = 5 \\ 2x_1 + 4x_2 + 8x_3 + 12x_4 = 18 \end{cases}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步</strong>：写增广矩阵并化为阶梯形：
+$<span class="arithmatex">\(\bar{A} = \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\ 2 &amp; 4 &amp; 8 &amp; 12 &amp; 18 \end{pmatrix} \xrightarrow{r_2-2r_1} \begin{pmatrix} 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\ 0 &amp; 0 &amp; 2 &amp; 4 &amp; 8 \end{pmatrix}\)</span>$</p>
+<p><span class="arithmatex">\(\text{rank}(A) = \text{rank}(\bar{A}) = 2\)</span>，有解。</p>
+<p><strong>第二步</strong>：同解方程组：
+$<span class="arithmatex">\(\begin{cases} x_1 + 2x_2 + 3x_3 + 4x_4 = 5 \\ 2x_3 + 4x_4 = 8 \end{cases} \Rightarrow \begin{cases} x_3 + 2x_4 = 4 \\ x_1 = 5 - 2x_2 - 3x_3 - 4x_4 \end{cases}\)</span>$</p>
+<p><strong>第三步</strong>：求特解：
+令 <span class="arithmatex">\(x_2 = 0\)</span>，<span class="arithmatex">\(x_4 = 0\)</span>，则 <span class="arithmatex">\(x_3 = 4\)</span>，<span class="arithmatex">\(x_1 = 5 - 12 = -7\)</span>。
+$<span class="arithmatex">\(\gamma_0 = (-7, 0, 4, 0)'\)</span>$</p>
+<p><strong>第四步</strong>：求导出组的基础解系：
+导出组：<span class="arithmatex">\(x_3 + 2x_4 = 0\)</span>，即 <span class="arithmatex">\(x_3 = -2x_4\)</span></p>
+<p>令 <span class="arithmatex">\(x_2 = t_1\)</span>，<span class="arithmatex">\(x_4 = t_2\)</span>：
+$<span class="arithmatex">\(x_3 = -2t_2, \quad x_1 = -2t_1 - 3(-2t_2) - 4t_2 = -2t_1 + 2t_2\)</span>$</p>
+<div class="arithmatex">\[\begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} = t_1 \begin{pmatrix} -2 \\ 1 \\ 0 \\ 0 \end{pmatrix} + t_2 \begin{pmatrix} 2 \\ 0 \\ -2 \\ 1 \end{pmatrix}\]</div>
+<p>基础解系：<span class="arithmatex">\(\eta_1 = (-2, 1, 0, 0)'\)</span>，<span class="arithmatex">\(\eta_2 = (2, 0, -2, 1)'\)</span></p>
+<p><strong>第五步</strong>：写出通解：
+$<span class="arithmatex">\(\gamma = \gamma_0 + k_1\eta_1 + k_2\eta_2 = (-7, 0, 4, 0)' + k_1(-2, 1, 0, 0)' + k_2(2, 0, -2, 1)'\)</span>$</p>
+<p><strong>关键思路</strong>：
+1. 先判断有解（两秩相等）
+2. 求一个特解（令自由变量为0）
+3. 求齐次方程组的基础解系
+4. 组合得到通解</p>
+<hr />
+<h3 id="_57">易错点提醒<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>特解不唯一</strong></li>
+<li>任意一个解都可以作为特解</li>
+<li>
+<p>对应不同的通解表达式</p>
+</li>
+<li>
+<p><strong>忘记加上特解</strong></p>
+</li>
+<li>通解 = 特解 + 齐次通解</li>
+<li>
+<p>只写齐次通解是错误的</p>
+</li>
+<li>
+<p><strong>混淆"导出组"</strong></p>
+</li>
+<li>导出组是把常数项换成 0</li>
+<li>不是把系数矩阵变成 0</li>
+</ol>
+<hr />
+<h3 id="_58">思考题<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求下述方程组的通解：
+   $<span class="arithmatex">\(\begin{cases} x_1 + x_2 + x_3 = 1 \\ 2x_1 + 2x_2 + 2x_3 = 2 \end{cases}\)</span>$</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 设 <span class="arithmatex">\(\gamma_0\)</span> 是 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 的一个解，<span class="arithmatex">\(\eta_1, \ldots, \eta_{n-r}\)</span> 是 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 的基础解系，证明：<span class="arithmatex">\(\gamma_0, \gamma_0+\eta_1, \ldots, \gamma_0+\eta_{n-r}\)</span> 线性无关。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m \times n\)</span> 矩阵，讨论 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 有唯一解的条件。</p>
+</li>
+</ol>
+<hr />
+<h2 id="_59">本章小结<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h2>
+<h3 id="_60">核心要点<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>内容</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>向量空间</strong></td>
+<td>满足8条运算规律的集合</td>
+<td>包含零向量</td>
+</tr>
+<tr>
+<td><strong>子空间</strong></td>
+<td>非空且对运算封闭</td>
+<td>必须含零向量</td>
+</tr>
+<tr>
+<td><strong>线性相关性</strong></td>
+<td>核心概念，决定向量组性质</td>
+<td>相关 ⟺ 存在非零系数</td>
+</tr>
+<tr>
+<td><strong>极大线性无关组</strong></td>
+<td>能表示整个向量组的无关组</td>
+<td>不唯一，但个数相同</td>
+</tr>
+<tr>
+<td><strong>向量组的秩</strong></td>
+<td>极大线性无关组的向量个数</td>
+<td><span class="arithmatex">\(\leq\)</span> 向量个数</td>
+</tr>
+<tr>
+<td><strong>矩阵的秩</strong></td>
+<td>行秩 = 列秩</td>
+<td>初等变换不改变</td>
+</tr>
+<tr>
+<td><strong>有解条件</strong></td>
+<td><span class="arithmatex">\(\text{rank}(A) = \text{rank}(\bar{A})\)</span></td>
+<td>最关键定理</td>
+</tr>
+<tr>
+<td><strong>解空间维数</strong></td>
+<td><span class="arithmatex">\(n - \text{rank}(A)\)</span></td>
+<td>齐次方程组</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_61">解题方法总结<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h3>
+<p><strong>求向量组的秩</strong>：
+1. 把向量写成矩阵的列（或行）
+2. 初等行变换化为阶梯形
+3. 非零行数 = 秩</p>
+<p><strong>求基础解系</strong>：
+1. 系数矩阵化为阶梯形
+2. 确定 <span class="arithmatex">\(n - r\)</span> 个自由未知量
+3. 令每个自由变量为 1（其他为 0），得到基础解系</p>
+<p><strong>求非齐次方程组通解</strong>：
+1. 判断有解（两秩相等）
+2. 求一个特解
+3. 求齐次方程组的基础解系
+4. 组合：<span class="arithmatex">\(\gamma = \gamma_0 + \sum k_i\eta_i\)</span></p>
+<h3 id="_62">公式速记<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>解空间维数</td>
+<td><span class="arithmatex">\(\dim W = n - \text{rank}(A)\)</span></td>
+</tr>
+<tr>
+<td>有解条件</td>
+<td><span class="arithmatex">\(\text{rank}(A) = \text{rank}(\bar{A})\)</span></td>
+</tr>
+<tr>
+<td>齐次方程非零解</td>
+<td><span class="arithmatex">\(\text{rank}(A) &lt; n\)</span></td>
+</tr>
+<tr>
+<td>通解结构</td>
+<td><span class="arithmatex">\(\gamma = \gamma_0 + k_1\eta_1 + \cdots + k_{n-r}\eta_{n-r}\)</span></td>
+</tr>
+<tr>
+<td>基础解系向量数</td>
+<td><span class="arithmatex">\(n - \text{rank}(A)\)</span></td>
+</tr>
+<tr>
+<td>矩阵秩性质</td>
+<td><span class="arithmatex">\(\text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\}\)</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

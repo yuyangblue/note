@@ -1,0 +1,2203 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>模型训练 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              模型训练
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        监督学习基本框架
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="监督学习基本框架">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四大核心要素
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        梯度下降法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="梯度下降法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        算法流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心特点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        梯度下降的物理图像
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线性回归实例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="线性回归实例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模型定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        损失函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        单样本梯度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gabor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gabor模型与损失曲面
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gabor模型与损失曲面">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gabor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gabor函数定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非凸损失函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局部极小点与鞍点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sgd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机梯度下降法（SGD）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="随机梯度下降法（SGD）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mini-batch-gd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        小批量梯度下降（Mini-Batch GD）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sgd-vs-gd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SGD vs 全批量GD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        带动量的梯度下降法（Momentum）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="带动量的梯度下降法（Momentum）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        物理直观
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nesterovnag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nesterov加速梯度法（NAG）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nesterov加速梯度法（NAG）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何直观
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        梯度归一化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="梯度归一化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adagrad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdaGrad算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AdaGrad算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        致命缺陷
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rmsprop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RMSprop算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RMSprop算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adagrad-vs-rmsprop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdaGrad vs RMSprop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adadelta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdaDelta算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AdaDelta算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键创新
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adam算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adam算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏差校正的必要性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        推荐超参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优化算法统一框架
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="优化算法统一框架">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        算法差异对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        场景推荐
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">模型训练<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">监督学习基本框架<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">四大核心要素<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>训练数据集</strong>：<span class="arithmatex">\(\mathcal{Z}=\{(\mathbf{x}_{i},\mathbf{y}_{i})\}_{i=1}^{I}\)</span></li>
+<li><strong>学习模型</strong>：<span class="arithmatex">\(\mathbf{y}=f(\mathbf{x},\phi)\)</span></li>
+<li><strong>损失函数</strong>：<span class="arithmatex">\(L(\phi)\)</span></li>
+<li><strong>模型训练</strong>：<span class="arithmatex">\(\hat{\phi}=\arg\operatorname*{min}_{\phi}\,L(\phi)\)</span></li>
+</ol>
+<hr />
+<h2 id="_4">梯度下降法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_5">算法流程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>输入: 目标函数 J(θ), 学习率 α, 最大迭代次数 T, 初始参数 θ
+for t = 1 到 T do:
+    g = ∇J(θ)           // 计算梯度
+    θ = θ - αg          // 参数更新
+return 最优参数 θ
+</code></pre></div></td></tr></table></div>
+<h3 id="_6">核心特点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原理直观，实现简单</td>
+<td>收敛速度慢</td>
+</tr>
+<tr>
+<td>学习率合理时稳定收敛</td>
+<td>对学习率高度敏感</td>
+</tr>
+<tr>
+<td></td>
+<td>复杂模型易振荡</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">梯度下降的物理图像<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>极小点处梯度为0</strong>：参数停止更新</li>
+<li><strong>谷底附近易振荡</strong>：导致收敛速度降低</li>
+</ul>
+<hr />
+<h2 id="_8">线性回归实例<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">模型定义<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[y=f(x,\phi)=\phi_{0}+\phi_{1}x\]</div>
+<h3 id="_10">损失函数<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L(\phi)=\sum_{i=1}^{I}(\phi_{0}+\phi_{1}x_{i}-y_{i})^{2}\]</div>
+<h3 id="_11">单样本梯度<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\frac{\partial l_{i}}{\partial\phi}=\begin{bmatrix} 2(\phi_{0}+\phi_{1}x_{i}-y_{i}) \\ 2x_{i}(\phi_{0}+\phi_{1}x_{i}-y_{i}) \end{bmatrix}\]</div>
+<hr />
+<h2 id="gabor">Gabor模型与损失曲面<a class="headerlink" href="#gabor" title="Permanent link">&para;</a></h2>
+<h3 id="gabor_1">Gabor函数定义<a class="headerlink" href="#gabor_1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[y=f(x;\phi)=\sin\left(\phi_{0}+0.06\phi_{1}x\right)\cdot\exp\left(-\frac{\left(\phi_{0}+0.06\phi_{1}x\right)^{2}}{32}\right)\]</div>
+<ul>
+<li><span class="arithmatex">\(\phi_0\)</span>：控制位置</li>
+<li><span class="arithmatex">\(\phi_1\)</span>：控制形状</li>
+</ul>
+<h3 id="_12">非凸损失函数<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>凸函数</strong>：可收敛至全局最优</li>
+<li><strong>非线性模型</strong>：损失函数非凸，仅能收敛至局部最优</li>
+</ul>
+<h3 id="_13">局部极小点与鞍点<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>局部极小值</strong></td>
+<td>梯度为0，邻域内所有点函数值均≥该点</td>
+</tr>
+<tr>
+<td><strong>鞍点</strong></td>
+<td>梯度为0，部分方向上升、部分方向下降</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sgd">随机梯度下降法（SGD）<a class="headerlink" href="#sgd" title="Permanent link">&para;</a></h2>
+<h3 id="_14">核心思想<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>批量采样</strong>：每次使用一小批样本估计梯度</li>
+<li><strong>随机性</strong>：帮助算法逃离局部最优</li>
+<li><strong>平衡性</strong>：在计算效率与梯度稳定性间取得平衡</li>
+</ul>
+<h3 id="mini-batch-gd">小批量梯度下降（Mini-Batch GD）<a class="headerlink" href="#mini-batch-gd" title="Permanent link">&para;</a></h3>
+<p>参数更新：</p>
+<div class="arithmatex">\[\phi_{t}=\phi_{t-1}-\alpha\cdot\frac{1}{|\mathcal{B}_{t}|}\sum_{(\boldsymbol{x}_{i},y_{i})\in\mathcal{B}_{t}}\nabla_{\phi}J(\phi_{t-1};\boldsymbol{x}_{i},y_{i})\]</div>
+<h3 id="_15">关键概念<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Batch</strong></td>
+<td>互不重叠的样本集合</td>
+</tr>
+<tr>
+<td><strong>Epoch</strong></td>
+<td>完整遍历一次全部训练数据</td>
+</tr>
+<tr>
+<td><strong>Batch Size</strong></td>
+<td>最小=1（SGD），最大=全部数据（全批量GD）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sgd-vs-gd">SGD vs 全批量GD<a class="headerlink" href="#sgd-vs-gd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>计算成本</th>
+<th>梯度噪声</th>
+<th>在线学习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全批量GD</td>
+<td>高</td>
+<td>无</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>Mini-Batch GD</td>
+<td>中等</td>
+<td>适中</td>
+<td>支持</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="momentum">带动量的梯度下降法（Momentum）<a class="headerlink" href="#momentum" title="Permanent link">&para;</a></h2>
+<h3 id="_16">核心思想<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>解决SGD在峡谷区域（一个方向陡峭、一个方向平缓）容易震荡的问题。</p>
+<h3 id="_17">数学形式<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p><strong>动量累积</strong>：</p>
+<div class="arithmatex">\[m_{t}=\beta m_{t-1}+g_{t}\]</div>
+<p><strong>参数更新</strong>：</p>
+<div class="arithmatex">\[\phi_{t+1}=\phi_{t}-\alpha m_{t}\]</div>
+<ul>
+<li><span class="arithmatex">\(\beta \in [0,1)\)</span>：控制历史信息衰减速度</li>
+<li>默认 <span class="arithmatex">\(\beta = 0.9\)</span></li>
+</ul>
+<h3 id="_18">物理直观<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>动量项 m</strong>：类似速度</li>
+<li><strong>梯度 g</strong>：类似加速度</li>
+<li><strong>β</strong>：类似摩擦系数</li>
+</ul>
+<p>动量本质是历史梯度的指数衰减移动平均：</p>
+<div class="arithmatex">\[m_{t}=\beta^{t}m_{0}+\sum_{k=1}^{t}\beta^{t-k}g_{k}\]</div>
+<hr />
+<h2 id="nesterovnag">Nesterov加速梯度法（NAG）<a class="headerlink" href="#nesterovnag" title="Permanent link">&para;</a></h2>
+<h3 id="_19">核心思想<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>Momentum存在缺陷：计算梯度时使用当前位置参数，但速度已指向未来方向。</p>
+<p><strong>NAG改进</strong>：先沿速度方向移动一步，再计算梯度。</p>
+<h3 id="_20">数学形式<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\phi_{\text{lookahead}}=\phi_{t}-\beta m_{t-1}$$
+$$g_{t}=\nabla_{\phi}J(\phi_{\text{lookahead}})$$
+$$m_{t}=\beta m_{t-1}+g_{t}$$
+$$\phi_{t+1}=\phi_{t}-\alpha m_{t}\]</div>
+<h3 id="_21">几何直观<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>对动量方向进行修正</li>
+<li>具有"预见性"</li>
+<li>更平滑地通过狭窄峡谷</li>
+</ul>
+<hr />
+<h2 id="_22">梯度归一化<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<h3 id="_23">核心思想<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>不同参数对梯度响应尺度不同，应为每个参数自适应调整步长。</p>
+<h3 id="_24">数学形式<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\phi_{t+1}=\phi_{t}-\frac{\alpha}{\sqrt{g_{t}\odot g_{t}+\epsilon}}\odot g_{t}\]</div>
+<ul>
+<li><strong>梯度大的维度</strong>：步长小</li>
+<li><strong>梯度小的维度</strong>：步长大</li>
+</ul>
+<h3 id="_25">局限性<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ul>
+<li>仅使用当前梯度</li>
+<li>易受单批次噪声影响</li>
+</ul>
+<hr />
+<h2 id="adagrad">AdaGrad算法<a class="headerlink" href="#adagrad" title="Permanent link">&para;</a></h2>
+<h3 id="_26">核心思想<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>引入历史梯度平方累积，对频繁更新参数降低学习率，对稀疏更新参数提高学习率。</p>
+<h3 id="_27">数学形式<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>累积梯度平方和：</p>
+<div class="arithmatex">\[v_{t}=v_{t-1}+g_{t}\odot g_{t}\]</div>
+<p>参数更新：</p>
+<div class="arithmatex">\[\phi_{t+1}=\phi_{t}-\frac{\alpha}{\sqrt{v_{t}+\epsilon}}\odot g_{t}\]</div>
+<h3 id="_28">特性<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自适应学习率</td>
+<td>每个维度独立调整</td>
+</tr>
+<tr>
+<td>学习率单调递减</td>
+<td>vt随训练单调递增</td>
+</tr>
+<tr>
+<td>适合稀疏特征</td>
+<td>如词嵌入</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_29">致命缺陷<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<p>累积平方和不断增大，导致学习率趋近于零，训练停滞。</p>
+<hr />
+<h2 id="rmsprop">RMSprop算法<a class="headerlink" href="#rmsprop" title="Permanent link">&para;</a></h2>
+<h3 id="_30">核心思想<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<p>用指数滑动平均替代累加，解决AdaGrad学习率衰减过快问题。</p>
+<h3 id="_31">数学形式<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[v_{t}=\beta v_{t-1}+(1-\beta)(g_{t}\odot g_{t})\]</div>
+<div class="arithmatex">\[\phi_{t+1}=\phi_{t}-\frac{\alpha}{\sqrt{v_{t}+\epsilon}}\odot g_{t}\]</div>
+<ul>
+<li>β 通常取 0.9 或 0.99</li>
+<li>α 通常取 0.001</li>
+</ul>
+<h3 id="adagrad-vs-rmsprop">AdaGrad vs RMSprop<a class="headerlink" href="#adagrad-vs-rmsprop" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>AdaGrad</th>
+<th>RMSprop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>历史信息聚合</td>
+<td>累加求和</td>
+<td>指数滑动平均</td>
+</tr>
+<tr>
+<td>学习率行为</td>
+<td>单调递减至零</td>
+<td>自适应稳定</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>稀疏特征</td>
+<td>非平稳目标</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="adadelta">AdaDelta算法<a class="headerlink" href="#adadelta" title="Permanent link">&para;</a></h2>
+<h3 id="_32">核心思想<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<p>消除学习率超参数α，仅通过历史更新量自适应调整步长。</p>
+<h3 id="_33">数学形式<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<p>定义两个滑动平均：
+- <span class="arithmatex">\(v_t\)</span>：梯度平方的滑动平均
+- <span class="arithmatex">\(s_t\)</span>：更新量平方的滑动平均</p>
+<p>更新过程：</p>
+<div class="arithmatex">\[v_{t}=\rho v_{t-1}+(1-\rho)(g_{t}\odot g_{t})\]</div>
+<div class="arithmatex">\[\Delta\phi_{t}=-\frac{\sqrt{s_{t-1}+\epsilon}}{\sqrt{v_{t}+\epsilon}}\odot g_{t}\]</div>
+<div class="arithmatex">\[s_{t}=\rho s_{t-1}+(1-\rho)(\Delta\phi_{t}\odot\Delta\phi_{t})\]</div>
+<h3 id="_34">关键创新<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>无学习率</strong>：α 被 <span class="arithmatex">\(\sqrt{s_{t-1}}\)</span> 替代</li>
+<li><strong>物理意义</strong>：<span class="arithmatex">\(\sqrt{s_t/v_t}\)</span> 表示历史更新幅度与历史梯度幅度的比值</li>
+</ul>
+<hr />
+<h2 id="adam">Adam算法<a class="headerlink" href="#adam" title="Permanent link">&para;</a></h2>
+<h3 id="_35">核心思想<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<p>融合Momentum（一阶动量）和RMSprop（二阶动量），引入偏差校正。</p>
+<h3 id="_36">数学形式<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[m_{t}=\beta_{1}m_{t-1}+(1-\beta_{1})g_{t}$$
+$$v_{t}=\beta_{2}v_{t-1}+(1-\beta_{2})(g_{t}\odot g_{t})\]</div>
+<p><strong>偏差校正</strong>：</p>
+<div class="arithmatex">\[\hat{m}_{t}=\frac{m_{t}}{1-\beta_{1}^{t}},\quad\hat{v}_{t}=\frac{v_{t}}{1-\beta_{2}^{t}}\]</div>
+<p><strong>参数更新</strong>：</p>
+<div class="arithmatex">\[\phi_{t+1}=\phi_{t}-\frac{\alpha}{\sqrt{\hat{v}_{t}}+\epsilon}\odot\hat{m}_{t}\]</div>
+<h3 id="_37">偏差校正的必要性<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<ul>
+<li>初始时刻 <span class="arithmatex">\(m_1=(1-\beta_1)g_1\)</span>，期望为 <span class="arithmatex">\((1-\beta_1)E[g]\)</span> 而非 <span class="arithmatex">\(E[g]\)</span></li>
+<li>校正因子 <span class="arithmatex">\(1/(1-\beta_1^t)\)</span> 在早期放大动量，补偿初始化偏向</li>
+</ul>
+<h3 id="_38">推荐超参数<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>超参数</th>
+<th>推荐值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>α</td>
+<td>10⁻³ 或 10⁻⁴</td>
+<td>学习率</td>
+</tr>
+<tr>
+<td>β₁</td>
+<td>0.9</td>
+<td>一阶动量衰减率</td>
+</tr>
+<tr>
+<td>β₂</td>
+<td>0.999</td>
+<td>二阶动量衰减率</td>
+</tr>
+<tr>
+<td>ε</td>
+<td>10⁻⁸</td>
+<td>数值稳定性常数</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_39">优化算法统一框架<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h2>
+<p>所有算法可统一为以下形式：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>g_t = ∇J(φ_t)                        // 梯度计算
+m_t = β₁m_{t-1} + (1-β₁)g_t          // 动量更新
+v_t = φ(v_{t-1}, g_t)               // 自适应尺度
+m̂_t = m_t / (1-β₁^t)                // 偏差校正（可选）
+v̂_t = v_t / (1-β₂^t)                // 偏差校正（可选）
+φ_{t+1} = φ_t - α·m̂_t/√(v̂_t+ε)     // 参数更新
+</code></pre></div></td></tr></table></div>
+<h3 id="_40">算法差异对比<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>一阶动量</th>
+<th>二阶动量</th>
+<th>学习率</th>
+<th>偏差校正</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SGD</td>
+<td>无</td>
+<td>无</td>
+<td>固定</td>
+<td>无</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>β₁m + g</td>
+<td>无</td>
+<td>固定</td>
+<td>无</td>
+</tr>
+<tr>
+<td>NAG</td>
+<td>前瞻修正</td>
+<td>无</td>
+<td>固定</td>
+<td>无</td>
+</tr>
+<tr>
+<td>AdaGrad</td>
+<td>无</td>
+<td>历史累积</td>
+<td>α/√g²</td>
+<td>无</td>
+</tr>
+<tr>
+<td>RMSprop</td>
+<td>无</td>
+<td>指数滑动</td>
+<td>α/√v</td>
+<td>无</td>
+</tr>
+<tr>
+<td>AdaDelta</td>
+<td>无</td>
+<td>指数滑动</td>
+<td>√s/√v</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>Adam</strong></td>
+<td>β₁m+(1-β₁)g</td>
+<td>指数滑动</td>
+<td>α/√v̂</td>
+<td><strong>有</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_41">场景推荐<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据规模大、特征稀疏</td>
+<td>Adam / AdaGrad</td>
+</tr>
+<tr>
+<td>需要良好泛化性能</td>
+<td>SGD + Momentum</td>
+</tr>
+<tr>
+<td>学习率难调</td>
+<td>AdaDelta / Adam</td>
+</tr>
+<tr>
+<td>凸优化问题</td>
+<td>AdaGrad</td>
+</tr>
+<tr>
+<td>循环神经网络</td>
+<td>Adam / RMSprop</td>
+</tr>
+<tr>
+<td>计算机视觉</td>
+<td>SGD + Momentum</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

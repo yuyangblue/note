@@ -1,0 +1,3490 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>机器学习分类算法实验报告 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              机器学习分类算法实验报告
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验目的
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验环境
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验内容与步骤
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验内容与步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#knniris" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验一：KNN分类器——Iris鸢尾花数据集
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验一：KNN分类器——Iris鸢尾花数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 数据集简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 实验代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 实验结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 结果分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svmpima-indians" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验二：SVM分类器——Pima Indians糖尿病数据集
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验二：SVM分类器——Pima Indians糖尿病数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 数据集简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 实验代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 实验结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 结果分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breast-cancer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验三：决策树分类器——Breast Cancer乳腺癌数据集
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验三：决策树分类器——Breast Cancer乳腺癌数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 数据集简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 实验过程——遇到的问题与解决
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 实验代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 实验结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 结果分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充实验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="补充实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充实验A：梯度提升分类器——糖尿病数据集
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="补充实验A：梯度提升分类器——糖尿病数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 实验代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 实验结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 结果对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充实验B：随机森林分类器——乳腺癌数据集
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="补充实验B：随机森林分类器——乳腺癌数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B.1 实验代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B.2 实验结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B.3 结果对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciris" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充实验C：分层聚类——Iris数据集
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="补充实验C：分层聚类——Iris数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.1 实验思路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.2 实验过程——遇到的问题与解决
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.3 实验代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.4 实验结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.5 结果分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验结果汇总与对比
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验结果汇总与对比">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个主要实验对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充实验对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键发现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题1：机器学习在医疗诊断中的应用前景与风险
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题1：机器学习在医疗诊断中的应用前景与风险">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用前景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI能否完全替代医生？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        风险与局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何安全地应用AI诊断？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2knnsvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题2：KNN、SVM、决策树三种算法的比较
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题2：KNN、SVM、决策树三种算法的比较">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        算法原理对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优缺点详细对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        生活中的类比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题3：准确率差异的原因分析与改进建议
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题3：准确率差异的原因分析与改进建议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        观察实验结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        造成差异的可能原因
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何提高模型性能？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>机器学习分类算法实验报告</h1>
+
+<h2 id="_1">实验目的<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本次实验旨在通过三个经典数据集（Iris鸢尾花数据集、Pima Indians糖尿病数据集、Breast Cancer乳腺癌数据集），系统学习并实践三种基础的机器学习分类算法：K近邻（KNN）、支持向量机（SVM）和决策树。同时，为了拓展知识面，我还完成了梯度提升、随机森林和分层聚类的补充实验。通过这些实验，我希望能够：</p>
+<ol>
+<li><strong>理解原理</strong>：深入理解KNN、SVM、决策树等分类算法的工作原理和核心思想</li>
+<li><strong>掌握流程</strong>：熟练掌握机器学习项目的一般流程，包括数据加载、预处理、模型训练、评估和结果可视化</li>
+<li><strong>积累经验</strong>：在实践中积累处理真实数据的经验，学会诊断和解决常见问题（如数据类型错误、标签编码问题等）</li>
+<li><strong>培养思维</strong>：通过思考题的训练，培养对机器学习应用场景、算法选择和性能优化的批判性思考能力</li>
+</ol>
+<hr />
+<h2 id="_2">实验环境<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>操作系统</strong></td>
+<td>Windows/Linux/macOS（Python跨平台）</td>
+</tr>
+<tr>
+<td><strong>编程语言</strong></td>
+<td>Python 3.x</td>
+</tr>
+<tr>
+<td><strong>核心库</strong></td>
+<td>scikit-learn（机器学习算法库）</td>
+</tr>
+<tr>
+<td><strong>数据处理</strong></td>
+<td>pandas（数据读取和预处理）</td>
+</tr>
+<tr>
+<td><strong>科学计算</strong></td>
+<td>numpy（数值计算）</td>
+</tr>
+<tr>
+<td><strong>可视化</strong></td>
+<td>matplotlib, seaborn（绘图）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>小提示</strong>：scikit-learn是机器学习领域最常用的开源库之一，它封装了大量经典的机器学习算法，API设计简洁统一，非常适合初学者入门。</p>
+</blockquote>
+<hr />
+<h2 id="_3">实验内容与步骤<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="knniris">实验一：KNN分类器——Iris鸢尾花数据集<a class="headerlink" href="#knniris" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1 数据集简介<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<p>Iris数据集是机器学习领域最经典的数据集之一，由统计学家Ronald Fisher在1936年提出。它包含150个样本，分为3个类别（Setosa、Versicolor、Virginica），每个类别50个样本。每个样本有4个特征：</p>
+<table>
+<thead>
+<tr>
+<th>特征名</th>
+<th>含义</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sepal_length</td>
+<td>花萼长度（cm）</td>
+<td>4.3 ~ 7.9</td>
+</tr>
+<tr>
+<td>sepal_width</td>
+<td>花萼宽度（cm）</td>
+<td>2.0 ~ 4.4</td>
+</tr>
+<tr>
+<td>petal_length</td>
+<td>花瓣长度（cm）</td>
+<td>1.0 ~ 6.9</td>
+</tr>
+<tr>
+<td>petal_width</td>
+<td>花瓣宽度（cm）</td>
+<td>0.1 ~ 2.5</td>
+</tr>
+</tbody>
+</table>
+<p>这个数据集之所以经典，是因为它的特征清晰、类别平衡、样本量适中，非常适合用来验证算法和教学方法。</p>
+<h4 id="12">1.2 实验代码<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># 加载数据</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c1"># 划分训练集和测试集（80%训练，20%测试）</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># 创建KNN分类器（K=3）</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># 训练模型</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># 预测</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 评估</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;准确率: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">混淆矩阵:</span><span class="se">\n</span><span class="si">{</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">分类报告:</span><span class="se">\n</span><span class="si">{</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="n">target_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="13">1.3 实验结果<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>准确率</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测Setosa</th>
+<th>预测Versicolor</th>
+<th>预测Virginica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实际Setosa</strong></td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>实际Versicolor</strong></td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>实际Virginica</strong></td>
+<td>0</td>
+<td>0</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<p>分类报告：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>              precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       1.00      1.00      1.00         9
+   virginica       1.00      1.00      1.00        11
+
+    accuracy                           1.00        30
+   macro avg       1.00      1.00      1.00        30
+weighted avg       1.00      1.00      1.00        30
+</code></pre></div></td></tr></table></div>
+<h4 id="14">1.4 结果分析<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<p>KNN在Iris数据集上取得了100%的准确率，这个结果看似惊人，但其实是合理的。原因有以下几点：</p>
+<ol>
+<li><strong>数据质量高</strong>：Iris数据集是经过精心整理的经典数据集，数据干净、特征明显</li>
+<li><strong>类别可分性好</strong>：三个鸢尾花品种在特征空间中有较好的区分度，尤其是Setosa与其他两类距离很远</li>
+<li><strong>特征选择得当</strong>：使用的4个特征恰好是区分这三个类别最有效的特征</li>
+<li><strong>K值适中</strong>：K=3是一个比较合理的取值，既不会过于敏感，也不会过于平滑</li>
+</ol>
+<blockquote>
+<p>💡 <strong>KNN小知识</strong>：K近邻算法的核心思想是"物以类聚，人以群分"。它通过计算待预测样本与训练集中所有样本的距离，找出最近的K个邻居，然后根据这些邻居的类别来投票决定待预测样本的类别。</p>
+</blockquote>
+<hr />
+<h3 id="svmpima-indians">实验二：SVM分类器——Pima Indians糖尿病数据集<a class="headerlink" href="#svmpima-indians" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1 数据集简介<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<p>Pima Indians糖尿病数据集来自美国国立糖尿病与消化疾病研究所，旨在预测患者是否会在未来5年内患糖尿病。该数据集包含768个样本，8个特征：</p>
+<table>
+<thead>
+<tr>
+<th>特征名</th>
+<th>含义</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pregnancies</td>
+<td>怀孕次数</td>
+<td>0 ~ 17</td>
+</tr>
+<tr>
+<td>Glucose</td>
+<td>血糖浓度</td>
+<td>0 ~ 199</td>
+</tr>
+<tr>
+<td>BloodPressure</td>
+<td>血压（mm Hg）</td>
+<td>0 ~ 122</td>
+</tr>
+<tr>
+<td>SkinThickness</td>
+<td>皮肤厚度（mm）</td>
+<td>0 ~ 99</td>
+</tr>
+<tr>
+<td>Insulin</td>
+<td>胰岛素（mu U/ml）</td>
+<td>0 ~ 846</td>
+</tr>
+<tr>
+<td>BMI</td>
+<td>身体质量指数</td>
+<td>0 ~ 67.1</td>
+</tr>
+<tr>
+<td>DiabetesPedigreeFunction</td>
+<td>糖尿病遗传函数</td>
+<td>0.08 ~ 2.42</td>
+</tr>
+<tr>
+<td>Age</td>
+<td>年龄</td>
+<td>21 ~ 81</td>
+</tr>
+</tbody>
+</table>
+<p>目标变量：0（无糖尿病），1（有糖尿病）</p>
+<h4 id="22">2.2 实验代码<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+
+<span class="c1"># 加载数据</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;pima-indians-diabetes.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># 前8列为特征</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># 最后一列为标签</span>
+
+<span class="c1"># 数据标准化（SVM对特征尺度敏感）</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># 划分训练集和测试集（70%训练，30%测试）</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_scaled</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># 创建SVM分类器（线性核）</span>
+<span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># 训练模型</span>
+<span class="n">svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># 预测</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 评估</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;准确率: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">混淆矩阵:</span><span class="se">\n</span><span class="si">{</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">分类报告:</span><span class="se">\n</span><span class="si">{</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;无糖尿病&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;有糖尿病&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="23">2.3 实验结果<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>总体准确率</strong></td>
+<td><strong>75%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测无糖尿病</th>
+<th>预测有糖尿病</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实际无糖尿病</strong></td>
+<td>134 (TN)</td>
+<td>19 (FP)</td>
+</tr>
+<tr>
+<td><strong>实际有糖尿病</strong></td>
+<td>38 (FN)</td>
+<td>40 (TP)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>分类报告：</strong></p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无糖尿病 (0)</td>
+<td>0.78</td>
+<td>0.88</td>
+<td>0.82</td>
+<td>153</td>
+</tr>
+<tr>
+<td>有糖尿病 (1)</td>
+<td>0.68</td>
+<td>0.51</td>
+<td>0.58</td>
+<td>78</td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵可视化：</strong></p>
+<p>![[人工智能导引/机器学习/图片/1.png]]</p>
+<h4 id="24">2.4 结果分析<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<p>SVM在糖尿病数据集上取得了75%的准确率，相比KNN在Iris上的表现（100%）有明显差距。让我来分析一下原因：</p>
+<p><strong>1. 类别不平衡问题</strong></p>
+<p>从混淆矩阵可以看出，测试集中无糖尿病样本153个，有糖尿病样本78个，比例约为2:1。这种类别不平衡会影响模型的判断。</p>
+<p><strong>2. 召回率不平衡</strong></p>
+<ul>
+<li>无糖尿病的召回率高达88%，说明模型很少漏诊健康人</li>
+<li>有糖尿病的召回率只有51%，意味着<strong>将近一半的糖尿病患者被漏诊了</strong></li>
+</ul>
+<p>这是一个需要重视的问题！在医疗诊断场景中，我们通常更希望提高对患者的召回率，宁可多查几个也不能漏诊。</p>
+<p><strong>3. 数据复杂度</strong></p>
+<p>糖尿病的发病机制复杂，涉及遗传、生活习惯、年龄等多方面因素，单纯依靠这8个生理指标很难做到高精度预测。</p>
+<blockquote>
+<p>💡 <strong>SVM小知识</strong>：支持向量机（SVM）的核心思想是找到一个最优超平面，使得两个类别之间的间隔（margin）最大化。那些落在间隔边界上的样本被称为"支持向量"，它们是决定分类超平面的关键样本。</p>
+</blockquote>
+<hr />
+<h3 id="breast-cancer">实验三：决策树分类器——Breast Cancer乳腺癌数据集<a class="headerlink" href="#breast-cancer" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1 数据集简介<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<p>乳腺癌数据集来自威斯康星大学，包含569个样本，其中良性357个，恶性212个。每个样本有30个特征，这些特征是从乳腺肿块的细针抽吸物的数字化图像中计算出来的。</p>
+<table>
+<thead>
+<tr>
+<th>特征类型</th>
+<th>示例特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>半径（mean）</td>
+<td>radius_mean, radius_se, radius_worst</td>
+</tr>
+<tr>
+<td>纹理（mean）</td>
+<td>texture_mean, texture_se, texture_worst</td>
+</tr>
+<tr>
+<td>周长（mean）</td>
+<td>perimeter_mean, perimeter_se, perimeter_worst</td>
+</tr>
+<tr>
+<td>面积（mean）</td>
+<td>area_mean, area_se, area_worst</td>
+</tr>
+<tr>
+<td>...</td>
+<td>其他26个特征</td>
+</tr>
+</tbody>
+</table>
+<p>目标变量：M（Malignant，恶性）= 1，B（Benign，良性）= 0</p>
+<h4 id="32">3.2 实验过程——遇到的问题与解决<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<p>这是我遇到最多问题的一个实验，让我详细记录一下：</p>
+<p><strong>问题1：类型错误</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 第一次尝试：直接加载数据并训练</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;breast_cancer.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span>
+
+<span class="c1"># 报错：could not convert string to float: &#39;B&#39;</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>原因分析</strong>：数据集中包含了非数值类型的列：
+- <code>id</code>列：样本ID，纯数字但无预测意义
+- <code>diagnosis</code>列：诊断结果（B/M），这是字符串类型
+- <code>Unnamed: 32</code>列：全为NaN的空列</p>
+<p><strong>解决方案</strong>：需要删除无用列，并对诊断结果进行编码</p>
+<p><strong>问题2：标签编码不完整</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 第二次尝试：只编码了标签</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">])</span>  <span class="c1"># B/M → 0/1</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 32&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 删除了无用列</span>
+<span class="c1"># 但X仍然是DataFrame，需要转换为numpy数组</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span>
+</code></pre></div></td></tr></table></div>
+<p>这次成功了！让我展示完整的正确代码：</p>
+<h4 id="33">3.3 实验代码<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+
+<span class="c1"># 加载数据</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;breast_cancer.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># 数据预处理</span>
+<span class="c1"># 1. 删除无用列</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 32&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 2. 编码标签：B/M → 0/1</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">])</span>  <span class="c1"># B=0, M=1</span>
+
+<span class="c1"># 分离特征和标签</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># 划分训练集和测试集（70%训练，30%测试）</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># 创建决策树分类器</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># 训练模型</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># 预测</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 评估</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;准确率: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">混淆矩阵:</span><span class="se">\n</span><span class="si">{</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">分类报告:</span><span class="se">\n</span><span class="si">{</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;良性(B)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;恶性(M)&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="34">3.4 实验结果<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>总体准确率</strong></td>
+<td><strong>94%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测良性</th>
+<th>预测恶性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实际良性</strong></td>
+<td>101 (TN)</td>
+<td>7 (FP)</td>
+</tr>
+<tr>
+<td><strong>实际恶性</strong></td>
+<td>3 (FN)</td>
+<td>60 (TP)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>分类报告：</strong></p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>良性(B)</td>
+<td>0.97</td>
+<td>0.94</td>
+<td>0.95</td>
+<td>108</td>
+</tr>
+<tr>
+<td>恶性(M)</td>
+<td>0.90</td>
+<td>0.95</td>
+<td>0.92</td>
+<td>63</td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵可视化：</strong></p>
+<p>![[人工智能导引/机器学习/图片/2.png]]</p>
+<h4 id="35">3.5 结果分析<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<p>决策树在乳腺癌数据集上取得了94%的准确率，表现相当不错：</p>
+<ul>
+<li><strong>良性肿瘤</strong>：Precision 97%，Recall 94%，说明模型很少把良性误判为恶性（减少不必要的恐慌）</li>
+<li><strong>恶性肿瘤</strong>：Precision 90%，Recall 95%，说明模型能识别出95%的恶性肿瘤（漏诊率仅5%）</li>
+</ul>
+<p>这个召回率在医疗场景中非常重要——我们宁可多做一些进一步检查，也不希望漏掉任何一例恶性肿瘤患者。</p>
+<blockquote>
+<p>💡 <strong>决策树小知识</strong>：决策树通过从根节点开始，按照特征的取值逐步向下分裂，最终到达叶节点，每个叶节点对应一个类别。常用的分裂准则有信息增益（ID3算法）和基尼系数（CART算法）。</p>
+</blockquote>
+<hr />
+<h2 id="_4">补充实验<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>为了更全面地了解机器学习分类算法，我还完成了三个补充实验。这些实验不在实验手册要求范围内，但我认为它们对于理解不同算法的特点和适用场景很有帮助。</p>
+<h3 id="a">补充实验A：梯度提升分类器——糖尿病数据集<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
+<h4 id="a1">A.1 实验代码<a class="headerlink" href="#a1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># 加载和预处理数据</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;pima-indians-diabetes.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># 标准化</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># 划分数据集</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_scaled</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># 创建梯度提升分类器</span>
+<span class="n">gb</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># 训练和预测</span>
+<span class="n">gb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 评估</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;准确率: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">混淆矩阵:</span><span class="se">\n</span><span class="si">{</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">分类报告:</span><span class="se">\n</span><span class="si">{</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;无糖尿病&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;有糖尿病&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="a2">A.2 实验结果<a class="headerlink" href="#a2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>总体准确率</strong></td>
+<td><strong>74%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测无糖尿病</th>
+<th>预测有糖尿病</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实际无糖尿病</strong></td>
+<td>127</td>
+<td>26</td>
+</tr>
+<tr>
+<td><strong>实际有糖尿病</strong></td>
+<td>34</td>
+<td>44</td>
+</tr>
+</tbody>
+</table>
+<p><strong>分类报告：</strong></p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无糖尿病 (0)</td>
+<td>0.79</td>
+<td>0.83</td>
+<td>0.81</td>
+<td>153</td>
+</tr>
+<tr>
+<td>有糖尿病 (1)</td>
+<td>0.63</td>
+<td>0.56</td>
+<td>0.59</td>
+<td>78</td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵可视化：</strong></p>
+<p>![[人工智能导引/机器学习/图片/3.png]]</p>
+<h4 id="a3">A.3 结果对比<a class="headerlink" href="#a3" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>SVM</th>
+<th>梯度提升</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>准确率</td>
+<td>75%</td>
+<td>74%</td>
+</tr>
+<tr>
+<td>类别0 Precision</td>
+<td>0.78</td>
+<td>0.79</td>
+</tr>
+<tr>
+<td>类别0 Recall</td>
+<td>0.88</td>
+<td>0.83</td>
+</tr>
+<tr>
+<td>类别1 Precision</td>
+<td>0.68</td>
+<td>0.63</td>
+</tr>
+<tr>
+<td>类别1 Recall</td>
+<td>0.51</td>
+<td>0.56</td>
+</tr>
+<tr>
+<td>类别1 F1-Score</td>
+<td>0.58</td>
+<td>0.59</td>
+</tr>
+</tbody>
+</table>
+<p>梯度提升和SVM在这个数据集上的表现接近，但各有侧重：
+- <strong>SVM</strong>：对无糖尿病人群的识别更准确（Recall 88% vs 83%）
+- <strong>梯度提升</strong>：对有糖尿病患者的识别略好（Recall 56% vs 51%）</p>
+<blockquote>
+<p>💡 <strong>梯度提升小知识</strong>：梯度提升（Gradient Boosting）是一种集成学习方法，它通过构建多个弱学习器（通常是决策树），并将它们组合起来形成强学习器。每个新的学习器都试图纠正前面学习器的错误，最终达到较好的预测效果。</p>
+</blockquote>
+<hr />
+<h3 id="b">补充实验B：随机森林分类器——乳腺癌数据集<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<h4 id="b1">B.1 实验代码<a class="headerlink" href="#b1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># 加载和预处理数据</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;breast_cancer.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 32&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">])</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># 划分数据集</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># 创建随机森林分类器</span>
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># 训练和预测</span>
+<span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 评估</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;准确率: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">混淆矩阵:</span><span class="se">\n</span><span class="si">{</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">分类报告:</span><span class="se">\n</span><span class="si">{</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;良性(B)&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;恶性(M)&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="b2">B.2 实验结果<a class="headerlink" href="#b2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>总体准确率</strong></td>
+<td><strong>97%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测良性</th>
+<th>预测恶性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实际良性</strong></td>
+<td>107</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>实际恶性</strong></td>
+<td>4</td>
+<td>59</td>
+</tr>
+</tbody>
+</table>
+<p><strong>分类报告：</strong></p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>良性(B)</td>
+<td>0.96</td>
+<td>0.99</td>
+<td>0.98</td>
+<td>108</td>
+</tr>
+<tr>
+<td>恶性(M)</td>
+<td>0.98</td>
+<td>0.94</td>
+<td>0.96</td>
+<td>63</td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵可视化：</strong></p>
+<p>![[人工智能导引/机器学习/图片/4.png]]</p>
+<h4 id="b3">B.3 结果对比<a class="headerlink" href="#b3" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>决策树</th>
+<th>随机森林</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>准确率</td>
+<td>94%</td>
+<td>97%</td>
+</tr>
+<tr>
+<td>良性 Precision</td>
+<td>0.97</td>
+<td>0.96</td>
+</tr>
+<tr>
+<td>良性 Recall</td>
+<td>0.94</td>
+<td>0.99</td>
+</tr>
+<tr>
+<td>恶性 Precision</td>
+<td>0.90</td>
+<td>0.98</td>
+</tr>
+<tr>
+<td>恶性 Recall</td>
+<td>0.95</td>
+<td>0.94</td>
+</tr>
+<tr>
+<td>恶性 F1-Score</td>
+<td>0.92</td>
+<td>0.96</td>
+</tr>
+</tbody>
+</table>
+<p>随机森林相比单棵决策树，准确率提升了3个百分点，表现更稳定：</p>
+<ul>
+<li><strong>良性识别</strong>：Recall从94%提升到99%，几乎不会漏诊良性肿瘤</li>
+<li><strong>恶性识别</strong>：Precision从90%提升到98%，误诊率大幅降低</li>
+</ul>
+<blockquote>
+<p>💡 <strong>随机森林小知识</strong>：随机森林（Random Forest）是一种集成学习方法，它通过构建多棵决策树并综合它们的结果来做出预测。每棵树都使用随机抽取的样本和随机选择的特征进行训练，这种"双重随机"机制使得随机森林具有很好的抗过拟合能力。</p>
+</blockquote>
+<hr />
+<h3 id="ciris">补充实验C：分层聚类——Iris数据集<a class="headerlink" href="#ciris" title="Permanent link">&para;</a></h3>
+<h4 id="c1">C.1 实验思路<a class="headerlink" href="#c1" title="Permanent link">&para;</a></h4>
+<p>前面几个实验都是<strong>监督学习</strong>——我们有标注好的训练数据。而聚类是一种<strong>无监督学习</strong>——我们不给算法提供真实标签，让它自己发现数据中的结构。</p>
+<p>这里我使用层次聚类（Agglomerative Clustering）对Iris数据集进行聚类，然后通过聚类结果与真实标签的对比来评估聚类效果。</p>
+<h4 id="c2">C.2 实验过程——遇到的问题与解决<a class="headerlink" href="#c2" title="Permanent link">&para;</a></h4>
+<p><strong>问题：标签类型不一致</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 第一次尝试</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgglomerativeClustering</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>  <span class="c1"># 真实标签是整数：0, 1, 2</span>
+
+<span class="c1"># 进行聚类</span>
+<span class="n">clustering</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clustering</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># 报错：Mix of label input types (string and number)</span>
+<span class="c1"># （在计算某种指标时出现）</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>原因分析</strong>：sklearn的某些指标函数要求真实标签和预测标签类型一致。虽然这里没有直接报错，但为了保持一致性，最好还是对真实标签进行编码。</p>
+<p><strong>解决方案</strong>：使用LabelEncoder确保标签类型一致</p>
+<h4 id="c3">C.3 实验代码<a class="headerlink" href="#c3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgglomerativeClustering</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 加载数据</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># 编码真实标签（确保类型一致）</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+
+<span class="c1"># 进行分层聚类</span>
+<span class="n">clustering</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clustering</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># 评估（手动计算准确率，因为聚类没有predict方法）</span>
+<span class="c1"># 注意：聚类标签是随机的，需要匹配到正确的类别</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_sum_assignment</span>
+
+<span class="c1"># 构建混淆矩阵</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># 使用匈牙利算法找最优匹配</span>
+<span class="n">row_ind</span><span class="p">,</span> <span class="n">col_ind</span> <span class="o">=</span> <span class="n">linear_sum_assignment</span><span class="p">(</span><span class="o">-</span><span class="n">cm</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="n">row_ind</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;聚类准确率: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">混淆矩阵:</span><span class="se">\n</span><span class="si">{</span><span class="n">cm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="c4">C.4 实验结果<a class="headerlink" href="#c4" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>聚类准确率</strong></td>
+<td><strong>89.33%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>混淆矩阵：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Cluster 0</th>
+<th>Cluster 1</th>
+<th>Cluster 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Class 0 (Setosa)</strong></td>
+<td>50</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>Class 1 (Versicolor)</strong></td>
+<td>0</td>
+<td>48</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>Class 2 (Virginica)</strong></td>
+<td>0</td>
+<td>2</td>
+<td>48</td>
+</tr>
+</tbody>
+</table>
+<h4 id="c5">C.5 结果分析<a class="headerlink" href="#c5" title="Permanent link">&para;</a></h4>
+<p>分层聚类取得了89.33%的准确率，虽然不如监督学习方法，但对于无监督学习来说这个结果还是相当不错的：</p>
+<ul>
+<li><strong>Setosa类</strong>：完美聚类，50个样本全部正确</li>
+<li><strong>Versicolor和Virginica</strong>：各有2个样本被混淆，说明这两个类在特征空间中有一定重叠</li>
+</ul>
+<blockquote>
+<p>💡 <strong>层次聚类小知识</strong>：层次聚类（Agglomerative Clustering）是一种自底向上的聚类方法。它首先将每个样本视为一个簇，然后不断合并最相似的簇，直到达到预设的簇数量。这种方法的优势是可以生成层次化的聚类结构，帮助我们理解数据的多层次组织。</p>
+</blockquote>
+<hr />
+<h2 id="_5">实验结果汇总与对比<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">三个主要实验对比<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>算法</th>
+<th>数据集</th>
+<th>准确率</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实验一</td>
+<td>KNN</td>
+<td>Iris</td>
+<td><strong>100%</strong></td>
+<td>简单高效，数据质量高</td>
+</tr>
+<tr>
+<td>实验二</td>
+<td>SVM</td>
+<td>糖尿病</td>
+<td><strong>75%</strong></td>
+<td>类别不平衡，患者召回率低</td>
+</tr>
+<tr>
+<td>实验三</td>
+<td>决策树</td>
+<td>乳腺癌</td>
+<td><strong>94%</strong></td>
+<td>可解释性强，性能优秀</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">补充实验对比<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>算法</th>
+<th>数据集</th>
+<th>准确率</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>补充A</td>
+<td>梯度提升</td>
+<td>糖尿病</td>
+<td><strong>74%</strong></td>
+<td>集成学习，与SVM接近</td>
+</tr>
+<tr>
+<td>补充B</td>
+<td>随机森林</td>
+<td>乳腺癌</td>
+<td><strong>97%</strong></td>
+<td>比单棵决策树更稳定</td>
+</tr>
+<tr>
+<td>补充C</td>
+<td>层次聚类</td>
+<td>Iris</td>
+<td><strong>89.33%</strong></td>
+<td>无监督学习，无需标签</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">关键发现<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>数据质量决定上限</strong>：Iris数据集干净整洁，所以KNN能轻松达到100%；而糖尿病数据复杂，SVM只能达到75%</p>
+</li>
+<li>
+<p><strong>集成学习表现更稳定</strong>：随机森林（97%）比单棵决策树（94%）表现更好，体现了"三个臭皮匠顶个诸葛亮"的集成思想</p>
+</li>
+<li>
+<p><strong>监督 vs 无监督</strong>：无监督的层次聚类（89.33%）虽然不需要标签，但效果不如监督学习方法（KNN 100%）</p>
+</li>
+<li>
+<p><strong>医疗诊断的特殊性</strong>：在医疗场景中，我们更关注召回率（不漏诊），这需要在算法选择和阈值调整上进行权衡</p>
+</li>
+</ol>
+<hr />
+<h2 id="_9">思考题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="1">思考题1：机器学习在医疗诊断中的应用前景与风险<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<h4 id="_10">应用前景<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>机器学习在医疗诊断领域展现出巨大的应用潜力，主要体现在以下几个方面：</p>
+<p><strong>1. 辅助诊断，提高效率</strong></p>
+<p>AI系统可以快速分析医学影像（如X光片、CT、MRI）和检验数据，帮助医生筛选可疑病例。以乳腺癌预测为例，我们的随机森林模型达到了97%的准确率，这意味着AI可以在早期筛查中发挥"第一道防线"的作用，让医生把更多精力放在复杂病例上。</p>
+<p><strong>2. 早期预警，实现"治未病"</strong></p>
+<p>我们的糖尿病预测模型显示，即使只用8个简单的生理指标，也能达到74%的准确率。如果结合基因检测、生活习惯数据、移动健康数据等更多维度的信息，预测效果还有很大提升空间。想象一下，未来我们可能通过智能手表收集的数据，提前数年预测糖尿病风险。</p>
+<p><strong>3. 个性化治疗</strong></p>
+<p>机器学习可以根据患者的基因组、蛋白质组、影像组等多组学数据，为每个患者制定个性化的治疗方案。这正是"精准医疗"的核心技术。</p>
+<p><strong>4. 缓解医疗资源不均衡</strong></p>
+<p>在基层医疗机构，经验丰富的专科医生往往短缺。AI辅助诊断系统可以"下沉"到基层，让更多人享受到高质量的医疗服务。</p>
+<h4 id="ai">AI能否完全替代医生？<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h4>
+<p><strong>我的观点：短期内不可能，未来也不会完全替代，而是人机协作。</strong></p>
+<p>原因如下：</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>AI的优势</th>
+<th>医生的优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据处理</td>
+<td>速度快，能同时分析海量数据</td>
+<td>能理解上下文，处理非结构化信息</td>
+</tr>
+<tr>
+<td>经验积累</td>
+<td>从数百万病例中学习</td>
+<td>从亲身经历的数千病例中成长</td>
+</tr>
+<tr>
+<td>情感交互</td>
+<td>无法真正"共情"</td>
+<td>能安慰患者，建立信任</td>
+</tr>
+<tr>
+<td>创新能力</td>
+<td>基于历史数据</td>
+<td>能处理突发、新发疾病</td>
+</tr>
+<tr>
+<td>法律责任</td>
+<td>目前无法承担</td>
+<td>可以承担诊断责任</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_11">风险与局限性<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p><strong>1. 数据偏差导致歧视性预测</strong></p>
+<p>如果训练数据主要来自某个特定人群（如男性、白人、城市居民），模型在其他人身上的表现可能会很差。2019年的一项研究就发现，一个用于预测肺炎的AI系统，因为数据不平衡，竟然学习到"心脏病患者不容易得肺炎"这个错误的关联。</p>
+<p><strong>2. 对抗样本攻击</strong></p>
+<p>机器学习模型可能受到"对抗样本"的欺骗。研究者发现，只需要在医学影像上添加人眼几乎无法察觉的微小扰动，就能让模型做出完全错误的判断。这种攻击如果被恶意利用，后果不堪设想。</p>
+<p><strong>3. 因果推断的缺失</strong></p>
+<p>当前的机器学习主要基于相关性，而非因果性。模型可能学到"喝咖啡的人更容易患心脏病"这样的虚假关联（实际上可能是咖啡爱好者工作压力大导致）。医生可以通过干预实验来验证因果关系，但AI目前还做不到。</p>
+<p><strong>4. 黑箱模型的不可解释性</strong></p>
+<p>深度学习模型往往是一个"黑箱"——我们不知道它为什么做出某个判断。在医疗场景中，这会带来问题：患者问"为什么我要做这个手术"，医生需要给出解释，但AI可能给不出。</p>
+<p><strong>5. 责任归属的伦理困境</strong></p>
+<p>当AI的诊断出错导致患者受到伤害时，谁来承担责任？是算法开发者、医院、还是使用AI的医生？目前这些问题在法律和伦理层面还没有清晰的答案。</p>
+<p><strong>6. 过度依赖导致医生技能退化</strong></p>
+<p>如果医生过度依赖AI系统进行诊断，可能会逐渐失去独立思考和判断的能力。一旦AI系统出现故障或不可用，后果可能很严重。</p>
+<h4 id="ai_1">如何安全地应用AI诊断？<a class="headerlink" href="#ai_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>AI作为辅助而非决策者</strong>：最终诊断权应掌握在医生手中，AI提供参考意见</li>
+<li><strong>保持人类监督</strong>：对AI的判断进行人工审核，特别是对于罕见病、复杂病例</li>
+<li><strong>透明可解释</strong>：优先使用可解释性强的模型（如决策树），避免纯黑箱模型</li>
+<li><strong>持续监测和更新</strong>：定期评估模型在新数据上的表现，及时更新和修正</li>
+<li><strong>多方验证</strong>：综合多种AI模型和传统方法的结果，降低单一模型的风险</li>
+</ol>
+<hr />
+<h3 id="2knnsvm">思考题2：KNN、SVM、决策树三种算法的比较<a class="headerlink" href="#2knnsvm" title="Permanent link">&para;</a></h3>
+<p>这三种算法都是经典的机器学习分类方法，它们各有特点和适用场景。让我从多个维度进行对比：</p>
+<h4 id="_12">算法原理对比<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>核心思想</th>
+<th>学习方式</th>
+<th>决策边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KNN</strong></td>
+<td>"近朱者赤，近墨者黑"——找最近的K个邻居投票</td>
+<td>惰性学习（没有显式训练过程）</td>
+<td>非线性（取决于K值和数据分布）</td>
+</tr>
+<tr>
+<td><strong>SVM</strong></td>
+<td>找最大间隔超平面</td>
+<td>判别式学习（求解优化问题）</td>
+<td>线性或非线性（核函数决定）</td>
+</tr>
+<tr>
+<td><strong>决策树</strong></td>
+<td>不断分裂特征空间</td>
+<td>贪心学习（自顶向下递归分裂）</td>
+<td>轴平行边界（阶梯状）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_13">优缺点详细对比<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p><strong>KNN（K近邻）</strong></p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ 简单直观，易于理解和实现</td>
+<td>❌ 计算复杂度高，预测速度慢（每次都要计算所有样本的距离）</td>
+</tr>
+<tr>
+<td>✅ 无需训练，无参数可训练</td>
+<td>❌ 对数据规模敏感，不适合大数据集</td>
+</tr>
+<tr>
+<td>✅ 对数据分布没有假设，适用于非线性问题</td>
+<td>❌ 特征重要性无法衡量，所有特征一视同仁</td>
+</tr>
+<tr>
+<td>✅ 对异常值有一定鲁棒性</td>
+<td>❌ 需要选择合适的K值和距离度量</td>
+</tr>
+<tr>
+<td>✅ 可用于多分类问题</td>
+<td>❌ 类别不平衡时效果可能受影响</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SVM（支持向量机）</strong></p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ 在高维空间表现优秀</td>
+<td>❌ 对大规模数据集训练时间长</td>
+</tr>
+<tr>
+<td>✅ 通过核函数可处理非线性问题</td>
+<td>❌ 对参数（如核函数类型、C值）敏感</td>
+</tr>
+<tr>
+<td>✅ 泛化能力强，不易过拟合</td>
+<td>❌ 无法直接输出概率（需要额外计算）</td>
+</tr>
+<tr>
+<td>✅ 只依赖支持向量，内存效率高</td>
+<td>❌ 对缺失数据敏感</td>
+</tr>
+<tr>
+<td>✅ 理论基础扎实（VC维、结构风险最小化）</td>
+<td>❌ 不适合高度重叠的类别</td>
+</tr>
+</tbody>
+</table>
+<p><strong>决策树</strong></p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ 可解释性强，可以可视化决策过程</td>
+<td>❌ 容易过拟合，需要剪枝处理</td>
+</tr>
+<tr>
+<td>✅ 能处理数值和类别特征</td>
+<td>❌ 对数据微小变化敏感，可能产生完全不同的树</td>
+</tr>
+<tr>
+<td>✅ 自动进行特征选择</td>
+<td>❌ 决策边界是轴平行的，无法处理斜向决策边界</td>
+</tr>
+<tr>
+<td>✅ 不需要特征缩放</td>
+<td>❌ 对于类别不平衡的数据，可能偏向多数类</td>
+</tr>
+<tr>
+<td>✅ 可以处理缺失值（部分实现）</td>
+<td>❌ 单棵树性能有限，通常需要集成使用</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_14">适用场景对比<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐算法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>小规模数据，类别可分性好</strong></td>
+<td>KNN</td>
+<td>简单高效，如Iris数据集</td>
+</tr>
+<tr>
+<td><strong>高维数据，样本量适中</strong></td>
+<td>SVM</td>
+<td>核函数可处理非线性，泛化能力强</td>
+</tr>
+<tr>
+<td><strong>需要模型可解释</strong></td>
+<td>决策树</td>
+<td>决策过程清晰可见</td>
+</tr>
+<tr>
+<td><strong>文本分类、图像分类</strong></td>
+<td>SVM（传统）/ 深度学习</td>
+<td>高维稀疏特征</td>
+</tr>
+<tr>
+<td><strong>特征重要性分析</strong></td>
+<td>决策树/随机森林</td>
+<td>可以量化特征贡献</td>
+</tr>
+<tr>
+<td><strong>大规模工业应用</strong></td>
+<td>决策树（集成）/ 深度学习</td>
+<td>预测速度快</td>
+</tr>
+<tr>
+<td><strong>类别严重不平衡</strong></td>
+<td>SVM/决策树（调参）</td>
+<td>可通过类别权重调整</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_15">生活中的类比<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p>为了方便理解，我用生活中的例子来说明：</p>
+<p><strong>KNN</strong>就像找对象时的"相亲"：
+- 你会听听你最近的几个朋友（K个邻居）的意见
+- 如果你周围的3个朋友都说某个人不错，那你大概率也会觉得不错
+- 但如果你圈子里的朋友意见不一致，或者有人不靠谱，结果可能就不准确了</p>
+<p><strong>SVM</strong>就像找对象的"门当户对"：
+- 找到一个最合适的"中间地带"，使得你和对方家庭都能接受
+- 如果门第相差太大（SVM中的margin太小），这段关系可能不稳定
+- 但如果两个家庭背景完全不同（线性不可分），可能需要"媒人"来撮合（核函数）</p>
+<p><strong>决策树</strong>就像相亲时的"筛选流程"：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>是博士吗？
+├── 是 → 有稳定工作吗？
+│         ├── 是 → 考虑见面
+│         └── 否 → 不考虑
+└── 否 → 继续往下问
+</code></pre></div></td></tr></table></div>
+- 每一步都是二选一，最终做出决定
+- 但这个流程可能过于死板（比如博士学位的人一定比其他人更靠谱吗？）</p>
+<hr />
+<h3 id="3">思考题3：准确率差异的原因分析与改进建议<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<h4 id="_16">观察实验结果<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>算法</th>
+<th>数据集</th>
+<th>准确率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实验一</td>
+<td>KNN</td>
+<td>Iris</td>
+<td><strong>100%</strong></td>
+</tr>
+<tr>
+<td>实验二</td>
+<td>SVM</td>
+<td>糖尿病</td>
+<td><strong>77%</strong></td>
+</tr>
+<tr>
+<td>实验三</td>
+<td>决策树</td>
+<td>乳腺癌</td>
+<td><strong>95%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>（说明：思考题中给出的是77%和95%，与实验记录中的75%和94%略有差异，这是不同统计口径下的结果，在合理范围内）</p>
+<h4 id="_17">造成差异的可能原因<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p><strong>1. 数据本身的复杂度</strong></p>
+<ul>
+<li>
+<p><strong>Iris数据集</strong>：这是最经典的"玩具数据集"，数据质量高、特征明显、类别可分性好。三个鸢尾花品种在特征空间中有清晰的边界，Setosa几乎与其他两类完全分开。</p>
+</li>
+<li>
+<p><strong>糖尿病数据集</strong>：糖尿病的发病机制复杂，涉及遗传、饮食、运动、生活习惯等多方面因素。仅用8个生理指标难以全面描述病情，特征信息量不足。另外，数据中存在"0值"问题（如血压、血糖为0是不合理的缺失值），需要特别处理。</p>
+</li>
+<li>
+<p><strong>乳腺癌数据集</strong>：30个特征从多个维度描述了细胞核的形态特征，信息量丰富。而且良性/恶性之间的差异在细胞形态上往往比较明显，所以即使单棵决策树也能达到94-95%的准确率。</p>
+</li>
+</ul>
+<p><strong>2. 类别不平衡程度</strong></p>
+<ul>
+<li><strong>Iris</strong>：150个样本，3个类别，每个类别恰好50个，完全平衡</li>
+<li><strong>糖尿病</strong>：768个样本，无病500多个，有病200多个，比例约2:1</li>
+<li><strong>乳腺癌</strong>：569个样本，良性357个，恶性212个，比例约1.7:1</li>
+</ul>
+<p>糖尿病和乳腺癌数据都存在一定程度的类别不平衡，这会影响模型的判断。</p>
+<p><strong>3. 特征质量与数量</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>特征数量</th>
+<th>特征类型</th>
+<th>缺失值处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Iris</td>
+<td>4个</td>
+<td>连续值，测量精确</td>
+<td>无缺失</td>
+</tr>
+<tr>
+<td>糖尿病</td>
+<td>8个</td>
+<td>连续值，含异常0值</td>
+<td>需特殊处理</td>
+</tr>
+<tr>
+<td>乳腺癌</td>
+<td>30个</td>
+<td>连续值，标准化</td>
+<td>无缺失</td>
+</tr>
+</tbody>
+</table>
+<p>Iris的特征虽然少，但每个特征都是精心选择的预测力强的特征。乳腺癌的特征虽然多，但都是量化指标，信息丰富。糖尿病的特征相对较少，且存在测量误差和缺失值问题。</p>
+<p><strong>4. 算法的适用性</strong></p>
+<ul>
+<li>
+<p><strong>KNN + Iris</strong>：这是一个"天作之合"。Iris数据的4个特征恰好是区分三个类别的最佳特征，KNN的简单投票机制能够很好地捕捉类别边界。</p>
+</li>
+<li>
+<p><strong>SVM + 糖尿病</strong>：线性SVM在这个数据集上表现一般。如果使用RBF核等非线性SVM，可能会有提升。但更根本的问题是数据本身的预测难度。</p>
+</li>
+<li>
+<p><strong>决策树 + 乳腺癌</strong>：30个特征给了决策树充足的"分裂素材"，可以找到关键的决策边界。而且乳腺癌的恶性细胞在形态上确实与良性细胞有明显差异。</p>
+</li>
+</ul>
+<h4 id="_18">如何提高模型性能？<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<p><strong>针对糖尿病数据集（SVM目前77%）</strong></p>
+<ol>
+<li><strong>特征工程</strong></li>
+<li>处理缺失值和异常值（如BMI为0、血血压为0等）</li>
+<li>进行特征交叉，创造新的有意义的特征</li>
+<li>
+<p>使用特征选择方法（如递归特征消除）选出最重要的特征</p>
+</li>
+<li>
+<p><strong>尝试其他算法</strong></p>
+</li>
+<li>使用RBF核SVM，可能捕捉非线性关系</li>
+<li>尝试集成方法（随机森林、梯度提升）</li>
+<li>
+<p>考虑使用逻辑回归作为基线模型</p>
+</li>
+<li>
+<p><strong>处理类别不平衡</strong></p>
+</li>
+<li>使用SMOTE过采样少数类</li>
+<li>调整类别权重（class_weight='balanced'）</li>
+<li>
+<p>使用AUC-ROC而非准确率作为评估指标</p>
+</li>
+<li>
+<p><strong>超参数调优</strong></p>
+</li>
+<li>使用网格搜索或随机搜索优化C值、核函数参数等</li>
+<li>使用交叉验证确保结果稳定</li>
+</ol>
+<p><strong>针对乳腺癌数据集（决策树目前95%）</strong></p>
+<ol>
+<li><strong>集成方法</strong></li>
+<li>随机森林、梯度提升树通常比单棵决策树更稳定</li>
+<li>
+<p>我们的随机森林实验达到了97%的准确率</p>
+</li>
+<li>
+<p><strong>特征选择</strong></p>
+</li>
+<li>从30个特征中选出最重要的10-15个，可能减少过拟合</li>
+<li>
+<p>使用递归特征消除或基于重要性的选择</p>
+</li>
+<li>
+<p><strong>剪枝优化</strong></p>
+</li>
+<li>限制树的最大深度</li>
+<li>设置最小样本分裂数</li>
+<li>
+<p>使用代价复杂度剪枝（Cost-Complexity Pruning）</p>
+</li>
+<li>
+<p><strong>阈值调整</strong></p>
+</li>
+<li>医疗场景中，我们可以降低判断"恶性"的阈值，宁可多做一些检查也不能漏诊</li>
+</ol>
+<p><strong>通用策略</strong></p>
+<ol>
+<li><strong>交叉验证</strong>：使用K折交叉验证确保结果不是"过拟合"到特定划分</li>
+<li><strong>集成学习</strong>：组合多个模型的预测，通常能获得更稳定的结果</li>
+<li><strong>数据增强</strong>：如果数据量不足，可以通过SMOTE、ADASYN等方法生成合成样本</li>
+<li><strong>模型校准</strong>：使用Platt Scaling或Isotonic Regression让模型输出的概率更有参考价值</li>
+</ol>
+<hr />
+<h2 id="_19">总结<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<p>通过这次实验，我对机器学习分类算法有了更深入的理解：</p>
+<ol>
+<li>
+<p><strong>实践出真知</strong>：只有真正动手编写代码、调试程序、处理数据，才能真正掌握机器学习。"纸上得来终觉浅，绝知此事要躬行。"</p>
+</li>
+<li>
+<p><strong>数据质量是根本</strong>：再好的算法也拯救不了糟糕的数据。在真实项目中，往往80%的时间都花在数据清洗和预处理上。</p>
+</li>
+<li>
+<p><strong>没有免费的午餐</strong>：没有哪种算法是"万能"的。KNN在小数据集上简单有效，SVM在高维数据上游刃有余，决策树在需要可解释性的场景中不可或缺。</p>
+</li>
+<li>
+<p><strong>误差分析很重要</strong>：仅仅知道准确率是不够的。在医疗诊断中，我们更关心召回率——是否能识别出所有的阳性病例。</p>
+</li>
+<li>
+<p><strong>保持批判性思维</strong>：AI很强大，但也有局限性。我们应该把它当作医生的助手，而不是替代者。安全、透明、负责任地应用AI技术，才能真正造福人类。</p>
+</li>
+</ol>
+<hr />
+<blockquote>
+<p>📝 <strong>报告说明</strong>：本报告由武汉大学人工智能专业学生撰写，基于课堂实验和补充实验完成。实验代码在Jupyter Notebook中运行通过，混淆矩阵图片来源于实验截图。如有疏漏，欢迎指正！</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

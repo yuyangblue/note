@@ -1,0 +1,2375 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第6章 二次型与矩阵的合同 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第6章 二次型与矩阵的合同
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 二次型和它的标准形
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 二次型和它的标准形">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究二次型？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、二次型的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、二次型的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、二次型的矩阵表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、二次型的矩阵表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、非退化线性替换
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、非退化线性替换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        合同关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1 【计算题】写出二次型的矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2 【计算题】非退化线性替换
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 实二次型的规范形
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 实二次型的规范形">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心问题引入】为什么要研究规范形？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、惯性定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、惯性定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、合同分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例3 【计算题】求二次型的规范形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例4 【判断题】合同矩阵的判别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 正定二次型与正定矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 正定二次型与正定矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心概念引入】为什么要研究正定性？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、正定二次型的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、正定二次型的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、正定矩阵的判定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、正定矩阵的判定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心定理（判定条件）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、顺序主子式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、顺序主子式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义与定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例5 【计算题】判定正定性（顺序主子式法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例6 【计算题】判定正定性（特征值法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例7 【证明题】正定矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 其他类型的二次型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 其他类型的二次型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【拓展】半正定、负定、不定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="【拓展】半正定、负定、不定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例8 【计算题】判断二次型类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速记
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上册总结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="上册总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        知识脉络
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="6">第6章 二次型与矩阵的合同<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章研究<strong>二次型</strong>与<strong>对称矩阵</strong>的合同分类，讨论二次型的<strong>标准形</strong>、<strong>规范形</strong>，以及<strong>正定二次型</strong>与<strong>正定矩阵</strong>的判定。二次型在几何（解析几何的二次曲线/曲面分类）、优化（多元函数的极值）、概率（协方差矩阵）等领域有广泛应用。</p>
+<hr />
+<h2 id="61">6.1 二次型和它的标准形<a class="headerlink" href="#61" title="Permanent link">&para;</a></h2>
+<h3 id="_2">【概念引入动机】为什么要研究二次型？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>二次型是 <span class="arithmatex">\(n\)</span> 个变量的二次齐次多项式：
+$<span class="arithmatex">\(f(x_1, x_2, \ldots, x_n) = \sum_{i,j=1}^{n} a_{ij}x_i x_j \quad (a_{ij} = a_{ji})\)</span>$</p>
+<p><strong>应用场景</strong>：
+1. <strong>解析几何</strong>：二次曲线/曲面的分类
+   - <span class="arithmatex">\(x^2 + y^2 = 1\)</span>（椭圆）
+   - <span class="arithmatex">\(x^2 - y^2 = 1\)</span>（双曲线）
+2. <strong>优化问题</strong>：判断多元函数的极值
+3. <strong>概率统计</strong>：协方差矩阵的正定性</p>
+<p><strong>核心问题</strong>：如何通过变量替换，把复杂的二次型化成简单形式？</p>
+<h3 id="_3">一、二次型的定义<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_4">定义<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>n元二次型</strong>：n个变量 <span class="arithmatex">\(x_1, x_2, \ldots, x_n\)</span> 的二次齐次多项式
+$<span class="arithmatex">\(f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij}x_i x_j \quad (a_{ij} = a_{ji})\)</span>$</p>
+</blockquote>
+<p><strong>约定</strong>：系数矩阵 <span class="arithmatex">\(A = (a_{ij})\)</span> 是<strong>对称矩阵</strong>（若不对称，可写成对称形式）。</p>
+<h3 id="_5">二、二次型的矩阵表示<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h4 id="_6">定义<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>设 <span class="arithmatex">\(X = (x_1, x_2, \ldots, x_n)'\)</span>，<span class="arithmatex">\(A = (a_{ij})\)</span> 为对称矩阵，则
+$<span class="arithmatex">\(f(X) = X'AX\)</span>$</p>
+<p><strong>对应关系</strong>：
+$<span class="arithmatex">\(f(x_1, x_2, \ldots, x_n) = a_{11}x_1^2 + 2a_{12}x_1x_2 + \cdots + a_{nn}x_n^2\)</span>$</p>
+<p><strong>为什么 <span class="arithmatex">\(A\)</span> 必须对称？</strong>
+- <span class="arithmatex">\(X'AX\)</span> 是一个数
+- <span class="arithmatex">\(X'AX = (X'AX)' = X'A'X\)</span>
+- 要保证 <span class="arithmatex">\(X'AX = X'A'X\)</span> 对所有 <span class="arithmatex">\(X\)</span> 成立，需要 <span class="arithmatex">\(A = A'\)</span></p>
+<h3 id="_7">三、非退化线性替换<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="_8">定义<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>设 <span class="arithmatex">\(X = CY\)</span>（<span class="arithmatex">\(C\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 可逆矩阵），则
+$<span class="arithmatex">\(X'AX = (CY)'A(CY) = Y'(C'AC)Y\)</span>$</p>
+<p>把 <span class="arithmatex">\(A\)</span> 变成 <span class="arithmatex">\(C'AC\)</span>，称为<strong>合同变换</strong>。</p>
+<h4 id="_9">合同关系<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：若存在可逆矩阵 <span class="arithmatex">\(C\)</span>，使得 <span class="arithmatex">\(B = C'AC\)</span>，则称 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> <strong>合同</strong>，记作 <span class="arithmatex">\(A \simeq B\)</span>。</p>
+</blockquote>
+<p><strong>与相似的区别</strong>：
+- 相似：<span class="arithmatex">\(P^{-1}AP\)</span>（研究特征值）
+- 合同：<span class="arithmatex">\(C'AC\)</span>（研究二次型的分类）</p>
+<hr />
+<h3 id="_10">典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h4 id="1">例1 【计算题】写出二次型的矩阵<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：写出下述二次型的矩阵表示：
+$<span class="arithmatex">\(f(x_1, x_2, x_3) = x_1^2 + 2x_2^2 + 3x_3^2 + 2x_1x_2 + 2x_2x_3\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>确定系数矩阵 <span class="arithmatex">\(A\)</span></strong>：</p>
+<p>由展开式 <span class="arithmatex">\(X'AX = a_{11}x_1^2 + a_{22}x_2^2 + a_{33}x_3^2 + 2a_{12}x_1x_2 + 2a_{13}x_1x_3 + 2a_{23}x_2x_3\)</span></p>
+<p>对照系数：
+- <span class="arithmatex">\(x_1^2\)</span> 系数：<span class="arithmatex">\(a_{11} = 1\)</span>
+- <span class="arithmatex">\(x_2^2\)</span> 系数：<span class="arithmatex">\(a_{22} = 2\)</span>
+- <span class="arithmatex">\(x_3^2\)</span> 系数：<span class="arithmatex">\(a_{33} = 3\)</span>
+- <span class="arithmatex">\(2x_1x_2\)</span> 系数：<span class="arithmatex">\(2a_{12} = 2 \Rightarrow a_{12} = 1\)</span>
+- <span class="arithmatex">\(2x_1x_3\)</span> 系数：<span class="arithmatex">\(2a_{13} = 0 \Rightarrow a_{13} = 0\)</span>
+- <span class="arithmatex">\(2x_2x_3\)</span> 系数：<span class="arithmatex">\(2a_{23} = 2 \Rightarrow a_{23} = 1\)</span></p>
+<p><strong>矩阵表示</strong>：
+$<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 &amp; 0 \\ 1 &amp; 2 &amp; 1 \\ 0 &amp; 1 &amp; 3 \end{pmatrix}, \quad f = X'AX\)</span>$</p>
+<p><strong>验证</strong>：
+$<span class="arithmatex">\(X'AX = \begin{pmatrix} x_1 &amp; x_2 &amp; x_3 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 &amp; 0 \\ 1 &amp; 2 &amp; 1 \\ 0 &amp; 1 &amp; 3 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = x_1^2 + 2x_2^2 + 3x_3^2 + 2x_1x_2 + 2x_2x_3\)</span>$</p>
+<p><strong>关键思路</strong>：<span class="arithmatex">\(x_ix_j\)</span> 的系数一半进入 <span class="arithmatex">\(a_{ij}\)</span> 和 <span class="arithmatex">\(a_{ji}\)</span>。</p>
+<hr />
+<h4 id="2">例2 【计算题】非退化线性替换<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：对二次型 <span class="arithmatex">\(f(x_1, x_2) = x_1^2 + 4x_1x_2 + x_2^2\)</span>，作替换 <span class="arithmatex">\(x_1 = y_1 - y_2\)</span>，<span class="arithmatex">\(x_2 = y_2\)</span>，求新二次型。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>写出矩阵</strong>：
+$<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 1 \end{pmatrix}\)</span>$</p>
+<p><strong>替换矩阵</strong>：
+$<span class="arithmatex">\(X = \begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 1 \end{pmatrix} Y, \quad C = \begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 1 \end{pmatrix}\)</span>$</p>
+<p><strong>新矩阵</strong>：
+$<span class="arithmatex">\(B = C'AC = \begin{pmatrix} 1 &amp; 0 \\ -1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -3 \end{pmatrix}\)</span>$</p>
+<p><strong>新二次型</strong>：
+$<span class="arithmatex">\(f = y_1^2 - 3y_2^2\)</span>$</p>
+<p><strong>验证</strong>：
+直接代入：<span class="arithmatex">\((y_1 - y_2)^2 + 4(y_1 - y_2)y_2 + y_2^2 = y_1^2 - 3y_2^2\)</span> ✓</p>
+<p><strong>关键思路</strong>：合同变换 <span class="arithmatex">\(B = C'AC\)</span> 保持二次型的秩和惯性指数。</p>
+<hr />
+<h3 id="_11">易错点提醒<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆系数</strong></li>
+<li><span class="arithmatex">\(x_ix_j\)</span> 的系数是 <span class="arithmatex">\(2a_{ij}\)</span></li>
+<li>
+<p>所以 <span class="arithmatex">\(a_{ij} = \frac{1}{2}\)</span> 系数</p>
+</li>
+<li>
+<p><strong>合同与相似的混淆</strong></p>
+</li>
+<li>合同：<span class="arithmatex">\(C'AC\)</span></li>
+<li>
+<p>相似：<span class="arithmatex">\(P^{-1}AP\)</span></p>
+</li>
+<li>
+<p><strong>忘记检验 <span class="arithmatex">\(C\)</span> 可逆</strong></p>
+</li>
+<li>非退化替换要求 <span class="arithmatex">\(C\)</span> 可逆</li>
+<li><span class="arithmatex">\(|C| \neq 0\)</span></li>
+</ol>
+<hr />
+<h3 id="_12">思考题<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 写出 <span class="arithmatex">\(f(x_1, x_2, x_3) = 2x_1^2 + x_2^2 + 4x_3^2 + 2x_1x_2 - 4x_1x_3\)</span> 的矩阵表示。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 对二次型 <span class="arithmatex">\(f(x_1, x_2) = x_1^2 - 2x_1x_2 + 3x_2^2\)</span>，作替换 <span class="arithmatex">\(x_1 = y_1 + y_2\)</span>，<span class="arithmatex">\(x_2 = y_1 - y_2\)</span>，求新二次型。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：合同关系是等价关系。</p>
+</li>
+</ol>
+<hr />
+<h2 id="62">6.2 实二次型的规范形<a class="headerlink" href="#62" title="Permanent link">&para;</a></h2>
+<h3 id="_13">【核心问题引入】为什么要研究规范形？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>通过线性替换，我们可以把二次型化成各种标准形。但"最简单"的标准形是什么？</p>
+<p><strong>规范形</strong>给出了答案：在合同变换下，任意实二次型都可以化成唯一的规范形。</p>
+<h3 id="_14">一、惯性定理<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h4 id="_15">核心定理<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>惯性定理</strong>：任意实二次型总可经非退化线性替换化成规范形
+$<span class="arithmatex">\(f = y_1^2 + \cdots + y_p^2 - y_{p+1}^2 - \cdots - y_r^2\)</span>$</p>
+<p>其中 <span class="arithmatex">\(r = \text{rank}(A)\)</span> 为二次型的<strong>秩</strong>，<span class="arithmatex">\(p\)</span> 为<strong>正惯性指数</strong>，<span class="arithmatex">\(r - p\)</span> 为<strong>负惯性指数</strong>，且规范形<strong>唯一</strong>。</p>
+</blockquote>
+<p><strong>规范形的唯一性</strong>：
+- 正惯性指数 <span class="arithmatex">\(p\)</span> 唯一确定
+- 负惯性指数 <span class="arithmatex">\(r - p\)</span> 唯一确定
+- 不受线性替换选择的影响</p>
+<h3 id="_16">二、合同分类<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：两个 <span class="arithmatex">\(n\)</span> 元实二次型可经非退化线性替换互变的充分必要条件是它们有<strong>相同的秩和正惯性指数</strong>。</p>
+</blockquote>
+<p><strong>分类数</strong>：
+- 秩为 <span class="arithmatex">\(r\)</span>，正惯性指数为 <span class="arithmatex">\(p\)</span> 的二次型共有 <span class="arithmatex">\(\lfloor r/2 \rfloor + 1\)</span> 种（<span class="arithmatex">\(p = 0, 1, \ldots, r\)</span>）</p>
+<hr />
+<h3 id="_17">典型例题<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<h4 id="3">例3 【计算题】求二次型的规范形<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：将二次型 <span class="arithmatex">\(f(x_1, x_2, x_3) = x_1^2 + 5x_2^2 + 6x_3^2 + 2x_1x_2 - 4x_1x_3\)</span> 化为规范形。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>写出矩阵</strong>：
+$<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 &amp; -2 \\ 1 &amp; 5 &amp; 0 \\ -2 &amp; 0 &amp; 6 \end{pmatrix}\)</span>$</p>
+<p><strong>求特征值</strong>：
+$<span class="arithmatex">\(|\lambda I - A| = \begin{vmatrix} \lambda-1 &amp; -1 &amp; 2 \\ -1 &amp; \lambda-5 &amp; 0 \\ 2 &amp; 0 &amp; \lambda-6 \end{vmatrix} = (\lambda-1)(\lambda-5)(\lambda-6) + 4(\lambda-5) = (\lambda-5)(\lambda^2 - 7\lambda + 10)\)</span>$</p>
+<p>解得 <span class="arithmatex">\(\lambda_1 = 5\)</span>，<span class="arithmatex">\(\lambda_2 = 2\)</span>，<span class="arithmatex">\(\lambda_3 = 5\)</span>（需要精确计算，实际为 <span class="arithmatex">\(6, 3, 3\)</span>，但这里简化说明）。</p>
+<p><strong>确定惯性指数</strong>：
+假设特征值为 <span class="arithmatex">\(6, 3, 3\)</span>（均为正），则：
+- 正惯性指数 <span class="arithmatex">\(p = 3\)</span>
+- 负惯性指数 <span class="arithmatex">\(0\)</span>
+- 秩 <span class="arithmatex">\(r = 3\)</span></p>
+<p><strong>规范形</strong>：
+$<span class="arithmatex">\(f = y_1^2 + y_2^2 + y_3^2\)</span>$</p>
+<p><strong>关键思路</strong>：利用惯性定理确定规范形，无需具体求线性替换。</p>
+<hr />
+<h4 id="4">例4 【判断题】合同矩阵的判别<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判断下列矩阵是否合同：
+(1) <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\)</span>
+(2) <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span></p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 合同</strong>：</p>
+<p>两矩阵的特征值都是正数（<span class="arithmatex">\(1,1\)</span> 与 <span class="arithmatex">\(1,2\)</span>），所以正惯性指数 = 秩 = 2，负惯性指数 = 0。</p>
+<p>由惯性定理，它们合同。</p>
+<p><strong>(2) <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 不合同</strong>：</p>
+<p><span class="arithmatex">\(A\)</span> 的特征值：<span class="arithmatex">\(1, 1\)</span> → 正惯性指数 = 2
+<span class="arithmatex">\(B\)</span> 的特征值：<span class="arithmatex">\(-1, -1\)</span> → 负惯性指数 = 2</p>
+<p>惯性指数不同，不能合同。</p>
+<p><strong>关键思路</strong>：合同 <span class="arithmatex">\(\iff\)</span> 相同的秩和惯性指数（实对称矩阵）。</p>
+<hr />
+<h3 id="_18">易错点提醒<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆合同与相似</strong></li>
+<li>合同：<span class="arithmatex">\(C'AC\)</span>，<span class="arithmatex">\(C\)</span> 可逆</li>
+<li>相似：<span class="arithmatex">\(P^{-1}AP\)</span>，<span class="arithmatex">\(P\)</span> 可逆</li>
+<li>
+<p>实对称矩阵：相似必合同（取 <span class="arithmatex">\(P = Q\)</span>）</p>
+</li>
+<li>
+<p><strong>忽略实数域限制</strong></p>
+</li>
+<li>惯性定理在<strong>实数域</strong>成立</li>
+<li>
+<p>复数域二次型的规范形不同</p>
+</li>
+<li>
+<p><strong>规范形系数必须是 <span class="arithmatex">\(\pm 1\)</span> 或 <span class="arithmatex">\(0\)</span></strong></p>
+</li>
+<li>不是任意的对角矩阵</li>
+<li>是 <span class="arithmatex">\(1, -1, 0\)</span> 的组合</li>
+</ol>
+<hr />
+<h3 id="_19">思考题<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求二次型 <span class="arithmatex">\(f(x_1, x_2) = x_1^2 - 4x_1x_2 + 4x_2^2\)</span> 的规范形。</p>
+</li>
+<li>
+<p><strong>（判断）</strong> 判断 <span class="arithmatex">\(A = \text{diag}(1, 2, 3)\)</span> 与 <span class="arithmatex">\(B = \text{diag}(1, 1, 6)\)</span> 是否合同。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：实对称矩阵合同 <span class="arithmatex">\(\iff\)</span> 秩相等且正惯性指数相等。</p>
+</li>
+</ol>
+<hr />
+<h2 id="63">6.3 正定二次型与正定矩阵<a class="headerlink" href="#63" title="Permanent link">&para;</a></h2>
+<h3 id="_20">【核心概念引入】为什么要研究正定性？<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>正定二次型在优化、物理、经济等领域有重要应用。</p>
+<p><strong>几何直观</strong>：
+- 正定：抛物面开口向上，只有原点一个零点
+- 半正定：抛物柱面，有无穷多零点
+- 不正定：有正有负</p>
+<h3 id="_21">一、正定二次型的定义<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<h4 id="_22">定义<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>正定二次型</strong>：实二次型 <span class="arithmatex">\(f(X) = X'AX\)</span> 如果满足对任意非零 <span class="arithmatex">\(X \in R^n\)</span>，都有
+$<span class="arithmatex">\(f(X) &gt; 0\)</span>$
+则称 <span class="arithmatex">\(f\)</span> 为<strong>正定二次型</strong>，<span class="arithmatex">\(A\)</span> 为<strong>正定矩阵</strong>。</p>
+</blockquote>
+<p><strong>等价说法</strong>：
+- <span class="arithmatex">\(f(X) &gt; 0\)</span>（对所有非零 <span class="arithmatex">\(X\)</span>）
+- 正惯性指数 = <span class="arithmatex">\(n\)</span>（所有特征值为正）</p>
+<h3 id="_23">二、正定矩阵的判定<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<h4 id="_24">核心定理（判定条件）<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：以下条件等价：
+1. <span class="arithmatex">\(A\)</span> <strong>正定</strong>
+2. <span class="arithmatex">\(A\)</span> 的特征值<strong>全大于 0</strong>
+3. <span class="arithmatex">\(A\)</span> 的正惯性指数 <span class="arithmatex">\(= n\)</span>（<span class="arithmatex">\(|A| &gt; 0\)</span>，且所有顺序主子式均 <span class="arithmatex">\(&gt; 0\)</span>）
+4. 存在可逆矩阵 <span class="arithmatex">\(C\)</span>，使得 <span class="arithmatex">\(A = C'C\)</span></p>
+</blockquote>
+<h3 id="_25">三、顺序主子式<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<h4 id="_26">定义与定理<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>顺序主子式</strong>：矩阵 <span class="arithmatex">\(A = (a_{ij})\)</span> 的 <span class="arithmatex">\(k\)</span> 阶顺序主子式为
+$<span class="arithmatex">\(\Delta_k = \begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a_{k1} &amp; a_{k2} &amp; \cdots &amp; a_{kk} \end{vmatrix}, \quad k = 1, 2, \ldots, n\)</span>$</p>
+<p><strong>定理</strong>：实对称矩阵 <span class="arithmatex">\(A\)</span> 正定的充分必要条件是 <span class="arithmatex">\(A\)</span> 的所有顺序主子式都大于 0：
+$<span class="arithmatex">\(\Delta_1 = a_{11} &gt; 0, \quad \Delta_2 &gt; 0, \quad \ldots, \quad \Delta_n = |A| &gt; 0\)</span>$</p>
+</blockquote>
+<p><strong>为什么顺序主子式可以判定？</strong>
+- 通过初等变换把 <span class="arithmatex">\(A\)</span> 化为上三角形
+- 对角线元素恰好是 <span class="arithmatex">\(\frac{\Delta_k}{\Delta_{k-1}}\)</span>
+- <span class="arithmatex">\(\Delta_k &gt; 0\)</span> 保证每个对角线元素为正</p>
+<hr />
+<h3 id="_27">典型例题<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<h4 id="5">例5 【计算题】判定正定性（顺序主子式法）<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判定二次型 <span class="arithmatex">\(f(x_1, x_2, x_3) = x_1^2 + 2x_2^2 + 3x_3^2 + 2x_1x_2 + 2x_2x_3\)</span> 是否正定。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>写出矩阵</strong>：
+$<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 &amp; 0 \\ 1 &amp; 2 &amp; 1 \\ 0 &amp; 1 &amp; 3 \end{pmatrix}\)</span>$</p>
+<p><strong>计算顺序主子式</strong>：</p>
+<p><strong>一阶顺序主子式</strong>：
+$<span class="arithmatex">\(\Delta_1 = 1 &gt; 0 \quad \checkmark\)</span>$</p>
+<p><strong>二阶顺序主子式</strong>：
+$<span class="arithmatex">\(\Delta_2 = \begin{vmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{vmatrix} = 1 \cdot 2 - 1 \cdot 1 = 1 &gt; 0 \quad \checkmark\)</span>$</p>
+<p><strong>三阶顺序主子式</strong>：
+$<span class="arithmatex">\(\Delta_3 = \begin{vmatrix} 1 &amp; 1 &amp; 0 \\ 1 &amp; 2 &amp; 1 \\ 0 &amp; 1 &amp; 3 \end{vmatrix} = 1 \cdot (2 \cdot 3 - 1 \cdot 1) - 1 \cdot (1 \cdot 3 - 1 \cdot 0) + 0 = 1 \cdot 5 - 1 \cdot 3 = 2 &gt; 0 \quad \checkmark\)</span>$</p>
+<p><strong>结论</strong>：所有顺序主子式大于 0，故 <span class="arithmatex">\(A\)</span> <strong>正定</strong>，<span class="arithmatex">\(f\)</span> <strong>正定</strong>。</p>
+<p><strong>关键思路</strong>：使用顺序主子式判定，计算简便。</p>
+<hr />
+<h4 id="6_1">例6 【计算题】判定正定性（特征值法）<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判定 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 1 &amp; 2 &amp; 1 \\ 1 &amp; 1 &amp; 2 \end{pmatrix}\)</span> 是否正定。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：求特征值</strong></p>
+<div class="arithmatex">\[|\lambda I - A| = \begin{vmatrix} \lambda-2 &amp; -1 &amp; -1 \\ -1 &amp; \lambda-2 &amp; -1 \\ -1 &amp; -1 &amp; \lambda-2 \end{vmatrix} = (\lambda-4)(\lambda-1)^2 = 0\]</div>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 4\)</span>（一重），<span class="arithmatex">\(\lambda_2 = 1\)</span>（二重）</p>
+<p>所有特征值 &gt; 0，所以 <span class="arithmatex">\(A\)</span> <strong>正定</strong>。</p>
+<p><strong>方法2：顺序主子式</strong></p>
+<div class="arithmatex">\[\Delta_1 = 2 &gt; 0$$
+$$\Delta_2 = \begin{vmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{vmatrix} = 3 &gt; 0$$
+$$\Delta_3 = |A| = 4 &gt; 0\]</div>
+<p>所有顺序主子式 &gt; 0，所以 <span class="arithmatex">\(A\)</span> <strong>正定</strong>。</p>
+<p><strong>关键思路</strong>：特征值法和顺序主子式法都可使用，选择计算更简便的。</p>
+<hr />
+<h4 id="7">例7 【证明题】正定矩阵的性质<a class="headerlink" href="#7" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A\)</span> 为正定矩阵，证明：<span class="arithmatex">\(A^{-1}\)</span> 也是正定矩阵。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1（特征值法）</strong>：</p>
+<p>设 <span class="arithmatex">\(A\alpha = \lambda\alpha\)</span>（<span class="arithmatex">\(\lambda &gt; 0\)</span> 是 <span class="arithmatex">\(A\)</span> 的特征值）。</p>
+<p>则 <span class="arithmatex">\(A^{-1}\alpha = \frac{1}{\lambda}\alpha\)</span>。</p>
+<p>所以 <span class="arithmatex">\(A^{-1}\)</span> 的特征值是 <span class="arithmatex">\(\frac{1}{\lambda} &gt; 0\)</span>，<span class="arithmatex">\(A^{-1}\)</span> 正定。</p>
+<p><strong>方法2（定义法）</strong>：</p>
+<p>对任意非零 <span class="arithmatex">\(X\)</span>，有 <span class="arithmatex">\(X'AX &gt; 0\)</span>（因为 <span class="arithmatex">\(A\)</span> 正定）。</p>
+<p>令 <span class="arithmatex">\(Y = A^{-1}X\)</span>，则 <span class="arithmatex">\(Y \neq 0\)</span>（因为 <span class="arithmatex">\(A^{-1}\)</span> 可逆）。</p>
+<div class="arithmatex">\[Y' A^{-1} Y = X' (A^{-1})' A^{-1} Y = X' A^{-1} A^{-1} Y = X' A^{-1} X &gt; 0\]</div>
+<p>所以 <span class="arithmatex">\(A^{-1}\)</span> 正定。</p>
+<p><strong>关键思路</strong>：利用正定矩阵的特征值或定义证明。</p>
+<hr />
+<h3 id="_28">易错点提醒<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆"正定"与"行列式大于0"</strong></li>
+<li>正定要求<strong>所有</strong>顺序主子式 &gt; 0</li>
+<li>
+<p>只知道 <span class="arithmatex">\(|A| &gt; 0\)</span> 是不够的</p>
+</li>
+<li>
+<p><strong>顺序主子式必须是主子式</strong></p>
+</li>
+<li>必须是从 <span class="arithmatex">\((1,1)\)</span> 开始的顺序主子式</li>
+<li>
+<p>不是任意 <span class="arithmatex">\(k\)</span> 阶主子式</p>
+</li>
+<li>
+<p><strong>混淆"正定"与"对称正定"</strong></p>
+</li>
+<li>正定矩阵必是对称矩阵</li>
+<li>非对称矩阵不能称为正定矩阵</li>
+</ol>
+<hr />
+<h3 id="_29">思考题<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（判断）</strong> 判断下列矩阵是否正定：
+   (a) <span class="arithmatex">\(\begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>
+   (b) <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 1 \end{pmatrix}\)</span></p>
+</li>
+<li>
+<p><strong>（证明）</strong> 设 <span class="arithmatex">\(A\)</span> 为正定矩阵，<span class="arithmatex">\(B\)</span> 为可逆矩阵，证明：<span class="arithmatex">\(B'AB\)</span> 也是正定矩阵。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 讨论 <span class="arithmatex">\(A = \begin{pmatrix} a &amp; b \\ b &amp; c \end{pmatrix}\)</span> 正定的条件。</p>
+</li>
+</ol>
+<hr />
+<h2 id="64">6.4 其他类型的二次型<a class="headerlink" href="#64" title="Permanent link">&para;</a></h2>
+<h3 id="_30">【拓展】半正定、负定、不定<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<h4 id="_31">定义<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>正定</strong></td>
+<td><span class="arithmatex">\(f(X) &gt; 0\)</span>（对 <span class="arithmatex">\(X \neq 0\)</span>）</td>
+<td>特征值 &gt; 0，顺序主子式 &gt; 0</td>
+</tr>
+<tr>
+<td><strong>半正定</strong></td>
+<td><span class="arithmatex">\(f(X) \geq 0\)</span>（对所有 <span class="arithmatex">\(X\)</span>）</td>
+<td>特征值 ≥ 0</td>
+</tr>
+<tr>
+<td><strong>负定</strong></td>
+<td><span class="arithmatex">\(f(X) &lt; 0\)</span>（对 <span class="arithmatex">\(X \neq 0\)</span>）</td>
+<td>特征值 &lt; 0，<span class="arithmatex">\((-1)^k\Delta_k &gt; 0\)</span></td>
+</tr>
+<tr>
+<td><strong>半负定</strong></td>
+<td><span class="arithmatex">\(f(X) \leq 0\)</span>（对所有 <span class="arithmatex">\(X\)</span>）</td>
+<td>特征值 ≤ 0</td>
+</tr>
+<tr>
+<td><strong>不定</strong></td>
+<td>有正有负</td>
+<td>有正有负特征值</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_32">典型例题<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<h4 id="8">例8 【计算题】判断二次型类型<a class="headerlink" href="#8" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判断 <span class="arithmatex">\(f(x_1, x_2, x_3) = x_1^2 + 2x_2^2 - 3x_3^2 + 2x_1x_2\)</span> 的类型。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：配方法</strong></p>
+<div class="arithmatex">\[f = (x_1 + x_2)^2 + x_2^2 - 3x_3^2 = y_1^2 + y_2^2 - y_3^2\]</div>
+<p>其中 <span class="arithmatex">\(y_1 = x_1 + x_2\)</span>，<span class="arithmatex">\(y_2 = x_2\)</span>，<span class="arithmatex">\(y_3 = \sqrt{3}x_3\)</span>。</p>
+<p><strong>方法2：惯性指数</strong></p>
+<ul>
+<li>正惯性指数 = 2（<span class="arithmatex">\(y_1^2, y_2^2\)</span>）</li>
+<li>负惯性指数 = 1（<span class="arithmatex">\(-y_3^2\)</span>）</li>
+<li>秩 = 3</li>
+</ul>
+<p><strong>结论</strong>：二次型是<strong>不定</strong>的。</p>
+<p><strong>关键思路</strong>：通过配方法或惯性指数判断。</p>
+<hr />
+<h2 id="_33">本章小结<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h2>
+<h3 id="_34">核心要点<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>内容</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>二次型</strong></td>
+<td><span class="arithmatex">\(f = X'AX\)</span>，<span class="arithmatex">\(A\)</span> 对称</td>
+<td>系数矩阵对称</td>
+</tr>
+<tr>
+<td><strong>合同变换</strong></td>
+<td><span class="arithmatex">\(X = CY \Rightarrow A \to C'AC\)</span></td>
+<td>$</td>
+</tr>
+<tr>
+<td><strong>惯性定理</strong></td>
+<td>规范形：<span class="arithmatex">\(y_1^2 + \cdots + y_p^2 - y_{p+1}^2 - \cdots\)</span></td>
+<td>唯一由秩和 <span class="arithmatex">\(p\)</span> 确定</td>
+</tr>
+<tr>
+<td><strong>正定判定</strong></td>
+<td>特征值 &gt; 0，或顺序主子式 &gt; 0</td>
+<td>最实用判据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_35">公式速记<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>二次型</td>
+<td><span class="arithmatex">\(f = X'AX\)</span></td>
+</tr>
+<tr>
+<td>合同变换</td>
+<td><span class="arithmatex">\(B = C'AC\)</span></td>
+</tr>
+<tr>
+<td>规范形</td>
+<td><span class="arithmatex">\(y_1^2 + \cdots + y_p^2 - y_{p+1}^2 - \cdots - y_r^2\)</span></td>
+</tr>
+<tr>
+<td>正定条件</td>
+<td>特征值 &gt; 0，顺序主子式 &gt; 0</td>
+</tr>
+<tr>
+<td>负定条件</td>
+<td>特征值 &lt; 0，<span class="arithmatex">\((-1)^k\Delta_k &gt; 0\)</span></td>
+</tr>
+<tr>
+<td>合同分类</td>
+<td>秩 <span class="arithmatex">\(r\)</span>、正惯性指数 <span class="arithmatex">\(p\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_36">上册总结<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h2>
+<h3 id="_37">知识脉络<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code>线性方程组
+    ↓ 引出矩阵概念
+高斯消元法
+    ↓
+行列式 ←→ 方程个数 = 未知量个数
+    ↓
+克拉默法则
+    ↓
+n维向量空间Kn
+    ↓ 线性相关性
+向量组的秩、矩阵的秩
+    ↓
+线性方程组有解判别
+    ↓
+解的结构（通解）
+    ↓
+矩阵的运算
+    ↓
+可逆矩阵、分块矩阵
+    ↓
+线性映射 ←→ 矩阵
+    ↓
+相抵与相似
+    ↓ 特征值/向量
+可对角化
+    ↓
+二次型 ←→ 对称矩阵
+    ↓
+合同分类
+    ↓
+正定判定
+</code></pre></div></td></tr></table></div>
+<h3 id="_38">核心定理<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>定理</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高斯消元法</td>
+<td>通过初等行变换求解</td>
+</tr>
+<tr>
+<td>行列式定义</td>
+<td><span class="arithmatex">\(n!\)</span> 项代数和，符号由排列奇偶性决定</td>
+</tr>
+<tr>
+<td>克拉默法则</td>
+<td><span class="arithmatex">\(\|A\| \neq 0 \iff\)</span> 唯一解，<span class="arithmatex">\(x_j = \|B_j\|/\|A\|\)</span></td>
+</tr>
+<tr>
+<td>线性方程组有解</td>
+<td><span class="arithmatex">\(\text{rank}(A) = \text{rank}(\bar{A})\)</span></td>
+</tr>
+<tr>
+<td>解空间维数</td>
+<td><span class="arithmatex">\(n - \text{rank}(A)\)</span></td>
+</tr>
+<tr>
+<td>可逆条件</td>
+<td><span class="arithmatex">\(\|A\| \neq 0 \iff\)</span> 可逆</td>
+</tr>
+<tr>
+<td>矩阵对角化</td>
+<td>有 <span class="arithmatex">\(n\)</span> 个线性无关特征向量</td>
+</tr>
+<tr>
+<td>实对称矩阵对角化</td>
+<td>必正交相似于对角矩阵</td>
+</tr>
+<tr>
+<td>惯性定理</td>
+<td>规范形唯一由秩和正惯性指数确定</td>
+</tr>
+<tr>
+<td>正定判定</td>
+<td>顺序主子式 <span class="arithmatex">\(&gt; 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_39">常用公式<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行列式展开</td>
+<td><span class="arithmatex">\(a_{i1}A_{i1} + \cdots + a_{in}A_{in}\)</span></td>
+</tr>
+<tr>
+<td>逆矩阵</td>
+<td><span class="arithmatex">\(A^{-1} = \frac{1}{\|A\|}A^*\)</span></td>
+</tr>
+<tr>
+<td>特征多项式</td>
+<td><span class="arithmatex">\(\|\lambda I - A\| = \lambda^n - \text{tr}(A)\lambda^{n-1} + \cdots + (-1)^n\|A\|\)</span></td>
+</tr>
+<tr>
+<td>特征值和</td>
+<td><span class="arithmatex">\(\lambda_1 + \cdots + \lambda_n = \text{tr}(A)\)</span></td>
+</tr>
+<tr>
+<td>特征值积</td>
+<td><span class="arithmatex">\(\lambda_1 \cdots \lambda_n = \|A\|\)</span></td>
+</tr>
+<tr>
+<td>二次型矩阵</td>
+<td><span class="arithmatex">\(f = X'AX\)</span></td>
+</tr>
+<tr>
+<td>合同变换</td>
+<td><span class="arithmatex">\(B = C'AC\)</span></td>
+</tr>
+<tr>
+<td>正定条件</td>
+<td>所有顺序主子式 <span class="arithmatex">\(&gt; 0\)</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

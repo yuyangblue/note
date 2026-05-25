@@ -1,0 +1,3069 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>线性回归模型 - 学习笔记（完整版） - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              线性回归模型 - 学习笔记（完整版）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、模块详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、模块详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模块1：导入库
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模块2：类定义与初始化 __init__
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模块2：类定义与初始化 __init__">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要正则化？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-_transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模块3：基函数变换 _transform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模块3：基函数变换 _transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        输入输出是什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么第一列是 1？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三种基函数详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三种基函数详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 多项式基函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rbf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 高斯基函数（RBF）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-sigmoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Sigmoid 基函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 基函数拟合过程详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 基函数拟合过程详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想：用"积木"搭建任意曲线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        高斯基函数拟合过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sigmoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sigmoid 基函数拟合过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两种基函数对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        选择建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fit_analytical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模块4：解析解求解 fit_analytical
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模块4：解析解求解 fit_analytical">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代码对应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nplinalgsolve-nplinalginv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么用 np.linalg.solve 而不是 np.linalg.inv？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-fit_gd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模块5：梯度下降求解 fit_gd
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模块5：梯度下降求解 fit_gd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三种梯度下降对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        梯度公式推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        学习率衰减
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-predict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模块6：预测 predict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模块6：预测 predict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学含义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、完整使用示例
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、总结对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、基函数选择指南
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、常见问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1：为什么拟合效果不好？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2：为什么过拟合？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q3：梯度下降不收敛？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、实验代码详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、实验代码详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-create_toy_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 数据生成函数 create_toy_data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 数据生成函数 create_toy_data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        逐行解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要加噪声？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-basis_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 基函数配置列表 basis_list
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 基函数配置列表 basis_list">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        这是什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四组实验的含义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        怎么使用？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 不同多项式次数对比
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 不同多项式次数对比">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要对比不同次数？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m-degree-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么是 M = degree + 1？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-rmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 RMSE 误差函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 RMSE 误差函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要用 RMSE？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 训练误差 vs 测试误差
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5 训练误差 vs 测试误差">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        这在干什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经典的过拟合曲线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何解读？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 梯度下降完整示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6 梯度下降完整示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数选择建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什么时候用梯度下降？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、关键代码速查表
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="-">线性回归模型 - 学习笔记（完整版）<a class="headerlink" href="#-" title="Permanent link">&para;</a></h1>
+<p>本文档详细讲解 <code>01_线性回归模型.ipynb</code> 的每个模块。</p>
+<hr />
+<h2 id="_1">一、概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>这个 notebook 实现了一个<strong>线性基函数回归模型</strong>，可以：
+- 使用多种基函数（多项式、高斯、Sigmoid）拟合数据
+- 通过解析解或梯度下降两种方式求解
+- 支持 L2 正则化防止过拟合</p>
+<hr />
+<h2 id="_2">二、模块详解<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1">模块1：导入库<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</code></pre></div></td></tr></table></div>
+<table>
+<thead>
+<tr>
+<th>库</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>numpy</code></td>
+<td>数值计算，矩阵运算</td>
+</tr>
+<tr>
+<td><code>matplotlib.pyplot</code></td>
+<td>绑图可视化</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实际用处</strong>：NumPy 是 Python 科学计算的基础，提供高效的数组操作和线性代数功能。</p>
+<hr />
+<h3 id="2-__init__">模块2：类定义与初始化 <code>__init__</code><a class="headerlink" href="#2-__init__" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LinearRegression</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis_type</span><span class="o">=</span><span class="s1">&#39;polynomial&#39;</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">l2_lambda</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis_type</span> <span class="o">=</span> <span class="n">basis_type</span>  <span class="c1"># 基函数类型</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">=</span> <span class="n">M</span>                     <span class="c1"># 基函数个数</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">=</span> <span class="n">l2_lambda</span>     <span class="c1"># 正则化系数</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="kc">None</span>                  <span class="c1"># 模型权重（训练后才有）</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span>           <span class="c1"># 基函数的额外参数</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_3">参数详解<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>含义</th>
+<th>怎么选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>basis_type</code></td>
+<td><code>'polynomial'</code></td>
+<td>基函数类型</td>
+<td>看数据形状选择</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td><code>10</code></td>
+<td>基函数个数</td>
+<td>越多越灵活，但容易过拟合</td>
+</tr>
+<tr>
+<td><code>l2_lambda</code></td>
+<td><code>0</code></td>
+<td>正则化强度</td>
+<td>过拟合时加大（0.01, 0.1, 1...）</td>
+</tr>
+<tr>
+<td><code>**kwargs</code></td>
+<td>-</td>
+<td>额外参数</td>
+<td>高斯传 <code>sigma</code>，Sigmoid 传 <code>c</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_4">为什么要正则化？<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p><strong>问题</strong>：M=10 意味着有 10 个参数 <span class="arithmatex">\(w_0, w_1, ..., w_9\)</span> 可以调。参数太多会怎样？</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>训练数据：5个点
+模型：10个参数
+
+结果：曲线穿过每个点，但在点之间疯狂震荡 → 死记硬背，泛化能力差
+</code></pre></div></td></tr></table></div>
+<p><strong>正则化的作用</strong>：在损失函数里加一项 <span class="arithmatex">\(\frac{\lambda}{2} \sum w_i^2\)</span></p>
+<ul>
+<li>原损失 = 数据误差</li>
+<li>新损失 = 数据误差 + λ × (权重平方和)</li>
+<li>效果：惩罚过大的权重 → 曲线更平滑 → 泛化更好</li>
+</ul>
+<p><strong>打个比方</strong>：正则化就像给模型戴上"紧箍咒"，让它不能太任性。</p>
+<hr />
+<h3 id="3-_transform">模块3：基函数变换 <code>_transform</code><a class="headerlink" href="#3-_transform" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;将原始输入 X 转换至基函数空间 Z (设计矩阵)&quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">))</span>
+
+    <span class="c1"># 第一个基函数通常取 phi0(x) = 1 (常数项/偏置)</span>
+    <span class="n">Z</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_type</span> <span class="o">==</span> <span class="s1">&#39;polynomial&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">):</span>
+            <span class="n">Z</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_type</span> <span class="o">==</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">:</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">mus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">):</span>
+            <span class="n">Z</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">mus</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_type</span> <span class="o">==</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+        <span class="n">ms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">):</span>
+            <span class="n">Z</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">ms</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+
+    <span class="k">return</span> <span class="n">Z</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_5">输入输出是什么？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>输入 X: [x1, x2, x3, ..., xN]  形状 (N,) 或 (N,1)
+输出 Z: 设计矩阵              形状 (N, M)
+
+Z 的每一列是一个基函数对所有样本的输出
+</code></pre></div></td></tr></table></div>
+<h4 id="1_1">为什么第一列是 1？<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Z</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+</code></pre></div></td></tr></table></div>
+<p>这是<strong>偏置项</strong>（bias），相当于直线方程 <span class="arithmatex">\(y = b + wx\)</span> 中的 <span class="arithmatex">\(b\)</span>。</p>
+<p>没有这一项的话，模型必须经过原点，拟合能力受限。</p>
+<h4 id="_6">三种基函数详解<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<h5 id="1_2">1. 多项式基函数<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h5>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Z</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>           <span class="c1"># φ₀(x) = 1      (偏置项)</span>
+<span class="n">Z</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>           <span class="c1"># φ₁(x) = x</span>
+<span class="n">Z</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="err">²</span>          <span class="c1"># φ₂(x) = x²</span>
+<span class="n">Z</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="err">³</span>          <span class="c1"># φ₃(x) = x³</span>
+<span class="o">...</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>效果</strong>：
+- M=3：<span class="arithmatex">\(y = w_0 + w_1 x + w_2 x^2\)</span> → 抛物线
+- M=5：能拟合更复杂的波浪</p>
+<p><strong>什么时候用</strong>：数据有明显的多项式趋势（比如抛物线轨迹）</p>
+<p><strong>注意</strong>：高次多项式容易在边界处爆炸（Runge 现象）</p>
+<h5 id="2-rbf">2. 高斯基函数（RBF）<a class="headerlink" href="#2-rbf" title="Permanent link">&para;</a></h5>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.44</span><span class="p">,</span> <span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.89</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>  <span class="c1"># M-1个中心点</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># 控制宽度</span>
+
+<span class="n">φ_j</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">μ_j</span><span class="p">)</span><span class="err">²</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="n">σ</span><span class="err">²</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>效果</strong>：每个基函数是一个"小山包"</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>        φ₁    φ₅    φ₉
+         ∧     ∧     ∧
+        / \   / \   / \
+       /   \_/   \_/   \
+    ──────────────────────→ x
+    0    0.5    1.0
+</code></pre></div></td></tr></table></div>
+<p><strong>参数 <code>sigma</code> 怎么选？</strong>
+- sigma 小：山包很尖，只能影响附近 → 可能欠拟合
+- sigma 大：山包很宽，影响范围大 → 可能过拟合</p>
+<p><strong>什么时候用</strong>：数据有多个局部峰谷，或者分布不规则</p>
+<h5 id="3-sigmoid">3. Sigmoid 基函数<a class="headerlink" href="#3-sigmoid" title="Permanent link">&para;</a></h5>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">φ_j</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">m_j</span><span class="p">)))</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>效果</strong>：每个基函数是一个"阶梯"</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>        φ₁    φ₅    φ₉
+         |_____|_____|
+         |           |
+    _____|           |_____
+    ──────────────────────→ x
+    0    0.5    1.0
+</code></pre></div></td></tr></table></div>
+<p><strong>参数 <code>c</code> 怎么选？</strong>
+- c 大：阶梯很陡，接近阶跃函数
+- c 小：阶梯很缓，过渡平滑</p>
+<p><strong>什么时候用</strong>：数据有明显的"台阶"或"跳跃"</p>
+<hr />
+<h5 id="4">4. 基函数拟合过程详解<a class="headerlink" href="#4" title="Permanent link">&para;</a></h5>
+<h6 id="_7">核心思想：用"积木"搭建任意曲线<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h6>
+<p><strong>问题</strong>：线性模型 <span class="arithmatex">\(y = wx + b\)</span> 只能拟合直线，怎么办？</p>
+<p><strong>解决</strong>：把 <span class="arithmatex">\(x\)</span> 变成一组基函数 <span class="arithmatex">\(\phi_1(x), \phi_2(x), ..., \phi_M(x)\)</span></p>
+<div class="arithmatex">\[y = w_0 + w_1 \phi_1(x) + w_2 \phi_2(x) + ... + w_M \phi_M(x)\]</div>
+<p><strong>本质</strong>：每个基函数是一块"积木"，加权求和后拼出目标曲线。</p>
+<hr />
+<h6 id="_8">高斯基函数拟合过程<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h6>
+<p><strong>步骤1：构造设计矩阵</strong></p>
+<p>假设有 <span class="arithmatex">\(N\)</span> 个数据点 <span class="arithmatex">\((x_i, y_i)\)</span>，构造设计矩阵 <span class="arithmatex">\(\Phi\)</span>：</p>
+<div class="arithmatex">\[\Phi = \begin{bmatrix} 
+1 &amp; \phi_1(x_1) &amp; \phi_2(x_1) &amp; \cdots &amp; \phi_M(x_1) \\
+1 &amp; \phi_1(x_2) &amp; \phi_2(x_2) &amp; \cdots &amp; \phi_M(x_2) \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; \phi_1(x_N) &amp; \phi_2(x_N) &amp; \cdots &amp; \phi_M(x_N)
+\end{bmatrix}\]</div>
+<p>每列是一个基函数在所有数据点上的值。</p>
+<p><strong>步骤2：求解权重</strong></p>
+<p>目标是最小化 <span class="arithmatex">\(\|y - \Phi w\|^2\)</span>，解析解为：</p>
+<div class="arithmatex">\[w = (\Phi^T \Phi + \lambda I)^{-1} \Phi^T y\]</div>
+<p><strong>步骤3：几何理解——叠加"小山包"</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code>步骤1：在每个中心放一个&quot;山包&quot;
+┌─────────────────────────────────────┐
+│   ∧     ∧∧∧     ∧     ∧∧∧     ∧    │
+│  / \   /   \   / \   /   \   / \   │
+│ /   \_/     \_/   \_/     \_/   \  │
+└─────────────────────────────────────┘
+
+步骤2：给每个山包乘上权重（有的变高，有的变矮）
+┌─────────────────────────────────────┐
+│       ∧∧∧                           │
+│      /   \   ∧∧∧∧∧                  │
+│     /     \_/     \____             │
+│    /                 \___           │
+└─────────────────────────────────────┘
+
+步骤3：叠加得到最终曲线
+┌─────────────────────────────────────┐
+│        ___                          │
+│       /   \___                      │
+│      /        \___     ____         │
+│     /             \___/    \___     │
+└─────────────────────────────────────┘
+</code></pre></div></td></tr></table></div>
+<p><strong>参数影响</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>sigma</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>小（如0.05）</strong></td>
+<td>山包很尖，只覆盖很小的区域 → 可能过拟合</td>
+</tr>
+<tr>
+<td><strong>适中（如0.1）</strong></td>
+<td>基函数之间有重叠 → 平滑拟合</td>
+</tr>
+<tr>
+<td><strong>大（如0.3）</strong></td>
+<td>山包很宽，覆盖范围大 → 可能欠拟合</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h6 id="sigmoid">Sigmoid 基函数拟合过程<a class="headerlink" href="#sigmoid" title="Permanent link">&para;</a></h6>
+<p><strong>核心特点</strong>：每个 Sigmoid 控制一个方向的"跃迁"。</p>
+<p><strong>几何理解——叠加"阶梯"</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code>步骤1：放置多个阶梯
+┌─────────────────────────────────────┐
+│ ____|____|_____|_____|_____|____    │
+│                                     │
+└─────────────────────────────────────┘
+
+步骤2：加权后叠加
+┌─────────────────────────────────────┐
+│ _____                               │
+│      |____                          │
+│           |___                      │
+│               |________             │
+└─────────────────────────────────────┘
+
+结果：拟合出复杂的台阶状曲线
+</code></pre></div></td></tr></table></div>
+<p><strong>参数影响</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>c值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>大（如50）</strong></td>
+<td>阶梯很陡，接近阶跃函数</td>
+</tr>
+<tr>
+<td><strong>适中（如10）</strong></td>
+<td>过渡平滑</td>
+</tr>
+<tr>
+<td><strong>小（如5）</strong></td>
+<td>阶梯很缓，像斜坡</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h6 id="_9">两种基函数对比<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>高斯（RBF）</th>
+<th>Sigmoid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>形状</strong></td>
+<td>钟形（小山包）</td>
+<td>S形（阶梯）</td>
+</tr>
+<tr>
+<td><strong>影响范围</strong></td>
+<td>局部（中心附近）</td>
+<td>全局（一边高一边低）</td>
+</tr>
+<tr>
+<td><strong>适用数据</strong></td>
+<td>多峰、波浪形</td>
+<td>台阶状、跳跃型</td>
+</tr>
+<tr>
+<td><strong>拟合平滑曲线</strong></td>
+<td>✅ 好</td>
+<td>❌ 一般</td>
+</tr>
+<tr>
+<td><strong>拟合突变数据</strong></td>
+<td>❌ 需要 σ 很小</td>
+<td>✅ 天然适合</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h6 id="_10">选择建议<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h6>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 判断数据类型的方法</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_data_shape</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;分析数据形态，推荐基函数类型&quot;&quot;&quot;</span>
+
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># 计算一阶差分</span>
+    <span class="n">sign_changes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">dy</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">jumps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jumps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;建议用 Sigmoid 基函数（台阶状数据）&quot;</span>
+    <span class="k">elif</span> <span class="n">sign_changes</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;建议用高斯基函数（多峰数据）&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;可以尝试两种基函数对比效果&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>一句话总结</strong>：
+- 高斯基函数像<strong>橡皮泥</strong>，可以捏出各种光滑形状
+- Sigmoid 基函数像<strong>积木台阶</strong>，适合搭建有高低落差的结构</p>
+<hr />
+<h3 id="4-fit_analytical">模块4：解析解求解 <code>fit_analytical</code><a class="headerlink" href="#4-fit_analytical" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_analytical</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;使用解析解求解 (正规方程)&quot;&quot;&quot;</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Z</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">*</span> <span class="n">I</span><span class="p">,</span> <span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">t</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_11">数学推导<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p><strong>目标</strong>：找到 <span class="arithmatex">\(w\)</span> 使得预测值 <span class="arithmatex">\(y = Zw\)</span> 尽可能接近真实值 <span class="arithmatex">\(t\)</span></p>
+<p><strong>损失函数</strong>（带正则化）：
+$<span class="arithmatex">\(L(w) = \frac{1}{2}(Zw - t)^T(Zw - t) + \frac{\lambda}{2}w^T w\)</span>$</p>
+<p><strong>对 <span class="arithmatex">\(w\)</span> 求导，令导数为 0</strong>：
+$<span class="arithmatex">\(\frac{\partial L}{\partial w} = Z^T(Zw - t) + \lambda w = 0\)</span>$</p>
+<p><strong>整理得到正规方程</strong>：
+$<span class="arithmatex">\(w = (Z^T Z + \lambda I)^{-1} Z^T t\)</span>$</p>
+<h4 id="_12">代码对应<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Z</span>           <span class="c1"># ZᵀZ</span>
+<span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">t</span>           <span class="c1"># Zᵀt</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">*</span> <span class="n">I</span>  <span class="c1"># λI</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 求解 Aw = b，比直接求逆更稳定</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="nplinalgsolve-nplinalginv">为什么用 <code>np.linalg.solve</code> 而不是 <code>np.linalg.inv</code>？<a class="headerlink" href="#nplinalgsolve-nplinalginv" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 方法1：直接求逆（不推荐）</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Z</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">*</span> <span class="n">I</span><span class="p">)</span> <span class="o">@</span> <span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">t</span>
+
+<span class="c1"># 方法2：求解线性方程组（推荐）</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Z</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">*</span> <span class="n">I</span><span class="p">,</span> <span class="n">Z</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">t</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>原因</strong>：
+- 求逆数值不稳定，容易放大误差
+- <code>solve</code> 内部用更稳定的算法（如 LU 分解）</p>
+<hr />
+<h3 id="5-fit_gd">模块5：梯度下降求解 <code>fit_gd</code><a class="headerlink" href="#5-fit_gd" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_gd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;使用小批量梯度下降求解&quot;&quot;&quot;</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">shape</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">batch_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">N</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="c1"># 学习率衰减</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.0001</span> <span class="o">*</span> <span class="n">epoch</span><span class="p">)</span>
+
+        <span class="c1"># 打乱数据</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+            <span class="n">ZB</span><span class="p">,</span> <span class="n">tB</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+            <span class="c1"># 计算预测值和误差</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ZB</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">-</span> <span class="n">tB</span>
+
+            <span class="c1"># 计算梯度</span>
+            <span class="n">gradient</span> <span class="o">=</span> <span class="p">(</span><span class="n">ZB</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">error</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+
+            <span class="c1"># 更新参数</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">gradient</span>
+
+        <span class="c1"># 打印损失（每 100 轮）</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">y_all_pred</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+            <span class="n">data_loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_all_pred</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+            <span class="n">reg_loss</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: Loss = </span><span class="si">{</span><span class="n">data_loss</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reg_loss</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_13">参数详解<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>learning_rate</code></td>
+<td>0.1</td>
+<td>学习率，步子大小</td>
+</tr>
+<tr>
+<td><code>epochs</code></td>
+<td>1000</td>
+<td>训练轮数</td>
+</tr>
+<tr>
+<td><code>batch_size</code></td>
+<td>None</td>
+<td>每批样本数，None=全量</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_14">三种梯度下降对比<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>batch_size</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>批量梯度下降</td>
+<td>batch_size=N</td>
+<td>每次用全部数据，稳定但慢</td>
+</tr>
+<tr>
+<td>随机梯度下降</td>
+<td>batch_size=1</td>
+<td>每次用一个样本，快但抖</td>
+</tr>
+<tr>
+<td>小批量梯度下降</td>
+<td>batch_size=32~256</td>
+<td>折中，最常用</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_15">梯度公式推导<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p><strong>损失函数</strong>：
+$<span class="arithmatex">\(L = \frac{1}{2N}\sum_{i=1}^{N}(y_i - t_i)^2 + \frac{\lambda}{2}\sum_{j}w_j^2\)</span>$</p>
+<p><strong>对 <span class="arithmatex">\(w\)</span> 求导</strong>：
+$<span class="arithmatex">\(\frac{\partial L}{\partial w} = \frac{1}{N}Z^T(Zw - t) + \lambda w\)</span>$</p>
+<p><strong>代码中</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">gradient</span> <span class="o">=</span> <span class="p">(</span><span class="n">ZB</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">error</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2_lambda</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+<span class="c1">#          ↑ 数据梯度               ↑ 正则化梯度</span>
+</code></pre></div></td></tr></table></div></p>
+<h4 id="_16">学习率衰减<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.0001</span> <span class="o">*</span> <span class="n">epoch</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>效果：
+- 第 1 轮：lr = 0.1
+- 第 1000 轮：lr ≈ 0.1 / 1.1 ≈ 0.09
+- 第 10000 轮：lr ≈ 0.05</p>
+<p><strong>为什么要衰减？</strong>
+- 初期：大步走，快速接近最优解
+- 后期：小步走，避免在最优解附近震荡</p>
+<hr />
+<h3 id="6-predict">模块6：预测 <code>predict</code><a class="headerlink" href="#6-predict" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;预测输出&quot;&quot;&quot;</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Z</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_17">数学含义<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[y = Z \cdot w = \sum_{j=0}^{M-1} w_j \phi_j(x)\]</div>
+<p><strong>展开</strong>：
+$<span class="arithmatex">\(y = w_0 \cdot 1 + w_1 \phi_1(x) + w_2 \phi_2(x) + ... + w_{M-1} \phi_{M-1}(x)\)</span>$</p>
+<hr />
+<h2 id="_18">三、完整使用示例<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># 生成数据</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># 训练模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">basis_type</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">l2_lambda</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit_analytical</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># 或 model.fit_gd(X, t)</span>
+
+<span class="c1"># 预测</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># 绑图</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;训练数据&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;预测&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_19">四、总结对比<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>优点</th>
+<th>缺点</th>
+<th>什么时候用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>解析解</td>
+<td>一步到位，精确</td>
+<td>数据量大时慢（<span class="arithmatex">\(O(M^3)\)</span>）</td>
+<td>样本数 &lt; 10000</td>
+</tr>
+<tr>
+<td>梯度下降</td>
+<td>可扩展到大数据</td>
+<td>需要调参，可能陷入局部最优</td>
+<td>样本数 &gt; 10000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_20">五、基函数选择指南<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>数据特征</th>
+<th>推荐基函数</th>
+<th>参数建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单调变化</td>
+<td>polynomial</td>
+<td>M=3~5</td>
+</tr>
+<tr>
+<td>抛物线/波浪</td>
+<td>polynomial</td>
+<td>M=3~7</td>
+</tr>
+<tr>
+<td>多个峰谷</td>
+<td>gaussian</td>
+<td>M=10, sigma=0.1</td>
+</tr>
+<tr>
+<td>有台阶/跳跃</td>
+<td>sigmoid</td>
+<td>M=10, c=10</td>
+</tr>
+<tr>
+<td>不知道形状</td>
+<td>gaussian</td>
+<td>先试 M=10</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_21">六、常见问题<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
+<h3 id="q1">Q1：为什么拟合效果不好？<a class="headerlink" href="#q1" title="Permanent link">&para;</a></h3>
+<p>可能原因：
+1. <strong>基函数类型不对</strong>：比如数据是抛物线，却用了 Sigmoid
+2. <strong>M 太小</strong>：模型复杂度不够
+3. <strong>正则化太强</strong>：l2_lambda 太大，压制了模型
+4. <strong>数据没归一化</strong>：如果 x 范围是 [0, 1000]，高斯基函数会失效</p>
+<h3 id="q2">Q2：为什么过拟合？<a class="headerlink" href="#q2" title="Permanent link">&para;</a></h3>
+<p>可能原因：
+1. <strong>M 太大</strong>：基函数太多
+2. <strong>数据太少</strong>：样本数 &lt; 参数数
+3. <strong>没有正则化</strong>：l2_lambda=0</p>
+<p>解决方法：加大 l2_lambda（如 0.01, 0.1, 1）</p>
+<h3 id="q3">Q3：梯度下降不收敛？<a class="headerlink" href="#q3" title="Permanent link">&para;</a></h3>
+<p>可能原因：
+1. <strong>学习率太大</strong>：减小 learning_rate
+2. <strong>数据没归一化</strong>：确保 x 在 [0, 1] 范围内
+3. <strong>迭代次数不够</strong>：增加 epochs</p>
+<hr />
+<h2 id="_22">七、实验代码详解<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<h3 id="71-create_toy_data">7.1 数据生成函数 <code>create_toy_data</code><a class="headerlink" href="#71-create_toy_data" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_toy_data</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">noise</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">std</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>            
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_23">逐行解释<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>np.linspace(0, 1, sample_size)</code></td>
+<td>在 [0, 1] 区间均匀生成 sample_size 个点</td>
+</tr>
+<tr>
+<td><code>.reshape(-1, 1)</code></td>
+<td>变成列向量（N行1列），符合 sklearn 风格</td>
+</tr>
+<tr>
+<td><code>f(x)</code></td>
+<td>真实函数 <span class="arithmatex">\(\sin(2\pi x)\)</span></td>
+</tr>
+<tr>
+<td><code>np.random.normal(scale=std, ...)</code></td>
+<td>添加高斯噪声，标准差为 std</td>
+</tr>
+<tr>
+<td><code>.flatten()</code></td>
+<td>把 y 压成一维数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_24">为什么要加噪声？<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
+<p>真实数据都有噪声。如果不加噪声，模型会死记硬背，无法测试泛化能力。</p>
+<p><strong>举个例子</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>无噪声：所有点都在完美正弦曲线上 → 模型只需插值
+有噪声：点在曲线附近随机波动 → 模型要学会&quot;忽略噪声&quot;，找到真实趋势
+</code></pre></div></td></tr></table></div></p>
+<hr />
+<h3 id="72-basis_list">7.2 基函数配置列表 <code>basis_list</code><a class="headerlink" href="#72-basis_list" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">basis_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;polynomial&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;Polynomial (No Reg)&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;polynomial&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="s1">&#39;Polynomial (L2 Reg)&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;Gaussian RBF&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;Sigmoid&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_25">这是什么？<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
+<p>这是一个<strong>实验配置列表</strong>，每个元组定义一组实验参数：</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第1个元素</td>
+<td>基函数类型</td>
+<td><code>'polynomial'</code></td>
+</tr>
+<tr>
+<td>第2个元素</td>
+<td>基函数个数 M</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td>第3个元素</td>
+<td>正则化系数 λ</td>
+<td><code>0.0</code> 或 <code>1e-4</code></td>
+</tr>
+<tr>
+<td>第4个元素</td>
+<td>实验名称（用于图例）</td>
+<td><code>'Polynomial (No Reg)'</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_26">四组实验的含义<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>基函数</th>
+<th>M</th>
+<th>λ</th>
+<th>预期效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Polynomial (No Reg)</td>
+<td>多项式</td>
+<td>10</td>
+<td>0</td>
+<td>可能过拟合（M=10太大了）</td>
+</tr>
+<tr>
+<td>Polynomial (L2 Reg)</td>
+<td>多项式</td>
+<td>10</td>
+<td>0.0001</td>
+<td>正则化压制过拟合</td>
+</tr>
+<tr>
+<td>Gaussian RBF</td>
+<td>高斯</td>
+<td>10</td>
+<td>0</td>
+<td>应该拟合得不错</td>
+</tr>
+<tr>
+<td>Sigmoid</td>
+<td>Sigmoid</td>
+<td>10</td>
+<td>0</td>
+<td>效果取决于数据形状</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_27">怎么使用？<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">for</span> <span class="n">basis_type</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">l2_lambda</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">basis_list</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">basis_type</span><span class="o">=</span><span class="n">basis_type</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">l2_lambda</span><span class="o">=</span><span class="n">l2_lambda</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit_analytical</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+    <span class="c1"># 绑图...</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="73">7.3 不同多项式次数对比<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">basis_type</span><span class="o">=</span><span class="s1">&#39;polynomial&#39;</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">degree</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">l2_lambda</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit_analytical</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_28">为什么要对比不同次数？<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>degree (M-1)</th>
+<th>模型</th>
+<th>拟合能力</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(y = w_0\)</span></td>
+<td>只能是一条水平线</td>
+<td>欠拟合</td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(y = w_0 + w_1 x\)</span></td>
+<td>直线</td>
+<td>欠拟合</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(y = w_0 + w_1 x + ... + w_6 x^6\)</span></td>
+<td>可以弯曲</td>
+<td>比较合适</td>
+</tr>
+<tr>
+<td>9</td>
+<td>10个参数</td>
+<td>非常灵活</td>
+<td>可能过拟合（训练数据只有10个点）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m-degree-1">为什么是 M = degree + 1？<a class="headerlink" href="#m-degree-1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>degree = 0 → M = 1 → 只有 <span class="arithmatex">\(\phi_0(x) = 1\)</span>（常数项）</li>
+<li>degree = 1 → M = 2 → <span class="arithmatex">\(\phi_0(x) = 1, \phi_1(x) = x\)</span></li>
+<li>degree = 9 → M = 10 → <span class="arithmatex">\(\phi_0(x) = 1, \phi_1(x) = x, ..., \phi_9(x) = x^9\)</span></li>
+</ul>
+<hr />
+<h3 id="74-rmse">7.4 RMSE 误差函数<a class="headerlink" href="#74-rmse" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">rmse</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rooted Mean Squared Error&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)))</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_29">数学公式<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[\text{RMSE} = \sqrt{\frac{1}{N}\sum_{i=1}^{N}(a_i - b_i)^2}\]</div>
+<h4 id="rmse">为什么要用 RMSE？<a class="headerlink" href="#rmse" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>公式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSE</td>
+<td><span class="arithmatex">\(\frac{1}{N}\sum(y - \hat{y})^2\)</span></td>
+<td>平方后单位和 y 不同</td>
+</tr>
+<tr>
+<td>RMSE</td>
+<td><span class="arithmatex">\(\sqrt{\text{MSE}}\)</span></td>
+<td>单位和 y 相同，更容易解释</td>
+</tr>
+<tr>
+<td>MAE</td>
+<td>$\frac{1}{N}\sum</td>
+<td>y - \hat{y}</td>
+</tr>
+</tbody>
+</table>
+<p><strong>例子</strong>：如果 y 是房价（万元），RMSE=5 意味着"平均误差约5万元"。</p>
+<hr />
+<h3 id="75-vs">7.5 训练误差 vs 测试误差<a class="headerlink" href="#75-vs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">errors_train</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">errors_test</span>  <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">basis_type</span><span class="o">=</span><span class="s1">&#39;polynomial&#39;</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">l2_lambda</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit_analytical</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>    
+
+    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+    <span class="n">y_pred_test</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+    <span class="n">errors_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmse</span><span class="p">(</span><span class="n">y_pred_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+    <span class="n">errors_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmse</span><span class="p">(</span><span class="n">y_pred_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_30">这在干什么？<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<p>遍历 M = 1, 2, ..., 9，记录每个 M 的训练误差和测试误差。</p>
+<h4 id="_31">经典的过拟合曲线<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code>误差
+  ^
+  |      训练误差（持续下降）
+  |     \
+  |      \
+  |       \__________
+  |                  \
+  |                   \
+  | 测试误差（先降后升）
+  |    \    /
+  |     \  /
+  |      \/  ← 最优点
+  |      /\
+  |     /  \
+  |____/____\__________→ M（模型复杂度）
+       最优  过拟合
+</code></pre></div></td></tr></table></div>
+<h4 id="_32">如何解读？<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>含义</th>
+<th>解决方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练误差 ↓，测试误差 ↓</td>
+<td>模型还在学习，可以加复杂度</td>
+<td>增加 M</td>
+</tr>
+<tr>
+<td>训练误差 ↓，测试误差 ↑</td>
+<td>过拟合！</td>
+<td>减小 M 或加正则化</td>
+</tr>
+<tr>
+<td>训练误差 ≈ 测试误差</td>
+<td>欠拟合</td>
+<td>增加 M 或换基函数</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="76">7.6 梯度下降完整示例<a class="headerlink" href="#76" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 初始化模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">basis_type</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">l2_lambda</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="c1"># 训练</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit_gd</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> 
+    <span class="n">y_train</span><span class="p">,</span> 
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>     <span class="c1"># 学习率</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>            <span class="c1"># 训练轮数</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">5</span>            <span class="c1"># 小批量大小（训练数据有10个，每批5个）</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_33">参数选择建议<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>本例设置</th>
+<th>一般建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>learning_rate</td>
+<td>0.001</td>
+<td>从 0.1 开始，不收敛就减小</td>
+</tr>
+<tr>
+<td>epochs</td>
+<td>5000</td>
+<td>看损失曲线，稳定了就停</td>
+</tr>
+<tr>
+<td>batch_size</td>
+<td>5</td>
+<td>小数据集用小 batch，大数据集用 32~256</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_34">什么时候用梯度下降？<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>数据量大</strong>（&gt;10000样本）：解析解太慢</li>
+<li><strong>在线学习</strong>：数据源源不断，无法一次性加载</li>
+<li><strong>需要正则化</strong>：某些正则化无法用解析解</li>
+</ul>
+<hr />
+<h2 id="_35">八、关键代码速查表<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建模型</td>
+<td><code>LinearRegression(basis_type='gaussian', M=10, l2_lambda=0.01)</code></td>
+<td>选择基函数和参数</td>
+</tr>
+<tr>
+<td>解析解训练</td>
+<td><code>model.fit_analytical(X, y)</code></td>
+<td>一步到位</td>
+</tr>
+<tr>
+<td>梯度下降训练</td>
+<td><code>model.fit_gd(X, y, lr=0.1, epochs=1000)</code></td>
+<td>可调超参数</td>
+</tr>
+<tr>
+<td>预测</td>
+<td><code>model.predict(X_test)</code></td>
+<td>返回预测值</td>
+</tr>
+<tr>
+<td>获取权重</td>
+<td><code>model.w</code></td>
+<td>训练后可查看</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

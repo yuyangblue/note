@@ -1,0 +1,5078 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>大容量与高速：利用存储层次结构 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              大容量与高速：利用存储层次结构
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        存储层次结构的基本概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="存储层次结构的基本概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见问题解答
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        利用局部性原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="利用局部性原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        存储技术对比
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="存储技术对比">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRAM技术详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DRAM技术详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dram_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRAM高级组织
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DRAM高级组织">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        存储带宽提升技术
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="存储带宽提升技术">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内存带宽优化：三种核心方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="内存带宽优化：三种核心方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-wide-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        a. 宽缓存组织（Wide Cache）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-multi-banked-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        b. 多银行缓存（Multi-banked Cache）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        带宽对比计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        &gt; 结论：单次大块数据传输选宽缓存；多个并发访问选多银行。
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="&gt; 结论：单次大块数据传输选宽缓存；多个并发访问选多银行。">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存性能示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存性能示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        闪存存储
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="闪存存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        闪存类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="闪存类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        磁盘存储结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="磁盘存储结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        磁盘扇区与访问
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="磁盘扇区与访问">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        磁盘访问实例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="磁盘访问实例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存基础概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存基础概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        直接映射缓存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="直接映射缓存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见问题解答
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标签与有效位
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="标签与有效位">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存示例：初始状态
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存示例：初始状态">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存示例：访问序列
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存示例：访问序列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存冲突示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存冲突示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        地址细分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="地址细分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Offset详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        块大小示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="块大小示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        块大小考虑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="块大小考虑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存未命中处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存未命中处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_69" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_70" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        写直达策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="写直达策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        写回策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="写回策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_76" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        写分配策略
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="写分配策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 组合选择影响整体性能：需要根据工作负载特性选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intrinsity-fastmath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intrinsity FastMATH缓存配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Intrinsity FastMATH缓存配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_79" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intrinsity-fastmath_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intrinsity FastMATH缓存结构详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Intrinsity FastMATH缓存结构详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mux16byte-offsetmux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mux（多路选择器）的作用：一块数据有16个字，Byte offset告诉Mux该输出哪个字
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        主存支持缓存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="主存支持缓存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        测量缓存性能
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="测量缓存性能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-performance-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cache Performance Example（缓存性能计算）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cache Performance Example（缓存性能计算）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_90" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        计算过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        平均内存访问时间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="平均内存访问时间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AMAT计算示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Summary（性能总结）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Summary（性能总结）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个关键趋势
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_96" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最终结论
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_97" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_98" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_99" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 2路和4路组相联是常见的平衡选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相联缓存示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相联缓存示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相联性谱
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相联性谱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相联性对比示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相联性对比示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_109" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相联性示例续
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相联性示例续">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2路组相联示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全相联示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_111" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_112" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相联性收益
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相联性收益">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_113" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_114" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_115" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        组相联缓存硬件结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="组相联缓存硬件结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_116" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_117" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_118" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        替换策略概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="替换策略概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_119" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多级缓存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多级缓存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性能对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_125" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多级缓存示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多级缓存示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_126" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        给定参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仅L1缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        添加L2缓存后
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_127" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_128" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多级缓存设计考虑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多级缓存设计考虑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_129" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        各级缓存的设计重点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与高级CPU的交互
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="与高级CPU的交互">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_134" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存未命中的影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_135" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_136" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与软件的交互
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="与软件的交互">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_137" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心内容讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_138" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        算法对比示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_139" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        编译器优化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_140" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">大容量与高速：利用存储层次结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>Chapter 5: Large and Fast: Exploiting Memory Hierarchy</strong></p>
+<hr />
+<h2 id="_2">存储层次结构的基本概念<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">核心内容讲解<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>计算机存储层次结构从快速小容量到慢速大容量的金字塔式层级：</p>
+<ul>
+<li><strong>Processor（处理器）</strong>：位于顶端，是数据的最终使用者</li>
+<li><strong>SRAM Memory</strong>：对应L1/L2缓存，容量小（KB级别）但速度极快（0.5-2.5ns）</li>
+<li><strong>DRAM Memory</strong>：对应主内存，容量中等（GB级别），速度适中（50-70ns）</li>
+<li><strong>Disk（磁盘）</strong>：位于底端，容量最大（TB级别）但速度最慢（毫秒级）</li>
+</ul>
+<p>箭头表示数据在各层之间的传递方向。</p>
+<h3 id="_4">核心概念<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>时间局部性（Temporal Locality）</strong>：最近访问的项很可能再次被访问。例如循环中的指令会被反复执行。</p>
+</li>
+<li>
+<p><strong>空间局部性（Spatial Locality）</strong>：相邻地址的项很可能被一起访问。例如顺序执行的指令流、数组数据的顺序访问。</p>
+</li>
+<li>
+<p><strong>存储层次结构的本质</strong>：在速度、容量、成本三者之间做权衡，利用局部性原理让"大容量"和"高速"看似同时实现。</p>
+</li>
+</ol>
+<hr />
+<h3 id="_5">常见问题解答<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>Q：存储层次结构层级图解中各层是什么意思？</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>CPU（处理器）
+    ↓
+Cache（缓存）—— SRAM，最快最小最贵
+    ↓
+Memory（主存/内存）—— DRAM，中等速度和容量
+    ↓
+Disk（磁盘/硬盘）—— 最慢最大最便宜
+</code></pre></div></td></tr></table></div>
+<p><strong>Memory（主存）是什么？</strong>
+- 就是平时说的"内存条"，通常几GB到几十GB
+- 技术上使用DRAM（动态RAM），断电数据丢失
+- 作用：给CPU一个"足够快"的数据源，避免CPU直接访问慢速磁盘</p>
+<p><strong>各层关系类比</strong>：
+- Memory = 图书馆（大，但找书要时间）
+- Cache = 书桌（小，但伸手就能拿到）
+- CPU想要的书，优先从书桌拿，没有再去图书馆</p>
+<hr />
+<h2 id="_6">利用局部性原理<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">核心内容讲解<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>![[Pasted image 20260509162020.png|208]]
+存储层次结构通过数据复制实现"缓存"的假象：</p>
+<p><strong>命中流程</strong>：
+- 数据请求首先到达最上层
+- 如果数据存在（Hit命中），直接从上层返回
+- 命中率高意味着大部分访问由上层服务，性能好</p>
+<p><strong>未命中流程</strong>：
+- 如果数据不在上层（Miss未命中），从下一层获取整个数据块
+- 获取的数据块被复制到上层供后续访问使用
+- 未命中惩罚（Miss Penalty）= 从下层获取数据的时间</p>
+<p><strong>块（Block/Line）</strong> 是数据复制的基本单位，大小影响性能。</p>
+<h3 id="_8">核心概念<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>块（Block）</strong>：存储层次中数据复制的基本单位，大小是关键设计参数</p>
+</li>
+<li>
+<p><strong>命中率的计算</strong>：Hit ratio = hits / accesses = 1 - Miss ratio</p>
+</li>
+<li>
+<p><strong>块大小的权衡</strong>：</p>
+</li>
+<li>大块利用空间局部性好</li>
+<li>但增加未命中惩罚和可能的缓存污染</li>
+</ol>
+<hr />
+<h2 id="_9">存储技术对比<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">核心内容讲解<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>四种存储技术的性能与成本对比：</p>
+<table>
+<thead>
+<tr>
+<th>存储类型</th>
+<th>访问时间</th>
+<th>成本（$/GB）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRAM</td>
+<td>0.5ns – 2.5ns</td>
+<td>$2000 – $5000</td>
+</tr>
+<tr>
+<td>DRAM</td>
+<td>50ns – 70ns</td>
+<td>$20 – $75</td>
+</tr>
+<tr>
+<td>磁盘</td>
+<td>5ms – 20ms</td>
+<td>$0.20 – $2</td>
+</tr>
+<tr>
+<td><strong>理想内存</strong></td>
+<td>SRAM速度</td>
+<td>磁盘成本</td>
+</tr>
+</tbody>
+</table>
+<p><strong>现实</strong>：物理上不可能同时获得SRAM的速度和磁盘的成本，因此需要存储层次结构。</p>
+<h3 id="_11">核心概念<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>SRAM</strong>：静态随机存取存储器，无需刷新，但占用面积大、功耗高</li>
+<li>存储1位需要6个晶体管（6T结构）</li>
+<li>面积约为DRAM的4-6倍</li>
+<li>
+<p>用触发器结构稳定存储，速度快但成本高</p>
+</li>
+<li>
+<p><strong>DRAM</strong>：动态随机存取存储器，使用电容存储，需要周期性刷新</p>
+</li>
+<li>存储1位只需1个晶体管+1个电容（1T1C结构）</li>
+<li>
+<p>面积小、成本低，但需要刷新</p>
+</li>
+<li>
+<p><strong>存储层次结构的驱动力</strong>：弥补各种存储技术之间的速度、容量、成本差距</p>
+</li>
+</ol>
+<hr />
+<h2 id="dram">DRAM技术详解<a class="headerlink" href="#dram" title="Permanent link">&para;</a></h2>
+<p>![[第五章6.png]]</p>
+<h3 id="_12">核心内容讲解<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>DRAM使用电容存储电荷来表示比特位：</p>
+<p><strong>存储单元结构</strong>：
+- 每个存储单元由1个晶体管 + 1个电容组成
+- 电容的电荷随时间泄漏，必须周期性刷新</p>
+<p><strong>刷新机制</strong>：
+- 刷新按"行"进行
+- 读出整行数据再写回
+- 行缓冲区（Row Buffer）允许在同一行内连续读取多个字</p>
+<p><strong>行缓冲区位置</strong>：
+- 行缓冲区位于DRAM芯片内部，是每个Bank独立的临时存储区域
+- 访问流程：选中某行 → 整行数据进入行缓冲区 → 根据列地址取具体数据
+- 作用：访问同一行的多个数据时无需反复激活行，提高速度</p>
+<h3 id="_13">核心概念<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>DRAM行缓冲区</strong>：允许并行读取和刷新多个字，提高突发访问效率</p>
+</li>
+<li>
+<p><strong>Bank结构</strong>：多个独立的banks可同时激活不同行，实现并行访问</p>
+</li>
+<li>单Bank限制：同一时间只能有一行处于激活状态</li>
+<li>多Bank优势：每个Bank有独立的行缓冲区，可同时激活不同行</li>
+<li>
+<p>地址中的BankID字段用于选择访问哪个Bank</p>
+</li>
+<li>
+<p><strong>刷新开销</strong>：DRAM需要周期性刷新，这段时间无法响应访问请求</p>
+</li>
+<li>刷新=充电：读出整行 → 放大信号 → 写回（重新充电）</li>
+<li>刷新期间存储阵列被占用，CPU必须等待</li>
+<li>典型DRAM每64ms刷新所有行，约5-10%时间无法访问</li>
+</ol>
+<hr />
+<h2 id="dram_1">DRAM高级组织<a class="headerlink" href="#dram_1" title="Permanent link">&para;</a></h2>
+<h3 id="_14">核心内容讲解<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>DRAM内部以矩形阵列组织数据位：</p>
+<p><strong>DDR（双倍数据率）</strong>：
+- 在时钟的上升沿和下降沿都传输数据
+- 相同频率下带宽翻倍</p>
+<p><strong>QDR（四倍数据率）</strong>：
+- 分离输入输出通道
+- 进一步提高带宽</p>
+<p><strong>突发模式</strong>：从一行连续读取多个字时减少延迟</p>
+<h3 id="_15">核心概念<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>DDR代数演进</strong>：DDR → DDR2 → DDR3 → DDR4 → DDR5，持续提升传输速率和能效</p>
+</li>
+<li>
+<p><strong>DRAM分银行（Banking）</strong>：多个独立banks可同时激活不同行，提升整体带宽</p>
+</li>
+<li>
+<p><strong>同步DRAM</strong>：使用时钟同步，允许突发传输连续字而无需每次发送地址</p>
+</li>
+</ol>
+<hr />
+<h2 id="_16">存储带宽提升技术<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p>![[第五章10.png]]</p>
+<h3 id="_17">内存带宽优化：三种核心方法<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>在 CPU 访存过程中，缓存缺失时需要从主存取数据。为了加快这个过程，通常有三种优化策略：</p>
+<hr />
+<h4 id="a-wide-cache">a. 宽缓存组织（Wide Cache）<a class="headerlink" href="#a-wide-cache" title="Permanent link">&para;</a></h4>
+<p><strong>思路</strong>：把数据通路加宽，一次从主存取回多个字。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>原本：一次拿 1 个字（4B）
+宽缓存：一次拿 4 个字（16B）
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>优点</strong>：减少访问次数，单次缺失处理更快</li>
+<li><strong>缺点</strong>：连线增多，功耗增大</li>
+</ul>
+<hr />
+<h4 id="b-multi-banked-cache">b. 多银行缓存（Multi-banked Cache）<a class="headerlink" href="#b-multi-banked-cache" title="Permanent link">&para;</a></h4>
+<p><strong>思路</strong>：把缓存分成多个独立的"银行"，每个银行可以同时工作。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>银行1 | 银行2 | 银行3 | 银行4
+  A1  |  A2  |  A3  |  A4    ← 交叉存放
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>优点</strong>：支持多个访问并行进行</li>
+<li><strong>缺点</strong>：单次传输反而更慢（要分多次交叉传输）</li>
+</ul>
+<hr />
+<h4 id="_18">带宽对比计算<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>缺失惩罚</th>
+<th>带宽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4-word 宽缓存</td>
+<td>1 + 15 + 1 = 17 周期</td>
+<td>16B ÷ 17 = <strong>0.94 B/周期</strong></td>
+</tr>
+<tr>
+<td>4-bank 交叉缓存</td>
+<td>1 + 15 + 4×1 = 20 周期</td>
+<td>16B ÷ 20 = <strong>0.80 B/周期</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_19">&gt; <strong>结论</strong>：单次大块数据传输选宽缓存；多个并发访问选多银行。<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<h3 id="_20">一句话总结<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>宽组织</strong> → 减少单次延迟</li>
+<li><strong>交叉组织</strong> → 增加并发带宽</li>
+</ul>
+<hr />
+<h2 id="_21">缓存性能示例<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
+<h3 id="_22">核心内容讲解<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>影响DRAM性能的三个关键因素：</p>
+<ol>
+<li>
+<p><strong>Row Buffer（行缓冲区）</strong>：允许在同一行内连续读取多个字而无需重新激活行，提高突发模式效率</p>
+</li>
+<li>
+<p><strong>Synchronous DRAM（同步DRAM）</strong>：使用时钟同步，允许突发传输连续字而无需每次发送地址</p>
+</li>
+<li>
+<p><strong>DRAM Banking（分银行）</strong>：同时访问多个DRAM，提高带宽</p>
+</li>
+</ol>
+<h3 id="_23">核心概念<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>这些优化都是为了弥补DRAM与SRAM之间约100倍的访问速度差距</strong></p>
+</li>
+<li>
+<p><strong>DDR技术</strong>：在时钟上升沿和下降沿都传输数据，相同频率下带宽翻倍</p>
+</li>
+<li>
+<p><strong>现代DRAM</strong>：通常包含多个banks，支持并行访问</p>
+</li>
+</ol>
+<hr />
+<h2 id="_24">闪存存储<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h2>
+<p>![[第五章11.png]]</p>
+<h3 id="_25">核心内容讲解<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>闪存是一种非易失性半导体存储，性能介于磁盘和DRAM之间：</p>
+<p><strong>优点</strong>：
+- 比磁盘快100–1000倍
+- 更小、更低功耗、更耐用（无机械部件）</p>
+<p><strong>缺点</strong>：
+- 成本高于磁盘（介于磁盘和DRAM之间）</p>
+<h3 id="_26">核心概念<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>闪存bits会随访问次数增加而磨损（通常1000次后）</strong></p>
+</li>
+<li>
+<p><strong>磨损均衡（Wear Leveling）</strong>：将数据映射到不同物理块以延长寿命</p>
+</li>
+<li>
+<p><strong>应用场景</strong>：SSD、移动设备存储、嵌入式系统</p>
+</li>
+</ol>
+<hr />
+<h2 id="_27">闪存类型<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h2>
+<h3 id="_28">核心内容讲解<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p>闪存分为两大类型：</p>
+<p><strong>NOR闪存</strong>：
+- 存储单元类似NOR门
+- 支持随机读写访问
+- 用于嵌入式系统的指令存储</p>
+<p><strong>NAND闪存</strong>：
+- 存储单元类似NAND门
+- 密度更高（每单位面积更多位）
+- 只能按块访问
+- 用于USB驱动器、存储卡、SSD</p>
+<p><strong>NOR门与NAND门</strong>：
+- NOR门 = OR门 + NOT门（或非门）：两个输入都为0时输出1
+- NAND门 = AND门 + NOT门（与非门）：至少一个输入为0时输出1
+- NOR闪存单元并联连接 → 支持独立随机访问
+- NAND闪存单元串联连接 → 只能按块访问，但密度更高</p>
+<h3 id="_29">核心概念<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>NOR vs NAND</strong>：NOR适合随机读取（代码执行），NAND适合大容量顺序访问（数据存储）</p>
+</li>
+<li>
+<p><strong>闪存不能直接替代需要频繁写入的RAM或磁盘应用</strong></p>
+</li>
+<li>
+<p><strong>磨损均衡</strong>：操作系统或控制器负责将写操作分散到不同物理块</p>
+</li>
+</ol>
+<hr />
+<h2 id="_30">磁盘存储结构<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h2>
+<p>![[第五章13.png]]</p>
+<h3 id="_31">核心内容讲解<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<p>磁盘是非易失性、旋转式磁性存储：</p>
+<p><strong>核心结构</strong>：
+- <strong>Track（磁道）</strong>：同心圆状的数据轨道
+- <strong>Sector（扇区）</strong>：磁道上的数据单元（通常512字节或4KB）
+- <strong>Cylinder（柱面）</strong>：多层盘片上相同位置的磁道集合</p>
+<h3 id="_32">核心概念<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>磁盘是存储层次中的最底层</strong>：提供最大容量和最低成本，但访问时间最长（毫秒级）</p>
+</li>
+<li>
+<p><strong>磁盘访问涉及机械运动</strong>：寻道时间 + 旋转延迟 + 传输时间</p>
+</li>
+<li>
+<p><strong>局部性原理在磁盘调度中的应用</strong>：电梯算法、提前排队等优化</p>
+</li>
+</ol>
+<hr />
+<h2 id="_33">磁盘扇区与访问<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h2>
+<p>![[第五章14.png]]</p>
+<h3 id="_34">核心内容讲解<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<p>每个扇区记录的内容：
+- <strong>Sector ID</strong>：扇区标识
+- <strong>Data（512字节）</strong>：实际数据
+- <strong>ECC（纠错码）</strong>：用于隐藏缺陷和记录错误
+- <strong>同步字段和间隙</strong>：用于分隔和同步</p>
+<p><strong>磁盘访问步骤</strong>：
+1. <strong>队列延迟</strong>：等待其他访问完成
+2. <strong>寻道时间</strong>：移动磁头到正确磁道
+3. <strong>旋转延迟</strong>：等待扇区旋转到磁头下方
+4. <strong>数据传输</strong>：实际读写数据
+5. <strong>控制器开销</strong>：控制器处理请求的时间</p>
+<p><strong>寻道时间详解</strong>：
+- 磁头装在移动臂上，需要机械运动才能到达目标磁道
+- 过程：启动加速 → 移动 → 减速 → 精确定位
+- 磁道宽度极窄（约0.1微米），需要精准定位
+- 平均寻道时间4-10ms，是磁盘访问的主要延迟来源之一</p>
+<p><strong>旋转延迟详解</strong>：
+- 磁头到位后，需要等待目标扇区旋转过来
+- 目标扇区位置随机，平均需等待半圈
+- 计算：转一圈时间 ÷ 2（如15000转/分 → 半圈2ms）</p>
+<h3 id="_35">核心概念<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>ECC（Error Correcting Code）</strong>：检测和纠正数据传输或存储中的错误，提高数据可靠性</p>
+</li>
+<li>
+<p><strong>扇区是磁盘I/O的基本单位</strong></p>
+</li>
+<li>
+<p><strong>访问时间组成</strong>：寻道时间 + 旋转延迟 + 传输时间 + 控制器开销‼️‼️‼️</p>
+</li>
+</ol>
+<hr />
+<h2 id="_36">磁盘访问实例<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h2>
+<p>![[第五章15.png]]</p>
+<h3 id="_37">核心内容讲解<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<p>给定参数计算平均读取时间：
+- 512B扇区，15000转/分
+- 4ms平均寻道时间
+- 100MB/s传输速率
+- 0.2ms控制器开销</p>
+<p><strong>计算过程</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>4ms（寻道）+ 2ms（半圈旋转延迟）+ 0.005ms（传输）+ 0.2ms（控制器）
+= 6.2ms
+</code></pre></div></td></tr></table></div></p>
+<p>如果实际平均寻道时间为1ms：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>1ms + 2ms + 0.005ms + 0.2ms = 3.2ms
+</code></pre></div></td></tr></table></div></p>
+<h3 id="_38">核心概念<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>实际平均寻道时间通常小于标称值</strong>：局部性和OS调度可以减少磁头移动</p>
+</li>
+<li>
+<p><strong>智能控制器</strong>：将逻辑相邻扇区放在物理相邻位置</p>
+</li>
+<li>
+<p><strong>磁盘缓存</strong>：预取扇区以避免寻道和旋转延迟</p>
+</li>
+</ol>
+<hr />
+<h2 id="_39">缓存基础概念<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h2>
+<p>![[第五章17.png]]</p>
+<h3 id="_40">核心内容讲解<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<p>缓存位于CPU和主存之间，利用局部性原理加速数据访问：</p>
+<p><strong>核心问题</strong>：
+- <strong>如何知道数据是否存在？</strong> → 通过标签（Tag）判断
+- <strong>数据应该放在哪里？</strong> → 由映射规则决定</p>
+<p>缓存接收一系列地址访问X₁...Xₙ₋₁, Xₙ：
+- 如果数据已在缓存中（命中），直接返回
+- 如果数据不在缓存中（未命中），从主存取回并放入缓存</p>
+<h3 id="_41">核心概念<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>缓存是存储层次中第一个处理命中/未命中概念的层级</strong></p>
+</li>
+<li>
+<p><strong>命中时间（Hit Time）</strong>：从缓存中获取数据所需的时间</p>
+</li>
+<li>
+<p><strong>未命中惩罚（Miss Penalty）</strong>：缓存未命中时从下一层获取数据的时间</p>
+</li>
+</ol>
+<hr />
+<h2 id="_42">直接映射缓存<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h2>
+<p>![[第五章18.png]]</p>
+<h3 id="_43">核心内容讲解<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<p>直接映射缓存中，<strong>每个内存块只能放在唯一的位置</strong>：</p>
+<p><strong>映射规则</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>缓存位置 = 块地址 mod 缓存块数
+</code></pre></div></td></tr></table></div></p>
+<p>例如：缓存有8块，地址22 mod 8 = 6 → 地址22的块只能放在第6块。</p>
+<p><strong>地址结构</strong>：
+- <strong>Index（索引）</strong>：选择缓存中的具体行
+- <strong>Tag（标签）</strong>：用于区分映射到同一位置的不同块
+- <strong>Offset（偏移）</strong>：块内选择具体字节</p>
+<h3 id="_44">核心概念<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>直接映射的优点</strong>：硬件简单、查找速度快</p>
+</li>
+<li>
+<p><strong>直接映射的缺点</strong>：可能产生<strong>冲突未命中</strong>——两个频繁访问的块如果映射到同一位置，会相互替换</p>
+</li>
+<li>
+<p><strong>地址划分示例</strong>：32位地址，1KB缓存，16字节块 → Index占6位，Offset占4位</p>
+</li>
+</ol>
+<hr />
+<h3 id="_45">常见问题解答<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
+<p><strong>Q：为什么需要映射？</strong></p>
+<p>核心问题：Cache太小，内存太大
+- 内存容量远大于Cache，不能把所有数据都放进Cache
+- 如果不映射（全相联），每次要搜索所有Cache位置，硬件复杂、成本高
+- <strong>映射的作用：缩小搜索范围</strong>——用地址计算出"数据应该在哪个Cache位置"</p>
+<table>
+<thead>
+<tr>
+<th>映射方式</th>
+<th>需要搜索的位置</th>
+<th>硬件复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接映射</td>
+<td>1个位置</td>
+<td>最简单</td>
+</tr>
+<tr>
+<td>2路组相联</td>
+<td>2个位置</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>全相联</td>
+<td>所有位置</td>
+<td>最复杂</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Q：映射在什么时候发生？</strong></p>
+<p>映射不是"预先设置"的，而是在<strong>每次CPU访问数据时动态发生</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>CPU发出请求：&quot;我要读地址 10110 的数据&quot;
+        ↓
+第一步：地址分解 → Tag=10, Index=110
+        ↓
+第二步：映射查找 → Index=110 指向 Cache位置110  ← 映射在这里发生！
+        ↓
+    ┌───检查Valid和Tag───┐
+    │                     │
+  命中                   缺失
+    ↓                     ↓
+直接返回            从Memory加载到该位置
+</code></pre></div></td></tr></table></div>
+<p><strong>Q：怎么确认Cache位置存的就是我们要的数据？</strong></p>
+<p>映射只告诉我们"去哪个位置找"，但那个位置存的不一定是我们要的数据。需要三步验证：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>Cache每个位置的结构：
+┌────────┬─────────┬──────────────┐
+│ Valid  │   Tag   │     Data     │
+│ 有效位  │  标签   │     数据     │
+└────────┴─────────┴──────────────┘
+</code></pre></div></td></tr></table></div>
+<p>验证流程：
+1. <strong>Index定位</strong>：用地址的Index部分定位Cache位置
+2. <strong>检查Valid</strong>：Valid=1才表示位置有效
+3. <strong>比较Tag</strong>：Tag匹配才确认是你要的数据</p>
+<p><strong>类比</strong>：映射（Index）像"座位号"告诉你去哪找，Tag像"姓名牌"确认是不是你要找的人。</p>
+<hr />
+<h2 id="_46">标签与有效位<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h2>
+<h3 id="_47">核心内容讲解<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h3>
+<p>缓存需要额外信息来确定存储的数据是否有效：</p>
+<p><strong>标签（Tag）</strong>：
+- 存储块地址的高位部分
+- 用于在缓存查找时判断该行是否包含请求的地址</p>
+<p><strong>有效位（Valid Bit）</strong>：
+- 1 = 数据有效
+- 0 = 无有效数据（初始状态或已被清除）
+- 系统启动时所有有效位为0</p>
+<h3 id="_48">核心概念<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>命中条件</strong>：标签匹配 AND 有效位为1</p>
+</li>
+<li>
+<p><strong>标签存储开销</strong>：每行需要额外的Tag位</p>
+</li>
+<li>
+<p><strong>有效位的作用</strong>：区分"空"和"存有旧数据"的缓存行</p>
+</li>
+</ol>
+<hr />
+<h2 id="_49">缓存示例：初始状态<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h2>
+<p>![[第五章20.png]]</p>
+<h3 id="_50">核心内容讲解<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h3>
+<p>缓存配置：8块、每块1字、直接映射</p>
+<p><strong>初始状态表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>V</th>
+<th>Tag</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000-111</td>
+<td>N</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>所有缓存行都无效（V=N）。</p>
+<h3 id="_51">核心概念<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>初始状态是理解缓存行为的基础</strong>——首次访问任何块都会产生未命中（冷启动未命中）</p>
+</li>
+<li>
+<p><strong>有效位为N表示该行未加载任何有效数据</strong></p>
+</li>
+<li>
+<p><strong>冷启动未命中（强制性未命中）</strong>：无法避免，只能通过预取优化</p>
+</li>
+</ol>
+<hr />
+<h2 id="_52">缓存示例：访问序列<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h2>
+<p>![[第五章21.png]]![[第五章22.png]]![[第五章23.png]]</p>
+<h3 id="_53">核心内容讲解<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h3>
+<p><strong>访问地址22（二进制10 110）</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>Index = 110 (6)
+Tag = 10
+块地址 = 22
+</code></pre></div></td></tr></table></div>
+结果：Miss（未命中），加载包含地址22的块到Index=6的行。</p>
+<p><strong>访问地址26（二进制11 010）</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>Index = 010 (2)
+Tag = 11
+</code></pre></div></td></tr></table></div>
+结果：Miss（未命中），加载块到Index=2的行。</p>
+<p><strong>再次访问</strong></p>
+<table>
+<thead>
+<tr>
+<th>Word addr</th>
+<th>Binary</th>
+<th>Tag</th>
+<th>Index</th>
+<th>Hit/Miss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>10110</td>
+<td>10</td>
+<td>110</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>26</td>
+<td>11010</td>
+<td>11</td>
+<td>010</td>
+<td>Hit</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_54">核心概念<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>时间局部性体现</strong>：刚访问过的数据再次访问会命中</p>
+</li>
+<li>
+<p><strong>不同Index的访问互不影响</strong></p>
+</li>
+<li>
+<p><strong>首次访问 → Miss，再次访问 → Hit</strong></p>
+</li>
+</ol>
+<hr />
+<h2 id="_55">缓存冲突示例<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h2>
+<p>![[第五章24.png]]![[第五章25.png]]</p>
+<h3 id="_56">核心内容讲解<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h3>
+<p>继续访问序列：</p>
+<table>
+<thead>
+<tr>
+<th>Word addr</th>
+<th>Binary</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>10000</td>
+<td>Miss</td>
+</tr>
+<tr>
+<td>3</td>
+<td>00011</td>
+<td>Miss</td>
+</tr>
+<tr>
+<td>16</td>
+<td>10000</td>
+<td>Hit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>冲突情况</strong>：
+- 地址18（10 010）映射到Index=2
+- 但Index=2已被地址26占用（Tag=11）
+- 访问18会<strong>替换</strong>Index=2的块
+- 导致后续访问26时变为Miss</p>
+<h3 id="_57">核心概念<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>冲突未命中</strong>：多个块竞争同一缓存位置</p>
+</li>
+<li>
+<p><strong>直接映射的局限性</strong>：两个经常访问的块如果映射到同一位置，会严重影响命中率</p>
+</li>
+<li>
+<p><strong>解决方案</strong>：使用组相联或全相联缓存</p>
+</li>
+</ol>
+<hr />
+<h2 id="_58">地址细分<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h2>
+<p>![[第五章26.png]]</p>
+<h3 id="_59">核心内容讲解<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h3>
+<p>以64KB缓存、64字节块为例：</p>
+<p><strong>64位地址划分</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>| Tag (48位) | Index (10位) | Offset (6位) |
+</code></pre></div></td></tr></table></div></p>
+<p><strong>32位地址划分</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>| Tag (16位) | Index (10位) | Offset (6位) |
+</code></pre></div></td></tr></table></div></p>
+<p><strong>计算过程</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>块数 = 64KB ÷ 64B = 1024块
+Index位数 = log₂(1024) = 10位
+Offset位数 = log₂(64) = 6位（已包含块内字节选择）
+Tag位数 = 地址总位数 - 10 - 6
+</code></pre></div></td></tr></table></div></p>
+<p><strong>注意</strong>：Offset已经包含了块内字节定位，不需要单独的Byte Offset！</p>
+<p><strong>查找过程</strong>：
+1. 用Index从缓存中选择一行
+2. 比较该行的Tag与地址的Tag
+3. 检查Valid位
+4. 如果都匹配，用Offset从数据块中选择字节</p>
+<h3 id="_60">核心概念<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>地址划分取决于缓存大小和块大小</strong></p>
+</li>
+<li>
+<p><strong>Offset用于选择块内的具体字节</strong>，位数由块大小决定</p>
+</li>
+</ol>
+<hr />
+<h3 id="offset">Offset详解<a class="headerlink" href="#offset" title="Permanent link">&para;</a></h3>
+<p><strong>Offset由块大小决定</strong>：
+- Offset位数 = log₂(块大小)
+- 块大小4字节 → Offset 2位（块内位置0-3）
+- 块大小32字节 → Offset 5位（块内位置0-31）
+- 块大小128字节 → Offset 7位（块内位置0-127）</p>
+<p><strong>Offset的本质</strong>：
+- Offset就是地址除以块大小后的余数
+- 用二进制看：就是地址的最低几位
+- 作用：告诉缓存"要取块内的第几个字节"</p>
+<p><strong>完整地址划分计算示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>给定：缓存总容量4096字节，128块，32位地址
+
+1. 块大小 = 4096 ÷ 128 = 32字节
+2. Offset位数 = log₂(32) = 5位
+3. Index位数 = log₂(128) = 7位
+4. Tag位数 = 32 - 7 - 5 = 20位
+
+地址划分：| Tag(20位) | Index(7位) | Offset(5位) |
+</code></pre></div></td></tr></table></div></p>
+<hr />
+<h2 id="_61">块大小示例<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h2>
+<p>![[第五章27.png]]</p>
+<h3 id="_62">核心内容讲解<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h3>
+<p>示例：64块、16字节/块的缓存，地址1200映射到哪块？</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>块地址 = floor(1200/16) = 75
+块号 = 75 mod 64 = 11
+</code></pre></div></td></tr></table></div>
+<p><strong>地址位划分</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>| Tag (22位) | Index (6位) | Offset (4位) |
+</code></pre></div></td></tr></table></div></p>
+<h3 id="_63">核心概念<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>块地址用于确定映射位置</strong></p>
+</li>
+<li>
+<p><strong>块内偏移用于选择块内具体字节</strong></p>
+</li>
+<li>
+<p><strong>地址计算中的除法</strong>：floor()确保正确取整</p>
+</li>
+</ol>
+<hr />
+<h2 id="_64">块大小考虑<a class="headerlink" href="#_64" title="Permanent link">&para;</a></h2>
+<p>![[第五章28.png]]</p>
+<h3 id="_65">核心内容讲解<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h3>
+<p><strong>增加块大小的优点</strong>：
+- 更好利用空间局部性
+- 减少强制性未命中（首次访问）</p>
+<p><strong>增加块大小的缺点</strong>：
+- 固定容量下块数减少 → 更多竞争 → 增加未命中
+- 增加未命中惩罚（传输更大块）
+- 可能导致缓存污染</p>
+<h3 id="_66">核心概念<a class="headerlink" href="#_66" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>块大小的选择是权衡</strong>：过大可能导致性能反而下降</p>
+</li>
+<li>
+<p><strong>现代缓存典型块大小</strong>：32-64字节</p>
+</li>
+<li>
+<p><strong>污染效应</strong>：大块可能将其他有用的块挤出缓存</p>
+</li>
+</ol>
+<hr />
+<h2 id="_67">缓存未命中处理<a class="headerlink" href="#_67" title="Permanent link">&para;</a></h2>
+<p>![[第五章29.png]]</p>
+<h3 id="_68">核心内容讲解<a class="headerlink" href="#_68" title="Permanent link">&para;</a></h3>
+<p><strong>命中时</strong>：CPU正常执行</p>
+<p><strong>未命中时</strong>：
+1. 停顿CPU流水线（Stall）
+2. 从下一层取数据块
+3. 存入缓存
+4. 恢复CPU执行</p>
+<p><strong>指令缓存未命中</strong>：重启取指阶段</p>
+<p><strong>数据缓存未命中</strong>：依赖该数据的指令停顿，其他指令可能继续（乱序执行）</p>
+<h3 id="_69">核心概念<a class="headerlink" href="#_69" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>未命中惩罚（Miss Penalty）</strong> 是评估缓存设计的重要指标</p>
+</li>
+<li>
+<p><strong>非阻塞缓存</strong>：允许CPU在未命中期间继续执行其他指令</p>
+</li>
+<li>
+<p><strong>关键路径影响</strong>：如果未命中发生在指令依赖链上，整体性能影响更大</p>
+</li>
+</ol>
+<hr />
+<h2 id="_70">写直达策略<a class="headerlink" href="#_70" title="Permanent link">&para;</a></h2>
+<p>![[第五章30.png]]</p>
+<h3 id="_71">核心内容讲解<a class="headerlink" href="#_71" title="Permanent link">&para;</a></h3>
+<p><strong>写直达（Write-Through）</strong>：
+- 写命中时，同时更新缓存和主存
+- 主存始终与缓存一致</p>
+<p><strong>问题</strong>：每次写都需要访问主存，性能开销大</p>
+<p><strong>解决方案：写缓冲（Write Buffer）</strong>：
+- 数据先写入缓存和写缓冲
+- CPU可立即继续执行
+- 后台将数据写入主存</p>
+<p><strong>性能计算</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>CPI = 1 + 0.1 × 100 = 11（10%存储指令，每次写需100周期）
+</code></pre></div></td></tr></table></div></p>
+<h3 id="_72">核心概念<a class="headerlink" href="#_72" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>写缓冲缓解了写直达的性能问题</strong></p>
+</li>
+<li>
+<p><strong>写缓冲满时的停顿</strong>：需要等待写缓冲清空</p>
+</li>
+<li>
+<p><strong>一致性优势</strong>：缓存和内存始终一致，便于多处理器共享</p>
+</li>
+</ol>
+<hr />
+<h2 id="_73">写回策略<a class="headerlink" href="#_73" title="Permanent link">&para;</a></h2>
+<p>![[第五章31.png]]</p>
+<h3 id="_74">核心内容讲解<a class="headerlink" href="#_74" title="Permanent link">&para;</a></h3>
+<p><strong>写回（Write-Back）</strong>：
+- 写命中时，只更新缓存
+- 主存在块被替换时才更新
+- 需要<strong>脏位（Dirty Bit）</strong> 跟踪修改状态</p>
+<p><strong>替换脏块时</strong>：
+- 先将脏块写回主存，将脏块的内容存到主存对应的位置上
+- 再加载新块，将主存的数据加载到新地址的脏块
+- 可用写缓冲优化</p>
+<h3 id="_75">核心概念<a class="headerlink" href="#_75" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>写回策略显著减少对主存的写操作</strong></li>
+<li><strong>脏位</strong>：标记缓存行是否被修改过， 表示这个块<strong>被修改过</strong>，但还没写回主存。</li>
+<li><strong>适合写密集型工作负载</strong>：减少总线带宽占用</li>
+</ol>
+<hr />
+<h2 id="_76">写分配策略<a class="headerlink" href="#_76" title="Permanent link">&para;</a></h2>
+<p>![[第五章32.png]]</p>
+<h3 id="_77">核心内容讲解<a class="headerlink" href="#_77" title="Permanent link">&para;</a></h3>
+<p><strong>写分配（Write Allocate）</strong>：
+- 写未命中时，先将块从主存加载到缓存
+- 再执行写操作
+- 后续对同块其他数据的访问会命中</p>
+<p><strong>非写分配（No-Write Allocate / Write Around）</strong>：
+- 写未命中时，直接写主存
+- 不加载块到缓存</p>
+<p><strong>组合策略</strong>：
+- 写回缓存 + 写分配（常见）
+- 写直达缓存 + 非写分配（常见）</p>
+<h3 id="_78">核心概念<a class="headerlink" href="#_78" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>写分配与写回配合效果最佳</strong>：一旦块在缓存中，后续写操作都在缓存内完成</p>
+</li>
+<li>
+<p><strong>非写分配适合只写一次的大块数据</strong></p>
+</li>
+</ol>
+<h2 id="3">3. <strong>组合选择影响整体性能</strong>：需要根据工作负载特性选择<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h2 id="intrinsity-fastmath">Intrinsity FastMATH缓存配置<a class="headerlink" href="#intrinsity-fastmath" title="Permanent link">&para;</a></h2>
+<p>![[第五章33.png]]</p>
+<h3 id="_79">核心内容讲解<a class="headerlink" href="#_79" title="Permanent link">&para;</a></h3>
+<p>FastMATH是一款<strong>嵌入式MIPS处理器</strong>，采用12级流水线，每个周期都要访问指令和数据：</p>
+<p><strong>缓存配置</strong>：</p>
+<ul>
+<li><strong>分离缓存（Split Cache）</strong> ：I-cache和D-cache各自独立，可以同时访问</li>
+<li>每缓存 <strong>16KB = 256块 × 16字/块</strong></li>
+<li>D-cache支持<strong>写直达（write-through）或写回（write-back）</strong></li>
+</ul>
+<p><strong>未命中率（SPEC2000基准测试）</strong> ：</p>
+<ul>
+<li>I-cache: <strong>0.4%</strong> —— 指令的局部性很好，循环反复执行同一批指令</li>
+<li>D-cache: <strong>11.4%</strong> —— 数据访问模式更随机，局部性较差</li>
+<li>加权平均: <strong>3.2%</strong> —— 综合考虑指令和数据访问频率</li>
+</ul>
+<h3 id="_80">核心概念<a class="headerlink" href="#_80" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>指令局部性远优于数据局部性</strong>：程序在循环中反复执行相同的指令序列，而数据访问模式更不可预测</p>
+</li>
+<li>
+<p><strong>分离缓存的核心优势</strong>：I-cache和D-cache可以<strong>同一周期并行访问</strong>，不会互相等待，适合流水线处理器</p>
+</li>
+<li>
+<p><strong>SPEC基准测试</strong>：用标准工作负载评估处理器性能，比单一测试更有代表性</p>
+</li>
+</ol>
+<h2 id="intrinsity-fastmath_1">Intrinsity FastMATH缓存结构详解<a class="headerlink" href="#intrinsity-fastmath_1" title="Permanent link">&para;</a></h2>
+<p>![[第五章34.png]]</p>
+<h3 id="_81">核心内容讲解<a class="headerlink" href="#_81" title="Permanent link">&para;</a></h3>
+<p>这张图展示了FastMATH缓存的<strong>完整寻址与数据读取逻辑</strong>，是理解cache工作原理的关键图：</p>
+<p><strong>地址划分（32位地址）</strong> ：</p>
+<p>表格</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>位数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tag</td>
+<td>18位</td>
+<td>标识是哪个主存块</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>8位</td>
+<td>选中256行中的哪一行</td>
+</tr>
+<tr>
+<td>Byte offset</td>
+<td>4位</td>
+<td>选中块内16字中的哪个字节</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>为什么是这些位数？256块 → Index需要 log2​256=8 位；每块16字 = 64字节 → Byte offset需要 log2​64=6 位，其中低2位选字节、高4位选字；剩余 32−8−6=18 位做Tag。</p>
+</blockquote>
+<p><strong>Cache每行结构</strong>：</p>
+<p>表格</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>位数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V（有效位）</td>
+<td>1位</td>
+<td>标记该行是否存有有效数据</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td>18位</td>
+<td>与地址的Tag比对，确认是否命中</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>512位</td>
+<td>16字 × 32位/字 = 512位</td>
+</tr>
+</tbody>
+</table>
+<p><strong>命中判断流程</strong>：</p>
+<ol>
+<li><strong>Index</strong> → 选中cache的某一行</li>
+<li>取出该行的 <strong>Tag</strong> 与地址的Tag → 送入<strong>比较器（Compare）</strong></li>
+<li>比较结果 <strong>AND</strong> 有效位V → 输出 <strong>Hit信号</strong><ul>
+<li>Tag匹配 <strong>且</strong> V=1 → Hit ✅</li>
+<li>Tag不匹配 <strong>或</strong> V=0 → Miss ❌</li>
+</ul>
+</li>
+<li><strong>Byte offset</strong> → 通过<strong>多路选择器（Mux）</strong> 从512位Data中选出32位输出</li>
+</ol>
+<h3 id="_82">核心概念<a class="headerlink" href="#_82" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>命中 = Tag匹配 + 有效位为1</strong>：两个条件缺一不可，V=0说明该行还没加载过数据</p>
+</li>
+<li>
+<p><strong>比较器是直接映射cache的核心</strong>：只需要1个比较器（因为Index已经唯一确定了一行），硬件简单</p>
+</li>
+</ol>
+<h2 id="3-mux16byte-offsetmux">3. <strong>Mux（多路选择器）的作用</strong>：一块数据有16个字，Byte offset告诉Mux该输出哪个字<a class="headerlink" href="#3-mux16byte-offsetmux" title="Permanent link">&para;</a></h2>
+<h2 id="_83">主存支持缓存<a class="headerlink" href="#_83" title="Permanent link">&para;</a></h2>
+<p>![[第五章35.png]]</p>
+<h3 id="_84">核心内容讲解<a class="headerlink" href="#_84" title="Permanent link">&para;</a></h3>
+<p>DRAM作为主存需要与缓存协同工作：</p>
+<p><strong>DRAM特性</strong>：
+- 使用DRAM作为主存
+- 固定宽度输出（如1字）
+- 通过固定宽度的时钟总线连接
+- 总线时钟通常慢于CPU时钟</p>
+<p><strong>块读取时序（Example cache block read）</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>1 bus cycle：地址传输
+15 bus cycles per DRAM access：DRAM访问延迟
+1 bus cycle per data transfer：数据传输
+</code></pre></div></td></tr></table></div></p>
+<p><strong>4字块、1字宽DRAM的Miss Penalty计算</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>Miss Penalty = 1 + 4×15 + 4×1 = 65 bus cycles
+              ↑      ↑      ↑
+           地址传输 访问延迟  数据传输
+
+带宽 = 16 bytes / 65 cycles = 0.25 B/cycle
+</code></pre></div></td></tr></table></div></p>
+<h3 id="_85">核心概念<a class="headerlink" href="#_85" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>DRAM访问延迟远大于CPU周期</strong>：这是引入缓存的主要原因</p>
+</li>
+<li>
+<p><strong>块传输效率</strong>：一次传输多个字可以提高带宽利用率</p>
+</li>
+<li>
+<p><strong>Miss Penalty的组成</strong>：地址传输 + DRAM访问 + 数据传输</p>
+</li>
+</ol>
+<hr />
+<h2 id="_86">测量缓存性能<a class="headerlink" href="#_86" title="Permanent link">&para;</a></h2>
+<p>![[第五章36.png]]</p>
+<h3 id="_87">核心内容讲解<a class="headerlink" href="#_87" title="Permanent link">&para;</a></h3>
+<p><strong>CPU时间的组成</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>CPU Time = Program execution cycles + Memory stall cycles
+         = 程序执行周期        + 存储停顿周期
+</code></pre></div></td></tr></table></div></p>
+<p><strong>存储停顿周期的来源</strong>：
+- 主要来自缓存未命中
+- 包括从下一层取数据的时间</p>
+<p><strong>存储停顿周期计算</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>Memory stall cycles = Memory accesses/Program × Miss rate × Miss penalty
+                    = (每程序内存访问次数) × (未命中率) × (未命中惩罚)
+
+或者：
+
+Memory stall cycles = Instructions/Program × Misses/Instruction × Miss penalty
+                    = (每程序指令数) × (每指令未命中次数) × (未命中惩罚)
+</code></pre></div></td></tr></table></div></p>
+<h3 id="_88">核心概念<a class="headerlink" href="#_88" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>缓存性能直接影响CPU执行时间</strong></p>
+</li>
+<li>
+<p><strong>减少未命中率或未命中惩罚都能提升性能</strong></p>
+</li>
+<li>
+<p><strong>Miss Penalty是关键指标</strong>：取决于主存速度和块传输效率</p>
+</li>
+</ol>
+<hr />
+<h2 id="cache-performance-example">Cache Performance Example（缓存性能计算）<a class="headerlink" href="#cache-performance-example" title="Permanent link">&para;</a></h2>
+<p>![[第五章37.png]]</p>
+<h3 id="_89">已知条件<a class="headerlink" href="#_89" title="Permanent link">&para;</a></h3>
+<p>表格</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I-cache miss rate</td>
+<td>2%</td>
+<td>每条指令取指时，2%的概率未命中</td>
+</tr>
+<tr>
+<td>D-cache miss rate</td>
+<td>4%</td>
+<td>每次访问数据时，4%的概率未命中</td>
+</tr>
+<tr>
+<td>Miss penalty</td>
+<td>100 cycles</td>
+<td>每次未命中要额外等100个周期</td>
+</tr>
+<tr>
+<td>Base CPI（理想cache）</td>
+<td>2</td>
+<td>假设cache永远命中，平均每条指令2个周期</td>
+</tr>
+<tr>
+<td>Load &amp; Store占比</td>
+<td>36%</td>
+<td>所有指令中，36%需要访问内存（读/写数据）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_90">计算过程<a class="headerlink" href="#_90" title="Permanent link">&para;</a></h3>
+<p><strong>第一步：算I-cache带来的额外周期</strong></p>
+<p>每条指令都取指，所以：</p>
+<blockquote>
+<p>I-cache额外周期 = 2% × 100 = <strong>2 cycles/instruction</strong></p>
+</blockquote>
+<p><strong>第二步：算D-cache带来的额外周期</strong></p>
+<p>不是每条指令都访问数据，只有36%（Load/Store）才需要：</p>
+<blockquote>
+<p>D-cache额外周期 = 36% × 4% × 100 = <strong>1.44 cycles/instruction</strong></p>
+</blockquote>
+<p>⚠️ 这就是为什么要乘0.36——因为D-cache只在访问数据时才有机会miss，而64%的指令根本不碰数据。</p>
+<p><strong>第三步：算实际CPI</strong></p>
+<blockquote>
+<p>Actual CPI = Base CPI + I-cache额外 + D-cache额外</p>
+<p>= 2 + 2 + 1.44 = <strong>5.44</strong></p>
+</blockquote>
+<p><strong>第四步：算理想CPU快多少倍</strong></p>
+<blockquote>
+<p>理想CPU（无miss）比实际CPU快 = 5.44 / 2 = <strong>2.72倍</strong></p>
+</blockquote>
+<h3 id="_91">一句话总结<a class="headerlink" href="#_91" title="Permanent link">&para;</a></h3>
+<p>虽然cache未命中率看着很小（2%、4%），但因为miss penalty高达100个周期，最终实际性能比理想情况慢了<strong>将近3倍</strong>。所以<strong>降低miss penalty和miss rate</strong>是cache设计的核心目标。</p>
+<hr />
+<h2 id="_92">平均内存访问时间<a class="headerlink" href="#_92" title="Permanent link">&para;</a></h2>
+<p>![[第五章38.png]]</p>
+<h3 id="_93">核心内容讲解<a class="headerlink" href="#_93" title="Permanent link">&para;</a></h3>
+<p><strong>AMAT（Average Memory Access Time，平均内存访问时间）</strong>：</p>
+<div class="arithmatex">\[AMAT = Hit\ Time + Miss\ Rate \times Miss\ Penalty\]</div>
+<p><strong>命中时间（Hit time）</strong>：
+- 命中时的访问时间
+- 包括标签比较和数据选择的时间
+- 对性能同样重要！</p>
+<p><strong>未命中率（Miss Rate）</strong>：
+- 未命中次数 / 总访问次数
+- 通常以百分比表示</p>
+<p><strong>未命中惩罚（Miss Penalty）</strong>：
+- 未命中时额外花费的时间
+- 从下一层获取数据所需周期</p>
+<h3 id="amat">AMAT计算示例<a class="headerlink" href="#amat" title="Permanent link">&para;</a></h3>
+<p><strong>给定参数</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>CPU时钟周期 = 1ns
+命中时间 = 1 cycle
+未命中惩罚 = 20 cycles
+I-cache未命中率 = 5%
+</code></pre></div></td></tr></table></div></p>
+<p><strong>计算过程</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>AMAT = Hit time + Miss rate × Miss penalty
+     = 1 + 0.05 × 20
+     = 1 + 1
+     = 2ns
+</code></pre></div></td></tr></table></div></p>
+<p><strong>等价表示</strong>：平均每条指令需要2个周期</p>
+<h3 id="_94">核心概念<a class="headerlink" href="#_94" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>命中时间同样重要</strong>：即使牺牲少量命中率换取更快的命中时间，也可能改善整体性能</p>
+</li>
+<li>
+<p><strong>AMAT是评估存储层次性能的统一指标</strong></p>
+</li>
+<li>
+<p><strong>优化方向</strong>：</p>
+</li>
+<li>降低未命中率（Miss Rate ↓）</li>
+<li>降低未命中惩罚（Miss Penalty ↓）</li>
+<li>降低命中时间（Hit Time ↓）</li>
+</ol>
+<hr />
+<p>![[Pasted image 20260509194438.png]]</p>
+<h2 id="performance-summary">Performance Summary（性能总结）<a class="headerlink" href="#performance-summary" title="Permanent link">&para;</a></h2>
+<h3 id="_95">三个关键趋势<a class="headerlink" href="#_95" title="Permanent link">&para;</a></h3>
+<p><strong>① 当CPU性能提升时</strong>
+→ Miss penalty变得<strong>更显著</strong></p>
+<blockquote>
+<p>CPU越快，每个周期时间越短，但内存速度没跟上，所以miss时浪费的周期占比更大了</p>
+</blockquote>
+<p><strong>② 当Base CPI降低时</strong>
+→ 内存停顿占的时间比例<strong>更大</strong></p>
+<blockquote>
+<p>举个直观例子：</p>
+<ul>
+<li>Base CPI = 10，miss额外5个周期 → miss占比 5/15 = 33%</li>
+<li>Base CPI = 1，miss额外5个周期 → miss占比 5/6 = 83%</li>
+</ul>
+<p>CPU本身执行变快了，但miss浪费的时间没变，所以miss的"拖后腿"效应反而更明显了</p>
+</blockquote>
+<p><strong>③ 当时钟频率提高时</strong>
+→ 内存停顿浪费的CPU周期数<strong>更多</strong></p>
+<blockquote>
+<p>时钟频率翻倍 = 每个周期时间减半 = 同样的内存访问时间折算成更多CPU周期</p>
+</blockquote>
+<h3 id="_96">最终结论<a class="headerlink" href="#_96" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>评估系统性能时，绝对不能忽视cache行为。</strong></p>
+</blockquote>
+<h3 id="_97">一句话总结<a class="headerlink" href="#_97" title="Permanent link">&para;</a></h3>
+<p>CPU发展越来越快，内存速度跟不上，cache的命中率对整体性能的影响只会越来越大。过去可以忽略的miss，现在可能让CPU慢好几倍——所以cache设计越来越重要。</p>
+<hr />
+<p>![[第五章40.png]]</p>
+<h3 id="_98">核心内容讲解<a class="headerlink" href="#_98" title="Permanent link">&para;</a></h3>
+<p>相联度决定块在缓存中的可选位置数量：</p>
+<p><strong>直接映射（Direct Mapped）</strong>：
+- 每块只有1个可选位置
+- 硬件简单，速度快
+- 可能产生冲突未命中</p>
+<p><strong>n路组相联（n-way Set Associative）</strong>：
+- 每块有n个可选位置（在同一组内）
+- 组号 = 块地址 mod 组数</p>
+<p><strong>全相联（Fully Associative）</strong>：
+- 块可放在任意位置
+- 冲突未命中最少
+- 需要搜索所有条目，只适合小缓存（如TLB）</p>
+<h3 id="_99">核心概念<a class="headerlink" href="#_99" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>更高的相联度减少冲突未命中</strong></p>
+</li>
+<li>
+<p><strong>但增加复杂度和潜在延迟</strong></p>
+</li>
+</ol>
+<h2 id="3-24">3. <strong>2路和4路组相联是常见的平衡选择</strong><a class="headerlink" href="#3-24" title="Permanent link">&para;</a></h2>
+<h2 id="_100">相联缓存示例<a class="headerlink" href="#_100" title="Permanent link">&para;</a></h2>
+<p>![[第五章41.png]]</p>
+<h3 id="_101">核心内容讲解<a class="headerlink" href="#_101" title="Permanent link">&para;</a></h3>
+<p>对比4块缓存的三种组织方式：</p>
+<p><strong>直接映射</strong>：
+- 只能放在唯一位置
+- 搜索1个标签</p>
+<p><strong>2路组相联</strong>：
+- 可放在组内2个位置之一
+- 搜索2个标签</p>
+<p><strong>全相联</strong>：
+- 可放在任意位置
+- 搜索所有4个标签</p>
+<h3 id="_102">核心概念<a class="headerlink" href="#_102" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>相联度越高，需要的比较器越多</strong></p>
+</li>
+<li>
+<p><strong>但能减少冲突未命中</strong></p>
+</li>
+<li>
+<p><strong>全相联缓存适合做TLB</strong>：容量小但需要快速定位</p>
+</li>
+</ol>
+<hr />
+<h2 id="_103">相联性谱<a class="headerlink" href="#_103" title="Permanent link">&para;</a></h2>
+<p>![[第五章42.png]]</p>
+<h3 id="_104">核心内容讲解<a class="headerlink" href="#_104" title="Permanent link">&para;</a></h3>
+<p><strong>对于8条目的缓存，不同相联度的结构对比：</strong></p>
+<table>
+<thead>
+<tr>
+<th>相联度</th>
+<th>结构名称</th>
+<th>可选位置数</th>
+<th>需要的比较器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-way</td>
+<td>直接映射</td>
+<td>1个</td>
+<td>1个</td>
+</tr>
+<tr>
+<td>2-way</td>
+<td>2路组相联</td>
+<td>2个</td>
+<td>2个</td>
+</tr>
+<tr>
+<td>4-way</td>
+<td>4路组相联</td>
+<td>4个</td>
+<td>4个</td>
+</tr>
+<tr>
+<td>8-way</td>
+<td>全相联</td>
+<td>8个</td>
+<td>8个</td>
+</tr>
+</tbody>
+</table>
+<p><strong>直接映射（1-way）</strong>：
+- 8个块 = 8个独立位置
+- 每块只有唯一位置
+- Index决定位置，Tag验证身份</p>
+<p><strong>2路组相联</strong>：
+- 4个组 × 2路 = 8块
+- Index定位组，组内2选1
+- 减少冲突未命中</p>
+<p><strong>4路组相联</strong>：
+- 2个组 × 4路 = 8块
+- Index定位组，组内4选1
+- 更高的灵活性</p>
+<p><strong>全相联（8-way）</strong>：
+- 整个缓存作为1个组
+- 块可放在任意位置
+- 需要8路并行比较</p>
+<h3 id="_105">核心概念<a class="headerlink" href="#_105" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>相联度越高，灵活性越大</strong>：块可以放在更多位置</p>
+</li>
+<li>
+<p><strong>代价是硬件复杂度</strong>：需要更多比较器</p>
+</li>
+<li>
+<p><strong>选择取决于权衡</strong>：性能 vs 成本/延迟</p>
+</li>
+</ol>
+<hr />
+<h2 id="_106">相联性对比示例<a class="headerlink" href="#_106" title="Permanent link">&para;</a></h2>
+<p>![[第五章43.png]]</p>
+<h3 id="_107">核心内容讲解<a class="headerlink" href="#_107" title="Permanent link">&para;</a></h3>
+<p><strong>访问序列</strong>：0, 8, 0, 6, 8（5次访问）</p>
+<p><strong>直接映射缓存的地址分析</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>块大小 = 1 word
+缓存块数 = 8
+
+块地址计算：Block = Memory address / Block size
+
+地址0 → 块0 → Index = 0
+地址8 → 块8 → Index = 8 mod 8 = 0  ← 与地址0冲突！
+地址6 → 块6 → Index = 6
+</code></pre></div></td></tr></table></div></p>
+<p><strong>访问过程分析</strong>：</p>
+<p>表格</p>
+<table>
+<thead>
+<tr>
+<th>访问</th>
+<th>地址</th>
+<th>Index</th>
+<th>Tag</th>
+<th>命中 / 缺失</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>Miss</td>
+<td>首次访问，加载 Mem [0] 到块 0</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>0</td>
+<td>1</td>
+<td>Miss</td>
+<td>Index=0 被 Mem [0] 占用，替换后加载 Mem [8]</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>Miss</td>
+<td>Index=0 被 Mem [8] 占用，再次替换</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>Miss</td>
+<td>Index=6 独立位置</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>0</td>
+<td>1</td>
+<td>Miss</td>
+<td>Index=0 被 Mem [0] 占用，替换 Mem [0]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果</strong>：5次访问全部Miss！</p>
+<h3 id="_108">核心概念<a class="headerlink" href="#_108" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>直接映射的冲突问题</strong>：地址0和地址8映射到同一位置</p>
+</li>
+<li>
+<p><strong>反复冲突导致性能下降</strong>：同一个Index的位置被反复替换</p>
+</li>
+<li>
+<p><strong>这就是高相联度缓存的价值</strong>：提供更多可选位置</p>
+</li>
+</ol>
+<hr />
+<h2 id="_109">相联性示例续<a class="headerlink" href="#_109" title="Permanent link">&para;</a></h2>
+<p>![[第五章44.png]]</p>
+<h3 id="2">2路组相联示例<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p><strong>访问序列</strong>：0, 8, 0, 6, 8</p>
+<p><strong>缓存结构</strong>：4组 × 2路 = 8块
+- Index = Block mod 4</p>
+<p><strong>访问过程</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>访问</th>
+<th>Index</th>
+<th>组内块 0</th>
+<th>组内块 1</th>
+<th>命中 / 缺失</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>-</td>
+<td>-</td>
+<td>Miss（加载 Mem [0]）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0</td>
+<td>Mem[0]</td>
+<td>-</td>
+<td>Miss（加载 Mem [8]）</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>Mem[0]</td>
+<td>Mem[8]</td>
+<td><strong>Hit!</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>2</td>
+<td>-</td>
+<td>-</td>
+<td>Miss（加载 Mem [6]）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0</td>
+<td>Mem[8]</td>
+<td>Mem[6]</td>
+<td><strong>Hit!</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果</strong>：2次Hit，3次Miss → 显著改善！</p>
+<h3 id="_110">全相联示例<a class="headerlink" href="#_110" title="Permanent link">&para;</a></h3>
+<p><strong>访问序列</strong>：0, 8, 0, 6, 8</p>
+<p><strong>缓存结构</strong>：1个组 × 8路</p>
+<table>
+<thead>
+<tr>
+<th>访问</th>
+<th>缓存内容</th>
+<th>命中/缺失</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>[Mem[0]]</td>
+<td>Miss</td>
+</tr>
+<tr>
+<td>8</td>
+<td>[Mem[0], Mem[8]]</td>
+<td>Miss</td>
+</tr>
+<tr>
+<td>0</td>
+<td>[Mem[0], Mem[8]]</td>
+<td><strong>Hit</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>[Mem[0], Mem[8], Mem[6]]</td>
+<td>Miss</td>
+</tr>
+<tr>
+<td>8</td>
+<td>[Mem[0], Mem[8], Mem[6]]</td>
+<td><strong>Hit</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果</strong>：2次Hit，3次Miss → 与2路相同</p>
+<h3 id="_111">核心概念<a class="headerlink" href="#_111" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>2路组相联大幅减少冲突</strong>：地址0和8在同一组但不同路</li>
+<li><strong>全相联最灵活</strong>：块可放在任意位置</li>
+<li><strong>实际权衡</strong>：全相联硬件成本高，2-4路是常见选择</li>
+</ol>
+<hr />
+<h2 id="_112">相联性收益<a class="headerlink" href="#_112" title="Permanent link">&para;</a></h2>
+<p>![[第五章45.png]]</p>
+<h3 id="_113">核心内容讲解<a class="headerlink" href="#_113" title="Permanent link">&para;</a></h3>
+<p><strong>实验配置</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>64KB D-cache
+16-word blocks (64字节/块)
+SPEC2000基准测试
+</code></pre></div></td></tr></table></div></p>
+<p><strong>不同相联度的未命中率</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>相联度</th>
+<th>未命中率</th>
+<th>相对减少</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-way</td>
+<td>10.3%</td>
+<td>基准</td>
+</tr>
+<tr>
+<td>2-way</td>
+<td>8.6%</td>
+<td>-16.5%</td>
+</tr>
+<tr>
+<td>4-way</td>
+<td>8.3%</td>
+<td>-19.4%</td>
+</tr>
+<tr>
+<td>8-way</td>
+<td>8.1%</td>
+<td>-21.4%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键观察</strong>：
+- 增加相联度确实降低未命中率
+- 但<strong>收益递减</strong>：2-way到4-way改善很小
+- 8-way与4-way几乎没区别</p>
+<h3 id="_114">核心概念<a class="headerlink" href="#_114" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>2-way通常是最优性价比</strong>：改善显著，成本增加不多</p>
+</li>
+<li>
+<p><strong>4-8路是L1缓存常见选择</strong>：平衡性能和延迟</p>
+</li>
+<li>
+<p><strong>收益递减的原因</strong>：大多数冲突在少数热点位置</p>
+</li>
+</ol>
+<hr />
+<h2 id="_115">组相联缓存硬件结构<a class="headerlink" href="#_115" title="Permanent link">&para;</a></h2>
+<p>![[第五章46.png]]</p>
+<h3 id="_116">核心内容讲解<a class="headerlink" href="#_116" title="Permanent link">&para;</a></h3>
+<p><strong>地址划分（4路组相联示例）</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>┌────────────────────┬──────────┬──────────┐
+│       Tag          │  Index   │  Offset  │
+│     22位           │   8位    │   2位    │
+│  (31...12)        │ (11...3) │  (1...0) │
+└────────────────────┴──────────┴──────────┘
+</code></pre></div></td></tr></table></div></p>
+<p><strong>硬件结构</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>1. Index选组：用8位Index从256个组中选择1个
+        ↓
+2. Tag并行比较：4路的Tag同时与地址Tag比较
+        ↓
+3. 命中判断：比较结果+Valid位 → 与门 → 或门 → Hit
+        ↓
+4. 数据选择：4选1多路选择器 → 输出数据
+</code></pre></div></td></tr></table></div></p>
+<p><strong>关键组件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tag 比较器 (×4)</td>
+<td>同时比较 4 路 Tag</td>
+</tr>
+<tr>
+<td>与门 (×4)</td>
+<td>Tag 匹配 AND Valid=1</td>
+</tr>
+<tr>
+<td>或门</td>
+<td>任意一路命中即为命中</td>
+</tr>
+<tr>
+<td>4 选 1 多路选择器</td>
+<td>根据命中信号选择数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_117">核心概念<a class="headerlink" href="#_117" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>相联度越高，比较器越多</strong>：硬件复杂度线性增长</p>
+</li>
+<li>
+<p><strong>并行比较是性能关键</strong>：所有候选块同时检查</p>
+</li>
+<li>
+<p><strong>延迟随相联度增加</strong>：更多比较器可能拉长关键路径</p>
+</li>
+</ol>
+<hr />
+<h2 id="_118">替换策略概述<a class="headerlink" href="#_118" title="Permanent link">&para;</a></h2>
+<p>![[第五章47.png]]</p>
+<h3 id="_119">核心内容讲解<a class="headerlink" href="#_119" title="Permanent link">&para;</a></h3>
+<p>当缓存组已满且需要加载新块时，必须选择一个块替换：</p>
+<p><strong>直接映射缓存</strong>：
+- 没有选择——只有唯一位置
+- 必须替换该位置的原块</p>
+<p><strong>组相联缓存</strong>：
+- 优先选择<strong>无效块</strong>（Valid=0）
+- 如果没有无效块，在组内选择一个块替换</p>
+<p>常见策略包括 <strong>LRU</strong>（最久未用）、<strong>随机</strong>、<strong>FIFO</strong>（先进先出）和<strong>伪LRU</strong>，核心权衡是命中率 vs 硬件复杂度。关于各策略的具体实现细节和对比，详见后文"缓存替换策略详解"一节。</p>
+<h3 id="_120">核心概念<a class="headerlink" href="#_120" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>替换策略直接影响缓存命中率</strong></p>
+</li>
+<li>
+<p><strong>高相联度缓存常用伪LRU</strong>：权衡性能和硬件成本</p>
+</li>
+</ol>
+<hr />
+<h2 id="_121">多级缓存<a class="headerlink" href="#_121" title="Permanent link">&para;</a></h2>
+<p>![[第五章48.png]]</p>
+<h3 id="_122">核心内容讲解<a class="headerlink" href="#_122" title="Permanent link">&para;</a></h3>
+<p>现代处理器采用<strong>多级缓存</strong>来平衡速度和容量：</p>
+<p><strong>第一级缓存（L1）</strong>：
+- 紧邻CPU
+- 最小，但最快
+- 通常1-2个周期访问</p>
+<p><strong>第二级缓存（L2）</strong>：
+- 服务于L1的未命中
+- 更大，但稍慢
+- 比主存快但比L1慢</p>
+<p><strong>第三级缓存（L3，可选）</strong>：
+- 高端系统才有
+- 更大，进一步减少主存访问</p>
+<h3 id="_123">性能对比<a class="headerlink" href="#_123" title="Permanent link">&para;</a></h3>
+<p><strong>单级L1缓存的问题</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>基础CPI = 1
+L1未命中率 = 2%
+未命中惩罚 = 100ns / 0.25ns = 400周期
+有效CPI = 1 + 0.02 × 400 = 9
+</code></pre></div></td></tr></table></div></p>
+<p><strong>添加L2缓存后</strong>：
+- 大幅减少对主存的访问
+- 有效降低平均内存访问时间</p>
+<h3 id="_124">核心概念<a class="headerlink" href="#_124" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>多级缓存通过在速度和容量间取得更好平衡</strong></p>
+</li>
+<li>
+<p><strong>L1命中率高但容量小，L2容量大但命中率较低</strong></p>
+</li>
+<li>
+<p><strong>全局未命中率</strong>：通过L1后仍miss的比例（到达主存）</p>
+</li>
+</ol>
+<hr />
+<h2 id="_125">多级缓存示例<a class="headerlink" href="#_125" title="Permanent link">&para;</a></h2>
+<p>![[第五章49.png]]![[第五章50.png]]</p>
+<h3 id="_126">给定参数<a class="headerlink" href="#_126" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>CPU基础CPI = 1，时钟频率 = 4GHz
+每指令L1未命中率 = 2%
+主存访问时间 = 100ns
+</code></pre></div></td></tr></table></div>
+<p><strong>周期换算</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>时钟周期 = 1 / 4GHz = 0.25ns
+100ns = 100 / 0.25 = 400周期
+</code></pre></div></td></tr></table></div></p>
+<h3 id="l1">仅L1缓存<a class="headerlink" href="#l1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>Miss penalty = 400 cycles
+有效CPI = 1 + 0.02 × 400 = 9
+</code></pre></div></td></tr></table></div>
+<h3 id="l2">添加L2缓存后<a class="headerlink" href="#l2" title="Permanent link">&para;</a></h3>
+<p><strong>L2参数</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>L2访问时间 = 5ns = 20周期
+L2全局未命中率 = 0.5%（到达主存的比例）
+</code></pre></div></td></tr></table></div></p>
+<p><strong>Miss penalty 分析</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>惩罚</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 命中</td>
+<td>0 周期</td>
+</tr>
+<tr>
+<td>L1 Miss, L2 Hit</td>
+<td>20 周期</td>
+</tr>
+<tr>
+<td>L1 Miss, L2 Miss</td>
+<td>400 周期</td>
+</tr>
+</tbody>
+</table>
+<p><strong>CPI计算</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>CPI = 基础CPI + L1 Miss×L2惩罚 + 全局Miss×内存惩罚
+    = 1 + 0.02 × 20 + 0.005 × 400
+    = 1 + 0.4 + 2.0
+    = 3.4
+</code></pre></div></td></tr></table></div></p>
+<p><strong>性能提升</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>性能比 = 9 / 3.4 = 2.6倍
+</code></pre></div></td></tr></table></div></p>
+<h3 id="_127">核心概念<a class="headerlink" href="#_127" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>L2缓存带来2.6倍性能提升</strong>：显著减少主存访问</p>
+</li>
+<li>
+<p><strong>每级设计目标不同</strong>：</p>
+</li>
+<li>L1：最小化命中时间（快速）</li>
+<li>
+<p>L2/L3：最小化未命中率（高效）</p>
+</li>
+<li>
+<p><strong>包含策略（Inclusive vs Exclusive）</strong>：L2是否包含L1的内容</p>
+</li>
+</ol>
+<hr />
+<h2 id="_128">多级缓存设计考虑<a class="headerlink" href="#_128" title="Permanent link">&para;</a></h2>
+<p>![[第五章51.png]]</p>
+<h3 id="_129">各级缓存的设计重点<a class="headerlink" href="#_129" title="Permanent link">&para;</a></h3>
+<p><strong>L1缓存（第一级）</strong>：
+- 核心目标：<strong>最小化命中时间</strong>
+- 块大小相对较小
+- 通常离CPU最近，必须快</p>
+<p><strong>L2/L3缓存（后续级）</strong>：
+- 核心目标：<strong>低未命中率</strong>，避免访问主存
+- 命中时间的影响较小（因为已经在L1之后）
+- 可以用更大的块和更高的相联度</p>
+<h3 id="_130">设计权衡<a class="headerlink" href="#_130" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>L1</th>
+<th>L2/L3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>容量</td>
+<td>小（32-64KB）</td>
+<td>大（256KB-数MB）</td>
+</tr>
+<tr>
+<td>块大小</td>
+<td>较小</td>
+<td>较大</td>
+</tr>
+<tr>
+<td>相联度</td>
+<td>通常4-8路</td>
+<td>可能更高</td>
+</tr>
+<tr>
+<td>命中时间</td>
+<td>关键（1-2周期）</td>
+<td>次要（数十周期）</td>
+</tr>
+<tr>
+<td>未命中率目标</td>
+<td>尽量低</td>
+<td>尽量低</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_131">典型配置<a class="headerlink" href="#_131" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>L1块大小 &lt; L2块大小  （如：32B vs 64B）
+L1容量 &lt; L2容量      （如：32KB vs 256KB）
+L1相联度 ≥ L2相联度  （L1需要更快的访问）
+</code></pre></div></td></tr></table></div>
+<h3 id="_132">核心概念<a class="headerlink" href="#_132" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>分离vs统一L2</strong>：统一缓存灵活但可能成为瓶颈</p>
+</li>
+<li>
+<p><strong>片上vs片外L2</strong>：片上更快但占用芯片面积</p>
+</li>
+<li>
+<p><strong>性能优化需要全局考虑</strong>：不能只优化某一层</p>
+</li>
+</ol>
+<hr />
+<h2 id="cpu">与高级CPU的交互<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
+<p>![[第五章52.png]]</p>
+<h3 id="_133">核心内容讲解<a class="headerlink" href="#_133" title="Permanent link">&para;</a></h3>
+<p><strong>乱序执行CPU（Out-of-order）</strong> 可以在缓存未命中期间继续执行其他指令：</p>
+<p><strong>关键机制</strong>：
+- 待存储指令留在Load/Store单元
+- 依赖指令在保留站中等待
+- 独立指令继续执行</p>
+<h3 id="_134">缓存未命中的影响<a class="headerlink" href="#_134" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>传统观点：
+缓存Miss → CPU停顿 → 性能下降
+
+现代观点：
+缓存Miss → 其他独立指令继续执行 → 性能影响取决于程序数据流
+</code></pre></div></td></tr></table></div>
+<p><strong>好消息</strong>：许多指令可以在Miss期间完成</p>
+<p><strong>坏消息</strong>：分析变得复杂，需要系统模拟</p>
+<h3 id="_135">核心概念<a class="headerlink" href="#_135" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>乱序执行减少缓存Miss的直接影响</strong>：CPU不必完全停顿</p>
+</li>
+<li>
+<p><strong>性能分析更复杂</strong>：取决于程序的数据依赖关系</p>
+</li>
+<li>
+<p><strong>评估需要模拟</strong>：很难用公式精确预测</p>
+</li>
+</ol>
+<hr />
+<h2 id="_136">与软件的交互<a class="headerlink" href="#_136" title="Permanent link">&para;</a></h2>
+<p>![[第五章53.png]]</p>
+<h3 id="_137">核心内容讲解<a class="headerlink" href="#_137" title="Permanent link">&para;</a></h3>
+<p><strong>缓存未命中取决于内存访问模式</strong>：
+- 算法行为影响访问模式
+- 编译器优化可以改善访问局部性</p>
+<h3 id="_138">算法对比示例<a class="headerlink" href="#_138" title="Permanent link">&para;</a></h3>
+<p>对不同规模数据进行排序的性能对比：</p>
+<p><strong>Radix Sort vs Quicksort</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据规模</th>
+<th>Radix Sort</th>
+<th>Quick Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instructions/Item</td>
+<td>大规模</td>
+<td>较少</td>
+<td>较多</td>
+</tr>
+<tr>
+<td>Clock Cycles/Item</td>
+<td>大规模</td>
+<td>更少</td>
+<td>更多</td>
+</tr>
+<tr>
+<td>Cache Misses/Item</td>
+<td>大规模</td>
+<td>明显更少</td>
+<td>更多</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_139">编译器优化<a class="headerlink" href="#_139" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>优化方向：
+1. 改善数据布局（结构体packing）
+2. 循环交换（提升空间局部性）
+3. 数组分块（Tile）
+4. 预取（Prefetch）
+</code></pre></div></td></tr></table></div>
+<h3 id="_140">核心概念<a class="headerlink" href="#_140" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>算法选择影响缓存性能</strong>：不同算法有不同的访问模式</p>
+</li>
+<li>
+<p><strong>编译器可以优化内存访问</strong>：减少miss率</p>
+</li>
+<li>
+<p><strong>软件层面的优化往往比硬件更有效</strong>：从源头改善局部性</p>
+</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1891 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>损失函数 - 作业解析 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              损失函数 - 作业解析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业概览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、正态分布假设下的负对数似然
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、正态分布假设下的负对数似然">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        推导过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与最小二乘损失的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、二分类问题的负对数似然
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、二分类问题的负对数似然">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 似然函数与负对数似然
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 损失函数与预测准确性的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、多分类问题的负对数似然
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、多分类问题的负对数似然">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 似然函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 负对数似然损失（多分类交叉熵）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Softmax输出合法概率分布的原因
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、交叉熵与KL散度
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、交叉熵与KL散度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-kl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 交叉熵与KL散度的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 证明：最小化交叉熵 ⟺ 最小化负对数似然
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 该等价性的意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、异方差回归
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、异方差回归">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        负对数似然损失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        均值项与方差项的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#von-mises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、von Mises分布（风向预测）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、von Mises分布（风向预测）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为何不宜使用正态分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. κ固定时的负对数似然
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. κ也由网络预测时
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laplace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、Laplace分布（鲁棒回归）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、Laplace分布（鲁棒回归）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-laplace-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Laplace vs 正态分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. b为常数时的负对数似然
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 等价于哪种常见损失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 对异常值不敏感的数学原因
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、多输出预测（气象预测）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、多输出预测（气象预测）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 激活函数设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 联合似然函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 负对数似然损失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 同方差假设下的变化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 推断阶段的点预测
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心公式速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="-">损失函数 - 作业解析<a class="headerlink" href="#-" title="Permanent link">&para;</a></h1>
+<h2 id="_1">作业概览<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本作业要求从最大似然估计出发，推导各类任务的负对数似然损失函数，考察对损失函数理论基础的掌握。</p>
+<hr />
+<h2 id="_2">一、正态分布假设下的负对数似然<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>设模型预测输出服从正态分布 <span class="arithmatex">\(N(y|\mu=f(x,\phi),\sigma^2)\)</span>，σ² 为常数。</p>
+<h3 id="_4">推导过程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>1. 写出似然函数：</strong></p>
+<div class="arithmatex">\[L(\phi)=\prod_{i=1}^{I}Pr(y_i|f(x_i,\phi))=\prod_{i=1}^{I}\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{(y_i-f(x_i,\phi))^2}{2\sigma^2}\right]\]</div>
+<p><strong>2. 取对数：</strong></p>
+<div class="arithmatex">\[\log L(\phi)=\sum_{i=1}^{I}\left[-\frac{1}{2}\log(2\pi\sigma^2)-\frac{(y_i-f(x_i,\phi))^2}{2\sigma^2}\right]\]</div>
+<p><strong>3. 负对数似然：</strong></p>
+<div class="arithmatex">\[-\log L(\phi)=\sum_{i=1}^{I}\frac{(y_i-f(x_i,\phi))^2}{2\sigma^2}+C\]</div>
+<p>其中 <span class="arithmatex">\(C=\frac{I}{2}\log(2\pi\sigma^2)\)</span> 为常数。</p>
+<h3 id="_5">与最小二乘损失的关系<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>当 σ² 为常数时，忽略常数项 <span class="arithmatex">\(1/(2\sigma^2)\)</span></li>
+<li><strong>负对数似然 ⟺ 最小二乘损失</strong> <span class="arithmatex">\(\sum(y_i-f(x_i,\phi))^2\)</span></li>
+</ul>
+<hr />
+<h2 id="_6">二、二分类问题的负对数似然<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">问题<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>神经网络输出经 sigmoid 得到正类概率 <span class="arithmatex">\(\lambda=\sigma(f(x,\phi))\)</span>。</p>
+<h3 id="1">1. 似然函数与负对数似然<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p><strong>似然函数（Bernoulli分布）：</strong></p>
+<div class="arithmatex">\[Pr(y|\lambda)=\lambda^y(1-\lambda)^{1-y}\]</div>
+<p><strong>负对数似然损失：</strong></p>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\left[y_i\log\lambda_i+(1-y_i)\log(1-\lambda_i)\right]\]</div>
+<p>其中 <span class="arithmatex">\(\lambda_i=\sigma(f(x_i,\phi))\)</span></p>
+<h3 id="2">2. 损失函数与预测准确性的关系<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>最小化损失</strong> ⟺ <strong>最大化似然</strong> ⟺ <strong>预测概率更接近真实标签</strong></li>
+<li>当 y=1 时：损失 = −log(λ)，λ 越大损失越小</li>
+<li>当 y=0 时：损失 = −log(1−λ)，λ 越小损失越小</li>
+<li><strong>本质</strong>：让模型对正类样本预测高概率，对负类样本预测低概率</li>
+</ul>
+<hr />
+<h2 id="_8">三、多分类问题的负对数似然<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">问题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>网络输出 <span class="arithmatex">\(f(x,\phi) \in \mathbb{R}^K\)</span>，经 softmax 得 <span class="arithmatex">\(\lambda_k\)</span>。</p>
+<h3 id="1_1">1. 似然函数<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[Pr(y=k|x)=\lambda_k=\frac{\exp(f_k(x,\phi))}{\sum_{k'=1}^{K}\exp(f_{k'}(x,\phi))}\]</div>
+<p>对于样本 <span class="arithmatex">\((x_i, y_i)\)</span>，似然为：</p>
+<div class="arithmatex">\[Pr(y_i|x_i)=\prod_{k=1}^{K}\lambda_{ik}^{[y_i=k]}\]</div>
+<p>即仅目标类别概率为1，其余为0。</p>
+<h3 id="2_1">2. 负对数似然损失（多分类交叉熵）<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\log Pr(y_i|f(x_i,\phi))=-\sum_{i=1}^{I}\log\lambda_{i,y_i}\]</div>
+<p>展开形式：</p>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\left[f_{y_i}(x_i,\phi)-\log\sum_{k'=1}^{K}\exp(f_{k'}(x_i,\phi))\right]\]</div>
+<h3 id="3-softmax">3. Softmax输出合法概率分布的原因<a class="headerlink" href="#3-softmax" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\sum_{k=1}^{K}\lambda_k=\sum_{k=1}^{K}\frac{\exp(z_k)}{\sum_{k'=1}^{K}\exp(z_{k'})}=\frac{\sum_{k=1}^{K}\exp(z_k)}{\sum_{k'=1}^{K}\exp(z_{k'})}=1\]</div>
+<ul>
+<li><strong>非负性</strong>：exp(z) &gt; 0</li>
+<li><strong>归一性</strong>：所有类别概率和为1</li>
+</ul>
+<hr />
+<h2 id="kl">四、交叉熵与KL散度<a class="headerlink" href="#kl" title="Permanent link">&para;</a></h2>
+<h3 id="_10">问题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>已知经验分布 <span class="arithmatex">\(q(y)=\frac{1}{I}\sum_{i=1}^{I}\delta(y-y_i)\)</span>，模型分布 <span class="arithmatex">\(Pr(y|\theta)\)</span>。</p>
+<h3 id="1-kl">1. 交叉熵与KL散度的关系<a class="headerlink" href="#1-kl" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[KL(q\|Pr)=\int q(y)\log\frac{q(y)}{Pr(y|\theta)}dy=H(q,Pr)-H(q)\]</div>
+<p>即：</p>
+<div class="arithmatex">\[H(q,Pr)=H(q)+KL(q\|Pr)\]</div>
+<h3 id="2_2">2. 证明：最小化交叉熵 ⟺ 最小化负对数似然<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[H(q,Pr)=-\int q(y)\log Pr(y|\theta)dy\]</div>
+<p>代入经验分布：</p>
+<div class="arithmatex">\[H(q,Pr)=-\int\left(\frac{1}{I}\sum_{i=1}^{I}\delta(y-y_i)\right)\log Pr(y|\theta)dy=-\frac{1}{I}\sum_{i=1}^{I}\log Pr(y_i|\theta)\]</div>
+<ul>
+<li>忽略常数 <span class="arithmatex">\(1/I\)</span></li>
+<li><strong>最小化交叉熵</strong> ⟺ <strong>最小化</strong> <span class="arithmatex">\(\sum_{i=1}^{I}\log Pr(y_i|\theta)\)</span> ⟺ <strong>最小化负对数似然</strong></li>
+</ul>
+<h3 id="3">3. 该等价性的意义<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>提供了损失函数的<strong>信息论解释</strong></li>
+<li>统一了概率建模与分布匹配两种视角</li>
+<li>为选择损失函数提供理论依据</li>
+</ul>
+<hr />
+<h2 id="_11">五、异方差回归<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12">问题<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>网络同时预测均值 <span class="arithmatex">\(\mu=f_1(x,\phi)\)</span> 和标准差 <span class="arithmatex">\(\sigma=f_2(x,\phi)\)</span>，取 <span class="arithmatex">\(\sigma=\exp(f_2(x,\phi))\)</span>。</p>
+<h3 id="_13">负对数似然损失<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\log\left[\frac{1}{\sqrt{2\pi}\sigma_i}\exp\left(-\frac{(y_i-\mu_i)^2}{2\sigma_i^2}\right)\right]\]</div>
+<p>展开：</p>
+<div class="arithmatex">\[L(\phi)=\sum_{i=1}^{I}\left[\frac{(y_i-\mu_i)^2}{2\sigma_i^2}+\log\sigma_i+\frac{1}{2}\log(2\pi)\right]\]</div>
+<h3 id="_14">均值项与方差项的作用<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\frac{(y_i-\mu_i)^2}{2\sigma_i^2}\)</span></td>
+<td><strong>均方误差项</strong>：惩罚预测值与真实值的偏差，方差大时惩罚减轻</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\log\sigma_i\)</span></td>
+<td><strong>正则化项</strong>：防止方差过大，保持模型稳定性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="von-mises">六、von Mises分布（风向预测）<a class="headerlink" href="#von-mises" title="Permanent link">&para;</a></h2>
+<h3 id="_15">问题<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>风向 <span class="arithmatex">\(y \in (-\pi, \pi]\)</span>，服从冯·米塞斯分布：</p>
+<div class="arithmatex">\[Pr(y|\mu,\kappa)=\frac{1}{2\pi I_0(\kappa)}\exp(\kappa\cos(y-\mu))\]</div>
+<h3 id="1_2">1. 为何不宜使用正态分布<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>正态分布定义在 <span class="arithmatex">\((-\infty, +\infty)\)</span>，不适用于周期性数据</li>
+<li>正态分布无法正确处理角度的"无缝连接"（如359°和1°）</li>
+</ul>
+<h3 id="2_3">2. κ固定时的负对数似然<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\log Pr(y_i|\mu_i,\kappa)\]</div>
+<div class="arithmatex">\[=-\sum_{i=1}^{I}\left[-\log(2\pi I_0(\kappa))+\kappa\cos(y_i-\mu_i)\right]\]</div>
+<div class="arithmatex">\[=I\log(2\pi I_0(\kappa))-\kappa\sum_{i=1}^{I}\cos(y_i-\mu_i)\]</div>
+<h3 id="3_1">3. κ也由网络预测时<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\kappa=\exp(f_\kappa(x,\phi))\)</span>，损失函数变为：</p>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\left[-\log(2\pi I_0(\kappa_i))+\kappa_i\cos(y_i-\mu_i)\right]\]</div>
+<p>其中 <span class="arithmatex">\(\kappa_i=\exp(f_\kappa(x_i,\phi))\)</span></p>
+<hr />
+<h2 id="laplace">七、Laplace分布（鲁棒回归）<a class="headerlink" href="#laplace" title="Permanent link">&para;</a></h2>
+<h3 id="_16">问题<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>使用 Laplace 分布建模输出：</p>
+<div class="arithmatex">\[Pr(y|\mu,b)=\frac{1}{2b}\exp\left(-\frac{|y-\mu|}{b}\right)\]</div>
+<h3 id="1-laplace-vs">1. Laplace vs 正态分布<a class="headerlink" href="#1-laplace-vs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Laplace分布</th>
+<th>正态分布</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>尾部</td>
+<td>更重（对离群点更鲁棒）</td>
+<td>较轻</td>
+</tr>
+<tr>
+<td>峰值</td>
+<td>更尖</td>
+<td>较平缓</td>
+</tr>
+<tr>
+<td>梯度</td>
+<td>对大误差恒定</td>
+<td>对大误差递减</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-b">2. b为常数时的负对数似然<a class="headerlink" href="#2-b" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\log\left[\frac{1}{2b}\exp\left(-\frac{|y_i-\mu_i|}{b}\right)\right]\]</div>
+<div class="arithmatex">\[=\frac{1}{b}\sum_{i=1}^{I}|y_i-\mu_i|+C\]</div>
+<p>其中 <span class="arithmatex">\(C=I\log(2b)\)</span> 为常数。</p>
+<h3 id="3_2">3. 等价于哪种常见损失<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h3>
+<p><strong>等价于 MAE（平均绝对误差）</strong>：</p>
+<div class="arithmatex">\[L(\phi)=\frac{1}{b}\sum_{i=1}^{I}|y_i-f(x_i,\phi)|+C\]</div>
+<h3 id="4">4. 对异常值不敏感的数学原因<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>MAE 对所有误差的梯度绝对值恒为 <span class="arithmatex">\(1/b\)</span></li>
+<li>MSE 对大误差的梯度为 <span class="arithmatex">\(\frac{2|y-\mu|}{b^2}(y-\mu)\)</span>，会很大</li>
+<li><strong>本质</strong>：MAE 使用 L1 范数，MSE 使用 L2 范数，L1 对离群点更鲁棒</li>
+</ul>
+<hr />
+<h2 id="_17">八、多输出预测（气象预测）<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<h3 id="_18">问题<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>同时预测：
+- <span class="arithmatex">\(y_1 \in \mathbb{R}\)</span>：温度（连续值）
+- <span class="arithmatex">\(y_2 \in \{0,1\}\)</span>：是否降水（二分类）
+- <span class="arithmatex">\(f_5(x,\phi)\)</span>：风向集中参数 κ</p>
+<h3 id="1_3">1. 激活函数设计<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>输出</th>
+<th>分布</th>
+<th>激活函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>温度 y₁</td>
+<td>正态分布</td>
+<td>无（可正可负）</td>
+</tr>
+<tr>
+<td>降水 y₂</td>
+<td>Bernoulli</td>
+<td>Sigmoid（概率）</td>
+</tr>
+<tr>
+<td>风向 κ</td>
+<td>von Mises</td>
+<td>Exp（保证正值）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2_4">2. 联合似然函数<a class="headerlink" href="#2_4" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[Pr(y_1,y_2,y_3|x,\phi)=Pr(y_1|\mu_1,\sigma^2)\cdot Pr(y_2|\lambda_2)\cdot Pr(y_3|\mu_3,\kappa)\]</div>
+<p>基于独立性假设：</p>
+<div class="arithmatex">\[=N(y_1|\mu_1,\sigma^2)\cdot Bernoulli(y_2|\lambda_2)\cdot von Mises(y_3|\mu_3,\kappa)\]</div>
+<h3 id="3_3">3. 负对数似然损失<a class="headerlink" href="#3_3" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L(\phi)=-\sum_{i=1}^{I}\left[\log N(y_{i1}|\mu_{i1},\sigma^2)+\log Bernoulli(y_{i2}|\lambda_{i2})+\log von Mises(y_{i3}|\mu_{i3},\kappa_i)\right]\]</div>
+<p>展开：</p>
+<div class="arithmatex">\[L(\phi)=\sum_{i=1}^{I}\left[\frac{(y_{i1}-\mu_{i1})^2}{2\sigma^2}+\frac{1}{2}\log(2\pi\sigma^2)-y_{i2}\log\lambda_{i2}-(1-y_{i2})\log(1-\lambda_{i2})+\kappa_i\cos(y_{i3}-\mu_{i3})+\log(2\pi I_0(\kappa_i))\right]\]</div>
+<h3 id="4_1">4. 同方差假设下的变化<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<p>若温度方差不依赖于输入（<span class="arithmatex">\(\sigma^2\)</span> 固定）：</p>
+<div class="arithmatex">\[L(\phi)=\sum_{i=1}^{I}\left[\frac{(y_{i1}-\mu_{i1})^2}{2\sigma^2}\right]+\text{其他项（不变）}\]</div>
+<p>简化为标准的均方误差项。</p>
+<h3 id="5">5. 推断阶段的点预测<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>输出</th>
+<th>点预测方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>温度 y₁</td>
+<td><span class="arithmatex">\(\hat{y}_1=\mu_1=f_1(x,\hat{\phi})\)</span>（均值）</td>
+</tr>
+<tr>
+<td>降水 y₂</td>
+<td><span class="arithmatex">\(\hat{y}_2=\mathbb{I}[\lambda_2\geq0.5]\)</span></td>
+</tr>
+<tr>
+<td>风向 y₃</td>
+<td><span class="arithmatex">\(\hat{y}_3=\mu_3=f_\mu(x,\hat{\phi})\)</span>（方向均值）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_19">核心公式速查<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>分布</th>
+<th>损失函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回归（同方差）</td>
+<td><span class="arithmatex">\(N(\mu,\sigma^2)\)</span></td>
+<td><span class="arithmatex">\(\sum(y-\mu)^2\)</span></td>
+</tr>
+<tr>
+<td>回归（异方差）</td>
+<td><span class="arithmatex">\(N(\mu,\sigma^2)\)</span></td>
+<td><span class="arithmatex">\(\sum\frac{(y-\mu)^2}{2\sigma^2}+\log\sigma\)</span></td>
+</tr>
+<tr>
+<td>二分类</td>
+<td>Bernoulli</td>
+<td><span class="arithmatex">\(-\sum[y\log\lambda+(1-y)\log(1-\lambda)]\)</span></td>
+</tr>
+<tr>
+<td>多分类</td>
+<td>Categorical</td>
+<td><span class="arithmatex">\(-\sum\log\lambda_{y_i}\)</span></td>
+</tr>
+<tr>
+<td>鲁棒回归</td>
+<td>Laplace</td>
+<td>$\sum</td>
+</tr>
+<tr>
+<td>方向预测</td>
+<td>von Mises</td>
+<td><span class="arithmatex">\(-\sum[\kappa\cos(y-\mu)+\log I_0(\kappa)]\)</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3508 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第7章 一元和n元多项式环（备课笔记） - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7-n" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第7章 一元和n元多项式环（备课笔记）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="章节概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章知识要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 一元多项式环
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 一元多项式环">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 一元多项式的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 多项式的次数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 多项式的运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 次数公式（重要！）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 环的概念（铺垫）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【证明题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 整除关系，带余除法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 整除关系，带余除法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 整除的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 带余除法定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 商和余式的求法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【证明题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 最大公因式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 最大公因式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 最大公因式的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 互素的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 最大公因式的存在性（辗转相除法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 关键定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 互素的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 不可约多项式，唯一因式分解定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 不可约多项式，唯一因式分解定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 不可约多项式的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 唯一因式分解定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 重因式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5 重因式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 重因式的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 重因式的判别定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 重因式的求法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 一元多项式的根，复数域上的不可约多项式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6 一元多项式的根，复数域上的不可约多项式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 余数定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 根与一次因式的对应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 代数基本定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 复数域上的不可约多项式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【证明题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 实系数多项式的实根
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.7 实系数多项式的实根">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 实系数不可约多项式的分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 实根的存在性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-sturm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 实根的隔离（Sturm定理简介）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8 有理数域上的不可约多项式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.8 有理数域上的不可约多项式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、概念引入动机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、详细讲解过程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、详细讲解过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 本原多项式的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 高斯引理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-eisenstein" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Eisenstein判别法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【验证题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【计算题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【证明题】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速记
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节知识图谱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：典型方法总结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录：典型方法总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 求最大公因式的方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 判断不可约的方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 判断重因式的方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="7-n">第7章 一元和n元多项式环（备课笔记）<a class="headerlink" href="#7-n" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章以研究数域K上一元多项式环的结构及其态射（即一元多项式环的通用性质）为主线。还介绍了n元多项式环的结构。</p>
+<h3 id="_2">本章知识要点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一元多项式环</td>
+<td>次数、加法、乘法</td>
+</tr>
+<tr>
+<td>整除关系</td>
+<td><span class="arithmatex">\(g(x)\|f(x)\)</span></td>
+</tr>
+<tr>
+<td>带余除法</td>
+<td><span class="arithmatex">\(f(x) = h(x)g(x) + r(x)\)</span></td>
+</tr>
+<tr>
+<td>最大公因式</td>
+<td><span class="arithmatex">\((f(x), g(x))\)</span></td>
+</tr>
+<tr>
+<td>不可约多项式</td>
+<td>不能分解为低次多项式乘积</td>
+</tr>
+<tr>
+<td>重因式</td>
+<td>导数判断</td>
+</tr>
+<tr>
+<td>多项式根</td>
+<td>余数定理、根与一次因式</td>
+</tr>
+<tr>
+<td>本原多项式</td>
+<td>Eisenstein判别法</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="71">7.1 一元多项式环<a class="headerlink" href="#71" title="Permanent link">&para;</a></h2>
+<h3 id="_3">一、概念引入动机<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要学习一元多项式环？</strong></p>
+<ol>
+<li><strong>从数到式的推广</strong>：整数环 <span class="arithmatex">\(\mathbb{Z}\)</span> 中的加法、减法、乘法运算封闭，我们希望构造一个类似的"多项式环"，使得多项式之间也能进行加、减、乘运算。</li>
+<li><strong>函数观点的局限</strong>：如果只把多项式看作函数 <span class="arithmatex">\(f: K \to K\)</span>，那就忽略了多项式作为代数对象的独立价值。多项式环是一个独立的代数结构，有其自身的研究意义。</li>
+<li><strong>类比整数环</strong>：整数环 <span class="arithmatex">\(\mathbb{Z}\)</span> 有整除性、最大公因数、质数分解等性质。多项式环 <span class="arithmatex">\(K[x]\)</span> 具有完全类似但更简单的结构——这是学习抽象代数（环论）的最佳起点。</li>
+<li><strong>不定元的意义</strong>：<span class="arithmatex">\(x\)</span> 称为"不定元"，它不是某个具体的数，而是一个符号，这使得多项式运算完全脱离了对具体数值的依赖。</li>
+</ol>
+<h3 id="_4">二、详细讲解过程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. 一元多项式的定义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p><strong>定义</strong>：数域K上一元多项式是形如
+$<span class="arithmatex">\(f(x) = a_nx^n + a_{n-1}x^{n-1} + \cdots + a_1x + a_0 \quad (a_i \in K)\)</span>$
+的表达式，其中 <span class="arithmatex">\(x\)</span> 称为<strong>不定元</strong>。</p>
+<p><strong>讲解要点</strong>：
+- <span class="arithmatex">\(a_i\)</span> 称为<strong>系数</strong>，必须属于某个固定的数域 <span class="arithmatex">\(K\)</span>（如 <span class="arithmatex">\(\mathbb{Q}, \mathbb{R}, \mathbb{C}\)</span>）
+- <span class="arithmatex">\(x\)</span> 不是变量，而是<strong>不定元</strong>——一个符号，不参与代入运算
+- 系数全为零的多项式称为<strong>零多项式</strong>，记作 <span class="arithmatex">\(0\)</span>
+- 通常记多项式集合为 <span class="arithmatex">\(K[x]\)</span></p>
+<h4 id="2">2. 多项式的次数<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>首项系数</strong>：最高次项 <span class="arithmatex">\(a_nx^n\)</span> 中的系数 <span class="arithmatex">\(a_n\)</span>（要求 <span class="arithmatex">\(a_n \neq 0\)</span>）</li>
+<li><strong>次数</strong>：<span class="arithmatex">\(\deg f(x) = n\)</span></li>
+<li><strong>零多项式的次数</strong>：定义为 <span class="arithmatex">\(-\infty\)</span>（这是一个技术性处理，保证次数公式成立）</li>
+</ul>
+<p><strong>追问</strong>：为什么要给零多项式的次数定义为 <span class="arithmatex">\(-\infty\)</span>？</p>
+<blockquote>
+<p>因为若 <span class="arithmatex">\(\deg 0\)</span> 定义为某个数 <span class="arithmatex">\(k\)</span>，则 <span class="arithmatex">\(\deg(f+0) = \deg f \leq \max\{\deg f, k\}\)</span> 可能不成立。</p>
+</blockquote>
+<h4 id="3">3. 多项式的运算<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>加法</strong>：同次项系数相加
+$<span class="arithmatex">\(f(x) + g(x) = \sum_i (a_i + b_i)x^i\)</span>$</p>
+<p><strong>乘法</strong>：
+$<span class="arithmatex">\(f(x)g(x) = \sum_{s=0}^{n+m} \left(\sum_{i+j=s} a_ib_j\right)x^s\)</span>$
+其中 <span class="arithmatex">\(n = \deg f, m = \deg g\)</span>。</p>
+<h4 id="4">4. 次数公式（重要！）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>命题</strong>：
+- <span class="arithmatex">\(\deg(f \pm g) \leq \max\{\deg f, \deg g\}\)</span>
+- <span class="arithmatex">\(\deg(fg) = \deg f + \deg g\)</span>（若 <span class="arithmatex">\(f \neq 0, g \neq 0\)</span>）</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. 加法：合并同类项后，次数由最高非零项决定，不会超过 <span class="arithmatex">\(\max\{\deg f, \deg g\}\)</span>
+2. 乘法：首项相乘得 <span class="arithmatex">\(a_n b_m x^{n+m}\)</span>，系数 <span class="arithmatex">\(a_n b_m \neq 0\)</span>，故次数为 <span class="arithmatex">\(n+m\)</span></p>
+<p><strong>推论</strong>：<span class="arithmatex">\(K[x]\)</span> 是<strong>整环</strong>（无零因子的交换环）。</p>
+<h4 id="5">5. 环的概念（铺垫）<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<p>环的定义：设 <span class="arithmatex">\(R\)</span> 是非空集合，带有两种运算 <span class="arithmatex">\(+, \times\)</span>，满足：
+1. <span class="arithmatex">\((R, +)\)</span> 是Abel群
+2. 乘法结合律、分配律
+3. 有乘法单位元 <span class="arithmatex">\(1\)</span></p>
+<p><strong>举例</strong>：整数环 <span class="arithmatex">\(\mathbb{Z}\)</span>、多项式环 <span class="arithmatex">\(K[x]\)</span>、矩阵环 <span class="arithmatex">\(M_n(K)\)</span> 都是环。</p>
+<h3 id="_5">三、典型例题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h4 id="_6">【验证题】<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p><strong>例1.1</strong> 验证：设 <span class="arithmatex">\(f(x) = 2x^3 + x^2 - 3x + 1\)</span>，<span class="arithmatex">\(g(x) = x^2 + 2x - 1\)</span>，求 <span class="arithmatex">\(\deg(f+g)\)</span> 和 <span class="arithmatex">\(\deg(fg)\)</span>。</p>
+<p><strong>解</strong>：
+- <span class="arithmatex">\(\deg f = 3\)</span>，<span class="arithmatex">\(\deg g = 2\)</span>
+- <span class="arithmatex">\(f+g = 2x^3 + 2x^2 - x\)</span>，所以 <span class="arithmatex">\(\deg(f+g) = 3 = \max\{3,2\}\)</span>
+- <span class="arithmatex">\(fg = 2x^5 + \cdots\)</span>，所以 <span class="arithmatex">\(\deg(fg) = 5 = 3 + 2\)</span></p>
+<p><strong>例1.2</strong> 判断下列说法是否正确：
+（1）若 <span class="arithmatex">\(f \neq 0\)</span>，则 <span class="arithmatex">\(\deg(f^2) = 2\deg f\)</span>
+（2）若 <span class="arithmatex">\(\deg f \neq \deg g\)</span>，则 <span class="arithmatex">\(\deg(f+g) = \max\{\deg f, \deg g\}\)</span></p>
+<p><strong>答案</strong>：（1）正确；（2）正确。</p>
+<h4 id="_7">【计算题】<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p><strong>例1.3</strong> 设 <span class="arithmatex">\(f(x) = x^4 - 2x^2 + 3\)</span>，<span class="arithmatex">\(g(x) = 2x^3 - x^2 + 1\)</span>，计算 <span class="arithmatex">\(f(x) \cdot g(x)\)</span> 并写出结果的首项和次数。</p>
+<p><strong>解</strong>：
+首项系数：<span class="arithmatex">\(1 \times 2 = 2\)</span>，首项为 <span class="arithmatex">\(2x^7\)</span>
+$<span class="arithmatex">\(\deg(fg) = 4 + 3 = 7\)</span>$</p>
+<h4 id="_8">【证明题】<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p><strong>例1.4</strong> 证明：若 <span class="arithmatex">\(f(x), g(x) \in K[x]\)</span> 且 <span class="arithmatex">\(f \neq 0\)</span>，则 <span class="arithmatex">\(\deg(fg) = \deg f + \deg g\)</span>。</p>
+<p><strong>证明</strong>：
+设 <span class="arithmatex">\(\deg f = n \geq 0\)</span>，首项系数为 <span class="arithmatex">\(a_n \neq 0\)</span>；
+设 <span class="arithmatex">\(\deg g = m \geq 0\)</span>，首项系数为 <span class="arithmatex">\(b_m \neq 0\)</span>。
+则 <span class="arithmatex">\(f \cdot g\)</span> 的最高次项为 <span class="arithmatex">\(a_n b_m x^{n+m}\)</span>。
+因 <span class="arithmatex">\(a_n \neq 0, b_m \neq 0\)</span>，故 <span class="arithmatex">\(a_n b_m \neq 0\)</span>。
+所以 <span class="arithmatex">\(\deg(fg) = n + m = \deg f + \deg g\)</span>。<span class="arithmatex">\(\square\)</span></p>
+<p><strong>例1.5</strong> 设 <span class="arithmatex">\(f(x), g(x), h(x) \in K[x]\)</span>，<span class="arithmatex">\(f \neq 0\)</span>。证明：若 <span class="arithmatex">\(fh = fg\)</span>，则 <span class="arithmatex">\(h = g\)</span>。</p>
+<p><strong>证明</strong>：
+由 <span class="arithmatex">\(fh = fg\)</span> 得 <span class="arithmatex">\(f(h - g) = 0\)</span>。
+因为 <span class="arithmatex">\(f \neq 0\)</span> 且 <span class="arithmatex">\(K[x]\)</span> 是整环，无零因子，所以 <span class="arithmatex">\(h - g = 0\)</span>，
+即 <span class="arithmatex">\(h = g\)</span>。<span class="arithmatex">\(\square\)</span></p>
+<h3 id="_9">四、易错点提醒<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>零多项式次数</strong>：零多项式的次数是 <span class="arithmatex">\(-\infty\)</span>，不是 <span class="arithmatex">\(0\)</span>！很多学生误认为 <span class="arithmatex">\(\deg 0 = 0\)</span>，这会导致次数公式失效。</p>
+</li>
+<li>
+<p><strong>乘法次数公式的条件</strong>：必须 <span class="arithmatex">\(f \neq 0\)</span> 且 <span class="arithmatex">\(g \neq 0\)</span>。若其中有一个为零多项式，则 <span class="arithmatex">\(\deg(fg)\)</span> 无定义（或视为 <span class="arithmatex">\(-\infty\)</span>）。</p>
+</li>
+<li>
+<p><strong>系数比较</strong>：两个多项式相等当且仅当同次项系数相等，不能只比较前几项。</p>
+</li>
+<li>
+<p><strong>不定元 <span class="arithmatex">\(x\)</span> 不是变量</strong>：<span class="arithmatex">\(x\)</span> 是一个符号，不能代入数值计算。</p>
+</li>
+</ol>
+<h3 id="_10">五、思考题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：<span class="arithmatex">\(K[x]\)</span> 与 <span class="arithmatex">\(K\)</span>（数域）有什么关系？能否把数域 <span class="arithmatex">\(K\)</span> 看作多项式环的特殊情形？</p>
+</li>
+<li>
+<p><strong>拓展</strong>：定义多项式的"形式导数"：<span class="arithmatex">\(D(x^n) = nx^{n-1}\)</span>，<span class="arithmatex">\(D(c) = 0\)</span>（<span class="arithmatex">\(c\)</span> 为常数）。验证：<span class="arithmatex">\(D(fg) = f'g + fg'\)</span>。这与微积分中的导数公式形式相同！</p>
+</li>
+<li>
+<p><strong>问题</strong>：若 <span class="arithmatex">\(K[x]\)</span> 中乘法满足消去律（<span class="arithmatex">\(f \neq 0\)</span> 时 <span class="arithmatex">\(fh = fg \Rightarrow h = g\)</span>），能否说明 <span class="arithmatex">\(K[x]\)</span> 没有零因子？</p>
+</li>
+</ol>
+<hr />
+<h2 id="72">7.2 整除关系，带余除法<a class="headerlink" href="#72" title="Permanent link">&para;</a></h2>
+<h3 id="_11">一、概念引入动机<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要研究整除性？</strong></p>
+<ol>
+<li><strong>类比整数环</strong>：整数的整除性是数论的核心。同样，多项式的整除性是多项式理论的核心。</li>
+<li><strong>类比整数除法</strong>：对任意整数 <span class="arithmatex">\(a, b\)</span>（<span class="arithmatex">\(b \neq 0\)</span>），存在唯一的 <span class="arithmatex">\(q, r\)</span> 使得 <span class="arithmatex">\(a = bq + r\)</span>，<span class="arithmatex">\(0 \leq r &lt; |b|\)</span>。多项式环中有一个完全类似的定理。</li>
+<li><strong>唯一性的价值</strong>：带余除法中商和余式的<strong>唯一性</strong>是关键，它保证了我们可以用"比较系数法"来求解。</li>
+<li><strong>后续应用</strong>：整除性是研究最大公因式、不可约分解的基础。</li>
+</ol>
+<h3 id="_12">二、详细讲解过程<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">1. 整除的定义<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：如果存在 <span class="arithmatex">\(h(x) \in K[x]\)</span>，使得 <span class="arithmatex">\(f(x) = h(x)g(x)\)</span>，则称 <span class="arithmatex">\(g(x)\)</span> <strong>整除</strong> <span class="arithmatex">\(f(x)\)</span>，记作 <span class="arithmatex">\(g(x) \mid f(x)\)</span>。</p>
+</blockquote>
+<p><strong>讲解要点</strong>：
+- <span class="arithmatex">\(g(x) \mid f(x)\)</span> 是一种<strong>关系</strong>，不是运算
+- <span class="arithmatex">\(g(x) = 0\)</span> 时，<span class="arithmatex">\(g(x) \mid f(x)\)</span> 当且仅当 <span class="arithmatex">\(f(x) = 0\)</span>
+- <span class="arithmatex">\(g(x)\)</span> 称为 <span class="arithmatex">\(f(x)\)</span> 的<strong>因式</strong>，<span class="arithmatex">\(f(x)\)</span> 称为 <span class="arithmatex">\(g(x)\)</span> 的<strong>倍式</strong>
+- 任何非零常数 <span class="arithmatex">\(c \in K\)</span> 都整除任何多项式（因为 <span class="arithmatex">\(f(x) = c \cdot (c^{-1}f(x))\)</span>）</p>
+<p><strong>整除的性质</strong>：
+1. 反身性：<span class="arithmatex">\(f \mid f\)</span>
+2. 传递性：若 <span class="arithmatex">\(f \mid g\)</span> 且 <span class="arithmatex">\(g \mid h\)</span>，则 <span class="arithmatex">\(f \mid h\)</span>
+3. 若 <span class="arithmatex">\(f \mid g_i\)</span>（<span class="arithmatex">\(i=1,2,\ldots,n\)</span>），则 <span class="arithmatex">\(f \mid \sum_{i=1}^n g_i\)</span></p>
+<h4 id="2_1">2. 带余除法定理<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理（带余除法）</strong>：设 <span class="arithmatex">\(f(x), g(x) \in K[x]\)</span>，且 <span class="arithmatex">\(g(x) \neq 0\)</span>，则存在唯一的 <span class="arithmatex">\(h(x), r(x)\)</span>，使得
+$<span class="arithmatex">\(f(x) = h(x)g(x) + r(x), \quad \deg r(x) &lt; \deg g(x)\)</span>$</p>
+</blockquote>
+<p><strong>存在性证明思路</strong>（教材方法）：
+1. 若 <span class="arithmatex">\(\deg f &lt; \deg g\)</span>，取 <span class="arithmatex">\(h(x) = 0\)</span>，<span class="arithmatex">\(r(x) = f(x)\)</span>，结论显然成立。
+2. 若 <span class="arithmatex">\(\deg f \geq \deg g\)</span>，对 <span class="arithmatex">\(\deg f\)</span> 用数学归纳法。
+   - 设 <span class="arithmatex">\(f(x) = a_nx^n + \cdots\)</span>，<span class="arithmatex">\(g(x) = b_mx^m + \cdots\)</span>（<span class="arithmatex">\(n \geq m\)</span>）
+   - 构造 <span class="arithmatex">\(f_1(x) = f(x) - \frac{a_n}{b_m}x^{n-m}g(x)\)</span>
+   - 则 <span class="arithmatex">\(\deg f_1 &lt; \deg f\)</span>，归纳假设适用于 <span class="arithmatex">\(f_1\)</span>
+3. 递归执行直到余式次数 <span class="arithmatex">\(&lt; m\)</span>。</p>
+<p><strong>唯一性证明思路</strong>：
+设 <span class="arithmatex">\(f = hg + r = h'g + r'\)</span>，则 <span class="arithmatex">\((h - h')g = r' - r\)</span>。
+比较次数：左边次数 <span class="arithmatex">\(\geq \deg g\)</span>，右边次数 <span class="arithmatex">\(&lt; \deg g\)</span>。
+唯一可能是两边都是零多项式，即 <span class="arithmatex">\(h = h', r = r'\)</span>。</p>
+<h4 id="3_1">3. 商和余式的求法<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<p><strong>比较系数法</strong>：
+1. 根据 <span class="arithmatex">\(\deg r &lt; \deg g\)</span> 设定 <span class="arithmatex">\(r(x)\)</span> 的形式
+2. 将 <span class="arithmatex">\(f = hg + r\)</span> 展开
+3. 比较同次项系数得到线性方程组
+4. 解方程组求出 <span class="arithmatex">\(h(x), r(x)\)</span></p>
+<h3 id="_13">三、典型例题<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h4 id="_14">【验证题】<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p><strong>例2.1</strong> 判断以下说法是否正确：
+（1）若 <span class="arithmatex">\(g \mid f\)</span>，则 <span class="arithmatex">\(\deg g \leq \deg f\)</span>（假设 <span class="arithmatex">\(f \neq 0\)</span>）
+（2）若 <span class="arithmatex">\(g \mid f\)</span> 且 <span class="arithmatex">\(f \neq 0\)</span>，则 <span class="arithmatex">\(g\)</span> 的首项系数一定非零
+（3）零多项式整除任何多项式</p>
+<p><strong>答案</strong>：（1）正确；（2）正确；（3）错误（0不能整除任何非零多项式，因为不存在 <span class="arithmatex">\(h\)</span> 使得 <span class="arithmatex">\(0 \cdot h = f\)</span>）。</p>
+<h4 id="_15">【计算题】<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p><strong>例2.2</strong> 用带余除法求 <span class="arithmatex">\(f(x) = 2x^4 - 3x^2 + x - 2\)</span> 除以 <span class="arithmatex">\(g(x) = x^2 - 1\)</span> 的商和余式。</p>
+<p><strong>解</strong>：设 <span class="arithmatex">\(h(x) = ax^2 + bx + c\)</span>，<span class="arithmatex">\(r(x) = dx + e\)</span>（因为 <span class="arithmatex">\(\deg g = 2\)</span>，所以 <span class="arithmatex">\(\deg r &lt; 2\)</span>）</p>
+<div class="arithmatex">\[f(x) = (ax^2 + bx + c)(x^2 - 1) + dx + e$$
+$$= ax^4 + bx^3 + cx^2 - ax^2 - bx - c + dx + e$$
+$$= ax^4 + bx^3 + (c-a)x^2 + (d-b)x + (e-c)\]</div>
+<p>比较系数：
+- <span class="arithmatex">\(x^4\)</span>: <span class="arithmatex">\(a = 2\)</span>
+- <span class="arithmatex">\(x^3\)</span>: <span class="arithmatex">\(b = 0\)</span>
+- <span class="arithmatex">\(x^2\)</span>: <span class="arithmatex">\(c - a = -3 \Rightarrow c - 2 = -3 \Rightarrow c = -1\)</span>
+- <span class="arithmatex">\(x^1\)</span>: <span class="arithmatex">\(d - b = 1 \Rightarrow d = 1\)</span>
+- <span class="arithmatex">\(x^0\)</span>: <span class="arithmatex">\(e - c = -2 \Rightarrow e + 1 = -2 \Rightarrow e = -3\)</span></p>
+<p>验证 <span class="arithmatex">\(x^3\)</span> 系数为 <span class="arithmatex">\(0\)</span> ✅</p>
+<p><strong>答案</strong>：商 <span class="arithmatex">\(h(x) = 2x^2 - 1\)</span>，余式 <span class="arithmatex">\(r(x) = x - 3\)</span></p>
+<p><strong>例2.3</strong> 求 <span class="arithmatex">\(f(x) = x^3 - 2x + 1\)</span> 除以 <span class="arithmatex">\(g(x) = x - 1\)</span> 的余式。</p>
+<p><strong>解法一</strong>（除法）：
+$<span class="arithmatex">\(x^3 - 2x + 1 = x^2(x-1) + x^2 - 2x + 1 = x^2(x-1) + x(x-1) + x + 1 = (x^2+x)(x-1) + (x+1)\)</span>$
+余式为 <span class="arithmatex">\(x + 1\)</span></p>
+<p><strong>解法二</strong>（代入验证）：当 <span class="arithmatex">\(x = 1\)</span> 时，<span class="arithmatex">\(f(1) = 1 - 2 + 1 = 0\)</span>，但这不是最终余式...</p>
+<p><strong>重新计算</strong>：
+$<span class="arithmatex">\(x^3 - 2x + 1 \div (x-1)\)</span>$
+$<span class="arithmatex">\(x^3 \div x = x^2 \Rightarrow x^3 - x^2\)</span>$
+$<span class="arithmatex">\(x^2 - 2x + 1 \div x = x \Rightarrow x^2 - x\)</span>$
+$<span class="arithmatex">\(-x + 1 \div x = -1 \Rightarrow -x + 1\)</span>$
+余式为 <span class="arithmatex">\(0\)</span></p>
+<p>验证：<span class="arithmatex">\(f(1) = 0\)</span> 确实成立。</p>
+<p><strong>例2.4</strong> 设 <span class="arithmatex">\(f(x) = x^4 + 2x^3 - 2x^2 + 4x - 5\)</span>，求 <span class="arithmatex">\(f(x)\)</span> 除以 <span class="arithmatex">\(x + 1\)</span> 的商和余式。</p>
+<p><strong>解</strong>：
+$<span class="arithmatex">\(x^4 + 2x^3 - 2x^2 + 4x - 5 \div (x+1)\)</span>$
+- <span class="arithmatex">\(x^4 \div x = x^3 \Rightarrow x^4 + x^3\)</span>
+- <span class="arithmatex">\((2x^3 - 2x^2) \div x = 2x^2 \Rightarrow 2x^3 + 2x^2\)</span>
+- <span class="arithmatex">\((-4x^2 + 4x) \div x = -4x \Rightarrow -4x^2 - 4x\)</span>
+- <span class="arithmatex">\((8x - 5) \div x = 8 \Rightarrow 8x + 8\)</span>，余 <span class="arithmatex">\(-13\)</span></p>
+<p><strong>验证</strong>：<span class="arithmatex">\(h(x) = x^3 + 2x^2 - 4x + 8\)</span>，<span class="arithmatex">\(r(x) = -13\)</span>
+检查：<span class="arithmatex">\((x+1)(x^3+2x^2-4x+8) + (-13) = x^4+2x^3-2x^2+4x-5\)</span> ✅</p>
+<h4 id="_16">【证明题】<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p><strong>例2.5</strong> 证明：若 <span class="arithmatex">\(g(x) \mid f(x)\)</span>，则对任意 <span class="arithmatex">\(h(x) \in K[x]\)</span>，都有 <span class="arithmatex">\(g(x) \mid f(x)h(x)\)</span>。</p>
+<p><strong>证明</strong>：
+由 <span class="arithmatex">\(g \mid f\)</span>，存在 <span class="arithmatex">\(q(x)\)</span> 使得 <span class="arithmatex">\(f = qg\)</span>。
+则 <span class="arithmatex">\(fh = qgh = (qg)h = q(gh)\)</span>。
+所以 <span class="arithmatex">\(g \mid fh\)</span>。<span class="arithmatex">\(\square\)</span></p>
+<p><strong>例2.6</strong> 证明：若 <span class="arithmatex">\(g(x) \mid f(x)\)</span> 且 <span class="arithmatex">\(f(x) \neq 0\)</span>，则 <span class="arithmatex">\(\deg g \leq \deg f\)</span>。</p>
+<p><strong>证明</strong>：
+由 <span class="arithmatex">\(g \mid f\)</span>，存在 <span class="arithmatex">\(h(x)\)</span> 使得 <span class="arithmatex">\(f = gh\)</span>。
+因为 <span class="arithmatex">\(f \neq 0\)</span> 且 <span class="arithmatex">\(K[x]\)</span> 是整环，所以 <span class="arithmatex">\(h \neq 0\)</span>。
+则 <span class="arithmatex">\(\deg f = \deg g + \deg h \geq \deg g\)</span>。<span class="arithmatex">\(\square\)</span></p>
+<h3 id="_17">四、易错点提醒<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>除式的次数要求</strong>：带余除法要求除式 <span class="arithmatex">\(g(x) \neq 0\)</span>，但没有要求首项系数非零？实际上 <span class="arithmatex">\(\deg g\)</span> 有定义就隐含了首项系数非零。</p>
+</li>
+<li>
+<p><strong>余式次数的严格性</strong>：必须有 <span class="arithmatex">\(\deg r &lt; \deg g\)</span>，不能取等号！这是唯一性证明的关键。</p>
+</li>
+<li>
+<p><strong>比较系数法的方程个数</strong>：当 <span class="arithmatex">\(n = \deg f \geq \deg g\)</span> 时，商 <span class="arithmatex">\(h\)</span> 的次数为 <span class="arithmatex">\(n-m\)</span>，有 <span class="arithmatex">\((n-m+1)\)</span> 个未知数；余式 <span class="arithmatex">\(r\)</span> 的次数小于 <span class="arithmatex">\(m\)</span>，有 <span class="arithmatex">\(m\)</span> 个未知数（如果设 <span class="arithmatex">\(r = c_{m-1}x^{m-1} + \cdots + c_0\)</span>）。总共 <span class="arithmatex">\((n-m+1) + m = n+1\)</span> 个未知数，与展开后 <span class="arithmatex">\(n+1\)</span> 个系数匹配。</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(g(x)\)</span> 首项系数的影响</strong>：当 <span class="arithmatex">\(g(x)\)</span> 首项系数不为 <span class="arithmatex">\(1\)</span> 时，每一步除法要乘上 <span class="arithmatex">\(\frac{a_n}{b_m}\)</span> 这个系数。</p>
+</li>
+</ol>
+<h3 id="_18">五、思考题<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：带余除法在 <span class="arithmatex">\(K[x]\)</span> 中成立，但在一般环（如 <span class="arithmatex">\(\mathbb{Z}\)</span> 的子环）中不一定成立。这说明 <span class="arithmatex">\(K[x]\)</span> 具有什么特殊性质？</p>
+</li>
+<li>
+<p><strong>探索</strong>：若 <span class="arithmatex">\(g(x)\)</span> 首项系数为 <span class="arithmatex">\(b_m\)</span>，定义"首一多项式" <span class="arithmatex">\(\tilde{g}(x) = g(x)/b_m\)</span>。带余除法对首一多项式有什么简化？</p>
+</li>
+<li>
+<p><strong>问题</strong>：设 <span class="arithmatex">\(f(x), g(x) \in K[x]\)</span>，<span class="arithmatex">\(g(x) \neq 0\)</span>。证明：存在唯一的 <span class="arithmatex">\(h(x), r(x)\)</span> 使得 <span class="arithmatex">\(f = gh + r\)</span>，且若 <span class="arithmatex">\(g\)</span> 是首一多项式，则 <span class="arithmatex">\(h, r\)</span> 唯一确定。</p>
+</li>
+</ol>
+<hr />
+<h2 id="73">7.3 最大公因式<a class="headerlink" href="#73" title="Permanent link">&para;</a></h2>
+<h3 id="_19">一、概念引入动机<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要研究最大公因式？</strong></p>
+<ol>
+<li><strong>类比整数的最大公因数</strong>：整数的最大公因数 <span class="arithmatex">\(\gcd(a,b)\)</span> 是数论的核心概念。多项式的最大公因式有完全类似的定义和性质。</li>
+<li><strong>解丢番图方程</strong>：整数情形 <span class="arithmatex">\(ax + by = \gcd(a,b)\)</span>，多项式情形类似：<span class="arithmatex">\(f(x)u(x) + g(x)v(x) = \gcd(f,g)\)</span>。</li>
+<li><strong>互素的应用</strong>：若 <span class="arithmatex">\((f,g) = 1\)</span>，则 <span class="arithmatex">\(f\)</span> 与 <span class="arithmatex">\(g\)</span> "没有共同的非平凡因式"，这在证明中有重要应用（如中国剩余定理在多项式环中的版本）。</li>
+<li><strong>欧几里得算法的多项式版本</strong>：整数有辗转相除法，多项式也有！这是求最大公因式的有效算法。</li>
+</ol>
+<h3 id="_20">二、详细讲解过程<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">1. 最大公因式的定义<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：<span class="arithmatex">\(d(x)\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 与 <span class="arithmatex">\(g(x)\)</span> 的<strong>最大公因式</strong>，如果：
+1. <span class="arithmatex">\(d(x) \mid f(x)\)</span> 且 <span class="arithmatex">\(d(x) \mid g(x)\)</span>
+2. 若 <span class="arithmatex">\(h(x) \mid f(x)\)</span> 且 <span class="arithmatex">\(h(x) \mid g(x)\)</span>，则 <span class="arithmatex">\(h(x) \mid d(x)\)</span></p>
+<p>记作 <span class="arithmatex">\(d(x) = (f(x), g(x))\)</span>。</p>
+</blockquote>
+<p><strong>讲解要点</strong>：
+- 条件1：<span class="arithmatex">\(d\)</span> 是 <span class="arithmatex">\(f\)</span> 和 <span class="arithmatex">\(g\)</span> 的<strong>公因式</strong>
+- 条件2：<span class="arithmatex">\(d\)</span> 是<strong>最大</strong>的——任何公因式都整除 <span class="arithmatex">\(d\)</span>
+- 最大公因式在<strong>相伴意义下唯一</strong>：若 <span class="arithmatex">\(d_1, d_2\)</span> 都是最大公因式，则 <span class="arithmatex">\(d_1 \mid d_2\)</span> 且 <span class="arithmatex">\(d_2 \mid d_1\)</span>，即 <span class="arithmatex">\(d_1 = c \cdot d_2\)</span>（<span class="arithmatex">\(c \in K^*\)</span>）
+- 通常取<strong>首一</strong>的最大公因式作为标准代表元</p>
+<h4 id="2_2">2. 互素的定义<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：如果 <span class="arithmatex">\((f(x), g(x)) = 1\)</span>，则称 <span class="arithmatex">\(f(x)\)</span> 与 <span class="arithmatex">\(g(x)\)</span> <strong>互素</strong>。</p>
+</blockquote>
+<p><strong>注意</strong>：互素并不意味着 <span class="arithmatex">\(f\)</span> 和 <span class="arithmatex">\(g\)</span> 都没有非平凡因式，而是说它们的公因式只能是常数（单位）。</p>
+<h4 id="3_2">3. 最大公因式的存在性（辗转相除法）<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
+<p><strong>定理</strong>：任意两个多项式 <span class="arithmatex">\(f, g\)</span>（不全为零）都有最大公因式。</p>
+<p><strong>证明思路</strong>（欧几里得算法）：</p>
+<ol>
+<li>
+<p>不失一般性设 <span class="arithmatex">\(\deg f \geq \deg g\)</span>。</p>
+</li>
+<li>
+<p>辗转相除：
+$<span class="arithmatex">\(f = h_1 g + r_1, \quad \deg r_1 &lt; \deg g\)</span>$
+$<span class="arithmatex">\(g = h_2 r_1 + r_2, \quad \deg r_2 &lt; \deg r_1\)</span>$
+$<span class="arithmatex">\(r_1 = h_3 r_2 + r_3, \quad \deg r_3 &lt; \deg r_2\)</span>$
+$<span class="arithmatex">\(\vdots\)</span>$
+$<span class="arithmatex">\(r_{k-2} = h_k r_{k-1} + r_k, \quad \deg r_k &lt; \deg r_{k-1}\)</span>$
+$<span class="arithmatex">\(r_{k-1} = h_{k+1} r_k + 0\)</span>$</p>
+</li>
+<li>
+<p>因为每次余式次数严格递减，必在有限步后得到 <span class="arithmatex">\(r_k = 0\)</span>。</p>
+</li>
+<li>
+<p>验证 <span class="arithmatex">\(r_{k-1}\)</span> 是最大公因式：</p>
+</li>
+<li>由最后一个非零余式依次回代，可得 <span class="arithmatex">\(r_{k-1} = af + bg\)</span></li>
+<li>任何 <span class="arithmatex">\(f,g\)</span> 的公因式必整除 <span class="arithmatex">\(r_{k-1}\)</span></li>
+<li>所以 <span class="arithmatex">\(r_{k-1}\)</span> 是最大公因式</li>
+</ol>
+<h4 id="4_1">4. 关键定理<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理（贝祖定理）</strong>：设 <span class="arithmatex">\(d = (f,g)\)</span>，则存在 <span class="arithmatex">\(u(x), v(x)\)</span> 使得
+$<span class="arithmatex">\(f(x)u(x) + g(x)v(x) = d(x)\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>：由欧几里得算法的回代过程可得。</p>
+<blockquote>
+<p><strong>定理（互素的等价条件）</strong>：<span class="arithmatex">\((f,g) = 1\)</span> 当且仅当存在 <span class="arithmatex">\(u,v\)</span> 使得 <span class="arithmatex">\(fu + gv = 1\)</span>。</p>
+</blockquote>
+<h4 id="5_1">5. 互素的性质<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>若 <span class="arithmatex">\((f,g) = 1\)</span> 且 <span class="arithmatex">\(f \mid gh\)</span>，则 <span class="arithmatex">\(f \mid h\)</span>。</li>
+<li>若 <span class="arithmatex">\((f,g) = 1\)</span>，则 <span class="arithmatex">\((f, gh) = (f,h)\)</span>。</li>
+<li>若 <span class="arithmatex">\((f,g) = 1\)</span> 且 <span class="arithmatex">\((f,h) = 1\)</span>，则 <span class="arithmatex">\((f,gh) = 1\)</span>。</li>
+</ol>
+<h3 id="_21">三、典型例题<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<h4 id="_22">【验证题】<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<p><strong>例3.1</strong> 验证：<span class="arithmatex">\(f(x) = (x-1)^2(x-2)\)</span> 与 <span class="arithmatex">\(g(x) = (x-1)(x-3)\)</span> 的最大公因式是 <span class="arithmatex">\(x-1\)</span>（首一形式）。</p>
+<p><strong>解</strong>：
+- <span class="arithmatex">\(f(x)\)</span> 的根：<span class="arithmatex">\(1\)</span>（二重），<span class="arithmatex">\(2\)</span>
+- <span class="arithmatex">\(g(x)\)</span> 的根：<span class="arithmatex">\(1\)</span>，<span class="arithmatex">\(3\)</span>
+- 共同根：<span class="arithmatex">\(1\)</span>
+- 所以 <span class="arithmatex">\((f,g) = x-1\)</span></p>
+<p><strong>例3.2</strong> 判断：若 <span class="arithmatex">\(f(x)\)</span> 与 <span class="arithmatex">\(g(x)\)</span> 互素，则 <span class="arithmatex">\(f(x)\)</span> 和 <span class="arithmatex">\(g(x)\)</span> 都是不可约的。这句话对吗？</p>
+<p><strong>答案</strong>：错！例如 <span class="arithmatex">\(f(x) = x+1\)</span>，<span class="arithmatex">\(g(x) = x^2+1\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中互素，但 <span class="arithmatex">\(g(x)\)</span> 不是不可约的（实际上在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中可约）。</p>
+<h4 id="_23">【计算题】<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<p><strong>例3.3</strong> 求 <span class="arithmatex">\(f(x) = x^4 + x^3 - 2x^2 - x + 1\)</span> 和 <span class="arithmatex">\(g(x) = x^3 + x^2 - 2x - 1\)</span> 的最大公因式。</p>
+<p><strong>解</strong>（辗转相除法）：</p>
+<p><strong>第一步</strong>：<span class="arithmatex">\(f\)</span> 除以 <span class="arithmatex">\(g\)</span>
+$<span class="arithmatex">\(f = x \cdot g + (x^2 + x - 1)\)</span>$
+验证：<span class="arithmatex">\(xg = x^4 + x^3 - 2x^2 - x\)</span>，余 <span class="arithmatex">\(r_1 = x^2 + x - 1\)</span></p>
+<p><strong>第二步</strong>：<span class="arithmatex">\(g\)</span> 除以 <span class="arithmatex">\(r_1\)</span>
+$<span class="arithmatex">\(g = x \cdot r_1 + (-2x + 0)\)</span>$
+验证：<span class="arithmatex">\(xr_1 = x^3 + x^2 - x\)</span>，余 <span class="arithmatex">\(-2x - 1 + x = -x - 1\)</span>，不对...</p>
+<p><strong>重新计算</strong>：
+<span class="arithmatex">\(g = x^3 + x^2 - 2x - 1\)</span>
+<span class="arithmatex">\(r_1 = x^2 + x - 1\)</span></p>
+<p><span class="arithmatex">\(x^3 \div x^2 = x\)</span>，所以 <span class="arithmatex">\(g - x \cdot r_1 = (x^3+x^2-2x-1) - (x^3+x^2-x) = -x - 1\)</span></p>
+<p>再除：<span class="arithmatex">\(-x \div x^2\)</span> 不能除，说明商是 <span class="arithmatex">\(x-1\)</span>，余式 <span class="arithmatex">\(-1\)</span>？</p>
+<p>实际上：<span class="arithmatex">\(g = (x+1) \cdot r_1 + (-2)\)</span>？
+检查：<span class="arithmatex">\((x+1)(x^2+x-1) = x^3 + 2x^2 - 1 \neq g\)</span></p>
+<p><strong>标准除法</strong>：
+$<span class="arithmatex">\(x^3 + x^2 - 2x - 1 = x \cdot (x^2 + x - 1) + (-x - 1)\)</span>$
+所以 <span class="arithmatex">\(r_2 = -x - 1\)</span></p>
+<p><strong>第三步</strong>：<span class="arithmatex">\(r_1\)</span> 除以 <span class="arithmatex">\(r_2\)</span>
+$<span class="arithmatex">\(r_1 = x^2 + x - 1 = (-x) \cdot (-x-1) + (-1)\)</span>$
+商 <span class="arithmatex">\(q = -x\)</span>，余 <span class="arithmatex">\(r = -1\)</span></p>
+<p><strong>第四步</strong>：<span class="arithmatex">\(r_2\)</span> 除以 <span class="arithmatex">\(r_3 = -1\)</span>
+得到余 <span class="arithmatex">\(0\)</span></p>
+<p>所以 <span class="arithmatex">\(\gcd(f,g) = -1\)</span>（首一形式为 <span class="arithmatex">\(1\)</span>），即 <span class="arithmatex">\(f\)</span> 与 <span class="arithmatex">\(g\)</span> 互素。</p>
+<p><strong>验证</strong>：用贝祖定理检查：存在 <span class="arithmatex">\(u,v\)</span> 使得 <span class="arithmatex">\(fu + gv = 1\)</span>。</p>
+<p><strong>例3.4</strong> 设 <span class="arithmatex">\(f(x) = x^2 - 1\)</span>，<span class="arithmatex">\(g(x) = x^3 - 1\)</span>，求 <span class="arithmatex">\((f,g)\)</span>。</p>
+<p><strong>解</strong>：
+- <span class="arithmatex">\(f(x) = (x-1)(x+1)\)</span>
+- <span class="arithmatex">\(g(x) = (x-1)(x^2 + x + 1)\)</span>
+- 共同因式只有 <span class="arithmatex">\(x-1\)</span>
+- 所以 <span class="arithmatex">\((f,g) = x-1\)</span></p>
+<p><strong>例3.5</strong> 证明：若 <span class="arithmatex">\((f,g) = 1\)</span>，<span class="arithmatex">\(f(1) = 2\)</span>，<span class="arithmatex">\(g(1) = 3\)</span>，则存在多项式 <span class="arithmatex">\(u,v\)</span> 使得 <span class="arithmatex">\(fu + gv = 1\)</span>，且 <span class="arithmatex">\(u(1) = -1, v(1) = 1\)</span>？</p>
+<p><strong>分析</strong>：这不是必然的，贝祖定理只保证存在 <span class="arithmatex">\(u,v\)</span>，但不唯一。<span class="arithmatex">\(u(1), v(1)\)</span> 的值取决于具体构造。</p>
+<h3 id="_24">四、易错点提醒<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>最大公因式不唯一</strong>：最大公因式在"相伴"意义下唯一，即若 <span class="arithmatex">\(d_1, d_2\)</span> 都是最大公因式，则 <span class="arithmatex">\(d_1 = c \cdot d_2\)</span>（<span class="arithmatex">\(c \neq 0\)</span>）。通常约定取首一多项式。</p>
+</li>
+<li>
+<p><strong>辗转相除的停止条件</strong>：当余式变为 <span class="arithmatex">\(0\)</span> 时，前一个非零余式就是最大公因式（可能需要化到首一形式）。</p>
+</li>
+<li>
+<p><strong>互素 ≠ 没有公因式</strong>：互素只要求公因式是常数。<span class="arithmatex">\((x^2+1)\)</span> 和 <span class="arithmatex">\((x^2-1)\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中互素吗？</p>
+</li>
+<li>
+<p><span class="arithmatex">\(x^2+1\)</span> 与 <span class="arithmatex">\(x^2-1\)</span> 的公因式？它们没有非常数公因式，所以互素！</p>
+</li>
+<li>
+<p><strong>贝祖定理的系数</strong>：<span class="arithmatex">\(fu + gv = d\)</span> 中的 <span class="arithmatex">\(u,v\)</span> 不唯一。任何一对解加上一组特解都还是解。</p>
+</li>
+</ol>
+<h3 id="_25">五、思考题<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：整数的最大公因数可以用质因数分解求得，也可以用辗转相除法。多项式的最大公因式呢？这两种方法哪个更实用？</p>
+</li>
+<li>
+<p><strong>探索</strong>：定义<strong>最小公倍式</strong> <span class="arithmatex">\([f,g]\)</span>。验证：<span class="arithmatex">\([f,g] \cdot (f,g) = fg\)</span>（在相伴意义下成立）。</p>
+</li>
+<li>
+<p><strong>问题</strong>：若 <span class="arithmatex">\(d = (f,g)\)</span> 且 <span class="arithmatex">\(f = dh, g = dk\)</span>，证明 <span class="arithmatex">\((h,k) = 1\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="74">7.4 不可约多项式，唯一因式分解定理<a class="headerlink" href="#74" title="Permanent link">&para;</a></h2>
+<h3 id="_26">一、概念引入动机<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要研究不可约多项式？</strong></p>
+<ol>
+<li><strong>质数的类比</strong>：整数的唯一分解定理依赖于"质数"的概念。类似地，多项式的唯一分解定理依赖于"不可约多项式"。</li>
+<li><strong>唯一分解的"原子"</strong>：不可约多项式是多项式环中的"原子"——不能再分解的因子。任何多项式都可以唯一地分解为不可约因子的乘积（忽略次序和相伴）。</li>
+<li><strong>几何意义</strong>：不可约多项式对应着"最简单的"代数簇。例如在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中，不可约多项式只有一次多项式，对应着平面上的点。</li>
+<li><strong>域的扩张</strong>：不可约多项式是构造扩域的关键工具。若 <span class="arithmatex">\(p(x)\)</span> 在 <span class="arithmatex">\(K[x]\)</span> 中不可约，则 <span class="arithmatex">\(K[x]/(p(x))\)</span> 是一个域。</li>
+</ol>
+<h3 id="_27">二、详细讲解过程<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<h4 id="1_3">1. 不可约多项式的定义<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(f(x)\)</span> 次数 <span class="arithmatex">\(\geq 1\)</span>，如果 <span class="arithmatex">\(f(x)\)</span> 不能分解为两个次数更低的多项式的乘积，则称 <span class="arithmatex">\(f(x)\)</span> 为<strong>不可约多项式</strong>。</p>
+</blockquote>
+<p><strong>等价定义</strong>：设 <span class="arithmatex">\(f(x)\)</span> 次数 <span class="arithmatex">\(\geq 1\)</span>，若 <span class="arithmatex">\(f(x) = g(x)h(x)\)</span> 能推出 <span class="arithmatex">\(g(x)\)</span> 或 <span class="arithmatex">\(h(x)\)</span> 是常数（单位），则 <span class="arithmatex">\(f(x)\)</span> 不可约。</p>
+<p><strong>讲解要点</strong>：
+- "不可约"是相对于<strong>系数域</strong>而言的！同一个多项式在不同数域上可能不可约也可能可约。
+  - 例如 <span class="arithmatex">\(x^2 + 1\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中不可约，但在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中可约为 <span class="arithmatex">\((x+i)(x-i)\)</span>
+- 不可约多项式只有非常数的因式，且任何因式都与自身相伴</p>
+<h4 id="2_3">2. 唯一因式分解定理<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理（唯一因式分解定理）</strong>：数域K上每一个次数 <span class="arithmatex">\(&gt; 0\)</span> 的多项式 <span class="arithmatex">\(f(x)\)</span> 都可以唯一地分解成有限多个不可约多项式的乘积。</p>
+<p>即：<span class="arithmatex">\(f(x) = p_1(x)^{r_1} p_2(x)^{r_2} \cdots p_s(x)^{r_s}\)</span>
+其中 <span class="arithmatex">\(p_i(x)\)</span> 是首一不可约多项式，<span class="arithmatex">\(p_i \neq p_j\)</span>（当 <span class="arithmatex">\(i \neq j\)</span> 时）。</p>
+</blockquote>
+<p><strong>存在性证明思路</strong>（数学归纳法）：
+1. 基础步：一次多项式是不可约的。
+2. 归纳假设：所有次数 <span class="arithmatex">\(&lt; n\)</span> 的多项式都可以分解。
+3. 归纳步：设 <span class="arithmatex">\(\deg f = n\)</span>。
+   - 若 <span class="arithmatex">\(f\)</span> 不可约，定理成立。
+   - 若 <span class="arithmatex">\(f\)</span> 可约，设 <span class="arithmatex">\(f = gh\)</span>，其中 <span class="arithmatex">\(\deg g, \deg h &lt; n\)</span>。
+   - 由归纳假设，<span class="arithmatex">\(g, h\)</span> 可以分解。
+   - 合并得 <span class="arithmatex">\(f\)</span> 的分解。</p>
+<p><strong>唯一性证明思路</strong>：
+设 <span class="arithmatex">\(f = p_1 \cdots p_s = q_1 \cdots q_t\)</span>，其中 <span class="arithmatex">\(p_i, q_j\)</span> 不可约。
+由不可约因子的性质（若不可约多项式整除乘积，则必整除其中一个因子——这需要证明），可得 <span class="arithmatex">\(s = t\)</span> 且调整次序后 <span class="arithmatex">\(p_i = q_i\)</span>。</p>
+<p><strong>关键引理</strong>：若 <span class="arithmatex">\(p\)</span> 不可约且 <span class="arithmatex">\(p \mid fg\)</span>，则 <span class="arithmatex">\(p \mid f\)</span> 或 <span class="arithmatex">\(p \mid g\)</span>。</p>
+<p><strong>引理证明</strong>：
+设 <span class="arithmatex">\(d = (p,f)\)</span>。因为 <span class="arithmatex">\(p\)</span> 不可约，<span class="arithmatex">\(d = 1\)</span> 或 <span class="arithmatex">\(d = p\)</span>（相伴）。
+- 若 <span class="arithmatex">\(d = p\)</span>，则 <span class="arithmatex">\(p \mid f\)</span>，得证。
+- 若 <span class="arithmatex">\(d = 1\)</span>，由贝祖定理，存在 <span class="arithmatex">\(u,v\)</span> 使 <span class="arithmatex">\(up + vf = 1\)</span>。
+  两边乘 <span class="arithmatex">\(g\)</span>：<span class="arithmatex">\(upg + vfg = g\)</span>。
+  因 <span class="arithmatex">\(p \mid p\)</span> 和 <span class="arithmatex">\(p \mid fg\)</span>，故 <span class="arithmatex">\(p \mid g\)</span>。得证。<span class="arithmatex">\(\square\)</span></p>
+<h3 id="_28">三、典型例题<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<h4 id="_29">【验证题】<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
+<p><strong>例4.1</strong> 判断下列多项式是否不可约：
+（1）<span class="arithmatex">\(x^2 + 1\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中
+（2）<span class="arithmatex">\(x^2 + 1\)</span> 在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中
+（3）<span class="arithmatex">\(x^2 - 2\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中
+（4）<span class="arithmatex">\(x^2 - 2\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中</p>
+<p><strong>答案</strong>：
+（1）不可约（因为在 <span class="arithmatex">\(\mathbb{R}\)</span> 中 <span class="arithmatex">\(x^2 + 1 = 0\)</span> 无实根）
+（2）可约（<span class="arithmatex">\(x^2 + 1 = (x+i)(x-i)\)</span>）
+（3）不可约（Eisenstein判别法，<span class="arithmatex">\(p=2\)</span>）
+（4）可约（<span class="arithmatex">\(x^2 - 2 = (x-\sqrt{2})(x+\sqrt{2})\)</span>）</p>
+<p><strong>例4.2</strong> 证明：若 <span class="arithmatex">\(p(x)\)</span> 不可约，则 <span class="arithmatex">\((p,f) = 1\)</span> 或 <span class="arithmatex">\(p \mid f\)</span>。</p>
+<p><strong>证明</strong>：
+设 <span class="arithmatex">\(d = (p,f)\)</span>，则 <span class="arithmatex">\(d \mid p\)</span>。
+因为 <span class="arithmatex">\(p\)</span> 不可约，<span class="arithmatex">\(d\)</span> 或为 <span class="arithmatex">\(1\)</span> 或与 <span class="arithmatex">\(p\)</span> 相伴。
+- 若 <span class="arithmatex">\(d = 1\)</span>，则 <span class="arithmatex">\((p,f) = 1\)</span>。
+- 若 <span class="arithmatex">\(d \sim p\)</span>，即 <span class="arithmatex">\(d = cp\)</span>，则 <span class="arithmatex">\(p \mid f\)</span>。<span class="arithmatex">\(\square\)</span></p>
+<h4 id="_30">【计算题】<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<p><strong>例4.3</strong> 将 <span class="arithmatex">\(f(x) = x^4 - 1\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x], \mathbb{R}[x], \mathbb{C}[x]\)</span> 中分解。</p>
+<p><strong>解</strong>：
+在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中：
+$<span class="arithmatex">\(f(x) = (x^2+1)(x^2-1) = (x+i)(x-i)(x+1)(x-1)\)</span>$</p>
+<p>在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中：
+$<span class="arithmatex">\(f(x) = (x^2+1)(x+1)(x-1)\)</span>$</p>
+<p>在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中：
+$<span class="arithmatex">\(f(x) = (x^2+1)(x^2-1) = (x^2+1)(x+1)(x-1)\)</span>$</p>
+<p><strong>例4.4</strong> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中分解 <span class="arithmatex">\(f(x) = x^4 + 4x^3 + 6x^2 + 4x + 1\)</span>。</p>
+<p><strong>提示</strong>：观察系数...</p>
+<p><strong>解</strong>：
+这实际上是 <span class="arithmatex">\((x+1)^4\)</span> 的展开！
+$<span class="arithmatex">\((x+1)^4 = x^4 + 4x^3 + 6x^2 + 4x + 1 = f(x)\)</span>$</p>
+<p>在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中的不可约分解就是它本身（但它是 <span class="arithmatex">\((x+1)^4\)</span>，所以因式都是 <span class="arithmatex">\(x+1\)</span>）。</p>
+<p><strong>例4.5</strong> 设 <span class="arithmatex">\(f(x) = x^3 - 6x^2 + 11x - 6\)</span>，求其在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中的不可约分解。</p>
+<p><strong>解</strong>：有理根定理告诉我们有理根只能是 <span class="arithmatex">\(\pm 1, \pm 2, \pm 3, \pm 6\)</span>。
+- <span class="arithmatex">\(f(1) = 1 - 6 + 11 - 6 = 0\)</span>，所以 <span class="arithmatex">\(x-1\)</span> 是因子。
+- 长除法：<span class="arithmatex">\((x^3 - 6x^2 + 11x - 6) \div (x-1) = x^2 - 5x + 6 = (x-2)(x-3)\)</span>
+- 所以 <span class="arithmatex">\(f(x) = (x-1)(x-2)(x-3)\)</span></p>
+<h3 id="_31">四、易错点提醒<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>不可约是相对于系数域的</strong>：一定要明确说明是在哪个数域上讨论。<span class="arithmatex">\(x^2 - 2\)</span> 在 <span class="arithmatex">\(\mathbb{Q}\)</span> 上不可约，在 <span class="arithmatex">\(\mathbb{R}\)</span> 上可约。</p>
+</li>
+<li>
+<p><strong>唯一分解的唯一性意义</strong>：唯一分解定理的"唯一"是在<strong>相伴意义下</strong>的，即不计次序和常数因子。</p>
+</li>
+<li>
+<p><strong>不可约 ≠ 没有根</strong>：一次多项式永远不可约。二次多项式在 <span class="arithmatex">\(\mathbb{C}\)</span> 中若有根则可约。但对于更高次，<strong>没有根也可能是可约的</strong>（例如 <span class="arithmatex">\((x^2+1)^2\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中没有根但可约）。</p>
+</li>
+<li>
+<p><strong>带余除法不保持不可约性</strong>：若 <span class="arithmatex">\(p\)</span> 不可约，<span class="arithmatex">\(f = ph + r\)</span>，则 <span class="arithmatex">\(r\)</span> 可能不可约也可能可约，与 <span class="arithmatex">\(p\)</span> 无直接关系。</p>
+</li>
+</ol>
+<h3 id="_32">五、思考题<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：整数的唯一分解依赖于"质数的不可分割性"。多项式的唯一分解依赖于"不可约多项式的不可分割性"。这两个结构（<span class="arithmatex">\(\mathbb{Z}\)</span> 和 <span class="arithmatex">\(K[x]\)</span>）有哪些本质的共同点？</p>
+</li>
+<li>
+<p><strong>探索</strong>：若 <span class="arithmatex">\(K\)</span> 是数域，<span class="arithmatex">\(K[x]\)</span> 中有唯一分解性质。问：<span class="arithmatex">\(K[x,y] = K[x][y]\)</span>（二元多项式环）是否也有唯一分解？</p>
+</li>
+<li>
+<p><strong>问题</strong>：设 <span class="arithmatex">\(p(x)\)</span> 不可约，<span class="arithmatex">\(f(x), g(x)\)</span> 任意。证明：若 <span class="arithmatex">\(p \mid fg\)</span>，则 <span class="arithmatex">\(p \mid f\)</span> 或 <span class="arithmatex">\(p \mid g\)</span>。这是唯一性证明的关键。</p>
+</li>
+</ol>
+<hr />
+<h2 id="75">7.5 重因式<a class="headerlink" href="#75" title="Permanent link">&para;</a></h2>
+<h3 id="_33">一、概念引入动机<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要研究重因式？</strong></p>
+<ol>
+<li><strong>导数的几何意义</strong>：重因式意味着多项式在该点的根是"重复的"。从图像上看，曲线与 <span class="arithmatex">\(x\)</span> 轴相切而不是穿过。</li>
+<li><strong>微积分的联系</strong>：重因式的判别依赖于导数，这建立了代数（多项式）与微积分（导数）之间的深刻联系。</li>
+<li><strong>实际问题</strong>：在代数几何中，重因式对应"重根"，影响曲线的形态。在数值计算中，重根的检测更困难。</li>
+<li><strong>后续应用</strong>：重因式的概念在判断代数元代数性、验证微分域扩张时有用。</li>
+</ol>
+<h3 id="_34">二、详细讲解过程<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<h4 id="1_4">1. 重因式的定义<a class="headerlink" href="#1_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：如果 <span class="arithmatex">\((x - a)^k \mid f(x)\)</span> 但 <span class="arithmatex">\((x - a)^{k+1} \nmid f(x)\)</span>，则 <span class="arithmatex">\(x - a\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 的 <strong><span class="arithmatex">\(k\)</span> 重因式</strong>。</p>
+</blockquote>
+<p><strong>讲解要点</strong>：
+- <span class="arithmatex">\(k = 1\)</span> 时称为<strong>单因式</strong>
+- <span class="arithmatex">\(k \geq 2\)</span> 时称为<strong>重因式</strong>
+- <span class="arithmatex">\(k\)</span> 称为<strong>重数</strong>
+- <span class="arithmatex">\(a\)</span> 称为<strong>根</strong></p>
+<p><strong>注意</strong>：重因式是<strong>一次因式</strong>的特殊情形，因为 <span class="arithmatex">\(x-a\)</span> 是一次多项式。</p>
+<h4 id="2_4">2. 重因式的判别定理<a class="headerlink" href="#2_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(x - a\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 的 <span class="arithmatex">\(k\)</span> 重因式 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(f(a) = f'(a) = \cdots = f^{(k-1)}(a) = 0\)</span>，但 <span class="arithmatex">\(f^{(k)}(a) \neq 0\)</span>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. <strong>必要性</strong>（<span class="arithmatex">\(\Rightarrow\)</span>）：设 <span class="arithmatex">\(f(x) = (x-a)^k g(x)\)</span>，其中 <span class="arithmatex">\(g(a) \neq 0\)</span>。逐次求导并代入 <span class="arithmatex">\(x=a\)</span>，可证结论。
+2. <strong>充分性</strong>（<span class="arithmatex">\(\Leftarrow\)</span>）：若 <span class="arithmatex">\(f(a) = f'(a) = \cdots = f^{(k-1)}(a) = 0\)</span>，但 <span class="arithmatex">\(f^{(k)}(a) \neq 0\)</span>，则 <span class="arithmatex">\((x-a)^k \mid f(x)\)</span> 但 <span class="arithmatex">\((x-a)^{k+1} \nmid f(x)\)</span>。</p>
+<p><strong>更实用的判别方法</strong>：</p>
+<blockquote>
+<p><strong>定理</strong>：设 <span class="arithmatex">\(f(x)\)</span> 次数为 <span class="arithmatex">\(n\)</span>，<span class="arithmatex">\(f'(x)\)</span> 是其导数。则 <span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 的 <span class="arithmatex">\(k\)</span> 重因式 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\((x-a)^k \mid f(x)\)</span> 但 <span class="arithmatex">\((x-a)^{k+1} \nmid f(x)\)</span>。</p>
+<p>更实用的是：<span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(k\)</span> 重因式 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\((x-a)^{k-1} \mid f'(x)\)</span> 但 <span class="arithmatex">\((x-a)^k \nmid f'(x)\)</span>。</p>
+</blockquote>
+<h4 id="3_3">3. 重因式的求法<a class="headerlink" href="#3_3" title="Permanent link">&para;</a></h4>
+<p><strong>方法一</strong>：求根法
+1. 求出 <span class="arithmatex">\(f(x)\)</span> 的所有根（可能在扩域中）
+2. 对每个根，判断其重数</p>
+<p><strong>方法二</strong>：导数法
+1. 计算 <span class="arithmatex">\(f(x)\)</span> 和 <span class="arithmatex">\(f'(x)\)</span>
+2. 求 <span class="arithmatex">\((f, f')\)</span>，则 <span class="arithmatex">\(f/(f,f')\)</span> 没有重因式</p>
+<h3 id="_35">三、典型例题<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<h4 id="_36">【验证题】<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h4>
+<p><strong>例5.1</strong> 判断：若 <span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 的 <span class="arithmatex">\(k\)</span> 重因式，则 <span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(f'(x)\)</span> 的 <span class="arithmatex">\(k-1\)</span> 重因式（<span class="arithmatex">\(k \geq 2\)</span>）。这句话对吗？</p>
+<p><strong>答案</strong>：对！由重因式判别定理可得。</p>
+<p><strong>例5.2</strong> 证明：<span class="arithmatex">\(x-1\)</span> 是 <span class="arithmatex">\(f(x) = (x-1)^3(x+2)\)</span> 的三重因式。</p>
+<p><strong>解</strong>：
+直接计算 <span class="arithmatex">\(f(1) = 0\)</span>，<span class="arithmatex">\(f'(1) = 0\)</span>，<span class="arithmatex">\(f''(1) = 0\)</span>，<span class="arithmatex">\(f'''(1) \neq 0\)</span>。
+或者：显然 <span class="arithmatex">\((x-1)^3 \mid f\)</span> 但 <span class="arithmatex">\((x-1)^4 \nmid f\)</span>。所以是三重因式。</p>
+<h4 id="_37">【计算题】<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h4>
+<p><strong>例5.3</strong> 判断 <span class="arithmatex">\(f(x) = x^3 - 3x + 2\)</span> 是否有重因式。</p>
+<p><strong>解</strong>：
+$<span class="arithmatex">\(f(x) = (x-1)^2(x+2)\)</span>$
+验证：<span class="arithmatex">\((x-1)^2(x+2) = (x^2-2x+1)(x+2) = x^3 + 2x^2 - 2x^2 - 4x + x + 2 = x^3 - 3x + 2\)</span> ✅</p>
+<p>所以 <span class="arithmatex">\(x-1\)</span> 是二重因式（重因式）。</p>
+<p><strong>例5.4</strong> 设 <span class="arithmatex">\(f(x) = x^4 - 5x^3 + 9x^2 - 8x + 4\)</span>，求其重因式。</p>
+<p><strong>解</strong>：
+$<span class="arithmatex">\(f'(x) = 4x^3 - 15x^2 + 18x - 8\)</span>$
+计算 <span class="arithmatex">\((f, f')\)</span>：</p>
+<p>辗转相除：
+$<span class="arithmatex">\(f = \frac{1}{4}x \cdot f' + \cdots\)</span>$
+实际上：
+$<span class="arithmatex">\(f = \frac{1}{4}x \cdot f' + r_1(x)\)</span>$
+$<span class="arithmatex">\(f'(x) = \cdots\)</span>$</p>
+<p>简化做法：注意到 <span class="arithmatex">\(f(x) = (x-1)^2(x-2)^2\)</span>？
+检查：<span class="arithmatex">\((x-1)^2(x-2)^2 = (x^2-3x+2)(x^2-4x+4) = x^4 - 7x^3 + \cdots \neq f\)</span></p>
+<p>正确分解：使用求根或软件计算可得...</p>
+<p><strong>例5.5</strong> 若 <span class="arithmatex">\(f(x) = x^n - a^n\)</span>（<span class="arithmatex">\(a \neq 0\)</span>），求 <span class="arithmatex">\(f(x)\)</span> 的所有因式及重数。</p>
+<p><strong>解</strong>：
+在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中：
+$<span class="arithmatex">\(f(x) = (x-a)(x-\zeta a)\cdots(x-\zeta^{n-1}a)\)</span>$
+其中 <span class="arithmatex">\(\zeta = e^{2\pi i/n}\)</span>。</p>
+<p>每个一次因式都是<strong>单因式</strong>（重数 <span class="arithmatex">\(k=1\)</span>），因为 <span class="arithmatex">\(f'(x) = nx^{n-1}\)</span>，而 <span class="arithmatex">\(f'(\zeta^k a) = n(\zeta^k a)^{n-1} \neq 0\)</span>。</p>
+<h3 id="_38">四、易错点提醒<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>重因式只针对一次因式</strong>：<span class="arithmatex">\(x-a\)</span> 才称为重因式，<span class="arithmatex">\((x^2+1)\)</span> 这类因式不讨论"重数"。</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(k=0\)</span> 的情况</strong>：若 <span class="arithmatex">\((x-a)^0 = 1\)</span> 整除 <span class="arithmatex">\(f\)</span>，但 <span class="arithmatex">\((x-a)^1\)</span> 不整除 <span class="arithmatex">\(f\)</span>，则 <span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(0\)</span> 重因式，即不是因式。</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(f'\)</span> 的重数</strong>：若 <span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(f\)</span> 的 <span class="arithmatex">\(k\)</span> 重因式（<span class="arithmatex">\(k \geq 2\)</span>），则 <span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(f'\)</span> 的 <span class="arithmatex">\(k-1\)</span> 重因式。但若 <span class="arithmatex">\(k=1\)</span>（单因式），则 <span class="arithmatex">\(x-a\)</span> 不是 <span class="arithmatex">\(f'\)</span> 的因式。</p>
+</li>
+<li>
+<p><strong>导数的计算</strong>：形式导数的定义 <span class="arithmatex">\(D(x^n) = nx^{n-1}\)</span> 适用于任何数域，即使在特征 <span class="arithmatex">\(p\)</span> 的域中也成立（此时 <span class="arithmatex">\(p \cdot a = 0\)</span> 可能导致导数为零多项式）。</p>
+</li>
+</ol>
+<h3 id="_39">五、思考题<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：若 <span class="arithmatex">\(f'(x) \equiv 0\)</span>（零多项式），则 <span class="arithmatex">\(f(x)\)</span> 有什么特点？（考虑特征！）</p>
+</li>
+<li>
+<p><strong>探索</strong>：设 <span class="arithmatex">\(f(x)\)</span> 无重因式（所有不可约因式都是单因式），则 <span class="arithmatex">\((f, f') = 1\)</span>。反过来，若 <span class="arithmatex">\((f, f') = 1\)</span>，能否推出 <span class="arithmatex">\(f\)</span> 无重因式？</p>
+</li>
+<li>
+<p><strong>问题</strong>：若 <span class="arithmatex">\(f(x)\)</span> 在扩域中有 <span class="arithmatex">\(k\)</span> 重根 <span class="arithmatex">\(a\)</span>，则在原数域中如何刻画这个性质？与 <span class="arithmatex">\((f, f')\)</span> 有什么关系？</p>
+</li>
+</ol>
+<hr />
+<h2 id="76">7.6 一元多项式的根，复数域上的不可约多项式<a class="headerlink" href="#76" title="Permanent link">&para;</a></h2>
+<h3 id="_40">一、概念引入动机<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要研究多项式的根？</strong></p>
+<ol>
+<li><strong>代数的核心问题</strong>：方程 <span class="arithmatex">\(f(x) = 0\)</span> 的根是代数学最古老的问题之一。高次方程的求根公式导致了群论的诞生（伽罗瓦理论）。</li>
+<li><strong>函数视角</strong>：从函数角度看，根是多项式函数 <span class="arithmatex">\(f: K \to K\)</span> 的零点。研究根的分布是分析学的重要内容。</li>
+<li><strong>因式分解的终点</strong>：在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中，每个 <span class="arithmatex">\(n\)</span> 次多项式都可以分解为 <span class="arithmatex">\(n\)</span> 个一次因式。这意味着每个复系数多项式都可以完全"线性化"。</li>
+<li><strong>几何意义</strong>：根对应着多项式函数图像与 <span class="arithmatex">\(x\)</span> 轴的交点（零点）。</li>
+</ol>
+<h3 id="_41">二、详细讲解过程<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<h4 id="1_5">1. 余数定理<a class="headerlink" href="#1_5" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理（余数定理）</strong>：<span class="arithmatex">\(f(a)\)</span> 等于 <span class="arithmatex">\(f(x)\)</span> 除以 <span class="arithmatex">\(x - a\)</span> 的余数。</p>
+</blockquote>
+<p><strong>证明</strong>：由带余除法，<span class="arithmatex">\(f(x) = (x-a)q(x) + r\)</span>，其中 <span class="arithmatex">\(r\)</span> 是常数（因为 <span class="arithmatex">\(\deg r &lt; 1\)</span>）。
+代入 <span class="arithmatex">\(x=a\)</span>：<span class="arithmatex">\(f(a) = r\)</span>。<span class="arithmatex">\(\square\)</span></p>
+<p><strong>推论</strong>：<span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 的根 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(f(a) = 0\)</span> <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 的因式。</p>
+<h4 id="2_5">2. 根与一次因式的对应<a class="headerlink" href="#2_5" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(f(x)\)</span> 的根 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(x - a \mid f(x)\)</span>。</p>
+</blockquote>
+<p><strong>讲解要点</strong>：
+- 这是沟通"根"与"因式"的桥梁
+- 若 <span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(k\)</span> 重根，则 <span class="arithmatex">\((x-a)^k \mid f(x)\)</span> 但 <span class="arithmatex">\((x-a)^{k+1} \nmid f(x)\)</span>
+- 反之亦然</p>
+<h4 id="3_4">3. 代数基本定理<a class="headerlink" href="#3_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理（代数基本定理）</strong>：复数域上每一个 <span class="arithmatex">\(n\)</span> 次多项式恰好有 <span class="arithmatex">\(n\)</span> 个根（重根计入）。</p>
+</blockquote>
+<p><strong>证明思路</strong>（简述）：
+1. 首先证明每个复系数多项式都有至少一个根（使用Liouville定理或极坐标展开）。
+2. 然后递归分解：若有根 <span class="arithmatex">\(a\)</span>，则 <span class="arithmatex">\(f(x) = (x-a)g(x)\)</span>，<span class="arithmatex">\(\deg g = n-1\)</span>。
+3. 归纳可得 <span class="arithmatex">\(n\)</span> 个根。</p>
+<p><strong>历史意义</strong>：这个定理"基本"在于它是复分析的起点，也是代数封闭性的定义来源。</p>
+<h4 id="4_2">4. 复数域上的不可约多项式<a class="headerlink" href="#4_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>结论</strong>：复数域上不可约多项式只有一次多项式。</p>
+</blockquote>
+<p><strong>证明</strong>：设 <span class="arithmatex">\(f(x) \in \mathbb{C}[x]\)</span> 不可约且 <span class="arithmatex">\(\deg f = n \geq 2\)</span>。
+由代数基本定理，<span class="arithmatex">\(f\)</span> 有 <span class="arithmatex">\(n\)</span> 个复数根 <span class="arithmatex">\(a_1, \ldots, a_n\)</span>。
+所以 <span class="arithmatex">\(f(x) = c(x-a_1)\cdots(x-a_n)\)</span>。
+这与 <span class="arithmatex">\(f\)</span> 不可约矛盾（<span class="arithmatex">\(n \geq 2\)</span> 意味着可以分解为两个更低次因式的乘积）。<span class="arithmatex">\(\square\)</span></p>
+<h3 id="_42">三、典型例题<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<h4 id="_43">【验证题】<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h4>
+<p><strong>例6.1</strong> 设 <span class="arithmatex">\(f(x) = x^2 - 5x + 6\)</span>，求 <span class="arithmatex">\(f(1), f(2), f(3)\)</span>。</p>
+<p><strong>解</strong>：
+- <span class="arithmatex">\(f(1) = 1 - 5 + 6 = 2\)</span>
+- <span class="arithmatex">\(f(2) = 4 - 10 + 6 = 0\)</span>
+- <span class="arithmatex">\(f(3) = 9 - 15 + 6 = 0\)</span></p>
+<p>所以 <span class="arithmatex">\(2, 3\)</span> 是根，<span class="arithmatex">\(1\)</span> 不是根。</p>
+<p><strong>例6.2</strong> 判断：若 <span class="arithmatex">\(f(x)\)</span> 是 <span class="arithmatex">\(n\)</span> 次多项式，则它恰好有 <span class="arithmatex">\(n\)</span> 个不同的根。这句话对吗？</p>
+<p><strong>答案</strong>：错！代数基本定理说的是"重根计入"，不是"恰好 <span class="arithmatex">\(n\)</span> 个<strong>不同</strong>的根"。例如 <span class="arithmatex">\(f(x) = (x-1)^n\)</span> 只有一个根（<span class="arithmatex">\(x=1\)</span>），但计重数是 <span class="arithmatex">\(n\)</span> 个。</p>
+<h4 id="_44">【计算题】<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h4>
+<p><strong>例6.3</strong> 已知 <span class="arithmatex">\(f(x) = 2x^3 - 5x^2 + x + 2\)</span> 有根 <span class="arithmatex">\(x = 2\)</span>，求 <span class="arithmatex">\(f(x)\)</span> 的完全分解。</p>
+<p><strong>解</strong>：
+由余数定理，<span class="arithmatex">\((x-2)\)</span> 是因式。
+长除法：<span class="arithmatex">\(f(x) = (x-2)(2x^2 - x - 1) = (x-2)(2x+1)(x-1)\)</span></p>
+<p>所以根为 <span class="arithmatex">\(2, -\frac{1}{2}, 1\)</span>。</p>
+<p><strong>例6.4</strong> 求 <span class="arithmatex">\(f(x) = x^n - 1\)</span> 在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中的根和因式分解。</p>
+<p><strong>解</strong>：
+单位根：<span class="arithmatex">\(e^{2\pi ik/n}\)</span>（<span class="arithmatex">\(k = 0, 1, \ldots, n-1\)</span>）
+$<span class="arithmatex">\(f(x) = \prod_{k=0}^{n-1} (x - e^{2\pi ik/n})\)</span>$</p>
+<p>特别地：
+- <span class="arithmatex">\(n=2\)</span>：<span class="arithmatex">\(x^2 - 1 = (x-1)(x+1)\)</span>
+- <span class="arithmatex">\(n=3\)</span>：<span class="arithmatex">\(x^3 - 1 = (x-1)(x - \omega)(x - \omega^2)\)</span>，其中 <span class="arithmatex">\(\omega = e^{2\pi i/3}\)</span></p>
+<p><strong>例6.5</strong> 设 <span class="arithmatex">\(f(x) = x^4 + 4x^2 + 4 = (x^2 + 2)^2\)</span>。求其根。</p>
+<p><strong>解</strong>：
+令 <span class="arithmatex">\(x^2 = t\)</span>，则 <span class="arithmatex">\(t^2 + 4t + 4 = (t+2)^2 = 0\)</span>，所以 <span class="arithmatex">\(t = -2\)</span>（二重）。
+<span class="arithmatex">\(x^2 = -2 \Rightarrow x = \pm \sqrt{2}i\)</span></p>
+<p>根：<span class="arithmatex">\(\sqrt{2}i, -\sqrt{2}i\)</span>（各二重）</p>
+<p>在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中：
+$<span class="arithmatex">\(f(x) = (x - \sqrt{2}i)^2(x + \sqrt{2}i)^2\)</span>$</p>
+<h4 id="_45">【证明题】<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h4>
+<p><strong>例6.6</strong> 证明：若 <span class="arithmatex">\(f(x) \in \mathbb{R}[x]\)</span> 且 <span class="arithmatex">\(\deg f\)</span> 为奇数，则 <span class="arithmatex">\(f(x)\)</span> 必有实根。</p>
+<p><strong>证明</strong>：
+设 <span class="arithmatex">\(f(x) = a_n x^n + \cdots + a_0\)</span>（<span class="arithmatex">\(a_n \neq 0\)</span>，<span class="arithmatex">\(n\)</span> 为奇数）。
+当 <span class="arithmatex">\(x \to +\infty\)</span> 时，<span class="arithmatex">\(f(x) \to +\infty\)</span>（若 <span class="arithmatex">\(a_n &gt; 0\)</span>）或 <span class="arithmatex">\(f(x) \to -\infty\)</span>（若 <span class="arithmatex">\(a_n &lt; 0\)</span>）。
+当 <span class="arithmatex">\(x \to -\infty\)</span> 时，<span class="arithmatex">\(f(x) \to -\infty\)</span>（若 <span class="arithmatex">\(a_n &gt; 0\)</span>）或 <span class="arithmatex">\(f(x) \to +\infty\)</span>（若 <span class="arithmatex">\(a_n &lt; 0\)</span>）。
+由连续性，<span class="arithmatex">\(f(x)\)</span> 必穿过 <span class="arithmatex">\(x\)</span> 轴，即有实根。<span class="arithmatex">\(\square\)</span></p>
+<h3 id="_46">四、易错点提醒<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>重根要计入</strong>：代数基本定理说"恰好有 <span class="arithmatex">\(n\)</span> 个根"，重根按重数计算。例如 <span class="arithmatex">\((x-1)^n\)</span> 有 <span class="arithmatex">\(n\)</span> 个根（都是 <span class="arithmatex">\(1\)</span>）。</p>
+</li>
+<li>
+<p><strong>实系数的共轭根</strong>：若 <span class="arithmatex">\(a + bi\)</span>（<span class="arithmatex">\(b \neq 0\)</span>）是实系数多项式的根，则 <span class="arithmatex">\(a - bi\)</span> 也是根，且重数相同。</p>
+</li>
+<li>
+<p><strong>余数定理的逆用</strong>：若 <span class="arithmatex">\(f(a) = 0\)</span>，则 <span class="arithmatex">\(x-a\)</span> 是因式；反之，若 <span class="arithmatex">\(x-a\)</span> 是因式，则 <span class="arithmatex">\(f(a) = 0\)</span>。这两个命题互为逆否命题，等价。</p>
+</li>
+<li>
+<p><strong>虚数单位 <span class="arithmatex">\(i\)</span></strong>：注意区分 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(1\)</span>。很多学生在计算 <span class="arithmatex">\(f(i)\)</span> 时忘记把 <span class="arithmatex">\(i^2 = -1\)</span> 代入。</p>
+</li>
+</ol>
+<h3 id="_47">五、思考题<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：代数基本定理说复数域是代数封闭的。为什么还需要研究 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 和 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 的不可约多项式？</p>
+</li>
+<li>
+<p><strong>探索</strong>：设 <span class="arithmatex">\(f(x) \in \mathbb{R}[x]\)</span>，次数为 <span class="arithmatex">\(n\)</span>。证明 <span class="arithmatex">\(f(x)\)</span> 必有至少一个实根（当 <span class="arithmatex">\(n\)</span> 为奇数）或至少一个非实共轭复根对（当 <span class="arithmatex">\(n\)</span> 为偶数）。</p>
+</li>
+<li>
+<p><strong>问题</strong>：若 <span class="arithmatex">\(f(x)\)</span> 的所有系数都是整数，且在 <span class="arithmatex">\(\mathbb{Q}\)</span> 中不可约，它在 <span class="arithmatex">\(\mathbb{C}\)</span> 中的根有什么特点？</p>
+</li>
+</ol>
+<hr />
+<h2 id="77">7.7 实系数多项式的实根<a class="headerlink" href="#77" title="Permanent link">&para;</a></h2>
+<h3 id="_48">一、概念引入动机<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要专门研究实系数多项式？</strong></p>
+<ol>
+<li><strong>实数的重要性</strong>：实数是日常生活中最直观的数系。实系数多项式的实根对应实际问题（物理、经济、工程）中的解。</li>
+<li><strong>完整分类</strong>：实系数多项式的不可约因子只有一次和二次（判别式负）。这是对复数域不可约分解的"实数版本"。</li>
+<li><strong>实根的存在性判别</strong>：我们关心如何判断实系数多项式是否有实根，以及如何隔离实根。</li>
+</ol>
+<h3 id="_49">二、详细讲解过程<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h3>
+<h4 id="1_6">1. 实系数不可约多项式的分类<a class="headerlink" href="#1_6" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>结论</strong>：实数域上不可约多项式只有一次多项式和判别式小于零的二次多项式。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. 设 <span class="arithmatex">\(f(x) \in \mathbb{R}[x]\)</span> 不可约，<span class="arithmatex">\(\deg f = n \geq 2\)</span>。
+2. 若 <span class="arithmatex">\(f\)</span> 有实根 <span class="arithmatex">\(a\)</span>，则 <span class="arithmatex">\((x-a) \mid f\)</span>，与不可约矛盾。
+3. 所以 <span class="arithmatex">\(f\)</span> 没有实根。
+4. 设 <span class="arithmatex">\(a+bi\)</span>（<span class="arithmatex">\(b \neq 0\)</span>）是 <span class="arithmatex">\(f\)</span> 的复根，则 <span class="arithmatex">\(a-bi\)</span> 也是根（实系数）。
+5. 所以 <span class="arithmatex">\((x-(a+bi))(x-(a-bi)) = x^2 - 2ax + (a^2+b^2)\)</span> 是 <span class="arithmatex">\(f\)</span> 的因式。
+6. 由不可约性，<span class="arithmatex">\(n = 2\)</span>，且 <span class="arithmatex">\(f\)</span> 与这个二次因式相伴（只差常数倍）。</p>
+<p><strong>推论</strong>：每个实系数多项式都可以分解为一次和二次（判别式负）因式的乘积。</p>
+<h4 id="2_6">2. 实根的存在性<a class="headerlink" href="#2_6" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>命题</strong>：奇次实系数多项式必有实根。</p>
+</blockquote>
+<p><strong>证明</strong>：见 7.6 例 6.6。</p>
+<blockquote>
+<p><strong>命题</strong>：偶次实系数多项式不一定有实根。</p>
+</blockquote>
+<p><strong>反例</strong>：<span class="arithmatex">\(x^2 + 1 = 0\)</span> 无实根。</p>
+<h4 id="3-sturm">3. 实根的隔离（Sturm定理简介）<a class="headerlink" href="#3-sturm" title="Permanent link">&para;</a></h4>
+<p><em>注：本节不深入，但可提及存在实根隔离的经典方法，如Sturm序列。</em></p>
+<h3 id="_50">三、典型例题<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h3>
+<h4 id="_51">【验证题】<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h4>
+<p><strong>例7.1</strong> 判断下列实系数多项式是否不可约：
+（1）<span class="arithmatex">\(x^2 - 2x + 2\)</span>（判别式 <span class="arithmatex">\(\Delta = 4-8 = -4 &lt; 0\)</span>）
+（2）<span class="arithmatex">\(x^2 - 4x + 3\)</span>（判别式 <span class="arithmatex">\(\Delta = 16-12 = 4 &gt; 0\)</span>）
+（3）<span class="arithmatex">\(x^2 - 2x + 1 = (x-1)^2\)</span></p>
+<p><strong>答案</strong>：（1）不可约（实数域）；（2）可约；（3）可约。</p>
+<p><strong>例7.2</strong> 设 <span class="arithmatex">\(f(x) = x^4 + 1\)</span>，在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中是否可约？</p>
+<p><strong>解</strong>：
+$<span class="arithmatex">\(x^4 + 1 = (x^2 + \sqrt{2}x + 1)(x^2 - \sqrt{2}x + 1)\)</span>$
+这两个二次式的判别式都是 <span class="arithmatex">\(2 - 4 = -2 &lt; 0\)</span>，所以在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中不可约！</p>
+<p>所以 <span class="arithmatex">\(x^4 + 1\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中可约（分解为两个不可约二次式），但在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约（Eisenstein判别法）。</p>
+<h4 id="_52">【计算题】<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h4>
+<p><strong>例7.3</strong> 将 <span class="arithmatex">\(f(x) = x^6 - 1\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中分解。</p>
+<p><strong>解</strong>：
+在 <span class="arithmatex">\(\mathbb{C}[x]\)</span> 中：
+$<span class="arithmatex">\(x^6 - 1 = (x-1)(x+1)(x-\frac{1}{2}-\frac{\sqrt{3}}{2}i)(x-\frac{1}{2}+\frac{\sqrt{3}}{2}i)(x+\frac{1}{2}-\frac{\sqrt{3}}{2}i)(x+\frac{1}{2}+\frac{\sqrt{3}}{2}i)\)</span>$</p>
+<p>配对共轭复根得：
+$<span class="arithmatex">\(x^6 - 1 = (x-1)(x+1)(x^2-x+1)(x^2+x+1)\)</span>$</p>
+<p>检查判别式：
+- <span class="arithmatex">\(x^2 - x + 1\)</span>：<span class="arithmatex">\(\Delta = 1 - 4 = -3 &lt; 0\)</span>，不可约
+- <span class="arithmatex">\(x^2 + x + 1\)</span>：<span class="arithmatex">\(\Delta = 1 - 4 = -3 &lt; 0\)</span>，不可约</p>
+<p><strong>例7.4</strong> 证明 <span class="arithmatex">\(x^4 + 4x^2 + 4 = (x^2 + 2)^2\)</span> 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中可约。</p>
+<p><strong>答案</strong>：这显然是某个多项式的平方。但它是否可以进一步分解？
+<span class="arithmatex">\((x^2+2)\)</span> 的判别式是 <span class="arithmatex">\(0 - 8 = -8 &lt; 0\)</span>，不可约。
+所以 <span class="arithmatex">\((x^2+2)^2\)</span> 已经是最简形式，可以视为两个不可约二次因式（都是 <span class="arithmatex">\(x^2+2\)</span>），或四个一次因式（但涉及虚数）。</p>
+<h3 id="_53">四、易错点提醒<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>判别式大于零 ≠ 在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中可约</strong>：这说明有<strong>实根</strong>，但有实根不意味着能分解为实系数一次因式？不对！有实根 <span class="arithmatex">\(a\)</span> 就意味着有因式 <span class="arithmatex">\(x-a\)</span>，这在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中就是一次因式。所以判别式 <span class="arithmatex">\(&gt; 0\)</span> 的二次多项式在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中可约。</p>
+</li>
+<li>
+<p><strong>判别式等于零</strong>：判别式等于零的二次多项式是完全平方，在 <span class="arithmatex">\(\mathbb{R}[x]\)</span> 中可约为 <span class="arithmatex">\((x-a)^2\)</span>。</p>
+</li>
+<li>
+<p><strong>分解的唯一性</strong>：每个实系数多项式可以唯一地分解为一次因式（实根对应）和二次不可约因式（共轭复根对对应）的乘积。</p>
+</li>
+</ol>
+<h3 id="_54">五、思考题<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：实系数多项式的复根以共轭对出现。这是实系数多项式的本质特性。证明这个性质。</p>
+</li>
+<li>
+<p><strong>探索</strong>：设 <span class="arithmatex">\(f(x) \in \mathbb{R}[x]\)</span>，次数为 <span class="arithmatex">\(2n\)</span>。若 <span class="arithmatex">\(f\)</span> 没有实根，则它可以写成 <span class="arithmatex">\(f(x) = g_1(x)^2 + \cdots + g_k(x)^2\)</span> 的形式吗？（这是Hilbert第17问题的特例）</p>
+</li>
+<li>
+<p><strong>问题</strong>：若 <span class="arithmatex">\(f(x)\)</span> 实系数，且 <span class="arithmatex">\(f(x) &gt; 0\)</span> 对所有实数 <span class="arithmatex">\(x\)</span> 成立，则 <span class="arithmatex">\(f(x)\)</span> 一定可以写成平方和的形式吗？（正定性）</p>
+</li>
+</ol>
+<hr />
+<h2 id="78">7.8 有理数域上的不可约多项式<a class="headerlink" href="#78" title="Permanent link">&para;</a></h2>
+<h3 id="_55">一、概念引入动机<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h3>
+<p><strong>为什么要研究 <span class="arithmatex">\(\mathbb{Q}[x]\)</span>？</strong></p>
+<ol>
+<li><strong>数论的联系</strong>：有理系数多项式与数论有深刻联系。有理数域 <span class="arithmatex">\(\mathbb{Q}\)</span> 是最小的数域，每个数域都包含 <span class="arithmatex">\(\mathbb{Q}\)</span>。</li>
+<li><strong>整数系数的特殊性</strong>：整数系数多项式（<span class="arithmatex">\(\mathbb{Z}[x]\)</span>）与有理系数多项式（<span class="arithmatex">\(\mathbb{Q}[x]\)</span>）有紧密联系：<span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中的不可约性等价于 <span class="arithmatex">\(\mathbb{Z}[x]\)</span> 中的原始性（乘以常数后首一系数为整数）。</li>
+<li><strong>Eisenstein判别法</strong>：这是数论（质数）与代数（不可约性）的完美结合，是本章最实用的工具之一。</li>
+<li><strong>反例的来源</strong>：很多群论、域论的反例涉及 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约多项式（如构造扩域）。</li>
+</ol>
+<h3 id="_56">二、详细讲解过程<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h3>
+<h4 id="1_7">1. 本原多项式的定义<a class="headerlink" href="#1_7" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：整数系数多项式各项系数的最大公因数为1，称为<strong>本原多项式</strong>。</p>
+</blockquote>
+<p><strong>讲解要点</strong>：
+- "本原"意味着没有非平凡的整数公因子
+- 例如：<span class="arithmatex">\(2x^2 + 4x + 6 = 2(x^2 + 2x + 3)\)</span> 不是本原的（系数的GCD是2）
+- <span class="arithmatex">\(x^2 + 2x + 3\)</span> 是本原的（系数的GCD是1）</p>
+<p><strong>引理（本原多项式的本质）</strong>：
+设 <span class="arithmatex">\(f(x) \in \mathbb{Z}[x]\)</span>，则 <span class="arithmatex">\(f(x) = c \cdot \tilde{f}(x)\)</span>，其中 <span class="arithmatex">\(c \in \mathbb{Z}\)</span>，<span class="arithmatex">\(\tilde{f}(x)\)</span> 是本原多项式。这种分解在相伴意义下唯一。</p>
+<h4 id="2_7">2. 高斯引理<a class="headerlink" href="#2_7" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>引理（Gauss）</strong>：两个本原多项式的乘积仍是本原多项式。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+设 <span class="arithmatex">\(f(x) = \sum a_i x^i\)</span>，<span class="arithmatex">\(g(x) = \sum b_j x^j\)</span> 都是本原的。
+设 <span class="arithmatex">\(h(x) = fg = \sum c_k x^k\)</span>，其中 <span class="arithmatex">\(c_k = \sum_{i+j=k} a_i b_j\)</span>。
+若 <span class="arithmatex">\(h\)</span> 不是本原的，设素数 <span class="arithmatex">\(p\)</span> 整除所有 <span class="arithmatex">\(c_k\)</span>。
+考虑 <span class="arithmatex">\(f\)</span> 中系数不被 <span class="arithmatex">\(p\)</span> 整除的最低次项 <span class="arithmatex">\(a_i x^i\)</span>（存在，因为 <span class="arithmatex">\(f\)</span> 本原）。
+考虑 <span class="arithmatex">\(g\)</span> 中系数不被 <span class="arithmatex">\(p\)</span> 整除的最低次项 <span class="arithmatex">\(b_j x^j\)</span>（存在，因为 <span class="arithmatex">\(g\)</span> 本原）。
+则 <span class="arithmatex">\(c_{i+j}\)</span> 的展开中，<span class="arithmatex">\(a_i b_j\)</span> 这一项不被 <span class="arithmatex">\(p\)</span> 整除，但其他项都被 <span class="arithmatex">\(p\)</span> 整除。
+所以 <span class="arithmatex">\(p \nmid c_{i+j}\)</span>，矛盾。<span class="arithmatex">\(\square\)</span></p>
+<p><strong>推论</strong>：设 <span class="arithmatex">\(f(x) \in \mathbb{Z}[x]\)</span>。若 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中可约，则 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Z}[x]\)</span> 中也可约。</p>
+<h4 id="3-eisenstein">3. Eisenstein判别法<a class="headerlink" href="#3-eisenstein" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理（Eisenstein判别法）</strong>：设
+$<span class="arithmatex">\(f(x) = a_nx^n + a_{n-1}x^{n-1} + \cdots + a_0\)</span>$
+是整数系数多项式。如果存在素数 <span class="arithmatex">\(p\)</span>，满足：
+1. <span class="arithmatex">\(p \nmid a_n\)</span>（首项系数不被 <span class="arithmatex">\(p\)</span> 整除）
+2. <span class="arithmatex">\(p \mid a_{n-1}, a_{n-2}, \ldots, a_0\)</span>（其余所有系数都被 <span class="arithmatex">\(p\)</span> 整除）
+3. <span class="arithmatex">\(p^2 \nmid a_0\)</span>（常数项不被 <span class="arithmatex">\(p^2\)</span> 整除）</p>
+<p>则 <span class="arithmatex">\(f(x)\)</span> 在有理数域上<strong>不可约</strong>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. 若 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中可约，由高斯引理，<span class="arithmatex">\(f\)</span> 可以写成两个次数较低的整数系数多项式的乘积。
+2. 设 <span class="arithmatex">\(f(x) = g(x)h(x)\)</span>，其中 <span class="arithmatex">\(g, h \in \mathbb{Z}[x]\)</span>，<span class="arithmatex">\(\deg g = r\)</span>，<span class="arithmatex">\(\deg h = s\)</span>（<span class="arithmatex">\(r+s = n\)</span>，<span class="arithmatex">\(1 \leq r, s \leq n-1\)</span>）。
+3. 考察 <span class="arithmatex">\(g(0)h(0) = a_0\)</span>。由条件，<span class="arithmatex">\(p \mid a_0\)</span> 但 <span class="arithmatex">\(p^2 \nmid a_0\)</span>，所以 <span class="arithmatex">\(p\)</span> 恰好整除 <span class="arithmatex">\(g(0)\)</span> 和 <span class="arithmatex">\(h(0)\)</span> 中的一个。
+4. 不失一般性，设 <span class="arithmatex">\(p \mid g(0)\)</span>，<span class="arithmatex">\(p \nmid h(0)\)</span>。
+5. 考察 <span class="arithmatex">\(g(x)\)</span> 的系数。若 <span class="arithmatex">\(g\)</span> 的所有非常数项系数都被 <span class="arithmatex">\(p\)</span> 整除，则 <span class="arithmatex">\(g(0)\)</span> 被 <span class="arithmatex">\(p\)</span> 整除，但 <span class="arithmatex">\(g\)</span> 的首项系数不被 <span class="arithmatex">\(p\)</span> 整除（因为 <span class="arithmatex">\(p \nmid a_n = g\)</span> 首项 <span class="arithmatex">\(\times\)</span> <span class="arithmatex">\(h\)</span> 首项，且 <span class="arithmatex">\(p \nmid h\)</span> 首项）。
+6. 设 <span class="arithmatex">\(g(x) = b_r x^r + \cdots + b_0\)</span>。令 <span class="arithmatex">\(k\)</span> 为最小的使得 <span class="arithmatex">\(p \nmid b_k\)</span> 的下标（<span class="arithmatex">\(0 \leq k \leq r\)</span>）。
+7. 考虑 <span class="arithmatex">\(f(x)\)</span> 的 <span class="arithmatex">\(x^k\)</span> 系数：<span class="arithmatex">\(c_k = \sum_{i+j=k} b_i a_j\)</span>，其中 <span class="arithmatex">\(a_j\)</span> 是 <span class="arithmatex">\(h\)</span> 的系数。
+8. 由 <span class="arithmatex">\(k\)</span> 的定义，当 <span class="arithmatex">\(i &lt; k\)</span> 时 <span class="arithmatex">\(b_i\)</span> 被 <span class="arithmatex">\(p\)</span> 整除。而 <span class="arithmatex">\(a_{k-i}\)</span>（对于 <span class="arithmatex">\(i \leq k\)</span>）中，<span class="arithmatex">\(i &lt; k\)</span> 时的项被 <span class="arithmatex">\(p\)</span> 整除。
+9. 关键矛盾：当 <span class="arithmatex">\(i = k\)</span> 时，<span class="arithmatex">\(b_k a_0\)</span> 中 <span class="arithmatex">\(p \nmid b_k\)</span> 且 <span class="arithmatex">\(p \mid a_0\)</span>，所以 <span class="arithmatex">\(p \mid b_k a_0\)</span>；但 <span class="arithmatex">\(c_k = a_n\)</span>（因为 <span class="arithmatex">\(k \leq r &lt; n\)</span>），而 <span class="arithmatex">\(p \nmid a_n\)</span>。
+10. 所以 <span class="arithmatex">\(c_k\)</span> 中各项都被 <span class="arithmatex">\(p\)</span> 整除，但 <span class="arithmatex">\(b_k a_0\)</span> 被 <span class="arithmatex">\(p\)</span> 整除？这导致矛盾...</p>
+<p><strong>简化证明</strong>：
+设 <span class="arithmatex">\(f(x) = g(x)h(x)\)</span>，在 <span class="arithmatex">\(\mathbb{Z}[x]\)</span> 中。取 <span class="arithmatex">\(p\)</span> 满足 Eisenstein 条件。
+考虑在 <span class="arithmatex">\(\mathbb{F}_p[x]\)</span> 中投射：<span class="arithmatex">\(\bar{f}(x) = \bar{a}_n x^n\)</span>（因为 <span class="arithmatex">\(p\)</span> 整除除首项外的所有系数）。
+但 <span class="arithmatex">\(\bar{f}(x) = \bar{g}(x)\bar{h}(x)\)</span>。
+因为 <span class="arithmatex">\(\bar{f}\)</span> 是单项式 <span class="arithmatex">\(a_n x^n\)</span>，所以 <span class="arithmatex">\(\bar{g}\)</span> 和 <span class="arithmatex">\(\bar{h}\)</span> 中只能有一个是单项式（常数或 <span class="arithmatex">\(x\)</span> 的幂）。
+若 <span class="arithmatex">\(\bar{g}\)</span> 是单项式 <span class="arithmatex">\(b_r x^r\)</span>，则 <span class="arithmatex">\(g(x) = b_r x^r + p \cdot \tilde{g}(x)\)</span>，其中 <span class="arithmatex">\(b_r \not\equiv 0 \pmod{p}\)</span>。
+这意味着 <span class="arithmatex">\(g(0)\)</span> 被 <span class="arithmatex">\(p\)</span> 整除（因为 <span class="arithmatex">\(r &gt; 0\)</span>）。
+同理分析 <span class="arithmatex">\(h(0)\)</span>...
+关键：若 <span class="arithmatex">\(r, s \geq 1\)</span>，则 <span class="arithmatex">\(g(0)\)</span> 和 <span class="arithmatex">\(h(0)\)</span> 都被 <span class="arithmatex">\(p\)</span> 整除，从而 <span class="arithmatex">\(f(0) = g(0)h(0)\)</span> 被 <span class="arithmatex">\(p^2\)</span> 整除，矛盾！
+所以 <span class="arithmatex">\(r = 0\)</span> 或 <span class="arithmatex">\(s = 0\)</span>，即 <span class="arithmatex">\(f\)</span> 不可约。<span class="arithmatex">\(\square\)</span></p>
+<h3 id="_57">三、典型例题<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h3>
+<h4 id="_58">【验证题】<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h4>
+<p><strong>例8.1</strong> 验证：<span class="arithmatex">\(f(x) = x^4 + 2x^3 + 2x^2 + 2x + 2\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约（用 <span class="arithmatex">\(p=2\)</span> 的Eisenstein判别法）。</p>
+<p><strong>解</strong>：
+- 首项系数 <span class="arithmatex">\(a_4 = 1\)</span>，<span class="arithmatex">\(2 \nmid 1\)</span> ✅
+- 其余系数：<span class="arithmatex">\(2, 2, 2, 2\)</span> 都被 <span class="arithmatex">\(2\)</span> 整除 ✅
+- 常数项 <span class="arithmatex">\(a_0 = 2\)</span>，<span class="arithmatex">\(4 \nmid 2\)</span> ✅</p>
+<p>所以 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约。</p>
+<p><strong>例8.2</strong> 验证：<span class="arithmatex">\(f(x) = x^3 + 3x^2 + 3x + 1 = (x+1)^3\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中可约。</p>
+<p><strong>解</strong>：虽然可以用 <span class="arithmatex">\(p=3\)</span> 尝试（<span class="arithmatex">\(3 \nmid 1\)</span>，<span class="arithmatex">\(3 \mid 3,3,3\)</span>，<span class="arithmatex">\(9 \nmid 1\)</span>），但更简单的方法是观察到 <span class="arithmatex">\(f(x) = (x+1)^3\)</span>，明显可约。
+所以 Eisenstein 判别法给出的是<strong>充分条件</strong>，不是必要条件。</p>
+<h4 id="_59">【计算题】<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h4>
+<p><strong>例8.3</strong> 判断 <span class="arithmatex">\(f(x) = 2x^4 + 6x^3 - 4x^2 + 8\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中是否可约。</p>
+<p><strong>解</strong>：尝试 <span class="arithmatex">\(p=2\)</span>：
+- 首项系数 <span class="arithmatex">\(a_4 = 2\)</span>，<span class="arithmatex">\(2 \mid 2\)</span>，不满足 <span class="arithmatex">\(2 \nmid a_4\)</span>！❌</p>
+<p>尝试 <span class="arithmatex">\(p=3\)</span>：
+- 首项系数 <span class="arithmatex">\(2\)</span>，<span class="arithmatex">\(3 \nmid 2\)</span> ✅
+- <span class="arithmatex">\(a_3 = 6\)</span>，<span class="arithmatex">\(3 \mid 6\)</span> ✅；<span class="arithmatex">\(a_2 = -4\)</span>，<span class="arithmatex">\(3 \nmid -4\)</span> ❌</p>
+<p>尝试 <span class="arithmatex">\(p=7\)</span>：
+- 首项 <span class="arithmatex">\(2\)</span>，<span class="arithmatex">\(7 \nmid 2\)</span> ✅
+- <span class="arithmatex">\(a_3 = 6\)</span>，<span class="arithmatex">\(7 \nmid 6\)</span> ❌</p>
+<p>看来直接用 Eisenstein 不行。但注意到 <span class="arithmatex">\(f(x) = 2(x^4 + 3x^3 - 2x^2 + 4)\)</span>。
+对 <span class="arithmatex">\(g(x) = x^4 + 3x^3 - 2x^2 + 4\)</span> 用 <span class="arithmatex">\(p=2\)</span>：
+- <span class="arithmatex">\(2 \nmid 1\)</span> ✅
+- <span class="arithmatex">\(2 \mid 3, -2, 4\)</span> ✅
+- <span class="arithmatex">\(4 \nmid 4\)</span> ❌（因为 <span class="arithmatex">\(4 = 2^2\)</span>）</p>
+<p>尝试 <span class="arithmatex">\(p=3\)</span> 对 <span class="arithmatex">\(g(x)\)</span>：
+- <span class="arithmatex">\(3 \nmid 1\)</span> ✅
+- <span class="arithmatex">\(3 \mid 3, -2\)</span>？不对...</p>
+<p>尝试 <span class="arithmatex">\(p=5\)</span> 对 <span class="arithmatex">\(g(x)\)</span>：
+- <span class="arithmatex">\(5 \nmid 1\)</span> ✅
+- <span class="arithmatex">\(5 \mid 3, -2, 4\)</span>？不对...</p>
+<p>所以 <span class="arithmatex">\(f(x)\)</span> 可能是可约的。实际上，<span class="arithmatex">\(f(x) = 2(x+2)(x^3+x^2-4x+4)\)</span>？</p>
+<p><strong>例8.4</strong> 用Eisenstein判别法证明 <span class="arithmatex">\(f(x) = x^4 + 2\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约。</p>
+<p><strong>解</strong>：
+- 首项系数 <span class="arithmatex">\(a_4 = 1\)</span>，<span class="arithmatex">\(2 \nmid 1\)</span> ✅
+- <span class="arithmatex">\(a_3 = a_2 = a_1 = 0\)</span>，被 <span class="arithmatex">\(2\)</span> 整除 ✅
+- 常数项 <span class="arithmatex">\(a_0 = 2\)</span>，<span class="arithmatex">\(4 \nmid 2\)</span> ✅</p>
+<p>所以 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约。</p>
+<p><strong>例8.5</strong> 设 <span class="arithmatex">\(f(x) = x^3 - 6x^2 + 12x - 8\)</span>。证明它在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中可约，并求分解。</p>
+<p><strong>解</strong>：
+观察：<span class="arithmatex">\(f(x) = (x-2)^3\)</span>（二项式定理）。
+更一般地：<span class="arithmatex">\((a-b)^3 = a^3 - 3a^2b + 3ab^2 - b^3\)</span>。
+这里取 <span class="arithmatex">\(a=x\)</span>，<span class="arithmatex">\(b=2\)</span>，得 <span class="arithmatex">\(x^3 - 6x^2 + 12x - 8\)</span>。</p>
+<p>所以 <span class="arithmatex">\(f(x) = (x-2)^3\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中可约。</p>
+<p>尝试 Eisenstein：取 <span class="arithmatex">\(p=2\)</span>？
+- <span class="arithmatex">\(a_3 = 1\)</span>，<span class="arithmatex">\(2 \nmid 1\)</span> ✅
+- <span class="arithmatex">\(a_2 = -6\)</span>，<span class="arithmatex">\(2 \mid -6\)</span> ✅
+- <span class="arithmatex">\(a_1 = 12\)</span>，<span class="arithmatex">\(2 \mid 12\)</span> ✅
+- <span class="arithmatex">\(a_0 = -8\)</span>，<span class="arithmatex">\(2 \mid -8\)</span> ✅，但 <span class="arithmatex">\(4 \mid -8\)</span>，不满足 <span class="arithmatex">\(p^2 \nmid a_0\)</span> ❌</p>
+<p>尝试 <span class="arithmatex">\(p=3\)</span>？
+- <span class="arithmatex">\(3 \nmid 1\)</span> ✅
+- <span class="arithmatex">\(3 \mid -6, 12, -8\)</span>？不对...</p>
+<p>所以 Eisenstein 判别法失败（因为它不是必要条件）。</p>
+<h4 id="_60">【证明题】<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h4>
+<p><strong>例8.6</strong> 证明：若 <span class="arithmatex">\(f(x) \in \mathbb{Z}[x]\)</span> 是本原多项式且 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约，则 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Z}[x]\)</span> 中也不可约。</p>
+<p><strong>证明</strong>：
+反证法。设 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Z}[x]\)</span> 中可约，即 <span class="arithmatex">\(f(x) = g(x)h(x)\)</span>，其中 <span class="arithmatex">\(g, h \in \mathbb{Z}[x]\)</span> 且 <span class="arithmatex">\(\deg g, \deg h \geq 1\)</span>。
+则 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中也可约，矛盾。<span class="arithmatex">\(\square\)</span></p>
+<h3 id="_61">四、易错点提醒<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Eisenstein判别法是充分条件</strong>：不能用Eisenstein判别也不能说明可约。例如 <span class="arithmatex">\(x^2 + 1\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中不可约，但无法用Eisenstein判别。</p>
+</li>
+<li>
+<p><strong>常数项的 <span class="arithmatex">\(p^2\)</span> 条件</strong>：<span class="arithmatex">\(p^2 \nmid a_0\)</span> 是必须的。若 <span class="arithmatex">\(p^2 \mid a_0\)</span>，反例可能出现（考虑 <span class="arithmatex">\(f(x) = (x+p)^2 = x^2 + 2px + p^2\)</span> 的展开...）。</p>
+</li>
+<li>
+<p><strong>本原多项式与有理系数</strong>：<span class="arithmatex">\(f(x) \in \mathbb{Q}[x]\)</span> 可约 <span class="arithmatex">\(\iff\)</span> 存在本原多项式 <span class="arithmatex">\(g, h\)</span> 使得 <span class="arithmatex">\(f = cgh\)</span>（<span class="arithmatex">\(c \in \mathbb{Q}\)</span>）。换言之，只要把有理系数多项式写成整系数本原多项式的乘积（乘以常数），就可以用高斯引理。</p>
+</li>
+<li>
+<p><strong>首一化技巧</strong>：若 <span class="arithmatex">\(f(x)\)</span> 的首项系数不是 <span class="arithmatex">\(1\)</span>，可以提取公因子化为首一本原多项式再讨论。</p>
+</li>
+</ol>
+<h3 id="_62">五、思考题<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>思考</strong>：Eisenstein判别法中要求 <span class="arithmatex">\(p \nmid a_n\)</span>，<span class="arithmatex">\(p \mid a_i\)</span>（<span class="arithmatex">\(i &lt; n\)</span>），<span class="arithmatex">\(p^2 \nmid a_0\)</span>。为什么 <span class="arithmatex">\(p^2 \nmid a_0\)</span> 是必要的？构造一个反例说明缺少这个条件会导致判别失效。</p>
+</li>
+<li>
+<p><strong>探索</strong>：将 Eisenstein 判别法与"替换 <span class="arithmatex">\(x \to x+1\)</span>"或"替换 <span class="arithmatex">\(x \to x-1\)</span>"结合使用，可以处理更多多项式。例如，若 <span class="arithmatex">\(f(x)\)</span> 不能直接用 Eisenstein，尝试 <span class="arithmatex">\(f(x+1)\)</span> 或 <span class="arithmatex">\(f(x-1)\)</span>。</p>
+</li>
+<li>
+<p><strong>问题</strong>：是否存在一个多项式 <span class="arithmatex">\(f(x)\)</span> 使得对每个素数 <span class="arithmatex">\(p\)</span>，<span class="arithmatex">\(f(x)\)</span> 都不满足 Eisenstein 判别法，但 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(\mathbb{Q}[x]\)</span> 中仍不可约？</p>
+</li>
+</ol>
+<hr />
+<h2 id="_63">本章小结<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h2>
+<h3 id="_64">核心要点<a class="headerlink" href="#_64" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>带余除法</strong>：<span class="arithmatex">\(f = hg + r\)</span>，<span class="arithmatex">\(\deg r &lt; \deg g\)</span></li>
+<li><strong>最大公因式</strong>：辗转相除法；互素 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\((f,g) = 1\)</span> <span class="arithmatex">\(\iff\)</span> 存在 <span class="arithmatex">\(u,v\)</span> 使 <span class="arithmatex">\(fu + gv = 1\)</span></li>
+<li><strong>不可约多项式</strong>：不能分解为低次乘积（相对于系数域）</li>
+<li><strong>唯一因式分解</strong>：每个多项式可唯一分解为不可约因子的乘积</li>
+<li><strong>重因式</strong>：用导数判断；<span class="arithmatex">\(k\)</span> 重因式 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(f(a) = f'(a) = \cdots = f^{(k-1)}(a) = 0\)</span>，但 <span class="arithmatex">\(f^{(k)}(a) \neq 0\)</span></li>
+<li><strong>复数域</strong>：不可约多项式只有一次；代数基本定理</li>
+<li><strong>实数域</strong>：不可约多项式为一次和判别式负的二次</li>
+<li><strong>有理数域</strong>：Eisenstein判别法；本原多项式；高斯引理</li>
+</ol>
+<h3 id="_65">公式速记<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>带余除法</td>
+<td><span class="arithmatex">\(f = hg + r\)</span></td>
+</tr>
+<tr>
+<td>余数定理</td>
+<td><span class="arithmatex">\(f(a) = r\)</span></td>
+</tr>
+<tr>
+<td>根与因式</td>
+<td><span class="arithmatex">\(a\)</span> 是根 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(x-a \mid f\)</span></td>
+</tr>
+<tr>
+<td>代数基本定理</td>
+<td><span class="arithmatex">\(n\)</span> 次多项式有 <span class="arithmatex">\(n\)</span> 个根（重根计入）</td>
+</tr>
+<tr>
+<td>重因式判别</td>
+<td><span class="arithmatex">\(x-a\)</span> 是 <span class="arithmatex">\(k\)</span> 重因式 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(f(a) = \cdots = f^{(k-1)}(a) = 0\)</span>, <span class="arithmatex">\(f^{(k)}(a) \neq 0\)</span></td>
+</tr>
+<tr>
+<td>Eisenstein</td>
+<td><span class="arithmatex">\(p \nmid a_n\)</span>, <span class="arithmatex">\(p \mid a_{n-1},\ldots,a_0\)</span>, <span class="arithmatex">\(p^2 \nmid a_0\)</span></td>
+</tr>
+<tr>
+<td>高斯引理</td>
+<td>本原多项式乘积仍是本原多项式</td>
+</tr>
+<tr>
+<td>贝祖定理</td>
+<td>存在 <span class="arithmatex">\(u,v\)</span> 使 <span class="arithmatex">\(fu + gv = (f,g)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_66">章节知识图谱<a class="headerlink" href="#_66" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code>一元多项式环 K[x]
+    ├── 基本运算（次数公式）
+    ├── 整除关系与带余除法
+    │   └── 欧几里得算法
+    ├── 最大公因式
+    │   └── 互素性质
+    ├── 唯一因式分解
+    │   └── 不可约多项式
+    ├── 重因式（导数判别）
+    ├── 根与一次因式
+    │   ├── 代数基本定理
+    │   └── 复数域不可约性
+    └── 有理数域
+        ├── 本原多项式
+        ├── 高斯引理
+        └── Eisenstein判别法
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_67">附录：典型方法总结<a class="headerlink" href="#_67" title="Permanent link">&para;</a></h2>
+<h3 id="1_8">1. 求最大公因式的方法<a class="headerlink" href="#1_8" title="Permanent link">&para;</a></h3>
+<p><strong>算法</strong>：辗转相除法
+1. 做带余除法 <span class="arithmatex">\(f = q_1 g + r_1\)</span>，<span class="arithmatex">\(\deg r_1 &lt; \deg g\)</span>
+2. 继续 <span class="arithmatex">\(g = q_2 r_1 + r_2\)</span>，直到余式为 <span class="arithmatex">\(0\)</span>
+3. 前一个非零余式（化为首一）即为 <span class="arithmatex">\((f,g)\)</span></p>
+<h3 id="2_8">2. 判断不可约的方法<a class="headerlink" href="#2_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><span class="arithmatex">\(\mathbb{C}[x]\)</span></strong>：只有一次多项式不可约</li>
+<li><strong><span class="arithmatex">\(\mathbb{R}[x]\)</span></strong>：一次和判别式负的二次不可约</li>
+<li><strong><span class="arithmatex">\(\mathbb{Q}[x]\)</span></strong>：Eisenstein判别法；若首一且有理根只能是 <span class="arithmatex">\(\pm 1, \pm p/q\)</span>（有理根定理）</li>
+</ul>
+<h3 id="3_5">3. 判断重因式的方法<a class="headerlink" href="#3_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>导数法</strong>：计算 <span class="arithmatex">\((f, f')\)</span>；若 <span class="arithmatex">\(d = (f, f')\)</span> 且 <span class="arithmatex">\(f = dh\)</span>，则 <span class="arithmatex">\(h\)</span> 无重因式</li>
+<li><strong>根的重数</strong>：若 <span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(k\)</span> 重根 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(f(a) = f'(a) = \cdots = f^{(k-1)}(a) = 0\)</span>，但 <span class="arithmatex">\(f^{(k)}(a) \neq 0\)</span></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2504 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>神经网络求解偏微分方程 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              神经网络求解偏微分方程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        先聊聊：偏微分方程是什么？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="先聊聊：偏微分方程是什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一句话解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        和常微分方程的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几个你可能见过的 PDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pde_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 PDE 这么难搞？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        传统方法 vs 神经网络方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题设定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pde_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、整体思路：用浅层网络怎么解 PDE？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、整体思路：用浅层网络怎么解 PDE？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 网络长什么样？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 优化目标：两个"尽量满足"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 变成线性方程组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 权重 \(\lambda\) 怎么选？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、TransNet：把随机初始化做精细
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、TransNet：把随机初始化做精细">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-transnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 TransNet 的核心改动
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 TransNet 的核心改动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方向怎么采？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏移怎么采？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 怎么算导数？（这是灵魂）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 怎么算导数？（这是灵魂）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一阶偏导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二阶偏导
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 代码逐行讲解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 代码逐行讲解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transnet2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TransNet2D 类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 类：采样点怎么生成？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-pde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem 类：定义要解的 PDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solver 类：把一切串起来
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运行实验
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 跑个实验：泊松方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gtransnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、GTransNet：加一层，能力翻倍
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、GTransNet：加一层，能力翻倍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-transnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 为啥 TransNet 不够用？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 结构对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 初始化策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 导数怎么算？（两层链式法则）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 导数怎么算？（两层链式法则）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一阶导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二阶导
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 代码
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        逐行讲解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、完整流程一图看懂
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transnet-vs-gtransnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、TransNet vs GTransNet 怎么选？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、练练手
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、练练手">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1helmholtz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习1：Helmholtz 方程（振荡波）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习2：多尺度椭圆型 PDE（变系数）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">神经网络求解偏微分方程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">先聊聊：偏微分方程是什么？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">一句话解释<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>偏微分方程（PDE）就是<strong>用"变化率"来描述世界的方程</strong>。</p>
+<p>比如你想知道一块铁板上每一点的温度怎么分布，铁板内部的热源在"产热"，边界上温度固定——温度随空间怎么变化，这个关系就是 PDE。</p>
+<h3 id="_4">和常微分方程的区别<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>常微分方程（ODE）</strong>：只有一个自变量，比如"随时间变化"——<span class="arithmatex">\(\frac{du}{dt} = f(t)\)</span></li>
+<li><strong>偏微分方程（PDE）</strong>：多个自变量，比如"随时间和空间同时变化"——<span class="arithmatex">\(\frac{\partial u}{\partial t} = \alpha \Delta u\)</span></li>
+</ul>
+<p>"偏"就偏在：函数有多个变量，我们只对其中一个求导（偏导数）。</p>
+<h3 id="pde">几个你可能见过的 PDE<a class="headerlink" href="#pde" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方程</th>
+<th>长什么样</th>
+<th>说的是啥事</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>拉普拉斯方程</strong></td>
+<td><span class="arithmatex">\(\Delta u = 0\)</span></td>
+<td>没有热源时，稳态温度分布就是平的</td>
+</tr>
+<tr>
+<td><strong>泊松方程</strong></td>
+<td><span class="arithmatex">\(\Delta u = f\)</span></td>
+<td>有热源时的稳态温度分布</td>
+</tr>
+<tr>
+<td><strong>热传导方程</strong></td>
+<td><span class="arithmatex">\(u_t = \alpha \Delta u\)</span></td>
+<td>温度怎么随时间扩散</td>
+</tr>
+<tr>
+<td><strong>波动方程</strong></td>
+<td><span class="arithmatex">\(u_{tt} = c^2 \Delta u\)</span></td>
+<td>声波、水波怎么传播</td>
+</tr>
+<tr>
+<td><strong>Helmholtz 方程</strong></td>
+<td><span class="arithmatex">\(\Delta u + k^2 u = 0\)</span></td>
+<td>波的"稳态拍照"版</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pde_1">为什么 PDE 这么难搞？<a class="headerlink" href="#pde_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>几乎没法手算</strong>——只有极少数情况能写出解析解（比如规则区域+特殊边界条件）</li>
+<li><strong>区域千奇百怪</strong>——实际问题的形状哪有那么规整的，传统方法得先画网格，麻烦得很</li>
+<li><strong>高维炸了</strong>——3维以上，传统数值方法的计算量蹭蹭往上涨</li>
+<li><strong>解可能疯狂振荡</strong>——比如高频波，你得画特别特别密的网格才能捕捉到</li>
+</ol>
+<h3 id="vs">传统方法 vs 神经网络方法<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>传统方法（有限元/有限差分）</th>
+<th>神经网络方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网格</td>
+<td>必须画网格，很头疼</td>
+<td><strong>不用网格！</strong>随机撒点就行</td>
+</tr>
+<tr>
+<td>高维</td>
+<td>维数一高就歇菜</td>
+<td>对维数不太敏感</td>
+</tr>
+<tr>
+<td>怎么解</td>
+<td>解大型线性方程组</td>
+<td>解最小二乘（一次就行）</td>
+</tr>
+<tr>
+<td>边界</td>
+<td>要特殊处理</td>
+<td>直接加一个损失项</td>
+</tr>
+<tr>
+<td>成熟度</td>
+<td>很成熟</td>
+<td>还在发展，但潜力大</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>核心想法特别简单</strong>：让神经网络去"猜"一个解，然后检查——猜的解在区域内部满足不满足方程？在边界上对不对？两项都尽量接近就完事了。</p>
+</blockquote>
+<hr />
+<h2 id="_5">问题设定<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>我们要解的是这样的 PDE：</p>
+<div class="arithmatex">\[
+\begin{cases}
+\mathcal{L}(u)(\mathbf{x}) = f(\mathbf{x}), &amp; \mathbf{x} \in \Omega \quad \text{（区域内部，方程要成立）} \\
+\mathcal{B}(u)(\mathbf{x}) = g(\mathbf{x}), &amp; \mathbf{x} \in \partial\Omega \quad \text{（边界上，值要给对）}
+\end{cases}
+\]</div>
+<p>说白了就是：<strong>内部要满足方程，边界要满足条件</strong>。</p>
+<p>本笔记介绍两种神经网络方法：
+- <strong>TransNet</strong>：单隐藏层，简单快速
+- <strong>GTransNet</strong>：多隐藏层，表达能力更强</p>
+<p>论文链接：<a href="https://arxiv.org/pdf/1911.09099">TransNet</a>、<a href="https://arxiv.org/abs/2604.03020">GTransNet</a></p>
+<hr />
+<h2 id="pde_2">一、整体思路：用浅层网络怎么解 PDE？<a class="headerlink" href="#pde_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 网络长什么样？<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>就一个隐藏层，特别简单：</p>
+<div class="arithmatex">\[
+\boldsymbol{\psi} = \sigma(\mathbf{W}\mathbf{x} + \mathbf{b}), \quad u_{\text{NN}}(\mathbf{x}) = \boldsymbol{\alpha} \boldsymbol{\psi}
+\]</div>
+<p>翻译成人话：
+1. 输入坐标 <span class="arithmatex">\(\mathbf{x}\)</span>，经过第一层（权重 <span class="arithmatex">\(\mathbf{W}\)</span> + 偏置 <span class="arithmatex">\(\mathbf{b}\)</span>）+ 激活函数 <span class="arithmatex">\(\sigma\)</span>，得到隐藏层特征 <span class="arithmatex">\(\boldsymbol{\psi}\)</span>
+2. 隐藏层特征再乘以输出权重 <span class="arithmatex">\(\boldsymbol{\alpha}\)</span>，就是网络的预测值</p>
+<p><strong>关键决策</strong>：第一层的参数 <span class="arithmatex">\(\mathbf{W}, \mathbf{b}\)</span> 随机初始化后<strong>就锁死不动了</strong>，只学 <span class="arithmatex">\(\boldsymbol{\alpha}\)</span>！</p>
+<blockquote>
+<p>💡 为啥只学输出层？因为这样一来，<span class="arithmatex">\(\boldsymbol{\alpha}\)</span> 在优化目标里是<strong>线性的</strong>，整个问题就变成了解线性方程组，不需要梯度下降来回迭代。一招 <code>lstsq</code> 搞定，又快又稳。</p>
+</blockquote>
+<h3 id="12">1.2 优化目标：两个"尽量满足"<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>在区域内部撒 <span class="arithmatex">\(N_{\text{int}}\)</span> 个点，边界上撒 <span class="arithmatex">\(N_{\text{bdy}}\)</span> 个点，然后要求：</p>
+<div class="arithmatex">\[
+\min_{\boldsymbol{\alpha}} \underbrace{\lambda_1 \sum_{i} \|\boldsymbol{\alpha} \mathcal{L}(\boldsymbol{\psi})(\mathbf{x}_i) - f(\mathbf{x}_i)\|^2}_{\text{PDE 残差：内部点满足方程}} + \underbrace{\lambda_2 \sum_{j} \|\boldsymbol{\alpha} \mathcal{B}(\boldsymbol{\psi})(\mathbf{y}_j) - g(\mathbf{y}_j)\|^2}_{\text{边界残差：边界点值给对}}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\lambda_1, \lambda_2\)</span> 是权重，用来平衡这两项（别让某一项太大把另一项压没了）</li>
+</ul>
+<h3 id="13">1.3 变成线性方程组<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>因为 <span class="arithmatex">\(u_{\text{NN}} = \boldsymbol{\alpha} \boldsymbol{\psi}\)</span> 是线性的，上面那个优化直接等价于：</p>
+<div class="arithmatex">\[
+\begin{bmatrix} \lambda_1 \mathbf{F}_{\text{pde}} \\ \lambda_2 \mathbf{F}_{\text{bdy}} \end{bmatrix} \boldsymbol{\alpha} = \begin{bmatrix} \lambda_1 \mathbf{f} \\ \lambda_2 \mathbf{g} \end{bmatrix}
+\]</div>
+<p><span class="arithmatex">\(\mathbf{F}_{\text{pde}}\)</span> 就是把每个内部点处的 <span class="arithmatex">\(\mathcal{L}(\boldsymbol{\psi})\)</span> 堆起来，<span class="arithmatex">\(\mathbf{F}_{\text{bdy}}\)</span> 是边界点处的 <span class="arithmatex">\(\boldsymbol{\psi}\)</span> 堆起来。</p>
+<blockquote>
+<p>🔑 <strong>一步 <code>lstsq</code> 求解，不需要迭代！</strong>这是 TransNet/ELM 最大的优势。</p>
+</blockquote>
+<h3 id="14-lambda">1.4 权重 <span class="arithmatex">\(\lambda\)</span> 怎么选？<a class="headerlink" href="#14-lambda" title="Permanent link">&para;</a></h3>
+<p>自动算的，不用手调。注意这里的 <span class="arithmatex">\(\lambda\)</span> 公式里的分母<strong>不是优化目标里的残差</strong>，而是特征矩阵和目标值的最大绝对值：</p>
+<div class="arithmatex">\[
+\lambda_1 = \frac{1}{\displaystyle\max_{1 \le i \le N_{\text{int}}} \left( \max_{1 \le j \le M} |\mathcal{L}(\psi_j)(\mathbf{x}_i)|,\ |f(\mathbf{x}_i)| \right)}, \quad \lambda_2 = \frac{1}{\displaystyle\max_{1 \le i \le N_{\text{bdy}}} \left( \max_{1 \le j \le M} |\mathcal{B}(\psi_j)(\mathbf{y}_i)|,\ |g(\mathbf{y}_i)| \right)}
+\]</div>
+<p>翻译成人话：</p>
+<div class="arithmatex">\[
+\lambda_1 = \frac{1}{\max\left(\mathbf{F}_{\text{pde}} \text{中最大绝对值},\ \mathbf{f} \text{中最大绝对值}\right)}, \quad \lambda_2 = \frac{1}{\max\left(\mathbf{F}_{\text{bdy}} \text{中最大绝对值},\ \mathbf{g} \text{中最大绝对值}\right)}
+\]</div>
+<p><strong>为啥要这样做？</strong> 本质是归一化。PDE 那部分的数可能量级很大（比如 <span class="arithmatex">\(10^4\)</span>），边界那部分可能量级很小（比如 <span class="arithmatex">\(10^{-1}\)</span>），如果不处理，PDE 项就会把边界项压没了——求解器会优先满足方程而忽略边界。</p>
+<p>乘上 <span class="arithmatex">\(\lambda\)</span> 之后，PDE 部分和边界部分的最大值都变成 1，<strong>谁也不欺负谁，公平竞争</strong>。</p>
+<hr />
+<h2 id="transnet">二、TransNet：把随机初始化做精细<a class="headerlink" href="#transnet" title="Permanent link">&para;</a></h2>
+<h3 id="21-transnet">2.1 TransNet 的核心改动<a class="headerlink" href="#21-transnet" title="Permanent link">&para;</a></h3>
+<p>普通的浅层网络第一层权重是随便初始化的，TransNet 说：<strong>不行，要有章法地初始化</strong>。</p>
+<p>它把隐藏层特征写成：</p>
+<div class="arithmatex">\[
+\psi_m(\mathbf{x}) = \tanh\left(\gamma(\mathbf{a}_m^\top \mathbf{x} + r_m)\right)
+\]</div>
+<p>这里有几个讲究：</p>
+<ul>
+<li><strong><span class="arithmatex">\(\mathbf{a}_m\)</span> 是单位向量</strong>：代表一个"方向"——你可以想象成一条超平面的法向量</li>
+<li><strong><span class="arithmatex">\(r_m\)</span> 是偏移量</strong>：决定这条超平面在空间中的位置</li>
+<li><strong><span class="arithmatex">\(\gamma\)</span> 是陡峭度</strong>：<span class="arithmatex">\(\gamma\)</span> 越大，tanh 从 -1 跳到 +1 越快，就像一个更"锐利"的台阶</li>
+</ul>
+<h4 id="_6">方向怎么采？<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>在<strong>单位球面上均匀采样</strong>：</p>
+<div class="arithmatex">\[
+\mathbf{a}_m = \frac{\mathbf{z}}{\|\mathbf{z}\|}, \quad \mathbf{z} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_d)
+\]</div>
+<blockquote>
+<p>💡 小技巧：先从标准正态分布抽一个向量，再归一化，就等于在球面上均匀取点了。因为高斯分布是旋转对称的，归一化后方向是等概率的。</p>
+</blockquote>
+<h4 id="_7">偏移怎么采？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p><span class="arithmatex">\(r_m \sim \mathcal{U}[0, 1]\)</span>，均匀分布。</p>
+<p><strong>为什么要这样做？</strong> 目标是让超平面在整个输入空间里<strong>均匀分布</strong>，这样每个区域都有足够的神经元"照看到"，不会出现某些角落没人管的情况。</p>
+<blockquote>
+<p>📌 如果你的区域不是以原点为中心的单位正方形怎么办？做仿射变换——把中心平移到 <span class="arithmatex">\(\mathbf{x}_c\)</span>，半径缩放到 <span class="arithmatex">\(R\)</span> 就行。</p>
+</blockquote>
+<h3 id="22">2.2 怎么算导数？（这是灵魂）<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>要解 PDE 就得算 <span class="arithmatex">\(\mathcal{L}(\boldsymbol{\psi})\)</span>，而 <span class="arithmatex">\(\mathcal{L}\)</span> 里含有导数，所以必须高效地算出 <span class="arithmatex">\(\boldsymbol{\psi}\)</span> 对输入的各阶偏导。</p>
+<p><strong>前向传播</strong>（以二维输入 <span class="arithmatex">\([x, y]\)</span> 为例）：</p>
+<div class="arithmatex">\[
+\tilde{\boldsymbol{\psi}} = \gamma(\mathbf{A}\mathbf{x} + \mathbf{r}), \quad \boldsymbol{\psi} = \tanh(\tilde{\boldsymbol{\psi}})
+\]</div>
+<p>其中 <span class="arithmatex">\(\mathbf{A} = \begin{bmatrix} \mathbf{a}_x^\top \\ \mathbf{a}_y^\top \end{bmatrix}\)</span> 是方向矩阵。</p>
+<p><strong>tanh 的导数</strong>有个好性质：<span class="arithmatex">\(\tanh'(z) = 1 - \tanh^2(z)\)</span>，所以定义：</p>
+<div class="arithmatex">\[
+\mathbf{d}_{\psi} = \mathbf{1} - \boldsymbol{\psi} \odot \boldsymbol{\psi}
+\]</div>
+<p>（<span class="arithmatex">\(\odot\)</span> 是逐元素相乘）</p>
+<h4 id="_8">一阶偏导<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>链式法则走一波：</p>
+<div class="arithmatex">\[
+\boldsymbol{\psi}_x = \gamma \mathbf{a}_x \odot \mathbf{d}_{\psi}, \quad \boldsymbol{\psi}_y = \gamma \mathbf{a}_y \odot \mathbf{d}_{\psi}
+\]</div>
+<blockquote>
+<p>💡 拆开看：<span class="arithmatex">\(\frac{\partial \boldsymbol{\psi}}{\partial x} = \underbrace{\frac{\partial \boldsymbol{\psi}}{\partial \tilde{\boldsymbol{\psi}}}}_{= \mathbf{d}_\psi} \cdot \underbrace{\frac{\partial \tilde{\boldsymbol{\psi}}}{\partial x}}_{= \gamma \mathbf{a}_x}\)</span>，就这么简单。</p>
+</blockquote>
+<h4 id="_9">二阶偏导<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>对一阶导再求一次导，关键是 <span class="arithmatex">\(\frac{\partial \mathbf{d}_\psi}{\partial x} = -2\boldsymbol{\psi} \odot \boldsymbol{\psi}_x\)</span>：</p>
+<div class="arithmatex">\[
+\boldsymbol{\psi}_{xx} = -2\gamma^2 (\mathbf{a}_x \odot \mathbf{a}_x \odot \boldsymbol{\psi} \odot \mathbf{d}_{\psi})
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol{\psi}_{yy} = -2\gamma^2 (\mathbf{a}_y \odot \mathbf{a}_y \odot \boldsymbol{\psi} \odot \mathbf{d}_{\psi})
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol{\psi}_{xy} = -2\gamma^2 (\mathbf{a}_x \odot \mathbf{a}_y \odot \boldsymbol{\psi} \odot \mathbf{d}_{\psi})
+\]</div>
+<blockquote>
+<p>📌 拿泊松方程 <span class="arithmatex">\(-\Delta u = f\)</span> 来说，<span class="arithmatex">\(\mathcal{L}(\boldsymbol{\psi}) = -(\boldsymbol{\psi}_{xx} + \boldsymbol{\psi}_{yy})\)</span>，把上面公式代进去就完事了。</p>
+</blockquote>
+<h3 id="23">2.3 代码逐行讲解<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<h4 id="transnet2d">TransNet2D 类<a class="headerlink" href="#transnet2d" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TransNet2D</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">dim</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">scale</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><code>dim</code>：隐藏层神经元数量（越大表达能力越强，但计算量也越大）</li>
+<li><code>gamma</code>：形状因子 <span class="arithmatex">\(\gamma\)</span>，控制 tanh 的陡峭程度</li>
+<li><code>scale</code>：偏置的缩放因子，默认 1.5，让偏置范围稍微超出区域</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>        <span class="c1"># 方向向量采样</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>         <span class="c1"># (dim, 2)：每个神经元一个2维方向</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># 归一化成单位向量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>      <span class="c1"># 转置成 (2, dim)，方便后面矩阵乘法</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>          <span class="c1"># 偏置，均匀采样</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 <code>a</code> 的 shape 从 <code>(dim, 2)</code> 变成 <code>(2, dim)</code> 是因为后面要做 <code>(N, 2) @ (2, dim)</code> 的矩阵乘法。归一化的原理：高斯分布旋转对称，归一化后就在单位圆上均匀分布了。</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">center</span><span class="p">)</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<p>前向传播，对应公式 <span class="arithmatex">\(\boldsymbol{\psi} = \tanh(\gamma(\mathbf{A}(\mathbf{x}-\mathbf{x}_c) + \mathbf{r}))\)</span>：
+- <code>X</code> 是采样点坐标，shape <code>(N, 2)</code>
+- <code>X - center</code>：平移到以 center 为原点
+- <code>@ self.a</code>：乘以方向矩阵，shape <code>(N, 2) @ (2, dim) → (N, dim)</code>
+- <code>+ self.r</code>：加偏置，广播成 <code>(N, dim)</code>
+- <code>* self.gamma</code>：乘以陡峭度
+- <code>np.tanh(...)</code>：过激活函数</p>
+<blockquote>
+<p>输出 shape：<code>(N, dim)</code>，每个采样点得到 dim 维的特征向量。</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>          <span class="c1"># 一阶偏导</span>
+        <span class="n">du</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">u</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>         <span class="c1"># tanh 的导数：1 - tanh²(z)</span>
+        <span class="n">u_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">du</span>   <span class="c1"># ψ_x = γ · a_x ⊙ d_ψ</span>
+        <span class="n">u_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">du</span>   <span class="c1"># ψ_y = γ · a_y ⊙ d_ψ</span>
+        <span class="k">return</span> <span class="n">u_x</span><span class="p">,</span> <span class="n">u_y</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 <code>self.a[[0], :]</code> 取的是方向矩阵的第一行，也就是所有神经元的 <span class="arithmatex">\(x\)</span> 方向分量 <span class="arithmatex">\(a_x\)</span>。<code>* du</code> 是逐元素相乘（Hadamard 积）。<code>u</code> 是 forward 的输出，所以 <code>1 - u**2</code> 就是 <span class="arithmatex">\(\mathbf{d}_\psi\)</span>。</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">deriv2order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>   <span class="c1"># 二阶偏导</span>
+        <span class="n">du</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">u</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># = 2·tanh(z)·(1-tanh²(z))，注意这里没有负号</span>
+        <span class="c1"># ψ_xx = -2γ²a_x²·ψ·d_ψ</span>
+        <span class="n">u_xx</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">du</span>   
+        <span class="c1"># ψ_yy = -2γ²a_y²·ψ·d_ψ</span>
+        <span class="n">u_yy</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">du</span>   
+        <span class="n">u_xy</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">du</span>  <span class="c1"># 交叉项</span>
+        <span class="k">return</span> <span class="n">u_xx</span><span class="p">,</span> <span class="n">u_yy</span><span class="p">,</span> <span class="n">u_xy</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 对比公式 <span class="arithmatex">\(\psi_{xx} = -2\gamma^2 a_x^2 \psi \mathbf{d}_\psi\)</span>，代码里 <code>du = 2*u*(1-u**2) = 2ψ·d_ψ</code>，负号在前面。所以 <code>-(γ·a_x)² * du = -γ²a_x² * 2ψ·d_ψ = -2γ²a_x²ψ·d_ψ</code>，和公式一致。</p>
+</blockquote>
+<hr />
+<h4 id="domain">Domain 类：采样点怎么生成？<a class="headerlink" href="#domain" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pyDOE</span><span class="w"> </span><span class="kn">import</span> <span class="n">lhs</span>   <span class="c1"># Latin Hypercube Sampling，拉丁超立方采样</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Domain</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>   <span class="c1"># [x左, x右, y下, y上]</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 拉丁超立方采样比纯随机采样更"均匀"——它把空间切成格子，每个格子只取一个点，避免扎堆。就像排座位，每行每列只坐一个人。</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">get_bc_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_bc</span><span class="p">):</span>
+        <span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">yb</span><span class="p">,</span> <span class="n">yt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="n">bc_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">n_bc</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_bc</span><span class="p">)</span> <span class="o">*</span> <span class="n">yb</span><span class="p">],</span>  <span class="c1"># 底边：y=0</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xr</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_bc</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yb</span><span class="p">,</span> <span class="n">yt</span><span class="p">,</span> <span class="n">n_bc</span><span class="p">)],</span>  <span class="c1"># 右边：x=1</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">n_bc</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_bc</span><span class="p">)</span> <span class="o">*</span> <span class="n">yt</span><span class="p">],</span>  <span class="c1"># 顶边：y=1</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xl</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_bc</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yb</span><span class="p">,</span> <span class="n">yt</span><span class="p">,</span> <span class="n">n_bc</span><span class="p">)],</span>  <span class="c1"># 左边：x=0</span>
+        <span class="p">])</span>
+        <span class="k">return</span> <span class="n">bc_points</span>   <span class="c1"># shape: (4*n_bc, 2)</span>
+</code></pre></div></td></tr></table></div>
+<p>边界点：四条边均匀取点。每条边 <code>n_bc</code> 个点，总共 <code>4*n_bc</code> 个。</p>
+<blockquote>
+<p>💡 <code>np.c_</code> 是按列拼起来，<code>np.linspace(xl, xr, n_bc)</code> 是从左到右均匀取 n_bc 个值。底边就是 x 变化、y 固定为 0。</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">get_collocation_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_colloc</span><span class="p">):</span>
+        <span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">yb</span><span class="p">,</span> <span class="n">yt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="n">colloc_points</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xr</span><span class="p">,</span> <span class="n">yt</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xl</span><span class="p">,</span> <span class="n">yb</span><span class="p">]))</span> <span class="o">*</span> <span class="n">lhs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_colloc</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xl</span><span class="p">,</span> <span class="n">yb</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">colloc_points</span>   <span class="c1"># shape: (n_colloc, 2)</span>
+</code></pre></div></td></tr></table></div>
+<p>内部配点：用拉丁超立方采样在 <code>[0,1]²</code> 内均匀撒点。<code>lhs(2, n_colloc)</code> 生成 <code>[0,1]</code> 之间的采样点，2 表示 2 维。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">get_test_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span>   <span class="c1"># shape: (10000, 2)</span>
+</code></pre></div></td></tr></table></div>
+<p>测试点：100×100 的均匀网格，用来画图看效果。</p>
+<hr />
+<h4 id="problem-pde">Problem 类：定义要解的 PDE<a class="headerlink" href="#problem-pde" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Problem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">case</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">case</span> <span class="o">=</span> <span class="n">case</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">case</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>         <span class="c1"># 低频解</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># 高频解</span>
+        <span class="k">return</span> <span class="n">u</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">case</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>         <span class="c1"># -Δu = f</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="mi">450</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 源项 <span class="arithmatex">\(f\)</span> 怎么来的？对 <span class="arithmatex">\(u = \sin(\pi x)\sin(\pi y)\)</span> 求两次偏导：
+- <span class="arithmatex">\(u_{xx} = -\pi^2 \sin(\pi x)\sin(\pi y)\)</span>，<span class="arithmatex">\(u_{yy}\)</span> 同理
+- 所以 <span class="arithmatex">\(-\Delta u = -u_{xx} - u_{yy} = 2\pi^2 \sin(\pi x)\sin(\pi y)\)</span></p>
+<p>高频的情况：<span class="arithmatex">\(u = \sin(15\pi x)\sin(15\pi y)\)</span>，每求一次导多一个 <span class="arithmatex">\(15\pi\)</span>，求两次就是 <span class="arithmatex">\((15\pi)^2 = 225\pi^2\)</span>，两项加起来 <span class="arithmatex">\(450\pi^2\)</span>。</p>
+</blockquote>
+<hr />
+<h4 id="solver">Solver 类：把一切串起来<a class="headerlink" href="#solver" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solver</span><span class="p">(</span><span class="n">Problem</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setting</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;cases&quot;</span><span class="p">])</span>   <span class="c1"># 继承 Problem，拿到 solution 和 source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setting</span> <span class="o">=</span> <span class="n">setting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">Domain</span><span class="p">()</span>
+
+        <span class="c1"># 根据配置选模型</span>
+        <span class="k">if</span> <span class="n">setting</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;TransNet&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">TransNet2D</span><span class="p">(</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;dim1&quot;</span><span class="p">],</span> <span class="n">setting</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">setting</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;GTransNet&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">GTransNet2D</span><span class="p">(</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;dim1&quot;</span><span class="p">],</span> <span class="n">setting</span><span class="p">[</span><span class="s2">&quot;dim2&quot;</span><span class="p">],</span> <span class="n">setting</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 1. 生成采样点</span>
+        <span class="n">x_colloc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">get_collocation_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;n_colloc&quot;</span><span class="p">])</span>  <span class="c1"># 内部点</span>
+        <span class="n">x_bc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">get_bc_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;n_bc&quot;</span><span class="p">])</span>                   <span class="c1"># 边界点</span>
+
+        <span class="c1"># 2. 计算 PDE 特征矩阵</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x_colloc</span><span class="p">)</span>        <span class="c1"># 内部点的前向传播</span>
+        <span class="n">u_xx</span><span class="p">,</span> <span class="n">u_yy</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deriv2order</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>  <span class="c1"># 二阶导数</span>
+        <span class="n">feature_pde</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">u_xx</span> <span class="o">+</span> <span class="n">u_yy</span><span class="p">)</span>             <span class="c1"># F_pde = -Δψ，对应泊松方程的算子</span>
+        <span class="n">target_pde</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">(</span><span class="n">x_colloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_colloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 右端项 f</span>
+
+        <span class="c1"># 3. 计算边界特征矩阵</span>
+        <span class="n">feature_bc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x_bc</span><span class="p">)</span>    <span class="c1"># 边界点的前向传播</span>
+        <span class="n">target_bc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">(</span><span class="n">x_bc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_bc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 边界值 g</span>
+
+        <span class="c1"># 4. 自适应权重 λ（归一化）</span>
+        <span class="n">eta_pde</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">feature_pde</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">target_pde</span><span class="p">)))</span>
+        <span class="n">eta_bc</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">feature_bc</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">target_bc</span><span class="p">)))</span>
+
+        <span class="c1"># 5. 拼装线性系统</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">eta_pde</span> <span class="o">*</span> <span class="n">feature_pde</span><span class="p">,</span> <span class="n">eta_bc</span> <span class="o">*</span> <span class="n">feature_bc</span><span class="p">])</span>   <span class="c1"># 系数矩阵</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">eta_pde</span> <span class="o">*</span> <span class="n">target_pde</span><span class="p">,</span> <span class="n">eta_bc</span> <span class="o">*</span> <span class="n">target_bc</span><span class="p">])</span>  <span class="c1"># 右端向量</span>
+
+        <span class="c1"># 6. 求解！</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">lstsq</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">targets</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># 最小二乘法，一步搞定</span>
+        <span class="k">return</span> <span class="n">alpha</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 整个 <code>solve</code> 就是把公式 <span class="arithmatex">\(\begin{bmatrix}\lambda_1 F_{pde} \\ \lambda_2 F_{bdy}\end{bmatrix}\alpha = \begin{bmatrix}\lambda_1 f \\ \lambda_2 g\end{bmatrix}\)</span> 翻译成代码。<code>lstsq</code> 解超定线性系统，返回的第一个元素就是 <span class="arithmatex">\(\alpha\)</span>。</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+        <span class="n">x_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">get_test_points</span><span class="p">()</span>      <span class="c1"># 100×100 测试网格</span>
+        <span class="n">u_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span> <span class="o">@</span> <span class="n">alpha</span>  <span class="c1"># 预测值 = ψ · α</span>
+        <span class="n">u_true</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">(</span><span class="n">x_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 精确解</span>
+
+        <span class="c1"># 画图</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">x_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">u_pred</span><span class="p">,</span> <span class="n">u_true</span> <span class="o">=</span> <span class="n">u_pred</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">u_true</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">abs_err</span> <span class="o">=</span> <span class="n">u_pred</span> <span class="o">-</span> <span class="n">u_true</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">cm</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u_pred</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>     <span class="c1"># 左图：预测解</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;u_pred&quot;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+        <span class="n">cm</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">abs_err</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;turbo&quot;</span><span class="p">)</span>  <span class="c1"># 右图：绝对误差</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;abs err&quot;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 <code>self.model.forward(x_test) @ alpha</code> 这一步：forward 得到 <code>(10000, dim)</code> 的特征矩阵，乘以 <code>(dim,)</code> 的权重 α，得到每个测试点的预测值。<code>contourf</code> 画等高线填充图，直观看到解的形状和误差分布。</p>
+</blockquote>
+<hr />
+<h4 id="_10">运行实验<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 低频解（case 1）</span>
+<span class="n">setting</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cases&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;dim1&quot;</span><span class="p">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;dim2&quot;</span><span class="p">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+           <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;TransNet&quot;</span><span class="p">,</span> <span class="s2">&quot;n_colloc&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s2">&quot;n_bc&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">Solver</span><span class="p">(</span><span class="n">setting</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>    <span class="c1"># 求解 → 得到 α</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>        <span class="c1"># 画图看效果</span>
+
+<span class="c1"># 高频解（case 2）—— 参数全翻倍</span>
+<span class="n">setting</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cases&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;dim1&quot;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span> <span class="s2">&quot;dim2&quot;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span> <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+           <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;TransNet&quot;</span><span class="p">,</span> <span class="s2">&quot;n_colloc&quot;</span><span class="p">:</span> <span class="mi">8000</span><span class="p">,</span> <span class="s2">&quot;n_bc&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">}</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">Solver</span><span class="p">(</span><span class="n">setting</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>💡 高频解参数变化：dim 1600→4000（更多神经元看细节），γ 1→6（tanh 更陡峭响应高频），配点 2000→8000（更密的采样点捕捉振荡），边界点 100→400。</p>
+</blockquote>
+<h3 id="24">2.4 跑个实验：泊松方程<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\Delta u = f, \quad (x,y) \in [0,1]^2, \quad u\big|_{\partial\Omega} = g
+\]</div>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>精确解</th>
+<th>长啥样</th>
+<th>参数建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>低频</strong></td>
+<td><span class="arithmatex">\(\sin(\pi x)\sin(\pi y)\)</span></td>
+<td>平滑的小鼓包</td>
+<td><span class="arithmatex">\(\gamma=1\)</span>，1600个神经元，2000配点</td>
+</tr>
+<tr>
+<td><strong>高频</strong></td>
+<td><span class="arithmatex">\(\sin(15\pi x)\sin(15\pi y)\)</span></td>
+<td>剧烈振荡的蛋托</td>
+<td><span class="arithmatex">\(\gamma=6\)</span>，4000个神经元，8000配点</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 高频解就像密集的波纹，需要更多神经元去"看清"每一个波峰波谷，还需要更大的 <span class="arithmatex">\(\gamma\)</span> 让 tanh 变得更锐利（响应更高频的信号）。就像拍照——拍细纹路得用更高像素。</p>
+</blockquote>
+<hr />
+<h2 id="gtransnet">三、GTransNet：加一层，能力翻倍<a class="headerlink" href="#gtransnet" title="Permanent link">&para;</a></h2>
+<h3 id="31-transnet">3.1 为啥 TransNet 不够用？<a class="headerlink" href="#31-transnet" title="Permanent link">&para;</a></h3>
+<p>单隐藏层用 tanh，表达能力有上限。遇到<strong>高频振荡</strong>或<strong>大梯度</strong>的解，一层 tanh 搞不定——就像用低分辨率相机拍高频条纹，拍出来糊的。</p>
+<p>GTransNet 的办法很直接：<strong>加层</strong>！</p>
+<h3 id="32">3.2 结构对比<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>TransNet</th>
+<th>GTransNet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>隐藏层</td>
+<td>1 层</td>
+<td>2 层或更多</td>
+</tr>
+<tr>
+<td>第一层</td>
+<td>随机初始化，固定</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>后续层</td>
+<td>没有</td>
+<td>随机初始化，固定</td>
+</tr>
+<tr>
+<td>输出层</td>
+<td>学 α</td>
+<td>学 α</td>
+</tr>
+<tr>
+<td>后续层偏置</td>
+<td>—</td>
+<td><strong>不用偏置</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 为啥后续层不加偏置？因为 tanh 是奇函数（过原点），加偏置会打破对称性，特征质量反而下降。</p>
+</blockquote>
+<h3 id="33">3.3 初始化策略<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p><strong>第一层</strong>：跟 TransNet 基本一样，但偏置改成从<strong>正态分布</strong> <span class="arithmatex">\(\mathcal{N}(0, \cdot)\)</span> 采样（中心对称，不像 TransNet 用 <span class="arithmatex">\(\mathcal{U}[0,1]\)</span> 只取正数）。</p>
+<p><strong>后续层</strong>：高斯采样，方差有讲究</p>
+<div class="arithmatex">\[
+W_{ij}^{(l)} \sim \mathcal{N}\left(0, \sigma_l^2\right), \quad \sigma_l = \sqrt{\frac{\delta}{N_{l-1}}}
+\]</div>
+<blockquote>
+<p>💡 这个方差的设定跟 Xavier/He 初始化一个道理——让信号在层间传递时既不爆炸也不消失。<span class="arithmatex">\(\delta\)</span> 是个调节旋钮，通常取 0.5 左右。</p>
+</blockquote>
+<h3 id="34">3.4 导数怎么算？（两层链式法则）<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>网络变成了：</p>
+<div class="arithmatex">\[
+\underbrace{\boldsymbol{\psi} = \tanh(\gamma(\mathbf{A}^\top \bar{\mathbf{x}} + \mathbf{r}))}_{\text{第一层}} \xrightarrow{\times \mathbf{W}} \underbrace{\tilde{\boldsymbol{\phi}} = \mathbf{W}\boldsymbol{\psi}}_{\text{线性组合}} \xrightarrow{\tanh} \underbrace{\boldsymbol{\phi} = \tanh(\tilde{\boldsymbol{\phi}})}_{\text{第二层激活}}
+\]</div>
+<h4 id="_11">一阶导<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p><strong>第一层</strong>（跟之前一样）：</p>
+<div class="arithmatex">\[
+\boldsymbol{\psi}_x = \gamma \mathbf{a}_x^\top \odot \mathbf{d}_{\psi}
+\]</div>
+<p><strong>传到第二层</strong>：</p>
+<div class="arithmatex">\[
+\tilde{\boldsymbol{\phi}}_x = \mathbf{W}\boldsymbol{\psi}_x \quad \text{（线性变换，直接矩阵乘法）}
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol{\phi}_x = \mathbf{d}_{\phi} \odot \tilde{\boldsymbol{\phi}}_x \quad \text{（再过一次 tanh 导数）}
+\]</div>
+<blockquote>
+<p>💡 <span class="arithmatex">\(\tilde{\boldsymbol{\phi}} = \mathbf{W}\boldsymbol{\psi}\)</span> 是纯线性的，所以 <span class="arithmatex">\(\tilde{\boldsymbol{\phi}}_x = \mathbf{W}\boldsymbol{\psi}_x\)</span>，就这么简单。导数跟着"传"过去了。</p>
+</blockquote>
+<h4 id="_12">二阶导<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>对 <span class="arithmatex">\(\boldsymbol{\phi}_x = \mathbf{d}_{\phi} \odot \tilde{\boldsymbol{\phi}}_x\)</span> 再求一次导，乘积法则：</p>
+<div class="arithmatex">\[
+\boldsymbol{\phi}_{xx} = \underbrace{-2\boldsymbol{\phi} \odot \boldsymbol{\phi}_x \odot \tilde{\boldsymbol{\phi}}_x}_{\text{d}_\phi \text{的变化}} + \underbrace{\mathbf{d}_{\phi} \odot (\mathbf{W}\boldsymbol{\psi}_{xx})}_{\text{线性项的二次导}}
+\]</div>
+<blockquote>
+<p>💡 记住这个模式：<strong>每多一层 tanh，就多套一次乘积法则</strong>。第一层的导数算好后，通过矩阵乘法"透传"到下一层，再乘以当前层的激活导数。</p>
+</blockquote>
+<h3 id="35">3.5 代码<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">GTransNet2D</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># 第一层：同 TransNet，但偏置用正态分布</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim1</span><span class="p">)</span>  <span class="c1"># 注意这里改成了正态</span>
+
+        <span class="c1"># 第二层权重</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">dim1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">center</span><span class="p">)</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_1</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u_2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+        <span class="n">d_u1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_1</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">d_u</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">u</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">u1_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">d_u1</span>
+        <span class="n">u1_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">d_u1</span>
+        <span class="n">u2_x</span><span class="p">,</span> <span class="n">u2_y</span> <span class="o">=</span> <span class="n">u1_x</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="n">u1_y</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>  <span class="c1"># 传过去</span>
+        <span class="k">return</span> <span class="n">d_u</span> <span class="o">*</span> <span class="n">u2_x</span><span class="p">,</span> <span class="n">d_u</span> <span class="o">*</span> <span class="n">u2_y</span>               <span class="c1"># 再过一次 tanh 导数</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="_13">逐行讲解<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p><strong><code>__init__</code>：初始化</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>人话翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dim1, dim2, gamma=1</code></td>
+<td><code>dim1</code> = 第一层神经元数，<code>dim2</code> = 第二层神经元数，<code>gamma</code> = 缩放因子（和 TransNet 一样）</td>
+</tr>
+<tr>
+<td><code>a = np.random.randn(dim1, 2)</code></td>
+<td>随机生成 dim1 个方向向量，每个是 2 维的（对应 x, y）</td>
+</tr>
+<tr>
+<td><code>a = a / np.sqrt(np.sum(a**2, axis=1, keepdims=True))</code></td>
+<td>归一化到单位球面上，保证每个 <span class="arithmatex">\(\mathbf{a}_m\)</span> 的长度都是 1</td>
+</tr>
+<tr>
+<td><code>self.a = np.swapaxes(a, 0, 1)</code></td>
+<td>转置！从 (dim1, 2) 变成 (2, dim1)，方便后面用 <code>X @ self.a</code> 做矩阵乘法</td>
+</tr>
+<tr>
+<td><code>self.r = np.random.randn(1, dim1)</code></td>
+<td>⚠️ <strong>和 TransNet 不同</strong>：TransNet 的 <span class="arithmatex">\(r\)</span> 是均匀分布的（控制 tanh 的"激活区域"在哪），GTransNet 改成了正态分布——因为多层网络不需要像单层那样精确控制每个神经元的覆盖位置，正态分布更自然</td>
+</tr>
+<tr>
+<td><code>self.w = np.sqrt(0.5 / dim1) * np.random.randn(dim1, dim2)</code></td>
+<td>第二层的权重矩阵 <span class="arithmatex">\(W\)</span>，形状 (dim1, dim2)。前面的系数 <span class="arithmatex">\(\sqrt{0.5/\text{dim1}}\)</span> 是 Xavier 初始化的变体——保证信号从第一层传到第二层时方差不会爆炸也不会消失</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>为什么用 Xavier 初始化？</strong> 第一层的 a 是归一化的，信号经过 tanh 后方差大约是 1；如果第二层权重直接用标准正态，方差会变成 dim1 倍（爆炸！）。乘以 <span class="arithmatex">\(\sqrt{0.5/\text{dim1}}\)</span> 就能把方差拉回来，让训练更稳定。</p>
+</blockquote>
+<p><strong><code>forward</code>：前向传播</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>人话翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>center=np.array([[0.5, 0.5]])</code></td>
+<td>中心点，默认是 (0.5, 0.5)——单位正方形的中心。<code>X - center</code> 就是把坐标平移，让 tanh 的激活中心对准求解区域</td>
+</tr>
+<tr>
+<td><code>self.u_1 = np.tanh(self.gamma * ((X - center) @ self.a + self.r))</code></td>
+<td><strong>第一层</strong>：和 TransNet 完全一样的操作——<span class="arithmatex">\(\mathbf{x}\)</span> 乘方向向量 + 偏置，过 tanh。结果 <code>u_1</code> 形状 (N, dim1)</td>
+</tr>
+<tr>
+<td><code>self.u_2 = self.u_1 @ self.w</code></td>
+<td><strong>中间层</strong>：把第一层输出乘以权重矩阵 <span class="arithmatex">\(W\)</span>，线性组合一下。结果 <code>u_2</code> 形状 (N, dim2)</td>
+</tr>
+<tr>
+<td><code>return np.tanh(self.u_2)</code></td>
+<td><strong>第二层</strong>：再过一次 tanh！最终输出形状 (N, dim2)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 整个流程就是：<strong>输入 → tanh → 线性组合 → tanh</strong>。比 TransNet 多了一个"线性组合 + tanh"的环节，这就是"G"（Generalized）的来源——多套一层，表达能力就上去了。</p>
+</blockquote>
+<p><strong><code>grad</code>：一阶导数</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>人话翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d_u1 = 1 - self.u_1**2</code></td>
+<td>第一层 tanh 的导数：<span class="arithmatex">\(\tanh'(z) = 1 - \tanh^2(z)\)</span></td>
+</tr>
+<tr>
+<td><code>d_u = 1 - u**2</code></td>
+<td>最终输出层 tanh 的导数</td>
+</tr>
+<tr>
+<td><code>u1_x = self.gamma * self.a[[0], :] * d_u1</code></td>
+<td>第一层对 x 的偏导：<span class="arithmatex">\(\frac{\partial u_1}{\partial x} = \gamma \cdot a_x \cdot (1 - u_1^2)\)</span>（和 TransNet 一样）</td>
+</tr>
+<tr>
+<td><code>u1_y = self.gamma * self.a[[1], :] * d_u1</code></td>
+<td>第一层对 y 的偏导，同理</td>
+</tr>
+<tr>
+<td><code>u2_x, u2_y = u1_x @ self.w, u1_y @ self.w</code></td>
+<td>⭐ <strong>关键步骤</strong>：把第一层导数通过权重矩阵 <span class="arithmatex">\(W\)</span> "传"到第二层。这就是链式法则——线性层的导数就是权重本身，所以直接做矩阵乘法就完事了</td>
+</tr>
+<tr>
+<td><code>return d_u * u2_x, d_u * u2_y</code></td>
+<td>最后再乘上输出层 tanh 的导数，完成完整的链式法则</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>对比 TransNet 的 grad</strong>：TransNet 只有一次 tanh，所以导数一步到位；GTransNet 要"传递"——第一层的导数算好之后，通过 <span class="arithmatex">\(W\)</span> 矩阵传到中间层，再乘以输出层的 tanh 导数。如果还有更多层，就继续往下传，每多一层就多一次矩阵乘法。</p>
+</blockquote>
+<hr />
+<h2 id="_14">四、完整流程一图看懂<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code>1. 建网络 → 随机初始化，锁死第一层（和中间层）
+              ↓
+2. 撒点   → 内部随机配点 + 边界均匀采样
+              ↓
+3. 算特征 → 前向传播得 ψ
+          → 链式法则算 ψ_x, ψ_y
+          → 乘积法则算 ψ_xx, ψ_yy, ψ_xy
+          → 组合出 F_pde = L(ψ), F_bdy = B(ψ)
+              ↓
+4. 归一化 → 自适应算 λ₁, λ₂
+              ↓
+5. 求解   → α = lstsq(F, b)  （一次搞定！）
+              ↓
+6. 检验   → 相对误差 ‖u_pred - u_exact‖ / ‖u_exact‖
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="transnet-vs-gtransnet">五、TransNet vs GTransNet 怎么选？<a class="headerlink" href="#transnet-vs-gtransnet" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>TransNet</th>
+<th>GTransNet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>隐藏层</td>
+<td>1 层</td>
+<td>2+ 层</td>
+</tr>
+<tr>
+<td>学什么</td>
+<td>只学输出层 α</td>
+<td>只学输出层 α</td>
+</tr>
+<tr>
+<td>导数计算</td>
+<td>一遍链式法则</td>
+<td>逐层传递，多遍</td>
+</tr>
+<tr>
+<td>低频解</td>
+<td>够用</td>
+<td>也行，有点大材小用</td>
+</tr>
+<tr>
+<td>高频解</td>
+<td>需要大量神经元 + 大 γ</td>
+<td>✅ 更擅长，多层组合能捕捉复杂振荡</td>
+</tr>
+<tr>
+<td>计算量</td>
+<td>小</td>
+<td>稍大（多一层矩阵乘法）</td>
+</tr>
+<tr>
+<td>一句话</td>
+<td><strong>简单够用型</strong></td>
+<td><strong>高难度任务型</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_15">六、练练手<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="1helmholtz">练习1：Helmholtz 方程（振荡波）<a class="headerlink" href="#1helmholtz" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+-\Delta u - k^2 u = 0
+\]</div>
+<ul>
+<li>波数 <span class="arithmatex">\(k = \frac{2\pi\nu}{c}\)</span>，声速 <span class="arithmatex">\(c = 340\)</span> m/s</li>
+<li>试三个频率：4000 / 6000 / 8000 Hz</li>
+<li>精确解：<span class="arithmatex">\(\sin\left(\frac{k}{\sqrt{2}}x\right)\sin\left(\frac{k}{\sqrt{2}}y\right)\)</span></li>
+</ul>
+<blockquote>
+<p>💡 频率越高 = 波纹越密 = 越难逼近。这正是 GTransNet 的主场。</p>
+</blockquote>
+<h3 id="2-pde">练习2：多尺度椭圆型 PDE（变系数）<a class="headerlink" href="#2-pde" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+-\nabla \cdot (A^\varepsilon(x,y) \nabla u) = f
+\]</div>
+<ul>
+<li>扩散系数 <span class="arithmatex">\(A^\varepsilon\)</span> 在快速振荡（<span class="arithmatex">\(\varepsilon\)</span> 越小越快）</li>
+<li>不再是简单的 <span class="arithmatex">\(-\Delta u\)</span>，多了个变系数项</li>
+</ul>
+<blockquote>
+<p>💡 这个比泊松方程复杂——<span class="arithmatex">\(\mathcal{L}(u)\)</span> 要展开乘积法则：<span class="arithmatex">\(-\nabla \cdot (A \nabla u) = -A\Delta u - \nabla A \cdot \nabla u\)</span>，得额外算 <span class="arithmatex">\(A\)</span> 的梯度。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

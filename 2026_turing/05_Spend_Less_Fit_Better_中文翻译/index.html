@@ -1,0 +1,1363 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>少花钱，更拟合：基于主动实验选择的预算高效标度律拟合 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              少花钱，更拟合：基于主动实验选择的预算高效标度律拟合
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第1节 引言
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第2节 相关工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第3节 问题设置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第4节 预算感知序贯标度律设计
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第4节 预算感知序贯标度律设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 目标感知的不确定性目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 候选实验评分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 计算盆内和盆间效用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 序贯设计过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第5节 实验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第5节 实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 实验设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 结果分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 消融研究
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第6节 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录E 讨论、局限性与未来工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">少花钱，更拟合：基于主动实验选择的预算高效标度律拟合<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>原文标题：</strong> Spend Less, Fit Better: Budget-Efficient Scaling Law Fitting via Active Experiment Selection</p>
+<p><strong>作者：</strong> Sijie Li (Peking University), Shanda Li (CMU), Haowei Lin (PKU), Weiwei Sun (CMU), Ameet Talwalkar (CMU, Datadog), Yiming Yang (CMU). 贡献相等。</p>
+<p><strong>来源链接：</strong> https://arxiv.org/abs/2604.22753</p>
+<hr />
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>标度律（Scaling laws）被用于规划耗资数百万美元的训练运行，但拟合这些定律本身可能就要花费数百万美元。在现代大规模工作流程中，组装一个足够信息的试点实验集本身已经是一个主要的预算分配问题，而非例行的预处理步骤。我们将标度律拟合形式化为预算感知的序贯实验设计：给定一组具有异构成本的可运行实验候选集，选择执行哪些运行以最大化高成本目标区域的外推精度。然后，我们提出了一种不确定性感知方法，用于序贯分配实验预算到对目标区域外推最有价值的运行。在多样化的标度律任务基准测试中，我们的方法始终优于经典的基于设计的方法，且通常仅使用约10%的总训练预算就能接近在完整实验集上拟合的性能。</p>
+<hr />
+<h2 id="1">第1节 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>标度律已成为分析和规划大规模语言模型训练的核心工具。通过拟合性能与模型大小、数据大小、计算量等变量之间的参数关系，从业者可以使用有限的试点运行集来预测更大规模的行为，并相应地分配未来的训练预算。这一范式已在实践中塑造了有影响力的决策：例如，Chinchilla风格的计算最优训练就是从跨越广泛规模范围的400多次训练运行的广泛实证研究中推导出来的。</p>
+<p>尽管标度律具有重要的实践意义，但拟合标度律仍然成本高昂且严重依赖人工实验设计。在典型的工作流程中，研究人员手动选择实验配置，运行许多试点训练，然后拟合参数定律以获得观测结果。在工业规模下，仅用于拟合标度律的试点运行本身就可能消耗大量预算，在任何部署规模训练之前，完整的拟合验证流程已达到百万美元级别。因此，准确的标度律拟合不仅是建模问题，也是预算分配问题。
+![[Pasted image 20260524165933.png]]</p>
+<blockquote>
+<p><strong>图1描述：</strong> 我们的方法仅使用原始标度律拟合预算的一小部分就能识别外推最优解。在lr&amp;bsz（学习率与批量大小）上，针对在1000亿token上训练的1B参数LLM的学习率和批量大小的预测最优解在测试损失热图上（左侧）以1%预算内达到低损失区域。如右侧设计空间3D视图中所示，用于拟合的所选训练配置按训练成本（6ND）着色，说明可从完整配置空间的稀疏、低成本子集实现准确的外推。</p>
+</blockquote>
+<p>随着标度律分析扩展到经典密集预训练之外，这一挑战变得日益严峻。最近的工作已将标度律扩展到更广泛的设置，包括词汇表设计、数据混合、稀疏性、专家混合架构以及推理时扩展。随着这些设置变得更加多样化和昂贵，手动选择试点运行变得越来越低效。这引出了一个自然的问题：</p>
+<blockquote>
+<p>给定一组可运行的实验候选集和有限的预算，我们应如何选择实验以确保拟合的标度律在目标区域能够准确外推？</p>
+</blockquote>
+<p>在本文中，我们将标度律拟合形式化为预算感知的序贯实验设计问题。我们不假设拟合数据是预先给出的，而是将每个候选实验视为一个昂贵的查询，并询问如何在有限预算下在一组有限的可运行配置中进行分配。我们的目标不仅仅是在观测点上拟合良好，而是在位于大规模、高成本 regime 的保留目标区域上最大化预测精度。这种形式化更直接地反映了标度律的实际使用方式，即最终目标是选择少数昂贵的最终配置，而不是均匀地拟合所有试点运行。</p>
+<p>我们的贡献有双重性。首先，我们形式化了这个问题，并首次在低预算 regime 下对标度律拟合进行了系统研究，在这种情况下，必须仅从标准标度律分析中使用的一小部分训练运行中恢复准确的外推。为了支持这项研究，我们进行了全面的评估，涵盖多样化的标度场景、异构定律族和任务特定的成本结构，使得在预算限制下能够对点选择策略进行对照比较。其次，我们提出了一种序贯的、不确定性感知的设计方法，该方法显式建模标度律参数的模糊性，并根据减少目标区域预测误差的期望值选择新实验。在经验上，我们的方法非常有效：如图1所示，它仅使用原始拟合FLOPs的一小部分就接近了外推真值最优解，在Step Law（学习率和批量大小标度律）上以1%预算内达到低损失区域。</p>
+<hr />
+<h2 id="2">第2节 相关工作<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p><strong>标度律：</strong> 标度律通过揭示模型大小、数据量和计算预算之间的可预测关系，已经改变了大规模AI系统的设计和优化。最近的工作将这一范式扩展到远远超出原始设置的范围，涵盖了模型架构、数据扩展、后训练行为、多模态 regime 和部署时设置。然而，在实践中拟合标度律仍然成本高昂且高度依赖人工：最终拟合可能对定律族的选择、初始化以及（至关重要的是）用于收集训练运行策略高度敏感。我们的方法不依赖手动设计的实验点，而是根据当前拟合状态和最需要准确预测的目标区域自动选择新运行。</p>
+<p><strong>非线性模型的最优实验设计：</strong> 经典的最优实验设计（OED）研究如何放置实验以高效估计模型参数或导出量，以Fisher信息矩阵定义诸如D-最优性和A-最优性等标准。对于非线性模型，这些标准通常依赖于未知参数，从而产生了大量关于局部最优设计的研究。然而，这一工作线主要是局部的、以参数估计为导向的，通常不考虑异构实验成本。贝叶斯最优实验设计通过在后验分布下优化期望效用来处理参数不确定性，这对于标度律拟合具有吸引力，因为目标函数高度非线性且有限的观测可能支持多种合理的拟合。然而，现有的贝叶斯OED方法并不直接针对我们的设置，在我们的设置中，候选实验是具有异构计算成本的离散训练运行，且必须在严格预算下序贯选择。因此，我们研究了一个专为标度律拟合量身定制的成本感知序贯设计问题，其中实验根据其相对于成本的预期预测收益进行优先排序。</p>
+<hr />
+<h2 id="3">第3节 问题设置<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>我们在预算约束的序贯设置下研究标度律拟合问题。我们假设底层性能趋势由参数化标度律 <span class="arithmatex">\(y = f(x; \theta)\)</span> 描述，其中 <span class="arithmatex">\(x \in \mathcal{X}\)</span> 表示建模配置（例如模型大小、token数量或其他超参数）；<span class="arithmatex">\(y \in \mathbb{R}\)</span> 表示预测目标（例如训练损失）；<span class="arithmatex">\(\theta \in \mathbb{R}^p\)</span> 表示待估计的参数。运行配置 <span class="arithmatex">\(x\)</span> 下的实验会产生非负成本 <span class="arithmatex">\(c(x)\)</span> 并揭示结果 <span class="arithmatex">\(y\)</span>。</p>
+<p>在实践中，实验选择是在一组预定义的可运行配置上执行的。我们考虑候选池 <span class="arithmatex">\(\mathcal{X}_{cand} = \{x_1, ..., x_N\}\)</span>，其中每个候选 <span class="arithmatex">\(x_i\)</span> 具有相关联的成本 <span class="arithmatex">\(c_i = c(x_i)\)</span>。在每一轮中，学习者选择一个之前未观测到的候选，支付其成本，观测其结果，并将产生的配对添加到当前数据集。经过 <span class="arithmatex">\(t\)</span> 轮后，累积的观测形成数据集 <span class="arithmatex">\(\mathcal{D}_t\)</span>，且所选实验的总成本必须保持在预算 <span class="arithmatex">\(C\)</span> 以内。</p>
+<p>最终目标不仅仅是在观测点上拟合良好，而是学习一个在目标区域 <span class="arithmatex">\(\mathcal{X}_{tar}\)</span> 上能够准确外推的标度律。这个目标区域通常包含对下游规划最重要的更大规模配置，但探索成本过高，而 <span class="arithmatex">\(\mathcal{X}_{cand}\)</span> 通常包含更便宜的小规模运行。因此，我们的目标是设计一种序贯实验选择策略，尽可能高效地利用可用预算，使得拟合的标度律在其最终重要的地方是准确的。</p>
+<hr />
+<h2 id="4">第4节 预算感知序贯标度律设计<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>我们现在描述在预算约束下进行标度律拟合的序贯设计策略。在第 <span class="arithmatex">\(t\)</span> 轮，给定当前数据集 <span class="arithmatex">\(\mathcal{D}_t\)</span>，我们的目标是选择下一个实验 <span class="arithmatex">\(x \in \mathcal{X}_{cand}\)</span>，以最大程度地改善目标区域 <span class="arithmatex">\(\mathcal{X}_{tar}\)</span> 上的预测精度。我们假设标准观测模型 <span class="arithmatex">\(y = f(x; \theta^*) + \varepsilon\)</span>，其中 <span class="arithmatex">\(\theta^*\)</span> 是真实参数，<span class="arithmatex">\(\varepsilon \sim \mathcal{N}(0, \sigma^2)\)</span>。</p>
+<h3 id="41">4.1 目标感知的不确定性目标<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>我们希望实验的效用能够反映我们的下游目标：改善目标区域 <span class="arithmatex">\(\mathcal{X}_{tar}\)</span> 上的预测精度。不确定性来自两个来源：可行拟合内的局部不确定性，以及跨多个可行拟合（它们在 <span class="arithmatex">\(\mathcal{X}_{tar}\)</span> 上外推不同）之间的分歧。我们将每个局部最优拟合称为一个"吸引盆"（basin）。给定观测 <span class="arithmatex">\(\mathcal{D}_t\)</span>，我们将后验近似为高斯混合分布：</p>
+<div class="arithmatex">\[p(\theta | \mathcal{D}_t) \approx \sum_k w_k q_k(\theta)\]</div>
+<p>其中 <span class="arithmatex">\(q_k(\theta) = \mathcal{N}(\theta_k, \Sigma_k)\)</span>，具有代表性参数 <span class="arithmatex">\(\theta_k\)</span>、局部协方差 <span class="arithmatex">\(\Sigma_k\)</span> 和混合权重 <span class="arithmatex">\(w_k\)</span>。</p>
+<p>定义目标区域预测映射 <span class="arithmatex">\(\mathbf{F}(\theta) = (f(x; \theta))_{x \in \mathcal{X}_{tar}} \in \mathbb{R}^{|\mathcal{X}_{tar}|}\)</span>。设 <span class="arithmatex">\(\hat{f}_k = \mathbf{F}(\theta_k)\)</span> 且 <span class="arithmatex">\(\bar{f} = \mathbb{E}[\mathbf{F}(\theta)] \approx \sum_k w_k \hat{f}_k\)</span>。</p>
+<p>我们使用目标区域均方预测误差 <span class="arithmatex">\(\text{MSPE}_{tar} = \frac{1}{|\mathcal{X}_{tar}|} \mathbb{E}[\|\mathbf{F}(\theta) - \bar{f}\|^2]\)</span> 作为我们的不确定性目标。在局部高斯近似下，这分解为：</p>
+<div class="arithmatex">\[\text{MSPE}_{tar} = V_{intra} + V_{inter}\]</div>
+<p>其中 <span class="arithmatex">\(V_{intra} = \frac{1}{|\mathcal{X}_{tar}|} \sum_k w_k \text{tr}(J_k \Sigma_k J_k^T)\)</span> 量化了每个吸引盆内的局部预测不确定性，而 <span class="arithmatex">\(V_{inter} = \frac{1}{|\mathcal{X}_{tar}|} \sum_k w_k \|\hat{f}_k - \bar{f}\|^2\)</span> 量化了目标区域内跨吸引盆的分歧。这里 <span class="arithmatex">\(J_k\)</span> 是在 <span class="arithmatex">\(\theta_k\)</span> 处评估的 <span class="arithmatex">\(\mathbf{F}(\theta)\)</span> 的雅可比矩阵。</p>
+<h3 id="42">4.2 候选实验评分<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>对于候选 <span class="arithmatex">\(x\)</span>，我们定义其效用为在目标区域不确定性的期望降低量：</p>
+<div class="arithmatex">\[\Delta\text{MSPE}_{tar}(x) = \text{MSPE}_{tar} - \mathbb{E}_y[\text{MSPE}_{tar}^+(x, y)]\]</div>
+<p>分解为 <span class="arithmatex">\(\Delta V_{intra}(x) + \Delta V_{inter}(x)\)</span>。第一项有利于降低盆内预测方差的候选，而第二项有利于消歧具有不同外推的吸引盆。为了考虑异构成本，我们按成本感知分数对候选排序：</p>
+<div class="arithmatex">\[S(x) = [\Delta V_{intra}(x) + \Delta V_{inter}(x)] / c(x)^\alpha\]</div>
+<p>其中 <span class="arithmatex">\(\alpha \geq 0\)</span> 控制成本惩罚的强度。</p>
+<h3 id="43">4.3 计算盆内和盆间效用<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>我们通过在每个吸引盆内局部线性化预测器来近似两个效用项，同时保留跨吸引盆的多模态结构。</p>
+<p><strong>盆内效用：</strong> 对于候选 <span class="arithmatex">\(x\)</span>，设 <span class="arithmatex">\(J_x(\theta_k)\)</span> 表示在吸引盆 <span class="arithmatex">\(k\)</span> 处的参数雅可比。在局部线性近似下，盆内目标不确定性的降低量为：</p>
+<div class="arithmatex">\[\Delta V_{intra}(x) = \frac{1}{|\mathcal{X}_{tar}|} \sum_k w_k \frac{\|J_k \Sigma_k J_x(\theta_k)^T\|^2}{\sigma^2 + J_x(\theta_k) \Sigma_k J_x(\theta_k)^T}\]</div>
+<p><strong>盆间效用：</strong> <span class="arithmatex">\(\Delta V_{inter}(x)\)</span> 衡量观测 <span class="arithmatex">\(x\)</span> 将减少跨吸引盆分歧的程度。它考虑了新观测将如何转移吸引盆权重（使不一致的吸引盆可能性降低），以及如何减少跨吸引盆目标预测的分散度。</p>
+<h3 id="44">4.4 序贯设计过程<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<p>完整过程：
+1. 用一小套随机实验初始化。
+2. 重复：基于当前数据拟合标度律，识别吸引盆，计算所有剩余候选的获取分数，在预算内选择得分最高的候选，运行它，将其添加到数据集。
+3. 返回最终拟合的标度律。</p>
+<hr />
+<h2 id="5">第5节 实验<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 实验设置<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p><strong>基准测试概述：</strong> 8个标度律任务，涵盖多样化的LLM场景：并行标度律、词汇表标度律、领域混合标度律、MoE标度律、数据约束标度律、学习率与批量大小标度律、稀疏性标度律和Farseer标度律。</p>
+<p><strong>协议和指标：</strong> 对于每个任务，完整数据集被分割为候选池和目标区域。方法在预算约束下从候选池中选择实验，拟合标度律，并在目标区域使用测试 <span class="arithmatex">\(R^2\)</span> 评估预测精度。</p>
+<p><strong>定律族和成本模型：</strong> 每个任务使用多种参数化定律形式（SLDBench排行榜按 <span class="arithmatex">\(R^2\)</span> 排名前10）。成本建模为 <span class="arithmatex">\(c(x) = 6ND\)</span>（训练的近似FLOPs）。</p>
+<p><strong>基线：</strong> 随机选择、统一网格、D-最优设计、A-最优设计，以及几种启发式基线（例如最大化多样性、最小化成本）。</p>
+<h3 id="52">5.2 结果分析<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p><strong>总体趋势：</strong> 所提出的方法在各种任务和预算水平上始终优于所有基线。在10%预算下，它通常匹配或超过在完整数据集上拟合的性能。</p>
+<p><strong>与基于设计的基线的比较：</strong> 经典OED方法（D-最优、A-最优）在低预算 regime 下表现不佳，因为它们依赖于参数的单点估计，且不考虑多模态性或目标区域相关性。</p>
+<p><strong>任务和预算依赖性：</strong> 所提方法的优势在最异构的任务（稀疏性、data_con）和更严格预算下最为明显，此时吸引盆模糊性更严重。</p>
+<p><strong>为什么某些方法可以优于全数据？</strong> 因为完整数据集可能包含噪声或冗余的点，这些点会使拟合产生偏差，而精心选择的子集可以避免这些陷阱。</p>
+<h3 id="53">5.3 消融研究<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p>从获取函数中移除 <span class="arithmatex">\(\Delta V_{intra}\)</span> 会导致性能显著下降，因为盆内不确定性降低提供了主导信号。移除 <span class="arithmatex">\(\Delta V_{inter}\)</span> 通常导致较小的下降，因为跨吸引盆分歧更加任务依赖。完整方法最为稳健，表明两项是互补的：<span class="arithmatex">\(\Delta V_{intra}\)</span> 提供主导信号，而当吸引盆模糊性很大时 <span class="arithmatex">\(\Delta V_{inter}\)</span> 产生额外收益。</p>
+<hr />
+<h2 id="6">第6节 结论<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>我们将标度律拟合形式化为预算感知的序贯实验设计问题，其中每个候选运行都会产生成本，目标是最大化高成本目标区域的预测精度。我们提出了一种不确定性感知的获取策略，根据实验对目标区域外推的价值来选择实验。在多样化的标度律任务基准测试中，该方法始终优于随机、启发式和经典基于设计的基线，且通常仅使用原始训练预算的一小部分就能接近全数据性能。这些结果表明，在现代规模下，标度律拟合不仅应被视为建模问题，还应被视为实验设计和预算分配问题。</p>
+<hr />
+<h2 id="e">附录E 讨论、局限性与未来工作<a class="headerlink" href="#e" title="Permanent link">&para;</a></h2>
+<p>本文提出的方法在标度律拟合领域取得了显著进展，但仍有若干局限性值得探讨，并为未来研究指明了方向。</p>
+<p><strong>对参数化形式的依赖：</strong> 我们的方法建立在假设底层性能趋势可以用参数化标度律 <span class="arithmatex">\(y = f(x; \theta)\)</span> 描述的基础上。虽然我们支持多种定律族形式，但在面对全新的设置或非标准架构时，选择合适的定律形式仍可能需要领域知识。此外，对于高度非凸的拟合景观，吸引盆的识别和估计可能变得不稳定。</p>
+<p><strong>计算开销：</strong> 在每个序贯步骤中，我们需要维护吸引盆的混合高斯后验近似，计算盆内和盆间效用分数。这在候选池规模很大时可能带来显著的计算开销。未来工作可以探索更高效的近似方法，例如使用变分推断或粒子滤波来替代当前的混合高斯近似。</p>
+<p><strong>成本模型的简化：</strong> 当前的成本模型 <span class="arithmatex">\(c(x) = 6ND\)</span> 是一个近似值，实际情况可能更复杂，例如包含通信成本、存储成本或与硬件利用率相关的因素。更精细的成本模型将使方法更贴近实际工业部署场景。</p>
+<p><strong>扩展到非参数化方法：</strong> 我们的框架专注于参数化标度律。未来的一个有趣方向是将类似的思想扩展到非参数化方法，如高斯过程或神经网络基函数，这可能提供更大的灵活性来处理复杂的性能景观。</p>
+<p><strong>多目标优化：</strong> 当前 formulation 假设单一目标区域，但实际应用可能需要同时在多个目标区域准确外推。多目标版本的方法可以更好地支持实际决策场景。</p>
+<p><strong>与自适应定律选择的结合：</strong> 我们假设定律族在实验选择过程中是固定的。一个更灵活的框架可以同时考虑实验配置和定律族的选择，这可能带来更大的性能提升。</p>
+<p><strong>实际部署考虑：</strong> 在真实的大规模训练环境中，还需要考虑并行训练效率、硬件异构性、故障恢复等实际因素。将我们的方法与这些实际约束集成将使其更具实用价值。</p>
+<p>我们相信，这些方向的探索将进一步提升预算高效标度律拟合方法的实用性和影响力。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

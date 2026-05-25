@@ -1,0 +1,3741 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>补充 数值线性代数核心概念学习笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              补充 数值线性代数核心概念学习笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        零、算法复杂度与浮点运算数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="零、算法复杂度与浮点运算数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-obig-o-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ‼️‼️‼️0.1 大O符号（Big-O Notation）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="‼️‼️‼️0.1 大O符号（Big-O Notation）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义与用途
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正式定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        直观理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见增长率排序
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2 浮点运算数（FLOPs）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.2 浮点运算数（FLOPs）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什么是FLOP？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何计算FLOPs？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.3 常见运算的FLOPs统计
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.3 常见运算的FLOPs统计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        详细推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.4 特殊情况的FLOPs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.5 为什么关心FLOPs？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.5 为什么关心FLOPs？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        理论意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实际意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-flops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.6 FLOPs的局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ‼️‼️‼️一、向量范数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="‼️‼️‼️一、向量范数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 定义与性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 常用向量范数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 范数等价性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ‼️‼️‼️二、矩阵范数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="‼️‼️‼️二、矩阵范数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 定义与性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 诱导矩阵范数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 常用矩阵范数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 范数之间的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 典型习题与解答
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 典型习题与解答">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        习题1：算子范数的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2frobenius" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        习题2：Frobenius范数不是算子范数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        习题3：范数的正交不变性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ‼️‼️‼️三、奇异值分解(SVD)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="‼️‼️‼️三、奇异值分解(SVD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 定理内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 奇异值的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 紧凑SVD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 计算步骤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 四个基本子空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 方阵的极分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、‼️‼️‼️广义逆与SVD的关系
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、‼️‼️‼️广义逆与SVD的关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-moore-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 广义逆（Moore-Penrose伪逆）定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 用SVD计算广义逆
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 广义逆与最小二乘
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 广义逆与最小二乘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 特殊情况
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Python实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 应用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eckhart-young" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Eckhart-Young定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、Eckhart-Young定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 定理内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 证明思路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 意义与应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ‼️‼️‼️六、条件数与扰动分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="‼️‼️‼️六、条件数与扰动分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 条件数定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 条件数的意义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 条件数的意义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        条件数量化标准
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 病态矩阵的数值例子
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 病态矩阵的数值例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        良态矩阵（两条正交直线）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        病态矩阵（两条几乎平行的直线）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 几何直观
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 几何直观">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        良态：两条正交直线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        病态：两条几乎平行的直线
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-at-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 为什么 \(A^T A\) 更病态？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 解决病态问题的方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 扰动分析的定量结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 扰动分析的定量结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        右端项b的扰动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩阵A的扰动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        同时扰动的误差上界
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 病态问题的数值分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、CUR分解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、CUR分解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 定理内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 证明思路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 几何意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 与SVD的比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 应用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 详细数值例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 索引集选择方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-svd-vs-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. SVD vs CUR 详细对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cur_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、CUR分解的等价条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、CUR分解的等价条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 定理内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 条件解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cur-vs-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、精确CUR vs 近似CUR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="九、精确CUR vs 近似CUR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 两种CUR的本质区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 精确CUR的条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 为什么需要近似CUR？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 近似CUR的核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 近似CUR的误差界
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 近似CUR的算法流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-cur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 两种CUR的选择建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、QR分解与线性系统求解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、QR分解与线性系统求解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. QR分解的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. QR分解的构造方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. QR分解的构造方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-gram-schmidt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Gram-Schmidt正交化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-householder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Householder变换（推荐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-givens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Givens旋转
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 三种方法对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 线性系统的QR解法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 线性系统的QR解法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 约化为三角系统
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 回代求解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. QR解法的特点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、关键概念联系图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、学习要点总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ‼️‼️‼️十一、岭回归与正则化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="‼️‼️‼️十一、岭回归与正则化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 问题背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 岭回归
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 求解过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 解的存在唯一性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 几何意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>补充 数值线性代数核心概念学习笔记</h1>
+
+<h2 id="_1">零、算法复杂度与浮点运算数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="01-obig-o-notation">‼️‼️‼️0.1 大O符号（Big-O Notation）<a class="headerlink" href="#01-obig-o-notation" title="Permanent link">&para;</a></h3>
+<h4 id="_2">定义与用途<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>大O符号用于描述函数的<strong>渐近增长率</strong>，是分析算法复杂度的核心工具。</p>
+<h4 id="_3">正式定义<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>对于非负函数 <span class="arithmatex">\(f(n), g(n) \geq 0\)</span>：</p>
+<div class="arithmatex">\[f(n) = \mathcal{O}(g(n)) \quad \text{当且仅当} \quad \exists C &gt; 0, n_0, \forall n \geq n_0: f(n) \leq C g(n)\]</div>
+<h4 id="_4">直观理解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>当 <span class="arithmatex">\(n\)</span> 足够大时，<span class="arithmatex">\(g(n)\)</span> 是 <span class="arithmatex">\(f(n)\)</span> 的上界，相差一个常数因子。</p>
+<h4 id="_5">常见示例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>大O表示</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(3n^2 + 5n + 2\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^2)\)</span></td>
+<td>最高次项主导</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\log(n^2)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\log(n^2) = 2\log n\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n!\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n!)\)</span></td>
+<td>阶乘增长极快</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2^n\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(2^n)\)</span></td>
+<td>指数增长</td>
+</tr>
+</tbody>
+</table>
+<p><strong>重要</strong>：对于任意固定的 <span class="arithmatex">\(k\)</span>，<span class="arithmatex">\(2^n\)</span> 不是 <span class="arithmatex">\(\mathcal{O}(n^k)\)</span>（指数增长快于任何多项式）</p>
+<h4 id="_6">常见增长率排序<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[1 &lt; \log n &lt; n &lt; n \log n &lt; n^2 &lt; n^3 &lt; 2^n &lt; n!\]</div>
+<p><strong>记忆技巧</strong>：
+- 常数 &lt; 对数 &lt; 线性 &lt; 线性对数 &lt; 多项式 &lt; 指数 &lt; 阶乘
+- 低阶复杂度算法在大规模数据时优势明显</p>
+<hr />
+<h3 id="02-flops">0.2 浮点运算数（FLOPs）<a class="headerlink" href="#02-flops" title="Permanent link">&para;</a></h3>
+<h4 id="flop">什么是FLOP？<a class="headerlink" href="#flop" title="Permanent link">&para;</a></h4>
+<p><strong>FLOP</strong> = Floating Point Operation，即一次浮点运算：
+- 一次浮点<strong>加法</strong>
+- 一次浮点<strong>减法</strong>
+- 一次浮点<strong>乘法</strong>
+- 一次浮点<strong>除法</strong></p>
+<h4 id="flops">如何计算FLOPs？<a class="headerlink" href="#flops" title="Permanent link">&para;</a></h4>
+<p>在矩阵计算中，浮点运算数通常通过计算<strong>最深层嵌套语句的算术运算总量</strong>得到。</p>
+<hr />
+<h3 id="03-flops">0.3 常见运算的FLOPs统计<a class="headerlink" href="#03-flops" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>运算</th>
+<th>维度</th>
+<th>精确FLOPs</th>
+<th>大O表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\alpha = x^\top y\)</span>（内积）</td>
+<td><span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span></td>
+<td><span class="arithmatex">\(2n - 1\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y = y + \alpha x\)</span>（AXPY）</td>
+<td><span class="arithmatex">\(x, y \in \mathbb{R}^n, \alpha \in \mathbb{R}\)</span></td>
+<td><span class="arithmatex">\(2n\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y = y + Ax\)</span>（矩阵-向量乘）</td>
+<td><span class="arithmatex">\(x \in \mathbb{R}^n, y \in \mathbb{R}^m, A \in \mathbb{R}^{m \times n}\)</span></td>
+<td><span class="arithmatex">\(2mn\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(C = C + AB\)</span>（矩阵-矩阵乘）</td>
+<td><span class="arithmatex">\(A \in \mathbb{R}^{m \times r}, B \in \mathbb{R}^{r \times n}, C \in \mathbb{R}^{m \times n}\)</span></td>
+<td><span class="arithmatex">\(2mnr\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(mnr)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_7">详细推导<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p><strong>内积 <span class="arithmatex">\(\alpha = x^\top y\)</span></strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>result = 0
+for i = 1 to n:
+    result = result + x[i] * y[i]  # 1次乘法 + 1次加法 = 2次
+</code></pre></div></td></tr></table></div>
+- 共 <span class="arithmatex">\(n\)</span> 次循环，每次 2 次运算，但最后一次加法可省略
+- 总计：<span class="arithmatex">\(2n - 1\)</span> 次运算</p>
+<p><strong>矩阵-向量乘 <span class="arithmatex">\(y = Ax\)</span></strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>for i = 1 to m:
+    for j = 1 to n:
+        y[i] = y[i] + A[i,j] * x[j]  # 2次运算
+</code></pre></div></td></tr></table></div>
+- 外层循环 <span class="arithmatex">\(m\)</span> 次，内层循环 <span class="arithmatex">\(n\)</span> 次
+- 总计：<span class="arithmatex">\(2mn\)</span> 次运算</p>
+<p><strong>矩阵-矩阵乘 <span class="arithmatex">\(C = AB\)</span></strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>for i = 1 to m:
+    for j = 1 to n:
+        for k = 1 to r:
+            C[i,j] = C[i,j] + A[i,k] * B[k,j]  # 2次运算
+</code></pre></div></td></tr></table></div>
+- 三层嵌套循环
+- 总计：<span class="arithmatex">\(2mnr\)</span> 次运算</p>
+<hr />
+<h3 id="04-flops">0.4 特殊情况的FLOPs<a class="headerlink" href="#04-flops" title="Permanent link">&para;</a></h3>
+<p>当矩阵是方阵（<span class="arithmatex">\(m = n = r\)</span>）时：</p>
+<table>
+<thead>
+<tr>
+<th>运算</th>
+<th>FLOPs</th>
+<th>大O表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内积 <span class="arithmatex">\(x^\top y\)</span></td>
+<td><span class="arithmatex">\(2n - 1\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+</tr>
+<tr>
+<td>矩阵-向量乘 <span class="arithmatex">\(Ax\)</span></td>
+<td><span class="arithmatex">\(2n^2\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^2)\)</span></td>
+</tr>
+<tr>
+<td>矩阵-矩阵乘 <span class="arithmatex">\(AB\)</span></td>
+<td><span class="arithmatex">\(2n^3\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^3)\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="05-flops">0.5 为什么关心FLOPs？<a class="headerlink" href="#05-flops" title="Permanent link">&para;</a></h3>
+<h4 id="_8">理论意义<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>算法比较</strong></td>
+<td>比较不同算法的计算效率</td>
+</tr>
+<tr>
+<td><strong>复杂度分析</strong></td>
+<td>预测算法在大规模数据上的表现</td>
+</tr>
+<tr>
+<td><strong>资源估算</strong></td>
+<td>估计计算所需的CPU时间</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_9">实际意义<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p><strong>例：矩阵乘法的优化</strong></p>
+<p>标准算法：<span class="arithmatex">\(\mathcal{O}(n^3)\)</span>
+- 当 <span class="arithmatex">\(n = 1000\)</span> 时，约 <span class="arithmatex">\(2 \times 10^9\)</span> 次运算
+- 现代CPU每秒可执行 <span class="arithmatex">\(10^9 \sim 10^{10}\)</span> 次浮点运算
+- 大约需要 0.1~1 秒</p>
+<p>Strassen算法：<span class="arithmatex">\(\mathcal{O}(n^{2.807})\)</span>
+- 当 <span class="arithmatex">\(n = 1000\)</span> 时，约 <span class="arithmatex">\(4 \times 10^8\)</span> 次运算
+- 快约 5 倍</p>
+<p><strong>例：求解线性方程组</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>FLOPs</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高斯消元</td>
+<td><span class="arithmatex">\(\frac{2}{3}n^3\)</span></td>
+<td>一般矩阵</td>
+</tr>
+<tr>
+<td>LU分解</td>
+<td><span class="arithmatex">\(\frac{2}{3}n^3\)</span></td>
+<td>多次求解相同系数矩阵</td>
+</tr>
+<tr>
+<td>Cholesky分解</td>
+<td><span class="arithmatex">\(\frac{1}{3}n^3\)</span></td>
+<td>对称正定矩阵</td>
+</tr>
+<tr>
+<td>QR分解</td>
+<td><span class="arithmatex">\(\frac{4}{3}n^3\)</span></td>
+<td>最小二乘问题</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="06-flops">0.6 FLOPs的局限性<a class="headerlink" href="#06-flops" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>局限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>忽略常数因子</strong></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span> 和 <span class="arithmatex">\(\mathcal{O}(100n)\)</span> 在大O表示下相同，但实际差异大</td>
+</tr>
+<tr>
+<td><strong>忽略内存访问</strong></td>
+<td>实际运行时间还受缓存命中率、内存带宽影响</td>
+</tr>
+<tr>
+<td><strong>忽略并行性</strong></td>
+<td>可并行化的算法实际更快</td>
+</tr>
+<tr>
+<td><strong>小规模数据失效</strong></td>
+<td>大O关注渐近行为，小数据时低阶项可能主导</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_10">‼️‼️‼️一、向量范数<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 定义与性质<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>向量范数是一个从向量空间 <span class="arithmatex">\(\mathbb{R}^m\)</span> 到实数集 <span class="arithmatex">\(\mathbb{R}\)</span> 的函数 <span class="arithmatex">\(\|\cdot\|\)</span>，满足以下性质：
+- <strong>非负性</strong>：<span class="arithmatex">\(\|\vec{v}\| \geq 0\)</span>，且 <span class="arithmatex">\(\|\vec{v}\| = 0\)</span> 当且仅当 <span class="arithmatex">\(\vec{v} = \vec{0}\)</span>
+- <strong>齐次性</strong>：<span class="arithmatex">\(\|\alpha\vec{v}\| = |\alpha| \|\vec{v}\|\)</span>，对任意实数 <span class="arithmatex">\(\alpha\)</span> 和向量 <span class="arithmatex">\(\vec{v}\)</span>
+- <strong>三角不等式</strong>：<span class="arithmatex">\(\|\vec{v} + \vec{u}\| \leq \|\vec{v}\| + \|\vec{u}\|\)</span>，对任意向量 <span class="arithmatex">\(\vec{v}\)</span> 和 <span class="arithmatex">\(\vec{u}\)</span></p>
+<h3 id="2">2. 常用向量范数<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>范数类型</th>
+<th>定义</th>
+<th>几何意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1-范数</strong>（<span class="arithmatex">\(\ell_1\)</span> 范数）</td>
+<td><span class="arithmatex">\(\|\vec{v}\|_1 = \sum_{i=1}^mv_i\)</span></td>
+<td>向量各分量绝对值之和，对应曼哈顿距离</td>
+</tr>
+<tr>
+<td><strong>2-范数</strong>（<span class="arithmatex">\(\ell_2\)</span> 范数）</td>
+<td><span class="arithmatex">\(\|\vec{v}\|_2 = \sqrt{\sum_{i=1}^mv_i^2}\)</span></td>
+<td>向量的欧几里得长度，对应欧几里得距离</td>
+</tr>
+<tr>
+<td><strong>∞-范数</strong>（<span class="arithmatex">\(\ell_\infty\)</span> 范数）</td>
+<td><span class="arithmatex">\(\|\vec{v}\|_\infty = \max_{1 \leq i \leq m}v_i\)</span></td>
+<td>向量分量的最大绝对值，对应切比雪夫距离</td>
+</tr>
+<tr>
+<td><strong>p-范数</strong>（<span class="arithmatex">\(\ell_p\)</span> 范数）</td>
+<td><span class="arithmatex">\(\|\vec{v}\|_p = \left(\sum_{i=1}^mv_i^p\right)^{1/p}\)</span></td>
+<td>上述范数的推广，当 <span class="arithmatex">\(p \to \infty\)</span> 时趋近于∞-范数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3">3. 范数等价性<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>不同向量范数之间存在等价关系，即存在常数 <span class="arithmatex">\(c_1, c_2 &gt; 0\)</span>，使得对任意向量 <span class="arithmatex">\(\vec{v}\)</span>，有：
+$<span class="arithmatex">\(c_1 \|\vec{v}\|_a \leq \|\vec{v}\|_b \leq c_2 \|\vec{v}\|_a\)</span>$
+![[Pasted image 20260516152018.png|373]]
+具体等价关系：
+$<span class="arithmatex">\(\|\vec{v}\|_\infty \leq \|\vec{v}\|_1 \leq m \|\vec{v}\|_\infty\)</span>$
+$<span class="arithmatex">\(\|\vec{v}\|_\infty \leq \|\vec{v}\|_2 \leq \sqrt{m} \|\vec{v}\|_\infty\)</span>$
+$<span class="arithmatex">\(\frac{1}{\sqrt{m}} \|\vec{v}\|_1 \leq \|\vec{v}\|_2 \leq \|\vec{v}\|_1\)</span>$</p>
+<p><strong>意义</strong>：在分析算法复杂度和收敛性时，可以在不同范数之间灵活转换</p>
+<hr />
+<h2 id="_11">‼️‼️‼️二、矩阵范数<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. 定义与性质<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>矩阵范数是一个从矩阵空间 <span class="arithmatex">\(\mathbb{R}^{m \times n}\)</span> 到实数集 <span class="arithmatex">\(\mathbb{R}\)</span> 的函数 <span class="arithmatex">\(\|\cdot\|\)</span>，满足以下性质：
+- <strong>非负性</strong>：<span class="arithmatex">\(\|A\| \geq 0\)</span>，且 <span class="arithmatex">\(\|A\| = 0\)</span> 当且仅当 <span class="arithmatex">\(A = 0\)</span>
+- <strong>齐次性</strong>：<span class="arithmatex">\(\|\alpha A\| = |\alpha| \|A\|\)</span>，对任意实数 <span class="arithmatex">\(\alpha\)</span> 和矩阵 <span class="arithmatex">\(A\)</span>
+- <strong>三角不等式</strong>：<span class="arithmatex">\(\|A + B\| \leq \|A\| + \|B\|\)</span>，对任意矩阵 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span>
+- <strong>相容性</strong>：<span class="arithmatex">\(\|AB\| \leq \|A\| \|B\|\)</span>，对任意可乘矩阵 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span></p>
+<h3 id="2_1">2. 诱导矩阵范数<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>由向量范数诱导的矩阵范数定义为：
+$<span class="arithmatex">\(\|A\| = \max_{\|\vec{v}\|=1} \|A\vec{v}\|\)</span>$</p>
+<p><strong>几何意义</strong>：矩阵对单位向量的最大拉伸倍数</p>
+<h3 id="3_1">3. 常用矩阵范数<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>范数类型</th>
+<th>定义</th>
+<th>计算方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1-范数</strong>（列和范数）</td>
+<td><span class="arithmatex">\(\|A\|_1 = \max_{\|\vec{v}\|_1=1} \|A\vec{v}\|_1\)</span></td>
+<td>矩阵各列元素绝对值之和的最大值</td>
+</tr>
+<tr>
+<td><strong>∞-范数</strong>（行和范数）</td>
+<td><span class="arithmatex">\(\|A\|_\infty = \max_{\|\vec{v}\|_\infty=1} \|A\vec{v}\|_\infty\)</span></td>
+<td>矩阵各行元素绝对值之和的最大值</td>
+</tr>
+<tr>
+<td><strong>2-范数</strong>（谱范数）</td>
+<td><span class="arithmatex">\(\|A\|_2 = \max_{\|\vec{v}\|_2=1} \|A\vec{v}\|_2\)</span></td>
+<td>矩阵的最大奇异值，即 <span class="arithmatex">\(\sqrt{\lambda_{\max}(A^T A)}\)</span></td>
+</tr>
+<tr>
+<td><strong>Frobenius范数</strong></td>
+<td><span class="arithmatex">\(\|A\|_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^na_{ij}^2}\)</span></td>
+<td>矩阵元素平方和的平方根，类似向量的2-范数，也等于<span class="arithmatex">\(\sqrt{\operatorname{tr}(A^T A)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4">4. 范数之间的关系<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\|A\|_2 \leq \|A\|_F \leq \sqrt{\text{rank}(A)} \|A\|_2$$
+$$\|A\|_2 \leq \sqrt{\|A\|_1 \|A\|_\infty}(由谱半径\rho(M)\leq\|M\|可得)$$
+$$\|A\|_\infty \leq \sqrt{n} \|A\|_2, \quad \|A\|_1 \leq \sqrt{m} \|A\|_2\]</div>
+<p><strong>意义</strong>：在不同范数之间转换时，可以估计误差的上界和下界</p>
+<h3 id="5">5. 典型习题与解答<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">习题1：算子范数的性质<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：证明由向量范数导出的矩阵算子范数必定满足 <span class="arithmatex">\(\|I_n\| = 1\)</span>。</p>
+<p><strong>证明</strong>：
+$<span class="arithmatex">\(\|I_n\| = \max_{\|\vec{v}\|=1} \|I_n \vec{v}\| = \max_{\|\vec{v}\|=1} \|\vec{v}\| = 1\)</span>$</p>
+<p><strong>证毕</strong>。</p>
+<hr />
+<h4 id="2frobenius">习题2：Frobenius范数不是算子范数<a class="headerlink" href="#2frobenius" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算 <span class="arithmatex">\(I_n\)</span> 的 Frobenius 范数，并证明当 <span class="arithmatex">\(n \geq 2\)</span> 时，Frobenius 范数不是由任何向量范数导出的算子范数。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>Part 1</strong>: 计算 <span class="arithmatex">\(\|I_n\|_F\)</span></p>
+<div class="arithmatex">\[\|I_n\|_F = \sqrt{\sum_{i=1}^n \sum_{j=1}^n (I_n)_{ij}^2} = \sqrt{\sum_{i=1}^n 1} = \sqrt{n}\]</div>
+<p><strong>Part 2</strong>: 反证法</p>
+<p>假设存在某个向量范数诱导的算子范数等于 Frobenius 范数，则必须满足 <span class="arithmatex">\(\|I_n\|_F = \|I_n\| = 1\)</span>。</p>
+<p>但 <span class="arithmatex">\(\|I_n\|_F = \sqrt{n}\)</span>，当 <span class="arithmatex">\(n \geq 2\)</span> 时，<span class="arithmatex">\(\sqrt{n} \neq 1\)</span>，矛盾。</p>
+<p><strong>结论</strong>：Frobenius 范数满足次可乘性，但不是算子范数。</p>
+<hr />
+<h4 id="3_2">习题3：范数的正交不变性<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span>，<span class="arithmatex">\(U\)</span>、<span class="arithmatex">\(V\)</span> 为正交矩阵。证明 2-范数和 Frobenius 范数具有正交不变性。</p>
+<p><strong>证明</strong>：</p>
+<p><strong>2-范数</strong>：设 <span class="arithmatex">\(A = U_A \Sigma V_A^T\)</span>，则 <span class="arithmatex">\(U A V^T = (U U_A) \Sigma (V V_A)^T\)</span> 仍是 SVD 形式，奇异值不变，故 <span class="arithmatex">\(\|U A V^T\|_2 = \sigma_1 = \|A\|_2\)</span>。</p>
+<p><strong>Frobenius 范数</strong>：
+$<span class="arithmatex">\(\|U A V^T\|_F^2 = \text{tr}(V A^T U^T U A V^T) = \text{tr}(A^T A) = \|A\|_F^2\)</span>$</p>
+<p><strong>证毕</strong>。</p>
+<hr />
+<h2 id="svd">‼️‼️‼️三、奇异值分解(SVD)<a class="headerlink" href="#svd" title="Permanent link">&para;</a></h2>
+<h3 id="1_3">1. 定理内容<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h3>
+<p>任何 <span class="arithmatex">\(n \times m\)</span> 矩阵 <span class="arithmatex">\(A\)</span> 都可以分解为：
+$<span class="arithmatex">\(A = U\Sigma V^T\)</span>$
+其中：
+- <span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 正交矩阵，其列是 <span class="arithmatex">\(A\)</span> 的左奇异向量
+- <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(m \times m\)</span> 正交矩阵，其列是 <span class="arithmatex">\(A\)</span> 的右奇异向量
+- <span class="arithmatex">\(\Sigma\)</span> 是 <span class="arithmatex">\(n \times m\)</span> 对角矩阵，其对角元素是 <span class="arithmatex">\(A\)</span> 的奇异值 <span class="arithmatex">\(\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_r &gt; 0\)</span>，<span class="arithmatex">\(r = \text{rank}(A)\)</span></p>
+<h3 id="2_2">2. 奇异值的性质<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>与特征值的关系</strong>：<span class="arithmatex">\(A^T A\)</span> 和 <span class="arithmatex">\(A A^T\)</span> 有相同的非零特征值 <span class="arithmatex">\(\sigma_1^2, \sigma_2^2, \dots, \sigma_r^2\)</span></li>
+<li><strong>计算方法</strong>：可以通过求解 <span class="arithmatex">\(A^T A\)</span> 或 <span class="arithmatex">\(A A^T\)</span> 的特征值来得到奇异值</li>
+<li><strong>几何意义</strong>：奇异值表示矩阵对不同方向向量的拉伸程度</li>
+</ol>
+<h3 id="3-svd">3. 紧凑SVD<a class="headerlink" href="#3-svd" title="Permanent link">&para;</a></h3>
+<p>当矩阵 <span class="arithmatex">\(A\)</span> 的秩为 <span class="arithmatex">\(r\)</span> 时，可以将SVD写为紧凑形式：
+$<span class="arithmatex">\(A = U_r \Sigma_r V_r^T\)</span>$
+其中：
+- <span class="arithmatex">\(U_r\)</span> 是 <span class="arithmatex">\(n \times r\)</span> 矩阵，包含前 <span class="arithmatex">\(r\)</span> 个左奇异向量
+- <span class="arithmatex">\(V_r\)</span> 是 <span class="arithmatex">\(m \times r\)</span> 矩阵，包含前 <span class="arithmatex">\(r\)</span> 个右奇异向量
+- <span class="arithmatex">\(\Sigma_r\)</span> 是 <span class="arithmatex">\(r \times r\)</span> 对角矩阵，包含前 <span class="arithmatex">\(r\)</span> 个非零奇异值</p>
+<h3 id="4_1">4. 计算步骤<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>计算 <span class="arithmatex">\(A^T A\)</span> 或 <span class="arithmatex">\(A A^T\)</span></li>
+<li>求解特征值和特征向量</li>
+<li>对特征值开平方得到奇异值</li>
+<li>对特征向量正交化得到奇异向量</li>
+</ol>
+<h3 id="5_1">5. 四个基本子空间<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h3>
+<p>设矩阵 <span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span> 的秩为 <span class="arithmatex">\(r\)</span>，SVD 为 <span class="arithmatex">\(A = U \Sigma V^T\)</span>，则：</p>
+<table>
+<thead>
+<tr>
+<th>子空间</th>
+<th>维数</th>
+<th>标准正交基</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>列空间</strong> <span class="arithmatex">\(C(A)\)</span></td>
+<td><span class="arithmatex">\(r\)</span></td>
+<td><span class="arithmatex">\(\{u_1, \ldots, u_r\}\)</span></td>
+</tr>
+<tr>
+<td><strong>零空间</strong> <span class="arithmatex">\(N(A)\)</span></td>
+<td><span class="arithmatex">\(n-r\)</span></td>
+<td><span class="arithmatex">\(\{v_{r+1}, \ldots, v_n\}\)</span></td>
+</tr>
+<tr>
+<td><strong>行空间</strong> <span class="arithmatex">\(C(A^T)\)</span></td>
+<td><span class="arithmatex">\(r\)</span></td>
+<td><span class="arithmatex">\(\{v_1, \ldots, v_r\}\)</span></td>
+</tr>
+<tr>
+<td><strong>左零空间</strong> <span class="arithmatex">\(N(A^T)\)</span></td>
+<td><span class="arithmatex">\(m-r\)</span></td>
+<td><span class="arithmatex">\(\{u_{r+1}, \ldots, u_m\}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>证明要点</strong>：
+- <span class="arithmatex">\(C(A)\)</span>：由 <span class="arithmatex">\(A = \sum_{i=1}^r \sigma_i u_i v_i^T\)</span> 知 <span class="arithmatex">\(Ax\)</span> 只能是 <span class="arithmatex">\(u_1, \ldots, u_r\)</span> 的线性组合
+- <span class="arithmatex">\(N(A)\)</span>：<span class="arithmatex">\(Av_j = U\Sigma V^T v_j = U \cdot 0 = 0\)</span>（当 <span class="arithmatex">\(j &gt; r\)</span> 时 <span class="arithmatex">\(\sigma_j = 0\)</span>）</p>
+<h3 id="6">6. 方阵的极分解<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<p><strong>定理</strong>：任意方阵 <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span> 可分解为 <span class="arithmatex">\(A = SQ\)</span>，其中 <span class="arithmatex">\(S\)</span> 半正定对称，<span class="arithmatex">\(Q\)</span> 正交。</p>
+<p><strong>构造方法</strong>：设 <span class="arithmatex">\(A = U\Sigma V^T\)</span>，则
+$<span class="arithmatex">\(S = U\Sigma U^T, \quad Q = UV^T\)</span>$</p>
+<p><strong>验证</strong>：
+- <span class="arithmatex">\(SQ = U\Sigma U^T \cdot UV^T = U\Sigma V^T = A\)</span> ✓
+- <span class="arithmatex">\(S^T = S\)</span>（对称）✓
+- <span class="arithmatex">\(S\)</span> 的特征值即 <span class="arithmatex">\(\sigma_i \geq 0\)</span>（半正定）✓</p>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(Q\)</span> 表示旋转/反射，<span class="arithmatex">\(S\)</span> 表示拉伸，类似复数的极坐标 <span class="arithmatex">\(z = re^{i\theta}\)</span>。</p>
+<hr />
+<h2 id="svd_1">四、‼️‼️‼️广义逆与SVD的关系<a class="headerlink" href="#svd_1" title="Permanent link">&para;</a></h2>
+<h3 id="1-moore-penrose">1. 广义逆（Moore-Penrose伪逆）定义<a class="headerlink" href="#1-moore-penrose" title="Permanent link">&para;</a></h3>
+<p>对于矩阵 <span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span>，其广义逆 <span class="arithmatex">\(A^\dagger\)</span> 是满足以下四个条件的唯一矩阵：</p>
+<ol>
+<li><span class="arithmatex">\(AA^\dagger A = A\)</span></li>
+<li><span class="arithmatex">\(A^\dagger AA^\dagger = A^\dagger\)</span></li>
+<li><span class="arithmatex">\((AA^\dagger)^T = AA^\dagger\)</span></li>
+<li><span class="arithmatex">\((A^\dagger A)^T = A^\dagger A\)</span></li>
+</ol>
+<h3 id="2-svd">2. 用SVD计算广义逆<a class="headerlink" href="#2-svd" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(A = U\Sigma V^T\)</span> 是矩阵 <span class="arithmatex">\(A\)</span> 的奇异值分解，则其广义逆为：</p>
+<div class="arithmatex">\[A^\dagger = V\Sigma^\dagger U^T\]</div>
+<p>其中 <span class="arithmatex">\(\Sigma^\dagger\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 的伪逆：</p>
+<div class="arithmatex">\[\Sigma = \begin{bmatrix} \sigma_1 &amp; &amp; &amp; 0 \\ &amp; \ddots &amp; &amp; \\ &amp; &amp; \sigma_r &amp; \\ 0 &amp; &amp; &amp; 0 \end{bmatrix} \implies \Sigma^\dagger = \begin{bmatrix} \frac{1}{\sigma_1} &amp; &amp; &amp; 0 \\ &amp; \ddots &amp; &amp; \\ &amp; &amp; \frac{1}{\sigma_r} &amp; \\ 0 &amp; &amp; &amp; 0 \end{bmatrix}^T\]</div>
+<p><strong>关键操作</strong>：非零奇异值取倒数，零奇异值保持为零，然后转置。</p>
+<h3 id="3_3">3. 广义逆与最小二乘<a class="headerlink" href="#3_3" title="Permanent link">&para;</a></h3>
+<p>对于线性系统 <span class="arithmatex">\(Ax = b\)</span>（通常 <span class="arithmatex">\(m &gt; n\)</span>，无精确解），最小二乘解为：</p>
+<div class="arithmatex">\[\tilde{x} = A^\dagger b\]</div>
+<h4 id="_12">证明<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>最小化 <span class="arithmatex">\(\|b - Ax\|^2\)</span>，对 <span class="arithmatex">\(x\)</span> 求导得到正规方程：</p>
+<div class="arithmatex">\[A^T A x = A^T b\]</div>
+<p>用SVD表示：</p>
+<div class="arithmatex">\[(V\Sigma^T U^T)(U\Sigma V^T) x = V\Sigma^T U^T b\]</div>
+<div class="arithmatex">\[V\Sigma^T\Sigma V^T x = V\Sigma^T U^T b\]</div>
+<p>两边左乘 <span class="arithmatex">\(V^T\)</span>：</p>
+<div class="arithmatex">\[\Sigma^T\Sigma V^T x = \Sigma^T U^T b\]</div>
+<p>解得：</p>
+<div class="arithmatex">\[x = V(\Sigma^T\Sigma)^{-1}\Sigma^T U^T b = V\Sigma^\dagger U^T b = A^\dagger b\]</div>
+<h3 id="4_2">4. 特殊情况<a class="headerlink" href="#4_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>条件</th>
+<th>广义逆公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列满秩</td>
+<td><span class="arithmatex">\(r = n\)</span></td>
+<td><span class="arithmatex">\(A^\dagger = (A^T A)^{-1} A^T\)</span></td>
+</tr>
+<tr>
+<td>行满秩</td>
+<td><span class="arithmatex">\(r = m\)</span></td>
+<td><span class="arithmatex">\(A^\dagger = A^T (A A^T)^{-1}\)</span></td>
+</tr>
+<tr>
+<td>不满秩</td>
+<td><span class="arithmatex">\(r &lt; \min(m, n)\)</span></td>
+<td><span class="arithmatex">\(A^\dagger = V\Sigma^\dagger U^T\)</span>（只能通过SVD计算）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-python">5. Python实现<a class="headerlink" href="#5-python" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 方法1：直接使用numpy的pinv</span>
+<span class="n">A_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># 方法2：通过SVD手动计算</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">S_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="n">S_plus</span><span class="p">[</span><span class="n">S</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">S</span><span class="p">[</span><span class="n">S</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">]</span>  <span class="c1"># 非零奇异值取倒数</span>
+<span class="n">A_plus</span> <span class="o">=</span> <span class="n">Vt</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S_plus</span><span class="p">)</span> <span class="o">@</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="6_1">6. 应用场景<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>最小二乘问题</strong>：求解超定线性系统的最优解</li>
+<li><strong>数据拟合</strong>：当矩阵不满秩时仍能求得解</li>
+<li><strong>机器学习</strong>：岭回归、主成分分析等算法的基础</li>
+<li><strong>信号处理</strong>：求解病态线性系统</li>
+</ul>
+<hr />
+<h2 id="eckhart-young">五、Eckhart-Young定理<a class="headerlink" href="#eckhart-young" title="Permanent link">&para;</a></h2>
+<h3 id="1_4">1. 定理内容<a class="headerlink" href="#1_4" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(k &lt; r = \text{rank}(A)\)</span>，且 <span class="arithmatex">\(A_k = \sum_{i=1}^k \sigma_i u_i v_i^\top\)</span>，则有：
+$<span class="arithmatex">\(\min_{\text{rank}(B)=k} \|A - B\|_2 = \|A - A_k\|_2 = \sigma_{k+1}\)</span>$</p>
+<h3 id="2_3">2. 证明思路<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>构造性证明</strong>：先说明用前 <span class="arithmatex">\(k\)</span> 个奇异值构造的 <span class="arithmatex">\(A_k\)</span> 确实能达到误差 <span class="arithmatex">\(\sigma_{k+1}\)</span></li>
+<li><span class="arithmatex">\(A - A_k\)</span> 的奇异值分解中，最大奇异值为 <span class="arithmatex">\(\sigma_{k+1}\)</span></li>
+<li>
+<p>矩阵的2-范数等于其最大奇异值，故 <span class="arithmatex">\(\|A - A_k\|_2 = \sigma_{k+1}\)</span></p>
+</li>
+<li>
+<p><strong>下界证明</strong>：再证明任何其他秩为 <span class="arithmatex">\(k\)</span> 的矩阵 <span class="arithmatex">\(B\)</span> 都不可能达到比 <span class="arithmatex">\(\sigma_{k+1}\)</span> 更小的误差</p>
+</li>
+<li>利用子空间相交性质，找到向量 <span class="arithmatex">\(z\)</span> 使得 <span class="arithmatex">\(Bz = 0\)</span></li>
+<li>证明 <span class="arithmatex">\(\|(A - B)z\|_2 = \|Az\|_2 \geq \sigma_{k+1}\)</span></li>
+<li>从而 <span class="arithmatex">\(\|A - B\|_2 \geq \sigma_{k+1}\)</span></li>
+</ol>
+<h3 id="3_4">3. 意义与应用<a class="headerlink" href="#3_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>理论意义</strong>：揭示了矩阵低秩近似的最优解和误差界</li>
+<li><strong>实际应用</strong>：</li>
+<li>数据压缩：用低秩矩阵近似原始矩阵，减少存储和计算量</li>
+<li>机器学习降维：如主成分分析(PCA)，保留主要特征的同时降低维度</li>
+<li>图像去噪：去除小奇异值对应的噪声分量</li>
+</ul>
+<hr />
+<h2 id="_13">‼️‼️‼️六、条件数与扰动分析<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h3 id="1_5">1. 条件数定义<a class="headerlink" href="#1_5" title="Permanent link">&para;</a></h3>
+<p>矩阵 <span class="arithmatex">\(A\)</span> 的条件数（相对于求逆）在2-范数下定义为：
+$<span class="arithmatex">\(\kappa(A) = \|A\|_2 \|A^{-1}\|_2 = \frac{\sigma_1}{\sigma_r}\)</span>$
+其中 <span class="arithmatex">\(\sigma_1\)</span> 是 <span class="arithmatex">\(A\)</span> 的最大奇异值，<span class="arithmatex">\(\sigma_r\)</span> 是 <span class="arithmatex">\(A\)</span> 的最小非零奇异值。</p>
+<h3 id="2_4">2. 条件数的意义<a class="headerlink" href="#2_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>良态矩阵</strong>：当 <span class="arithmatex">\(\kappa(A)\)</span> 接近1时，矩阵 <span class="arithmatex">\(A\)</span> 是良态的</li>
+<li>数据 <span class="arithmatex">\(b\)</span> 的微小变化只会导致解 <span class="arithmatex">\(x\)</span> 的微小变化</li>
+<li>数值计算中的舍入误差对结果影响较小</li>
+<li>
+<p>线性系统容易求解且结果可靠</p>
+</li>
+<li>
+<p><strong>病态矩阵</strong>：当 <span class="arithmatex">\(\kappa(A)\)</span> 很大时，矩阵 <span class="arithmatex">\(A\)</span> 是病态的</p>
+</li>
+<li>数据 <span class="arithmatex">\(b\)</span> 的微小变化可能导致解 <span class="arithmatex">\(x\)</span> 的巨大变化</li>
+<li>数值计算中的舍入误差可能被放大，导致结果不可靠</li>
+<li>线性系统难以用数值方法精确求解</li>
+</ul>
+<h4 id="_14">条件数量化标准<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>条件数</th>
+<th>矩阵状态</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\kappa \approx 1\)</span></td>
+<td>良态</td>
+<td>数据小扰动 → 解小变化</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\kappa = 10^3\)</span></td>
+<td>轻度病态</td>
+<td>误差可能放大1000倍</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\kappa = 10^6\)</span></td>
+<td>中度病态</td>
+<td>数值计算已不可靠</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\kappa = 10^{12}\)</span></td>
+<td>严重病态</td>
+<td>双精度下几乎无意义</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3_5">3. 病态矩阵的数值例子<a class="headerlink" href="#3_5" title="Permanent link">&para;</a></h3>
+<h4 id="_15">良态矩阵（两条正交直线）<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">A_good</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;条件数 κ(A) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">A_good</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 1.00</span>
+
+<span class="c1"># 给b加微小扰动</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">b_perturbed</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">])</span>
+<span class="n">x_original</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_good</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">x_perturbed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_good</span><span class="p">,</span> <span class="n">b_perturbed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;解的变化: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_perturbed</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x_original</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 0.001414</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>结论</strong>：扰动被忠实地传递，没有放大。</p>
+<h4 id="_16">病态矩阵（两条几乎平行的直线）<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">A_bad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.001</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;条件数 κ(A) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">A_bad</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 4002</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;条件数 κ(A^T A) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">A_bad</span><span class="o">.</span><span class="n">T</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">A_bad</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 16016010</span>
+
+<span class="c1"># 给b加微小扰动</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">b_perturbed</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.001</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">x_original</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_bad</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">x_perturbed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_bad</span><span class="p">,</span> <span class="n">b_perturbed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;解的变化: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_perturbed</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x_original</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 1.41</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>结论</strong>：<span class="arithmatex">\(b\)</span> 只改变了 0.001，但解改变了 1.41，扰动被放大了约 <strong>1400 倍</strong>！</p>
+<h3 id="4_3">4. 几何直观<a class="headerlink" href="#4_3" title="Permanent link">&para;</a></h3>
+<h4 id="_17">良态：两条正交直线<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>    │
+    │  /
+    │ /
+────┼────
+   /│
+  / │
+</code></pre></div></td></tr></table></div>
+交点明确，稍微移动直线，交点变化不大。</p>
+<h4 id="_18">病态：两条几乎平行的直线<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>    │
+    │  /  /
+    │ /  /
+────┼──/──/
+   /│ / 
+  / │/
+</code></pre></div></td></tr></table></div>
+几乎平行，稍微移动一条，交点可能跑很远。</p>
+<h3 id="5-at-a">5. 为什么 <span class="arithmatex">\(A^T A\)</span> 更病态？<a class="headerlink" href="#5-at-a" title="Permanent link">&para;</a></h3>
+<p>对于最小二乘问题，正规方程涉及 <span class="arithmatex">\(A^T A\)</span>：</p>
+<div class="arithmatex">\[\kappa(A^T A) = \kappa(A)^2\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(A\)</span> 的条件数</th>
+<th><span class="arithmatex">\(A^T A\)</span> 的条件数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(10^3\)</span></td>
+<td><span class="arithmatex">\(10^6\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^6\)</span></td>
+<td><span class="arithmatex">\(10^{12}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>最小二乘用正规方程求解时，病态问题会加剧！</strong></p>
+<h3 id="6_2">6. 解决病态问题的方法<a class="headerlink" href="#6_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>原理</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>QR分解</strong></td>
+<td>不构造 <span class="arithmatex">\(A^T A\)</span>，直接分解 <span class="arithmatex">\(A\)</span></td>
+<td>避免条件数平方，数值稳定</td>
+</tr>
+<tr>
+<td><strong>SVD分解</strong></td>
+<td>用广义逆 <span class="arithmatex">\(A^\dagger = V\Sigma^\dagger U^T\)</span> 求解</td>
+<td>数值最稳定，可处理不满秩情况</td>
+</tr>
+<tr>
+<td><strong>正则化（岭回归）</strong></td>
+<td>给对角线加小常数 <span class="arithmatex">\(\lambda\)</span></td>
+<td>改善条件数，防止过拟合</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 正则化：κ(A^T A + λI) &lt; κ(A^T A)</span>
+<span class="n">lambda_reg</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">x_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">A</span> <span class="o">+</span> <span class="n">lambda_reg</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="7">7. 扰动分析的定量结果<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<h4 id="b">右端项b的扰动<a class="headerlink" href="#b" title="Permanent link">&para;</a></h4>
+<p>对于线性系统 <span class="arithmatex">\(Ax = b\)</span>，如果 <span class="arithmatex">\(b\)</span> 有扰动 <span class="arithmatex">\(\delta b\)</span>，对应的解 <span class="arithmatex">\(x\)</span> 有扰动 <span class="arithmatex">\(\delta x\)</span>，则有：
+$<span class="arithmatex">\(\frac{\|\delta x\|}{\|x\|} \leq \kappa(A) \frac{\|\delta b\|}{\|b\|}\)</span>$</p>
+<p><strong>证明</strong>：</p>
+<p>设 <span class="arithmatex">\(Ax = b\)</span>，扰动后 <span class="arithmatex">\(A(x + \delta x) = b + \delta b\)</span>。</p>
+<p><strong>Step 1</strong>：展开扰动方程
+$<span class="arithmatex">\(Ax + A\delta x = b + \delta b\)</span>$</p>
+<p>由于 <span class="arithmatex">\(Ax = b\)</span>，两边相减得：
+$<span class="arithmatex">\(A\delta x = \delta b\)</span>$</p>
+<p><strong>Step 2</strong>：解出 <span class="arithmatex">\(\delta x\)</span>
+$<span class="arithmatex">\(\delta x = A^{-1}\delta b\)</span>$</p>
+<p><strong>Step 3</strong>：取范数
+$<span class="arithmatex">\(\|\delta x\| = \|A^{-1}\delta b\| \leq \|A^{-1}\| \cdot \|\delta b\|\)</span>$</p>
+<p>这里用到了范数的次可乘性：<span class="arithmatex">\(\|AB\| \leq \|A\|\|B\|\)</span>。</p>
+<p><strong>Step 4</strong>：对原方程取范数
+由 <span class="arithmatex">\(b = Ax\)</span>，有：
+$<span class="arithmatex">\(\|b\| = \|Ax\| \leq \|A\| \cdot \|x\|\)</span>$</p>
+<p>因此：
+$<span class="arithmatex">\(\|x\| \geq \frac{\|b\|}{\|A\|}\)</span>$</p>
+<p><strong>Step 5</strong>：合并两式
+$<span class="arithmatex">\(\frac{\|\delta x\|}{\|x\|} \leq \frac{\|A^{-1}\| \cdot \|\delta b\|}{\|b\|/\|A\|} = \|A\| \cdot \|A^{-1}\| \cdot \frac{\|\delta b\|}{\|b\|}\)</span>$</p>
+<p>由条件数定义 <span class="arithmatex">\(\kappa(A) = \|A\| \cdot \|A^{-1}\|\)</span>，得：
+$<span class="arithmatex">\(\frac{\|\delta x\|}{\|x\|} \leq \kappa(A) \frac{\|\delta b\|}{\|b\|}\)</span>$</p>
+<p><strong>证毕</strong>。</p>
+<hr />
+<p><strong>直观理解</strong>：</p>
+<ul>
+<li>条件数 <span class="arithmatex">\(\kappa(A)\)</span> 是误差放大因子</li>
+<li>如果 <span class="arithmatex">\(\kappa(A) = 10^3\)</span>，则 <span class="arithmatex">\(b\)</span> 的 0.1% 误差可能导致 <span class="arithmatex">\(x\)</span> 的 100% 误差</li>
+<li>这就是为什么病态矩阵（大条件数）的数值解不可靠</li>
+</ul>
+<h4 id="a">矩阵A的扰动<a class="headerlink" href="#a" title="Permanent link">&para;</a></h4>
+<p>如果矩阵 <span class="arithmatex">\(A\)</span> 有扰动 <span class="arithmatex">\(\delta A\)</span>，则有：
+$<span class="arithmatex">\(\frac{\|\delta x\|}{\|x \|} \leq \frac{\kappa(A) \frac{\|\delta A\|}{\|A\|}}{1 - \kappa(A) \frac{\|\delta A\|}{\|A\|}}\)</span>$</p>
+<p>当 <span class="arithmatex">\(\kappa(A) \frac{\|\delta A\|}{\|A\|} \ll 1\)</span> 时，近似有：
+$<span class="arithmatex">\(\frac{\|\delta x\|}{\|x\|} \leq \kappa(A) \frac{\|\delta A\|}{\|A\|}\)</span>$</p>
+<h4 id="_19">同时扰动的误差上界<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
+<p><strong>原题</strong>：</p>
+<p><strong>定理</strong>：当 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(b\)</span> 同时存在扰动时，解的相对误差满足：</p>
+<div class="arithmatex">\[\boxed{\frac{\|\Delta x\|_2}{\|x\|_2} \leq \kappa_2(A) \left( \frac{\|\Delta A\|_2}{\|A\|_2} + \frac{\|\Delta b\|_2}{\|b\|_2} \right)}\]</div>
+<p><strong>证明要点</strong>：
+设 <span class="arithmatex">\((A + \Delta A)(x + \Delta x) = b + \Delta b\)</span>，展开并忽略高阶小项：
+$<span class="arithmatex">\(A\Delta x \approx \Delta b - \Delta A \cdot x\)</span>$</p>
+<p>取范数后整理即得上式。</p>
+<p><strong>结论</strong>：解的相对误差上界是条件数乘以扰动之和，条件数越大，误差放大越严重。</p>
+<h3 id="8">8. 病态问题的数值分析<a class="headerlink" href="#8" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：当矩阵 <span class="arithmatex">\(A\)</span> 存在接近 0 的非零奇异值时，系统为何呈现"病态"特征？</p>
+<p><strong>分析</strong>：</p>
+<ol>
+<li>
+<p><strong>条件数剧烈增大</strong>：<span class="arithmatex">\(\kappa_2(A) = \frac{\sigma_1}{\sigma_r}\)</span>，当 <span class="arithmatex">\(\sigma_r \to 0\)</span> 时，<span class="arithmatex">\(\kappa \to \infty\)</span></p>
+</li>
+<li>
+<p><strong>扰动被剧烈放大</strong>：</p>
+</li>
+<li>若 <span class="arithmatex">\(\kappa = 10^{10}\)</span>，则 <span class="arithmatex">\(b\)</span> 的 <span class="arithmatex">\(10^{-10}\)</span> 相对误差可能导致 <span class="arithmatex">\(x\)</span> 的 <span class="arithmatex">\(100\%\)</span> 误差</li>
+<li>
+<p>双精度浮点数精度约 <span class="arithmatex">\(10^{-16}\)</span>，当 <span class="arithmatex">\(\kappa &gt; 10^{16}\)</span> 时解几乎无意义</p>
+</li>
+<li>
+<p><strong>正规方程更病态</strong>：最小二乘中 <span class="arithmatex">\(\kappa(A^T A) = \kappa(A)^2\)</span></p>
+</li>
+</ol>
+<p>解决办法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>原理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QR 分解</td>
+<td>避免构造 <span class="arithmatex">\((A^T A)\)</span></td>
+</tr>
+<tr>
+<td>SVD 分解</td>
+<td>直接使用伪逆</td>
+</tr>
+<tr>
+<td>正则化</td>
+<td><span class="arithmatex">\((A^T A + \lambda I)\)</span> 改善条件数</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cur">七、CUR分解<a class="headerlink" href="#cur" title="Permanent link">&para;</a></h2>
+<h3 id="1_6">1. 定理内容<a class="headerlink" href="#1_6" title="Permanent link">&para;</a></h3>
+<p><strong>Theorem 12</strong>：设 <span class="arithmatex">\(A \in \mathbb{K}^{m \times n}\)</span> 是秩为 <span class="arithmatex">\(k\)</span> 的矩阵，<span class="arithmatex">\(I \subset [m]\)</span>，<span class="arithmatex">\(J \subset [n]\)</span> 是满足 <span class="arithmatex">\(|I| = |J| = k\)</span> 的索引集。定义子矩阵：
+- <span class="arithmatex">\(C = A(:, J)\)</span>：取A的第J列
+- <span class="arithmatex">\(R = A(I, :)\)</span>：取A的第I行
+- <span class="arithmatex">\(U = A(I, J)\)</span>：取A的第I行第J列元素组成的子矩阵</p>
+<p>若 <span class="arithmatex">\(\text{rank}(U) = \text{rank}(A)\)</span>，则有：
+$<span class="arithmatex">\(A = C U^\dagger R\)</span>$
+其中 <span class="arithmatex">\(U^\dagger\)</span> 是U的Moore-Penrose伪逆。</p>
+<h3 id="2_5">2. 证明思路<a class="headerlink" href="#2_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>秩的推导</strong>：由 <span class="arithmatex">\(\text{rank}(U) = \text{rank}(A) = k\)</span>，可知U是满秩矩阵</li>
+<li><strong>选择矩阵</strong>：定义选择矩阵 <span class="arithmatex">\(P_I\)</span> 和 <span class="arithmatex">\(P_J\)</span>，使得 <span class="arithmatex">\(R = P_I A\)</span>，<span class="arithmatex">\(C = A P_J\)</span></li>
+<li><strong>矩阵方程变换</strong>：
+   $<span class="arithmatex">\(A = A U^\dagger U = A P_J (P_I A P_J)^\dagger P_I A = C U^\dagger R\)</span>$</li>
+</ol>
+<h3 id="3_6">3. 几何意义<a class="headerlink" href="#3_6" title="Permanent link">&para;</a></h3>
+<p>CUR分解可以看作是对矩阵A的一种“采样”近似：
+- C是A的列采样，保留了A的主要列信息
+- R是A的行采样，保留了A的主要行信息
+- U是C和R的交集，用于恢复原始矩阵的结构</p>
+<h3 id="4-svd">4. 与SVD的比较<a class="headerlink" href="#4-svd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>分解方法</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SVD</strong></td>
+<td>最优低秩近似，数值稳定</td>
+<td>计算复杂度高，不保持原始矩阵的稀疏性</td>
+<td>数据压缩，机器学习降维</td>
+</tr>
+<tr>
+<td><strong>CUR</strong></td>
+<td>保持原始矩阵的稀疏性，计算复杂度低</td>
+<td>近似误差可能大于SVD</td>
+<td>大规模稀疏矩阵，文本数据，推荐系统</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5_2">5. 应用场景<a class="headerlink" href="#5_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>文本数据处理</strong>：如潜在语义索引(LSI)，保留原始词汇信息</li>
+<li><strong>推荐系统</strong>：如矩阵分解算法，保留用户和物品的原始索引</li>
+<li><strong>生物信息学</strong>：如基因表达数据分析，保留原始基因样本信息</li>
+</ul>
+<h3 id="6_3">6. 详细数值例子<a class="headerlink" href="#6_3" title="Permanent link">&para;</a></h3>
+<p>设矩阵 <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \end{bmatrix}\)</span>，秩为2。</p>
+<p><strong>Step 1：选择索引集</strong></p>
+<p>选取 <span class="arithmatex">\(I = \{1, 2\}\)</span>（第1、2行），<span class="arithmatex">\(J = \{1, 2\}\)</span>（第1、2列）</p>
+<p><strong>Step 2：构造子矩阵</strong></p>
+<div class="arithmatex">\[C = A(:, J) = \begin{bmatrix} 1 &amp; 2 \\ 4 &amp; 5 \\ 7 &amp; 8 \end{bmatrix}, \quad R = A(I, :) = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \end{bmatrix}, \quad U = A(I, J) = \begin{bmatrix} 1 &amp; 2 \\ 4 &amp; 5 \end{bmatrix}\]</div>
+<p><strong>Step 3：验证条件</strong></p>
+<p><span class="arithmatex">\(\det(U) = 1 \times 5 - 2 \times 4 = -3 \neq 0\)</span>，所以 <span class="arithmatex">\(\text{rank}(U) = 2 = \text{rank}(A)\)</span> ✓</p>
+<p><strong>Step 4：计算 <span class="arithmatex">\(U^\dagger = U^{-1}\)</span></strong></p>
+<div class="arithmatex">\[U^{-1} = \frac{1}{-3} \begin{bmatrix} 5 &amp; -2 \\ -4 &amp; 1 \end{bmatrix} = \begin{bmatrix} -\frac{5}{3} &amp; \frac{2}{3} \\ \frac{4}{3} &amp; -\frac{1}{3} \end{bmatrix}\]</div>
+<p><strong>Step 5：验证 <span class="arithmatex">\(A = C U^\dagger R\)</span></strong></p>
+<p>$<span class="arithmatex">\(C U^{-1} R = \begin{bmatrix} 1 &amp; 2 \\ 4 &amp; 5 \\ 7 &amp; 8 \end{bmatrix} \begin{bmatrix} -\frac{5}{3} &amp; \frac{2}{3} \\ \frac{4}{3} &amp; -\frac{1}{3} \end{bmatrix} \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \end{bmatrix} = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \end{bmatrix} = A\)</span>$ ✓</p>
+<h3 id="7_1">7. 索引集选择方法<a class="headerlink" href="#7_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>思路</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>最大体积法</strong></td>
+<td>选择行列式绝对值最大的k×k子矩阵</td>
+<td>理论最优</td>
+<td>计算复杂度高</td>
+</tr>
+<tr>
+<td><strong>列/行范数</strong></td>
+<td>选择范数最大的k行/列</td>
+<td>简单快速</td>
+<td>不一定最优</td>
+</tr>
+<tr>
+<td><strong>随机采样</strong></td>
+<td>按概率采样（概率与范数平方成正比）</td>
+<td>适合大规模矩阵</td>
+<td>有随机误差</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-svd-vs-cur">8. SVD vs CUR 详细对比<a class="headerlink" href="#8-svd-vs-cur" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SVD</th>
+<th>CUR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>分解形式</strong></td>
+<td><span class="arithmatex">\(A = U\Sigma V^T\)</span></td>
+<td><span class="arithmatex">\(A = C U^\dagger R\)</span></td>
+</tr>
+<tr>
+<td><strong>基的可解释性</strong></td>
+<td>抽象的奇异向量</td>
+<td>原矩阵的真实行/列</td>
+</tr>
+<tr>
+<td><strong>稀疏性保持</strong></td>
+<td>不保持</td>
+<td>保持</td>
+</tr>
+<tr>
+<td><strong>最优性</strong></td>
+<td>最优低秩近似</td>
+<td>近似，非最优</td>
+</tr>
+<tr>
+<td><strong>计算复杂度</strong></td>
+<td><span class="arithmatex">\(O(mn\min(m,n))\)</span></td>
+<td><span class="arithmatex">\(O(mk + nk)\)</span></td>
+</tr>
+<tr>
+<td><strong>数值稳定性</strong></td>
+<td>高</td>
+<td>依赖U的条件数</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键区别</strong>：SVD的 <span class="arithmatex">\(U, V\)</span> 是抽象基；CUR的 <span class="arithmatex">\(C, R\)</span> 是原矩阵的真实行/列，有明确含义。</p>
+<hr />
+<h2 id="cur_1">八、CUR分解的等价条件<a class="headerlink" href="#cur_1" title="Permanent link">&para;</a></h2>
+<h3 id="1_7">1. 定理内容<a class="headerlink" href="#1_7" title="Permanent link">&para;</a></h3>
+<p><strong>Theorem 13</strong>：设 <span class="arithmatex">\(A \in \mathbb{K}^{m \times n}\)</span> 是秩为 <span class="arithmatex">\(k\)</span> 的矩阵，<span class="arithmatex">\(I \subset [m]\)</span>，<span class="arithmatex">\(J \subset [n]\)</span> 是满足 <span class="arithmatex">\(|I| = |J| = k\)</span> 的索引集，<span class="arithmatex">\(C = A(:, J)\)</span>，<span class="arithmatex">\(R = A(I, :)\)</span>，<span class="arithmatex">\(U = A(I, J)\)</span>。则以下条件等价：</p>
+<p>(i) <span class="arithmatex">\(\text{rank}(U) = \text{rank}(A)\)</span></p>
+<p>(ii) <span class="arithmatex">\(A = C U^\dagger R\)</span></p>
+<p>(iii) <span class="arithmatex">\(A = C C^\dagger A R^\dagger R\)</span></p>
+<p>(iv) <span class="arithmatex">\(A^\dagger = R^\dagger U C^\dagger\)</span></p>
+<p>(v) <span class="arithmatex">\(\text{rank}(C) = \text{rank}(R) = \text{rank}(A)\)</span></p>
+<h3 id="2_6">2. 条件解释<a class="headerlink" href="#2_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>(i) 子矩阵U的秩等于原始矩阵A的秩</li>
+<li>(ii) CUR分解成立</li>
+<li>(iii) 原始矩阵A可以表示为C的列空间投影和R的行空间投影的乘积</li>
+<li>(iv) 伪逆的CUR分解形式</li>
+<li>(v) 列采样C和行采样R的秩都等于原始矩阵A的秩</li>
+</ul>
+<hr />
+<h2 id="cur-vs-cur">九、精确CUR vs 近似CUR<a class="headerlink" href="#cur-vs-cur" title="Permanent link">&para;</a></h2>
+<h3 id="1-cur">1. 两种CUR的本质区别<a class="headerlink" href="#1-cur" title="Permanent link">&para;</a></h3>
+<p>上述定理给出的是<strong>精确CUR分解</strong>，要求满足特定条件才能实现<strong>精确相等</strong>。但在实际应用中，常用的是<strong>近似CUR分解</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>条件</th>
+<th>结果</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>精确CUR</strong></td>
+<td><span class="arithmatex">\(\text{rank}(U) = \text{rank}(A)\)</span></td>
+<td><span class="arithmatex">\(A = CU^\dagger R\)</span>（精确相等）</td>
+<td>理论分析、小矩阵</td>
+</tr>
+<tr>
+<td><strong>近似CUR</strong></td>
+<td>随机采样行列</td>
+<td><span class="arithmatex">\(A \approx CUR\)</span>（近似）</td>
+<td>大规模数据、实际应用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-cur">2. 精确CUR的条件<a class="headerlink" href="#2-cur" title="Permanent link">&para;</a></h3>
+<p><strong>关键条件</strong>：选出的 <span class="arithmatex">\(k \times k\)</span> 子矩阵 <span class="arithmatex">\(U\)</span> 必须满秩。</p>
+<div class="arithmatex">\[\text{rank}(U) = \text{rank}(A) = k\]</div>
+<p>此时 <span class="arithmatex">\(U^\dagger = U^{-1}\)</span>（因为 <span class="arithmatex">\(U\)</span> 是满秩方阵），有：</p>
+<div class="arithmatex">\[A = CU^{-1}R \quad \text{（精确等式）}\]</div>
+<p><strong>数值验证</strong>（前文例子）：
+$<span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \end{bmatrix}, \quad U = \begin{bmatrix} 1 &amp; 2 \\ 4 &amp; 5 \end{bmatrix}\)</span>$</p>
+<p><span class="arithmatex">\(\det(U) = -3 \neq 0\)</span>，满足条件，计算得 <span class="arithmatex">\(CU^{-1}R = A\)</span> ✓</p>
+<h3 id="3-cur">3. 为什么需要近似CUR？<a class="headerlink" href="#3-cur" title="Permanent link">&para;</a></h3>
+<p><strong>精确CUR的困难</strong>：
+1. <strong>选择困难</strong>：如何找到满秩的 <span class="arithmatex">\(k \times k\)</span> 子矩阵？可能需要尝试很多次
+2. <strong>可能不存在</strong>：某些特殊结构的矩阵，任意 <span class="arithmatex">\(k \times k\)</span> 子矩阵都奇异
+3. <strong>计算复杂度高</strong>：对于大规模矩阵，枚举所有组合不现实</p>
+<h3 id="4-cur">4. 近似CUR的核心思想<a class="headerlink" href="#4-cur" title="Permanent link">&para;</a></h3>
+<p><strong>随机采样代替精确选择</strong>：</p>
+<p>用<strong>杠杆分数（Leverage Score）</strong> 定义采样概率：</p>
+<div class="arithmatex">\[P(\text{选第 } i \text{ 行}) = \frac{\|row_i\|^2}{\sum_j \|row_j\|^2}\]</div>
+<div class="arithmatex">\[P(\text{选第 } j \text{ 列}) = \frac{\|col_j\|^2}{\sum_k \|col_k\|^2}\]</div>
+<p><strong>直觉</strong>：范数大的行/列包含更多"能量"，更有代表性。</p>
+<h3 id="5-cur">5. 近似CUR的误差界<a class="headerlink" href="#5-cur" title="Permanent link">&para;</a></h3>
+<p><strong>关键定理</strong>：设 <span class="arithmatex">\(A_k\)</span> 是 <span class="arithmatex">\(A\)</span> 的最佳秩-<span class="arithmatex">\(k\)</span> 近似（即SVD截断），采样 <span class="arithmatex">\(c = O(k/\epsilon^2)\)</span> 列、<span class="arithmatex">\(r = O(k/\epsilon^2)\)</span> 行，则以高概率：</p>
+<div class="arithmatex">\[\|A - CUR\|_F \leq (1 + \epsilon) \|A - A_k\|_F\]</div>
+<p><strong>含义</strong>：
+- <span class="arithmatex">\(\|A - A_k\|_F\)</span> 是SVD能达到的最小误差（Eckhart-Young定理）
+- 近似CUR的误差最多比SVD大 <span class="arithmatex">\((1+\epsilon)\)</span> 倍
+- 采样越多，<span class="arithmatex">\(\epsilon\)</span> 越小，近似越精确</p>
+<h3 id="6-cur">6. 近似CUR的算法流程<a class="headerlink" href="#6-cur" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>输入：矩阵 A，目标秩 k，采样数 c, r
+输出：C, U, R
+
+1. 计算列采样概率 p_j = ‖col_j‖² / Σ‖col_k‖²
+2. 按概率随机选 c 列，构成 C
+3. 计算行采样概率 q_i = ‖row_i‖² / Σ‖row_j‖²
+4. 按概率随机选 r 行，构成 R
+5. 找 C 和 R 的交集子矩阵 W
+6. 计算 U = W⁺（伪逆）
+7. 返回 C, U, R
+</code></pre></div></td></tr></table></div>
+<h3 id="7-cur">7. 两种CUR的选择建议<a class="headerlink" href="#7-cur" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐方法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小规模矩阵（&lt;1000行/列）</td>
+<td>精确CUR</td>
+<td>可以枚举找满秩子矩阵</td>
+</tr>
+<tr>
+<td>大规模稀疏矩阵</td>
+<td>近似CUR</td>
+<td>计算高效，保持稀疏性</td>
+</tr>
+<tr>
+<td>推荐系统、文本挖掘</td>
+<td>近似CUR</td>
+<td>可扩展性好</td>
+</tr>
+<tr>
+<td>理论证明、数值验证</td>
+<td>精确CUR</td>
+<td>有精确等式可用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8_1">8. 一句话总结<a class="headerlink" href="#8_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>精确CUR</strong>：选对子矩阵 → 精确相等（理论优美，实际难找）</li>
+<li><strong>近似CUR</strong>：概率采样 → 近似重构（理论有误差界，实际可用）</li>
+</ul>
+<hr />
+<h2 id="qr">十、QR分解与线性系统求解<a class="headerlink" href="#qr" title="Permanent link">&para;</a></h2>
+<h3 id="1-qr">1. QR分解的定义<a class="headerlink" href="#1-qr" title="Permanent link">&para;</a></h3>
+<p>对于 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>，其QR分解为：
+$<span class="arithmatex">\(A = QR\)</span>$
+其中：
+- <span class="arithmatex">\(Q \in \mathbb{R}^{m \times r}\)</span> 是具有正交列的矩阵（<span class="arithmatex">\(Q^\top Q = I_r\)</span>）
+- <span class="arithmatex">\(R \in \mathbb{R}^{r \times n}\)</span> 是上三角矩阵
+- <span class="arithmatex">\(r = \text{rank}(A)\)</span></p>
+<h3 id="2-qr">2. QR分解的构造方法<a class="headerlink" href="#2-qr" title="Permanent link">&para;</a></h3>
+<h4 id="21-gram-schmidt">2.1 Gram-Schmidt正交化<a class="headerlink" href="#21-gram-schmidt" title="Permanent link">&para;</a></h4>
+<p><strong>思想</strong>：逐列正交化，将 <span class="arithmatex">\(A\)</span> 的列向量 <span class="arithmatex">\(\{a_1, \ldots, a_n\}\)</span> 转化为正交向量组 <span class="arithmatex">\(\{q_1, \ldots, q_n\}\)</span>。</p>
+<p><strong>算法步骤</strong>：</p>
+<p>对于 <span class="arithmatex">\(j = 1, 2, \ldots, n\)</span>：</p>
+<ol>
+<li><strong>投影</strong>：<span class="arithmatex">\(v_j = a_j - \sum_{i=1}^{j-1} (q_i^T a_j) q_i\)</span>（减去在已有正交向量上的投影）</li>
+<li><strong>归一化</strong>：<span class="arithmatex">\(q_j = \frac{v_j}{\|v_j\|_2}\)</span></li>
+<li><strong>计算R的第j列</strong>：<span class="arithmatex">\(r_{ij} = q_i^T a_j\)</span>（<span class="arithmatex">\(i &lt; j\)</span>），<span class="arithmatex">\(r_{jj} = \|v_j\|_2\)</span></li>
+</ol>
+<p><strong>数值例子</strong>：设 <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}\)</span></p>
+<p><strong>j=1</strong>：
+$<span class="arithmatex">\(v_1 = a_1 = \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}, \quad r_{11} = \|v_1\| = \sqrt{2}, \quad q_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}\)</span>$</p>
+<p><strong>j=2</strong>：
+$<span class="arithmatex">\(v_2 = a_2 - (q_1^T a_2) q_1 = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} - \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{1}{2} \\ 1 \\ -\frac{1}{2} \end{bmatrix}\)</span>$</p>
+<div class="arithmatex">\[r_{12} = q_1^T a_2 = \frac{1}{\sqrt{2}}, \quad r_{22} = \|v_2\| = \frac{\sqrt{6}}{2}, \quad q_2 = \frac{1}{\sqrt{6}}\begin{bmatrix} 1 \\ 2 \\ -1 \end{bmatrix}\]</div>
+<p><strong>结果</strong>：
+$<span class="arithmatex">\(Q = \begin{bmatrix} \frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{6}} \\ 0 &amp; \frac{2}{\sqrt{6}} \\ \frac{1}{\sqrt{2}} &amp; -\frac{1}{\sqrt{6}} \end{bmatrix}, \quad R = \begin{bmatrix} \sqrt{2} &amp; \frac{1}{\sqrt{2}} \\ 0 &amp; \frac{\sqrt{6}}{2} \end{bmatrix}\)</span>$</p>
+<p><strong>缺点</strong>：数值稳定性差，舍入误差累积严重。</p>
+<h4 id="22-householder">2.2 Householder变换（推荐）<a class="headerlink" href="#22-householder" title="Permanent link">&para;</a></h4>
+<p><strong>思想</strong>：用反射矩阵逐列消零，比Gram-Schmidt更稳定。</p>
+<p><strong>Householder矩阵定义</strong>：
+$<span class="arithmatex">\(H = I - 2uu^T\)</span>$
+其中 <span class="arithmatex">\(\|u\|_2 = 1\)</span>。</p>
+<p><strong>性质</strong>：
+- 对称：<span class="arithmatex">\(H^T = H\)</span>
+- 正交：<span class="arithmatex">\(H^T H = I\)</span>
+- 反射：<span class="arithmatex">\(Hx\)</span> 是 <span class="arithmatex">\(x\)</span> 关于 <span class="arithmatex">\(u^\perp\)</span> 的反射</p>
+<p><strong>构造目标</strong>：对向量 <span class="arithmatex">\(x\)</span>，构造 <span class="arithmatex">\(H\)</span> 使得 <span class="arithmatex">\(Hx = \|x\|e_1\)</span>（把 <span class="arithmatex">\(x\)</span> 变成只有第一个分量非零）。</p>
+<p><strong><span class="arithmatex">\(u\)</span> 的选取</strong>：
+$<span class="arithmatex">\(u = \frac{x - \|x\|e_1}{\|x - \|x\|e_1\|}\)</span>$</p>
+<p><strong>算法步骤</strong>：</p>
+<p>对于 <span class="arithmatex">\(k = 1, 2, \ldots, n-1\)</span>：
+1. 取 <span class="arithmatex">\(A\)</span> 第 <span class="arithmatex">\(k\)</span> 列第 <span class="arithmatex">\(k\)</span> 行及以下元素 <span class="arithmatex">\(x = A(k:m, k)\)</span>
+2. 构造 <span class="arithmatex">\(H_k\)</span> 使得 <span class="arithmatex">\(H_k x = \|x\|e_1\)</span>
+3. 更新 <span class="arithmatex">\(A = \text{diag}(I_{k-1}, H_k) \cdot A\)</span>
+4. 累积 <span class="arithmatex">\(Q = H_1 H_2 \cdots H_{n-1}\)</span></p>
+<p><strong>优点</strong>：数值稳定性好，广泛用于实际计算。</p>
+<h4 id="23-givens">2.3 Givens旋转<a class="headerlink" href="#23-givens" title="Permanent link">&para;</a></h4>
+<p><strong>思想</strong>：用旋转矩阵逐元素消零，适合稀疏矩阵。</p>
+<p><strong>Givens旋转矩阵</strong>：
+$<span class="arithmatex">\(G(i, j, \theta) = \begin{bmatrix} 
+1 &amp; &amp; &amp; &amp; \\
+&amp; \cos\theta &amp; &amp; -\sin\theta &amp; \\
+&amp; &amp; 1 &amp; &amp; \\
+&amp; \sin\theta &amp; &amp; \cos\theta &amp; \\
+&amp; &amp; &amp; &amp; 1
+\end{bmatrix}\)</span>$</p>
+<p><strong>作用</strong>：选择合适的 <span class="arithmatex">\(\theta\)</span>，使 <span class="arithmatex">\(G \cdot A\)</span> 的 <span class="arithmatex">\((j, k)\)</span> 元素变为零。</p>
+<p><strong>适用场景</strong>：稀疏矩阵、并行计算。</p>
+<h4 id="24">2.4 三种方法对比<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>稳定性</th>
+<th>计算量</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gram-Schmidt</strong></td>
+<td>差</td>
+<td><span class="arithmatex">\(O(2mn^2)\)</span></td>
+<td>教学、理解原理</td>
+</tr>
+<tr>
+<td><strong>Householder</strong></td>
+<td>好</td>
+<td><span class="arithmatex">\(O(\frac{4}{3}mn^2 - \frac{1}{3}n^3)\)</span></td>
+<td>一般稠密矩阵</td>
+</tr>
+<tr>
+<td><strong>Givens</strong></td>
+<td>好</td>
+<td><span class="arithmatex">\(O(3mn^2)\)</span></td>
+<td>稀疏矩阵、并行计算</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-qr">3. 线性系统的QR解法<a class="headerlink" href="#3-qr" title="Permanent link">&para;</a></h3>
+<p>对于相容线性系统 <span class="arithmatex">\(Ax = b\)</span>，<span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span>，<span class="arithmatex">\(b \in \mathbb{R}^m\)</span>：</p>
+<h4 id="31">3.1 约化为三角系统<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<p>将 <span class="arithmatex">\(A = QR\)</span> 代入 <span class="arithmatex">\(Ax = b\)</span>，得到：
+$<span class="arithmatex">\(QRx = b\)</span>$
+两边同时乘以 <span class="arithmatex">\(Q^\top\)</span>（正交矩阵的转置不改变范数）：
+$<span class="arithmatex">\(Rx = Q^\top b\)</span>$</p>
+<p>这样，求解原始线性系统就转化为求解上述三角系统。</p>
+<h4 id="32">3.2 回代求解<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<p>由于 <span class="arithmatex">\(R\)</span> 是上三角矩阵，可以通过回代法高效求解 <span class="arithmatex">\(Rx = Q^\top b\)</span>。</p>
+<p>具体步骤：
+设 <span class="arithmatex">\(R = \begin{bmatrix} r_{11} &amp; r_{12} &amp; \cdots &amp; r_{1n} \\ 0 &amp; r_{22} &amp; \cdots &amp; r_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; \cdots &amp; 0 &amp; r_{nn} \end{bmatrix}\)</span>，<span class="arithmatex">\(y = Q^\top b = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}\)</span></p>
+<p>从最后一个变量开始递归求解：
+$<span class="arithmatex">\(x_n = \frac{y_n}{r_{nn}}\)</span>$
+$<span class="arithmatex">\(x_k = \frac{1}{r_{kk}} \left(y_k - \sum_{j=k+1}^n r_{kj}x_j\right), \quad k = n-1, \dots, 1\)</span>$</p>
+<h3 id="4-qr">4. QR解法的特点<a class="headerlink" href="#4-qr" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>数值稳定性</strong>：QR分解提供了一种稳定的方法来求解线性系统，无需形成正规方程</li>
+<li><strong>计算复杂度</strong>：计算QR分解需要 <span class="arithmatex">\(O(mn^2)\)</span> 次运算，回代求解需要 <span class="arithmatex">\(O(n^2)\)</span> 次运算</li>
+<li><strong>适用场景</strong>：特别适用于超定最小二乘问题（<span class="arithmatex">\(m \gg n\)</span>），但也适用于相容的方阵系统</li>
+</ul>
+<hr />
+<h2 id="_20">十、关键概念联系图<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code>┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  向量范数   │────▶│  矩阵范数   │────▶│  奇异值分解  │
+└─────────────┘     └─────────────┘     └─────────────┘
+          │                  │                  │
+          ▼                  ▼                  ▼
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  距离度量   │     │  拉伸倍数   │     │  低秩近似   │
+└─────────────┘     └─────────────┘     └─────────────┘
+                                          │
+                                          ▼
+                                  ┌─────────────┐
+                                  │ Eckhart-Young│
+                                  │   定理      │
+                                  └─────────────┘
+                                          │
+                                          ▼
+                                  ┌─────────────┐
+                                  │  数据压缩   │
+                                  │  机器学习降维│
+                                  └─────────────┘
+                                          │
+                                          ▼
+                                  ┌─────────────┐
+                                  │  CUR分解    │
+                                  │  矩阵采样近似│
+                                  └─────────────┘
+                                          │
+                                          ▼
+                                  ┌─────────────┐
+                                  │  QR分解     │
+                                  │  线性系统求解│
+                                  └─────────────┘
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_21">十一、学习要点总结<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>范数是基础</strong>：向量范数和矩阵范数是数值线性代数的基础，用于度量向量和矩阵的大小</li>
+<li><strong>SVD是核心工具</strong>：奇异值分解是一种强大的矩阵分解方法，在数据科学和机器学习中有广泛应用</li>
+<li><strong>Eckhart-Young定理是理论依据</strong>：为矩阵低秩近似提供了最优解和误差界，是数据压缩和降维的理论基础</li>
+<li><strong>CUR分解是实用方法</strong>：保持原始矩阵的稀疏性，适用于大规模数据处理</li>
+<li><strong>QR分解是求解工具</strong>：提供了一种稳定的方法来求解线性系统</li>
+<li><strong>条件数是分析工具</strong>：用于衡量线性系统对数据扰动的敏感程度，评估数值算法的稳定性</li>
+<li><strong>概念之间相互关联</strong>：这些概念不是孤立的，而是相互关联、相互支撑的，共同构成了数值线性代数的理论体系</li>
+</ol>
+<hr />
+<h2 id="_22">‼️‼️‼️十一、岭回归与正则化<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<h3 id="1_8">1. 问题背景<a class="headerlink" href="#1_8" title="Permanent link">&para;</a></h3>
+<p>对于超定线性系统 <span class="arithmatex">\(Xw = y\)</span>（<span class="arithmatex">\(X \in \mathbb{R}^{N \times d}\)</span>），最小二乘解：
+$<span class="arithmatex">\(w = (X^T X)^{-1} X^T y\)</span>$</p>
+<p><strong>问题</strong>：当 <span class="arithmatex">\(X^T X\)</span> 接近奇异（条件数大）时，解不稳定。</p>
+<h3 id="2_7">2. 岭回归<a class="headerlink" href="#2_7" title="Permanent link">&para;</a></h3>
+<p><strong>目标函数</strong>：
+$<span class="arithmatex">\(L(w) = \|Xw - y\|_2^2 + \lambda \|w\|_2^2\)</span>$</p>
+<p>其中 <span class="arithmatex">\(\lambda &gt; 0\)</span> 是正则化参数。</p>
+<h3 id="3_7">3. 求解过程<a class="headerlink" href="#3_7" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1</strong>：展开目标函数
+$<span class="arithmatex">\(L(w) = (Xw - y)^T(Xw - y) + \lambda w^T w\)</span>$</p>
+<p><strong>Step 2</strong>：求梯度并令其为零
+$<span class="arithmatex">\(\nabla_w L(w) = 2X^T X w - 2X^T y + 2\lambda w = 0\)</span>$</p>
+<p>整理得：
+$<span class="arithmatex">\((X^T X + \lambda I_d) w = X^T y\)</span>$</p>
+<p><strong>Step 3</strong>：解的表达式
+$<span class="arithmatex">\(\boxed{w = (X^T X + \lambda I_d)^{-1} X^T y}\)</span>$</p>
+<h3 id="4_4">4. 解的存在唯一性<a class="headerlink" href="#4_4" title="Permanent link">&para;</a></h3>
+<p><strong>定理</strong>：对于任意 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(\lambda &gt; 0\)</span>，岭回归解存在且唯一。</p>
+<p><strong>证明</strong>：</p>
+<p><span class="arithmatex">\(X^T X\)</span> 是半正定矩阵（特征值 <span class="arithmatex">\(\mu_i \geq 0\)</span>）。</p>
+<p><span class="arithmatex">\(X^T X + \lambda I_d\)</span> 的特征值为 <span class="arithmatex">\(\mu_i + \lambda &gt; 0\)</span>（因为 <span class="arithmatex">\(\lambda &gt; 0\)</span>）。</p>
+<p>因此 <span class="arithmatex">\(X^T X + \lambda I_d\)</span> 是<strong>正定矩阵</strong>，可逆，解唯一。</p>
+<p><strong>证毕</strong>。</p>
+<h3 id="5_3">5. 几何意义<a class="headerlink" href="#5_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>解空间</th>
+<th>条件数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最小二乘</td>
+<td><span class="arithmatex">\(w = (X^T X)^{-1}X^T y\)</span></td>
+<td><span class="arithmatex">\(\kappa(X^T X)\)</span></td>
+</tr>
+<tr>
+<td>岭回归</td>
+<td><span class="arithmatex">\(w = (X^T X + \lambda I)^{-1}X^T y\)</span></td>
+<td><span class="arithmatex">\(\kappa(X^T X + \lambda I) &lt; \kappa(X^T X)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>直观理解</strong>：岭回归在 <span class="arithmatex">\(X^T X\)</span> 对角线上加 <span class="arithmatex">\(\lambda\)</span>，相当于把所有特征值向上平移，改善了条件数。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

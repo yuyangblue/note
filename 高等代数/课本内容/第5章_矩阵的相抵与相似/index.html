@@ -1,0 +1,2766 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第5章 矩阵的相抵与相似 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第5章 矩阵的相抵与相似
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 等价关系与集合的划分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 等价关系与集合的划分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究等价关系？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、等价关系
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、等价关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、集合的划分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1 【概念题】验证等价关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 矩阵的相抵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 矩阵的相抵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究矩阵的相抵？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、相抵关系
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、相抵关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、相抵不变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、相抵标准形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2 【计算题】求相抵标准形
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 广义逆矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 广义逆矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入广义逆？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moore-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Moore-Penrose广义逆
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Moore-Penrose广义逆">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 矩阵的相似
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 矩阵的相似">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究相似？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、相似关系
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、相似关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、相似不变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例3 【计算题】验证相似关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 矩阵的特征值和特征向量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.5 矩阵的特征值和特征向量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心概念引入】为什么要引入特征值和特征向量？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、特征值与特征向量的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、特征多项式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、特征多项式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、特征向量的求法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例4 【计算题】求特征值和特征向量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例5 【计算题】求重特征值的特征向量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例6 【证明题】特征值的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 矩阵可对角化的条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.6 矩阵可对角化的条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心问题引入】为什么要研究可对角化？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、可对角化的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、可对角化的充分必要条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、可对角化的充分必要条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、可对角化的充分条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、可对角化的充分条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、重特征值的处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例7 【判断题】判断可对角化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例8 【计算题】对角化矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7 实对称矩阵的对角化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7 实对称矩阵的对角化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心定理引入】为什么实对称矩阵特殊？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、实对称矩阵的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、实对称矩阵的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、正交相似于对角矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、正交相似于对角矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、正交对角化步骤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例9 【计算题】实对称矩阵的正交对角化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例10 【综合题】实对称矩阵的应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速记
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="5">第5章 矩阵的相抵与相似<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章通过建立等价关系（相抵、相似、合同）来研究矩阵的分类，引出<strong>特征值</strong>和<strong>特征向量</strong>的概念，讨论矩阵<strong>可对角化</strong>的条件，以及<strong>实对称矩阵</strong>的对角化问题。</p>
+<hr />
+<h2 id="51">5.1 等价关系与集合的划分<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
+<h3 id="_2">【概念引入动机】为什么要研究等价关系？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>在分类问题时，我们经常把"本质上相同"的对象归为一类。等价关系就是描述"本质上相同"这一概念的数学工具。</p>
+<h3 id="_3">一、等价关系<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_4">定义<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>设 <span class="arithmatex">\(\sim\)</span> 是集合 <span class="arithmatex">\(S\)</span> 的一个二元关系，如果满足：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>定义</th>
+<th>直观理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>反身性</strong></td>
+<td><span class="arithmatex">\(\forall a \in S, a \sim a\)</span></td>
+<td>每个元素与自身等价</td>
+</tr>
+<tr>
+<td><strong>对称性</strong></td>
+<td><span class="arithmatex">\(a \sim b \Rightarrow b \sim a\)</span></td>
+<td>等价是相互的</td>
+</tr>
+<tr>
+<td><strong>传递性</strong></td>
+<td><span class="arithmatex">\(a \sim b, b \sim c \Rightarrow a \sim c\)</span></td>
+<td>等价的传递</td>
+</tr>
+</tbody>
+</table>
+<p>则称 <span class="arithmatex">\(\sim\)</span> 是 <span class="arithmatex">\(S\)</span> 的一个<strong>等价关系</strong>。</p>
+<p><strong>常见例子</strong>：
+- 整数的同余关系：<span class="arithmatex">\(a \equiv b \pmod{n}\)</span>
+- 三角形的相似关系
+- 矩阵的相抵、相似、合同关系（本章重点）</p>
+<h3 id="_5">二、集合的划分<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>等价关系把集合划分为若干等价类</strong>，同一等价类中的元素彼此等价，不同等价类中的元素不等价。</p>
+</blockquote>
+<p><strong>几何理解</strong>：
+- 等价关系 → 分类
+- 等价类 → 同一类中的所有元素
+- 代表元 → 每一类的"标准形式"</p>
+<hr />
+<h3 id="_6">典型例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h4 id="1">例1 【概念题】验证等价关系<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，判断下述关系是否为等价关系：
+(1) <span class="arithmatex">\(A \sim B\)</span> 定义为 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 相抵（存在可逆矩阵 <span class="arithmatex">\(P, Q\)</span> 使 <span class="arithmatex">\(PAQ = B\)</span>）
+(2) <span class="arithmatex">\(A \sim B\)</span> 定义为 <span class="arithmatex">\(|A| = |B|\)</span></p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) 相抵关系</strong>：</p>
+<ul>
+<li><strong>反身性</strong>：<span class="arithmatex">\(A = IAI\)</span>，<span class="arithmatex">\(I\)</span> 可逆，所以 <span class="arithmatex">\(A \sim A\)</span> ✓</li>
+<li><strong>对称性</strong>：若 <span class="arithmatex">\(PAQ = B\)</span>，则 <span class="arithmatex">\(Q^{-1}PA = B^{(-1)}\)</span>，所以 <span class="arithmatex">\(B \sim A\)</span> ✓</li>
+<li><strong>传递性</strong>：若 <span class="arithmatex">\(PAQ = B\)</span>，<span class="arithmatex">\(P'BQ = C\)</span>，则 <span class="arithmatex">\((P'P)AQ = C\)</span>，所以 <span class="arithmatex">\(A \sim C\)</span> ✓</li>
+</ul>
+<p>是等价关系。</p>
+<p><strong>(2) 行列式相等</strong>：</p>
+<ul>
+<li><strong>反身性</strong>：<span class="arithmatex">\(|A| = |A|\)</span> ✓</li>
+<li><strong>对称性</strong>：若 <span class="arithmatex">\(|A| = |B|\)</span>，则 <span class="arithmatex">\(|B| = |A|\)</span> ✓</li>
+<li><strong>传递性</strong>：若 <span class="arithmatex">\(|A| = |B|\)</span>，<span class="arithmatex">\(|B| = |C|\)</span>，则 <span class="arithmatex">\(|A| = |C|\)</span> ✓</li>
+</ul>
+<p>是等价关系。</p>
+<p><strong>关键思路</strong>：逐一验证三个性质。</p>
+<hr />
+<h3 id="_7">易错点提醒<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆等价关系与一般关系</strong></li>
+<li>必须同时满足三个性质</li>
+<li>
+<p>缺少任一个都不是等价关系</p>
+</li>
+<li>
+<p><strong>等价类不唯一</strong></p>
+</li>
+<li>同一等价关系下可能有多种分类方式</li>
+<li>但划分是唯一的</li>
+</ol>
+<hr />
+<h3 id="_8">思考题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（判断）</strong> 判断"整数的除以3余数相同"是否是等价关系。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(\sim\)</span> 是 <span class="arithmatex">\(S\)</span> 上的等价关系，则所有等价类构成 <span class="arithmatex">\(S\)</span> 的一个划分。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 设 <span class="arithmatex">\(\sim\)</span> 是矩阵间的相似关系，<span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 相似，则它们有哪些共同的不变量？</p>
+</li>
+</ol>
+<hr />
+<h2 id="52">5.2 矩阵的相抵<a class="headerlink" href="#52" title="Permanent link">&para;</a></h2>
+<h3 id="_9">【概念引入动机】为什么要研究矩阵的相抵？<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>不同的矩阵可能"本质上相同"——它们可能是同一个线性映射在不同基下的表示。<strong>相抵</strong>关系描述的就是这种"同一个映射的不同表示"。</p>
+<h3 id="_10">一、相抵关系<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h4 id="_11">定义<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：若存在可逆矩阵 <span class="arithmatex">\(P, Q\)</span>，使得
+$<span class="arithmatex">\(PAQ = B\)</span>$
+则称 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> <strong>相抵</strong>，记作 <span class="arithmatex">\(A \stackrel{\sim}{\sim} B\)</span>。</p>
+</blockquote>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 是同一个线性映射在不同基下的矩阵。</p>
+<h3 id="_12">二、相抵不变量<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：矩阵的<strong>秩</strong>是相抵关系下的<strong>完全不变量</strong>。</p>
+<p>即：<span class="arithmatex">\(A \stackrel{\sim}{\sim} B \iff \text{rank}(A) = \text{rank}(B)\)</span></p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. 相抵 <span class="arithmatex">\(\Rightarrow\)</span> 秩相等：初等变换不改变秩
+2. 秩相等 <span class="arithmatex">\(\Rightarrow\)</span> 相抵：都可以化为标准形 <span class="arithmatex">\(\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span></p>
+<h3 id="_13">三、相抵标准形<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：任意矩阵 <span class="arithmatex">\(A\)</span> 相抵于唯一的形式
+$<span class="arithmatex">\(\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>其中 <span class="arithmatex">\(r = \text{rank}(A)\)</span>。</p>
+</blockquote>
+<hr />
+<h3 id="_14">典型例题<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h4 id="2">例2 【计算题】求相抵标准形<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{pmatrix}\)</span> 的相抵标准形。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>求秩</strong>：<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{pmatrix} \xrightarrow{r_2-2r_1} \begin{pmatrix} 1 &amp; 2 \\ 0 &amp; 0 \end{pmatrix}\)</span></p>
+<p>所以 <span class="arithmatex">\(\text{rank}(A) = 1\)</span>。</p>
+<p><strong>相抵标准形</strong>：
+$<span class="arithmatex">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p><strong>验证</strong>：存在可逆矩阵 <span class="arithmatex">\(P, Q\)</span> 使得 <span class="arithmatex">\(PAQ = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p>取 <span class="arithmatex">\(P = \begin{pmatrix} 1 &amp; 0 \\ -2 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(Q = I\)</span>，则：
+$<span class="arithmatex">\(PA = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p><strong>关键思路</strong>：先求秩，再写出相应的标准形。</p>
+<hr />
+<h3 id="_15">易错点提醒<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆相抵与相似</strong></li>
+<li>相抵：<span class="arithmatex">\(PAQ = B\)</span>（左乘可逆矩阵 <span class="arithmatex">\(P\)</span>，右乘可逆矩阵 <span class="arithmatex">\(Q\)</span>）</li>
+<li>
+<p>相似：<span class="arithmatex">\(P^{-1}AP = B\)</span>（只左乘可逆矩阵 <span class="arithmatex">\(P^{-1}\)</span>）</p>
+</li>
+<li>
+<p><strong>标准形的唯一性</strong></p>
+</li>
+<li>相抵标准形由秩唯一确定</li>
+<li>不唯一的是初等变换的具体步骤</li>
+</ol>
+<hr />
+<h3 id="_16">思考题<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \end{pmatrix}\)</span> 的相抵标准形。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A \stackrel{\sim}{\sim} B\)</span>，则 <span class="arithmatex">\(\text{rank}(A) = \text{rank}(B)\)</span>。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 两个 <span class="arithmatex">\(m \times n\)</span> 矩阵相抵的充分必要条件是什么？</p>
+</li>
+</ol>
+<hr />
+<h2 id="53">5.3 广义逆矩阵<a class="headerlink" href="#53" title="Permanent link">&para;</a></h2>
+<h3 id="_17">【概念引入动机】为什么要引入广义逆？<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>对于不可逆矩阵（如非方阵），通常的逆矩阵不存在。但在解线性方程组时，我们仍然需要某种"逆"的概念。</p>
+<p><strong>Moore-Penrose广义逆</strong>（伪逆）就是这样的概念：对于任意矩阵 <span class="arithmatex">\(A\)</span>，都存在唯一的矩阵 <span class="arithmatex">\(X\)</span> 满足特定条件。</p>
+<h3 id="moore-penrose">Moore-Penrose广义逆<a class="headerlink" href="#moore-penrose" title="Permanent link">&para;</a></h3>
+<h4 id="_18">定义<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<p>对于任意矩阵 <span class="arithmatex">\(A\)</span>，存在唯一矩阵 <span class="arithmatex">\(X\)</span> 满足：</p>
+<ol>
+<li><span class="arithmatex">\(AXA = A\)</span></li>
+<li><span class="arithmatex">\(XAX = X\)</span></li>
+<li><span class="arithmatex">\((AX)' = AX\)</span>（<span class="arithmatex">\(AX\)</span> 对称）</li>
+<li><span class="arithmatex">\((XA)' = XA\)</span>（<span class="arithmatex">\(XA\)</span> 对称）</li>
+</ol>
+<p>则称 <span class="arithmatex">\(X\)</span> 为 <span class="arithmatex">\(A\)</span> 的<strong>Moore-Penrose广义逆</strong>，记作 <span class="arithmatex">\(A^+\)</span>。</p>
+<p><strong>性质</strong>：
+- 若 <span class="arithmatex">\(A\)</span> 可逆，则 <span class="arithmatex">\(A^+ = A^{-1}\)</span>
+- 若 <span class="arithmatex">\(A\)</span> 是列满秩（<span class="arithmatex">\(m \times n\)</span>，<span class="arithmatex">\(\text{rank}(A) = n\)</span>），则 <span class="arithmatex">\(A^+ = (A'A)^{-1}A'\)</span>
+- 若 <span class="arithmatex">\(A\)</span> 是行满秩（<span class="arithmatex">\(m \times n\)</span>，<span class="arithmatex">\(\text{rank}(A) = m\)</span>），则 <span class="arithmatex">\(A^+ = A'(AA')^{-1}\)</span></p>
+<hr />
+<h2 id="54">5.4 矩阵的相似<a class="headerlink" href="#54" title="Permanent link">&para;</a></h2>
+<h3 id="_19">【概念引入动机】为什么要研究相似？<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>相抵描述的是同一个线性映射在不同<strong>基</strong>下的表示。但有时我们还需要在<strong>同一空间</strong>的不同基之间转换。</p>
+<p><strong>相似</strong>描述的就是：同一个<strong>线性变换</strong>在不同<strong>基</strong>下的矩阵表示之间的关系。</p>
+<h3 id="_20">一、相似关系<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h4 id="_21">定义<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：若存在可逆矩阵 <span class="arithmatex">\(P\)</span>，使得
+$<span class="arithmatex">\(P^{-1}AP = B\)</span>$
+则称 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> <strong>相似</strong>，记作 <span class="arithmatex">\(A \sim B\)</span>。</p>
+</blockquote>
+<p><strong>与相抵的区别</strong>：
+- 相抵：<span class="arithmatex">\(PAQ = B\)</span>（可能 <span class="arithmatex">\(P \neq Q^{-1}\)</span>）
+- 相似：<span class="arithmatex">\(P^{-1}AP = B\)</span>（<span class="arithmatex">\(P = Q^{-1}\)</span>）</p>
+<h3 id="_22">二、相似不变量<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>相似变换保持以下量不变：</p>
+<table>
+<thead>
+<tr>
+<th>不变量</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行列式</td>
+<td><span class="arithmatex">\(\|A\| = \|B\|\)</span></td>
+<td>因为 <span class="arithmatex">\(\|P^{-1}AP\| = \|P^{-1}\|\|A\|\|P\| = \|A\|\)</span></td>
+</tr>
+<tr>
+<td>秩</td>
+<td><span class="arithmatex">\(\text{rank}(A) = \text{rank}(B)\)</span></td>
+<td>相似变换是相抵变换的特殊情况</td>
+</tr>
+<tr>
+<td>迹</td>
+<td><span class="arithmatex">\(\text{tr}(A) = \text{tr}(B)\)</span></td>
+<td><span class="arithmatex">\(\text{tr}(P^{-1}AP) = \text{tr}(A)\)</span></td>
+</tr>
+<tr>
+<td>特征多项式</td>
+<td><span class="arithmatex">\(\|\lambda I - A\| = \|\lambda I - B\|\)</span></td>
+<td>特征值相同</td>
+</tr>
+<tr>
+<td>特征值</td>
+<td><span class="arithmatex">\(\lambda_i(A) = \lambda_i(B)\)</span></td>
+<td>包括代数重数</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_23">典型例题<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<h4 id="3">例3 【计算题】验证相似关系<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，问 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 是否相似？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>计算特征值</strong>：</p>
+<p><span class="arithmatex">\(A\)</span> 的特征多项式：<span class="arithmatex">\(|\lambda I - A| = \begin{vmatrix} \lambda-2 &amp; -1 \\ 0 &amp; \lambda-1 \end{vmatrix} = (\lambda-2)(\lambda-1)\)</span></p>
+<p><span class="arithmatex">\(B\)</span> 的特征多项式：<span class="arithmatex">\(|\lambda I - B| = \begin{vmatrix} \lambda-2 &amp; 0 \\ 0 &amp; \lambda-1 \end{vmatrix} = (\lambda-2)(\lambda-1)\)</span></p>
+<p>两者特征多项式相同，特征值都是 <span class="arithmatex">\(2, 1\)</span>。</p>
+<p><strong>判断</strong>：
+- 特征值相同（包括重数）→ <strong>相似</strong>
+- 具体地，取 <span class="arithmatex">\(P = \begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 1 \end{pmatrix}\)</span>，则：
+$<span class="arithmatex">\(P^{-1}AP = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}\begin{pmatrix} 2 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = B\)</span>$</p>
+<p><strong>关键思路</strong>：利用相似不变量（特征多项式）判断。</p>
+<hr />
+<h3 id="_24">易错点提醒<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆相抵与相似</strong></li>
+<li>相抵：只要求秩相等</li>
+<li>
+<p>相似：特征多项式相同</p>
+</li>
+<li>
+<p><strong>特征值相同是相似的必要条件</strong></p>
+</li>
+<li>不是充分条件（后续会看到反例）</li>
+<li>对于实对称矩阵是充分条件</li>
+</ol>
+<hr />
+<h3 id="_25">思考题<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 判断 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span> 与 <span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}\)</span> 是否相似。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A \sim B\)</span>，则 <span class="arithmatex">\(A^k \sim B^k\)</span>。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 相似的两个矩阵是否一定有相同的秩？是否有相同的行列式？</p>
+</li>
+</ol>
+<hr />
+<h2 id="55">5.5 矩阵的特征值和特征向量<a class="headerlink" href="#55" title="Permanent link">&para;</a></h2>
+<h3 id="_26">【核心概念引入】为什么要引入特征值和特征向量？<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>特征值和特征向量是线性代数中最深刻的概念之一。</p>
+<p><strong>几何直观</strong>：
+- 特征向量 <span class="arithmatex">\(\alpha\)</span>：线性变换 <span class="arithmatex">\(A\)</span> 作用在 <span class="arithmatex">\(\alpha\)</span> 上，<strong>方向不变</strong>
+- 特征值 <span class="arithmatex">\(\lambda\)</span>：长度可能改变，但方向不变，<span class="arithmatex">\(\alpha\)</span> 变成 <span class="arithmatex">\(\lambda\alpha\)</span></p>
+<p><strong>数学定义</strong>：
+$<span class="arithmatex">\(A\alpha = \lambda\alpha, \quad \alpha \neq 0\)</span>$</p>
+<h3 id="_27">一、特征值与特征向量的定义<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(A\)</span> 为数域 <span class="arithmatex">\(K\)</span> 上的 <span class="arithmatex">\(n\)</span> 级矩阵，如果存在 <span class="arithmatex">\(\lambda_0 \in K\)</span> 和非零向量 <span class="arithmatex">\(\alpha \in K^n\)</span>，使得
+$<span class="arithmatex">\(A\alpha = \lambda_0 \alpha\)</span>$
+则称 <span class="arithmatex">\(\lambda_0\)</span> 为 <span class="arithmatex">\(A\)</span> 的一个<strong>特征值</strong>，<span class="arithmatex">\(\alpha\)</span> 为 <span class="arithmatex">\(A\)</span> 的属于特征值 <span class="arithmatex">\(\lambda_0\)</span> 的<strong>特征向量</strong>。</p>
+</blockquote>
+<p><strong>等价定义</strong>：
+- <span class="arithmatex">\((\lambda_0 I - A)\alpha = 0\)</span> 有非零解
+- <span class="arithmatex">\(\lambda_0\)</span> 是特征方程 <span class="arithmatex">\(|\lambda I - A| = 0\)</span> 的根</p>
+<h3 id="_28">二、特征多项式<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<h4 id="_29">定义<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[|\lambda I - A| = \lambda^n - (\text{tr}A)\lambda^{n-1} + \cdots + (-1)^n|A|\]</div>
+<p><strong>重要性质</strong>：
+- 特征多项式的根是特征值
+- <span class="arithmatex">\(n\)</span> 级矩阵在复数域中有 <span class="arithmatex">\(n\)</span> 个特征值（重数计入）</p>
+<h3 id="_30">三、特征向量的求法<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<p><strong>步骤</strong>：
+1. 解特征方程 <span class="arithmatex">\(|\lambda I - A| = 0\)</span> 求特征值 <span class="arithmatex">\(\lambda_1, \lambda_2, \ldots, \lambda_n\)</span>
+2. 对每个 <span class="arithmatex">\(\lambda_i\)</span>，解方程组 <span class="arithmatex">\((\lambda_i I - A)\alpha = 0\)</span> 求特征向量</p>
+<hr />
+<h3 id="_31">典型例题<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<h4 id="4">例4 【计算题】求特征值和特征向量<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{pmatrix}\)</span> 的特征值和特征向量。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>步骤1</strong>：求特征多项式
+$<span class="arithmatex">\(|\lambda I - A| = \begin{vmatrix} \lambda - 3 &amp; -1 \\ 0 &amp; \lambda - 2 \end{vmatrix} = (\lambda - 3)(\lambda - 2) = 0\)</span>$</p>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 3\)</span>，<span class="arithmatex">\(\lambda_2 = 2\)</span></p>
+<p><strong>步骤2</strong>：求特征向量</p>
+<p>对于 <span class="arithmatex">\(\lambda_1 = 3\)</span>：
+$<span class="arithmatex">\((3I - A)\alpha = 0 \Rightarrow \begin{pmatrix} 0 &amp; -1 \\ 0 &amp; 1 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = 0\)</span>$</p>
+<p>化简为 <span class="arithmatex">\(x_2 = 0\)</span>，<span class="arithmatex">\(x_1\)</span> 任意。</p>
+<p>特征向量：<span class="arithmatex">\(\alpha_1 = (1, 0)'\)</span>（任意非零倍数，如 <span class="arithmatex">\((2,0)'\)</span>，<span class="arithmatex">\((c,0)'\)</span> 等）</p>
+<p>对于 <span class="arithmatex">\(\lambda_2 = 2\)</span>：
+$<span class="arithmatex">\((2I - A)\alpha = 0 \Rightarrow \begin{pmatrix} -1 &amp; -1 \\ 0 &amp; 0 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = 0\)</span>$</p>
+<p>化简为 <span class="arithmatex">\(x_1 + x_2 = 0\)</span>，<span class="arithmatex">\(x_2\)</span> 任意。</p>
+<p>特征向量：<span class="arithmatex">\(\alpha_2 = (1, -1)'\)</span>（任意非零倍数）</p>
+<p><strong>几何意义</strong>：
+- <span class="arithmatex">\(\alpha_1 = (1,0)\)</span>：<span class="arithmatex">\(A\)</span> 把 <span class="arithmatex">\((1,0)\)</span> 变成 <span class="arithmatex">\(3(1,0)\)</span>，方向不变，长度变为3倍
+- <span class="arithmatex">\(\alpha_2 = (1,-1)\)</span>：<span class="arithmatex">\(A\)</span> 把 <span class="arithmatex">\((1,-1)\)</span> 变成 <span class="arithmatex">\(2(1,-1)\)</span>，方向不变，长度变为2倍</p>
+<p><strong>关键思路</strong>：先求特征值，再解齐次方程组求特征向量。</p>
+<hr />
+<h4 id="5_1">例5 【计算题】求重特征值的特征向量<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span> 的特征值和特征向量。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>求特征值</strong>：
+$<span class="arithmatex">\(|\lambda I - A| = \begin{vmatrix} \lambda - 3 &amp; 0 \\ 0 &amp; \lambda - 3 \end{vmatrix} = (\lambda - 3)^2 = 0\)</span>$</p>
+<p>特征值：<span class="arithmatex">\(\lambda = 3\)</span>（<strong>二重</strong>）</p>
+<p><strong>求特征向量</strong>：
+$<span class="arithmatex">\((3I - A)\alpha = 0 \Rightarrow \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = 0\)</span>$</p>
+<p>所有非零向量都是特征向量！</p>
+<p>取两个线性无关的：
+$<span class="arithmatex">\(\alpha_1 = (1, 0)', \quad \alpha_2 = (0, 1)'\)</span>$</p>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(A\)</span> 是<strong>数量矩阵</strong> <span class="arithmatex">\(3I\)</span>，所有非零向量的方向都不变（实际上没有"方向改变"），都是特征向量。</p>
+<hr />
+<h4 id="6">例6 【证明题】特征值的性质<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(\lambda_1, \lambda_2, \ldots, \lambda_n\)</span> 是 <span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(A\)</span> 的全部特征值（重数计入），证明：
+(1) <span class="arithmatex">\(\lambda_1 + \lambda_2 + \cdots + \lambda_n = \text{tr}(A)\)</span>
+(2) <span class="arithmatex">\(\lambda_1 \cdot \lambda_2 \cdots \lambda_n = |A|\)</span></p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) 迹相等</strong>：</p>
+<p>特征多项式：
+$<span class="arithmatex">\(|\lambda I - A| = \lambda^n - (\text{tr}A)\lambda^{n-1} + \cdots + (-1)^n|A|\)</span>$</p>
+<p>另一方面：
+$<span class="arithmatex">\(|\lambda I - A| = (\lambda - \lambda_1)(\lambda - \lambda_2)\cdots(\lambda - \lambda_n)\)</span>$</p>
+<p>展开 <span class="arithmatex">\(\lambda^{n-1}\)</span> 的系数（由 Vieta 定理）：
+$<span class="arithmatex">\(-(\lambda_1 + \lambda_2 + \cdots + \lambda_n)\)</span>$</p>
+<p>比较系数：
+$<span class="arithmatex">\(\lambda_1 + \lambda_2 + \cdots + \lambda_n = \text{tr}(A)\)</span>$</p>
+<p><strong>(2) 行列式相等</strong>：</p>
+<p>令 <span class="arithmatex">\(\lambda = 0\)</span> 在上述两个表达式中：
+$<span class="arithmatex">\(|0 \cdot I - A| = |-A| = (-1)^n|A|\)</span>$
+$<span class="arithmatex">\((0 - \lambda_1)(0 - \lambda_2)\cdots(0 - \lambda_n) = (-1)^n\lambda_1\lambda_2\cdots\lambda_n\)</span>$</p>
+<p>比较得：
+$<span class="arithmatex">\(|A| = \lambda_1\lambda_2\cdots\lambda_n\)</span>$</p>
+<p><strong>关键思路</strong>：利用特征多项式的两种表达式和 Vieta 定理。</p>
+<hr />
+<h3 id="_32">易错点提醒<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆代数重数与几何重数</strong></li>
+<li>代数重数：特征值作为特征多项式根的重数</li>
+<li>几何重数：特征值对应特征子空间的维数</li>
+<li>
+<p>几何重数 <span class="arithmatex">\(\leq\)</span> 代数重数</p>
+</li>
+<li>
+<p><strong>特征向量不能是零向量</strong></p>
+</li>
+<li>特征向量定义要求 <span class="arithmatex">\(\alpha \neq 0\)</span></li>
+<li>
+<p>但齐次方程组的基础解系中的解向量都满足要求</p>
+</li>
+<li>
+<p><strong>特征值必须在数域 <span class="arithmatex">\(K\)</span> 中</strong></p>
+</li>
+<li>若 <span class="arithmatex">\(K = \mathbb{R}\)</span>，某些特征多项式可能无实根</li>
+<li>需要在复数域中讨论</li>
+</ol>
+<hr />
+<h3 id="_33">思考题<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求 <span class="arithmatex">\(A = \begin{pmatrix} 4 &amp; 1 \\ 2 &amp; 3 \end{pmatrix}\)</span> 的特征值和特征向量。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，证明：<span class="arithmatex">\(|A| = 0 \iff A\)</span> 有零特征值。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(\lambda\)</span> 是 <span class="arithmatex">\(A\)</span> 的特征值，则 <span class="arithmatex">\(\lambda^k\)</span> 是 <span class="arithmatex">\(A^k\)</span> 的特征值。</p>
+</li>
+</ol>
+<hr />
+<h2 id="56">5.6 矩阵可对角化的条件<a class="headerlink" href="#56" title="Permanent link">&para;</a></h2>
+<h3 id="_34">【核心问题引入】为什么要研究可对角化？<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<p>对角矩阵是最简单的一类矩阵。加法、乘法、求逆都很容易计算。</p>
+<p><strong>问题</strong>：给定矩阵 <span class="arithmatex">\(A\)</span>，能否找到一个可逆矩阵 <span class="arithmatex">\(P\)</span>，使得 <span class="arithmatex">\(P^{-1}AP\)</span> 是对角矩阵？</p>
+<p>如果能找到，就说 <span class="arithmatex">\(A\)</span> <strong>可对角化</strong>。</p>
+<h3 id="_35">一、可对角化的定义<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：如果 <span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(A\)</span> 与一个对角矩阵相似，即存在可逆矩阵 <span class="arithmatex">\(P\)</span>，使得
+$<span class="arithmatex">\(P^{-1}AP = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)\)</span>$
+则称 <span class="arithmatex">\(A\)</span> <strong>可对角化</strong>。</p>
+</blockquote>
+<p><strong>几何意义</strong>：
+- <span class="arithmatex">\(P\)</span> 的列向量就是 <span class="arithmatex">\(A\)</span> 的特征向量
+- 在这些特征向量构成的基下，<span class="arithmatex">\(A\)</span> 的作用就是"沿着每个特征向量方向伸缩 <span class="arithmatex">\(\lambda_i\)</span> 倍"</p>
+<h3 id="_36">二、可对角化的充分必要条件<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<h4 id="_37">核心定理<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(A\)</span> 可对角化的充分必要条件是 <span class="arithmatex">\(A\)</span> 有 <span class="arithmatex">\(n\)</span> 个<strong>线性无关</strong>的特征向量。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+- <strong>必要性</strong>：若 <span class="arithmatex">\(P^{-1}AP = \text{diag}(\lambda_1, \ldots, \lambda_n)\)</span>，则 <span class="arithmatex">\(P\)</span> 的列向量是特征值 <span class="arithmatex">\(\lambda_i\)</span> 对应的特征向量
+- <strong>充分性</strong>：若有 <span class="arithmatex">\(n\)</span> 个线性无关特征向量，以它们为列构成 <span class="arithmatex">\(P\)</span>，则 <span class="arithmatex">\(P^{-1}AP = \text{diag}(\lambda_1, \ldots, \lambda_n)\)</span></p>
+<h3 id="_38">三、可对角化的充分条件<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<h4 id="_39">定理<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：如果 <span class="arithmatex">\(A\)</span> 有 <span class="arithmatex">\(n\)</span> 个<strong>两两不同</strong>的特征值，则 <span class="arithmatex">\(A\)</span> 可对角化。</p>
+</blockquote>
+<p><strong>为什么？</strong>
+- 不同特征值对应的特征向量线性无关
+- 有 <span class="arithmatex">\(n\)</span> 个线性无关特征向量 → 可对角化</p>
+<h3 id="_40">四、重特征值的处理<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(A\)</span> 可对角化 <span class="arithmatex">\(\iff\)</span> 对每个特征值 <span class="arithmatex">\(\lambda_i\)</span>，其代数重数 = 几何重数。</p>
+<p>即：<span class="arithmatex">\(\dim V_{\lambda_i} = m_i\)</span>（<span class="arithmatex">\(m_i\)</span> 为 <span class="arithmatex">\(\lambda_i\)</span> 的代数重数）</p>
+</blockquote>
+<p><strong>几何直观</strong>：
+- 代数重数：该特征值作为根出现多少次
+- 几何重数：该特征值对应的线性无关特征向量有多少个
+- 几何重数 = 齐次方程 <span class="arithmatex">\((\lambda_i I - A)\alpha = 0\)</span> 的解空间维数 = <span class="arithmatex">\(n - \text{rank}(\lambda_i I - A)\)</span></p>
+<hr />
+<h3 id="_41">典型例题<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<h4 id="7">例7 【判断题】判断可对角化<a class="headerlink" href="#7" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判断下列矩阵是否可对角化：
+(1) <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span>
+(2) <span class="arithmatex">\(B = \begin{pmatrix} 3 &amp; 1 \\ 0 &amp; 3 \end{pmatrix}\)</span></p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) <span class="arithmatex">\(A\)</span> 可对角化</strong>：</p>
+<div class="arithmatex">\[|\lambda I - A| = (\lambda - 3)^2\]</div>
+<p>特征值 <span class="arithmatex">\(\lambda = 3\)</span>（二重）。</p>
+<div class="arithmatex">\[(3I - A) = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\]</div>
+<p>所有非零向量都是特征向量，有 <span class="arithmatex">\(n = 2\)</span> 个线性无关特征向量（如 <span class="arithmatex">\((1,0)\)</span> 和 <span class="arithmatex">\((0,1)\)</span>）。</p>
+<p><strong>可对角化</strong>（实际上 <span class="arithmatex">\(A = 3I\)</span> 本身已是对角矩阵）。</p>
+<p><strong>(2) <span class="arithmatex">\(B\)</span> 不可对角化</strong>：</p>
+<div class="arithmatex">\[|\lambda I - B| = (\lambda - 3)^2\]</div>
+<p>特征值 <span class="arithmatex">\(\lambda = 3\)</span>（二重）。</p>
+<div class="arithmatex">\[(3I - B) = \begin{pmatrix} 0 &amp; -1 \\ 0 &amp; 0 \end{pmatrix}\]</div>
+<p>几何重数 = <span class="arithmatex">\(n - \text{rank}(3I - B) = 2 - 1 = 1\)</span></p>
+<p>代数重数 = 2</p>
+<p>几何重数 <span class="arithmatex">\(\neq\)</span> 代数重数 → <strong>不可对角化</strong>。</p>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(B\)</span> 是<strong>若尔当块</strong>，代表一个"不纯"的变换——有拉伸，也有剪切。</p>
+<p><strong>关键思路</strong>：比较代数重数与几何重数。</p>
+<hr />
+<h4 id="8">例8 【计算题】对角化矩阵<a class="headerlink" href="#8" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：将矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 4 &amp; 2 \\ 3 &amp; 3 \end{pmatrix}\)</span> 对角化。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>步骤1</strong>：求特征值</p>
+<div class="arithmatex">\[|\lambda I - A| = \begin{vmatrix} \lambda-4 &amp; -2 \\ -3 &amp; \lambda-3 \end{vmatrix} = (\lambda-4)(\lambda-3) - 6 = \lambda^2 - 7\lambda + 6 = (\lambda-1)(\lambda-6) = 0\]</div>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 1\)</span>，<span class="arithmatex">\(\lambda_2 = 6\)</span></p>
+<p><strong>步骤2</strong>：求特征向量</p>
+<p>对于 <span class="arithmatex">\(\lambda_1 = 1\)</span>：
+$<span class="arithmatex">\((I - A) = \begin{pmatrix} -3 &amp; -2 \\ -3 &amp; -2 \end{pmatrix} \to \begin{pmatrix} 3 &amp; 2 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>解 <span class="arithmatex">\(3x_1 + 2x_2 = 0\)</span>，取 <span class="arithmatex">\(x_2 = 3\)</span>，则 <span class="arithmatex">\(x_1 = -2\)</span>。</p>
+<p>特征向量：<span class="arithmatex">\(\alpha_1 = (-2, 3)'\)</span></p>
+<p>对于 <span class="arithmatex">\(\lambda_2 = 6\)</span>：
+$<span class="arithmatex">\((6I - A) = \begin{pmatrix} 2 &amp; -2 \\ -3 &amp; 3 \end{pmatrix} \to \begin{pmatrix} 1 &amp; -1 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>解 <span class="arithmatex">\(x_1 - x_2 = 0\)</span>，取 <span class="arithmatex">\(x_1 = 1\)</span>。</p>
+<p>特征向量：<span class="arithmatex">\(\alpha_2 = (1, 1)'\)</span></p>
+<p><strong>步骤3</strong>：构造 <span class="arithmatex">\(P\)</span> 并验证</p>
+<div class="arithmatex">\[P = (\alpha_1, \alpha_2) = \begin{pmatrix} -2 &amp; 1 \\ 3 &amp; 1 \end{pmatrix}\]</div>
+<div class="arithmatex">\[P^{-1}AP = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 6 \end{pmatrix}\]</div>
+<p><strong>关键思路</strong>：求出所有线性无关特征向量，构造可逆矩阵 <span class="arithmatex">\(P\)</span>。</p>
+<hr />
+<h3 id="_42">易错点提醒<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>误认为有重特征值就不可对角化</strong></li>
+<li>重特征值也可能可对角化</li>
+<li>
+<p>关键是几何重数 = 代数重数</p>
+</li>
+<li>
+<p><strong>特征向量必须线性无关</strong></p>
+</li>
+<li><span class="arithmatex">\(n\)</span> 个特征值对应 <span class="arithmatex">\(n\)</span> 个特征向量</li>
+<li>
+<p>但特征向量可能线性相关！</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(P\)</span> 的列必须是特征向量</strong></p>
+</li>
+<li>构造 <span class="arithmatex">\(P\)</span> 时，以特征向量为列</li>
+<li><span class="arithmatex">\(P^{-1}AP\)</span> 的对角线是对应特征值</li>
+</ol>
+<hr />
+<h3 id="_43">思考题<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（判断）</strong> 判断 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 2 \end{pmatrix}\)</span> 是否可对角化。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 将 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 1 \\ 1 &amp; 0 &amp; 1 \end{pmatrix}\)</span> 对角化。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A\)</span> 可对角化，则 <span class="arithmatex">\(A^T\)</span> 也可对角化。</p>
+</li>
+</ol>
+<hr />
+<h2 id="57">5.7 实对称矩阵的对角化<a class="headerlink" href="#57" title="Permanent link">&para;</a></h2>
+<h3 id="_44">【核心定理引入】为什么实对称矩阵特殊？<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<p>实对称矩阵是最重要的一类矩阵：
+1. 特征值都是<strong>实数</strong>
+2. 不同特征值对应的特征向量彼此<strong>正交</strong>
+3. <strong>必可正交相似</strong>于对角矩阵</p>
+<p>这使得实对称矩阵在二次型、主成分分析等领域有广泛应用。</p>
+<h3 id="_45">一、实对称矩阵的性质<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
+<h4 id="_46">性质定理<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：
+1. 实对称矩阵的<strong>特征值都是实数</strong>
+2. 实对称矩阵<strong>不同特征值</strong>对应的特征向量<strong>彼此正交</strong></p>
+</blockquote>
+<p><strong>证明思路</strong>（性质1）：
+设 <span class="arithmatex">\(A\alpha = \lambda\alpha\)</span>，取共轭转置 <span class="arithmatex">\(\bar{\alpha}' A' = \bar{\lambda}\bar{\alpha}'\)</span>，然后与原式点乘。</p>
+<p>由于 <span class="arithmatex">\(A\)</span> 是实矩阵且对称，<span class="arithmatex">\(A' = A\)</span>，推导出 <span class="arithmatex">\(\lambda = \bar{\lambda}\)</span>。</p>
+<h3 id="_47">二、正交相似于对角矩阵<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h3>
+<h4 id="_48">核心定理<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 级<strong>实对称矩阵</strong>，则存在<strong>正交矩阵</strong> <span class="arithmatex">\(Q\)</span>，使得
+$<span class="arithmatex">\(Q^{-1}AQ = Q'AQ = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)\)</span>$</p>
+<p>其中 <span class="arithmatex">\(\lambda_1, \lambda_2, \ldots, \lambda_n\)</span> 是 <span class="arithmatex">\(A\)</span> 的全部特征值。</p>
+</blockquote>
+<p><strong>为什么是</strong>正交矩阵？
+- 正交矩阵 <span class="arithmatex">\(Q\)</span> 满足 <span class="arithmatex">\(Q^{-1} = Q'\)</span>
+- <span class="arithmatex">\(Q\)</span> 的列向量是两两正交的单位向量
+- 几何上，这表示选择了一组<strong>标准正交基</strong></p>
+<h3 id="_49">三、正交对角化步骤<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h3>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>
+<p><strong>求特征值</strong>：解 <span class="arithmatex">\(|\lambda I - A| = 0\)</span></p>
+</li>
+<li>
+<p><strong>求特征向量</strong>：解 <span class="arithmatex">\((\lambda_i I - A)\alpha = 0\)</span></p>
+</li>
+<li>
+<p><strong>正交化</strong>（对重特征值）：</p>
+</li>
+<li>不同特征值的特征向量<strong>自动正交</strong></li>
+<li>
+<p>同一特征值的特征向量需要<strong>施密特正交化</strong></p>
+</li>
+<li>
+<p><strong>单位化</strong>：每个向量除以它的长度</p>
+</li>
+<li>
+<p><strong>构造正交矩阵</strong> <span class="arithmatex">\(Q\)</span>：以单位正交特征向量为列</p>
+</li>
+<li>
+<p><strong>验证</strong>：<span class="arithmatex">\(Q'AQ = \text{diag}(\lambda_1, \ldots, \lambda_n)\)</span></p>
+</li>
+</ol>
+<hr />
+<h3 id="_50">典型例题<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h3>
+<h4 id="9">例9 【计算题】实对称矩阵的正交对角化<a class="headerlink" href="#9" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：将实对称矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 2 &amp; 2 \\ 2 &amp; 2 &amp; 2 \\ 2 &amp; 2 &amp; 2 \end{pmatrix}\)</span> 正交对角化。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>步骤1</strong>：求特征值</p>
+<div class="arithmatex">\[|\lambda I - A| = \begin{vmatrix} \lambda-2 &amp; -2 &amp; -2 \\ -2 &amp; \lambda-2 &amp; -2 \\ -2 &amp; -2 &amp; \lambda-2 \end{vmatrix}\]</div>
+<p>利用行列式性质提取公因子... 最终得：
+$<span class="arithmatex">\(= \lambda^2(\lambda - 6) = 0\)</span>$</p>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 6\)</span>（1重），<span class="arithmatex">\(\lambda_2 = 0\)</span>（2重）</p>
+<p><strong>步骤2</strong>：求特征向量</p>
+<p>对于 <span class="arithmatex">\(\lambda_1 = 6\)</span>：
+$<span class="arithmatex">\((6I - A) = \begin{pmatrix} 4 &amp; -2 &amp; -2 \\ -2 &amp; 4 &amp; -2 \\ -2 &amp; -2 &amp; 4 \end{pmatrix} \to \begin{pmatrix} 1 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>解 <span class="arithmatex">\(x_1 + x_2 + x_3 = 0\)</span>，取 <span class="arithmatex">\(\alpha_1 = (1,1,1)'\)</span></p>
+<p>对于 <span class="arithmatex">\(\lambda_2 = 0\)</span>：
+$<span class="arithmatex">\((-A) = \begin{pmatrix} -2 &amp; -2 &amp; -2 \\ -2 &amp; -2 &amp; -2 \\ -2 &amp; -2 &amp; -2 \end{pmatrix} \to \begin{pmatrix} 1 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>解 <span class="arithmatex">\(x_1 + x_2 + x_3 = 0\)</span>，基础解系：<span class="arithmatex">\(\alpha_2 = (1,-1,0)'\)</span>，<span class="arithmatex">\(\alpha_3 = (1,1,-2)'\)</span></p>
+<p><strong>步骤3</strong>：正交化</p>
+<ul>
+<li><span class="arithmatex">\(\alpha_1\)</span> 与 <span class="arithmatex">\(\alpha_2, \alpha_3\)</span> 已正交（因为属于不同特征值）</li>
+<li>对 <span class="arithmatex">\(\alpha_2, \alpha_3\)</span> 施密特正交化：</li>
+</ul>
+<p>取 <span class="arithmatex">\(\beta_2 = (1,-1,0)'\)</span></p>
+<div class="arithmatex">\[\beta_3 = \alpha_3 - \frac{(\alpha_3, \beta_2)}{(\beta_2, \beta_2)}\beta_2 = (1,1,-2)' - \frac{0}{2}(1,-1,0)' = (1,1,-2)'\]</div>
+<p><strong>步骤4</strong>：单位化</p>
+<div class="arithmatex">\[\eta_1 = \frac{1}{\sqrt{3}}(1,1,1)', \quad \eta_2 = \frac{1}{\sqrt{2}}(1,-1,0)', \quad \eta_3 = \frac{1}{\sqrt{6}}(1,1,-2)'\]</div>
+<p><strong>步骤5</strong>：构造正交矩阵</p>
+<div class="arithmatex">\[Q = \begin{pmatrix} \frac{1}{\sqrt{3}} &amp; \frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} &amp; -\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} &amp; 0 &amp; -\frac{2}{\sqrt{6}} \end{pmatrix}\]</div>
+<p><strong>验证</strong>：
+$<span class="arithmatex">\(Q'AQ = \begin{pmatrix} 6 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p><strong>关键思路</strong>：实对称矩阵必可正交对角化，利用正交化确保列向量两两正交。</p>
+<hr />
+<h4 id="10">例10 【综合题】实对称矩阵的应用<a class="headerlink" href="#10" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A\)</span> 为实对称矩阵，证明：<span class="arithmatex">\(A\)</span> 可逆 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(A\)</span> 的特征值全不为零。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>必要性</strong>：若 <span class="arithmatex">\(A\)</span> 可逆，则 <span class="arithmatex">\(|A| \neq 0\)</span>。</p>
+<p>由 <span class="arithmatex">\(|A| = \lambda_1 \lambda_2 \cdots \lambda_n\)</span>，得 <span class="arithmatex">\(\lambda_i \neq 0\)</span>（<span class="arithmatex">\(i = 1, 2, \ldots, n\)</span>）。</p>
+<p><strong>充分性</strong>：若所有 <span class="arithmatex">\(\lambda_i \neq 0\)</span>，则 <span class="arithmatex">\(|A| = \lambda_1 \lambda_2 \cdots \lambda_n \neq 0\)</span>。</p>
+<p>所以 <span class="arithmatex">\(A\)</span> 可逆。</p>
+<p><strong>进一步</strong>：若 <span class="arithmatex">\(A\)</span> 可逆，则 <span class="arithmatex">\(A^{-1}\)</span> 也是实对称矩阵，且特征值为 <span class="arithmatex">\(\frac{1}{\lambda_i}\)</span>。</p>
+<hr />
+<h3 id="_51">易错点提醒<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆"正交相似"与"相似"</strong></li>
+<li>正交相似：<span class="arithmatex">\(Q'AQ = \text{diag}(\lambda_i)\)</span>，<span class="arithmatex">\(Q\)</span> 正交</li>
+<li>
+<p>相似：<span class="arithmatex">\(P^{-1}AP = \text{diag}(\lambda_i)\)</span>，<span class="arithmatex">\(P\)</span> 可逆</p>
+</li>
+<li>
+<p><strong>忘记对重特征值进行正交化</strong></p>
+</li>
+<li>不同特征值的特征向量自动正交</li>
+<li>
+<p>同一特征值的特征向量需要施密特正交化</p>
+</li>
+<li>
+<p><strong>单位化忘记开根号</strong></p>
+</li>
+<li><span class="arithmatex">\(\eta = \frac{\alpha}{\|\alpha\|}\)</span></li>
+<li><span class="arithmatex">\(\|\alpha\| = \sqrt{(\alpha, \alpha)}\)</span></li>
+</ol>
+<hr />
+<h3 id="_52">思考题<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 将 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 2 \\ 0 &amp; 2 &amp; 3 \end{pmatrix}\)</span> 正交对角化。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 设 <span class="arithmatex">\(A\)</span> 为实对称矩阵，证明：存在正交矩阵 <span class="arithmatex">\(Q\)</span> 使得 <span class="arithmatex">\(Q'AQ\)</span> 为对角矩阵。</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 实对称矩阵的特征值是否一定为实数？为什么？</p>
+</li>
+</ol>
+<hr />
+<h2 id="_53">本章小结<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h2>
+<h3 id="_54">核心要点<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>内容</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>等价关系</strong></td>
+<td>反身、对称、传递</td>
+<td>划分集合</td>
+</tr>
+<tr>
+<td><strong>矩阵相抵</strong></td>
+<td><span class="arithmatex">\(PAQ = B\)</span></td>
+<td>秩是完全不变量</td>
+</tr>
+<tr>
+<td><strong>矩阵相似</strong></td>
+<td><span class="arithmatex">\(P^{-1}AP = B\)</span></td>
+<td>特征多项式相同</td>
+</tr>
+<tr>
+<td><strong>特征值/向量</strong></td>
+<td><span class="arithmatex">\(A\alpha = \lambda\alpha\)</span></td>
+<td>$</td>
+</tr>
+<tr>
+<td><strong>可对角化</strong></td>
+<td>有 <span class="arithmatex">\(n\)</span> 个线性无关特征向量</td>
+<td>代数重数 = 几何重数</td>
+</tr>
+<tr>
+<td><strong>实对称矩阵</strong></td>
+<td><span class="arithmatex">\(Q'AQ = \text{diag}(\lambda_i)\)</span></td>
+<td>必可正交对角化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_55">公式速记<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特征多项式</td>
+<td><span class="arithmatex">\(\|\lambda I - A\| = \lambda^n - (\text{tr}A)\lambda^{n-1} + \cdots\)</span></td>
+</tr>
+<tr>
+<td>特征值和</td>
+<td><span class="arithmatex">\(\lambda_1 + \cdots + \lambda_n = \text{tr}A\)</span></td>
+</tr>
+<tr>
+<td>特征值积</td>
+<td><span class="arithmatex">\(\lambda_1 \cdots \lambda_n = \|A\|\)</span></td>
+</tr>
+<tr>
+<td>可对角化条件</td>
+<td><span class="arithmatex">\(n\)</span> 个线性无关特征向量</td>
+</tr>
+<tr>
+<td>实对称对角化</td>
+<td><span class="arithmatex">\(Q'AQ = \text{diag}(\lambda_1, \ldots, \lambda_n)\)</span>，<span class="arithmatex">\(Q\)</span> 正交</td>
+</tr>
+<tr>
+<td>相抵标准形</td>
+<td><span class="arithmatex">\(\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span></td>
+</tr>
+<tr>
+<td>相似不变量</td>
+<td>行列式、秩、迹、特征多项式</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

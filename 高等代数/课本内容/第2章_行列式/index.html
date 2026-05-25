@@ -1,0 +1,3106 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第2章 行列式 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第2章 行列式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 n元排列
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 n元排列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究排列？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、排列的基本概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、排列的基本概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、排列的奇偶性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、对换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、排列奇偶性的快速判断
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1 【计算题】求排列的逆序数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2 【计算题】求特殊排列的逆序数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例3 【证明题】对换改变奇偶性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 n阶行列式的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 n阶行列式的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入行列式？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、2阶行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、n阶行列式的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、n阶行列式的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【定义引入】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、重要说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例4 【计算题】用定义计算低阶行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例5 【计算题】上三角形行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例6 【计算题】特殊行列式——反对角线元素乘积
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 行列式的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 行列式的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究行列式的性质？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七条基本性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七条基本性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质1【转置不变性】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质2【两行互换】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质3【某行元素有公因子】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质4【拆行分配】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质5【倍加不变】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质6【行比例为零】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质7【乘积公式】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        计算行列式的基本方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例7 【计算题】利用性质计算行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例8 【计算题】行和相等的行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例9 【证明题】行列式乘积公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 行列式按一行（列）展开
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 行列式按一行（列）展开">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要按行（列）展开？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、余子式与代数余子式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、余子式与代数余子式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、按一行（列）展开定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、按一行（列）展开定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理1（按第 \(i\) 行展开）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-j" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理2（按第 \(j\) 列展开）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、展开定理的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、展开定理的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        同一行（列）元素与代数余子式的乘积
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、范德蒙行列式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、范德蒙行列式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义与公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例10 【计算题】按行展开计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例11 【计算题】范德蒙行列式应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例12 【证明题】代数余子式的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-cramer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 克拉默(Cramer)法则
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 克拉默(Cramer)法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入克拉默法则？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、n个方程n个未知量方程组有唯一解的条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、n个方程n个未知量方程组有唯一解的条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、克拉默法则
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、克拉默法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例13 【计算题】应用克拉默法则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例14 【讨论题】范德蒙行列式与克拉默法则的综合
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 行列式按k行（列）展开（拉普拉斯定理）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 行列式按k行（列）展开（拉普拉斯定理）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入拉普拉斯定理？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、k阶子式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、k阶子式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、拉普拉斯定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例15 【计算题】利用拉普拉斯定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        行列式计算方法总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速记
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="2">第2章 行列式<a class="headerlink" href="#2" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章针对<strong>方程个数与未知量个数相等</strong>的线性方程组（即 <span class="arithmatex">\(n \times n\)</span> 方程组），讨论如何直接从系数和常数项判断解的情况。我们将引入 <span class="arithmatex">\(n\)</span> 阶行列式的概念，建立克拉默法则，并学习行列式的各种计算技巧。</p>
+<hr />
+<h2 id="21-n">2.1 n元排列<a class="headerlink" href="#21-n" title="Permanent link">&para;</a></h2>
+<h3 id="_2">【概念引入动机】为什么要研究排列？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>行列式的定义需要用到<strong>排列的奇偶性</strong>。具体来说，<span class="arithmatex">\(n\)</span> 阶行列式的每一项都有符号，这个符号正是由对应排列的奇偶性决定的。</p>
+<p>排列的奇偶性在行列式理论中还与<strong>对换变换</strong>密切相关，理解这一点有助于掌握行列式性质的证明。</p>
+<h3 id="_3">一、排列的基本概念<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_4">定义<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>n元排列</strong>：n个不同的正整数 <span class="arithmatex">\(1, 2, \ldots, n\)</span> 的一个全排列</li>
+<li>
+<p>例如：<span class="arithmatex">\((1, 2, 3)\)</span>，<span class="arithmatex">\((3, 1, 2)\)</span>，<span class="arithmatex">\((2, 3, 1)\)</span> 都是3元排列</p>
+</li>
+<li>
+<p><strong>逆序</strong>：在排列 <span class="arithmatex">\(j_1 j_2 \ldots j_n\)</span> 中，若 <span class="arithmatex">\(j_s &gt; j_t\)</span>（<span class="arithmatex">\(s &lt; t\)</span>），则称 <span class="arithmatex">\((j_s, j_t)\)</span> 构成一个<strong>逆序</strong></p>
+</li>
+<li>
+<p>例如：在排列 <span class="arithmatex">\((3, 1, 2)\)</span> 中，<span class="arithmatex">\((3, 1)\)</span> 和 <span class="arithmatex">\((3, 2)\)</span> 是逆序</p>
+</li>
+<li>
+<p><strong>逆序数</strong>：排列中逆序的总数，记作 <span class="arithmatex">\(\tau(j_1j_2\ldots j_n)\)</span>
+  $<span class="arithmatex">\(\tau(j_1j_2\ldots j_n) = \#\{(j_s, j_t) \mid s &lt; t, j_s &gt; j_t\}\)</span>$</p>
+</li>
+</ul>
+<h3 id="_5">二、排列的奇偶性<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>偶排列</strong>：逆序数为<strong>偶数</strong></li>
+<li><strong>奇排列</strong>：逆序数为<strong>奇数</strong></li>
+</ul>
+<h3 id="_6">三、对换<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理1（对换与奇偶性）</strong>：对换（交换排列中两个数的位置）<strong>改变</strong>n元排列的奇偶性。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+考虑一个排列 <span class="arithmatex">\((j_1, \ldots, j_{k-1}, \boxed{a}, j_{k+1}, \ldots, j_{t-1}, \boxed{b}, j_{t+1}, \ldots, j_n)\)</span>，交换 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 的位置。</p>
+<p>逆序数的变化：
+- 原来 <span class="arithmatex">\(a\)</span> 与它后面的 <span class="arithmatex">\(t - k - 1\)</span> 个数可能构成逆序（设为 <span class="arithmatex">\(s\)</span> 个）
+- 原来 <span class="arithmatex">\(b\)</span> 与它后面的数不涉及 <span class="arithmatex">\(a\)</span>，共有 <span class="arithmatex">\(n - t\)</span> 个</p>
+<p>交换后：
+- <span class="arithmatex">\(b\)</span> 移到了原来 <span class="arithmatex">\(a\)</span> 的位置，与 <span class="arithmatex">\(a\)</span> 后面的数构成逆序的情况改变了
+- 需要具体分析，但结论是逆序数<strong>改变奇数个</strong></p>
+<blockquote>
+<p><strong>定理2（自然序排列）</strong>：任一n元排列与自然序排列 <span class="arithmatex">\(12\ldots n\)</span> 可以经过一系列对换互变，并且所作对换的次数与这个n元排列有<strong>相同的奇偶性</strong>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+从任意排列变到自然序，每次对换可以减少一个逆序（但也可能增加），需要精确计数。</p>
+<h3 id="_7">四、排列奇偶性的快速判断<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>方法</strong>：从左到右，统计每个数后面比它小的数的个数，求和取奇偶性。</p>
+<hr />
+<h3 id="_8">典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h4 id="1">例1 【计算题】求排列的逆序数<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求6元排列 <span class="arithmatex">\(413625\)</span> 的逆序数，并指出它的奇偶性。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>逐项统计法</strong>：</p>
+<p>从左边第1个数字开始，统计后面比它小的数的个数：</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>数字</th>
+<th>后面比它小的数</th>
+<th>逆序个数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>1, 3, 2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>无</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>6</td>
+<td>2, 5</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>无</td>
+<td>0</td>
+</tr>
+<tr>
+<td>6</td>
+<td>5</td>
+<td>无</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[\tau(413625) = 3 + 0 + 1 + 2 + 0 + 0 = 6\]</div>
+<p>因为 <span class="arithmatex">\(6\)</span> 是<strong>偶数</strong>，所以 <span class="arithmatex">\(413625\)</span> 是<strong>偶排列</strong>。</p>
+<p><strong>验证</strong>：<span class="arithmatex">\(413625\)</span> 经过多少次对换能变成 <span class="arithmatex">\(123456\)</span>？
+由于它是偶排列，对换次数是偶数。</p>
+<p><strong>关键思路</strong>：逐个考察每个元素与其后面元素构成的逆序数。</p>
+<hr />
+<h4 id="2_1">例2 【计算题】求特殊排列的逆序数<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求n元排列 <span class="arithmatex">\(n(n-1)\ldots321\)</span>（逆序排列）的逆序数，并讨论其奇偶性。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>分析结构</strong>：
+- 第一个数 <span class="arithmatex">\(n\)</span>：与后面每个数都构成逆序，共 <span class="arithmatex">\((n-1)\)</span> 个
+- 第二个数 <span class="arithmatex">\(n-1\)</span>：与后面每个数都构成逆序，共 <span class="arithmatex">\((n-2)\)</span> 个
+- <span class="arithmatex">\(\cdots\)</span>
+- 最后两个数 <span class="arithmatex">\(2, 1\)</span>：构成 <span class="arithmatex">\(1\)</span> 个逆序</p>
+<div class="arithmatex">\[\tau(n(n-1)\ldots321) = (n-1) + (n-2) + \cdots + 2 + 1 = \frac{n(n-1)}{2}\]</div>
+<p><strong>奇偶性讨论</strong>：</p>
+<div class="arithmatex">\[\frac{n(n-1)}{2} \text{ 的奇偶性} = \begin{cases} \text{偶数}, &amp; n \equiv 0, 1 \pmod{4} \\ \text{奇数}, &amp; n \equiv 2, 3 \pmod{4} \end{cases}\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n \bmod 4\)</span></th>
+<th><span class="arithmatex">\(\frac{n(n-1)}{2}\)</span> 的奇偶性</th>
+<th>排列类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>偶</td>
+<td>偶排列</td>
+</tr>
+<tr>
+<td>1</td>
+<td>偶</td>
+<td>偶排列</td>
+</tr>
+<tr>
+<td>2</td>
+<td>奇</td>
+<td>奇排列</td>
+</tr>
+<tr>
+<td>3</td>
+<td>奇</td>
+<td>奇排列</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键思路</strong>：利用逆序数的定义，<strong>逐项计算求和</strong>。</p>
+<p><strong>记忆口诀</strong>：逆序排列，<span class="arithmatex">\(n\)</span> 为 <span class="arithmatex">\(4k, 4k+1\)</span> 为偶，<span class="arithmatex">\(4k+2, 4k+3\)</span> 为奇。</p>
+<hr />
+<h4 id="3">例3 【证明题】对换改变奇偶性<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：证明：对换改变排列的奇偶性。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>证法1（直接分析）</strong>：
+设原排列为 <span class="arithmatex">\((1, 2, \ldots, k-1, a, k+1, \ldots, t-1, b, t+1, \ldots, n)\)</span>，交换 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 的位置（设 <span class="arithmatex">\(a &lt; b\)</span>）。</p>
+<p><strong>分析逆序数变化</strong>：</p>
+<ol>
+<li>
+<p><strong><span class="arithmatex">\(a\)</span> 与 <span class="arithmatex">\(b\)</span> 之间</strong>（原来）：<span class="arithmatex">\((a, b)\)</span> 不是逆序（因为 <span class="arithmatex">\(a &lt; b\)</span>）；交换后变成 <span class="arithmatex">\((b, a)\)</span> 是逆序。变化：+1</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(a\)</span> 与中间元素</strong>：</p>
+</li>
+<li>原来 <span class="arithmatex">\(a\)</span> 与 <span class="arithmatex">\(k+1, \ldots, t-1\)</span> 中小于 <span class="arithmatex">\(a\)</span> 的数构成逆序，设为 <span class="arithmatex">\(p\)</span> 个</li>
+<li>交换后 <span class="arithmatex">\(a\)</span> 移到最后，与这些数的关系不变，仍有 <span class="arithmatex">\(p\)</span> 个逆序</li>
+<li>
+<p>变化：0</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(b\)</span> 与中间元素</strong>：</p>
+</li>
+<li>原来 <span class="arithmatex">\(b\)</span> 与 <span class="arithmatex">\(k+1, \ldots, t-1\)</span> 中大于 <span class="arithmatex">\(b\)</span> 的数构成逆序，设为 <span class="arithmatex">\(q\)</span> 个</li>
+<li>交换后 <span class="arithmatex">\(b\)</span> 移到原来 <span class="arithmatex">\(a\)</span> 的位置，与这些数的关系不变，仍有 <span class="arithmatex">\(q\)</span> 个</li>
+<li>变化：0</li>
+</ol>
+<p><strong>总变化</strong>：<span class="arithmatex">\(+1\)</span>（奇数）</p>
+<p>因此，对换后逆序数的奇偶性<strong>一定改变</strong>。</p>
+<p><strong>证法2（归纳法）</strong>：
+- 相邻对换：逆序数改变 ±1（奇数），奇偶性改变
+- 一般对换：相当于连续若干次相邻对换，对换次数为奇数</p>
+<p><strong>关键思路</strong>：分析对换前后逆序数的<strong>精确变化量</strong>。</p>
+<hr />
+<h3 id="_9">易错点提醒<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>逆序数计算漏数</strong></li>
+<li>每个数都要统计后面比它小的</li>
+<li>
+<p>容易遗漏中间的数</p>
+</li>
+<li>
+<p><strong>混淆"逆序"与"顺序"</strong></p>
+</li>
+<li><span class="arithmatex">\(j_s &gt; j_t\)</span>（<span class="arithmatex">\(s &lt; t\)</span>）是逆序</li>
+<li>
+<p><span class="arithmatex">\(j_s &lt; j_t\)</span>（<span class="arithmatex">\(s &lt; t\)</span>）是顺序，不计数</p>
+</li>
+<li>
+<p><strong>忘记对换的奇偶性结论</strong></p>
+</li>
+<li>对换<strong>总是</strong>改变奇偶性</li>
+<li>不是"可能改变"</li>
+</ol>
+<hr />
+<h3 id="_10">思考题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求排列 <span class="arithmatex">\(n! \ldots 321\)</span> 的逆序数，并讨论奇偶性。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：在 <span class="arithmatex">\(n\)</span> 个元素的全排列中，奇排列和偶排列的个数相等，各为 <span class="arithmatex">\(\frac{n!}{2}\)</span>。</p>
+</li>
+<li>
+<p><strong>（应用）</strong> 判断下述排列是奇排列还是偶排列：
+   (a) <span class="arithmatex">\(1234567\)</span>
+   (b) <span class="arithmatex">\(7654321\)</span>
+   (c) <span class="arithmatex">\(2461357\)</span></p>
+</li>
+</ol>
+<hr />
+<h2 id="22-n">2.2 n阶行列式的定义<a class="headerlink" href="#22-n" title="Permanent link">&para;</a></h2>
+<h3 id="_11">【概念引入动机】为什么要引入行列式？<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>对于 <span class="arithmatex">\(n \times n\)</span> 的线性方程组：
+$<span class="arithmatex">\(\begin{cases} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\ a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\ \cdots \\ a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = b_n \end{cases}\)</span>$</p>
+<p>我们希望能有一个<strong>简单判据</strong>判断是否有唯一解，并给出解的公式。</p>
+<p>从2元方程组出发：
+$<span class="arithmatex">\(\begin{cases} a_{11}x_1 + a_{12}x_2 = b_1 \\ a_{21}x_1 + a_{22}x_2 = b_2 \end{cases}\)</span>$</p>
+<p>解为：
+$<span class="arithmatex">\(x_1 = \frac{b_1a_{22} - b_2a_{12}}{a_{11}a_{22} - a_{12}a_{21}}, \quad x_2 = \frac{a_{11}b_2 - a_{21}b_1}{a_{11}a_{22} - a_{12}a_{21}}\)</span>$</p>
+<p>观察分母 <span class="arithmatex">\(a_{11}a_{22} - a_{12}a_{21}\)</span>，这是系数的某种组合——这就是<strong>2阶行列式</strong>。</p>
+<h3 id="2_2">一、2阶行列式<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[|A| = \begin{vmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{vmatrix} = a_{11}a_{22} - a_{12}a_{21}\]</div>
+<p><strong>几何意义</strong>：平行四边形的面积（向量 <span class="arithmatex">\((a_{11}, a_{21})\)</span> 和 <span class="arithmatex">\((a_{12}, a_{22})\)</span> 构成的平行四边形）。</p>
+<h3 id="n">二、n阶行列式的定义<a class="headerlink" href="#n" title="Permanent link">&para;</a></h3>
+<h4 id="_12">【定义引入】<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>观察2阶行列式的结构：
+$<span class="arithmatex">\(a_{11}a_{22} - a_{12}a_{21}\)</span>$</p>
+<p>这是<strong>两项的和</strong>：
+- 第一项 <span class="arithmatex">\(a_{11}a_{22}\)</span>：取第1行第1列、第2行第2列（对角线上的元素），符号为正
+- 第二项 <span class="arithmatex">\(a_{12}a_{21}\)</span>：取第1行第2列、第2行第1列（副对角线上的元素），符号为负</p>
+<p><strong>推广到n阶</strong>：</p>
+<blockquote>
+<p><strong>定义</strong>：n级矩阵 <span class="arithmatex">\(A = (a_{ij})\)</span> 的<strong>n阶行列式</strong>
+$<span class="arithmatex">\(|A| = \begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} \end{vmatrix}\)</span>$</p>
+<p>是 <span class="arithmatex">\(n!\)</span> 项的<strong>代数和</strong>，其中每一项都是位于<strong>不同行、不同列</strong>的n个元素的乘积。把这n个元素以行指标为自然顺序排好位置：
+- 当列指标构成<strong>偶排列</strong>时，该项带<strong>正号</strong>
+- 当列指标构成<strong>奇排列</strong>时，该项带<strong>负号</strong></p>
+</blockquote>
+<div class="arithmatex">\[|A| = \sum_{j_1j_2\ldots j_n} (-1)^{\tau(j_1j_2\ldots j_n)} a_{1j_1}a_{2j_2}\cdots a_{nj_n}\]</div>
+<p>其中求和遍历所有 <span class="arithmatex">\(n\)</span> 元排列。</p>
+<p><strong>为什么这样定义？</strong>
+1. 2阶情形符合
+2. 行列式的七条性质（见下节）都可以从这一定义推导出来
+3. 克拉默法则等核心定理都依赖于这一定义</p>
+<h3 id="_13">三、重要说明<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>注意</strong>：
+- n级<strong>矩阵</strong>A是一张<strong>表</strong>
+- n阶<strong>行列式</strong>|A|是一个<strong>数</strong>
+- 矩阵用圆括号或方括号，行列式用两条竖线</p>
+</blockquote>
+<hr />
+<h3 id="_14">典型例题<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h4 id="4">例4 【计算题】用定义计算低阶行列式<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算 <span class="arithmatex">\(\begin{vmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{vmatrix}\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<div class="arithmatex">\[|A| = 1 \times 4 - 2 \times 3 = 4 - 6 = -2\]</div>
+<p><strong>按定义验证</strong>：
+- 排列 <span class="arithmatex">\(12\)</span>（偶排列）：<span class="arithmatex">\(1 \times 4 = 4\)</span>，取正
+- 排列 <span class="arithmatex">\(21\)</span>（奇排列）：<span class="arithmatex">\(2 \times 3 = 6\)</span>，取负
+- <span class="arithmatex">\(|A| = 4 - 6 = -2\)</span></p>
+<hr />
+<h4 id="5">例5 【计算题】上三角形行列式<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算下述 <span class="arithmatex">\(n\)</span> 阶行列式（主对角线以上元素不全为0，但下方全为0）：
+$<span class="arithmatex">\(D = \begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ 0 &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; a_{nn} \end{vmatrix}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>分析</strong>：下三角形行列式的完全展开式中，只有<strong>一项</strong>可能非零。</p>
+<p>在 <span class="arithmatex">\(n!\)</span> 项中，每一项都要从每行取一个元素且不同列：
+- 第1行必须取第1列（其他列下面全是0）
+- 第2行必须取第2列或之前（但第1列已被取）
+- <span class="arithmatex">\(\cdots\)</span>
+- 第 <span class="arithmatex">\(n\)</span> 行必须取第 <span class="arithmatex">\(n\)</span> 列</p>
+<p>唯一可能的项是：<span class="arithmatex">\(a_{11}a_{22}\cdots a_{nn}\)</span>，对应的列指标排列是 <span class="arithmatex">\(12\ldots n\)</span>（偶排列）。</p>
+<p>因此：
+$<span class="arithmatex">\(D = a_{11}a_{22}\cdots a_{nn}\)</span>$</p>
+<p><strong>结论</strong>：下三角形行列式的值等于<strong>主对角线元素的乘积</strong>。</p>
+<p><strong>关键思路</strong>：观察行列式的结构，利用完全展开式中只有一项可能非零的性质。</p>
+<hr />
+<h4 id="6">例6 【计算题】特殊行列式——反对角线元素乘积<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算下述n阶行列式：
+$<span class="arithmatex">\(\begin{vmatrix} 0 &amp; 0 &amp; \cdots &amp; 0 &amp; a_1 \\ 0 &amp; 0 &amp; \cdots &amp; a_2 &amp; 0 \\ \vdots &amp; \vdots &amp; &amp; \vdots &amp; \vdots \\ 0 &amp; a_{n-1} &amp; \cdots &amp; 0 &amp; 0 \\ a_n &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \end{vmatrix}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>分析</strong>：这是一个<strong>副对角线行列式</strong>（反对角线以外全是0）。</p>
+<p>唯一可能的项是 <span class="arithmatex">\(a_1 \cdot a_2 \cdots a_n\)</span>，但需要确定它的符号。</p>
+<p>这个项对应的列指标排列是 <span class="arithmatex">\(n(n-1)\ldots321\)</span>。</p>
+<p>由第2.1节例2：
+$<span class="arithmatex">\(\tau(n(n-1)\ldots321) = \frac{n(n-1)}{2}\)</span>$</p>
+<p>因此：
+$<span class="arithmatex">\(|A| = (-1)^{\frac{n(n-1)}{2}} a_1a_2\cdots a_n\)</span>$</p>
+<p><strong>结论</strong>：
+$<span class="arithmatex">\(|A| = (-1)^{\frac{n(n-1)}{2}} a_1a_2\cdots a_n\)</span>$</p>
+<p><strong>记忆口诀</strong>：副对角线行列式，值为 <span class="arithmatex">\((-1)^{\frac{n(n-1)}{2}}\)</span> 乘以副对角线元素乘积。</p>
+<hr />
+<h3 id="_15">易错点提醒<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆行列式与矩阵</strong></li>
+<li>行列式是<strong>数</strong>，矩阵是<strong>表</strong></li>
+<li>
+<p><span class="arithmatex">\(|A| = 0\)</span> 不代表 <span class="arithmatex">\(A = 0\)</span></p>
+</li>
+<li>
+<p><strong>忘记确定符号</strong></p>
+</li>
+<li>每项都有符号，由列指标排列的奇偶性决定</li>
+<li>
+<p>不能只看元素乘积</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(n!\)</span> 项的求和</strong></p>
+</li>
+<li>当 <span class="arithmatex">\(n \geq 4\)</span> 时，不能枚举所有项</li>
+<li>需要利用性质化简</li>
+</ol>
+<hr />
+<h3 id="_16">思考题<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（概念理解）</strong> 用行列式定义证明：若矩阵 <span class="arithmatex">\(A\)</span> 的某行全为 0，则 <span class="arithmatex">\(|A| = 0\)</span>。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 计算 <span class="arithmatex">\(\begin{vmatrix} 2 &amp; 1 &amp; 3 \\ 0 &amp; 5 &amp; 1 \\ 0 &amp; 0 &amp; 3 \end{vmatrix}\)</span>。</p>
+</li>
+<li>
+<p><strong>（探索）</strong> 思考：为什么行列式的定义要用排列的奇偶性来确定符号？能否用其他方式？</p>
+</li>
+</ol>
+<hr />
+<h2 id="23">2.3 行列式的性质<a class="headerlink" href="#23" title="Permanent link">&para;</a></h2>
+<h3 id="_17">【概念引入动机】为什么要研究行列式的性质？<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>按照定义计算行列式需要 <span class="arithmatex">\(n!\)</span> 项的求和，当 <span class="arithmatex">\(n\)</span> 较大时是不可行的。行列式的性质可以把复杂行列式<strong>化简</strong>成容易计算的形式（如上三角形），或者用来<strong>证明</strong>行列式的理论结果。</p>
+<h3 id="_18">七条基本性质<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">性质1【转置不变性】<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(|A'| = |A|\)</span>（行列式转置后值不变）</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+- 转置后，行变成列，列变成行
+- 每一项 <span class="arithmatex">\(a_{1j_1}a_{2j_2}\cdots a_{nj_n}\)</span> 对应一项 <span class="arithmatex">\(a_{j_11}a_{j_22}\cdots a_{j_nn}\)</span>
+- 两次转置恢复原状</p>
+<p><strong>意义</strong>：行和列是对称的，所有对行成立的性质对列也成立。</p>
+<h4 id="2_3">性质2【两行互换】<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：互换行列式的两行，行列式<strong>变号</strong>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+- 互换第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(j\)</span> 行（<span class="arithmatex">\(i &lt; j\)</span>）
+- 完全展开式中，每一项的行指标交换了位置
+- 相当于对列指标排列做了一次对换
+- 对换改变奇偶性，所以符号改变</p>
+<p><strong>推论</strong>：若两行相等，则行列式为 0。</p>
+<h4 id="3_1">性质3【某行元素有公因子】<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：行列式某行元素的公因子可以<strong>提到行列式外面</strong>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：完全展开式中，每一项都含有该行的因子，提取 <span class="arithmatex">\(n!\)</span> 项的公共因子。</p>
+<p><strong>推论</strong>：若某行全为零，则行列式为 0。</p>
+<h4 id="4_1">性质4【拆行分配】<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：若行列式某行元素都是两组数之和：
+$<span class="arithmatex">\(a_{ij} = b_{ij} + c_{ij}\)</span>$
+则行列式可以拆成两个行列式之和：
+$<span class="arithmatex">\(|A| = |B| + |C|\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>：完全展开式中，每一项都按加法拆分。</p>
+<h4 id="5_1">性质5【倍加不变】<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：将某行的 <span class="arithmatex">\(k\)</span> 倍加到另一行，行列式值<strong>不变</strong>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：由性质2（变号）和性质4（拆行）可得。</p>
+<p><strong>重要应用</strong>：这是高斯消元法在行列式计算中的应用。</p>
+<h4 id="6_1">性质6【行比例为零】<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：若行列式有两行<strong>成比例</strong>，则行列式为 0。</p>
+</blockquote>
+<p><strong>证明思路</strong>：由性质3（提因子）和性质2推论（两行相等为零）可得。</p>
+<h4 id="7">性质7【乘积公式】<a class="headerlink" href="#7" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：若 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，则 <span class="arithmatex">\(|AB| = |A| \cdot |B|\)</span>。</p>
+</blockquote>
+<p><strong>证明思路</strong>：由行列式的定义，<span class="arithmatex">\(AB\)</span> 的完全展开式可以重组为 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 的展开式的乘积（较复杂，后续章节有更简单的证明）。</p>
+<h3 id="_19">计算行列式的基本方法<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>化成上三角形</strong>（最常用）</li>
+<li>利用性质5（倍加不变）把下方元素消成0</li>
+<li>最终化为上三角形行列式</li>
+<li>
+<p>值等于主对角线元素的乘积</p>
+</li>
+<li>
+<p><strong>拆项法</strong></p>
+</li>
+<li>
+<p>利用性质4把复杂行拆开</p>
+</li>
+<li>
+<p><strong>利用各行元素和相同</strong></p>
+</li>
+<li>把第2,3,...,n列都加到第1列</li>
+<li>然后提因子、化简</li>
+</ol>
+<hr />
+<h3 id="_20">典型例题<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h4 id="7_1">例7 【计算题】利用性质计算行列式<a class="headerlink" href="#7_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算
+$<span class="arithmatex">\(\begin{vmatrix} -2 &amp; 1 &amp; -3 \\ 9 &amp; 8 &amp; 10 \\ 2 &amp; -3 &amp; 4 \end{vmatrix}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：化为上三角形</strong></p>
+<p><strong>第一步</strong>：把 <span class="arithmatex">\(a_{11}\)</span> 变成 1（方便计算）：
+- 第1行提取 -2：<span class="arithmatex">\(= -2 \begin{vmatrix} 1 &amp; -\frac{1}{2} &amp; \frac{3}{2} \\ 9 &amp; 8 &amp; 10 \\ 2 &amp; -3 &amp; 4 \end{vmatrix}\)</span></p>
+<p><strong>第二步</strong>：消去第2、3行的第1列元素：
+- <span class="arithmatex">\(r_2 - 9r_1 \to r_2\)</span>：<span class="arithmatex">\(\begin{vmatrix} 1 &amp; -\frac{1}{2} &amp; \frac{3}{2} \\ 0 &amp; \frac{25}{2} &amp; -\frac{7}{2} \\ 2 &amp; -3 &amp; 4 \end{vmatrix}\)</span>
+- <span class="arithmatex">\(r_3 - 2r_1 \to r_3\)</span>：<span class="arithmatex">\(\begin{vmatrix} 1 &amp; -\frac{1}{2} &amp; \frac{3}{2} \\ 0 &amp; \frac{25}{2} &amp; -\frac{7}{2} \\ 0 &amp; -2 &amp; 1 \end{vmatrix}\)</span></p>
+<p><strong>第三步</strong>：消去第3行的第2列元素：
+- <span class="arithmatex">\(r_3 + \frac{4}{25}r_2 \to r_3\)</span>：<span class="arithmatex">\(\begin{vmatrix} 1 &amp; -\frac{1}{2} &amp; \frac{3}{2} \\ 0 &amp; \frac{25}{2} &amp; -\frac{7}{2} \\ 0 &amp; 0 &amp; \frac{11}{25} \end{vmatrix}\)</span></p>
+<p><strong>第四步</strong>：计算结果：
+$<span class="arithmatex">\(= -2 \times 1 \times \frac{25}{2} \times \frac{11}{25} = -2 \times \frac{11}{2} = -11\)</span>$</p>
+<p><strong>方法2：直接化简</strong></p>
+<p>注意：也可以不用提因子，直接用倍加变换：</p>
+<div class="arithmatex">\[\begin{vmatrix} -2 &amp; 1 &amp; -3 \\ 9 &amp; 8 &amp; 10 \\ 2 &amp; -3 &amp; 4 \end{vmatrix} \xrightarrow{r_2 + \frac{9}{2}r_1} \begin{vmatrix} -2 &amp; 1 &amp; -3 \\ 0 &amp; \frac{25}{2} &amp; -\frac{7}{2} \\ 2 &amp; -3 &amp; 4 \end{vmatrix}\]</div>
+<p>继续化简...</p>
+<p><strong>关键思路</strong>：利用行列式性质将行列式化成上三角形计算。</p>
+<p><strong>技巧总结</strong>：
+- 选择有1或-1的位置作为主元
+- 用倍加变换消元，不改变行列式值</p>
+<hr />
+<h4 id="8">例8 【计算题】行和相等的行列式<a class="headerlink" href="#8" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算
+$<span class="arithmatex">\(D = \begin{vmatrix} 1 &amp; 2 &amp; 3 \\ 2 &amp; 3 &amp; 4 \\ 3 &amp; 4 &amp; 5 \end{vmatrix}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>观察</strong>：每行元素之和相等：<span class="arithmatex">\(1+2+3=6\)</span>, <span class="arithmatex">\(2+3+4=9\)</span>, <span class="arithmatex">\(3+4+5=12\)</span>。</p>
+<p><strong>方法：加到第一列</strong></p>
+<p>把第2、3列都加到第1列：
+$<span class="arithmatex">\(D = \begin{vmatrix} 1+2+3 &amp; 2 &amp; 3 \\ 2+3+4 &amp; 3 &amp; 4 \\ 3+4+5 &amp; 4 &amp; 5 \end{vmatrix} = \begin{vmatrix} 6 &amp; 2 &amp; 3 \\ 9 &amp; 3 &amp; 4 \\ 12 &amp; 4 &amp; 5 \end{vmatrix}\)</span>$</p>
+<p><strong>提因子</strong>：
+- 第1列提取 3：<span class="arithmatex">\(= 3 \begin{vmatrix} 2 &amp; 2 &amp; 3 \\ 3 &amp; 3 &amp; 4 \\ 4 &amp; 4 &amp; 5 \end{vmatrix}\)</span></p>
+<p><strong>发现</strong>：第1列与第2列成比例！
+- 两列成比例 → 行列式为 0</p>
+<p>因此 <span class="arithmatex">\(D = 3 \times 0 = 0\)</span>。</p>
+<p><strong>验证</strong>：直接计算：<span class="arithmatex">\(1(3\cdot5-4\cdot4) - 2(2\cdot5-4\cdot3) + 3(2\cdot4-3\cdot3) = 1(-1) - 2(-2) + 3(-1) = -1+4-3=0\)</span></p>
+<p><strong>关键思路</strong>：利用"行和相等"的行列式结构，把其他列加到一列，提取因子后出现比例。</p>
+<hr />
+<h4 id="9">例9 【证明题】行列式乘积公式<a class="headerlink" href="#9" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，证明：<span class="arithmatex">\(|AB| = |A| \cdot |B|\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：利用初等矩阵</strong></p>
+<p>任何可逆矩阵都可以写成初等矩阵的乘积：<span class="arithmatex">\(A = P_1 P_2 \cdots P_t\)</span>。</p>
+<p>初等矩阵的行列式：
+- 互换两行：<span class="arithmatex">\(|E_{ij}| = -1\)</span>
+- 某行乘 <span class="arithmatex">\(k\)</span>：<span class="arithmatex">\(|D_i(k)| = k\)</span>
+- 某行 <span class="arithmatex">\(k\)</span> 倍加到另一行：<span class="arithmatex">\(|T_{ij}(k)| = 1\)</span></p>
+<p>因此 <span class="arithmatex">\(|A| = |P_1| \cdot |P_2| \cdots |P_t|\)</span>。</p>
+<p>而 <span class="arithmatex">\(AB = P_1 P_2 \cdots P_t B\)</span>，所以：
+$<span class="arithmatex">\(|AB| = |P_1| \cdot |P_2| \cdots |P_t| \cdot |B| = |A| \cdot |B|\)</span>$</p>
+<p><strong>方法2：直接证明</strong></p>
+<p>构造分块矩阵，利用行列式的性质（证明较繁琐）。</p>
+<p><strong>关键思路</strong>：利用初等矩阵的行列式性质和矩阵分解。</p>
+<hr />
+<h3 id="_21">易错点提醒<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆行和列变换</strong></li>
+<li>行列式性质主要针对<strong>行</strong></li>
+<li>
+<p>转置后行列式不变，所以对列也适用</p>
+</li>
+<li>
+<p><strong>拆项时只拆了一部分</strong></p>
+</li>
+<li>拆行时，<strong>每一项</strong>都要拆分</li>
+<li>
+<p>不是只拆某一项</p>
+</li>
+<li>
+<p><strong>倍加变换记错方向</strong></p>
+</li>
+<li>"把第 <span class="arithmatex">\(i\)</span> 行的 <span class="arithmatex">\(k\)</span> 倍加到第 <span class="arithmatex">\(j\)</span> 行"记作：<span class="arithmatex">\(r_j + k r_i\)</span></li>
+<li>不能写成 <span class="arithmatex">\(r_i + k r_j\)</span>（会改变行列式值）</li>
+</ol>
+<hr />
+<h3 id="_22">思考题<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 计算 <span class="arithmatex">\(\begin{vmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 2 &amp; 3 &amp; 4 &amp; 5 \\ 3 &amp; 4 &amp; 5 &amp; 6 \\ 4 &amp; 5 &amp; 6 &amp; 7 \end{vmatrix}\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n\)</span> 级矩阵，则 <span class="arithmatex">\(|kA| = k^n |A|\)</span>。</p>
+</li>
+<li>
+<p><strong>（应用）</strong> 利用行列式性质判断下述矩阵是否可逆：
+   (a) <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>
+   (b) <span class="arithmatex">\(\begin{pmatrix} 2 &amp; 4 \\ 1 &amp; 2 \end{pmatrix}\)</span></p>
+</li>
+</ol>
+<hr />
+<h2 id="24">2.4 行列式按一行（列）展开<a class="headerlink" href="#24" title="Permanent link">&para;</a></h2>
+<h3 id="_23">【概念引入动机】为什么要按行（列）展开？<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>当行列式较大时，直接按定义计算需要 <span class="arithmatex">\(n!\)</span> 项。<strong>按行（列）展开</strong>可以把 <span class="arithmatex">\(n\)</span> 阶行列式化为 <span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\((n-1)\)</span> 阶行列式，是<strong>降阶计算</strong>的基本方法。</p>
+<h3 id="_24">一、余子式与代数余子式<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<h4 id="_25">定义<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>余子式</strong> <span class="arithmatex">\(M_{ij}\)</span>：划去第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(j\)</span> 列，剩下的元素按原顺序组成的 <span class="arithmatex">\((n-1)\)</span> 级矩阵的行列式</p>
+</li>
+<li>
+<p><strong>代数余子式</strong> <span class="arithmatex">\(A_{ij} = (-1)^{i+j} M_{ij}\)</span></p>
+</li>
+</ul>
+<p><strong>为什么要有 <span class="arithmatex">\((-1)^{i+j}\)</span> 因子？</strong>
+这是行列式定义的自然延伸：第 <span class="arithmatex">\(i\)</span> 行第 <span class="arithmatex">\(j\)</span> 列元素的符号由行列式完全展开式中的位置决定。</p>
+<h3 id="_26">二、按一行（列）展开定理<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<h4 id="1-i">定理1（按第 <span class="arithmatex">\(i\)</span> 行展开）<a class="headerlink" href="#1-i" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：
+$<span class="arithmatex">\(|A| = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}\)</span>$</p>
+<p>即：<span class="arithmatex">\(|A| = \sum_{j=1}^{n} a_{ij}A_{ij}\)</span></p>
+</blockquote>
+<p><strong>证明思路</strong>：
+- 把第 <span class="arithmatex">\(i\)</span> 行的每个元素 <span class="arithmatex">\(a_{ij}\)</span> 看作它所在列的唯一非零元素
+- 把行列式按第 <span class="arithmatex">\(i\)</span> 行展开
+- 每一项 <span class="arithmatex">\(a_{ij} \cdot M_{ij}\)</span> 的符号由 <span class="arithmatex">\((-1)^{i+j}\)</span> 确定</p>
+<h4 id="2-j">定理2（按第 <span class="arithmatex">\(j\)</span> 列展开）<a class="headerlink" href="#2-j" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：
+$<span class="arithmatex">\(|A| = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj} = \sum_{i=1}^{n} a_{ij}A_{ij}\)</span>$</p>
+</blockquote>
+<h3 id="_27">三、展开定理的应用<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<h4 id="_28">同一行（列）元素与代数余子式的乘积<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：
+$<span class="arithmatex">\(a_{i1}A_{k1} + a_{i2}A_{k2} + \cdots + a_{in}A_{kn} = \begin{cases} |A|, &amp; i = k \\ 0, &amp; i \neq k \end{cases}\)</span>$</p>
+<p>同理：
+$<span class="arithmatex">\(a_{1j}A_{1k} + a_{2j}A_{2k} + \cdots + a_{nj}A_{nk} = \begin{cases} |A|, &amp; j = k \\ 0, &amp; j \neq k \end{cases}\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+- <span class="arithmatex">\(i = k\)</span>：就是展开定理本身
+- <span class="arithmatex">\(i \neq k\)</span>：把第 <span class="arithmatex">\(i\)</span> 行的元素换成第 <span class="arithmatex">\(k\)</span> 行的元素，新行列式有两行相等，为 0</p>
+<p><strong>应用</strong>：可以用来求某些特殊行列式的值。</p>
+<h3 id="_29">四、范德蒙行列式<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<h4 id="_30">定义与公式<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>范德蒙行列式</strong>：
+$<span class="arithmatex">\(D = \begin{vmatrix} 1 &amp; 1 &amp; \cdots &amp; 1 \\ a_1 &amp; a_2 &amp; \cdots &amp; a_n \\ a_1^2 &amp; a_2^2 &amp; \cdots &amp; a_n^2 \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a_1^{n-1} &amp; a_2^{n-1} &amp; \cdots &amp; a_n^{n-1} \end{vmatrix} = \prod_{1 \leq j &lt; i \leq n} (a_i - a_j)\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>（数学归纳法）：
+1. <span class="arithmatex">\(n = 2\)</span> 时，<span class="arithmatex">\(D = a_2 - a_1\)</span>，显然成立
+2. 假设 <span class="arithmatex">\(n-1\)</span> 阶范德蒙行列式成立
+3. 对 <span class="arithmatex">\(n\)</span> 阶范德蒙行列式，从最后一行开始，每行减去前一行乘以 <span class="arithmatex">\(a_1\)</span>
+4. 提取因子后得到 <span class="arithmatex">\((n-1)\)</span> 阶范德蒙行列式</p>
+<p><strong>重要结论</strong>：</p>
+<blockquote>
+<p><span class="arithmatex">\(n\)</span> 阶范德蒙行列式不等于零 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(a_1, a_2, \ldots, a_n\)</span> <strong>两两不等</strong>。</p>
+</blockquote>
+<hr />
+<h3 id="_31">典型例题<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<h4 id="10">例10 【计算题】按行展开计算<a class="headerlink" href="#10" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算
+$<span class="arithmatex">\(\begin{vmatrix} 5 &amp; 2 &amp; 3 &amp; 3 \\ 0 &amp; 1 &amp; -2 &amp; 4 \\ 0 &amp; 7 &amp; 13 &amp; -3 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{vmatrix}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>观察</strong>：第1列只有一个非零元素 <span class="arithmatex">\(5\)</span>，按第1列展开最方便。</p>
+<p><strong>按第1列展开</strong>：
+$<span class="arithmatex">\(= 5 \times (-1)^{1+1} \begin{vmatrix} 1 &amp; -2 &amp; 4 \\ 7 &amp; 13 &amp; -3 \\ 0 &amp; 0 &amp; 1 \end{vmatrix}\)</span>$</p>
+<p><strong>继续按第3行展开</strong>（因为有2个零）：
+$<span class="arithmatex">\(= 5 \times 1 \times (-1)^{3+3} \begin{vmatrix} 1 &amp; -2 \\ 7 &amp; 13 \end{vmatrix} = 5 \times (1 \times 13 - (-2) \times 7) = 5 \times (13 + 14) = 5 \times 27 = 135\)</span>$</p>
+<p><strong>关键思路</strong>：选择<strong>0多的行或列展开</strong>，逐步降阶。</p>
+<p><strong>技巧总结</strong>：
+- 优先选择有0多的行或列
+- 可以结合行列式性质（先化简，再展开）
+- <span class="arithmatex">\((-1)^{i+j}\)</span> 要仔细计算</p>
+<hr />
+<h4 id="11">例11 【计算题】范德蒙行列式应用<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算
+$<span class="arithmatex">\(\begin{vmatrix} 1 &amp; 1 &amp; 1 \\ 2 &amp; 3 &amp; 4 \\ 4 &amp; 9 &amp; 16 \end{vmatrix}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>观察</strong>：这是范德蒙行列式的形式：
+$<span class="arithmatex">\(a_1 = 2, \quad a_2 = 3, \quad a_3 = 4\)</span>$</p>
+<p>注意：第1行是 <span class="arithmatex">\(1, 1, 1\)</span>，不是 <span class="arithmatex">\(a_i^0\)</span> 的形式...</p>
+<p>实际上，这是一个"列"形式的范德蒙行列式：
+$<span class="arithmatex">\(\begin{vmatrix} 1 &amp; 1 &amp; 1 \\ 2 &amp; 3 &amp; 4 \\ 2^2 &amp; 3^2 &amp; 4^2 \end{vmatrix} = (3-2)(4-2)(4-3) = 1 \times 2 \times 1 = 2\)</span>$</p>
+<p><strong>直接验证</strong>：
+$<span class="arithmatex">\(= 1 \times (3 \times 16 - 4 \times 9) - 1 \times (2 \times 16 - 4 \times 4) + 1 \times (2 \times 9 - 3 \times 4) = 1 \times 12 - 1 \times 16 + 1 \times 6 = 2\)</span>$</p>
+<p><strong>关键思路</strong>：直接应用范德蒙行列式公式：<span class="arithmatex">\(\prod_{i&gt;j} (a_i - a_j)\)</span>。</p>
+<hr />
+<h4 id="12">例12 【证明题】代数余子式的性质<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，证明：<span class="arithmatex">\(A \cdot A^* = A^* \cdot A = |A| I\)</span>，其中 <span class="arithmatex">\(A^*\)</span> 为 <span class="arithmatex">\(A\)</span> 的伴随矩阵（<span class="arithmatex">\(A^*\)</span> 的 <span class="arithmatex">\((i,j)\)</span> 元是 <span class="arithmatex">\(A_{ji}\)</span>）。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>分析</strong>：<span class="arithmatex">\(A^*\)</span> 的 <span class="arithmatex">\((i,j)\)</span> 元是 <span class="arithmatex">\(A_{ji}\)</span>（注意下标顺序）。</p>
+<p><strong>计算 <span class="arithmatex">\(A \cdot A^*\)</span> 的 <span class="arithmatex">\((i,j)\)</span> 元</strong>：
+$<span class="arithmatex">\((AA^*)_{ij} = \sum_{k=1}^{n} a_{ik} A_{jk}\)</span>$</p>
+<ul>
+<li>若 <span class="arithmatex">\(i = j\)</span>：<span class="arithmatex">\((AA^*)_{ii} = \sum_{k=1}^{n} a_{ik} A_{ik} = |A|\)</span>（按第 <span class="arithmatex">\(i\)</span> 行展开）</li>
+<li>若 <span class="arithmatex">\(i \neq j\)</span>：把 <span class="arithmatex">\(a_{i1}, \ldots, a_{in}\)</span> 换成 <span class="arithmatex">\(a_{j1}, \ldots, a_{jn}\)</span>，得到有两行相等的矩阵，行列式为 0</li>
+</ul>
+<p>因此：
+$<span class="arithmatex">\((AA^*)_{ij} = \begin{cases} |A|, &amp; i = j \\ 0, &amp; i \neq j \end{cases} = |A| \cdot \delta_{ij}\)</span>$</p>
+<p>即 <span class="arithmatex">\(AA^* = |A| I\)</span>。</p>
+<p>同理可证 <span class="arithmatex">\(A^*A = |A| I\)</span>。</p>
+<p><strong>关键思路</strong>：利用代数余子式的展开性质。</p>
+<hr />
+<h3 id="_32">易错点提醒<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>代数余子式符号错误</strong></li>
+<li><span class="arithmatex">\(A_{ij} = (-1)^{i+j} M_{ij}\)</span></li>
+<li>
+<p>不能忘记 <span class="arithmatex">\((-1)^{i+j}\)</span> 因子</p>
+</li>
+<li>
+<p><strong>混淆 <span class="arithmatex">\(A^*\)</span> 和 <span class="arithmatex">\(A^{-1}\)</span></strong></p>
+</li>
+<li><span class="arithmatex">\(A^* = (A_{ij})^T\)</span>（转置，不是逆）</li>
+<li>
+<p><span class="arithmatex">\(A^{-1} = \frac{1}{|A|} A^*\)</span>（当 <span class="arithmatex">\(|A| \neq 0\)</span> 时）</p>
+</li>
+<li>
+<p><strong>展开时行列式顺序</strong></p>
+</li>
+<li>按第 <span class="arithmatex">\(i\)</span> 行展开时，余子式是 <span class="arithmatex">\(M_{ij}\)</span></li>
+<li>符号 <span class="arithmatex">\((-1)^{i+j}\)</span> 在代数余子式中已经包含</li>
+</ol>
+<hr />
+<h3 id="_33">思考题<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 计算 <span class="arithmatex">\(\begin{vmatrix} 3 &amp; 1 &amp; -2 &amp; 4 \\ 0 &amp; 2 &amp; 1 &amp; 3 \\ 0 &amp; 0 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 0 &amp; 5 \end{vmatrix}\)</span>。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 计算范德蒙行列式 <span class="arithmatex">\(\begin{vmatrix} 1 &amp; 1 &amp; 1 \\ 3 &amp; 5 &amp; 7 \\ 9 &amp; 25 &amp; 49 \end{vmatrix}\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，<span class="arithmatex">\(A^*\)</span> 为其伴随矩阵，证明：<span class="arithmatex">\(|A^*| = |A|^{n-1}\)</span>（当 <span class="arithmatex">\(|A| \neq 0\)</span> 时）。</p>
+</li>
+</ol>
+<hr />
+<h2 id="25-cramer">2.5 克拉默(Cramer)法则<a class="headerlink" href="#25-cramer" title="Permanent link">&para;</a></h2>
+<h3 id="_34">【概念引入动机】为什么要引入克拉默法则？<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<p>我们已经会用高斯消元法解线性方程组，但克拉默法则给出了<strong>解的显式公式</strong>：</p>
+<div class="arithmatex">\[x_j = \frac{|B_j|}{|A|}\]</div>
+<p>这不仅在理论上有重要意义，而且在某些特殊情况下（如系数矩阵含有参数，或只需要求某一个未知量时）非常有用。</p>
+<h3 id="nn">一、n个方程n个未知量方程组有唯一解的条件<a class="headerlink" href="#nn" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">定理1<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：n个方程n个未知量的线性方程组
+$<span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span>$
+有唯一解的充分必要条件是：
+$<span class="arithmatex">\(|A| \neq 0\)</span>$</p>
+<p>其中 <span class="arithmatex">\(A\)</span> 为系数矩阵。</p>
+</blockquote>
+<p><strong>证明思路</strong>：
+1. <strong>必要性</strong>：若有唯一解，则 <span class="arithmatex">\(A\)</span> 可逆（行列式不为0）
+2. <strong>充分性</strong>：若 <span class="arithmatex">\(|A| \neq 0\)</span>，通过克拉默法则可构造出唯一解</p>
+<h3 id="_35">二、克拉默法则<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<h4 id="2_4">定理2<a class="headerlink" href="#2_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>克拉默法则</strong>：当 <span class="arithmatex">\(|A| \neq 0\)</span> 时，方程组的唯一解为：
+$<span class="arithmatex">\(x_j = \frac{|B_j|}{|A|}, \quad j = 1, 2, \ldots, n\)</span>$</p>
+<p>其中 <span class="arithmatex">\(B_j\)</span> 是将系数矩阵 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(j\)</span> 列换成常数项 <span class="arithmatex">\(\mathbf{b}\)</span> 得到的矩阵。</p>
+</blockquote>
+<p><strong>证明</strong>（简要）：
+设解为 <span class="arithmatex">\(\mathbf{x} = (x_1, x_2, \ldots, x_n)'\)</span>。</p>
+<p>对第 <span class="arithmatex">\(j\)</span> 个分量：
+- <span class="arithmatex">\(A \cdot A^* = |A| I\)</span>（见上节例12）
+- <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span>
+- 两边左乘 <span class="arithmatex">\(A^*\)</span>：<span class="arithmatex">\(|A| \mathbf{x} = A^* \mathbf{b}\)</span>
+- 所以 <span class="arithmatex">\(x_j = \frac{(A^* \mathbf{b})_j}{|A|} = \frac{\sum_{k=1}^{n} A_{kj} b_k}{|A|} = \frac{|B_j|}{|A|}\)</span></p>
+<hr />
+<h3 id="_36">典型例题<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<h4 id="13">例13 【计算题】应用克拉默法则<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：用克拉默法则解方程组：
+$<span class="arithmatex">\(\begin{cases} 2x_1 + x_2 - 3x_3 = 1 \\ x_1 - 2x_2 + x_3 = 2 \\ 3x_1 + 2x_2 + x_3 = 9 \end{cases}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步</strong>：计算系数行列式 <span class="arithmatex">\(|A|\)</span>：
+$<span class="arithmatex">\(|A| = \begin{vmatrix} 2 &amp; 1 &amp; -3 \\ 1 &amp; -2 &amp; 1 \\ 3 &amp; 2 &amp; 1 \end{vmatrix}\)</span>$</p>
+<p>化为上三角形：
+$<span class="arithmatex">\(= 2 \begin{vmatrix} 1 &amp; -2 &amp; 1 \\ -2 &amp; 5 &amp; 7 \\ 3 &amp; 2 &amp; 1 \end{vmatrix} \xrightarrow{\text{计算}} = -24 \neq 0\)</span>$</p>
+<p><strong>第二步</strong>：计算 <span class="arithmatex">\(|B_1|\)</span>（第1列换成常数项）：
+$<span class="arithmatex">\(|B_1| = \begin{vmatrix} 1 &amp; 1 &amp; -3 \\ 2 &amp; -2 &amp; 1 \\ 9 &amp; 2 &amp; 1 \end{vmatrix} = -48\)</span>$</p>
+<p><strong>第三步</strong>：计算 <span class="arithmatex">\(|B_2|\)</span>：
+$<span class="arithmatex">\(|B_2| = \begin{vmatrix} 2 &amp; 1 &amp; -3 \\ 1 &amp; 2 &amp; 1 \\ 3 &amp; 9 &amp; 1 \end{vmatrix} = -24\)</span>$</p>
+<p><strong>第四步</strong>：计算 <span class="arithmatex">\(|B_3|\)</span>：
+$<span class="arithmatex">\(|B_3| = \begin{vmatrix} 2 &amp; 1 &amp; 1 \\ 1 &amp; -2 &amp; 2 \\ 3 &amp; 2 &amp; 9 \end{vmatrix} = -72\)</span>$</p>
+<p><strong>第五步</strong>：求 <span class="arithmatex">\(x_j = |B_j| / |A|\)</span>：
+$<span class="arithmatex">\(x_1 = \frac{-48}{-24} = 2, \quad x_2 = \frac{-24}{-24} = 1, \quad x_3 = \frac{-72}{-24} = 3\)</span>$</p>
+<p><strong>验证</strong>：代入原方程组检验...</p>
+<p><strong>关键思路</strong>：用克拉默法则求每个未知量需要计算 <span class="arithmatex">\(n+1\)</span> 个 <span class="arithmatex">\(n\)</span> 阶行列式，计算量较大。</p>
+<p><strong>适用场景</strong>：系数矩阵含参数、只需计算部分未知量时。</p>
+<hr />
+<h4 id="14">例14 【讨论题】范德蒙行列式与克拉默法则的综合<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：讨论下述n元线性方程组解的情况：
+$<span class="arithmatex">\(\begin{cases} x + ax_2 + a^2x_3 + \cdots + a^{n-1}x_n = b_1 \\ x + a^2x_2 + a^4x_3 + \cdots + a^{2(n-1)}x_n = b_2 \\ \cdots \\ x + a^nx_2 + a^{2n}x_3 + \cdots + a^{n(n-1)}x_n = b_n \end{cases}\)</span>$</p>
+<p>其中 <span class="arithmatex">\(a \neq 0\)</span> 且当 <span class="arithmatex">\(0 &lt; r &lt; n\)</span> 时，<span class="arithmatex">\(a^r \neq 1\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>分析系数行列式</strong>：
+$<span class="arithmatex">\(|A| = \begin{vmatrix} 1 &amp; a &amp; a^2 &amp; \cdots &amp; a^{n-1} \\ 1 &amp; a^2 &amp; a^4 &amp; \cdots &amp; a^{2(n-1)} \\ \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \\ 1 &amp; a^n &amp; a^{2n} &amp; \cdots &amp; a^{n(n-1)} \end{vmatrix}\)</span>$</p>
+<p><strong>观察</strong>：这是范德蒙行列式的变体！</p>
+<p>提取因子（第 <span class="arithmatex">\(i\)</span> 行提取 <span class="arithmatex">\(a^{i-1}\)</span>）：
+$<span class="arithmatex">\(|A| = a^{0+1+2+\cdots+(n-1)} \begin{vmatrix} 1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1 \\ 1 &amp; a &amp; a^2 &amp; \cdots &amp; a^{n-1} \\ 1 &amp; a^2 &amp; a^4 &amp; \cdots &amp; a^{2(n-1)} \\ \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \\ 1 &amp; a^{n-1} &amp; a^{2(n-1)} &amp; \cdots &amp; a^{(n-1)^2} \end{vmatrix}\)</span>$</p>
+<p>这是范德蒙行列式 <span class="arithmatex">\((1, a, a^2, \ldots, a^{n-1})\)</span>，值为：
+$<span class="arithmatex">\(\prod_{1 \leq j &lt; i \leq n} (a^{i-1} - a^{j-1}) = \prod_{1 \leq j &lt; i \leq n} a^{j-1}(a^{i-j} - 1) = a^{\sum_{j=1}^{n-1} j(n-j)} \prod_{1 \leq j &lt; i \leq n} (a^{i-j} - 1)\)</span>$</p>
+<p>由于当 <span class="arithmatex">\(0 &lt; r &lt; n\)</span> 时 <span class="arithmatex">\(a^r \neq 1\)</span>，所以 <span class="arithmatex">\(a, a^2, \ldots, a^{n-1}\)</span> 两两不等。</p>
+<p>因此 <span class="arithmatex">\(|A| \neq 0\)</span>，由克拉默法则，方程组有<strong>唯一解</strong>。</p>
+<p><strong>关键思路</strong>：将系数行列式转化为范德蒙行列式，利用范德蒙行列式非零的条件。</p>
+<hr />
+<h3 id="_37">易错点提醒<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>克拉默法则使用条件</strong></li>
+<li>必须 <span class="arithmatex">\(|A| \neq 0\)</span></li>
+<li>
+<p>必须是<strong>方阵</strong>（方程个数 = 未知量个数）</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(|B_j|\)</span> 的构造</strong></p>
+</li>
+<li>只替换<strong>第 <span class="arithmatex">\(j\)</span> 列</strong></li>
+<li>
+<p>其他列保持不变</p>
+</li>
+<li>
+<p><strong>计算量大</strong></p>
+</li>
+<li>克拉默法则理论上优美，实际计算用<strong>高斯消元法</strong></li>
+<li>当 <span class="arithmatex">\(n \geq 4\)</span> 时，克拉默法则的计算量远大于高斯消元法</li>
+</ol>
+<hr />
+<h3 id="_38">思考题<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 用克拉默法则解：
+   $<span class="arithmatex">\(\begin{cases} x_1 + 2x_2 = 5 \\ 3x_1 - x_2 = 4 \end{cases}\)</span>$</p>
+</li>
+<li>
+<p><strong>（讨论）</strong> 当 <span class="arithmatex">\(k\)</span> 取何值时，下述方程组无解？有唯一解？有无穷多解？
+   $<span class="arithmatex">\(\begin{cases} kx_1 + x_2 = 1 \\ x_1 + kx_2 = 1 \end{cases}\)</span>$</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n\)</span> 级可逆矩阵，<span class="arithmatex">\(\mathbf{b}\)</span> 是 <span class="arithmatex">\(n\)</span> 维列向量。证明：<span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 的唯一解的第 <span class="arithmatex">\(j\)</span> 个分量为 <span class="arithmatex">\(x_j = \frac{|A_j|}{|A|}\)</span>，其中 <span class="arithmatex">\(A_j\)</span> 是将 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(j\)</span> 列换成 <span class="arithmatex">\(\mathbf{b}\)</span> 所得矩阵。</p>
+</li>
+</ol>
+<hr />
+<h2 id="26-k">2.6 行列式按k行（列）展开（拉普拉斯定理）<a class="headerlink" href="#26-k" title="Permanent link">&para;</a></h2>
+<h3 id="_39">【概念引入动机】为什么要引入拉普拉斯定理？<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<p>按一行展开是把 <span class="arithmatex">\(n\)</span> 阶行列式化为 <span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\((n-1)\)</span> 阶行列式。<strong>拉普拉斯定理</strong>是这一思想的推广：按 <span class="arithmatex">\(k\)</span> 行展开，可以把 <span class="arithmatex">\(n\)</span> 阶行列式化为 <span class="arithmatex">\(\binom{n}{k}\)</span> 个 <span class="arithmatex">\(k\)</span> 阶子式与 <span class="arithmatex">\((n-k)\)</span> 阶子式的乘积。</p>
+<p>这一定理在理论上有重要意义，特别是在研究矩阵的<strong>秩</strong>与<strong>行列式</strong>的关系时。</p>
+<h3 id="k">一、k阶子式<a class="headerlink" href="#k" title="Permanent link">&para;</a></h3>
+<h4 id="_40">定义<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h4>
+<p>在 <span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(A\)</span> 中，任意取定 <span class="arithmatex">\(k\)</span> 行、<span class="arithmatex">\(k\)</span> 列，位于交叉处的 <span class="arithmatex">\(k^2\)</span> 个元素按原排法组成的 <span class="arithmatex">\(k\)</span> 级矩阵的行列式，称为 <span class="arithmatex">\(A\)</span> 的一个 <strong><span class="arithmatex">\(k\)</span> 阶子式</strong>。</p>
+<ul>
+<li>若划去的行和列互补，则得到的 <span class="arithmatex">\((n-k)\)</span> 阶子式称为该 <span class="arithmatex">\(k\)</span> 阶子式的<strong>余子式</strong></li>
+<li>符号因子 <span class="arithmatex">\((-1)^{\sum \text{行号} + \sum \text{列号}}\)</span> 对应的余子式称为<strong>代数余子式</strong></li>
+</ul>
+<h3 id="_41">二、拉普拉斯定理<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理（拉普拉斯）</strong>：在 <span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(A\)</span> 中，取定 <span class="arithmatex">\(i_1, i_2, \ldots, i_k\)</span> 行（<span class="arithmatex">\(1 \leq k &lt; n\)</span>），则这 <span class="arithmatex">\(k\)</span> 行元素形成的所有 <span class="arithmatex">\(k\)</span> 阶子式与它们自己的代数余子式的乘积之和等于 <span class="arithmatex">\(|A|\)</span>：</p>
+<div class="arithmatex">\[|A| = \sum_{1 \leq j_1 &lt; j_2 &lt; \cdots &lt; j_k \leq n} A\begin{pmatrix} i_1 &amp; i_2 &amp; \cdots &amp; i_k \\ j_1 &amp; j_2 &amp; \cdots &amp; j_k \end{pmatrix} \cdot \tilde{A}\begin{pmatrix} i_1 &amp; i_2 &amp; \cdots &amp; i_k \\ j_1 &amp; j_2 &amp; \cdots &amp; j_k \end{pmatrix}\]</div>
+</blockquote>
+<p><strong>理解</strong>：
+- 取定 <span class="arithmatex">\(k\)</span> 行后，共有 <span class="arithmatex">\(\binom{n}{k}\)</span> 种方式选择 <span class="arithmatex">\(k\)</span> 列
+- 对每种选择，有一个 <span class="arithmatex">\(k\)</span> 阶子式 <span class="arithmatex">\(M\)</span> 和对应的 <span class="arithmatex">\((n-k)\)</span> 阶余子式 <span class="arithmatex">\(\tilde{M}\)</span>
+- <span class="arithmatex">\(|A| = \sum M \cdot (-1)^{\text{行号和}+\text{列号和}} \tilde{M}\)</span></p>
+<p><strong>特例</strong>：当 <span class="arithmatex">\(k = 1\)</span> 时，就是按一行展开。</p>
+<hr />
+<h3 id="_42">典型例题<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<h4 id="15">例15 【计算题】利用拉普拉斯定理<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：计算
+$<span class="arithmatex">\(\begin{vmatrix} a &amp; b &amp; 0 &amp; 0 \\ c &amp; d &amp; 0 &amp; 0 \\ e &amp; f &amp; g &amp; h \\ i &amp; j &amp; k &amp; l \end{vmatrix}\)</span>$</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1：按前两行展开</strong></p>
+<p>取第1、2行，共有 <span class="arithmatex">\(\binom{4}{2} = 6\)</span> 个2阶子式。但前两行只在1、2列有非零元素，所以只需考虑列号为 <span class="arithmatex">\(\{1,2\}\)</span> 的子式：</p>
+<div class="arithmatex">\[M = \begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix} = ad - bc\]</div>
+<p>对应的余子式是划去1、2行和1、2列后剩下的 <span class="arithmatex">\(2 \times 2\)</span> 矩阵的行列式：
+$<span class="arithmatex">\(\tilde{M} = \begin{vmatrix} g &amp; h \\ k &amp; l \end{vmatrix} = gl - kh\)</span>$</p>
+<p>符号因子：<span class="arithmatex">\((-1)^{(1+2)+(1+2)} = (-1)^6 = 1\)</span></p>
+<p>所以：
+$<span class="arithmatex">\(|A| = M \cdot \tilde{M} = (ad - bc)(gl - kh)\)</span>$</p>
+<p><strong>方法2：直接分块计算</strong></p>
+<p>观察矩阵结构：
+$<span class="arithmatex">\(|A| = \begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix} \cdot \begin{vmatrix} g &amp; h \\ k &amp; l \end{vmatrix} = (ad - bc)(gl - kh)\)</span>$</p>
+<p><strong>关键思路</strong>：利用矩阵的特殊结构，选择合适的行展开。</p>
+<hr />
+<h3 id="_43">易错点提醒<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>拉普拉斯定理计算量大</strong></li>
+<li>实际计算中很少直接使用</li>
+<li>
+<p>主要用于理论证明</p>
+</li>
+<li>
+<p><strong>符号因子容易错</strong></p>
+</li>
+<li><span class="arithmatex">\((-1)^{\text{行号和}+\text{列号和}}\)</span></li>
+<li>要仔细计算</li>
+</ol>
+<hr />
+<h3 id="_44">思考题<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 用拉普拉斯定理计算 <span class="arithmatex">\(\begin{vmatrix} 1 &amp; 2 &amp; 0 &amp; 0 \\ 3 &amp; 4 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 5 &amp; 6 \\ 0 &amp; 0 &amp; 7 &amp; 8 \end{vmatrix}\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 用拉普拉斯定理证明：若 <span class="arithmatex">\(A\)</span> 为分块对角矩阵，则 <span class="arithmatex">\(|A| = |A_1| \cdot |A_2| \cdots |A_s|\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="_45">本章小结<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h2>
+<h3 id="_46">核心要点<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>内容</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>排列的奇偶性</strong></td>
+<td>逆序数的奇偶性决定符号</td>
+<td>对换改变奇偶性</td>
+</tr>
+<tr>
+<td><strong>行列式定义</strong></td>
+<td><span class="arithmatex">\(n!\)</span> 项的代数和，每项取不同行不同列</td>
+<td>符号由列指标排列奇偶性决定</td>
+</tr>
+<tr>
+<td><strong>行列式性质</strong></td>
+<td>转置不变、互换变号、倍加不变</td>
+<td>性质7：$</td>
+</tr>
+<tr>
+<td><strong>按行(列)展开</strong></td>
+<td><span class="arithmatex">\(a_{i1}A_{i1} + \cdots + a_{in}A_{in}\)</span></td>
+<td>降阶计算</td>
+</tr>
+<tr>
+<td><strong>范德蒙行列式</strong></td>
+<td><span class="arithmatex">\(\prod_{i&gt;j} (a_i - a_j)\)</span></td>
+<td>两两不等则非零</td>
+</tr>
+<tr>
+<td><strong>克拉默法则</strong></td>
+<td><span class="arithmatex">\(x_j = \|B_j\| / \|A\|\)</span></td>
+<td><span class="arithmatex">\(\|A\| \neq 0\)</span> 时唯一解</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_47">行列式计算方法总结<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>适用场景</th>
+<th>关键技巧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>定义法</strong></td>
+<td><span class="arithmatex">\(n \leq 3\)</span></td>
+<td>枚举各项</td>
+</tr>
+<tr>
+<td><strong>化为三角形</strong></td>
+<td>一般情况</td>
+<td>倍加消元</td>
+</tr>
+<tr>
+<td><strong>按行(列)展开</strong></td>
+<td>某行(列)0多</td>
+<td>选择0多的行(列)</td>
+</tr>
+<tr>
+<td><strong>拆项法</strong></td>
+<td>某行元素是两组之和</td>
+<td>拆成两个行列式</td>
+</tr>
+<tr>
+<td><strong>范德蒙公式</strong></td>
+<td>范德蒙型行列式</td>
+<td>直接套公式</td>
+</tr>
+<tr>
+<td><strong>拉普拉斯定理</strong></td>
+<td>分块结构</td>
+<td>按子式展开</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_48">公式速记<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2阶行列式</td>
+<td><span class="arithmatex">\(a_{11}a_{22} - a_{12}a_{21}\)</span></td>
+</tr>
+<tr>
+<td>n阶行列式完全展开</td>
+<td><span class="arithmatex">\(\sum (-1)^{\tau} a_{1j_1}a_{2j_2}\cdots a_{nj_n}\)</span></td>
+</tr>
+<tr>
+<td>代数余子式</td>
+<td><span class="arithmatex">\(A_{ij} = (-1)^{i+j}M_{ij}\)</span></td>
+</tr>
+<tr>
+<td>按行展开</td>
+<td><span class="arithmatex">\(a_{i1}A_{i1} + \cdots + a_{in}A_{in}\)</span></td>
+</tr>
+<tr>
+<td>范德蒙行列式</td>
+<td><span class="arithmatex">\(\prod_{j&lt;i} (a_i - a_j)\)</span></td>
+</tr>
+<tr>
+<td>克拉默法则</td>
+<td><span class="arithmatex">\(x_j = \|B_j\| / \|A\|\)</span></td>
+</tr>
+<tr>
+<td>行列式乘积</td>
+<td><span class="arithmatex">\(\|AB\| = \|A\| \cdot \|B\|\)</span></td>
+</tr>
+<tr>
+<td>伴随矩阵</td>
+<td><span class="arithmatex">\(A^* A = \|A\| I\)</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

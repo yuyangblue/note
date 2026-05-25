@@ -1,0 +1,2554 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>FPGA与VIVADO设计流程笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fpgavivado" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FPGA与VIVADO设计流程笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、FPGA基础概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、FPGA基础概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fpga_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什么是FPGA？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xilinx-artix-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Xilinx Artix-7系列：我们的主角
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIVADO是什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vivado_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、VIVADO设计流程总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、新建工程：一步一步来
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、新建工程：一步一步来">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、设计文件输入：写代码啦
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、设计文件输入：写代码啦">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        创建Verilog文件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        编写模块代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vivado_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、约束文件：告诉Vivado你的"接线图"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、约束文件：告诉Vivado你的&#34;接线图&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法一：图形界面配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法二：手动编写XDC文件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdc_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XDC约束语法速查
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、功能仿真：先"纸上谈兵"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、功能仿真：先&#34;纸上谈兵&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        创建Testbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运行仿真
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仿真波形查看
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、设计综合：代码变电路
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、设计综合：代码变电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运行综合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看综合结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        综合后的原理图解读
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、工程实现：布局布线
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、工程实现：布局布线">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运行实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看实现结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、位流生成：生成"配置文件"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="九、位流生成：生成&#34;配置文件&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        生成位流
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fpga_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、下载到FPGA：见证奇迹
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、下载到FPGA：见证奇迹">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连接硬件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vivado_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用Vivado下载
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、实验案例：猜数字+跑马灯
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十一、实验案例：猜数字+跑马灯">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实验目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        完整步骤回顾
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代码实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        约束文件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：常见问题排查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nexys-a7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：Nexys A7开发板资源
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：快捷键和技巧
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="fpgavivado">FPGA与VIVADO设计流程笔记<a class="headerlink" href="#fpgavivado" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自VIVADO设计流程课件+FPGA实验文档 | 武汉大学人工智能自强班FPGA课程</p>
+</blockquote>
+<hr />
+<h2 id="fpga">一、FPGA基础概念<a class="headerlink" href="#fpga" title="Permanent link">&para;</a></h2>
+<h3 id="fpga_1">什么是FPGA？<a class="headerlink" href="#fpga_1" title="Permanent link">&para;</a></h3>
+<p>FPGA，全称<strong>Field Programmable Gate Array</strong>（现场可编程门阵列）。你可以把它想象成一片"数字电路乐高"——上面有成千上万个可以自由连接的逻辑块，你可以通过编程来定义它们之间的连接关系，从而实现各种数字电路功能。</p>
+<p><strong>类比理解</strong>：
+- <strong>ASIC</strong>（专用芯片）：像定制家具，批量生产后功能固定
+- <strong>FPGA</strong>：像乐高积木，可以反复搭建、修改、重新搭建</p>
+<p>FPGA的核心优势在于：
+- <strong>灵活性高</strong>：可以反复编程修改
+- <strong>开发周期短</strong>：不需要流片
+- <strong>适合小批量</strong>：成本可控
+- <strong>可以并行开发</strong>：软硬件可以同时进行</p>
+<hr />
+<h3 id="xilinx-artix-7">Xilinx Artix-7系列：我们的主角<a class="headerlink" href="#xilinx-artix-7" title="Permanent link">&para;</a></h3>
+<p>课件和实验中用到的是<strong>Artix-7 XC7A100T</strong>芯片，封装是<strong>CSG324</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>芯片型号</td>
+<td>XC7A100T</td>
+<td>Artix-7系列，100K逻辑单元</td>
+</tr>
+<tr>
+<td>封装</td>
+<td>CSG324</td>
+<td>324个引脚</td>
+</tr>
+<tr>
+<td>速度等级</td>
+<td>-1</td>
+<td>数字越大速度越快</td>
+</tr>
+<tr>
+<td>I/O Bank</td>
+<td>6个</td>
+<td>每组Bank有不同的电压标准</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么选择Artix-7？</strong>
+- 性价比高，适合教学
+- 资源够用（100K LUT + 126K FF）
+- 功耗低
+- 配套开发板多（如Nexys A7）</p>
+<hr />
+<h3 id="vivado">VIVADO是什么？<a class="headerlink" href="#vivado" title="Permanent link">&para;</a></h3>
+<p>Vivado是<strong>Xilinx公司的新一代FPGA设计工具</strong>，用来：
+- 创建和管理工程
+- 编写和编辑Verilog/VHDL代码
+- 仿真验证功能
+- 综合（把代码变成电路网表）
+- 实现（布局布线）
+- 生成比特流文件
+- 烧写到FPGA开发板</p>
+<p><strong>vivado版本</strong>：课件用2016.2和2018.3实验用2018.3，界面略有差异但流程相同。</p>
+<hr />
+<h2 id="vivado_1">二、VIVADO设计流程总览<a class="headerlink" href="#vivado_1" title="Permanent link">&para;</a></h2>
+<p>VIVADO的设计流程大致分为以下几个步骤：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                        VIVADO设计流程                            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ① 新建工程 ──→ ② 设计输入 ──→ ③ 功能仿真 ──→ ④ 设计综合             │
+│        │                                        │               │
+│        │                                        ↓               │
+│  ⑦ 下载到板子 ←── ⑥ 位流生成 ←── ⑤ 工程实现                         │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div></td></tr></table></div>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>说明</th>
+<th>产出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>新建工程</strong></td>
+<td>创建项目，配置芯片型号</td>
+<td>.xpr工程文件</td>
+</tr>
+<tr>
+<td><strong>设计输入</strong></td>
+<td>编写Verilog代码</td>
+<td>.v设计文件</td>
+</tr>
+<tr>
+<td><strong>功能仿真</strong></td>
+<td>用testbench验证功能</td>
+<td>仿真波形</td>
+</tr>
+<tr>
+<td><strong>设计综合</strong></td>
+<td>代码→逻辑网表</td>
+<td>综合后的原理图</td>
+</tr>
+<tr>
+<td><strong>工程实现</strong></td>
+<td>布局布线</td>
+<td>门级网表</td>
+</tr>
+<tr>
+<td><strong>位流生成</strong></td>
+<td>生成配置文件</td>
+<td>.bit比特流文件</td>
+</tr>
+<tr>
+<td><strong>下载</strong></td>
+<td>烧写到FPGA</td>
+<td>运行在板子上</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_1">三、新建工程：一步一步来<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">步骤详解<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1：打开Vivado</strong></p>
+<p>双击桌面Vivado图标或在开始菜单找到：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Xilinx Design Tools → Vivado 2018.3 → Vivado 2018.3
+</code></pre></div></td></tr></table></div></p>
+<p>看到欢迎界面后，点击 <strong>"Create New Project"</strong>。</p>
+<hr />
+<p><strong>Step 2：工程名称和路径</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>Project name: project_guessdigital
+Project location: D:/cpu/NEXYSA7
+☑ Create project subdirectory
+</code></pre></div></td></tr></table></div>
+<p>⚠️ <strong>注意事项</strong>：
+- 工程名称和路径<strong>不能有中文和空格</strong>！
+- 建议用字母、数字、下划线组合
+- 勾选创建子目录，便于管理</p>
+<hr />
+<p><strong>Step 3：选择项目类型</strong></p>
+<p>选择 <strong>"RTL Project"</strong>，并勾选 <strong>"Do not specify sources at this time"</strong>（暂时不添加源文件）。</p>
+<table>
+<thead>
+<tr>
+<th>项目类型</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RTL Project</strong></td>
+<td>大部分设计场景</td>
+</tr>
+<tr>
+<td>Post-synthesis Project</td>
+<td>已有综合网表</td>
+</tr>
+<tr>
+<td>I/O Planning Project</td>
+<td>只做引脚规划</td>
+</tr>
+<tr>
+<td>Imported Project</td>
+<td>从其他工具导入</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Step 4：选择FPGA芯片</strong></p>
+<p>这是关键步骤！根据实验文档，需要选择：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>Family: Artix-7
+Subfamily: Artix-7
+Package: CSG324
+Speed: -1
+Temp Grade: C
+</code></pre></div></td></tr></table></div>
+<p>然后在器件列表中找到：<strong>xc7a100tcsg324-1</strong></p>
+<p><strong>或者直接搜索</strong>，输入 <code>xc7a100tcsg324</code> 快速定位。</p>
+<hr />
+<p><strong>Step 5：确认并完成</strong></p>
+<p>检查Summary信息，确认无误后点击 <strong>Finish</strong>。</p>
+<hr />
+<h2 id="_3">四、设计文件输入：写代码啦<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="verilog">创建Verilog文件<a class="headerlink" href="#verilog" title="Permanent link">&para;</a></h3>
+<p>在Flow Navigator中：
+1. 点击 <strong>Project Manager → Add Sources</strong>
+2. 选择 <strong>"Add or Create Design Sources"</strong>
+3. 点击 <strong>"Create File"</strong>
+4. 输入文件名（如 <code>led.v</code>、<code>test.v</code>）
+5. 选择文件类型：<strong>Verilog</strong>
+6. 点击OK，然后Finish</p>
+<hr />
+<h3 id="_4">编写模块代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>Vivado会自动生成模板：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 模板</span>
+<span class="k">module</span><span class="w"> </span><span class="n">led</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">sw</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="n">led</span>
+<span class="p">);</span>
+<span class="w">    </span><span class="c1">// 在这里写你的代码</span>
+<span class="k">endmodule</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>实验代码示例</strong>：猜数字游戏中检测特定开关组合</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">test</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">clk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">rstn</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">sw_i</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">led_o</span>
+<span class="p">);</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">ledstate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">always</span><span class="p">@(</span><span class="o">*</span><span class="p">)</span>
+<span class="w">    </span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sw_i</span><span class="p">[</span><span class="mh">4</span><span class="o">:</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1010</span><span class="p">)</span><span class="w"> </span>
+<span class="w">            </span><span class="n">ledstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w">  </span><span class="c1">// 开关5-8为1010时LED亮</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span>
+<span class="w">            </span><span class="n">ledstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">led_o</span><span class="p">[</span><span class="mh">15</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ledstate</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="vivado_2">五、约束文件：告诉Vivado你的"接线图"<a class="headerlink" href="#vivado_2" title="Permanent link">&para;</a></h2>
+<p>约束文件（XDC文件）告诉Vivado：
+- <strong>哪些引脚</strong>连接哪些信号
+- <strong>时钟频率</strong>是多少
+- <strong>电气标准</strong>是什么</p>
+<h3 id="_5">方法一：图形界面配置<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1：先综合</strong></p>
+<p>点击 <strong>Run Synthesis</strong>，等待综合完成。</p>
+<p><strong>Step 2：打开综合设计</strong></p>
+<p>点击 <strong>Open Synthesized Design</strong>。</p>
+<p><strong>Step 3：配置引脚</strong></p>
+<p>在layout中选择 <strong>I/O Planning</strong>，切换到 <strong>I/O Ports</strong> 标签。</p>
+<p>设置每个端口的：
+- <strong>Package Pin</strong>：引脚编号（如J15、L16）
+- <strong>I/O Std</strong>：电气标准（如LVCMOS33）</p>
+<hr />
+<h3 id="xdc">方法二：手动编写XDC文件<a class="headerlink" href="#xdc" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1：创建约束文件</strong></p>
+<p>Add Sources → Add or Create Constraints → Create File → 输入文件名（如<code>icf.xdc</code>）</p>
+<p><strong>Step 2：编写约束内容</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code># ============================================================
+# 猜数字游戏约束文件
+# ============================================================
+
+## 时钟约束
+set_property PACKAGE_PIN L18 [get_ports clk]
+set_property IOSTANDARD LVCMOS33 [get_ports clk]
+create_clock -period 10.000 -name sys_clk_pin -waveform {0 5.000} -add [get_ports clk]
+
+## 复位信号
+set_property PACKAGE_PIN T18 [get_ports rstn]
+set_property IOSTANDARD LVCMOS33 [get_ports rstn]
+
+## 开关输入（16个）
+set_property PACKAGE_PIN J15 [get_ports {sw_i[0]}]
+set_property PACKAGE_PIN L16 [get_ports {sw_i[1]}]
+set_property PACKAGE_PIN M13 [get_ports {sw_i[2]}]
+set_property PACKAGE_PIN R15 [get_ports {sw_i[3]}]
+set_property PACKAGE_PIN R17 [get_ports {sw_i[4]}]
+set_property PACKAGE_PIN T18 [get_ports {sw_i[5]}]
+set_property PACKAGE_PIN U18 [get_ports {sw_i[6]}]
+set_property PACKAGE_PIN R13 [get_ports {sw_i[7]}]
+set_property PACKAGE_PIN T8 [get_ports {sw_i[8]}]
+set_property PACKAGE_PIN U8 [get_ports {sw_i[9]}]
+set_property PACKAGE_PIN R16 [get_ports {sw_i[10]}]
+set_property PACKAGE_PIN T13 [get_ports {sw_i[11]}]
+set_property PACKAGE_PIN H6 [get_ports {sw_i[12]}]
+# ... (其他开关类似)
+
+## LED输出
+set_property PACKAGE_PIN H17 [get_ports {led_o[0]}]
+set_property PACKAGE_PIN K15 [get_ports {led_o[1]}]
+set_property PACKAGE_PIN J13 [get_ports {led_o[2]}]
+# ... (根据需要配置)
+
+## 设置所有端口的IO标准
+set_property IOSTANDARD LVCMOS33 [get_ports {sw_i[*]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led_o[*]}]
+</code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="xdc_1">XDC约束语法速查<a class="headerlink" href="#xdc_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>约束类型</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>引脚位置</td>
+<td><code>set_property PACKAGE_PIN &lt;引脚号&gt; [get_ports &lt;信号名&gt;]</code></td>
+</tr>
+<tr>
+<td>IO标准</td>
+<td><code>set_property IOSTANDARD &lt;标准&gt; [get_ports &lt;信号&gt;]</code></td>
+</tr>
+<tr>
+<td>时钟约束</td>
+<td><code>create_clock -period &lt;周期&gt; [get_ports &lt;时钟信号&gt;]</code></td>
+</tr>
+<tr>
+<td>IO Bank电压</td>
+<td><code>set_property CFGBVS VCCO [current_design]</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>常用IO标准</strong>：
+- <strong>LVCMOS33</strong>：3.3V CMOS，常用于按键、LED
+- <strong>LVCMOS18</strong>：1.8V CMOS
+- <strong>LVDS</strong>：差分信号</p>
+<hr />
+<h2 id="_6">六、功能仿真：先"纸上谈兵"<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>在真正烧写到FPGA之前，先用仿真验证功能是否正确——这叫<strong>功能仿真（Behavioral Simulation）</strong>。</p>
+<h3 id="testbench">创建Testbench<a class="headerlink" href="#testbench" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1：添加仿真源文件</strong></p>
+<p>Add Sources → Add or Create Simulation Sources → Create File → 输入名称（如<code>test_tb</code>）</p>
+<p><strong>Step 2：编写Testbench</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="no">`timescale</span><span class="w"> </span><span class="mh">1</span><span class="n">ns</span><span class="o">/</span><span class="mh">1</span><span class="n">ps</span>
+
+<span class="k">module</span><span class="w"> </span><span class="n">test_tb</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="c1">// 1. 定义被测试模块的信号</span>
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">clk</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">rstn</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">sw_i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">led_o</span><span class="p">;</span>
+<span class="w">    </span><span class="k">integer</span><span class="w"> </span><span class="n">foutput</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="c1">// 2. 例化被测试模块</span>
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="n">u_test</span><span class="p">(</span>
+<span class="w">        </span><span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">rstn</span><span class="p">(</span><span class="n">rstn</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sw_i</span><span class="p">(</span><span class="n">sw_i</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">led_o</span><span class="p">(</span><span class="n">led_o</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="c1">// 3. 复位信号生成</span>
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">rstn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sw_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">16</span><span class="mb">&#39;b0000</span><span class="n">_0000_0001_0100</span><span class="p">;</span><span class="w">  </span><span class="c1">// 初始值</span>
+
+<span class="w">        </span><span class="n">foutput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">$fopen</span><span class="p">(</span><span class="s">&quot;results.txt&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">rstn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w">   </span><span class="c1">// 拉低复位</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="p">;</span>
+<span class="w">        </span><span class="n">rstn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span><span class="w">   </span><span class="c1">// 释放复位</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="c1">// 4. 时钟信号生成</span>
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">clk</span><span class="p">;</span><span class="w">  </span><span class="c1">// 100MHz时钟</span>
+
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="c1">// 5. 仿真过程中的信号变化</span>
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rstn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="c1">// 在时钟上升沿显示信号</span>
+<span class="w">            </span><span class="nb">$display</span><span class="p">(</span><span class="s">&quot;sw_i = %h, led_o = %b&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sw_i</span><span class="p">,</span><span class="w"> </span><span class="n">led_o</span><span class="p">);</span>
+<span class="w">            </span><span class="nb">$fdisplay</span><span class="p">(</span><span class="n">foutput</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sw_i = %h, led_o = %b&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sw_i</span><span class="p">,</span><span class="w"> </span><span class="n">led_o</span><span class="p">);</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="c1">// 6. 仿真结束</span>
+<span class="w">    </span><span class="c1">// ==========================================</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5000</span><span class="p">;</span><span class="w">   </span><span class="c1">// 运行5000ns</span>
+<span class="w">        </span><span class="nb">$fclose</span><span class="p">(</span><span class="n">foutput</span><span class="p">);</span>
+<span class="w">        </span><span class="nb">$finish</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="k">endmodule</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="_7">运行仿真<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ol>
+<li>点击 <strong>Flow Navigator → Simulation → Run Simulation → Run Behavioral Simulation</strong></li>
+<li>Vivado会打开仿真界面</li>
+<li>在 <strong>Scopes</strong> 中找到你的模块</li>
+<li>在 <strong>Objects</strong> 中选择信号，右键 <strong>Add To Wave Window</strong></li>
+<li>点击 <strong>Run</strong> 运行仿真</li>
+<li>查看波形是否与预期一致</li>
+</ol>
+<hr />
+<h3 id="_8">仿真波形查看<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>仿真波形工具栏功能：
+| 按钮 | 功能 |
+|-----|------|
+| ⏪ | 复位（清空波形）|
+| ▶️ | 运行仿真 |
+| ⏸ | 暂停 |
+| 🔀 | 单步运行 |
+| ⏱ | 设置运行时间 |</p>
+<hr />
+<h2 id="_9">七、设计综合：代码变电路<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p><strong>综合（Synthesis）</strong>是把Verilog代码转换成FPGA内部基本逻辑单元的过程。</p>
+<h3 id="_10">运行综合<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>点击 <strong>Run Synthesis</strong>，Vivado会自动：
+1. 检查语法错误
+2. 优化逻辑
+3. 映射到FPGA原语（LUT、FF、DSP等）
+4. 生成综合网表</p>
+<h3 id="_11">查看综合结果<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>综合完成后，点击 <strong>Open Synthesized Design</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>查看内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Schematic</strong></td>
+<td>查看综合后的电路原理图</td>
+</tr>
+<tr>
+<td>** Utilization Report**</td>
+<td>资源使用率报告</td>
+</tr>
+<tr>
+<td><strong>Timing Summary</strong></td>
+<td>时序报告</td>
+</tr>
+<tr>
+<td><strong>DRC</strong></td>
+<td>设计规则检查</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">综合后的原理图解读<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>对于简单的组合逻辑，综合后可能会看到：
+- <strong>LUT</strong>（查找表）：实现组合逻辑
+- <strong>IBUF</strong>（输入缓冲器）：输入信号缓冲
+- <strong>OBUF</strong>（输出缓冲器）：输出信号缓冲</p>
+<p>对于时序逻辑，还会有：
+- <strong>FDRE</strong>（触发器）：D触发器
+- <strong>BUFG</strong>（全局时钟缓冲）：时钟信号专用走线</p>
+<hr />
+<h2 id="_13">八、工程实现：布局布线<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p><strong>实现（Implementation）</strong>把综合后的网表映射到FPGA具体的物理资源上，包括：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Opt Design</strong></td>
+<td>优化设计</td>
+</tr>
+<tr>
+<td><strong>Place Design</strong></td>
+<td>布局（把逻辑放到具体资源上）</td>
+</tr>
+<tr>
+<td><strong>Route Design</strong></td>
+<td>布线（连接各资源）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">运行实现<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>点击 <strong>Run Implementation</strong>，等待完成。</p>
+<h3 id="_15">查看实现结果<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>点击 <strong>Open Implemented Design</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>查看内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Device视图</strong></td>
+<td>芯片内部资源使用情况</td>
+</tr>
+<tr>
+<td><strong>I/O Planning</strong></td>
+<td>引脚分配</td>
+</tr>
+<tr>
+<td><strong>Timing</strong></td>
+<td>时序分析</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_16">九、位流生成：生成"配置文件"<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p>比特流（Bitstream）文件是FPGA的"程序"，包含了配置FPGA所有资源的信息。</p>
+<h3 id="_17">生成位流<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>点击 <strong>Generate Bitstream</strong>，Vivado会：
+1. 读取实现后的设计
+2. 生成配置数据
+3. 输出.bit文件</p>
+<p>生成完成后，位流文件通常位于：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>&lt;工程目录&gt;/&lt;工程名&gt;.runs/impl_1/&lt;顶层模块&gt;.bit
+</code></pre></div></td></tr></table></div></p>
+<hr />
+<h2 id="fpga_2">十、下载到FPGA：见证奇迹<a class="headerlink" href="#fpga_2" title="Permanent link">&para;</a></h2>
+<h3 id="_18">连接硬件<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ol>
+<li>用USB线连接开发板和电脑</li>
+<li>打开开发板电源开关</li>
+<li>等待电脑识别设备</li>
+</ol>
+<h3 id="vivado_3">用Vivado下载<a class="headerlink" href="#vivado_3" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1：打开Hardware Manager</strong></p>
+<p>点击 <strong>Flow Navigator → Open Hardware Manager</strong></p>
+<p><strong>Step 2：连接目标</strong></p>
+<p>点击 <strong>Open Target → Auto Connect</strong></p>
+<p><strong>Step 3：编程设备</strong></p>
+<ol>
+<li>在 hardware 窗口中右键芯片</li>
+<li>选择 <strong>Program Device</strong></li>
+<li>确认Bitstream文件路径</li>
+<li>点击 <strong>Program</strong></li>
+</ol>
+<hr />
+<h3 id="_19">验证结果<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>下载成功后，观察开发板：
+- 如果是LED实验，对应LED应该按预期亮起
+- 如果是数码管实验，显示应该正确
+- 如果没反应，检查约束文件和代码逻辑</p>
+<hr />
+<h2 id="_20">十一、实验案例：猜数字+跑马灯<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<h3 id="_21">实验目标<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>利用FPGA开发板的16个开关和16个LED实现：
+- 通过开关输入特定组合（如1010）
+- 检测到后点亮对应的LED
+- 练习完整的Vivado设计流程</p>
+<h3 id="_22">完整步骤回顾<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>新建工程</td>
+<td>选择正确的芯片型号</td>
+</tr>
+<tr>
+<td>2</td>
+<td>创建Verilog文件</td>
+<td><code>test.v</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>编写代码</td>
+<td>检测开关组合</td>
+</tr>
+<tr>
+<td>4</td>
+<td>创建XDC约束</td>
+<td>配置引脚和时钟</td>
+</tr>
+<tr>
+<td>5</td>
+<td>功能仿真</td>
+<td>验证逻辑正确性</td>
+</tr>
+<tr>
+<td>6</td>
+<td>设计综合</td>
+<td>检查资源使用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>工程实现</td>
+<td>布局布线</td>
+</tr>
+<tr>
+<td>8</td>
+<td>位流生成</td>
+<td>生成配置文件</td>
+</tr>
+<tr>
+<td>9</td>
+<td>下载验证</td>
+<td>观察实际效果</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_23">代码实现<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">test</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">clk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">rstn</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">sw_i</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">led_o</span>
+<span class="p">);</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">ledstate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 组合逻辑：检测开关5-8是否为1010</span>
+<span class="w">    </span><span class="k">always</span><span class="p">@(</span><span class="o">*</span><span class="p">)</span>
+<span class="w">    </span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sw_i</span><span class="p">[</span><span class="mh">4</span><span class="o">:</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1010</span><span class="p">)</span>
+<span class="w">            </span><span class="n">ledstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">ledstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="c1">// 输出连接到LED15</span>
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">led_o</span><span class="p">[</span><span class="mh">15</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ledstate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 其他LED保持熄灭</span>
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">led_o</span><span class="p">[</span><span class="mh">14</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">15</span><span class="mb">&#39;b0</span><span class="p">;</span>
+
+<span class="k">endmodule</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_24">约束文件<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code># 时钟约束（100MHz）
+create_clock -period 10.000 -name sys_clk_pin -waveform {0 5.000} [get_ports clk]
+
+# 复位约束
+set_property PACKAGE_PIN T18 [get_ports rstn]
+set_property IOSTANDARD LVCMOS33 [get_ports rstn]
+
+# 开关约束（sw_i[0]到sw_i[7]）
+set_property PACKAGE_PIN J15 [get_ports {sw_i[0]}]
+set_property PACKAGE_PIN L16 [get_ports {sw_i[1]}]
+set_property PACKAGE_PIN M13 [get_ports {sw_i[2]}]
+set_property PACKAGE_PIN R15 [get_ports {sw_i[3]}]
+set_property PACKAGE_PIN R17 [get_ports {sw_i[4]}]
+set_property PACKAGE_PIN T18 [get_ports {sw_i[5]}]
+set_property PACKAGE_PIN U18 [get_ports {sw_i[6]}]
+set_property PACKAGE_PIN R13 [get_ports {sw_i[7]}]
+
+# LED约束
+set_property PACKAGE_PIN H17 [get_ports {led_o[15]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led_o[*]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sw_i[*]}]
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_25">附录：常见问题排查<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>可能原因</th>
+<th>解决方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>综合报错</td>
+<td>语法错误</td>
+<td>检查代码，特别是分号、括号</td>
+</tr>
+<tr>
+<td>仿真无波形</td>
+<td>信号未定义或连接错误</td>
+<td>检查testbench</td>
+</tr>
+<tr>
+<td>实现失败</td>
+<td>时序不满足</td>
+<td>优化代码或添加约束</td>
+</tr>
+<tr>
+<td>下载后LED不亮</td>
+<td>引脚约束错误</td>
+<td>核对原理图和约束文件</td>
+</tr>
+<tr>
+<td>资源不够</td>
+<td>代码规模超过芯片</td>
+<td>选择更大芯片或优化代码</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="nexys-a7">附录：Nexys A7开发板资源<a class="headerlink" href="#nexys-a7" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>数量/规格</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FPGA芯片</td>
+<td>XC7A100T-CSG324</td>
+<td>我们的目标芯片</td>
+</tr>
+<tr>
+<td>开关</td>
+<td>16个SW</td>
+<td>输入</td>
+</tr>
+<tr>
+<td>LED</td>
+<td>16个LED</td>
+<td>输出</td>
+</tr>
+<tr>
+<td>按钮</td>
+<td>5个BTN</td>
+<td>复位等</td>
+</tr>
+<tr>
+<td>7段数码管</td>
+<td>4位</td>
+<td>显示</td>
+</tr>
+<tr>
+<td>时钟</td>
+<td>100MHz</td>
+<td>连接在特定引脚</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_26">附录：快捷键和技巧<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>保存所有</td>
+<td>Ctrl+Shift+S</td>
+<td>保存所有文件</td>
+</tr>
+<tr>
+<td>运行综合</td>
+<td>F6</td>
+<td>快捷综合</td>
+</tr>
+<tr>
+<td>添加到波形</td>
+<td>Ctrl+W</td>
+<td>在仿真中添加波形</td>
+</tr>
+<tr>
+<td>搜索命令</td>
+<td>Ctrl+P</td>
+<td>快速搜索命令</td>
+</tr>
+<tr>
+<td>RTL分析</td>
+<td>Ctrl+Shift+E</td>
+<td>打开RTL分析</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p>整理自VIVADO设计流程课件+FPGA实验文档 | 武汉大学人工智能自强班FPGA课程</p>
+<p>动手实践是最好的学习方式！不要怕出错，多尝试多思考 💪</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2083 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>精确SVD vs 随机化SVD 对比笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#svd-vs-svd" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              精确SVD vs 随机化SVD 对比笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#svdexactclassical-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、精确SVD（Exact/Classical SVD）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、精确SVD（Exact/Classical SVD）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 核心性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 计算方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 计算方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法一：基于特征值分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golub-kahan-reinsch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法二：Golub-Kahan-Reinsch算法（工业标准）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 计算复杂度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svdrandomized-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、随机化SVD（Randomized SVD）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、随机化SVD（Randomized SVD）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 算法步骤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 数学原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 计算复杂度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 参数选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、详细对比
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、详细对比">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 核心对比表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 复杂度对比图
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 精度对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、优缺点分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、优缺点分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 精确SVD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 精确SVD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 优点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 随机化SVD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 随机化SVD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 优点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、适用场景
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、适用场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 选择精确SVD的场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 选择随机化SVD的场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 典型应用领域
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、代码实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-pythonsvd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Python示例：精确SVD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-pythonsvd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Python示例：随机化SVD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 性能对比示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、理论保证
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、理论保证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 随机化SVD的误差界
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 适用条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="svd-vs-svd">精确SVD vs 随机化SVD 对比笔记<a class="headerlink" href="#svd-vs-svd" title="Permanent link">&para;</a></h1>
+<h2 id="svdexactclassical-svd">一、精确SVD（Exact/Classical SVD）<a class="headerlink" href="#svdexactclassical-svd" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 定义<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p><strong>奇异值分解（Singular Value Decomposition, SVD）</strong> 是任意矩阵的一种分解形式。对于矩阵 <span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span>，其SVD定义为：</p>
+<div class="arithmatex">\[A = U \Sigma V^T\]</div>
+<p>其中：
+- <span class="arithmatex">\(U \in \mathbb{R}^{m \times m}\)</span>：左奇异向量矩阵，列为 <span class="arithmatex">\(AA^T\)</span> 的特征向量（正交矩阵）
+- <span class="arithmatex">\(\Sigma \in \mathbb{R}^{m \times n}\)</span>：奇异值对角矩阵，对角元素 <span class="arithmatex">\(\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r &gt; 0\)</span>（按降序排列）
+- <span class="arithmatex">\(V \in \mathbb{R}^{n \times n}\)</span>：右奇异向量矩阵，列为 <span class="arithmatex">\(A^TA\)</span> 的特征向量（正交矩阵）
+- <span class="arithmatex">\(r = \text{rank}(A)\)</span>：矩阵的秩</p>
+<h3 id="12">1.2 核心性质<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>存在性</strong></td>
+<td>任何实数或复数矩阵都有SVD分解</td>
+</tr>
+<tr>
+<td><strong>唯一性</strong></td>
+<td>奇异值唯一；奇异向量在奇异值不重复时唯一（相差符号）</td>
+</tr>
+<tr>
+<td><strong>正交性</strong></td>
+<td>U和V的列向量构成标准正交基</td>
+</tr>
+<tr>
+<td><strong>秩揭示</strong></td>
+<td>非零奇异值的个数等于矩阵的秩</td>
+</tr>
+<tr>
+<td><strong>低秩逼近</strong></td>
+<td>保留前k个奇异值可得到最佳秩-k逼近（Eckart-Young定理）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13">1.3 计算方法<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<h4 id="_1">方法一：基于特征值分解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>计算 <span class="arithmatex">\(B = A^TA\)</span>（<span class="arithmatex">\(n \times n\)</span>矩阵）</li>
+<li>求 <span class="arithmatex">\(B\)</span> 的特征值 <span class="arithmatex">\(\lambda_i\)</span> 和特征向量 <span class="arithmatex">\(v_i\)</span></li>
+<li>奇异值 <span class="arithmatex">\(\sigma_i = \sqrt{\lambda_i}\)</span>，右奇异向量 <span class="arithmatex">\(V = [v_1, v_2, ...]\)</span></li>
+<li>左奇异向量 <span class="arithmatex">\(u_i = \frac{Av_i}{\sigma_i}\)</span></li>
+</ol>
+<h4 id="golub-kahan-reinsch">方法二：Golub-Kahan-Reinsch算法（工业标准）<a class="headerlink" href="#golub-kahan-reinsch" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>双对角化</strong>：使用Householder变换将A化为双对角形式 <span class="arithmatex">\(B\)</span></li>
+<li><strong>QR迭代</strong>：对双对角矩阵进行QR迭代求奇异值</li>
+<li><strong>回代</strong>：计算对应的奇异向量</li>
+</ol>
+<h3 id="14">1.4 计算复杂度<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稠密矩阵（<span class="arithmatex">\(m \geq n\)</span>）</td>
+<td><span class="arithmatex">\(O(mn^2)\)</span></td>
+<td><span class="arithmatex">\(O(mn)\)</span></td>
+</tr>
+<tr>
+<td>稠密矩阵（<span class="arithmatex">\(m &lt; n\)</span>）</td>
+<td><span class="arithmatex">\(O(m^2n)\)</span></td>
+<td><span class="arithmatex">\(O(mn)\)</span></td>
+</tr>
+<tr>
+<td>稀疏矩阵</td>
+<td>取决于稀疏结构</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="svdrandomized-svd">二、随机化SVD（Randomized SVD）<a class="headerlink" href="#svdrandomized-svd" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 定义<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><strong>随机化SVD</strong> 是由 Halko, Martinsson, Tropp 在2011年提出的近似算法，通过随机投影技术快速找到矩阵的低秩逼近。</p>
+<p>核心思想：用少量随机向量来探测矩阵的列空间，然后用这个小矩阵进行精确分解。</p>
+<h3 id="22">2.2 算法步骤<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p><strong>算法：随机化SVD（HMT算法）</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>输入：矩阵 A ∈ R^(m×n)，目标秩 k，过采样参数 p
+
+1. 生成随机矩阵 Ω ∈ R^(n×(k+p))
+2. 计算 Y = AΩ                      # 列空间采样
+3. QR分解：Y = QR                  # 正交化
+4. 计算 B = Q^TA                   # 投影到低维空间
+5. 精确SVD：B = ŨΣV^T              # 小矩阵分解
+6. 计算 U = QŨ                     # 重构左奇异向量
+
+输出：U ∈ R^(m×k), Σ ∈ R^(k×k), V ∈ R^(n×k)
+</code></pre></div></td></tr></table></div>
+<h3 id="23">2.3 数学原理<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<ul>
+<li>随机矩阵 <span class="arithmatex">\(\Omega\)</span> 用于"探测"矩阵 <span class="arithmatex">\(A\)</span> 的列空间</li>
+<li><span class="arithmatex">\(Y = A\Omega\)</span> 近似包含A的主要列方向信息</li>
+<li>通过QR分解得到正交基 <span class="arithmatex">\(Q\)</span>，<span class="arithmatex">\(Q^TQ = I\)</span></li>
+<li><span class="arithmatex">\(B = Q^TA\)</span> 是 <span class="arithmatex">\(A\)</span> 在 <span class="arithmatex">\(Q\)</span> 张成空间中的投影</li>
+<li>对小矩阵 <span class="arithmatex">\(B\)</span> 进行SVD，计算量大幅降低</li>
+</ul>
+<h3 id="24">2.4 计算复杂度<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稠密矩阵</td>
+<td><span class="arithmatex">\(O(mn \cdot l + (m+n)k^2)\)</span></td>
+<td><span class="arithmatex">\(O(mk + nk)\)</span></td>
+</tr>
+<tr>
+<td>其中 <span class="arithmatex">\(l = k + p\)</span>（过采样数，通常 <span class="arithmatex">\(p = 5 \sim 20\)</span>）</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="25">2.5 参数选择<a class="headerlink" href="#25" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n_components</code> (k)</td>
+<td>目标秩</td>
+<td>要提取的奇异值/向量数</td>
+</tr>
+<tr>
+<td><code>n_oversamples</code> (p)</td>
+<td>10</td>
+<td>过采样数量，增加可提高精度</td>
+</tr>
+<tr>
+<td><code>n_iter</code></td>
+<td>'auto' (通常4)</td>
+<td>幂迭代次数，用于衰减噪声</td>
+</tr>
+<tr>
+<td><code>power_iteration_normalizer</code></td>
+<td>'auto'</td>
+<td>幂迭代的归一化方式</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">三、详细对比<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 核心对比表<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>精确SVD</th>
+<th>随机化SVD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>结果类型</strong></td>
+<td>精确解</td>
+<td>近似解</td>
+</tr>
+<tr>
+<td><strong>计算复杂度</strong></td>
+<td><span class="arithmatex">\(O(\min(mn^2, m^2n))\)</span></td>
+<td><span class="arithmatex">\(O(mn \cdot l + (m+n)k^2)\)</span></td>
+</tr>
+<tr>
+<td><strong>内存需求</strong></td>
+<td><span class="arithmatex">\(O(mn)\)</span></td>
+<td><span class="arithmatex">\(O(mk + nk)\)</span></td>
+</tr>
+<tr>
+<td><strong>数值精度</strong></td>
+<td>双精度（~10⁻¹⁶）</td>
+<td>可控误差（通常 &lt; 10⁻⁸）</td>
+</tr>
+<tr>
+<td><strong>确定性</strong></td>
+<td>确定性算法</td>
+<td>随机算法（结果可能略有不同）</td>
+</tr>
+<tr>
+<td><strong>适用矩阵</strong></td>
+<td>中小型稠密矩阵</td>
+<td>大型稠密/稀疏矩阵</td>
+</tr>
+<tr>
+<td><strong>可并行性</strong></td>
+<td>较难</td>
+<td>易于并行化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 复杂度对比图<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>精确SVD: O(mn²) - 当 n &gt;&gt; k 时，与 k 无关
+随机SVD: O(mnk) - 与目标秩 k 近似线性相关
+</code></pre></div></td></tr></table></div>
+<p><strong>优势区间</strong>：
+- 当 <span class="arithmatex">\(k \ll \min(m, n)\)</span> 时，随机化SVD优势明显
+- 对于超大规模矩阵，随机化SVD可能是唯一可行的方法</p>
+<h3 id="33">3.3 精度对比<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>误差度量</th>
+<th>精确SVD</th>
+<th>随机化SVD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>奇异值误差</td>
+<td>0</td>
+<td><span class="arithmatex">\(O(\epsilon)\)</span>（可控）</td>
+</tr>
+<tr>
+<td>奇异向量正交性</td>
+<td>完美正交</td>
+<td>近似正交</td>
+</tr>
+<tr>
+<td>重构误差</td>
+<td>0</td>
+<td><span class="arithmatex">\(\|A - \tilde{U}\tilde{\Sigma}\tilde{V}^T\|_F\)</span></td>
+</tr>
+<tr>
+<td>谱范数误差</td>
+<td><span class="arithmatex">\(\|A - A_k\|_2 = \sigma_{k+1}\)</span></td>
+<td><span class="arithmatex">\(\leq (1+\sqrt{\frac{k}{p}})\sigma_{k+1}\)</span>（高概率）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_3">四、优缺点分析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="41-svd">4.1 精确SVD<a class="headerlink" href="#41-svd" title="Permanent link">&para;</a></h3>
+<h4 id="_4">✅ 优点<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>精确可靠</strong>：提供数学意义上的精确分解</li>
+<li><strong>数值稳定</strong>：Golub-Kahan算法经过数十年优化，极其稳定</li>
+<li><strong>精度最高</strong>：达到机器精度（double类型约10⁻¹⁶）</li>
+<li><strong>理论完备</strong>：有完整的误差分析和收敛性保证</li>
+<li><strong>工具成熟</strong>：LAPACK/MATLAB/NumPy等库实现高度优化</li>
+</ul>
+<h4 id="_5">❌ 缺点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>计算量大</strong>：对于大型矩阵，计算时间可能不切实际</li>
+<li><strong>内存密集</strong>：需要存储完整矩阵及其分解结果</li>
+<li><strong>难以扩展</strong>：分布式环境下效率较低</li>
+<li><strong>不必要精度</strong>：很多应用不需要完全精确的结果</li>
+</ul>
+<h3 id="42-svd">4.2 随机化SVD<a class="headerlink" href="#42-svd" title="Permanent link">&para;</a></h3>
+<h4 id="_6">✅ 优点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>速度极快</strong>：通常比精确SVD快1-3个数量级</li>
+<li><strong>内存高效</strong>：只需存储小矩阵（<span class="arithmatex">\(O(mk + nk)\)</span>）</li>
+<li><strong>可扩展性强</strong>：天然适合分布式计算</li>
+<li><strong>灵活性高</strong>：通过参数调整平衡精度和速度</li>
+<li><strong>适用于大矩阵</strong>：可以处理精确SVD无法处理的问题</li>
+</ul>
+<h4 id="_7">❌ 缺点<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>近似解</strong>：结果是近似值，存在误差</li>
+<li><strong>参数敏感</strong>：需要调参以获得理想精度</li>
+<li><strong>随机性</strong>：多次运行结果略有不同（但通常影响很小）</li>
+<li><strong>理论限制</strong>：主要保证适用于奇异值快速衰减的矩阵</li>
+<li><strong>对小矩阵</strong>：当矩阵本身就很小时，开销可能不值得</li>
+</ul>
+<hr />
+<h2 id="_8">五、适用场景<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="51-svd">5.1 选择精确SVD的场景<a class="headerlink" href="#51-svd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小型矩阵（<span class="arithmatex">\(n &lt; 1000\)</span>）</td>
+<td>计算量可接受，精度最重要</td>
+</tr>
+<tr>
+<td>科学研究需要精确解</td>
+<td>不容许近似误差</td>
+</tr>
+<tr>
+<td>金融计算、医疗影像</td>
+<td>对精度要求极高</td>
+</tr>
+<tr>
+<td>调试和验证算法</td>
+<td>需要作为基准对比</td>
+</tr>
+<tr>
+<td>矩阵病态性分析</td>
+<td>需要完整奇异值谱</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-svd">5.2 选择随机化SVD的场景<a class="headerlink" href="#52-svd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大规模矩阵（<span class="arithmatex">\(n &gt; 10^5\)</span>）</td>
+<td>精确SVD计算不可行</td>
+</tr>
+<tr>
+<td>深度学习模型压缩</td>
+<td>需要快速迭代</td>
+</tr>
+<tr>
+<td>推荐系统</td>
+<td>处理稀疏大矩阵</td>
+</tr>
+<tr>
+<td>图像压缩</td>
+<td>实时处理需求</td>
+</tr>
+<tr>
+<td>分布式环境</td>
+<td>可并行化设计</td>
+</tr>
+<tr>
+<td>探索性数据分析</td>
+<td>快速获取主要结构</td>
+</tr>
+<tr>
+<td>流数据处理</td>
+<td>无需完整矩阵存储</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53">5.3 典型应用领域<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code>精确SVD:
+├── 精密工程计算
+├── 科学仪器标定
+├── 医学影像精确重建
+├── 财务报表分析
+└── 小规模机器学习
+
+随机化SVD:
+├── 大规模推荐系统
+├── 自然语言处理（潜在语义分析）
+├── 计算机视觉（图像压缩/降维）
+├── 信号处理（特征提取）
+├── 图神经网络
+├── 量子化学计算
+└── 社交网络分析
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_9">六、代码实现<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="61-pythonsvd">6.1 Python示例：精确SVD<a class="headerlink" href="#61-pythonsvd" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">svd</span>
+
+<span class="c1"># 精确SVD</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># economy SVD</span>
+
+<span class="c1"># 保留前k个分量</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">A_k</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="n">k</span><span class="p">])</span> <span class="o">@</span> <span class="n">Vt</span><span class="p">[:</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="62-pythonsvd">6.2 Python示例：随机化SVD<a class="headerlink" href="#62-pythonsvd" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">TruncatedSVD</span>
+
+<span class="c1"># 随机化SVD</span>
+<span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;randomized&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="c1"># 降维后的数据</span>
+<span class="n">components</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">components_</span>  <span class="c1"># 主成分</span>
+<span class="n">explained_variance</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">explained_variance_ratio_</span>  <span class="c1"># 方差解释率</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="63">6.3 性能对比示例<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># 精确SVD</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">U1</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">Vt1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="c1"># 随机化SVD</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">U2</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">Vt2</span> <span class="o">=</span> <span class="n">randomized_svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n_oversamples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;精确SVD: </span><span class="si">{</span><span class="n">t1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s, 随机化SVD: </span><span class="si">{</span><span class="n">t2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s, 加速比: </span><span class="si">{</span><span class="n">t1</span><span class="o">/</span><span class="n">t2</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_10">七、理论保证<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="71-svd">7.1 随机化SVD的误差界<a class="headerlink" href="#71-svd" title="Permanent link">&para;</a></h3>
+<p><strong>定理（Halko et al., 2011）</strong>：</p>
+<p>对于目标秩 <span class="arithmatex">\(k\)</span> 和过采样参数 <span class="arithmatex">\(p \geq 2\)</span>，设 <span class="arithmatex">\(\hat{r} &lt; k + p\)</span>，则：</p>
+<div class="arithmatex">\[\mathbb{E}\|A - \tilde{U}\tilde{\Sigma}\tilde{V}^T\|_F \leq \left(1 + \sqrt{\frac{k}{p}}\right)\|A - A_{\hat{r}}\|_F\]</div>
+<p>其中 <span class="arithmatex">\(A_{\hat{r}}\)</span> 是最优秩-<span class="arithmatex">\(\hat{r}\)</span>逼近。</p>
+<h3 id="72">7.2 适用条件<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p>随机化SVD的近似质量依赖于：</p>
+<ol>
+<li><strong>谱衰减</strong>：奇异值衰减越快，效果越好</li>
+<li><strong>过采样量</strong>：<span class="arithmatex">\(p\)</span> 越大，精度越高</li>
+<li><strong>幂迭代</strong>：对于噪声问题，增加迭代次数可改善效果</li>
+<li><strong>矩阵条件数</strong>：条件数越大，可能需要更多过采样</li>
+</ol>
+<hr />
+<h2 id="_11">八、总结<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>精确SVD</th>
+<th>随机化SVD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>核心价值</strong></td>
+<td>数学精确</td>
+<td>计算效率</td>
+</tr>
+<tr>
+<td><strong>时间复杂度</strong></td>
+<td><span class="arithmatex">\(O(n^3)\)</span></td>
+<td><span class="arithmatex">\(O(n^2k)\)</span></td>
+</tr>
+<tr>
+<td><strong>精度</strong></td>
+<td>机器精度</td>
+<td>可控近似</td>
+</tr>
+<tr>
+<td><strong>适用规模</strong></td>
+<td>中小型</td>
+<td>大型/超大型</td>
+</tr>
+<tr>
+<td><strong>工业应用</strong></td>
+<td>精确分析</td>
+<td>大规模学习系统</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选择建议</strong>：
+- 优先使用精确SVD作为基准，验证随机化SVD的精度
+- 对于实际问题，先尝试随机化SVD，根据精度需求调整参数
+- 当矩阵规模超过 <span class="arithmatex">\(10^4 \times 10^4\)</span> 时，几乎必须使用随机化方法</p>
+<hr />
+<p><em>笔记整理日期：2025年</em></p>
+<p><em>参考资料：</em>
+- <em>Halko, Martinsson, Tropp (2011). "Finding structure with randomness"</em>
+- <em>Golub &amp; Van Loan (2013). "Matrix Computations"</em>
+- <em>scikit-learn documentation</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

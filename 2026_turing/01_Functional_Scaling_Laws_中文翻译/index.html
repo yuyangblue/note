@@ -1,0 +1,2142 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>核回归中的泛函标度律：损失动力学与学习率调度 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              核回归中的泛函标度律：损失动力学与学习率调度
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        摘要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 引言
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 引言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 本文贡献
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 相关工作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 符号约定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-plk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 幂律核（PLK）回归
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 幂律核（PLK）回归">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 模型容量与任务难度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-sgdsde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 单程SGD与内蕴时间SDE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 单程SGD与内蕴时间SDE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 连续时间极限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 内蕴时间重参数化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 内蕴时间泛函标度律
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 内蕴时间泛函标度律">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 示例设定与底层标度行为
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-top-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 一般结果：Top-\(M\)特征情况
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-random-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 一般结果：Random-\(M\)特征情况
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 关键证明步骤与核心洞察
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 关键证明步骤与核心洞察">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#volterra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Volterra积分方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        幂律标度的涌现（多任务视角）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 学习率调度影响标度效率
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 学习率调度影响标度效率">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-lrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 常数LRS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-lrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 指数衰减LRS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-wsdlrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 WSD型LRS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 WSD型LRS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        计算最优标度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 实验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 幂律核回归
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 LLM预训练
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录A 补充材料
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录A 补充材料">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 LLM预训练损失轨迹的经验拟合方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 LLM预训练中常用的学习率调度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 与核回归的联系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-sde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 SDE建模的推导细节
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录B 实验细节与额外结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录B 实验细节与额外结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B.1 幂律核回归实验
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B.2 LLM预训练实验
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录C 第4节的证明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录C 第4节的证明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c1-volterra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.1 Volterra积分方程刻画损失动力学
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2-e_mmathcalk_m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.2 \(e_M\)和\(\mathcal{K}_M\)函数的幂律衰减
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c3-top-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.3 Top-\(M\)特征情况
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C.3 Top-\(M\)特征情况">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c31-43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.3.1 定理4.3的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c32-44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.3.2 定理4.4的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c33-45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.3.3 定理4.5的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c34-42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.3.4 定理4.2的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4-random-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.4 Random-\(M\)特征情况
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C.4 Random-\(M\)特征情况">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.4.1 集中不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.4.2 上下界
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c43-c11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C.4.3 命题C.11的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录D 第5节的证明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录D 第5节的证明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#d1-lrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.1 常数LRS的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d2-lrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.2 指数衰减LRS的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d3-wsdlrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.3 WSD型LRS的证明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录E 辅助引理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">核回归中的泛函标度律：损失动力学与学习率调度<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>原文标题：</strong> Functional Scaling Laws in Kernel Regression: Loss Dynamics and Learning Rate Schedules</p>
+<p><strong>作者：</strong> Binghui Li, Fengling Chen, Zixun Huang, Lean Wang, Lei Wu (Peking University). 共同第一作者。通讯作者：Lei Wu.</p>
+<p><strong>来源：</strong> https://arxiv.org/abs/2509.19189</p>
+<p><strong>会议：</strong> NeurIPS 2025 Spotlight</p>
+<hr />
+<h2 id="_2">摘要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>标度律已成为理解和指导大语言模型（LLM）训练的统一框架。然而，现有研究主要关注最终步的损失，遗留了一个重要问题：整个损失动力学是否也遵循类似的标度律？更重要的是，学习率调度（LRS）如何塑造这些动力学？本文通过在幂律核（PLK）回归模型上分析随机梯度下降（SGD）来解决这些空白。核心洞察是提出了"内蕴时间"这一新视角，它比迭代次数更准确地刻画训练进度。我们随后建立了泛函标度律（FSL），该定律通过一个简单的卷积泛函来表达调度的影响，能够捕捉任意LRS下的完整损失轨迹。我们进一步将理论应用于三种代表性LRS——常数、指数衰减和预热-稳定-衰减（WSD）——并推导了数据受限和计算受限两种 regime 下的显式标度关系。这些比较解释了几个关键经验现象：(i) 更高容量的模型在数据和计算效率上都更优；(ii) 学习率衰减提高了训练效率；(iii) WSD型调度优于纯衰减调度。最后，在0.1B到1B参数规模的LLM上进行的实验表明，FSL作为代理模型在拟合和预测大规模预训练中的损失轨迹方面具有实际应用价值。</p>
+<hr />
+<h2 id="1">1 引言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>大规模深度学习模型的训练神秘地遵循标度律，即模型性能随可用资源（如计算量或数据）可预测地改善[20]。具体而言，Kaplan等人[27]的开创性研究表明，在LLM预训练中，损失L随模型大小M和数据规模D按照一个极为简洁的幂律关系递减：</p>
+<div class="arithmatex">\[L(M,D) = L_0 + C_M M^{-\alpha_M} + C_D D^{-\alpha_D}, \tag{1}\]</div>
+<p>其中 <span class="arithmatex">\(\alpha_M\)</span> 和 <span class="arithmatex">\(\alpha_D\)</span> 是标度指数，<span class="arithmatex">\(L_0\)</span> 表示不可约损失，<span class="arithmatex">\(C_M, C_D\)</span> 是某些常数。这类经验关系已被证明在模型架构、规模和训练设置上具有鲁棒性[21,62,38]，并已成为指导LLM开发的基本原则[19,26,1,5,57,29]。在实践中，它们现在被常规地用于设计最优资源分配策略[21]以及调整学习率和批量大小等关键超参数[38,31]。</p>
+<p>尽管取得了这些经验成功，但标度律的理论理解仍然有限。最近的研究开始阐明其底层机制[56,23,41,65,25,44,45,2,15,3,8,37,52,9,73]，但两个重要空白仍然存在：</p>
+<ul>
+<li>
+<p><strong>标度效率的决定因素。</strong> 现有研究缺乏对关键因素（如模型容量、任务难度和超参数选择）如何影响标度效率——体现为指数 <span class="arithmatex">\(\alpha_M\)</span> 和 <span class="arithmatex">\(\alpha_D\)</span>——的系统性描述。特别是学习率调度（LRS）在实践中被公认为至关重要[42,4,18]，但它们在塑造标度效率方面的精确作用仍不清楚。</p>
+</li>
+<li>
+<p><strong>超越最终步损失。</strong> 经典标度律（公式(1)）仅处理训练结束时的损失[27,21]，遗留了一个开放问题：整个损失轨迹是否表现出类似的标度行为？虽然最近的实证证据[61,40]表明存在这种可能性，但系统性的研究和理论证明仍然缺失。</p>
+</li>
+</ul>
+<p><img alt="图1：泛函标度律（FSL）精确捕捉核回归中SGD的损失动力学和标度行为。在两个子图中，实线表示SGD的结果，虚线表示相应的FSL预测。(a) SGD损失动力学（1000次运行的平均）与三种学习率调度（cosine、WSD和一种非标准循环调度）下FSL预测的对比。(b) 使用第5节解析公式的FSL预测的最终损失标度，与200次独立SGD运行的均值对比。" src="https://arxiv.org/pdf/2509.19189.pdf#page=1" /></p>
+<h3 id="11">1.1 本文贡献<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>本文在受控但具代表性的理论设定下迈出解决这些空白的一步。我们研究幂律核（PLK）回归的随机梯度下降（SGD）训练——这是标度律分析中广泛采用的代理模型[8,3,52,37,9]。PLK回归由四个参数刻画：任务难度<span class="arithmatex">\(s\)</span>、容量指数<span class="arithmatex">\(\beta\)</span>、模型大小<span class="arithmatex">\(M\)</span>和标签噪声水平<span class="arithmatex">\(\sigma\)</span>。为了捕捉学习率调度（LRS）的影响，我们通过内蕴时间SDE对SGD进行建模，其中内蕴时间的概念成为统一刻画不同LRS如何塑造损失动力学和标度行为的关键量。在此基础上，我们建立了泛函标度律（FSL），它不仅能预测最终损失，还能精确刻画整个损失动力学。</p>
+<p>具体而言，对于一般的内蕴时间LRS <span class="arithmatex">\(\gamma: [0,\infty) \to [0,\infty)\)</span>，在某些条件下，期望损失 <span class="arithmatex">\(\mathbb{E}[\mathcal{R}(\bm{\nu}_t)]\)</span>（其中<span class="arithmatex">\(t\)</span>表示内蕴时间）的动力学满足：</p>
+<div class="arithmatex">\[
+\mathbb{E}[\mathcal{R}(\bm{\nu}_t)] - \underbrace{\frac{\sigma^2}{2}}_{\text{不可约误差}} \;\eqsim\; \underbrace{\frac{1}{M^{s\beta}}}_{\text{近似误差}} + \underbrace{e(t)}_{\text{信号学习}} + \underbrace{\!\int_0^t\!\mathcal{K}(t-z)\,[e(z)+\sigma^2]\,\gamma(z)\,\mathop{}\!\mathrm{d}z}_{\text{噪声累积}}, \tag{2}
+\]</div>
+<p>其中 <span class="arithmatex">\(e(t) = (1+t)^{-s}\)</span> 且 <span class="arithmatex">\(\mathcal{K}(t) = (1+t)^{-(2-1/\beta)}\)</span>。FSL中的每个项都有清晰的解释：<span class="arithmatex">\(\tfrac{\sigma^2}{2}\)</span> 表示由标签噪声引起的不可约误差，<span class="arithmatex">\(M^{-s\beta}\)</span> 代表近似误差，<span class="arithmatex">\(e(t)\)</span> 表征无噪声（全批量）梯度下降下的信号学习动力学，最后一项捕捉梯度噪声的注入和消散，其中LRS <span class="arithmatex">\(\gamma\)</span> 通过一个可处理的卷积泛函进入。函数 <span class="arithmatex">\(\mathcal{K}\)</span>，称为遗忘核，量化了注入的噪声在训练过程中消散的速度。图1（左）表明FSL精确捕捉了SGD在不同LRS下的损失动力学。</p>
+<p>在FSL的基础上，我们进一步推导了三种代表性LRS——常数、指数衰减[16]和预热-稳定-衰减（WSD）[72,22]——在数据受限和计算受限两种regime下的最终步损失的显式标度关系。结果总结在表1和图1（右）中，推广并扩展了先前的工作[8,9,52,37]，同时揭示了几个统一的洞察。</p>
+<ul>
+<li>
+<p><strong>不同调度的标度效率。</strong> WSD实现了最佳的标度效率，其次是指数衰减，然后是常数调度。这种效率层次为学习率衰减的重要性提供了理论依据，并解释了WSD的经验成功[72,22,60,38]。</p>
+</li>
+<li>
+<p><strong>模型容量的作用。</strong> 更高容量的模型在计算和数据方面始终更高效，凸显了扩展模型容量的必要性[27]。</p>
+</li>
+<li>
+<p><strong>数据-模型权衡。</strong> 计算最优训练要求数据规模的增长速度超过模型大小，与LLM预训练中已建立的启发式方法一致[21]。</p>
+</li>
+<li>
+<p><strong>峰值学习率的标度律。</strong> 最优标度要求峰值学习率（LR）随训练预算（数据或计算）适当缩放，揭示了仔细调整峰值LR的重要性[7,31]。</p>
+</li>
+</ul>
+<p>除了PLK回归，我们还将FSL ansatz应用于从0.1B到1B参数规模的LLM预训练实验拟合和预测损失轨迹，涵盖密集和MoE架构。这些结果突出了FSL作为理解和指导LLM预训练的实用代理的潜力。</p>
+<p><strong>表1：学习率调度（LRS）对幂律核回归标度效率的强烈影响。</strong> 效率由两个关键因素决定：相对任务难度<span class="arithmatex">\(s \in (0,\infty)\)</span>和模型容量<span class="arithmatex">\(\beta &gt; 1\)</span>。我们区分"易学习regime"（<span class="arithmatex">\(s \geqslant 1-1/\beta\)</span>）和"难学习regime"（<span class="arithmatex">\(s &lt; 1-1/\beta\)</span>）。</p>
+<table>
+<thead>
+<tr>
+<th>学习率调度（LRS）</th>
+<th>数据最优标度律</th>
+<th>计算最优标度律</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>易学习</td>
+<td>难学习</td>
+</tr>
+<tr>
+<td>常数</td>
+<td><span class="arithmatex">\(D^{-\frac{s}{s+1}}\)</span></td>
+<td><span class="arithmatex">\(C^{-\frac{s\beta}{1+s\beta+\beta}}\)</span></td>
+</tr>
+<tr>
+<td>指数衰减</td>
+<td><span class="arithmatex">\(D^{-\frac{s\beta}{1+s\beta}}(\log D)^{\frac{s\beta}{1+s\beta}}\)</span></td>
+<td><span class="arithmatex">\(D^{-s}(\log D)^{s}\)</span></td>
+</tr>
+<tr>
+<td>预热-稳定-衰减（WSD）</td>
+<td><span class="arithmatex">\(D^{-\frac{s\beta}{1+s\beta}}(\log D)^{\frac{s\beta-s}{1+s\beta}}\)</span></td>
+<td><span class="arithmatex">\(D^{-s}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 相关工作<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p><strong>标度律的理论解释。</strong> 在越来越多的寻求理论解释标度律的工作中[56,23,41,65,25,44,45,2,15,3,8,37,52,9,48]，最相关的是[8,52,9,37]，它们也分析了PLK回归（通常以等价的线性回归形式书写）。具体而言，[8]研究了梯度流，[52,9]分析了带常数LRS的SGD，[37]考虑了指数衰减LRS。相比之下，我们建立了一个适用于一般LRS的统一标度律，不仅将这些先前结果作为特例恢复，而且通过捕捉损失动力学而不仅是最终步损失来实质性地扩展了它们。这种统一是由引入内蕴时间的关键概念实现的，它比原始训练步数更准确地捕捉有效训练进度。</p>
+<p><strong>LLM预训练中损失轨迹的预测。</strong> 最近的实证研究[61,40]表明，LLM预训练的整个损失轨迹——而不仅是最终损失——可以被适当的标度关系精确捕捉。相应的拟合程序的详细描述见附录A.1。我们的理论为这些实证发现提供了理论解释。有趣的是，[40]提出的多幂律（MPL）模型与我们的FSL密切相关：通过分部积分变换，FSL表达式可以转化为与MPL公式几乎等价的形式（见附录B.2）。</p>
+<p><strong>预热-稳定-衰减（WSD）LRS。</strong> WSD调度[72]在DeepSeek-V3[33]和Kimi-K2[39]等工业模型中使用。尽管其经验成功，但缺乏理论理解。本文表明，即使在二次优化（核回归）的简单设定中，也可以复现WSD的本质优势。</p>
+<h3 id="13">1.3 符号约定<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\([n] := \{1,2,\ldots,n\}\)</span>。对于正半定矩阵<span class="arithmatex">\(\mathbf{S}\)</span>，<span class="arithmatex">\(\mu_j(\mathbf{S})\)</span>表示第<span class="arithmatex">\(j\)</span>大特征值，<span class="arithmatex">\(\|u\|_{\mathbf{S}} := \sqrt{u^\top \mathbf{S} u}\)</span>。符号<span class="arithmatex">\(\eqsim\)</span>表示常数因子等价，<span class="arithmatex">\(\lesssim\)</span>和<span class="arithmatex">\(\gtrsim\)</span>表示常数因子不等式。</p>
+<hr />
+<h2 id="2-plk">2 幂律核（PLK）回归<a class="headerlink" href="#2-plk" title="Permanent link">&para;</a></h2>
+<p>我们考虑通过特征映射 <span class="arithmatex">\(\phi: \mathcal{X} \to \mathbb{R}^N\)</span> 的核回归任务。给定输入<span class="arithmatex">\(x \in \mathcal{X}\)</span>，目标是预测标量标签<span class="arithmatex">\(y\)</span>，满足：</p>
+<div class="arithmatex">\[y = \langle \phi(x), \theta^* \rangle + \varepsilon, \quad \varepsilon \sim \mathcal{N}(0, \sigma^2),\]</div>
+<p>其中<span class="arithmatex">\(\theta^* \in \mathbb{R}^N\)</span>是ground-truth参数向量，<span class="arithmatex">\(\varepsilon\)</span>是标签噪声。</p>
+<p><strong>假设2.1（超收缩性）。</strong> 特征分布的四阶矩被二阶矩控制。即存在常数<span class="arithmatex">\(\rho_-, \rho_+ &gt; 0\)</span>使得：</p>
+<div class="arithmatex">\[\rho_- \cdot \mathbb{E}[\|\phi(X)\|^2 \cdot u^2] \leq \mathbb{E}[\langle \phi(X), u \rangle^4] \leq \rho_+ \cdot \mathbb{E}[\|\phi(X)\|^2 \cdot u^2]^2\]</div>
+<p>对所有<span class="arithmatex">\(u \in \mathbb{R}^N\)</span>成立。高斯特征（以及更一般的<span class="arithmatex">\(\sigma\)</span>-子高斯特征）满足此条件。</p>
+<p><strong>假设2.2（特征协方差）。</strong> 我们假设特征协方差矩阵 <span class="arithmatex">\(\mathbf{H} = \mathbb{E}[\phi(X)\phi(X)^\top]\)</span> 是对角的：</p>
+<div class="arithmatex">\[\mathbf{H} = \operatorname{diag}(\lambda_1, \lambda_2, \ldots, \lambda_N), \quad \lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_N.\]</div>
+<p>模型参数化为 <span class="arithmatex">\(f(x; v) = \sum_{j=1}^M v_j w_j^\top \phi(x)\)</span>，其中 <span class="arithmatex">\(\mathbf{v} = (v_1, \ldots, v_M)^\top \in \mathbb{R}^M\)</span>。有两种投影方式：</p>
+<ul>
+<li><strong>Top-<span class="arithmatex">\(M\)</span>特征：</strong> <span class="arithmatex">\(w_j = e_j\)</span>（单位向量）</li>
+<li><strong>Random-<span class="arithmatex">\(M\)</span>特征：</strong> <span class="arithmatex">\(w_j \sim \mathcal{N}(0, \mathbf{I}_N)\)</span></li>
+</ul>
+<h3 id="21">2.1 模型容量与任务难度<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><strong>假设2.3（模型容量）。</strong> 特征衰减速度由容量指数<span class="arithmatex">\(\beta &gt; 1\)</span>控制：</p>
+<div class="arithmatex">\[\lambda_j \asymp j^{-\beta}.\]</div>
+<p>注：<span class="arithmatex">\(\beta\)</span>越大，特征衰减越快，模型的表达能力越弱。</p>
+<p><strong>假设2.5（任务难度）。</strong> 目标参数的结构由任务难度指数<span class="arithmatex">\(s &gt; 0\)</span>刻画：</p>
+<div class="arithmatex">\[|\theta_j^*|^2 \asymp j^{-(s\beta+1)}.\]</div>
+<p>注：<span class="arithmatex">\(s\)</span>刻画了相对任务难度。直观上，对于固定的<span class="arithmatex">\(\alpha = s\beta\)</span>，<span class="arithmatex">\(s\)</span>越大（<span class="arithmatex">\(\beta\)</span>越小）意味着模型容量越大，任务相对越容易学习。</p>
+<hr />
+<h2 id="3-sgdsde">3 单程SGD与内蕴时间SDE<a class="headerlink" href="#3-sgdsde" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 连续时间极限<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>当步长<span class="arithmatex">\(h \to 0\)</span>时，SGD可以被随机微分方程（SDE）近似：</p>
+<div class="arithmatex">\[d\nu_j(t) = -\lambda_j (\nu_j - \theta_j^*) dt + \sqrt{\eta(t)} \cdot \sqrt{\frac{\mathcal{R}(\bm{\nu}_t)}{b(t)}} dB_t^{(j)},\]</div>
+<p>其中<span class="arithmatex">\(B_t^{(j)}\)</span>是标准布朗运动，<span class="arithmatex">\(b(t)\)</span>是批量大小。</p>
+<h3 id="32">3.2 内蕴时间重参数化<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>内蕴时间 <span class="arithmatex">\(\tau(t) = \int_0^t \eta(s) ds\)</span> 将物理时间转换为内蕴时间。关键观察：不同LRS通过内蕴时间统一刻画训练进度。定义<span class="arithmatex">\(\gamma(\tau) = \eta(T^{-1}(\tau))\)</span>为内蕴时间下的LRS。</p>
+<p>在内蕴时间下，SDE简化为：</p>
+<div class="arithmatex">\[d\nu_j(t) = -\lambda_j (\nu_j - \theta_j^*) dt + \sqrt{\frac{\gamma(t)}{b(T^{-1}(t))}} dB_t^{(j)}.\]</div>
+<hr />
+<h2 id="4">4 内蕴时间泛函标度律<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 示例设定与底层标度行为<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>我们首先在Top-<span class="arithmatex">\(M\)</span>特征设定下建立FSL，其中各模式的学习动力学相互独立，可以精确求解。</p>
+<p>定义：
+- <span class="arithmatex">\(e_M(t) = \sum_{j=1}^M \lambda_j |\theta_j^*|^2 e^{-2\lambda_j t}\)</span>（信号学习函数）
+- <span class="arithmatex">\(\mathcal{K}_M(t) = \sum_{j=1}^M \lambda_j^2 e^{-2\lambda_j t}\)</span>（遗忘核）</p>
+<p><strong>引理4.1（幂律衰减）。</strong> 对于 <span class="arithmatex">\(1 \lesssim t \lesssim M^\beta\)</span>，有：</p>
+<div class="arithmatex">\[e_M(t) \asymp t^{-s}, \quad \mathcal{K}_M(t) \asymp t^{-(2-1/\beta)}.\]</div>
+<h3 id="42-top-m">4.2 一般结果：Top-<span class="arithmatex">\(M\)</span>特征情况<a class="headerlink" href="#42-top-m" title="Permanent link">&para;</a></h3>
+<p><strong>定理4.2（内蕴时间FSL，难学习regime）。</strong> 假设<span class="arithmatex">\(s \leq 1 - 1/\beta\)</span>。设<span class="arithmatex">\(\bm{\nu}_t\)</span>是内蕴时间SDE的解。则：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_t)] - \tfrac{1}{2}\sigma^2 \eqsim M^{-s\beta} + e(t) + \int_0^t \mathcal{K}(t-z)[e(z)+\sigma^2]\gamma(z)\mathop{}\!\mathrm{d}z, \tag{9}\]</div>
+<p>其中 <span class="arithmatex">\(e(t) := (1+t)^{-s}\)</span>，<span class="arithmatex">\(\mathcal{K}(t) := (1+t)^{-(2-1/\beta)}\)</span>。对于随机-<span class="arithmatex">\(M\)</span>情况，以概率至少 <span class="arithmatex">\(1 - \exp\{-\Omega(M)\}\)</span>（关于<span class="arithmatex">\(\mathbf{W}\)</span>的随机性）成立相同的FSL。</p>
+<p>该定理建立了对于任务难度<span class="arithmatex">\(s \leq 1 - 1/\beta\)</span>的困难任务，损失动力学完全由FSL（公式9）刻画。此外，FSL（公式9）中的每一项都有清晰的解释：</p>
+<ul>
+<li><strong>不可约误差：</strong> <span class="arithmatex">\(\tfrac{1}{2}\sigma^2\)</span>。该项源于标签噪声。</li>
+<li><strong>近似误差：</strong> <span class="arithmatex">\(M^{-s\beta}\)</span>。该项对应于有限模型大小造成的误差，标度效率由任务的固有难度<span class="arithmatex">\(s\beta\)</span>决定。</li>
+<li><strong>信号学习：</strong> <span class="arithmatex">\(e(t)\)</span>。该项对应于全批量梯度下降下的学习，捕捉SGD提取信号<span class="arithmatex">\(f^*\)</span>的速率。此外，速率取决于任务的相对难度<span class="arithmatex">\(s\)</span>。对于固定的<span class="arithmatex">\(f^*\)</span>（固定的<span class="arithmatex">\(\alpha = s\beta\)</span>），增加模型容量（更小的<span class="arithmatex">\(\beta\)</span>）会加速收敛，因为<span class="arithmatex">\(s = \alpha/\beta\)</span>变大。</li>
+<li><strong>噪声累积：</strong> <span class="arithmatex">\(\int_0^t \mathcal{K}(t-z)[e(z)+\sigma^2]\gamma(z)\mathop{}\!\mathrm{d}z\)</span>。该项刻画了学习率和批量大小调度如何塑造随机噪声的累积和消散。被积函数<span class="arithmatex">\([e(z)+\sigma^2]\gamma(z)\)</span>表示瞬时噪声幅度，其中<span class="arithmatex">\(e(z)\)</span>捕捉小批量噪声，<span class="arithmatex">\(\sigma^2\)</span>捕捉标签噪声。遗忘核<span class="arithmatex">\(\mathcal{K}(\cdot)\)</span>量化了在时刻<span class="arithmatex">\(z\)</span>注入的噪声如何仍然影响时刻<span class="arithmatex">\(t\)</span>的损失。由于<span class="arithmatex">\(\mathcal{K}(t) \asymp t^{-(2-1/\beta)}\)</span>，更高容量的模型（更小的<span class="arithmatex">\(\beta\)</span>）往往遗忘噪声更慢。</li>
+</ul>
+<p>值得注意的是，最后两项共同构成优化误差，两个关键因素决定了它们之间的权衡：</p>
+<ul>
+<li><strong>模型容量。</strong> 增加模型容量（<span class="arithmatex">\(\beta \downarrow\)</span>）会加速信号学习，但同时减慢噪声遗忘。</li>
+<li><strong>学习率和批量大小调度。</strong> 更小的学习率或更大的批量大小会抑制噪声注入，但也会缩短内蕴训练时间。然而，足够的内蕴时间是重要的：信号学习项需要它来有效降低风险，而噪声遗忘项依赖于它来遗忘早期训练中记忆的噪声。因此，有效的调度必须平衡这些竞争目标——抑制注入的噪声，同时保持足够的学习和遗忘内蕴时间。</li>
+</ul>
+<p><strong>定理4.3（内蕴时间FSL，Top-<span class="arithmatex">\(M\)</span>特征，一般标签噪声）。</strong> 假设假设4.1成立。设<span class="arithmatex">\(\bm{\nu}_t\)</span>是带Top-<span class="arithmatex">\(M\)</span>特征的内蕴时间SDE的解。定义 <span class="arithmatex">\(\mathcal{F}_M(t;\gamma) = e_M(t) + \int_0^t \mathcal{K}_M(t-z)[e_M(z)+\sigma^2]\gamma(z)\mathop{}\!\mathrm{d}z\)</span>。存在<span class="arithmatex">\(c &gt; 0\)</span>使得对于<span class="arithmatex">\(0 \leq t \leq cM^\beta\)</span>，有：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_t)] - \tfrac{1}{2}\sigma^2 \;\eqsim\; M^{-s\beta} + \mathcal{F}_\infty(t;\gamma). \tag{11}\]</div>
+<p>对于所有<span class="arithmatex">\(cM^\beta \leq t &lt; \infty\)</span>，有：</p>
+<div class="arithmatex">\[M^{-s\beta} + \mathcal{F}_M(t;\gamma) \;\lesssim\; \mathbb{E}[\mathcal{R}(\bm{\nu}_t)] - \tfrac{1}{2}\sigma^2 \;\lesssim\; M^{-s\beta} + \mathcal{F}_\infty(t;\gamma). \tag{12}\]</div>
+<p><strong>定理4.4（内蕴时间FSL，Top-<span class="arithmatex">\(M\)</span>特征，常数标签噪声）。</strong> 在假设4.1下，假设<span class="arithmatex">\(\sigma \gtrsim 1\)</span>。设<span class="arithmatex">\(\bm{\nu}_t\)</span>是带Top-<span class="arithmatex">\(M\)</span>特征的内蕴时间SDE的解。那么，对于任意<span class="arithmatex">\(s &gt; 0\)</span>和所有<span class="arithmatex">\(t \geq 0\)</span>：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_t)] - \tfrac{1}{2}\sigma^2 \;\eqsim\; M^{-s\beta} + e_M(t) + \int_0^t \mathcal{K}_M(t-z)\,[e_M(z)+\sigma^2]\,\gamma(z)\,\mathop{}\!\mathrm{d}z.\]</div>
+<p><strong>定理4.5（内蕴时间FSL，Top-<span class="arithmatex">\(M\)</span>特征，零标签噪声）。</strong> 假设假设4.1成立且<span class="arithmatex">\(\sigma = 0\)</span>。设<span class="arithmatex">\(\bm{\nu}_t\)</span>是带Top-<span class="arithmatex">\(M\)</span>特征的内蕴时间SDE的解。如果<span class="arithmatex">\(s \in [0, 2-1/\beta]\)</span>，则对所有<span class="arithmatex">\(t \geq 0\)</span>：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_t)] \;\eqsim\; M^{-s\beta} + e_M(t) + \int_0^t \mathcal{K}_M(t-z)\,e_M(z)\,\gamma(z)\,\mathop{}\!\mathrm{d}z.\]</div>
+<h3 id="43-random-m">4.3 一般结果：Random-<span class="arithmatex">\(M\)</span>特征情况<a class="headerlink" href="#43-random-m" title="Permanent link">&para;</a></h3>
+<p>对于随机特征情况，修改后的特征协方差矩阵为 <span class="arithmatex">\(\widehat{\mathbf{H}} = \mathbf{W}\mathbf{H}\mathbf{W}^\top\)</span>，其特征值记为 <span class="arithmatex">\(\widehat{\lambda}_1 \geq \widehat{\lambda}_2 \geq \cdots \geq \widehat{\lambda}_M\)</span>。</p>
+<p><strong>定理4.6（内蕴时间FSL，Random-<span class="arithmatex">\(M\)</span>特征）。</strong> 假设假设4.1成立且<span class="arithmatex">\(s \in (0, 1]\)</span>。设<span class="arithmatex">\(\bm{\nu}_t\)</span>是带Random-<span class="arithmatex">\(M\)</span>特征的内蕴时间SDE的解。那么，以概率至少 <span class="arithmatex">\(1 - \exp(-\Omega(M))\)</span>（关于投影矩阵<span class="arithmatex">\(\mathbf{W}\)</span>的随机性），定理4.3、4.4和4.5的结果继续成立，只需将<span class="arithmatex">\(e_M(\cdot)\)</span>和<span class="arithmatex">\(\mathcal{K}_M(\cdot)\)</span>分别替换为其随机特征对应物<span class="arithmatex">\(\widehat{e}_M(\cdot)\)</span>和<span class="arithmatex">\(\widehat{\mathcal{K}}_M(\cdot)\)</span>。</p>
+<p><strong>引理4.7。</strong> 以概率至少 <span class="arithmatex">\(1 - \exp(-\Omega(M))\)</span>（关于投影矩阵<span class="arithmatex">\(\mathbf{W}\)</span>的随机性），对任意<span class="arithmatex">\(j \in [M]\)</span>有 <span class="arithmatex">\(\widehat{\lambda}_j \eqsim \lambda_j \eqsim j^{-\beta}\)</span>。</p>
+<h3 id="44">4.4 关键证明步骤与核心洞察<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<p>本节概述FSL（公式11）证明背后的主要思想，突出关键技巧。完整证明见附录C。</p>
+<p>我们需要梯度噪声结构的以下表征。</p>
+<p><strong>引理4.8（噪声结构）。</strong> 对于任意<span class="arithmatex">\(\mathbf{v} \in \mathbb{R}^M\)</span>，有：</p>
+<div class="arithmatex">\[(2\rho_- \mathcal{E}(\mathbf{v}) + \sigma^2)\,\nabla^2 \mathcal{R}(\mathbf{v}) \;\preceq\; \bm{\Sigma}(\mathbf{v}) \;\preceq\; (2\rho_+ \mathcal{E}(\mathbf{v}) + \sigma^2)\,\nabla^2 \mathcal{R}(\mathbf{v}),\]</div>
+<p>其中<span class="arithmatex">\(\nabla^2 \mathcal{R}(\mathbf{v}) = \mathbf{W}\mathbf{H}\mathbf{W}^\top\)</span>。</p>
+<h4 id="volterra">Volterra积分方程<a class="headerlink" href="#volterra" title="Permanent link">&para;</a></h4>
+<p>通过分析，损失动力学满足以下Volterra方程：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{E}_t] \eqsim \delta_M + e_M(t) + \int_0^t \mathcal{K}_M(t-z)\gamma(z)(\mathbb{E}[\mathcal{E}_z] + \sigma^2)\mathop{}\!\mathrm{d}z. \tag{15}\]</div>
+<p>设<span class="arithmatex">\(f(t) := \mathbb{E}[\mathcal{E}_t]\)</span>，<span class="arithmatex">\(g(t) := \delta_M + e_M(t) + \sigma^2 \int_0^t \mathcal{K}_M(t-z)\gamma(z)\mathop{}\!\mathrm{d}z\)</span>，并定义线性算子：</p>
+<div class="arithmatex">\[\mathcal{T}f(t) = \int_0^t \mathcal{K}_M(t-z)\gamma(z)f(z)\mathop{}\!\mathrm{d}z.\]</div>
+<p>则Volterra方程（公式15）可以简洁地写成 <span class="arithmatex">\(f = g + \mathcal{T}f\)</span>。形式上，其解可以展开为无穷级数：</p>
+<div class="arithmatex">\[f = (\mathcal{I} - \mathcal{T})^{-1}g = g + \mathcal{T}g + \mathcal{T}^2 g + \mathcal{T}^3 g + \cdots. \tag{16}\]</div>
+<p>关键观察：在幂律假设下，高阶项<span class="arithmatex">\(\mathcal{T}^k g\)</span>（<span class="arithmatex">\(k \geq 2\)</span>）可以被一阶项<span class="arithmatex">\(\mathcal{T}g\)</span>控制。这源于遗忘核的尺度不变性：</p>
+<p><strong>引理4.9（尺度不变性）。</strong> 对任意<span class="arithmatex">\(t \lesssim M^\beta\)</span>，有 <span class="arithmatex">\(\tfrac{\mathcal{K}_M(t/2)}{\mathcal{K}_M(t)} \simeq 1\)</span>。</p>
+<p><strong>推论4.10（次卷积性质）。</strong> 对任意<span class="arithmatex">\(t \lesssim M^\beta\)</span>，有 <span class="arithmatex">\(\mathcal{K}_M * \mathcal{K}_M(t) \lesssim \mathcal{K}_M(t)\)</span>。</p>
+<p>由此可得 <span class="arithmatex">\(f(t) \eqsim g(t) + \mathcal{T}g(t)\)</span>，即FSL主方程。</p>
+<h4 id="_3">幂律标度的涌现（多任务视角）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>我们从多任务学习视角说明幂律标度如何从我们的设定中涌现。直观上，我们可以将每个特征函数的学习视为一个子任务。在这种视角下，我们的FSL框架揭示了幂律行为的三种不同表现：</p>
+<ul>
+<li><strong>(i) 近似误差。</strong> 近似误差解释了<span class="arithmatex">\(N-M\)</span>个未学习子任务的总风险，由于：</li>
+</ul>
+<div class="arithmatex">\[\delta_M = \sum_{j=M+1}^N \lambda_j |\theta_j^*|^2 \eqsim M^{-s\beta}, \quad \text{若} N-M \gtrsim M.\]</div>
+<ul>
+<li><strong>(ii) 信号学习。</strong> 对于每个子任务，子任务风险相对于内蕴时间<span class="arithmatex">\(t\)</span>呈指数收敛。然而，由于<span class="arithmatex">\(\{\lambda_j\}\)</span>和<span class="arithmatex">\(\{\theta_j^*\}\)</span>的幂律结构，当<span class="arithmatex">\(M\)</span>足够大时，总多任务风险呈现幂律衰减：</li>
+</ul>
+<div class="arithmatex">\[e_M(t) = \sum_{j=1}^M \lambda_j |\theta_j^*|^2 e^{-2\lambda_j t} \eqsim \int_{M^{-\beta}}^1 u^{s-1} e^{-2ut} \mathop{}\!\mathrm{d}u \eqsim \frac{1}{t^s}, \quad \text{若} 1 \lesssim t \lesssim M^\beta.\]</div>
+<ul>
+<li><strong>(iii) 噪声遗忘。</strong> 类似地，对于遗忘核，我们也有：</li>
+</ul>
+<div class="arithmatex">\[\mathcal{K}_M(t) = \sum_{j=1}^M \lambda_j^2 e^{-2\lambda_j t} \;\eqsim\; \int_{M^{-\beta}}^1 z^{\,1-\frac{1}{\beta}} e^{-2zt} \mathop{}\!\mathrm{d}z \;\eqsim\; t^{-(2-1/\beta)}, \quad \text{若} 1 \lesssim t \lesssim M^\beta.\]</div>
+<p><strong>注4.11（任务累积效应）。</strong> 上述推导揭示了：尽管单个任务可能不会表现出关于内蕴时间的精确幂律标度，但许多任务的<strong>集体累积</strong>产生了这种标度行为。随着任务数量的增加，幂律regime逐渐扩展，在<span class="arithmatex">\(M \to \infty\)</span>的理想极限下，它覆盖整个训练过程。在我们的设定中，每个子任务自然遵循指数学习曲线<span class="arithmatex">\(\exp(-\lambda t)\)</span>，然而底层机制似乎更加普遍。我们预计即使个体任务动力学偏离这种形式，类似的幂律行为也可能出现，这有待未来研究。</p>
+<hr />
+<h2 id="5">5 学习率调度影响标度效率<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>在建立了通用FSL之后，我们现在将其应用于三种代表性LRS——常数、指数衰减和预热-稳定-衰减（WSD）——以检验调度设计如何影响标度效率。所有证明见附录D。为清晰起见，我们作如下假设：</p>
+<p><strong>假设5.1。</strong> 假设标签噪声<span class="arithmatex">\(\sigma^2 \gtrsim 1\)</span>和批量大小<span class="arithmatex">\(b(\tau) = B\)</span>均为常数。</p>
+<p>在该假设下，给定物理时间LRS函数<span class="arithmatex">\(\varphi(\cdot)\)</span>，定理4.4意味着对于<span class="arithmatex">\(t \gtrsim 1\)</span>，FSL简化为：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_t)] - \tfrac{1}{2}\sigma^2 \;\eqsim\; M^{-s\beta} + (1+t)^{-s} + \frac{1}{B} \int_0^t (1+t-z)^{-(2-1/\beta)} [(1+z)^{-s} + \sigma^2] \varphi(z) \mathop{}\!\mathrm{d}z.\]</div>
+<h3 id="51-lrs">5.1 常数LRS<a class="headerlink" href="#51-lrs" title="Permanent link">&para;</a></h3>
+<p><strong>定理5.2（常数LRS）。</strong> 考虑常数LRS <span class="arithmatex">\(\eta(t) = \eta_0\)</span>（即<span class="arithmatex">\(\gamma(t) = \eta_0\)</span>）和批量大小<span class="arithmatex">\(B\)</span>。最终损失满足：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_{T})] - \frac{\sigma^2}{2} \;\eqsim\; M^{-s\beta} + (\eta_0 T)^{-s} + \frac{\eta_0}{B}\sigma^2,\]</div>
+<p>其中<span class="arithmatex">\(T = K\eta_0\)</span>是总内蕴时间，<span class="arithmatex">\(K\)</span>是物理训练步数。</p>
+<p><strong>数据最优标度。</strong> 在数据受限regime（<span class="arithmatex">\(D\)</span>表示数据量），数据最优学习率满足 <span class="arithmatex">\(\eta_{\text{opt}} \eqsim D^{-s/(s+1)}\)</span>，对应最优损失：</p>
+<div class="arithmatex">\[E_{\text{opt}} \;\eqsim\; D^{-\frac{s}{s+1}}.\]</div>
+<p><strong>计算最优标度。</strong> 在计算受限regime（<span class="arithmatex">\(C\)</span>表示计算量），计算最优学习率满足 <span class="arithmatex">\(\eta_{\text{opt}} \eqsim C^{-\frac{s\beta}{1+(s+1)\beta}}\)</span>，对应最优损失：</p>
+<div class="arithmatex">\[E_{\text{opt}} \;\eqsim\; C^{-\frac{s\beta}{1+s\beta+\beta}}.\]</div>
+<p>关键发现：
+- <strong>线性缩放规则：</strong> 学习率应与批量大小线性缩放。
+- <strong>更高容量模型更计算高效：</strong> 随着<span class="arithmatex">\(\beta\)</span>减小（容量增加），损失指数<span class="arithmatex">\(s\beta/(1+s\beta+\beta)\)</span>增大，模型更高效。</p>
+<h3 id="52-lrs">5.2 指数衰减LRS<a class="headerlink" href="#52-lrs" title="Permanent link">&para;</a></h3>
+<p><strong>定理5.3（指数衰减LRS）。</strong> 考虑指数衰减LRS <span class="arithmatex">\(\eta(t) = a e^{-bt}\)</span>（即<span class="arithmatex">\(\gamma(t) = a e^{-bt}\)</span>）和批量大小<span class="arithmatex">\(B\)</span>。最终损失满足：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_{T})] - \frac{\sigma^2}{2} \;\eqsim\; M^{-s\beta} + T^{-s} + \frac{\sigma^2}{B} + \frac{a-b}{BT} \min\{M^\beta, T^{1/\beta}\} \cdot \sigma^2,\]</div>
+<p>其中<span class="arithmatex">\(T = (a-b)K/\log(a/b)\)</span>是总内蕴时间。</p>
+<p><strong>数据最优标度。</strong> 最优损失：</p>
+<div class="arithmatex">\[E_{\text{opt}} \;\eqsim\; (D/\log D)^{-\frac{s\beta}{1+s\beta}} \quad \text{（易学习regime）}$$
+$$E_{\text{opt}} \;\eqsim\; (D/\log D)^{-s} \quad \text{（难学习regime）}\]</div>
+<p>相比常数LRS，指数衰减LRS严格更优，验证了学习率衰减的重要性。</p>
+<h3 id="53-wsdlrs">5.3 WSD型LRS<a class="headerlink" href="#53-wsdlrs" title="Permanent link">&para;</a></h3>
+<p>WSD调度由三个阶段组成：
+1. <strong>预热阶段：</strong> <span class="arithmatex">\([0, K_1)\)</span>，学习率从<span class="arithmatex">\(0\)</span>线性增加到峰值<span class="arithmatex">\(\eta_{\max}\)</span>
+2. <strong>稳定阶段：</strong> <span class="arithmatex">\([K_1, K_1 + K_2)\)</span>，学习率保持在<span class="arithmatex">\(\eta_{\max}\)</span>
+3. <strong>衰减阶段：</strong> <span class="arithmatex">\([K_1 + K_2, K]\)</span>，学习率从<span class="arithmatex">\(\eta_{\max}\)</span>指数衰减到<span class="arithmatex">\(\eta_{\min}\)</span></p>
+<p><strong>定理5.4（WSD型LRS）。</strong> 考虑WSD LRS <span class="arithmatex">\(\eta(t)\)</span>，其内蕴时间表示为<span class="arithmatex">\(\gamma(t)\)</span>。最终损失满足：</p>
+<div class="arithmatex">\[\mathbb{E}[\mathcal{R}(\bm{\nu}_{T})] - \frac{\sigma^2}{2} \;\eqsim\; M^{-s\beta} + (T_1 + T_2)^{-s} + \frac{\sigma^2}{B} + \frac{a-b}{BT_2} \min\{M^\beta, T_2^{1/\beta}\} \cdot \sigma^2,\]</div>
+<p>其中<span class="arithmatex">\(T_1\)</span>和<span class="arithmatex">\(T_2\)</span>分别是稳定阶段和衰减阶段贡献的内蕴时间。</p>
+<p><strong>关键优势：</strong> 稳定阶段大幅增加了内蕴时间，而衰减阶段仅占很小比例（<span class="arithmatex">\(r \to 0\)</span>）。这消除了指数衰减中的对数因子。</p>
+<p><strong>数据最优标度。</strong> 最优损失：</p>
+<div class="arithmatex">\[E_{\text{opt}} \;\eqsim\; (D/\log D)^{-\frac{s\beta}{1+s\beta}} (\log D)^{\frac{s\beta-s}{1+s\beta}} \quad \text{（易学习regime）}$$
+$$E_{\text{opt}} \;\eqsim\; D^{-s} \quad \text{（难学习regime）}\]</div>
+<p>这完全消除了难学习regime中的对数因子，与LLM实践中衰减阶段仅占10%-20%的经验一致。</p>
+<h4 id="_4">计算最优标度<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>在计算受限regime下，WSD同样优于其他调度，特别是在难学习regime中达到<span class="arithmatex">\(C^{-s\beta/(1+\beta)}\)</span>的最优损失。</p>
+<hr />
+<h2 id="6">6 实验<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 幂律核回归<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>我们在幂律核回归任务上验证FSL的预测。我们考虑三种LRS：cosine调度、WSD调度和一种非标准循环调度。</p>
+<p><strong>实验设置：</strong>
+- 特征维数：<span class="arithmatex">\(N = 2000\)</span>
+- 特征衰减：<span class="arithmatex">\(\beta = 2\)</span>
+- 任务难度：<span class="arithmatex">\(s = 0.5\)</span>（难学习regime）
+- 噪声水平：<span class="arithmatex">\(\sigma = 0.1\)</span>
+- 模型大小：<span class="arithmatex">\(M \in \{50, 100, 200, 500\}\)</span></p>
+<p><strong>结果：</strong> FSL准确捕捉SGD在所有三种LRS下的损失动力学。图1（a）显示FSL预测（虚线）与SGD实验（实线）的对比，表明我们的理论能够精确描述整个训练轨迹。</p>
+<p>WSD调度的行为值得注意：在稳定阶段，损失衰减相对较慢；但一旦进入衰减阶段，损失急剧下降，最终达到比常数和cosine调度更低的值。这与我们的理论预测一致。</p>
+<p>图1（b）显示了FSL预测的最终损失标度行为与SGD实验的对比。在不同模型大小下，FSL预测的标度关系与经验观察高度一致。</p>
+<h3 id="62-llm">6.2 LLM预训练<a class="headerlink" href="#62-llm" title="Permanent link">&para;</a></h3>
+<p>我们在真实LLM预训练场景中测试FSL的实用性。</p>
+<p><strong>实验设置：</strong>
+- <strong>Llama 400M模型：</strong> 使用8-1-1 LRS（8个epoch预热，稳定1个epoch，然后衰减）的轨迹拟合FSL参数<span class="arithmatex">\((\beta, s)\)</span>，然后预测cosine和WSD调度下的损失曲线。
+- <strong>Llama 1B模型：</strong> 类似的实验设置。
+- <strong>QwenMoE 1B模型：</strong> 测试FSL在混合专家模型上的适用性。</p>
+<p><strong>结果：</strong></p>
+<ol>
+<li>
+<p><strong>损失轨迹拟合：</strong> FSL能够用8-1-1 LRS的轨迹准确拟合参数，并成功预测cosine和WSD调度下的损失曲线。</p>
+</li>
+<li>
+<p><strong>最优LRS发现：</strong> 在1B QwenMoE模型上，FSL预测的最优LRS呈现明显的WSD形状，衰减阶段将学习率降至远低于<span class="arithmatex">\(0.1\eta_{\max}\)</span>。</p>
+</li>
+<li>
+<p><strong>计算效率比较：</strong> FSL最优LRS在相同计算预算下优于所有基线LRS（常数、cosine、标准WSD等）。</p>
+</li>
+</ol>
+<p>这些实验表明FSL可以作为理解和指导LLM预训练的有价值工具。</p>
+<hr />
+<h2 id="7">7 结论<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>本文建立了泛函标度律（FSL），它统一描述了任意学习率调度下的完整损失动力学。我们的关键贡献包括：</p>
+<ol>
+<li>
+<p><strong>内蕴时间概念：</strong> 提出了内蕴时间作为刻画训练进度的更准确度量，比简单的迭代次数更好地捕捉有效训练动态。</p>
+</li>
+<li>
+<p><strong>幂律标度的涌现：</strong> 证明了幂律标度从多任务累积效应中自然涌现，揭示了标度律的深层机制。</p>
+</li>
+<li>
+<p><strong>WSD的理论解释：</strong> 提供了WSD优于纯衰减调度的理论原因，解释了为什么工业LLM广泛采用这种调度策略。</p>
+</li>
+<li>
+<p><strong>真实LLM验证：</strong> 在0.1B到1B参数的真实LLM上验证了FSL的实用性，包括密集和MoE架构。</p>
+</li>
+</ol>
+<p><strong>局限性与未来方向：</strong> 当前分析限于幂律核回归设定。未来的重要扩展包括：
+- 更一般的特征谱结构
+- 非均匀学习率
+- Transformer架构的建模
+- 与LLM预训练中观察到的具体现象的联系</p>
+<hr />
+<h2 id="a">附录A 补充材料<a class="headerlink" href="#a" title="Permanent link">&para;</a></h2>
+<h3 id="a1-llm">A.1 LLM预训练损失轨迹的经验拟合方法<a class="headerlink" href="#a1-llm" title="Permanent link">&para;</a></h3>
+<p>为将FSL应用于LLM预训练，我们需要从经验损失轨迹中估计参数<span class="arithmatex">\((\beta, s)\)</span>。具体步骤如下：</p>
+<ol>
+<li>
+<p><strong>数据预处理：</strong> 收集LLM预训练过程中的损失轨迹<span class="arithmatex">\(\{(K_k, L_k)\}\)</span>，其中<span class="arithmatex">\(K_k\)</span>是第<span class="arithmatex">\(k\)</span>步的迭代数，<span class="arithmatex">\(L_k\)</span>是对应的损失值。</p>
+</li>
+<li>
+<p><strong>内蕴时间估计：</strong> 通过积分学习率曲线估计内蕴时间<span class="arithmatex">\(\tau_k = \int_0^{K_k} \eta(s) ds\)</span>。</p>
+</li>
+<li>
+<p><strong>参数拟合：</strong> 使用FSL公式拟合数据，估计<span class="arithmatex">\((\beta, s)\)</span>。具体而言，我们最小化以下损失函数：</p>
+</li>
+</ol>
+<div class="arithmatex">\[\mathcal{L}(\beta, s) = \sum_k \left| \log L_k - \log \hat{L}(\tau_k; \beta, s) \right|^2,\]</div>
+<p>其中<span class="arithmatex">\(\hat{L}\)</span>是由FSL预测的损失值。</p>
+<ol>
+<li><strong>验证：</strong> 使用拟合的参数预测其他LRS下的损失轨迹，验证预测精度。</li>
+</ol>
+<h3 id="a2-llm">A.2 LLM预训练中常用的学习率调度<a class="headerlink" href="#a2-llm" title="Permanent link">&para;</a></h3>
+<p>LLM预训练中常用的学习率调度包括：</p>
+<ul>
+<li><strong>常数调度：</strong> <span class="arithmatex">\(\eta(t) = \eta_0\)</span></li>
+<li><strong>余弦衰减（cosine）：</strong> <span class="arithmatex">\(\eta(t) = \eta_{\max} \cdot \frac{1 + \cos(\pi t / T)}{2}\)</span></li>
+<li><strong>指数衰减：</strong> <span class="arithmatex">\(\eta(t) = \eta_{\max} \cdot e^{-t/\tau}\)</span></li>
+<li><strong>阶梯衰减：</strong> <span class="arithmatex">\(\eta(t) = \eta_{\max} \cdot a^{ \lfloor t / \tau \rfloor }\)</span></li>
+<li><strong>WSD（预热-稳定-衰减）：</strong> 如第5.3节所定义</li>
+<li><strong>8-1-1调度：</strong> 预热8个epoch，稳定1个epoch，衰减1个epoch</li>
+</ul>
+<h3 id="a3">A.3 与核回归的联系<a class="headerlink" href="#a3" title="Permanent link">&para;</a></h3>
+<p>本文的PLK回归设定等价于具有幂律特征谱的核回归。具体而言，核函数<span class="arithmatex">\(K(x, x') = \langle \phi(x), \phi(x') \rangle\)</span>具有特征值<span class="arithmatex">\(\lambda_j \asymp j^{-\beta}\)</span>。</p>
+<p>这种联系表明FSL的预测可能推广到更一般的核回归场景，甚至可能推广到神经网络训练的某些阶段。</p>
+<h3 id="a4-sde">A.4 SDE建模的推导细节<a class="headerlink" href="#a4-sde" title="Permanent link">&para;</a></h3>
+<p>从SGD到连续时间SDE的过渡涉及以下关键步骤：</p>
+<ol>
+<li>
+<p><strong>SGD更新：</strong> <span class="arithmatex">\(v_{k+1} = v_k - \eta_k \nabla \mathcal{R}(v_k) + \eta_k \xi_k\)</span>，其中<span class="arithmatex">\(\xi_k\)</span>是梯度噪声。</p>
+</li>
+<li>
+<p><strong>缩放假设：</strong> 步长<span class="arithmatex">\(\eta_k \to 0\)</span>，学习率随时间缓慢变化，使得<span class="arithmatex">\(T = \sum_k \eta_k\)</span>保持有限。</p>
+</li>
+<li>
+<p><strong>扩散项标定：</strong> 梯度噪声的协方差为<span class="arithmatex">\(\mathbb{E}[\xi_k \xi_k^\top] \asymp \frac{\mathcal{R}(v_k)}{b_k}\)</span>。</p>
+</li>
+<li>
+<p><strong>Itô-Taylor展开：</strong> 应用Itô-Taylor展开，保留主导项，得到连续时间SDE。</p>
+</li>
+</ol>
+<hr />
+<h2 id="b">附录B 实验细节与额外结果<a class="headerlink" href="#b" title="Permanent link">&para;</a></h2>
+<h3 id="b1">B.1 幂律核回归实验<a class="headerlink" href="#b1" title="Permanent link">&para;</a></h3>
+<p><strong>实验参数：</strong>
+- 特征维数<span class="arithmatex">\(N = 2000\)</span>，模型大小<span class="arithmatex">\(M \in \{50, 100, 200, 500\}\)</span>
+- 容量指数<span class="arithmatex">\(\beta = 2\)</span>，任务难度<span class="arithmatex">\(s \in \{0.3, 0.5, 0.8\}\)</span>
+- 标签噪声<span class="arithmatex">\(\sigma = 0.1\)</span>，批量大小<span class="arithmatex">\(B = 32\)</span>
+- 学习率调度：常数<span class="arithmatex">\(\eta = 0.01\)</span>，cosine，WSD</p>
+<p><strong>评估指标：</strong>
+- 训练损失<span class="arithmatex">\(\mathcal{R}(\bm{\nu}_t)\)</span>
+- 最终损失与理论预测的相对误差</p>
+<h3 id="b2-llm">B.2 LLM预训练实验<a class="headerlink" href="#b2-llm" title="Permanent link">&para;</a></h3>
+<p><strong>数据集：</strong> OpenWebText语料库的子集</p>
+<p><strong>模型配置：</strong>
+- Llama 400M：12层，16头，隐藏维度1024
+- Llama 1B：22层，16头，隐藏维度2048
+- QwenMoE 1B：24层，MoE配置为8 experts per token</p>
+<p><strong>训练配置：</strong>
+- 批量大小：4096 tokens
+- 最大学习率：<span class="arithmatex">\(1 \times 10^{-3}\)</span>
+- 训练步数：100K-500K</p>
+<hr />
+<h2 id="c-4">附录C 第4节的证明<a class="headerlink" href="#c-4" title="Permanent link">&para;</a></h2>
+<h3 id="c1-volterra">C.1 Volterra积分方程刻画损失动力学<a class="headerlink" href="#c1-volterra" title="Permanent link">&para;</a></h3>
+<h3 id="c2-e_mmathcalk_m">C.2 <span class="arithmatex">\(e_M\)</span>和<span class="arithmatex">\(\mathcal{K}_M\)</span>函数的幂律衰减<a class="headerlink" href="#c2-e_mmathcalk_m" title="Permanent link">&para;</a></h3>
+<h3 id="c3-top-m">C.3 Top-<span class="arithmatex">\(M\)</span>特征情况<a class="headerlink" href="#c3-top-m" title="Permanent link">&para;</a></h3>
+<h4 id="c31-43">C.3.1 定理4.3的证明<a class="headerlink" href="#c31-43" title="Permanent link">&para;</a></h4>
+<h4 id="c32-44">C.3.2 定理4.4的证明<a class="headerlink" href="#c32-44" title="Permanent link">&para;</a></h4>
+<h4 id="c33-45">C.3.3 定理4.5的证明<a class="headerlink" href="#c33-45" title="Permanent link">&para;</a></h4>
+<h4 id="c34-42">C.3.4 定理4.2的证明<a class="headerlink" href="#c34-42" title="Permanent link">&para;</a></h4>
+<h3 id="c4-random-m">C.4 Random-<span class="arithmatex">\(M\)</span>特征情况<a class="headerlink" href="#c4-random-m" title="Permanent link">&para;</a></h3>
+<h4 id="c41">C.4.1 集中不等式<a class="headerlink" href="#c41" title="Permanent link">&para;</a></h4>
+<h4 id="c42">C.4.2 上下界<a class="headerlink" href="#c42" title="Permanent link">&para;</a></h4>
+<h4 id="c43-c11">C.4.3 命题C.11的证明<a class="headerlink" href="#c43-c11" title="Permanent link">&para;</a></h4>
+<hr />
+<h2 id="d-5">附录D 第5节的证明<a class="headerlink" href="#d-5" title="Permanent link">&para;</a></h2>
+<h3 id="d1-lrs">D.1 常数LRS的证明<a class="headerlink" href="#d1-lrs" title="Permanent link">&para;</a></h3>
+<h3 id="d2-lrs">D.2 指数衰减LRS的证明<a class="headerlink" href="#d2-lrs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>情况1：</strong> <span class="arithmatex">\(T \geq M^\beta\)</span></li>
+<li><strong>情况2：</strong> <span class="arithmatex">\(T &lt; M^\beta\)</span></li>
+</ul>
+<h3 id="d3-wsdlrs">D.3 WSD型LRS的证明<a class="headerlink" href="#d3-wsdlrs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>情况1：</strong> <span class="arithmatex">\(T_2 \geq M^\beta\)</span></li>
+<li><strong>情况2：</strong> <span class="arithmatex">\(T_2 &lt; M^\beta\)</span></li>
+</ul>
+<hr />
+<h2 id="e">附录E 辅助引理<a class="headerlink" href="#e" title="Permanent link">&para;</a></h2>
+<p>本文证明中使用的辅助引理集合，包括：
+- 积分估计引理
+- 幂函数不等式
+- 卷积不等式
+- 集中不等式</p>
+<hr />
+<h2 id="_5">参考文献<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>（原文参考文献，无需翻译）</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

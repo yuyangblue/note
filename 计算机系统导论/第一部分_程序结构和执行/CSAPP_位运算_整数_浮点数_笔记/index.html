@@ -1,0 +1,2935 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CSAPP 学习笔记：位运算、整数与浮点数 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#csapp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CSAPP 学习笔记：位运算、整数与浮点数
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="csapp">CSAPP 学习笔记：位运算、整数与浮点数<a class="headerlink" href="#csapp" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>课程</strong>：CMU 15-213 / CSAPP (Computer Systems: A Programmer's Perspective)<br />
+<strong>教材</strong>：Bryant and O'Hallaron, Computer Systems: A Programmer's Perspective<br />
+<strong>讲次</strong>：第2-4讲（Bits, Bytes, and Integers &amp; Floating Point）<br />
+<strong>整理日期</strong>：2026-05-24</p>
+</blockquote>
+<hr />
+<h1 id="_1">第一部分：比特、字节与位运算<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="1">1. 比特与二进制基础<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">什么是比特？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>每个比特（bit）只有两种取值：<strong>0</strong> 或 <strong>1</strong>。计算机通过编码和解释不同的比特组合来表示：
+- 指令
+- 数字
+- 文本字符
+- 图片/视频
+- ...所有你能想到的信息</p>
+<h3 id="_3">为什么用比特？<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>这可不是随意选的，背后有很物理上的考量：</p>
+<table>
+<thead>
+<tr>
+<th>考量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>电子实现简单</strong></td>
+<td>双稳态元件容易存储（稳定在0或1两种状态）</td>
+</tr>
+<tr>
+<td><strong>抗噪声能力强</strong></td>
+<td>在噪声大、精度不高的线路上也能可靠传输</td>
+</tr>
+<tr>
+<td><strong>电压阈值明确</strong></td>
+<td>0.0-0.2V 被识别为 0，0.9-1.1V 被识别为 1</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>理解</strong>：就像用开关表示开/关一样，用高低电压表示0/1非常可靠。</p>
+</blockquote>
+<h3 id="_4">二进制计数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>我们平时用的是<strong>十进制</strong>（base 10），每一位是 0-9，进位规则是"满10进1"。</p>
+<p>二进制（base 2）也是类似的，只是每一位只能是 0 或 1，进位规则是"满2进1"。</p>
+<p><strong>15213₁₀ 转二进制：</strong></p>
+<div class="arithmatex">\[
+15213_{10} = 11101101101101_2
+\]</div>
+<p>验证一下：
+$$
+1 \times 2^{13} + 1 \times 2^{12} + 1 \times 2^{11} + 0 \times 2^{10} + 1 \times 2^9 + 1 \times 2^8 + 0 \times 2^7 + 1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0 = 8192 + 4096 + 2048 + 512 + 256 + 128 + 64 + 32 + 8 + 4 + 1 = 15213 \checkmark
+$$</p>
+<p><strong>1.20₁₀ 的二进制：</strong></p>
+<div class="arithmatex">\[
+1.20_{10} = 1.0011001100110011[0011]\dots_2
+\]</div>
+<p>⚠️ <strong>注意</strong>：这是个<strong>无限循环</strong>的小数！就像 1/3 = 0.333... 一样。这导致了一个经典问题：<strong>浮点数精度丢失</strong>。</p>
+<p>我们可以用二进制科学计数法表示：</p>
+<div class="arithmatex">\[
+1.5213 \times 10^4 = 1.1101101101101_2 \times 2^{13}
+\]</div>
+<p>这启发了后来 IEEE 754 浮点数的表示方式！</p>
+<blockquote>
+<p><strong>要点总结</strong>：二进制是"满2进1"，小数部分可能是无限循环的。</p>
+</blockquote>
+<h3 id="_5">字节编码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>1 Byte = 8 bits</strong></p>
+<p>一个字节可以表示 256 个不同的值（2⁸ = 256）。</p>
+<p><strong>三种表示方式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>进制</th>
+<th>范围</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>二进制</strong></td>
+<td>00000000₂ 到 11111111₂</td>
+<td>10101010</td>
+</tr>
+<tr>
+<td><strong>十进制</strong></td>
+<td>0 到 255</td>
+<td>170</td>
+</tr>
+<tr>
+<td><strong>十六进制</strong></td>
+<td>00₁₆ 到 FF₁₆</td>
+<td>0xAA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>十六进制的好处</strong>：</p>
+<p>十六进制超级适合表示字节，因为：
+- <strong>1位十六进制 = 4位二进制</strong>（4个bit可以表示0-15，正好对应0-F）
+- 比二进制更紧凑，比十进制转换更直接</p>
+<p><strong>对照表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>十六进制</th>
+<th>二进制</th>
+<th>十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>A</td>
+<td>1010</td>
+<td>10</td>
+</tr>
+<tr>
+<td>F</td>
+<td>1111</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>C语言写法</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="mh">0xFA1D37B</span><span class="w">    </span><span class="c1">// 大小写均可</span>
+<span class="mh">0xfa1d37b</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：十六进制是程序员的好朋友，4位二进制 = 1位十六进制。</p>
+</blockquote>
+<hr />
+<h2 id="2">2. 位运算详解<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="_6">布尔代数<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>四种基本运算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>运算</th>
+<th>符号</th>
+<th>规则</th>
+<th>口诀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AND</strong>（与）</td>
+<td><code>&amp;</code></td>
+<td>两个都是1才为1</td>
+<td>有0出0，全1出1</td>
+</tr>
+<tr>
+<td><strong>OR</strong>（或）</td>
+<td><code>\|</code></td>
+<td>任一是1就为1</td>
+<td>有1出1，全0出0</td>
+</tr>
+<tr>
+<td><strong>NOT</strong>（非）</td>
+<td><code>~</code></td>
+<td>取反</td>
+<td>1变0，0变1</td>
+</tr>
+<tr>
+<td><strong>XOR</strong>（异或）</td>
+<td><code>^</code></td>
+<td>恰好一个为1时为1</td>
+<td>不同出1，相同出0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>真值表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a&amp;b</th>
+<th>a|b</th>
+<th>a^b</th>
+<th>~a</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>位向量操作</strong>：</p>
+<p>位运算都是<strong>逐位</strong>进行的！</p>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>    01101001  (0x69)
+  &amp; 01010101  (0x55)
+  ----------
+    01000001  (0x41)
+</code></pre></div></td></tr></table></div></p>
+<p>竖着看，每一位独立运算。</p>
+<blockquote>
+<p><strong>要点总结</strong>：位运算是逐位进行的，不是整体运算。</p>
+</blockquote>
+<h3 id="_7">位操作表示集合<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>这是个很酷的技巧！用位向量巧妙表示集合：</p>
+<p>假设我们用8位表示集合 {0,1,2,3,4,5,6,7} 的子集：
+- 位i = 1 表示元素i在集合中
+- 位i = 0 表示元素i不在集合中</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>位运算</th>
+<th>集合意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交集</td>
+<td><code>&amp;</code></td>
+<td>两个集合的交集</td>
+</tr>
+<tr>
+<td>并集</td>
+<td><code>\|</code></td>
+<td>两个集合的并集</td>
+</tr>
+<tr>
+<td>对称差</td>
+<td><code>^</code></td>
+<td>在一个集合但不在另一个</td>
+</tr>
+<tr>
+<td>补集</td>
+<td><code>~</code></td>
+<td>全集减去当前集合</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>集合 A = {0, 2, 4, 6} = 01010101
+集合 B = {1, 2, 5, 6} = 01000110
+A &amp; B = 01000100 = {2, 6}       (交集)
+A | B = 01010111 = {0,1,2,4,5,6} (并集)
+A ^ B = 00010011 = {0,1,4,5}     (对称差)
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p><strong>要点总结</strong>：位运算可以高效地表示和操作集合。</p>
+</blockquote>
+<h3 id="vs">位级操作 vs 逻辑操作<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
+<p>⚠️ <strong>这是一个超级容易踩坑的地方！</strong></p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>位级操作</th>
+<th>逻辑操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>符号</td>
+<td><code>&amp;</code>, |, <code>~</code>, <code>^</code></td>
+<td><code>&amp;&amp;</code>, ||, <code>!</code></td>
+</tr>
+<tr>
+<td>操作对象</td>
+<td>每一位</td>
+<td>整个表达式（0或非0）</td>
+</tr>
+<tr>
+<td>结果</td>
+<td>位的组合</td>
+<td>0 或 1</td>
+</tr>
+<tr>
+<td>短路求值</td>
+<td>❌ 否</td>
+<td>✅ 是</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键区别</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 位级：每一位单独运算</span>
+<span class="mi">5</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="c1">// 0101 &amp; 0100 = 0100</span>
+
+<span class="c1">// 逻辑：转换为布尔值再运算</span>
+<span class="mi">5</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c1">// 非0 &amp;&amp; 非0 = 1</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>⚠️ 常见错误</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 错误写法</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x01</span><span class="p">)</span><span class="w">  </span><span class="c1">// 意图：检查flags的第0位</span>
+
+<span class="c1">// 正确写法</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="c1">// 需要加括号！</span>
+</code></pre></div></td></tr></table></div>
+<p>因为 <code>!=</code> 优先级高于 <code>&amp;</code>，上面的代码实际变成了 <code>flags &amp; (0x01 != 0)</code> = <code>flags &amp; 1</code>。</p>
+<p><strong>短路求值的妙用</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="w">  </span><span class="c1">// 安全！p为NULL时不会解引用</span>
+</code></pre></div></td></tr></table></div>
+<p>如果 <code>p</code> 是 NULL（0），由于短路求值，<code>*p</code> 根本不会执行！</p>
+<blockquote>
+<p><strong>要点总结</strong>：位操作 vs 逻辑操作，一字之差，天壤之别！⚠️</p>
+</blockquote>
+<h3 id="_8">移位操作<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><strong>左移 <code>x &lt;&lt; y</code></strong>：</p>
+<p>将 x 向左移动 y 位，<strong>右边补0</strong>。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>    10110100 &lt;&lt; 2
+  = 11010000
+</code></pre></div></td></tr></table></div>
+<p><strong>右移 <code>x &gt;&gt; y</code></strong>：</p>
+<p>有两种方式：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>规则</th>
+<th>示例（8位，x=11010100）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>逻辑右移</strong></td>
+<td>左边补0</td>
+<td>&gt;&gt; 2 = 00110101</td>
+</tr>
+<tr>
+<td><strong>算术右移</strong></td>
+<td>复制最高位（符号位）</td>
+<td>&gt;&gt; 2 = 11110101</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ <strong>无符号数必须用逻辑右移</strong>，有符号数<strong>通常用算术右移</strong>（但标准没规定，取决于编译器）。</p>
+<p><strong>未定义行为</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 这些都是未定义行为！</span>
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">-1</span><span class="w">    </span><span class="c1">// 移位量为负</span>
+<span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">32</span><span class="w">    </span><span class="c1">// 移位量 &gt;= 字长</span>
+</code></pre></div></td></tr></table></div>
+<p>编译器可能做任何事，甚至崩溃。</p>
+<blockquote>
+<p><strong>要点总结</strong>：左移右边补0，右移分逻辑/算术两种。</p>
+</blockquote>
+<hr />
+<h2 id="3-c">3. C语言数据类型大小<a class="headerlink" href="#3-c" title="Permanent link">&para;</a></h2>
+<p>同一个数据类型在不同架构下的大小可能不同！</p>
+<table>
+<thead>
+<tr>
+<th>C Data Type</th>
+<th>32位系统</th>
+<th>64位系统</th>
+<th>x86-64</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>short</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>long</td>
+<td>4</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>4</td>
+<td>8</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ <strong>易错点</strong>：64位系统下 <code>long</code> 是 8 字节！如果你在 32 位系统写 <code>long</code>，然后迁移到 64 位系统，可能会出问题。</p>
+<blockquote>
+<p><strong>要点总结</strong>：指针和 long 在 32 位和 64 位系统下大小不同。</p>
+</blockquote>
+<hr />
+<h1 id="_9">第二部分：整数表示与运算<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h1>
+<h2 id="4">4. 整数的编码方式<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="_10">无符号数<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[B2U(x) = \sum_{i=0}^{w-1} x_i \cdot 2^i\]</div>
+<p>直接按权重求和，很直观。</p>
+<p><strong>示例</strong>：15213 的二进制
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>15213 = 00111011 01101101
+</code></pre></div></td></tr></table></div></p>
+<h3 id="twos-complement">补码（Two's Complement）<a class="headerlink" href="#twos-complement" title="Permanent link">&para;</a></h3>
+<p>这是表示有符号数的标准方式！</p>
+<div class="arithmatex">\[B2T(x) = -x_{w-1} \cdot 2^{w-1} + \sum_{i=0}^{w-2} x_i \cdot 2^i\]</div>
+<p>关键点：
+- <strong>符号位</strong>：最高位 <span class="arithmatex">\(x_{w-1}\)</span> 决定了正负
+- 符号位 = 0 → 非负数
+- 符号位 = 1 → 负数</p>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>x = 15213:  00111011 01101101  (正数，符号位=0)
+y = -15213: 11000100 10010011  (负数，符号位=1)
+</code></pre></div></td></tr></table></div></p>
+<p>⚠️ 注意看这两个数的位模式：它们<strong>不是简单的取反</strong>！</p>
+<blockquote>
+<p><strong>为什么要用补码？</strong>
+补码的好处是加法器可以统一处理有符号和无符号加法！硬件设计大大简化。</p>
+</blockquote>
+<h3 id="_11">数值范围<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p><strong>无符号数范围</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>最小值</th>
+<th>最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>表达式</strong></td>
+<td>UMin = 0</td>
+<td>UMax = 2^w - 1</td>
+</tr>
+<tr>
+<td><strong>位模式</strong></td>
+<td>00...0</td>
+<td>11...1</td>
+</tr>
+<tr>
+<td><strong>8位示例</strong></td>
+<td>0</td>
+<td>255</td>
+</tr>
+<tr>
+<td><strong>16位示例</strong></td>
+<td>0</td>
+<td>65,535</td>
+</tr>
+</tbody>
+</table>
+<p><strong>补码范围</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>最小值</th>
+<th>最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>表达式</strong></td>
+<td>TMin = -2^{w-1}</td>
+<td>TMax = 2^{w-1} - 1</td>
+</tr>
+<tr>
+<td><strong>位模式</strong></td>
+<td>10...0</td>
+<td>01...1</td>
+</tr>
+<tr>
+<td><strong>8位示例</strong></td>
+<td>-128</td>
+<td>127</td>
+</tr>
+<tr>
+<td><strong>16位示例</strong></td>
+<td>-32,768</td>
+<td>32,767</td>
+</tr>
+</tbody>
+</table>
+<p><strong>⚠️ 关键不对称性</strong>：</p>
+<div class="arithmatex">\[|TMin| = |TMax| + 1\]</div>
+<p>这意味着：
+- TMin 没有对应的正数
+- -1 = 111...1（全是1），看起来"最大"但实际是-1</p>
+<p><strong>8位示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>TMin  = 10000000 = -128
+TMax  = 01111111 = +127
+-TMin = -(-128) = -128  // 溢出！还是-128
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p><strong>要点总结</strong>：TMin 的绝对值比 TMax 大1，这是一个不对称的世界。</p>
+</blockquote>
+<hr />
+<h2 id="5">5. 有符号与无符号的转换<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="_12">转换规则<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><strong>保持位模式不变，只是重新解释！</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>位模式: 11000100 10010011
+
+作为有符号数 (补码) = -15213
+作为无符号数       = 50323
+</code></pre></div></td></tr></table></div>
+<p><strong>T2U（补码 → 无符号）</strong>：
+$<span class="arithmatex">\(T2U_w(x) = 
+\begin{cases}
+x + 2^w &amp; \text{if } x &lt; 0 \\
+x &amp; \text{if } x \geq 0
+\end{cases}\)</span>$</p>
+<p>负数会变成大正数！</p>
+<p><strong>U2T（无符号 → 补码）</strong>：
+$<span class="arithmatex">\(U2T_w(u) = 
+\begin{cases}
+u &amp; \text{if } u &lt; 2^{w-1} \\
+u - 2^w &amp; \text{if } u \geq 2^{w-1}
+\end{cases}\)</span>$</p>
+<p>大正数会变成负数！</p>
+<blockquote>
+<p><strong>要点总结</strong>：位不变，变解释。</p>
+</blockquote>
+<h3 id="c">C语言中的有符号/无符号<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p>⚠️ <strong>这是另一个超级容易踩坑的地方！</strong></p>
+<p><strong>常量规则</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="mi">42</span><span class="w">      </span><span class="c1">// int (有符号)</span>
+<span class="mi">42U</span><span class="w">     </span><span class="c1">// unsigned int (无符号)</span>
+<span class="mf">42L</span><span class="w">     </span><span class="c1">// long</span>
+<span class="mi">42UL</span><span class="w">    </span><span class="c1">// unsigned long</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>⚠️ 隐式转换陷阱</strong>：</p>
+<p><strong>混合表达式中，有符号会被隐式转换为无符号！</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="mi">-1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0U</span><span class="w">    </span><span class="c1">// 结果是 false！！</span>
+</code></pre></div></td></tr></table></div>
+<p>为什么？
+1. <code>0U</code> 是无符号数
+2. <code>-1</code> 被隐式转换为无符号数
+3. <code>-1</code> 的补码是 <code>0xFFFFFFFF</code>
+4. 转换为无符号后是 UMax = 4,294,967,295
+5. 所以 <code>-1 &lt; 0U</code> 变成 <code>4294967295 &lt; 0</code>，为假！</p>
+<p><strong>比较操作符</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="mi">-1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0U</span><span class="w">    </span><span class="c1">// false！⚠️</span>
+<span class="mi">-1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w">     </span><span class="c1">// true</span>
+<span class="mi">1U</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">-2</span><span class="w">    </span><span class="c1">// true！⚠️ (1U = 1, -2变成4294967294)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：混合表达式中，有符号数会被转换成无符号数！⚠️⚠️⚠️</p>
+</blockquote>
+<hr />
+<h2 id="6">6. 整数的扩展与截断<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="_13">符号扩展<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p><strong>规则</strong>：</p>
+<p>将 w 位补码扩展为 w+k 位：<strong>复制 k 个符号位</strong></p>
+<p><strong>正数示例</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">short</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15213</span><span class="p">;</span><span class="w">      </span><span class="c1">// 16位: 00111011 01101101</span>
+<span class="kt">int</span><span class="w">   </span><span class="n">ix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">   </span><span class="c1">// 32位: 00000000 00000000 00111011 01101101</span>
+</code></pre></div></td></tr></table></div>
+<p>值不变：<code>15213 = 15213</code> ✓</p>
+<p><strong>负数示例</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">short</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-15213</span><span class="p">;</span><span class="w">     </span><span class="c1">// 16位: 11000100 10010011</span>
+<span class="kt">int</span><span class="w">   </span><span class="n">iy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">   </span><span class="c1">// 32位: 11111111 11111111 11000100 10010011</span>
+</code></pre></div></td></tr></table></div>
+<p>值不变：<code>-15213 = -15213</code> ✓</p>
+<p><strong>为什么这样做？</strong></p>
+<p>因为补码的数学定义：符号位携带 <span class="arithmatex">\(2^{w-1}\)</span> 的<strong>负权重</strong>。</p>
+<p>当我们扩展时：
+- 新增的位贡献 <span class="arithmatex">\(2^{w-1} + 2^{w} + ... + 2^{w+k-1} = 2^{w+k-1}\)</span>
+- 但原符号位的权重从 <span class="arithmatex">\(2^{w-1}\)</span> 变成了 <span class="arithmatex">\(2^{w+k-1}\)</span>
+- 差值正好是 <span class="arithmatex">\(2^{w+k-1} - 2^{w-1} = 2^{w-1}\)</span>，等于原符号位贡献的变化</p>
+<p>说人话：<strong>新增的符号位完美补偿了权重变化</strong>。</p>
+<blockquote>
+<p><strong>要点总结</strong>：符号扩展通过复制符号位来增加位数，值不变。</p>
+</blockquote>
+<h3 id="_14">截断<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><strong>规则</strong>：</p>
+<p>将 w 位截断为 k 位：<strong>丢弃高位，只保留低 k 位</strong></p>
+<p><strong>无符号数截断</strong>：</p>
+<div class="arithmatex">\[x' = x \mod 2^k\]</div>
+<p>简单！就是取模。</p>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>x     = 11110101 (245)
+x mod 4 = 01 (1)  // 截断为2位
+</code></pre></div></td></tr></table></div></p>
+<p><strong>补码截断</strong>：</p>
+<ol>
+<li>先按无符号截断</li>
+<li>再将结果重新解释为补码</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 示例：从8位截断到4位</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000011</span><span class="w">  </span><span class="c1">// 有符号: -125</span>
+<span class="nl">截断后</span><span class="p">:</span><span class="w"> </span><span class="mo">0011</span><span class="w">    </span><span class="c1">// 无符号: 3</span>
+<span class="nl">重新解释</span><span class="p">:</span><span class="w"> </span><span class="o">+</span><span class="mi">3</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：截断就是丢高位，保留低 k 位。</p>
+</blockquote>
+<hr />
+<h2 id="7">7. 整数运算<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<h3 id="_15">加法<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p><strong>无符号加法</strong>：</p>
+<div class="arithmatex">\[result = (x + y) \mod 2^w\]</div>
+<p><strong>可能溢出</strong>！但这是<strong>模运算</strong>，自然 wrap around。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>8位无符号加法:
+  200 + 100 = 300
+  300 mod 256 = 44
+</code></pre></div></td></tr></table></div>
+<p><strong>补码加法</strong>：</p>
+<p>补码加法的电路和无符号加法<strong>完全一样</strong>！只是解释不同。</p>
+<p>会发生两种溢出：
+- <strong>正溢出</strong>：两个正数相加变负数
+- <strong>负溢出</strong>：两个负数相加变正数</p>
+<p><strong>溢出检测</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两个正数相加得负数</td>
+<td>正溢出 ✓</td>
+</tr>
+<tr>
+<td>两个负数相加得正数</td>
+<td>负溢出 ✓</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 检测补码加法溢出</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">overflow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">               </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：无符号加法模 2^w，补码加法可能正/负溢出。</p>
+</blockquote>
+<h3 id="_16">取负<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p><strong>公式</strong>：</p>
+<div class="arithmatex">\[-x = \sim x + 1\]</div>
+<p>这就是"取反加一"！一个经典的技巧。</p>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>x     = 15213: 00111011 01101101
+~x    = 11000100 10010010
+~x+1  = 11000100 10010011 = -15213 ✓
+</code></pre></div></td></tr></table></div></p>
+<p><strong>特殊值：TMin</strong>：</p>
+<p>⚠️ <strong>TMin 的负数还是 TMin！</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>-TMin = -(-2^{w-1}) = 2^{w-1}
+</code></pre></div></td></tr></table></div>
+<p>在 w 位补码中，这正好等于 TMin（因为只能表示 -2^{w-1} 到 2^{w-1}-1）。</p>
+<p>8位示例：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>TMin  = 10000000 = -128
+-TMin = 10000000 = -128  // 溢出！还是-128
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p><strong>要点总结</strong>：取负 = 取反 + 1，TMin 例外。</p>
+</blockquote>
+<h3 id="_17">乘法<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p><strong>无符号乘法</strong>：</p>
+<div class="arithmatex">\[result = (x \times y) \mod 2^w\]</div>
+<p><strong>补码乘法</strong>：</p>
+<p><strong>神奇的是</strong>：先按无符号乘，再截断到 w 位，结果和直接用补码乘一样！</p>
+<p>这意味着：<strong>加法器可以同时处理无符号和补码乘法</strong>，不需要两套电路。</p>
+<p><strong>乘以2的幂：移位优化</strong>：</p>
+<div class="arithmatex">\[x \times 2^k = x &lt;&lt; k\]</div>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>x * 1  = x &lt;&lt; 0
+x * 2  = x &lt;&lt; 1
+x * 4  = x &lt;&lt; 2
+x * 8  = x &lt;&lt; 3
+</code></pre></div></td></tr></table></div></p>
+<p>编译器会自动做这个优化！</p>
+<p><strong>乘以任意常数</strong>：</p>
+<p>利用分配律分解：</p>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>优化方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x × 3</td>
+<td>(x &lt;&lt; 1) + x</td>
+</tr>
+<tr>
+<td>x × 5</td>
+<td>(x &lt;&lt; 2) + x</td>
+</tr>
+<tr>
+<td>x × 6</td>
+<td>(x &lt;&lt; 2) + (x &lt;&lt; 1)</td>
+</tr>
+<tr>
+<td>x × 7</td>
+<td>(x &lt;&lt; 3) - x</td>
+</tr>
+<tr>
+<td>x × 10</td>
+<td>(x &lt;&lt; 3) + (x &lt;&lt; 1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>// 编译器可能这样优化
+int thrice(int x) {
+    return x * 3;
+}
+// 汇编可能变成
+// return (x &lt;&lt; 1) + x;
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p><strong>要点总结</strong>：乘以2的幂用左移实现，其他常数也可以分解。</p>
+</blockquote>
+<h3 id="2_1">除以2的幂<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p><strong>无符号：逻辑右移</strong>：</p>
+<div class="arithmatex">\[x / 2^k = x &gt;&gt; k\]</div>
+<p>简单直接。</p>
+<p><strong>补码：算术右移</strong>：</p>
+<div class="arithmatex">\[x / 2^k = x &gt;&gt; k\]</div>
+<p>但是！⚠️ <strong>负数会向下（向负无穷）舍入</strong>，而不是向零舍入！</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>-5 / 2 = -2  // 数学上是 -2.5，向下舍入到 -2
+-5 &gt;&gt; 1 = -3 // 算术右移结果
+</code></pre></div></td></tr></table></div>
+<p><strong>实现向零舍入</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 负数时加偏移量</span>
+<span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">k</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>(-5 + 1) &gt;&gt; 1 = -4 &gt;&gt; 1 = -2  ✓
+</code></pre></div></td></tr></table></div></p>
+<p><strong>原理</strong>：
+- 正数：x + (2^k - 1) 后还是正数，除以2^k 会"多"一点，正好抵消舍入
+- 负数：x + (2^k - 1) 后变大了，除以2^k 后向下舍入，更接近零</p>
+<blockquote>
+<p><strong>要点总结</strong>：除以2的幂用右移，但负数需要修正才能向零舍入。</p>
+</blockquote>
+<hr />
+<h1 id="_18">第三部分：浮点数<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h1>
+<h2 id="8">8. 二进制小数与精度问题<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="_19">基本概念<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>二进制小数和十进制小数一样，只是基数是2。</p>
+<p><strong>小数点右边</strong>的位表示2的<strong>负幂次</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>位位置</th>
+<th>权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.1</td>
+<td>2⁻¹ = 0.5</td>
+</tr>
+<tr>
+<td>.01</td>
+<td>2⁻² = 0.25</td>
+</tr>
+<tr>
+<td>.001</td>
+<td>2⁻³ = 0.125</td>
+</tr>
+<tr>
+<td>.0001</td>
+<td>2⁻⁴ = 0.0625</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例</strong>：</p>
+<div class="arithmatex">\[1011.101_2 = 1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 + 1 \times 2^{-1} + 0 \times 2^{-2} + 1 \times 2^{-3} = 8 + 0 + 2 + 1 + 0.5 + 0 + 0.125 = 11.625\]</div>
+<p><strong>一般形式</strong>：</p>
+<div class="arithmatex">\[b = \sum_{i} b_i \cdot 2^i \quad (i \text{ 可正可负})\]</div>
+<p><strong>右移/左移操作</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>小数效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>右移一位</td>
+<td>除以2</td>
+</tr>
+<tr>
+<td>左移一位</td>
+<td>乘以2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>⚠️ 精度问题</strong>：</p>
+<div class="arithmatex">\[0.111111\dots_2 = 1.0 - \varepsilon\]</div>
+<p>无限个1的二进制小数<strong>等于1减去一个无穷小的数</strong>，但<strong>永远不等于1</strong>！</p>
+<p>这导致了很多浮点数的问题。</p>
+<blockquote>
+<p><strong>要点总结</strong>：二进制小数用负指数，右移除以2，左移乘以2。</p>
+</blockquote>
+<h3 id="_20">可表示的数<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p><strong>限制1：只能精确表示 x/2^k 形式的数</strong></p>
+<p><strong>可精确表示</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>1/2 = 0.1₂
+3/4 = 0.11₂
+1/8 = 0.001₂
+</code></pre></div></td></tr></table></div></p>
+<p><strong>不可精确表示</strong>（无限循环）：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>1/3 = 0.010101...₂
+1/5 = 0.00110011...₂
+1/10 = 0.000110011...₂  ⚠️ 这就是 0.1 + 0.2 ≠ 0.3 的原因！
+</code></pre></div></td></tr></table></div></p>
+<p><strong>限制2：范围有限</strong></p>
+<p>w 位中只有一个小数点位置，所以：
+- 太大或太小的数都表示不了
+- 精度和范围是一对矛盾</p>
+<blockquote>
+<p><strong>要点总结</strong>：浮点数只能精确表示分母是2幂次的分数。</p>
+</blockquote>
+<hr />
+<h2 id="9-ieee-754">9. IEEE 754 浮点标准<a class="headerlink" href="#9-ieee-754" title="Permanent link">&para;</a></h2>
+<h3 id="ieee-754">IEEE 754 格式概述<a class="headerlink" href="#ieee-754" title="Permanent link">&para;</a></h3>
+<p><strong>历史</strong>：</p>
+<p>1985年确立，<strong>所有主要CPU都支持</strong>。这是计算机史上的重大成就！</p>
+<p><strong>数值形式</strong>：</p>
+<p>每个浮点数表示为：</p>
+<div class="arithmatex">\[(-1)^s \times M \times 2^E\]</div>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s</td>
+<td>符号位 (0=正, 1=负)</td>
+</tr>
+<tr>
+<td>M</td>
+<td>尾数/有效数字 (mantissa)，通常在 [1.0, 2.0)</td>
+</tr>
+<tr>
+<td>E</td>
+<td>指数 (exponent)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>存储编码</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>| 符号(1位) | 指数域 exp (k位) | 小数域 frac (n位) |
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：IEEE 754 用符号位、指数、尾数三部分表示浮点数。</p>
+</blockquote>
+<h3 id="_21">精度选项<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>精度</th>
+<th>符号位</th>
+<th>指数位</th>
+<th>尾数位</th>
+<th>总位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单精度</strong> (float)</td>
+<td>1</td>
+<td>8</td>
+<td>23</td>
+<td>32</td>
+</tr>
+<tr>
+<td><strong>双精度</strong> (double)</td>
+<td>1</td>
+<td>11</td>
+<td>52</td>
+<td>64</td>
+</tr>
+<tr>
+<td><strong>扩展精度</strong></td>
+<td>1</td>
+<td>15</td>
+<td>63/64</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<p><strong>单精度 float</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>| 31 | 30-23      | 22-0      |
+| s  | exp (8位)   | frac (23位) |
+</code></pre></div></td></tr></table></div></p>
+<p><strong>双精度 double</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>| 63 | 62-52      | 51-0       |
+| s  | exp (11位)  | frac (52位) |
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p><strong>要点总结</strong>：float 用32位，double用64位，double精度高得多。</p>
+</blockquote>
+<h3 id="_22">规格化值<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p><strong>条件</strong>：</p>
+<div class="arithmatex">\[exp \neq 00\dots0 \quad \text{且} \quad exp \neq 11\dots1\]</div>
+<p>既不是全0，也不是全1。</p>
+<p><strong>指数计算</strong>：</p>
+<div class="arithmatex">\[E = Exp - Bias\]</div>
+<p>其中 Bias 是偏移量：
+$<span class="arithmatex">\(Bias = 2^{k-1} - 1\)</span>$</p>
+<table>
+<thead>
+<tr>
+<th>精度</th>
+<th>Bias</th>
+<th>E 范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单精度 (k=8)</td>
+<td>127</td>
+<td>-126 到 +127</td>
+</tr>
+<tr>
+<td>双精度 (k=11)</td>
+<td>1023</td>
+<td>-1022 到 +1023</td>
+</tr>
+</tbody>
+</table>
+<p><strong>尾数计算</strong>：</p>
+<div class="arithmatex">\[M = 1.xxx\dots x_2\]</div>
+<p>⚠️ <strong>关键</strong>：有一个<strong>隐含的前导1</strong>！</p>
+<ul>
+<li>frac = 00...0 → M = 1.0</li>
+<li>frac = 11...1 → M = 2.0 - ε</li>
+</ul>
+<p>这意味着：<strong>尾数域23位，实际存储了24位精度</strong>！免费多一位！</p>
+<blockquote>
+<p><strong>要点总结</strong>：规格化值用隐含前导1，指数有偏移。</p>
+</blockquote>
+<h3 id="_23">规格化编码示例<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p><strong>float F = 15213.0</strong></p>
+<p><strong>Step 1：转二进制</strong>
+$<span class="arithmatex">\(15213_{10} = 11101101101101_2\)</span>$</p>
+<p><strong>Step 2：规格化</strong>
+$<span class="arithmatex">\(15213 = 1.1101101101101_2 \times 2^{13}\)</span>$</p>
+<p><strong>Step 3：计算各部分</strong>
+- M = 1.1101101101101
+- frac = 11011011011010000000000（23位）
+- E = 13
+- Bias = 127
+- Exp = E + Bias = 13 + 127 = 140 = 10001100₂</p>
+<p><strong>Step 4：组合</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>| 0 | 10001100 | 11011011011010000000000 |
+ s   exp        frac
+</code></pre></div></td></tr></table></div></p>
+<p>这就是 15213.0 在 float 中的存储！</p>
+<blockquote>
+<p><strong>要点总结</strong>：通过规格化确定M/E/frac，再编码存储。</p>
+</blockquote>
+<h3 id="_24">非规格化值<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p><strong>条件</strong>：</p>
+<div class="arithmatex">\[exp = 00\dots0\]</div>
+<p><strong>指数计算</strong>：</p>
+<div class="arithmatex">\[E = 1 - Bias \quad \text{（不是} 0 - Bias\text{）}\]</div>
+<p><strong>尾数计算</strong>：</p>
+<div class="arithmatex">\[M = 0.xxx\dots x_2\]</div>
+<p>⚠️ 这次隐含的是 <strong>前导0</strong>，不是1！</p>
+<p><strong>两种情况</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>frac</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00...0</td>
+<td>00...0</td>
+<td><strong>0</strong>（有+0和-0）</td>
+</tr>
+<tr>
+<td>00...0</td>
+<td>≠00...0</td>
+<td>最接近0的数，<strong>等间距分布</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么需要非规格化数？</strong></p>
+<p><strong>防止"突然变0"的问题</strong>。</p>
+<p>没有非规格化数时，最大的非规格化数和最小的规格化数之间有巨大gap。有了非规格化数，gap被填平了！</p>
+<blockquote>
+<p><strong>要点总结</strong>：非规格化数填补0附近的gap，实现平滑过渡。</p>
+</blockquote>
+<h3 id="nan">特殊值（∞和NaN）<a class="headerlink" href="#nan" title="Permanent link">&para;</a></h3>
+<p><strong>条件</strong>：</p>
+<div class="arithmatex">\[exp = 11\dots1\]</div>
+<p><strong>无穷大</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>frac</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11...1</td>
+<td>00...0</td>
+<td><strong>∞</strong>（有+∞和-∞）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>1.0 / 0.0 = +∞
+-1.0 / 0.0 = -∞
+</code></pre></div></td></tr></table></div></p>
+<p><strong>NaN (Not a Number)</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>frac</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11...1</td>
+<td>≠00...0</td>
+<td><strong>NaN</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>产生NaN的操作</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>√(-1)     = NaN
+∞ - ∞    = NaN
+∞ × 0    = NaN
+</code></pre></div></td></tr></table></div></p>
+<p>NaN 有趣的性质：<strong>NaN 不等于任何数，包括自己</strong>！</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>NaN == NaN  // false！
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：全1指数表示∞和NaN。</p>
+</blockquote>
+<h3 id="_25">编码空间与分布<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>从负无穷到正无穷的完整编码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>| -NaN | -∞ | -规格化 | -非规格化 | +0/-0 | +非规格化 | +规格化 | +∞ | +NaN |
+</code></pre></div></td></tr></table></div>
+<p><strong>密度分布</strong>：
+- <strong>靠近0的地方更密集</strong>
+- <strong>远离0的地方更稀疏</strong></p>
+<p>这是指数表示法的必然结果！</p>
+<blockquote>
+<p><strong>要点总结</strong>：浮点数在数轴上不是均匀分布的。</p>
+</blockquote>
+<h3 id="8_1">编码示例：8位浮点<a class="headerlink" href="#8_1" title="Permanent link">&para;</a></h3>
+<p><strong>格式</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>1位符号 + 4位指数(bias=7) + 3位小数 = 8位
+</code></pre></div></td></tr></table></div>
+<p><strong>非规格化</strong>：</p>
+<ul>
+<li>exp = 0000</li>
+<li>E = 1 - 7 = -6</li>
+<li>值从 0 到 7/512</li>
+</ul>
+<p><strong>规格化</strong>：</p>
+<ul>
+<li>exp = 0001 到 1110</li>
+<li>E 从 -6 到 +7</li>
+<li>值从 8/512 到 240</li>
+</ul>
+<p><strong>特殊</strong>：</p>
+<ul>
+<li>exp = 1111：∞ 或 NaN</li>
+</ul>
+<blockquote>
+<p><strong>要点总结</strong>：小格式帮助理解原理。</p>
+</blockquote>
+<h3 id="ieee">IEEE编码的特殊性质<a class="headerlink" href="#ieee" title="Permanent link">&para;</a></h3>
+<p><strong>0的表示</strong>：</p>
+<p><strong>FP的0和整数的0一样</strong>：所有位都是0！</p>
+<p>这是IEEE的设计目标之一。</p>
+<p><strong>无符号整数比较</strong>：</p>
+<p>几乎可以直接用无符号整数比较浮点数：
+1. 先比较符号位
+2. -0 = +0 需要特殊处理
+3. ⚠️ <strong>NaN有问题</strong>：NaN比较永远为假</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>NaN &lt; 0    // false
+NaN &gt; 0    // false
+NaN == 0   // false
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：可以用无符号比较浮点数，但要注意NaN。</p>
+</blockquote>
+<hr />
+<h2 id="10">10. 浮点运算<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<h3 id="_26">运算基本思想<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p><strong>定义</strong>：</p>
+<div class="arithmatex">\[x +_f y = Round(x + y)$$
+$$x \times_f y = Round(x \times y)\]</div>
+<p><strong>计算步骤</strong>：</p>
+<ol>
+<li>计算精确结果（可能需要很多位）</li>
+<li>舍入到目标精度</li>
+<li>可能溢出（指数太大）或下溢（指数太小）</li>
+</ol>
+<p><strong>溢出示例</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>float f = 3.4e38;
+f = f * 100;  // 溢出 → ∞
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：浮点运算 = 精确运算 + 舍入。</p>
+</blockquote>
+<h3 id="_27">舍入模式与向偶舍入<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>IEEE 754 定义了四种舍入模式：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>+1.40</th>
+<th>+1.60</th>
+<th>+1.50</th>
+<th>+2.50</th>
+<th>-1.50</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>向零</strong> (Round toward 0)</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>-1</td>
+</tr>
+<tr>
+<td><strong>向下</strong> (Round toward -∞)</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>-2</td>
+</tr>
+<tr>
+<td><strong>向上</strong> (Round toward +∞)</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>-1</td>
+</tr>
+<tr>
+<td><strong>向偶舍入</strong> (Round to even)</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>-2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>向偶舍入是默认模式</strong>！</p>
+<blockquote>
+<p><strong>要点总结</strong>：向偶舍入是默认模式，可以消除统计偏差。</p>
+</blockquote>
+<p><strong>为什么用"偶"？</strong></p>
+<p>其他三种模式都有<strong>统计偏差</strong>：
+- 向上：平均偏大
+- 向下：平均偏小
+- 向零：平均偏小</p>
+<p>向偶舍入在大量运算时偏差最小。</p>
+<p><strong>规则</strong>：</p>
+<p><strong>恰好在中间时</strong>，舍入使<strong>最低有效位为偶数</strong>。</p>
+<p><strong>十进制示例（舍入到百分位）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>结果</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.8949999</td>
+<td>7.89</td>
+<td>不到一半，向下</td>
+</tr>
+<tr>
+<td>7.8950001</td>
+<td>7.90</td>
+<td>超过一半，向上</td>
+</tr>
+<tr>
+<td>7.8950000</td>
+<td>7.90</td>
+<td>恰好一半，向上（因为90是偶数，88是偶数但更接近）</td>
+</tr>
+<tr>
+<td>7.8850000</td>
+<td>7.88</td>
+<td>恰好一半，向下（因为88是偶数）</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ 关键：<strong>只看被舍入的那位和后面的位</strong>，来决定是否"恰好一半"。</p>
+<p><strong>二进制向偶舍入</strong>：</p>
+<p>在二进制中，"偶" = 最低位为0。</p>
+<p><strong>舍入到 1/4（即2位小数）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>二进制</th>
+<th>结果</th>
+<th>十进制</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.00011</td>
+<td>10.00</td>
+<td>2</td>
+<td>不到一半，向下</td>
+</tr>
+<tr>
+<td>10.00110</td>
+<td>10.01</td>
+<td>2.25</td>
+<td>超过一半，向上</td>
+</tr>
+<tr>
+<td>10.11100</td>
+<td>11.00</td>
+<td>3</td>
+<td>恰好一半，向上（00是偶数但向上更接近）</td>
+</tr>
+<tr>
+<td>10.10100</td>
+<td>10.10</td>
+<td>2.5</td>
+<td>恰好一半，向下（00是偶数）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>要点总结</strong>：向偶舍入 = 不到一半向下，超过一半向上，一半时看LSB是否为偶。</p>
+</blockquote>
+<h3 id="_28">浮点加法与乘法<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p><strong>浮点乘法</strong>：</p>
+<p><strong>公式</strong>：</p>
+<div class="arithmatex">\[(-1)^{s_1} M_1 2^{E_1} \times (-1)^{s_2} M_2 2^{E_2}\]</div>
+<p><strong>计算步骤</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>计算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>符号</td>
+<td><span class="arithmatex">\(s = s_1 \oplus s_2\)</span></td>
+</tr>
+<tr>
+<td>尾数</td>
+<td><span class="arithmatex">\(M = M_1 \times M_2\)</span></td>
+</tr>
+<tr>
+<td>指数</td>
+<td><span class="arithmatex">\(E = E_1 + E_2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>修正</strong>：</p>
+<ol>
+<li>如果 <span class="arithmatex">\(M \geq 2\)</span>，右移 M，E++</li>
+<li>如果 E 太大 → <strong>溢出</strong> → ∞</li>
+<li>舍入 M</li>
+</ol>
+<blockquote>
+<p><strong>要点总结</strong>：浮点乘法分别处理符号/尾数/指数。</p>
+</blockquote>
+<p><strong>浮点加法</strong>：</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li><strong>对齐小数点</strong>：小指数的尾数右移</li>
+<li><strong>相加</strong>：有符号尾数相加</li>
+<li><strong>规格化</strong>：调整到尾数在[1,2)</li>
+<li><strong>舍入</strong>：必要时再次调整</li>
+</ol>
+<p><strong>对齐示例</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>  1.000 × 2^0
++ 1.000 × 2^2
+= 0.010 × 2^2  (对齐)
++ 1.000 × 2^2
+= 1.010 × 2^2
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：浮点加法需要对齐指数，然后相加规格化。</p>
+</blockquote>
+<h3 id="_29">数学性质（结合律、分配律的失效）<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<p>⚠️ <strong>浮点运算不满足很多我们熟悉的数学性质！</strong></p>
+<p><strong>浮点加法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>是否满足</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>封闭性</td>
+<td>基本满足</td>
+<td>可能产生∞或NaN</td>
+</tr>
+<tr>
+<td>交换律</td>
+<td>✅ 满足</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>结合律</strong></td>
+<td>❌ 不满足</td>
+<td><strong>舍入导致！</strong></td>
+</tr>
+<tr>
+<td>0是单位元</td>
+<td>✅ 满足</td>
+<td></td>
+</tr>
+<tr>
+<td>加法逆元</td>
+<td>基本满足</td>
+<td>∞和NaN除外</td>
+</tr>
+<tr>
+<td>单调性</td>
+<td>基本满足</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结合律反例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>(3.14 + 1e10) - 1e10 = 0
+3.14 + (1e10 - 1e10) = 3.14
+</code></pre></div></td></tr></table></div></p>
+<p><strong>浮点乘法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>是否满足</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>封闭性</td>
+<td>基本满足</td>
+<td>可能产生∞或NaN</td>
+</tr>
+<tr>
+<td>交换律</td>
+<td>✅ 满足</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>结合律</strong></td>
+<td>❌ 不满足</td>
+<td><strong>溢出和舍入导致！</strong></td>
+</tr>
+<tr>
+<td>1是单位元</td>
+<td>✅ 满足</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>分配律</strong></td>
+<td>❌ 不满足</td>
+<td><strong>这是个大坑！</strong></td>
+</tr>
+<tr>
+<td>单调性</td>
+<td>基本满足</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结合律反例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>(1e20 × 1e20) × 1e-20 = ∞
+1e20 × (1e20 × 1e-20) = 1e20
+</code></pre></div></td></tr></table></div></p>
+<p><strong>分配律反例</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>1e20 × (1e20 - 1e20) = 0
+1e20 × 1e20 - 1e20 × 1e-20 = NaN
+</code></pre></div></td></tr></table></div></p>
+<p>⚠️ <strong>实际影响</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// 这个优化可能是错误的！</span>
+<span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<span class="c1">// 不能改成</span>
+<span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+<span class="c1">// 因为顺序可能影响结果！</span>
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p><strong>要点总结</strong>：浮点运算不满足结合律和分配律！</p>
+</blockquote>
+<hr />
+<h2 id="11-c">11. C语言中的浮点<a class="headerlink" href="#11-c" title="Permanent link">&para;</a></h2>
+<h3 id="_30">基本类型<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="p">;</span><span class="w">    </span><span class="c1">// 单精度，32位</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">   </span><span class="c1">// 双精度，64位</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="_31">类型转换<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>转换</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>double/float → int</strong></td>
+<td>截断小数部分（向零舍入），超出范围或NaN → <strong>未定义</strong>（通常设为TMin）</td>
+</tr>
+<tr>
+<td><strong>int → double</strong></td>
+<td><strong>精确转换</strong>（int≤53位时）</td>
+</tr>
+<tr>
+<td><strong>int → float</strong></td>
+<td><strong>按舍入模式舍入</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_32">⚠️ 常见陷阱<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">           </span><span class="c1">// 安全，精确</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e100</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">d</span><span class="p">;</span><span class="w">         </span><span class="c1">// 未定义！溢出</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x100000</span><span class="p">;</span><span class="w">       </span><span class="c1">// 16777216</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">            </span><span class="c1">// 1.6777216e7</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">f</span><span class="p">;</span><span class="w">         </span><span class="c1">// 16777216，精确！</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x200001</span><span class="p">;</span><span class="w">       </span><span class="c1">// 2097153</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">            </span><span class="c1">// ?</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">f</span><span class="p">;</span><span class="w">         </span><span class="c1">// 2097152！舍入导致精度丢失</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：int转float可能舍入，double/float转int可能溢出或未定义。</p>
+</blockquote>
+<h3 id="_33">浮点谜题解析<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<p><strong>转换精度问题</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="kt">float</span><span class="p">)</span><span class="n">x</span><span class="p">;</span><span class="w">     </span><span class="c1">// 不总是成立！</span>
+<span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="kt">double</span><span class="p">)</span><span class="n">x</span><span class="p">;</span><span class="w">    </span><span class="c1">// 总是成立</span>
+<span class="n">f</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="kt">double</span><span class="p">)</span><span class="n">f</span><span class="p">;</span><span class="w">  </span><span class="c1">// 总是成立</span>
+<span class="n">d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="kt">float</span><span class="p">)</span><span class="n">d</span><span class="p">;</span><span class="w">  </span><span class="c1">// 不总是成立！</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>解释</strong>：float只有23位尾数，int可能超过。double有52位，可以精确表示任何int。</p>
+<p><strong>符号问题</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">f</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">);</span><span class="w">             </span><span class="c1">// 总是成立</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>整数除法陷阱</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="o">/</span><span class="mf">3.0</span><span class="p">;</span><span class="w">           </span><span class="c1">// 不成立！</span>
+<span class="c1">// 左边：整数除法 = 0</span>
+<span class="c1">// 右边：浮点除法 ≈ 0.667</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>单调性</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 总是成立（单调性）</span>
+<span class="n">d</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="p">;</span><span class="w">        </span><span class="c1">// 总是成立</span>
+<span class="n">d</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w">            </span><span class="c1">// 总是成立</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>⚠️ 结合律失效</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">f</span><span class="p">;</span><span class="w">        </span><span class="c1">// 不总是成立！</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>原因</strong>：舍入误差。</p>
+<blockquote>
+<p><strong>要点总结</strong>：浮点数的很多"直觉"都是错的！⚠️</p>
+</blockquote>
+<hr />
+<h2 id="12">12. 浮点舍入的实现<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<h3 id="_34">创建浮点数的步骤<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<p><strong>三步流程</strong>：</p>
+<ol>
+<li><strong>规格化</strong>：使数变成 1.xxxxx 形式</li>
+<li><strong>舍入</strong>：用 Guard/Round/Sticky 位</li>
+<li><strong>后规格化</strong>：舍入可能导致溢出，需调整</li>
+</ol>
+<p><strong>示例</strong>：</p>
+<p>将 2.5 用 4位尾数舍入：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>原始: 10.100 | 110...
+      ↑    ↑
+     frac  GRS位
+
+舍入到 3位小数后: 10.101 (向上，因为 GRS = 110 &gt; 一半)
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：创建浮点数需要规格化、舍入、后规格化三步。</p>
+</blockquote>
+<h3 id="grsguard-round-sticky">GRS位（Guard, Round, Sticky）<a class="headerlink" href="#grsguard-round-sticky" title="Permanent link">&para;</a></h3>
+<p><strong>三个关键位</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>位</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G</td>
+<td>Guard</td>
+<td>结果的最低有效位</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Round</td>
+<td>被舍入掉的第一位</td>
+</tr>
+<tr>
+<td>S</td>
+<td>Sticky</td>
+<td>剩余所有位的OR（只要有1就是1）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>舍入条件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>GRS</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1xx</td>
+<td>超过一半，向上</td>
+</tr>
+<tr>
+<td>10x</td>
+<td>恰好一半，看G</td>
+</tr>
+<tr>
+<td>01x</td>
+<td>不到一半，向下</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键</strong>：G=1 且 (R=1 或 S=1) → 超过0.5 → 向上</p>
+<p><strong>示例</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>目标: 2位小数
+
+10.00011  G=0,R=0,S=0 → 10.00 向下
+10.00110  G=1,R=1,S=0 → 超过一半，向上 → 10.01
+10.11100  G=1,R=0,S=0 → 恰好一半 → 向偶 → 11.00
+10.10100  G=0,R=1,S=0 → 不到一半 → 10.10
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>要点总结</strong>：GRS位帮助实现精确舍入。</p>
+</blockquote>
+<hr />
+<h1 id="_35">附录：常见错误速查表<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h1>
+<h2 id="_36">位运算易错点<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>示例</th>
+<th>正确写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>混淆 &amp; 和 &amp;&amp;</td>
+<td><code>if (flags &amp; 0x01)</code></td>
+<td><code>if ((flags &amp; 0x01) != 0)</code></td>
+</tr>
+<tr>
+<td>优先级错误</td>
+<td><code>a &amp; b == 0</code></td>
+<td><code>(a &amp; b) == 0</code></td>
+</tr>
+<tr>
+<td>移位量错误</td>
+<td><code>x &lt;&lt; -1</code></td>
+<td>未定义行为！</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_37">有符号/无符号易错点<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>示例</th>
+<th>结果</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>混合比较</td>
+<td><code>-1 &lt; 0U</code></td>
+<td>false ❌</td>
+<td>避免混用</td>
+</tr>
+<tr>
+<td>隐式转换</td>
+<td><code>1U &lt; -2</code></td>
+<td>true ❌</td>
+<td>显式类型转换</td>
+</tr>
+<tr>
+<td>TMin取负</td>
+<td><code>-(-128)</code></td>
+<td>-128</td>
+<td>避免TMin运算</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_38">浮点易错点<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相等比较</td>
+<td><code>0.1 + 0.2 == 0.3</code></td>
+<td>false ❌</td>
+</tr>
+<tr>
+<td>结合律</td>
+<td><code>(a+b)+c == a+(b+c)</code></td>
+<td>可能不等 ❌</td>
+</tr>
+<tr>
+<td>整数除法</td>
+<td><code>2/3 == 2/3.0</code></td>
+<td>false ❌</td>
+</tr>
+<tr>
+<td>NaN比较</td>
+<td><code>NaN == NaN</code></td>
+<td>false ❌</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_39">重要公式汇总<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h1>
+<h2 id="_40">无符号数<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[B2U(x) = \sum_{i=0}^{w-1} x_i \cdot 2^i\]</div>
+<div class="arithmatex">\[UMin = 0, \quad UMax = 2^w - 1\]</div>
+<h2 id="_41">补码<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[B2T(x) = -x_{w-1} \cdot 2^{w-1} + \sum_{i=0}^{w-2} x_i \cdot 2^i\]</div>
+<div class="arithmatex">\[TMin = -2^{w-1}, \quad TMax = 2^{w-1} - 1\]</div>
+<h2 id="ieee-754_1">IEEE 754<a class="headerlink" href="#ieee-754_1" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[(-1)^s \times M \times 2^E\]</div>
+<div class="arithmatex">\[E = Exp - Bias, \quad Bias = 2^{k-1} - 1\]</div>
+<hr />
+<h1 id="_42">参考资源<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>课程</strong>：CMU 15-213 (CSAPP)</li>
+<li><strong>教材</strong>：Bryant and O'Hallaron, <em>Computer Systems: A Programmer's Perspective</em>, 3rd Edition</li>
+<li><strong>讲次</strong>：第2-4讲</li>
+<li><strong>整理日期</strong>：2026-05-24</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

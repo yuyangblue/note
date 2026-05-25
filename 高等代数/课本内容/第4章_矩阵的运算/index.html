@@ -1,0 +1,3268 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第4章 矩阵的运算 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第4章 矩阵的运算
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 矩阵的加法、数量乘法与乘法运算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 矩阵的加法、数量乘法与乘法运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入矩阵运算？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、矩阵的加法与数量乘法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、矩阵的加法与数量乘法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        加法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数量乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        负矩阵与减法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、矩阵的乘法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、矩阵的乘法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心概念】为什么矩阵乘法这样定义？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、矩阵乘法的重要性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、矩阵乘法的重要性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不满足的运算律（易错！）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        满足的运算律
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、转置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、转置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1 【计算题】矩阵运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2 【计算题】矩阵乘法与向量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例3 【证明题】矩阵乘法不满足消去律
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 特殊矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 特殊矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究特殊矩阵？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        特殊矩阵一览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="重要性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对角矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对称矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        斜对称矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例4 【计算题】分块对角矩阵的幂
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例5 【验证题】对称矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例6 【证明题】任意矩阵分解为对称矩阵与斜对称矩阵之和
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 矩阵乘积的秩与行列式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 矩阵乘积的秩与行列式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要研究矩阵乘积的秩与行列式？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、矩阵乘积的秩
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、矩阵乘积的秩">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、矩阵乘积的行列式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、矩阵乘积的行列式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例7 【计算题】利用秩的不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 可逆矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 可逆矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心概念引入】为什么要引入可逆矩阵？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、可逆矩阵的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、可逆的充分必要条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、可逆的充分必要条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、逆矩阵的求法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、逆矩阵的求法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法1：伴随矩阵法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法2：初等变换法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例8 【计算题】求逆矩阵（伴随矩阵法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例9 【计算题】求逆矩阵（初等变换法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例10 【证明题】可逆矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 矩阵的分块
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5 矩阵的分块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要分块？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、分块矩阵的运算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、分块矩阵的运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        加法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数量乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        转置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、分块对角矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、分块对角矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例11 【计算题】分块对角矩阵的行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例12 【计算题】分块矩阵乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-rn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 正交矩阵·欧几里得空间 \(R^n\)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.6 正交矩阵·欧几里得空间 \(R^n\)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入正交矩阵？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、内积
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、内积">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        向量的长度与夹角
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、欧几里得空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、正交矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、正交矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【核心定义】
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正交矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例13 【验证题】验证正交矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例14 【证明题】正交矩阵的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-kn-ks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 \(K^n\) 到 \(K^s\) 的线性映射
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.7 \(K^n\) 到 \(K^s\) 的线性映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        【概念引入动机】为什么要引入线性映射？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_69" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、线性映射的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_70" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、线性映射的矩阵表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、核与像
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例15 【计算题】求线性映射的矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例16 【验证题】验证线性映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_76" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速记
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="4">第4章 矩阵的运算<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章研究矩阵的<strong>加法</strong>、<strong>数量乘法</strong>、<strong>乘法</strong>运算，以及与矩阵乘法密切相关的<strong>可逆矩阵</strong>、<strong>分块矩阵</strong>、<strong>正交矩阵</strong>等内容，并引入 <span class="arithmatex">\(K^n\)</span> 到 <span class="arithmatex">\(K^s\)</span> 的<strong>线性映射</strong>的概念。</p>
+<hr />
+<h2 id="41">4.1 矩阵的加法、数量乘法与乘法运算<a class="headerlink" href="#41" title="Permanent link">&para;</a></h2>
+<h3 id="_2">【概念引入动机】为什么要引入矩阵运算？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>在研究线性方程组和线性变换时，我们需要对矩阵进行运算：
+- <strong>加法</strong>：合并两个系统（两个线性方程组相加）
+- <strong>数量乘法</strong>：缩放（方程两边同乘一个数）
+- <strong>乘法</strong>：复合变换（线性映射的复合）</p>
+<p>特别是<strong>矩阵乘法</strong>，它是为了表示<strong>线性映射的复合</strong>而引入的。</p>
+<h3 id="_3">一、矩阵的加法与数量乘法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_4">加法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(A = (a_{ij})_{s \times n}\)</span>，<span class="arithmatex">\(B = (b_{ij})_{s \times n}\)</span>，则
+$<span class="arithmatex">\(A + B = (a_{ij} + b_{ij})_{s \times n}\)</span>$</p>
+</blockquote>
+<p><strong>前提</strong>：同型矩阵（行数、列数分别相等）</p>
+<h4 id="_5">数量乘法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(A = (a_{ij})_{s \times n}\)</span>，<span class="arithmatex">\(k \in K\)</span>，则
+$<span class="arithmatex">\(kA = (ka_{ij})_{s \times n}\)</span>$</p>
+</blockquote>
+<h4 id="_6">负矩阵与减法<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>负矩阵</strong>：<span class="arithmatex">\(-A = (-a_{ij})\)</span>
+<strong>减法</strong>：<span class="arithmatex">\(A - B = A + (-B)\)</span></p>
+</blockquote>
+<h3 id="_7">二、矩阵的乘法<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="_8">【核心概念】为什么矩阵乘法这样定义？<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>考虑两个线性映射：
+- <span class="arithmatex">\(\sigma: K^n \to K^s\)</span>，对应矩阵 <span class="arithmatex">\(A = (a_{ij})_{s \times n}\)</span>
+- <span class="arithmatex">\(\tau: K^s \to K^m\)</span>，对应矩阵 <span class="arithmatex">\(B = (b_{kl})_{m \times s}\)</span></p>
+<p>复合映射 <span class="arithmatex">\(\tau \circ \sigma: K^n \to K^m\)</span> 对应什么矩阵？</p>
+<p>设 <span class="arithmatex">\(\sigma(e_j) = (a_{1j}, a_{2j}, \ldots, a_{sj})'\)</span>，则：
+$<span class="arithmatex">\((\tau \circ \sigma)(e_j) = \tau(\sigma(e_j)) = \begin{pmatrix} b_{11} &amp; b_{12} &amp; \cdots &amp; b_{1s} \\ b_{21} &amp; b_{22} &amp; \cdots &amp; b_{2s} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ b_{m1} &amp; b_{m2} &amp; \cdots &amp; b_{ms} \end{pmatrix} \begin{pmatrix} a_{1j} \\ a_{2j} \\ \vdots \\ a_{sj} \end{pmatrix} = \begin{pmatrix} \sum_{k=1}^{s} b_{1k}a_{kj} \\ \sum_{k=1}^{s} b_{2k}a_{kj} \\ \vdots \\ \sum_{k=1}^{s} b_{mk}a_{kj} \end{pmatrix}\)</span>$</p>
+<p>因此复合矩阵 <span class="arithmatex">\(C = BA\)</span> 的第 <span class="arithmatex">\(ij\)</span> 个元素为：
+$<span class="arithmatex">\(c_{ij} = \sum_{k=1}^{s} b_{ik}a_{kj}\)</span>$</p>
+<h4 id="_9">定义<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(A = (a_{ij})_{s \times n}\)</span>，<span class="arithmatex">\(B = (b_{ij})_{n \times m}\)</span>，则
+$<span class="arithmatex">\(C = AB = (c_{ij})_{s \times m}, \quad c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}\)</span>$</p>
+<p>即：<span class="arithmatex">\(C\)</span> 的第 <span class="arithmatex">\(i\)</span> 行第 <span class="arithmatex">\(j\)</span> 列 = <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(i\)</span> 行与 <span class="arithmatex">\(B\)</span> 的第 <span class="arithmatex">\(j\)</span> 列的<strong>点积</strong>。</p>
+</blockquote>
+<p><strong>注意</strong>：矩阵乘法要求<strong>内维数相等</strong>（<span class="arithmatex">\(A\)</span> 的列数 = <span class="arithmatex">\(B\)</span> 的行数）。</p>
+<h3 id="_10">三、矩阵乘法的重要性质<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h4 id="_11">不满足的运算律（易错！）<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>不满足交换律</strong>：<span class="arithmatex">\(AB \neq BA\)</span>（一般情况）</p>
+<p><strong>举例</strong>：<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>
+$<span class="arithmatex">\(AB = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}, \quad BA = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p><strong>从 <span class="arithmatex">\(AB = 0\)</span> 不能推出 <span class="arithmatex">\(A = 0\)</span> 或 <span class="arithmatex">\(B = 0\)</span></strong></p>
+<p><strong>举例</strong>：<span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>
+$<span class="arithmatex">\(AB = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+</blockquote>
+<h4 id="_12">满足的运算律<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>运算律</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结合律</td>
+<td><span class="arithmatex">\((AB)C = A(BC)\)</span></td>
+</tr>
+<tr>
+<td>分配律</td>
+<td><span class="arithmatex">\(A(B+C) = AB + AC\)</span>，<span class="arithmatex">\((A+B)C = AC + BC\)</span></td>
+</tr>
+<tr>
+<td>单位元</td>
+<td><span class="arithmatex">\(AI = IA = A\)</span></td>
+</tr>
+<tr>
+<td>数乘结合</td>
+<td><span class="arithmatex">\((kA)B = A(kB) = k(AB)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">四、转置<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h4 id="_14">定义<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[(A')_{ij} = a_{ji}\]</div>
+<h4 id="_15">性质<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[(AB)' = B'A'\]</div>
+<p><strong>为什么是 <span class="arithmatex">\(B'A'\)</span> 而不是 <span class="arithmatex">\(A'B'\)</span>？</strong>
+因为：<span class="arithmatex">\((AB)'_{ij} = (AB)_{ji} = \sum_k A_{jk}B_{ki} = \sum_k B_{ki}A_{jk} = (B'A')_{ij}\)</span></p>
+<hr />
+<h3 id="_16">典型例题<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<h4 id="1">例1 【计算题】矩阵运算<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(AB\)</span>，<span class="arithmatex">\(BA\)</span>，<span class="arithmatex">\(A^2\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>计算 <span class="arithmatex">\(AB\)</span></strong>：
+$<span class="arithmatex">\(AB = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 \cdot 0 + 2 \cdot 1 &amp; 1 \cdot 1 + 2 \cdot 0 \\ 3 \cdot 0 + 4 \cdot 1 &amp; 3 \cdot 1 + 4 \cdot 0 \end{pmatrix} = \begin{pmatrix} 2 &amp; 1 \\ 4 &amp; 3 \end{pmatrix}\)</span>$</p>
+<p><strong>计算 <span class="arithmatex">\(BA\)</span></strong>：
+$<span class="arithmatex">\(BA = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix} = \begin{pmatrix} 0 \cdot 1 + 1 \cdot 3 &amp; 0 \cdot 2 + 1 \cdot 4 \\ 1 \cdot 1 + 0 \cdot 3 &amp; 1 \cdot 2 + 0 \cdot 4 \end{pmatrix} = \begin{pmatrix} 3 &amp; 4 \\ 1 &amp; 2 \end{pmatrix}\)</span>$</p>
+<p><strong>计算 <span class="arithmatex">\(A^2\)</span></strong>：
+$<span class="arithmatex">\(A^2 = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}^2 = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix} = \begin{pmatrix} 1 \cdot 1 + 2 \cdot 3 &amp; 1 \cdot 2 + 2 \cdot 4 \\ 3 \cdot 1 + 4 \cdot 3 &amp; 3 \cdot 2 + 4 \cdot 4 \end{pmatrix} = \begin{pmatrix} 7 &amp; 10 \\ 15 &amp; 22 \end{pmatrix}\)</span>$</p>
+<p><strong>关键观察</strong>：
+- <span class="arithmatex">\(AB \neq BA\)</span>（不满足交换律）
+- <span class="arithmatex">\(A^2 \neq A\)</span>（除非 <span class="arithmatex">\(A\)</span> 是幂等矩阵）</p>
+<hr />
+<h4 id="2">例2 【计算题】矩阵乘法与向量<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{x} = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(A\mathbf{x}\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<div class="arithmatex">\[A\mathbf{x} = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 1 \cdot x_1 + 2 \cdot x_2 + 3 \cdot x_3 \\ 4 \cdot x_1 + 5 \cdot x_2 + 6 \cdot x_3 \end{pmatrix}\]</div>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(A\mathbf{x}\)</span> 表示把向量 <span class="arithmatex">\(\mathbf{x}\)</span> 线性变换为向量 <span class="arithmatex">\((x_1+2x_2+3x_3, 4x_1+5x_2+6x_3)\)</span>。</p>
+<hr />
+<h4 id="3">例3 【证明题】矩阵乘法不满足消去律<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：举反例说明：<span class="arithmatex">\(AB = AC\)</span> 且 <span class="arithmatex">\(A \neq 0\)</span> 不能推出 <span class="arithmatex">\(B = C\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>反例</strong>：
+取 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(C = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}\)</span>。</p>
+<p>则：
+$<span class="arithmatex">\(AB = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span>$
+$<span class="arithmatex">\(AC = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix} = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span>$</p>
+<p>所以 <span class="arithmatex">\(AB = AC\)</span>，但 <span class="arithmatex">\(B \neq C\)</span>。</p>
+<p><strong>原因</strong>：<span class="arithmatex">\(A\)</span> 不是<strong>可逆矩阵</strong>（奇异矩阵）。只有当 <span class="arithmatex">\(A\)</span> 可逆时，才能从左边消去。</p>
+<p><strong>什么时候 <span class="arithmatex">\(AB = AC \Rightarrow B = C\)</span>？</strong>
+当且仅当 <span class="arithmatex">\(A\)</span> 是<strong>可逆矩阵</strong>（左乘可逆矩阵不改变秩）。</p>
+<hr />
+<h3 id="_17">易错点提醒<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>矩阵乘法维数不匹配</strong></li>
+<li><span class="arithmatex">\(A_{s \times n} \times B_{n \times m} = C_{s \times m}\)</span></li>
+<li>
+<p>内维数必须相等</p>
+</li>
+<li>
+<p><strong>混淆 <span class="arithmatex">\(AB\)</span> 和 <span class="arithmatex">\(BA\)</span></strong></p>
+</li>
+<li>即使都有定义，<span class="arithmatex">\(AB \neq BA\)</span>（一般情况）</li>
+<li>
+<p>除非特别说明，不能交换顺序</p>
+</li>
+<li>
+<p><strong>从 <span class="arithmatex">\(AB = 0\)</span> 误推 <span class="arithmatex">\(A = 0\)</span> 或 <span class="arithmatex">\(B = 0\)</span></strong></p>
+</li>
+<li>两个非零矩阵的乘积可以为零矩阵</li>
+<li>
+<p>这是矩阵乘法与数乘的本质区别</p>
+</li>
+<li>
+<p><strong>转置公式错误</strong></p>
+</li>
+<li><span class="arithmatex">\((AB)' = B'A'\)</span>，不是 <span class="arithmatex">\(A'B'\)</span></li>
+<li>要记住"外翻里翻"</li>
+</ol>
+<hr />
+<h3 id="_18">思考题<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 2 &amp; 0 \\ 1 &amp; 3 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(A+B\)</span>，<span class="arithmatex">\(2A\)</span>，<span class="arithmatex">\(AB\)</span>。</p>
+</li>
+<li>
+<p><strong>（判断）</strong> 判断下列说法是否正确，并说明理由：
+   (a) 若 <span class="arithmatex">\(A^2 = 0\)</span>，则 <span class="arithmatex">\(A = 0\)</span>
+   (b) 若 <span class="arithmatex">\(AB = AC\)</span> 且 <span class="arithmatex">\(A \neq 0\)</span>，则 <span class="arithmatex">\(B = C\)</span></p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：<span class="arithmatex">\((A+B)' = A' + B'\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="42">4.2 特殊矩阵<a class="headerlink" href="#42" title="Permanent link">&para;</a></h2>
+<h3 id="_19">【概念引入动机】为什么要研究特殊矩阵？<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>某些矩阵具有特殊结构，使计算更简便。认识这些特殊矩阵有助于：
+1. 简化计算
+2. 发现矩阵的性质
+3. 建立理论模型</p>
+<h3 id="_20">特殊矩阵一览<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>矩阵类型</th>
+<th>定义</th>
+<th>记号/性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>零矩阵</strong></td>
+<td>所有元素为0</td>
+<td><span class="arithmatex">\(\mathbf{0}\)</span></td>
+</tr>
+<tr>
+<td><strong>对角矩阵</strong></td>
+<td>非主对角元全为0</td>
+<td><span class="arithmatex">\(\text{diag}(a_1, a_2, \ldots, a_n)\)</span></td>
+</tr>
+<tr>
+<td><strong>单位矩阵</strong></td>
+<td>主对角元全为1</td>
+<td><span class="arithmatex">\(I_n\)</span></td>
+</tr>
+<tr>
+<td><strong>数量矩阵</strong></td>
+<td><span class="arithmatex">\(kI_n\)</span></td>
+<td><span class="arithmatex">\(k\)</span> 与单位矩阵的乘积</td>
+</tr>
+<tr>
+<td><strong>上三角矩阵</strong></td>
+<td><span class="arithmatex">\(i &gt; j\)</span> 时 <span class="arithmatex">\(a_{ij} = 0\)</span></td>
+<td>主对角线下方全为0</td>
+</tr>
+<tr>
+<td><strong>下三角矩阵</strong></td>
+<td><span class="arithmatex">\(i &lt; j\)</span> 时 <span class="arithmatex">\(a_{ij} = 0\)</span></td>
+<td>主对角线上方全为0</td>
+</tr>
+<tr>
+<td><strong>对称矩阵</strong></td>
+<td><span class="arithmatex">\(a_{ij} = a_{ji}\)</span></td>
+<td><span class="arithmatex">\(A' = A\)</span></td>
+</tr>
+<tr>
+<td><strong>斜对称矩阵</strong></td>
+<td><span class="arithmatex">\(a_{ij} = -a_{ji}\)</span></td>
+<td><span class="arithmatex">\(A' = -A\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_21">重要性质<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<h4 id="_22">对角矩阵<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[\text{diag}(a_1, \ldots, a_n) \cdot \text{diag}(b_1, \ldots, b_n) = \text{diag}(a_1b_1, \ldots, a_nb_n)\]</div>
+<p><strong>为什么？</strong> 对角矩阵的乘法就是对应元素相乘。</p>
+<h4 id="_23">对称矩阵<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<ul>
+<li><span class="arithmatex">\(A = A'\)</span></li>
+<li><span class="arithmatex">\(A^k\)</span> 也是对称矩阵</li>
+<li><span class="arithmatex">\(AB\)</span> 对称 <span class="arithmatex">\(\iff AB = BA\)</span>（<span class="arithmatex">\(A, B\)</span> 对称时）</li>
+</ul>
+<h4 id="_24">斜对称矩阵<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
+<ul>
+<li><span class="arithmatex">\(A = -A'\)</span></li>
+<li>主对角线元素全为 0（因为 <span class="arithmatex">\(a_{ii} = -a_{ii} \Rightarrow a_{ii} = 0\)</span>）</li>
+<li>任意矩阵 <span class="arithmatex">\(A\)</span>，<span class="arithmatex">\(A - A'\)</span> 是斜对称矩阵</li>
+</ul>
+<hr />
+<h3 id="_25">典型例题<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<h4 id="4_1">例4 【计算题】分块对角矩阵的幂<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A = \text{diag}(2, -1, 3)\)</span>，求 <span class="arithmatex">\(A^{10}\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p>由对角矩阵的性质：
+$<span class="arithmatex">\(A^k = \text{diag}(2^k, (-1)^k, 3^k)\)</span>$</p>
+<p>所以：
+$<span class="arithmatex">\(A^{10} = \text{diag}(2^{10}, (-1)^{10}, 3^{10}) = \text{diag}(1024, 1, 59049)\)</span>$</p>
+<p><strong>关键思路</strong>：对角矩阵的幂等于对角线元素的幂。</p>
+<hr />
+<h4 id="5">例5 【验证题】对称矩阵的性质<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n\)</span> 级对称矩阵，证明：<span class="arithmatex">\(A+B\)</span> 也是对称矩阵。</p>
+<p><strong>解答</strong>：</p>
+<p>因为 <span class="arithmatex">\(A' = A\)</span>，<span class="arithmatex">\(B' = B\)</span>，所以：
+$<span class="arithmatex">\((A+B)' = A' + B' = A + B\)</span>$</p>
+<p>因此 <span class="arithmatex">\(A+B\)</span> 是对称矩阵。</p>
+<p><strong>进一步</strong>：若 <span class="arithmatex">\(k \in K\)</span>，则 <span class="arithmatex">\(kA\)</span> 也是对称矩阵（因为 <span class="arithmatex">\((kA)' = kA' = kA\)</span>）。</p>
+<hr />
+<h4 id="6">例6 【证明题】任意矩阵分解为对称矩阵与斜对称矩阵之和<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：证明：任意 <span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(A\)</span> 可以唯一地分解为一个对称矩阵与一个斜对称矩阵之和。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>构造</strong>：
+设 <span class="arithmatex">\(S = \frac{1}{2}(A + A')\)</span>，<span class="arithmatex">\(K = \frac{1}{2}(A - A')\)</span>。</p>
+<p>则：
+- <span class="arithmatex">\(S' = \frac{1}{2}(A' + A) = S\)</span>（对称）
+- <span class="arithmatex">\(K' = \frac{1}{2}(A' - A) = -K\)</span>（斜对称）
+- <span class="arithmatex">\(S + K = A\)</span></p>
+<p><strong>唯一性</strong>：若还有 <span class="arithmatex">\(S_1 + K_1 = A\)</span>，其中 <span class="arithmatex">\(S_1\)</span> 对称，<span class="arithmatex">\(K_1\)</span> 斜对称，则：
+$<span class="arithmatex">\(S_1 - S = K - K_1\)</span>$</p>
+<p>左边对称，右边斜对称，所以只能为零矩阵，即 <span class="arithmatex">\(S_1 = S\)</span>，<span class="arithmatex">\(K_1 = K\)</span>。</p>
+<p><strong>关键思路</strong>：利用 <span class="arithmatex">\(\frac{1}{2}(A + A')\)</span> 和 <span class="arithmatex">\(\frac{1}{2}(A - A')\)</span> 的构造。</p>
+<hr />
+<h3 id="_26">易错点提醒<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆"对角矩阵"与"对角线"</strong></li>
+<li>对角矩阵：<span class="arithmatex">\(i \neq j\)</span> 时 <span class="arithmatex">\(a_{ij} = 0\)</span></li>
+<li>
+<p>不是只有主对角线非零，其他位置可以有零</p>
+</li>
+<li>
+<p><strong>对称矩阵的判断</strong></p>
+</li>
+<li>必须 <span class="arithmatex">\(A' = A\)</span></li>
+<li>
+<p>只看某几个元素相等是不够的</p>
+</li>
+<li>
+<p><strong>斜对称矩阵的主对角线</strong></p>
+</li>
+<li>主对角线元素必须为 0</li>
+<li>因为 <span class="arithmatex">\(a_{ii} = -a_{ii}\)</span></li>
+</ol>
+<hr />
+<h3 id="_27">思考题<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（判断）</strong> 判断下列矩阵是对称矩阵、斜对称矩阵，还是都不是：
+   (a) <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 1 \end{pmatrix}\)</span>
+   (b) <span class="arithmatex">\(\begin{pmatrix} 0 &amp; 3 \\ -3 &amp; 0 \end{pmatrix}\)</span>
+   (c) <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span></p>
+</li>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(A = \text{diag}(1, 2, 3)\)</span>，<span class="arithmatex">\(B = \text{diag}(3, 2, 1)\)</span>，求 <span class="arithmatex">\(AB\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A\)</span> 是对称矩阵，则 <span class="arithmatex">\(A^k\)</span> 也是对称矩阵（<span class="arithmatex">\(k\)</span> 为正整数）。</p>
+</li>
+</ol>
+<hr />
+<h2 id="43">4.3 矩阵乘积的秩与行列式<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
+<h3 id="_28">【概念引入动机】为什么要研究矩阵乘积的秩与行列式？<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p>在研究线性变换和线性方程组时，经常需要知道：
+- 两个矩阵相乘后，秩如何变化？
+- 两个矩阵相乘后，行列式如何变化？</p>
+<p>这些关系在理论上和应用中都非常重要。</p>
+<h3 id="_29">一、矩阵乘积的秩<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<h4 id="_30">定理<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：
+1. <span class="arithmatex">\(\text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\}\)</span>
+2. <span class="arithmatex">\(\text{rank}(A+B) \leq \text{rank}(A) + \text{rank}(B)\)</span></p>
+</blockquote>
+<p><strong>证明1</strong>：利用列空间
+- <span class="arithmatex">\(AB\)</span> 的列是 <span class="arithmatex">\(A\)</span> 的列的线性组合
+- 所以 <span class="arithmatex">\(\text{Col}(AB) \subseteq \text{Col}(A)\)</span>
+- 因此 <span class="arithmatex">\(\text{rank}(AB) \leq \text{rank}(A)\)</span></p>
+<p><strong>证明2</strong>：对称性
+- 由转置性质 <span class="arithmatex">\(\text{rank}(AB) = \text{rank}((AB)' = B'A') \leq \text{rank}(B')\)</span></p>
+<h3 id="_31">二、矩阵乘积的行列式<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<h4 id="_32">定理<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：若 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，则
+$<span class="arithmatex">\(|AB| = |A| \cdot |B|\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>（利用初等矩阵）：
+1. 若 <span class="arithmatex">\(A\)</span> 可逆，<span class="arithmatex">\(A = P_1P_2\cdots P_t\)</span>，则 <span class="arithmatex">\(|A| = |P_1|\cdots|P_t|\)</span>
+2. 代入 <span class="arithmatex">\(|AB| = |P_1|\cdots|P_t||B| = |A||B|\)</span>
+3. 若 <span class="arithmatex">\(A\)</span> 不可逆，则 <span class="arithmatex">\(\text{rank}(A) &lt; n\)</span>，<span class="arithmatex">\(\text{rank}(AB) &lt; n\)</span>，所以 <span class="arithmatex">\(|AB| = 0 = |A||B|\)</span></p>
+<hr />
+<h3 id="_33">典型例题<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<h4 id="7">例7 【计算题】利用秩的不等式<a class="headerlink" href="#7" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(3 \times 4\)</span> 矩阵，<span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(4 \times 5\)</span> 矩阵，且 <span class="arithmatex">\(AB = 0\)</span>，证明：<span class="arithmatex">\(\text{rank}(A) + \text{rank}(B) \leq 4\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法1</strong>：由 <span class="arithmatex">\(AB = 0\)</span>，得 <span class="arithmatex">\(\text{Col}(B) \subseteq \text{Ker}(A)\)</span>。</p>
+<p><span class="arithmatex">\(\dim \text{Ker}(A) = n - \text{rank}(A) = 4 - \text{rank}(A)\)</span>（由线性映射基本定理）</p>
+<p>又 <span class="arithmatex">\(\dim \text{Col}(B) = \text{rank}(B)\)</span>，且 <span class="arithmatex">\(\text{Col}(B) \subseteq \text{Ker}(A)\)</span>，所以：
+$<span class="arithmatex">\(\text{rank}(B) \leq 4 - \text{rank}(A)\)</span>$</p>
+<p>即 <span class="arithmatex">\(\text{rank}(A) + \text{rank}(B) \leq 4\)</span>。</p>
+<p><strong>方法2</strong>：由 <span class="arithmatex">\(\text{rank}(AB) = 0\)</span>，而 <span class="arithmatex">\(\text{rank}(AB) \leq \text{rank}(B)\)</span>，得 <span class="arithmatex">\(\text{rank}(B) \leq \text{rank}(B)\)</span>。</p>
+<p>再由 Sylvester 不等式：<span class="arithmatex">\(\text{rank}(A) + \text{rank}(B) \leq n + \min\{\text{rank}(A), \text{rank}(B)\} - \min\{\text{rank}(A), \text{rank}(B)\} = n = 4\)</span>。</p>
+<p><strong>关键思路</strong>：利用子空间维数关系或秩的不等式。</p>
+<hr />
+<h3 id="_34">易错点提醒<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆 <span class="arithmatex">\(\leq\)</span> 和 <span class="arithmatex">\(=\)</span></strong></li>
+<li>一般只有 <span class="arithmatex">\(\text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\}\)</span></li>
+<li>
+<p>等号不一定成立</p>
+</li>
+<li>
+<p><strong><span class="arithmatex">\(|AB| = |A||B|\)</span> 的前提</strong></p>
+</li>
+<li><span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 必须是方阵</li>
+<li>且阶数相同</li>
+</ol>
+<hr />
+<h3 id="_35">思考题<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(|AB|\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，则 <span class="arithmatex">\(|kA| = k^n|A|\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：<span class="arithmatex">\(\text{rank}(A+B) \leq \text{rank}(A) + \text{rank}(B)\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="44">4.4 可逆矩阵<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
+<h3 id="_36">【核心概念引入】为什么要引入可逆矩阵？<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<p>在数系中，非零数 <span class="arithmatex">\(a\)</span> 的倒数 <span class="arithmatex">\(a^{-1}\)</span> 满足 <span class="arithmatex">\(a \cdot a^{-1} = 1\)</span>。</p>
+<p>在矩阵中，我们问：哪些矩阵 <span class="arithmatex">\(A\)</span> 存在"矩阵倒数" <span class="arithmatex">\(A^{-1}\)</span>，使得 <span class="arithmatex">\(AA^{-1} = A^{-1}A = I\)</span>？</p>
+<p><strong>可逆矩阵</strong>就是矩阵中的"非零数"。</p>
+<h3 id="_37">一、可逆矩阵的定义<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：对于 <span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(A\)</span>，如果存在 <span class="arithmatex">\(n\)</span> 级矩阵 <span class="arithmatex">\(B\)</span>，使得
+$<span class="arithmatex">\(AB = BA = I\)</span>$
+则称 <span class="arithmatex">\(A\)</span> 是<strong>可逆矩阵</strong>（或<strong>非奇异矩阵</strong>），<span class="arithmatex">\(B\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>逆矩阵</strong>，记作 <span class="arithmatex">\(A^{-1}\)</span>。</p>
+</blockquote>
+<p><strong>可逆 = 存在逆矩阵</strong></p>
+<h3 id="_38">二、可逆的充分必要条件<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<h4 id="_39">核心定理<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：以下条件等价：
+1. <span class="arithmatex">\(A\)</span> <strong>可逆</strong>
+2. <span class="arithmatex">\(|A| \neq 0\)</span>（行列式非零）
+3. <span class="arithmatex">\(\text{rank}(A) = n\)</span>（满秩）
+4. <span class="arithmatex">\(A\)</span> 的行（列）向量组线性无关
+5. <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(I\)</span> 相抵</p>
+</blockquote>
+<h3 id="_40">三、逆矩阵的求法<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">方法1：伴随矩阵法<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(A^{-1} = \frac{1}{|A|} A^*\)</span></p>
+<p>其中 <span class="arithmatex">\(A^*\)</span> 为 <span class="arithmatex">\(A\)</span> 的<strong>伴随矩阵</strong>（<span class="arithmatex">\(A^*\)</span> 的 <span class="arithmatex">\((i,j)\)</span> 元是 <span class="arithmatex">\(A_{ji}\)</span>）。</p>
+</blockquote>
+<p><strong>为什么 <span class="arithmatex">\(A^*A = |A|I\)</span>？</strong>
+由行列式展开定理：<span class="arithmatex">\(A^*\)</span> 的第 <span class="arithmatex">\(i\)</span> 行与 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(j\)</span> 列的点积是 <span class="arithmatex">\(|A|\)</span>（当 <span class="arithmatex">\(i=j\)</span>）或 <span class="arithmatex">\(0\)</span>（当 <span class="arithmatex">\(i \neq j\)</span>）。</p>
+<p><strong>计算步骤</strong>：
+1. 计算 <span class="arithmatex">\(|A|\)</span>，判断是否非零
+2. 计算每个元素的代数余子式 <span class="arithmatex">\(A_{ij}\)</span>
+3. 构造 <span class="arithmatex">\(A^* = (A_{ji})\)</span>（注意转置！）
+4. <span class="arithmatex">\(A^{-1} = \frac{1}{|A|}A^*\)</span></p>
+<h4 id="2_1">方法2：初等变换法<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\((A \mid I) \xrightarrow{\text{初等行变换}} (I \mid A^{-1})\)</span></p>
+</blockquote>
+<p><strong>计算步骤</strong>：
+1. 写分块矩阵 <span class="arithmatex">\((A \mid I)\)</span>
+2. 对左边 <span class="arithmatex">\(A\)</span> 做初等行变换，同时对右边 <span class="arithmatex">\(I\)</span> 做相同变换
+3. 当左边变成 <span class="arithmatex">\(I\)</span> 时，右边就是 <span class="arithmatex">\(A^{-1}\)</span></p>
+<p><strong>为什么有效？</strong>
+初等行变换相当于左乘可逆矩阵 <span class="arithmatex">\(P\)</span>：<span class="arithmatex">\(P(A \mid I) = (PA \mid P)\)</span>。当 <span class="arithmatex">\(PA = I\)</span> 时，<span class="arithmatex">\(P = A^{-1}\)</span>。</p>
+<hr />
+<h3 id="_41">典型例题<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<h4 id="8">例8 【计算题】求逆矩阵（伴随矩阵法）<a class="headerlink" href="#8" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span> 的逆矩阵。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步</strong>：计算行列式
+$<span class="arithmatex">\(|A| = 1 \cdot 4 - 2 \cdot 3 = 4 - 6 = -2 \neq 0\)</span>$
+所以 <span class="arithmatex">\(A\)</span> 可逆。</p>
+<p><strong>第二步</strong>：计算代数余子式
+$<span class="arithmatex">\(A_{11} = (-1)^{1+1} \cdot 4 = 4\)</span>$
+$<span class="arithmatex">\(A_{12} = (-1)^{1+2} \cdot 3 = -3\)</span>$
+$<span class="arithmatex">\(A_{21} = (-1)^{2+1} \cdot 2 = -2\)</span>$
+$<span class="arithmatex">\(A_{22} = (-1)^{2+2} \cdot 1 = 1\)</span>$</p>
+<p><strong>第三步</strong>：构造伴随矩阵
+$<span class="arithmatex">\(A^* = \begin{pmatrix} A_{11} &amp; A_{21} \\ A_{12} &amp; A_{22} \end{pmatrix} = \begin{pmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{pmatrix}\)</span>$</p>
+<p><strong>第四步</strong>：求逆矩阵
+$<span class="arithmatex">\(A^{-1} = \frac{1}{|A|} A^* = \frac{1}{-2} \begin{pmatrix} 4 &amp; -2 \\ -3 &amp; 1 \end{pmatrix} = \begin{pmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{pmatrix}\)</span>$</p>
+<p><strong>验证</strong>：
+$<span class="arithmatex">\(AA^{-1} = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\begin{pmatrix} -2 &amp; 1 \\ \frac{3}{2} &amp; -\frac{1}{2} \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I\)</span>$</p>
+<p><strong>关键思路</strong>：
+1. 先判断可逆（<span class="arithmatex">\(|A| \neq 0\)</span>）
+2. 注意 <span class="arithmatex">\(A^*\)</span> 是代数余子式的转置，不是直接排列</p>
+<hr />
+<h4 id="9">例9 【计算题】求逆矩阵（初等变换法）<a class="headerlink" href="#9" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：用初等变换法求 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 1 &amp; 2 &amp; 1 \\ 1 &amp; 1 &amp; 2 \end{pmatrix}\)</span> 的逆矩阵。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>写分块矩阵并做初等行变换</strong>：
+$<span class="arithmatex">\(\left(\begin{array}{ccc|ccc} 2 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\ 1 &amp; 1 &amp; 2 &amp; 0 &amp; 0 &amp; 1 \end{array}\right)\)</span>$</p>
+<p><strong>步骤1</strong>：把 <span class="arithmatex">\((1,1)\)</span> 位置变成 1
+- <span class="arithmatex">\(r_1 \leftrightarrow r_2\)</span>：<span class="arithmatex">\(\left(\begin{array}{ccc|ccc} 1 &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\ 2 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 2 &amp; 0 &amp; 0 &amp; 1 \end{array}\right)\)</span></p>
+<p><strong>步骤2</strong>：消去第2、3行的第1列
+- <span class="arithmatex">\(r_2 - 2r_1 \to r_2\)</span>：<span class="arithmatex">\(\left(\begin{array}{ccc|ccc} 1 &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; -3 &amp; -1 &amp; 1 &amp; -2 &amp; 0 \\ 1 &amp; 1 &amp; 2 &amp; 0 &amp; 0 &amp; 1 \end{array}\right)\)</span>
+- <span class="arithmatex">\(r_3 - r_1 \to r_3\)</span>：<span class="arithmatex">\(\left(\begin{array}{ccc|ccc} 1 &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; -3 &amp; -1 &amp; 1 &amp; -2 &amp; 0 \\ 0 &amp; -1 &amp; 1 &amp; 0 &amp; -1 &amp; 1 \end{array}\right)\)</span></p>
+<p><strong>步骤3</strong>：继续化简...
+- <span class="arithmatex">\(r_3 \leftrightarrow r_2\)</span>：把 <span class="arithmatex">\((-3)\)</span> 位置变为 1
+- ...</p>
+<p>最终得到：
+$<span class="arithmatex">\(A^{-1} = \frac{1}{4}\begin{pmatrix} 3 &amp; -1 &amp; -1 \\ -1 &amp; 3 &amp; -1 \\ -1 &amp; -1 &amp; 3 \end{pmatrix} = \begin{pmatrix} \frac{3}{4} &amp; -\frac{1}{4} &amp; -\frac{1}{4} \\ -\frac{1}{4} &amp; \frac{3}{4} &amp; -\frac{1}{4} \\ -\frac{1}{4} &amp; -\frac{1}{4} &amp; \frac{3}{4} \end{pmatrix}\)</span>$</p>
+<p><strong>关键思路</strong>：初等变换法比伴随矩阵法计算量小，特别适合大型矩阵。</p>
+<hr />
+<h4 id="10">例10 【证明题】可逆矩阵的性质<a class="headerlink" href="#10" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n\)</span> 级矩阵，且 <span class="arithmatex">\(AB\)</span> 可逆，证明：<span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 都可逆。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>证明</strong>：</p>
+<p>因为 <span class="arithmatex">\(AB\)</span> 可逆，所以 <span class="arithmatex">\(|AB| \neq 0\)</span>。</p>
+<p>由行列式乘积公式：<span class="arithmatex">\(|AB| = |A| \cdot |B| \neq 0\)</span>，所以 <span class="arithmatex">\(|A| \neq 0\)</span> 且 <span class="arithmatex">\(|B| \neq 0\)</span>。</p>
+<p>因此 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 都可逆。</p>
+<p><strong>进一步</strong>：由 <span class="arithmatex">\(\text{rank}(AB) = n\)</span>，得 <span class="arithmatex">\(\text{rank}(A) \geq \text{rank}(AB) = n\)</span>，所以 <span class="arithmatex">\(\text{rank}(A) = n\)</span>，同理 <span class="arithmatex">\(\text{rank}(B) = n\)</span>。</p>
+<p><strong>关键思路</strong>：利用行列式或秩的可逆判别法。</p>
+<hr />
+<h3 id="_42">易错点提醒<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>伴随矩阵的构造错误</strong></li>
+<li><span class="arithmatex">\(A^*\)</span> 的 <span class="arithmatex">\((i,j)\)</span> 元是 <span class="arithmatex">\(A_{ji}\)</span>（<strong>转置</strong>！）</li>
+<li>
+<p>不是 <span class="arithmatex">\((A_{ij})\)</span></p>
+</li>
+<li>
+<p><strong>忘记判断 <span class="arithmatex">\(|A| \neq 0\)</span></strong></p>
+</li>
+<li>只有 <span class="arithmatex">\(|A| \neq 0\)</span> 时 <span class="arithmatex">\(A^{-1}\)</span> 才存在</li>
+<li>
+<p>直接套公式可能出错</p>
+</li>
+<li>
+<p><strong>初等变换只做行或只做列</strong></p>
+</li>
+<li>求逆矩阵只能做<strong>初等行变换</strong></li>
+<li>行变换和列变换不能混用</li>
+</ol>
+<hr />
+<h3 id="_43">思考题<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 求 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 1 \\ 5 &amp; 2 \end{pmatrix}\)</span> 的逆矩阵。</p>
+</li>
+<li>
+<p><strong>（判断）</strong> 判断下列矩阵是否可逆，若可逆，求其逆：
+   (a) <span class="arithmatex">\(\begin{pmatrix} 2 &amp; 4 \\ 1 &amp; 2 \end{pmatrix}\)</span>
+   (b) <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; 4 &amp; 5 \\ 0 &amp; 0 &amp; 6 \end{pmatrix}\)</span></p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A\)</span> 可逆，则 <span class="arithmatex">\(A'\)</span> 也可逆，且 <span class="arithmatex">\((A')^{-1} = (A^{-1})'\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="45">4.5 矩阵的分块<a class="headerlink" href="#45" title="Permanent link">&para;</a></h2>
+<h3 id="_44">【概念引入动机】为什么要分块？<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<p>当矩阵较大时，直接运算可能很复杂。<strong>分块矩阵</strong>是一种"化整为零"的策略：
+- 把大矩阵分成若干小矩阵块
+- 把块当作"元素"进行运算
+- 在某些特殊结构下（如分块对角），可以大大简化计算</p>
+<h3 id="_45">一、分块矩阵的运算<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
+<h4 id="_46">加法<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h4>
+<p>同型矩阵，对应块相加（要求对应块同型）。</p>
+<h4 id="_47">数量乘法<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h4>
+<p>每块乘以数量。</p>
+<h4 id="_48">乘法<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h4>
+<p>块相乘，要求<strong>内维数匹配</strong>：</p>
+<div class="arithmatex">\[\begin{pmatrix} A_{11} &amp; A_{12} \\ A_{21} &amp; A_{22} \end{pmatrix} \begin{pmatrix} B_{11} &amp; B_{12} \\ B_{21} &amp; B_{22} \end{pmatrix} = \begin{pmatrix} A_{11}B_{11} + A_{12}B_{21} &amp; A_{11}B_{12} + A_{12}B_{22} \\ A_{21}B_{11} + A_{22}B_{21} &amp; A_{21}B_{12} + A_{22}B_{22} \end{pmatrix}\]</div>
+<h4 id="_49">转置<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h4>
+<p><strong>先转置，再转置每块</strong>：
+$<span class="arithmatex">\(\begin{pmatrix} A_{11} &amp; A_{12} \\ A_{21} &amp; A_{22} \end{pmatrix}' = \begin{pmatrix} A_{11}' &amp; A_{21}' \\ A_{12}' &amp; A_{22}' \end{pmatrix}\)</span>$</p>
+<h3 id="_50">二、分块对角矩阵<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h3>
+<h4 id="_51">定义<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[A = \begin{pmatrix} A_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; A_s \end{pmatrix}\]</div>
+<p>其中 <span class="arithmatex">\(A_i\)</span> 为 <span class="arithmatex">\(n_i\)</span> 级方阵，其他位置为零。</p>
+<h4 id="_52">性质<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h4>
+<ol>
+<li><span class="arithmatex">\(|A| = |A_1| \cdot |A_2| \cdots |A_s|\)</span></li>
+<li><span class="arithmatex">\(A\)</span> 可逆 <span class="arithmatex">\(\iff\)</span> 每个 <span class="arithmatex">\(A_i\)</span> 都可逆</li>
+<li><span class="arithmatex">\(A^{-1} = \text{diag}(A_1^{-1}, A_2^{-1}, \ldots, A_s^{-1})\)</span></li>
+</ol>
+<hr />
+<h3 id="_53">典型例题<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h3>
+<h4 id="11">例11 【计算题】分块对角矩阵的行列式<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A = \text{diag}(2, 3)\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(|A|\)</span> 和 <span class="arithmatex">\(|B|\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>分块对角矩阵</strong> <span class="arithmatex">\(A = \text{diag}(2, 3)\)</span>：
+$<span class="arithmatex">\(|A| = 2 \times 3 = 6\)</span>$</p>
+<p><strong>上三角矩阵</strong> <span class="arithmatex">\(B\)</span>：
+$<span class="arithmatex">\(|B| = 1 \times 4 - 2 \times 3 = 4 - 6 = -2\)</span>$</p>
+<p><strong>验证</strong>：直接计算分块对角矩阵的行列式等于对角块行列式的乘积。</p>
+<hr />
+<h4 id="12">例12 【计算题】分块矩阵乘法<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 &amp; 0 &amp; 0 \\ 3 &amp; 4 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 5 &amp; 6 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \\ 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(AB\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>观察结构</strong>：<span class="arithmatex">\(A\)</span> 可以分块为：
+$<span class="arithmatex">\(A = \begin{pmatrix} A_1 &amp; 0 \\ 0 &amp; A_2 \end{pmatrix}, \quad A_1 = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}, \quad A_2 = \begin{pmatrix} 5 &amp; 6 \end{pmatrix}\)</span>$</p>
+<p>但 <span class="arithmatex">\(A_2\)</span> 不是方阵... 重新分块：</p>
+<div class="arithmatex">\[A = \begin{pmatrix} A_{11} &amp; A_{12} \\ A_{21} &amp; A_{22} \end{pmatrix}, \quad A_{11} = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}, \ A_{12} = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \ A_{21} = \begin{pmatrix} 0 &amp; 0 \end{pmatrix}, \ A_{22} = \begin{pmatrix} 5 &amp; 6 \end{pmatrix}\]</div>
+<div class="arithmatex">\[B = \begin{pmatrix} B_1 \\ B_2 \end{pmatrix}, \quad B_1 = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix}, \ B_2 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\]</div>
+<p>则：
+$<span class="arithmatex">\(AB = \begin{pmatrix} A_{11}B_1 + A_{12}B_2 \\ A_{21}B_1 + A_{22}B_2 \end{pmatrix} = \begin{pmatrix} \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix} \\ \begin{pmatrix} 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \end{pmatrix} + \begin{pmatrix} 5 &amp; 6 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} \end{pmatrix}\)</span>$</p>
+<div class="arithmatex">\[= \begin{pmatrix} \begin{pmatrix} 5 &amp; 5 \\ 11 &amp; 11 \end{pmatrix} \\ \begin{pmatrix} 5 &amp; 6 \end{pmatrix} \end{pmatrix} = \begin{pmatrix} 5 &amp; 5 \\ 11 &amp; 11 \\ 5 &amp; 6 \end{pmatrix}\]</div>
+<p><strong>关键思路</strong>：识别矩阵的分块结构，利用分块乘法简化计算。</p>
+<hr />
+<h3 id="_54">易错点提醒<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>分块乘法内维数不匹配</strong></li>
+<li>要求对应块的列数 = 行数</li>
+<li>
+<p>必须仔细检查</p>
+</li>
+<li>
+<p><strong>分块转置错误</strong></p>
+</li>
+<li>不仅块的位置要转置</li>
+<li>
+<p>每个块内部也要转置</p>
+</li>
+<li>
+<p><strong>分块对角矩阵必须是方阵</strong></p>
+</li>
+<li>对角线上的块必须是方阵</li>
+<li>不然无法定义行列式</li>
+</ol>
+<hr />
+<h3 id="_55">思考题<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 3 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 4 &amp; 0 &amp; 0 \\ 0 &amp; 5 &amp; 0 \\ 0 &amp; 0 &amp; 6 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(AB\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：分块对角矩阵的行列式等于对角块行列式的乘积。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(A = \begin{pmatrix} A_1 &amp; 0 \\ 0 &amp; A_2 \end{pmatrix}\)</span>，其中 <span class="arithmatex">\(A_1, A_2\)</span> 可逆，求 <span class="arithmatex">\(A^{-1}\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="46-rn">4.6 正交矩阵·欧几里得空间 <span class="arithmatex">\(R^n\)</span><a class="headerlink" href="#46-rn" title="Permanent link">&para;</a></h2>
+<h3 id="_56">【概念引入动机】为什么要引入正交矩阵？<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h3>
+<p>在解析几何中，我们关心<strong>长度</strong>和<strong>角度</strong>的变换。什么样的线性变换保持长度不变？</p>
+<p>答案是：<strong>正交矩阵</strong>对应的线性变换保持向量的长度和角度不变。</p>
+<h3 id="_57">一、内积<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h3>
+<h4 id="_58">定义<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h4>
+<p>在 <span class="arithmatex">\(R^n\)</span> 中定义<strong>内积</strong>：
+$<span class="arithmatex">\((\alpha, \beta) = \alpha' \beta = \sum_{i=1}^{n} a_i b_i\)</span>$</p>
+<h4 id="_59">性质<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h4>
+<ol>
+<li>对称性：<span class="arithmatex">\((\alpha, \beta) = (\beta, \alpha)\)</span></li>
+<li>线性性：<span class="arithmatex">\((\alpha +beta, \gamma) = (\alpha, \gamma) + (\beta, \gamma)\)</span></li>
+<li>正定性：<span class="arithmatex">\((\alpha, \alpha) \geq 0\)</span>，等号成立 <span class="arithmatex">\(\iff \alpha = 0\)</span></li>
+</ol>
+<h4 id="_60">向量的长度与夹角<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>长度</strong>：<span class="arithmatex">\(\|\alpha\| = \sqrt{(\alpha, \alpha)}\)</span></li>
+<li><strong>夹角</strong>：<span class="arithmatex">\(\cos \theta = \frac{(\alpha, \beta)}{\|\alpha\| \cdot \|\beta\|}\)</span></li>
+<li><strong>正交</strong>：<span class="arithmatex">\((\alpha, \beta) = 0\)</span></li>
+</ul>
+<h3 id="_61">二、欧几里得空间<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：定义了内积的实向量空间 <span class="arithmatex">\(R^n\)</span> 称为<strong>n维欧几里得空间</strong>，记作 <span class="arithmatex">\(R^n\)</span>。</p>
+</blockquote>
+<h3 id="_62">三、正交矩阵<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h3>
+<h4 id="_63">【核心定义】<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>定义</strong>：<span class="arithmatex">\(n\)</span> 级实矩阵 <span class="arithmatex">\(A\)</span> 满足
+$<span class="arithmatex">\(A'A = I\)</span>$
+则称 <span class="arithmatex">\(A\)</span> 为<strong>正交矩阵</strong>。</p>
+</blockquote>
+<p><strong>等价条件</strong>：
+- <span class="arithmatex">\(A'A = I\)</span>
+- <span class="arithmatex">\(A^{-1} = A'\)</span>
+- <span class="arithmatex">\(A\)</span> 的列（行）向量组是两两正交的单位向量</p>
+<h4 id="_64">正交矩阵的性质<a class="headerlink" href="#_64" title="Permanent link">&para;</a></h4>
+<ol>
+<li><span class="arithmatex">\(A^{-1} = A'\)</span></li>
+<li><span class="arithmatex">\(|A| = \pm 1\)</span></li>
+<li>若 <span class="arithmatex">\(A, B\)</span> 为正交矩阵，则 <span class="arithmatex">\(AB\)</span> 也为正交矩阵</li>
+<li><span class="arithmatex">\(A^T\)</span> 也是正交矩阵</li>
+</ol>
+<hr />
+<h3 id="_65">典型例题<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h3>
+<h4 id="13">例13 【验证题】验证正交矩阵<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：验证 <span class="arithmatex">\(A = \begin{pmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{pmatrix}\)</span> 是正交矩阵。</p>
+<p><strong>解答</strong>：</p>
+<p>计算 <span class="arithmatex">\(A'A\)</span>：
+$<span class="arithmatex">\(A'A = \begin{pmatrix} \cos\theta &amp; \sin\theta \\ -\sin\theta &amp; \cos\theta \end{pmatrix}\begin{pmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{pmatrix}\)</span>$</p>
+<div class="arithmatex">\[= \begin{pmatrix} \cos^2\theta + \sin^2\theta &amp; -\cos\theta\sin\theta + \sin\theta\cos\theta \\ -\sin\theta\cos\theta + \cos\theta\sin\theta &amp; \sin^2\theta + \cos^2\theta \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I\]</div>
+<p>因此 <span class="arithmatex">\(A\)</span> 是正交矩阵。</p>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(A\)</span> 对应平面上的旋转变换，旋转保持长度不变。</p>
+<hr />
+<h4 id="14">例14 【证明题】正交矩阵的性质<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A\)</span> 为正交矩阵，证明：<span class="arithmatex">\(|A| = \pm 1\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p>由 <span class="arithmatex">\(A'A = I\)</span>，两边取行列式：
+$<span class="arithmatex">\(|A'A| = |I| = 1\)</span>$</p>
+<p>又 <span class="arithmatex">\(|A'A| = |A'| \cdot |A| = |A| \cdot |A| = |A|^2\)</span>（因为 <span class="arithmatex">\(|A'| = |A|\)</span>）</p>
+<p>所以 <span class="arithmatex">\(|A|^2 = 1\)</span>，即 <span class="arithmatex">\(|A| = \pm 1\)</span>。</p>
+<p><strong>关键思路</strong>：利用正交矩阵的定义和行列式的性质。</p>
+<hr />
+<h3 id="_66">易错点提醒<a class="headerlink" href="#_66" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>混淆正交矩阵与对角矩阵</strong></li>
+<li>正交矩阵要求 <span class="arithmatex">\(A'A = I\)</span></li>
+<li>
+<p>不是只有对角线上有元素</p>
+</li>
+<li>
+<p><strong>忘记 <span class="arithmatex">\(|A| = \pm 1\)</span></strong></p>
+</li>
+<li>正交矩阵的行列式可以是 -1</li>
+<li>
+<p>-1 对应反射变换</p>
+</li>
+<li>
+<p><strong>正交矩阵必须是实矩阵</strong></p>
+</li>
+<li>定义在实数域上</li>
+<li>复数域上的类似概念是酉矩阵</li>
+</ol>
+<hr />
+<h3 id="_67">思考题<a class="headerlink" href="#_67" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（判断）</strong> 判断下列矩阵是否为正交矩阵：
+   (a) <span class="arithmatex">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>
+   (b) <span class="arithmatex">\(\begin{pmatrix} \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} &amp; -\frac{\sqrt{2}}{2} \end{pmatrix}\)</span></p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(A\)</span> 为正交矩阵，则 <span class="arithmatex">\(A^{-1}\)</span> 也是正交矩阵。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(\alpha = (1, 2, 2)\)</span>，求 <span class="arithmatex">\(\|\alpha\|\)</span> 和 <span class="arithmatex">\(\alpha\)</span> 的单位化向量。</p>
+</li>
+</ol>
+<hr />
+<h2 id="47-kn-ks">4.7 <span class="arithmatex">\(K^n\)</span> 到 <span class="arithmatex">\(K^s\)</span> 的线性映射<a class="headerlink" href="#47-kn-ks" title="Permanent link">&para;</a></h2>
+<h3 id="_68">【概念引入动机】为什么要引入线性映射？<a class="headerlink" href="#_68" title="Permanent link">&para;</a></h3>
+<p>线性映射是线性代数的核心研究对象。它描述了向量空间之间的"线性变换"：
+- 直线映射后还是直线
+- 原点映射后还是原点
+- 保持加法和数乘运算</p>
+<p>矩阵与线性映射的关系：每个 <span class="arithmatex">\(s \times n\)</span> 矩阵对应一个 <span class="arithmatex">\(K^n \to K^s\)</span> 的线性映射。</p>
+<h3 id="_69">一、线性映射的定义<a class="headerlink" href="#_69" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：映射 <span class="arithmatex">\(\sigma: K^n \to K^s\)</span> 如果满足：
+1. <span class="arithmatex">\(\sigma(\alpha + \beta) = \sigma(\alpha) + \sigma(\beta)\)</span>（加法保持）
+2. <span class="arithmatex">\(\sigma(k\alpha) = k\sigma(\alpha)\)</span>（数乘保持）</p>
+<p>则称 <span class="arithmatex">\(\sigma\)</span> 为 <span class="arithmatex">\(K^n\)</span> 到 <span class="arithmatex">\(K^s\)</span> 的<strong>线性映射</strong>。</p>
+</blockquote>
+<p><strong>等价形式</strong>：
+$<span class="arithmatex">\(\sigma(k\alpha + l\beta) = k\sigma(\alpha) + l\sigma(\beta)\)</span>$</p>
+<h3 id="_70">二、线性映射的矩阵表示<a class="headerlink" href="#_70" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\sigma(e_1), \sigma(e_2), \ldots, \sigma(e_n)\)</span> 为 <span class="arithmatex">\(\sigma\)</span> 在标准基下的像，则 <span class="arithmatex">\(\sigma\)</span> 对应矩阵 <span class="arithmatex">\(A\)</span>：
+$<span class="arithmatex">\(\sigma(\alpha) = A\alpha\)</span>$</p>
+<p><strong>为什么？</strong>
+设 <span class="arithmatex">\(\alpha = x_1e_1 + \cdots + x_ne_n\)</span>，则：
+$<span class="arithmatex">\(\sigma(\alpha) = \sum_{i=1}^{n} x_i \sigma(e_i) = A\alpha\)</span>$</p>
+<h3 id="_71">三、核与像<a class="headerlink" href="#_71" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>核</strong> <span class="arithmatex">\(\text{Ker}(\sigma) = \{\alpha \in K^n \mid \sigma(\alpha) = 0\}\)</span></p>
+<p><strong>像</strong> <span class="arithmatex">\(\text{Im}(\sigma) = \{\sigma(\alpha) \mid \alpha \in K^n\}\)</span></p>
+</blockquote>
+<p><strong>维数公式</strong>（线性映射基本定理）：
+$<span class="arithmatex">\(\dim \text{Ker}(\sigma) + \dim \text{Im}(\sigma) = n\)</span>$</p>
+<hr />
+<h3 id="_72">典型例题<a class="headerlink" href="#_72" title="Permanent link">&para;</a></h3>
+<h4 id="15">例15 【计算题】求线性映射的矩阵<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设线性映射 <span class="arithmatex">\(\sigma: R^2 \to R^2\)</span> 满足 <span class="arithmatex">\(\sigma(1,0) = (3,1)\)</span>，<span class="arithmatex">\(\sigma(0,1) = (2,1)\)</span>，求 <span class="arithmatex">\(\sigma\)</span> 对应的矩阵 <span class="arithmatex">\(A\)</span>，并求 <span class="arithmatex">\(\sigma(1,2)\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>求矩阵</strong>：</p>
+<p>因为 <span class="arithmatex">\(e_1 = (1,0)\)</span>，<span class="arithmatex">\(e_2 = (0,1)\)</span>，所以：
+$<span class="arithmatex">\(A = (\sigma(e_1), \sigma(e_2)) = \begin{pmatrix} 3 &amp; 2 \\ 1 &amp; 1 \end{pmatrix}\)</span>$</p>
+<p><strong>求 <span class="arithmatex">\(\sigma(1,2)\)</span></strong>：</p>
+<div class="arithmatex">\[\sigma(1,2) = \sigma(1\cdot(1,0) + 2\cdot(0,1)) = 1\cdot\sigma(1,0) + 2\cdot\sigma(0,1) = (3,1) + 2(2,1) = (7, 3)\]</div>
+<p>或直接用矩阵乘法：
+$<span class="arithmatex">\(\sigma(1,2) = A\begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 3 &amp; 2 \\ 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 7 \\ 3 \end{pmatrix}\)</span>$</p>
+<p><strong>关键思路</strong>：线性映射在标准基下的矩阵就是基向量的像作为列。</p>
+<hr />
+<h4 id="16">例16 【验证题】验证线性映射<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：判断下列映射是否为线性映射：
+(1) <span class="arithmatex">\(\sigma: R^2 \to R\)</span>，<span class="arithmatex">\(\sigma(x,y) = x + y\)</span>
+(2) <span class="arithmatex">\(\sigma: R^2 \to R^2\)</span>，<span class="arithmatex">\(\sigma(x,y) = (x+1, y)\)</span></p>
+<p><strong>解答</strong>：</p>
+<p><strong>(1) 验证 <span class="arithmatex">\(\sigma(x,y) = x + y\)</span></strong>：</p>
+<ul>
+<li><span class="arithmatex">\(\sigma(\alpha + \beta) = (x_1+x_2) + (y_1+y_2) = (x_1+y_1) + (x_2+y_2) = \sigma(\alpha) + \sigma(\beta)\)</span> ✓</li>
+<li><span class="arithmatex">\(\sigma(k\alpha) = kx + ky = k(x+y) = k\sigma(\alpha)\)</span> ✓</li>
+</ul>
+<p>是线性映射。</p>
+<p><strong>(2) 验证 <span class="arithmatex">\(\sigma(x,y) = (x+1, y)\)</span></strong>：</p>
+<ul>
+<li><span class="arithmatex">\(\sigma(\alpha + \beta) = (x_1+x_2+1, y_1+y_2)\)</span></li>
+<li><span class="arithmatex">\(\sigma(\alpha) + \sigma(\beta) = (x_1+1, y_1) + (x_2+1, y_2) = (x_1+x_2+2, y_1+y_2)\)</span></li>
+<li><span class="arithmatex">\(\sigma(\alpha + \beta) \neq \sigma(\alpha) + \sigma(\beta)\)</span></li>
+</ul>
+<p><strong>不是</strong>线性映射（因为常数项破坏了线性性）。</p>
+<p><strong>关键思路</strong>：线性映射必须保持原点的映射（<span class="arithmatex">\(\sigma(0) = 0\)</span>）。</p>
+<hr />
+<h3 id="_73">易错点提醒<a class="headerlink" href="#_73" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>忘记验证 <span class="arithmatex">\(\sigma(0) = 0\)</span></strong></li>
+<li>这是线性映射的必要条件</li>
+<li>
+<p>常数项会破坏线性性</p>
+</li>
+<li>
+<p><strong>混淆线性映射与仿射映射</strong></p>
+</li>
+<li>线性映射：<span class="arithmatex">\(\sigma(0) = 0\)</span></li>
+<li>
+<p>仿射映射：<span class="arithmatex">\(\sigma(0) \neq 0\)</span>（如 <span class="arithmatex">\(\sigma(x) = x + b\)</span>）</p>
+</li>
+<li>
+<p><strong>核与像的维数关系</strong></p>
+</li>
+<li><span class="arithmatex">\(\dim \text{Ker} + \dim \text{Im} = n\)</span></li>
+<li>不是 <span class="arithmatex">\(\text{Ker} + \text{Im} = n\)</span></li>
+</ol>
+<hr />
+<h3 id="_74">思考题<a class="headerlink" href="#_74" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>（验证）</strong> 判断 <span class="arithmatex">\(\sigma: R^3 \to R^2\)</span>，<span class="arithmatex">\(\sigma(x,y,z) = (x+y, y+z)\)</span> 是否为线性映射。</p>
+</li>
+<li>
+<p><strong>（计算）</strong> 设 <span class="arithmatex">\(\sigma: R^3 \to R^3\)</span>，<span class="arithmatex">\(\sigma(x,y,z) = (x, x+y, x+y+z)\)</span>，求 <span class="arithmatex">\(\text{Ker}(\sigma)\)</span> 和 <span class="arithmatex">\(\text{Im}(\sigma)\)</span>。</p>
+</li>
+<li>
+<p><strong>（证明）</strong> 证明：若 <span class="arithmatex">\(\sigma: K^n \to K^s\)</span> 为线性映射，则 <span class="arithmatex">\(\sigma(0) = 0\)</span>。</p>
+</li>
+</ol>
+<hr />
+<h2 id="_75">本章小结<a class="headerlink" href="#_75" title="Permanent link">&para;</a></h2>
+<h3 id="_76">核心要点<a class="headerlink" href="#_76" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>内容</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>矩阵乘法</strong></td>
+<td><span class="arithmatex">\(c_{ij} = \sum_k a_{ik}b_{kj}\)</span></td>
+<td>不满足交换律</td>
+</tr>
+<tr>
+<td><strong>可逆矩阵</strong></td>
+<td><span class="arithmatex">\(A^{-1} = \frac{1}{\|A\|}A^*\)</span></td>
+<td><span class="arithmatex">\(\|A\| \neq 0\)</span></td>
+</tr>
+<tr>
+<td><strong>伴随矩阵</strong></td>
+<td><span class="arithmatex">\(A^*A = \|A\|I\)</span></td>
+<td>代数余子式转置</td>
+</tr>
+<tr>
+<td><strong>正交矩阵</strong></td>
+<td><span class="arithmatex">\(A'A = I\)</span></td>
+<td><span class="arithmatex">\(\|A\| = \pm 1\)</span></td>
+</tr>
+<tr>
+<td><strong>分块运算</strong></td>
+<td>块内维数匹配</td>
+<td>分块对角化简</td>
+</tr>
+<tr>
+<td><strong>线性映射</strong></td>
+<td><span class="arithmatex">\(\sigma(k\alpha + l\beta) = k\sigma(\alpha) + l\sigma(\beta)\)</span></td>
+<td><span class="arithmatex">\(\sigma(0) = 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_77">公式速记<a class="headerlink" href="#_77" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>逆矩阵</td>
+<td><span class="arithmatex">\(A^{-1} = \frac{1}{\|A\|}A^*\)</span></td>
+</tr>
+<tr>
+<td>$</td>
+<td>AB</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\text{rank}(AB)\)</span></td>
+<td><span class="arithmatex">\(\leq \min\{\text{rank}(A), \text{rank}(B)\}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((AB)'\)</span></td>
+<td><span class="arithmatex">\(B'A'\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A^*\)</span> 的 <span class="arithmatex">\((i,j)\)</span> 元</td>
+<td><span class="arithmatex">\(A_{ji}\)</span></td>
+</tr>
+<tr>
+<td>正交矩阵</td>
+<td><span class="arithmatex">\(A'A = I\)</span></td>
+</tr>
+<tr>
+<td>内积</td>
+<td><span class="arithmatex">\((\alpha, \beta) = \alpha'\beta\)</span></td>
+</tr>
+<tr>
+<td>核+像维数</td>
+<td><span class="arithmatex">\(\dim \text{Ker} + \dim \text{Im} = n\)</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

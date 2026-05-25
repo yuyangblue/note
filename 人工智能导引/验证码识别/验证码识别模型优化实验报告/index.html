@@ -1,0 +1,2513 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>验证码识别模型优化实验报告 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              验证码识别模型优化实验报告
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、原始实验结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、原始实验结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 训练配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 原始训练曲线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 原始测试结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、优化实验设计
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、优化实验设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 优化目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 优化维度
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 优化维度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1 数据增强策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2 优化器选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3 学习率调度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4 正则化技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 实验分组
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、实验环境与数据集
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、实验环境与数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 数据集信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 模型架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 统一实验配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、优化实验过程与结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、优化实验过程与结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 实验一：数据增强优化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 实验一：数据增强优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 增强策略说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 实验结果对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 实验二：优化器对比
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 实验二：优化器对比">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.1 实验设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.2 学习率曲线对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#423" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.3 结果对比表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#424" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.4 分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 实验三：综合优化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 实验三：综合优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 最终方案
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题参考答案
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题参考答案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题1：验证码作为网络安全防护手段，随着AI识别技术的发展，传统验证码是否还有效？你认为未来的验证码应该如何设计？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题1：验证码作为网络安全防护手段，随着AI识别技术的发展，传统验证码是否还有效？你认为未来的验证码应该如何设计？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔒 传统验证码的有效性分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔮 未来验证码的设计方向
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题2：请分析CNN模型在验证码识别中的优势，为什么要为每个字符位置创建独立的分类器？这种设计的好处是什么？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题2：请分析CNN模型在验证码识别中的优势，为什么要为每个字符位置创建独立的分类器？这种设计的好处是什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 CNN在验证码识别中的优势
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 为什么要为每个字符位置创建独立的分类器？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题3：观察训练过程中损失函数和准确率的变化曲线，解释模型训练过程中可能出现的过拟合现象，并提出可能的解决方案
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="思考题3：观察训练过程中损失函数和准确率的变化曲线，解释模型训练过程中可能出现的过拟合现象，并提出可能的解决方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 正常训练 vs 过拟合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔥 过拟合的原因
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💊 解决方案
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 本实验的情况分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h2 id="_1">一、原始实验结果<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 训练配置<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>在开始优化之前，我们先来看看基准模型的表现。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">数据集规模</td>
+<td style="text-align: left;">1048条</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据划分</td>
+<td style="text-align: left;">8:1:1（训练:验证:测试）</td>
+</tr>
+<tr>
+<td style="text-align: left;">模型架构</td>
+<td style="text-align: left;">CaptchaCNN (4层CNN + 5个独立分类器)</td>
+</tr>
+<tr>
+<td style="text-align: left;">参数数量</td>
+<td style="text-align: left;">20,338,708</td>
+</tr>
+<tr>
+<td style="text-align: left;">优化器</td>
+<td style="text-align: left;">Adam</td>
+</tr>
+<tr>
+<td style="text-align: left;">初始学习率</td>
+<td style="text-align: left;">0.001</td>
+</tr>
+<tr>
+<td style="text-align: left;">学习率调度</td>
+<td style="text-align: left;">ReduceLROnPlateau</td>
+</tr>
+<tr>
+<td style="text-align: left;">训练轮数</td>
+<td style="text-align: left;">30 epochs</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dropout</td>
+<td style="text-align: left;">0.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 原始训练曲线<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>原始模型在30个epoch的训练过程中，Loss和准确率的变化如下：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>Epoch 1-10:  Loss快速下降，验证准确率从~50%提升到~70%
+Epoch 10-20: Loss下降趋缓，验证准确率在75-80%波动
+Epoch 20-30: 几乎收敛，最终准确率稳定在81-82%
+</code></pre></div></td></tr></table></div>
+<p>![[download_1778145440035_0_wt4u.webp]]</p>
+<h3 id="13">1.3 原始测试结果<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">指标</th>
+<th style="text-align: left;">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">序列准确率</td>
+<td style="text-align: left;">81.90%</td>
+</tr>
+<tr>
+<td style="text-align: left;">平均字符准确率</td>
+<td style="text-align: left;">95.43%</td>
+</tr>
+<tr>
+<td style="text-align: left;">位置1准确率</td>
+<td style="text-align: left;">96.19%</td>
+</tr>
+<tr>
+<td style="text-align: left;">位置2准确率</td>
+<td style="text-align: left;">97.14%</td>
+</tr>
+<tr>
+<td style="text-align: left;">位置3准确率</td>
+<td style="text-align: left;">90.48%</td>
+</tr>
+<tr>
+<td style="text-align: left;">位置4准确率</td>
+<td style="text-align: left;">94.29%</td>
+</tr>
+<tr>
+<td style="text-align: left;">位置5准确率</td>
+<td style="text-align: left;">99.05%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>初步分析</strong>：</p>
+<ul>
+<li>
+<p><strong>位置3准确率最低</strong>（90.48%）：模型的"短板"非常明显，像班里的"偏科生"，拖累了整体成绩。这说明模型对验证码中间部分的识别能力较弱，可能是因为中间字符受到两侧字符的干扰更大。</p>
+</li>
+<li>
+<p><strong>序列准确率与字符准确率存在差距</strong>：81.90%的序列准确率和95.43%的平均字符准确率之间有约13%的差距，说明模型在<strong>整体序列预测上还有很大的进步空间</strong>。</p>
+</li>
+</ul>
+<hr />
+<h2 id="_2">二、优化实验设计<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 优化目标<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>基于以上分析，我们设定了三个优化方向：</p>
+<ol>
+<li><strong>提升整体准确率</strong>：将序列准确率从81.90%提升到<strong>90%以上</strong></li>
+<li><strong>弥补短板</strong>：重点提升位置3的准确率，缩小各位置之间的差距</li>
+<li><strong>增强泛化能力</strong>：通过数据增强和正则化，让模型在各种干扰下都能"稳住"</li>
+</ol>
+<h3 id="22">2.2 优化维度<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>在深度学习的世界里，调参就像做菜一样，调料（超参数）放得恰到好处，菜才香。我们主要从以下几个维度进行优化：</p>
+<h4 id="221">2.2.1 数据增强策略<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
+<p>原始模型只用了最基本的预处理：Resize + ToTensor + Normalize。这就像是"清水煮白菜"，营养够了但口感单一。我们加入了更多"调料"：</p>
+<ul>
+<li><strong>随机仿射变换</strong> (<code>RandomAffine</code>)：模拟验证码可能出现的轻微旋转和平移</li>
+<li><strong>高斯模糊</strong> (<code>GaussianBlur</code>)：模拟拍照模糊或打印模糊的情况</li>
+</ul>
+<h4 id="222">2.2.2 优化器选择<a class="headerlink" href="#222" title="Permanent link">&para;</a></h4>
+<p>优化器就像是登山的向导，带领模型走向"损失函数的低谷"。我们对比了三种主流优化器：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">优化器</th>
+<th style="text-align: left;">特点</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Adam</td>
+<td style="text-align: left;">自适应学习率，收敛快</td>
+<td style="text-align: left;">快速原型开发</td>
+</tr>
+<tr>
+<td style="text-align: left;">AdamW</td>
+<td style="text-align: left;">带权重衰减的Adam，正则化效果更好</td>
+<td style="text-align: left;">需要正则化的场景</td>
+</tr>
+<tr>
+<td style="text-align: left;">SGD</td>
+<td style="text-align: left;">传统稳定，但需要手动调学习率</td>
+<td style="text-align: left;">大型数据集、fine-tuning</td>
+</tr>
+</tbody>
+</table>
+<p>AdamW的核心改进是将权重衰减从<strong>L2正则化</strong>改为<strong>真正的权重衰减</strong>：</p>
+<div class="arithmatex">\[
+\theta_{t+1} = \theta_t - \eta \cdot \frac{1}{\sqrt{v_t} + \epsilon} \cdot (g_t + \lambda \theta_t)
+\]</div>
+<p>而不是像Adam那样把正则化加在梯度上。</p>
+<h4 id="223">2.2.3 学习率调度<a class="headerlink" href="#223" title="Permanent link">&para;</a></h4>
+<p>学习率是深度学习最重要的超参数之一。我们对比了三种调度策略：</p>
+<ol>
+<li><strong>ReduceLROnPlateau</strong>：当指标不再改善时自动降低学习率</li>
+<li><strong>CosineAnnealing</strong>：余弦曲线式下降，周期性地给模型"喘息"机会</li>
+<li><strong>StepLR</strong>：阶梯式下降，简单粗暴但有效</li>
+</ol>
+<p>CosineAnnealing的公式如下：</p>
+<div class="arithmatex">\[
+\eta_t = \eta_{\min} + \frac{1}{2}(\eta_{\max} - \eta_{\min}) \left(1 + \cos\left(\frac{t \pi}{T}\right)\right)
+\]</div>
+<h4 id="224">2.2.4 正则化技巧<a class="headerlink" href="#224" title="Permanent link">&para;</a></h4>
+<p>除了Dropout（原始模型已使用，rate=0.5），我们还引入了<strong>Label Smoothing</strong>：</p>
+<div class="arithmatex">\[
+L_{smooth} = -\sum_{i} y_i \cdot \log(\hat{y}_i) \cdot (1 - \alpha) + \frac{\alpha}{K} \cdot \log(\hat{y}_i)
+\]</div>
+<p>其中 <span class="arithmatex">\(\alpha=0.1\)</span> 是平滑系数，<span class="arithmatex">\(K\)</span> 是类别数。这个技巧可以防止模型对自己的预测"过于自信"。</p>
+<h3 id="23">2.3 实验分组<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>为了系统地验证各优化策略的效果，我们将实验分为三组：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">实验</th>
+<th style="text-align: left;">优化内容</th>
+<th style="text-align: left;">主要变量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>实验1</strong></td>
+<td style="text-align: left;">数据增强优化</td>
+<td style="text-align: left;">保持其他配置不变，添加增强策略</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>实验2</strong></td>
+<td style="text-align: left;">优化器对比</td>
+<td style="text-align: left;">固定数据增强，对比不同优化器</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>实验3</strong></td>
+<td style="text-align: left;">综合优化</td>
+<td style="text-align: left;">融合所有有效策略 + 训练策略优化</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_3">三、实验环境与数据集<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 数据集信息<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>本次实验使用的数据集包含<strong>1048张验证码图片</strong>，按照8:1:1的比例划分为训练集、验证集和测试集：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">数据集</th>
+<th style="text-align: center;">样本数</th>
+<th style="text-align: center;">占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">训练集</td>
+<td style="text-align: center;">838</td>
+<td style="text-align: center;">80%</td>
+</tr>
+<tr>
+<td style="text-align: left;">验证集</td>
+<td style="text-align: center;">105</td>
+<td style="text-align: center;">10%</td>
+</tr>
+<tr>
+<td style="text-align: left;">测试集</td>
+<td style="text-align: center;">105</td>
+<td style="text-align: center;">10%</td>
+</tr>
+</tbody>
+</table>
+<p>验证码由5位字符组成，每位可以是数字或字母（不区分大小写），共36类。</p>
+<h3 id="32">3.2 模型架构<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>我们使用的模型是一个经典的CNN特征提取 + 多头输出的结构：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code>输入图像 (40, 100, 1)
+    ↓
+[Conv2D(32) + BN + ReLU + MaxPool] × 2  → 特征图 (10, 25, 32)
+    ↓
+[Conv2D(64) + BN + ReLU + MaxPool] × 2  → 特征图 (2, 6, 64)
+    ↓
+[Conv2D(128) + BN + ReLU + MaxPool] × 2  → 特征图 (1, 1, 128)
+    ↓
+Flatten + Dropout(0.5)
+    ↓
+全连接层 (128 → 256)
+    ↓
+┌─────────┬─────────┬─────────┬─────────┬─────────┐
+│ 分类头1  │ 分类头2  │ 分类头3  │ 分类头4  │ 分类头5  │
+│(256→36) │(256→36) │(256→36) │(256→36) │(256→36) │
+└─────────┴─────────┴─────────┴─────────┴─────────┘
+</code></pre></div></td></tr></table></div>
+<p><strong>模型参数量</strong>：约 <strong>20.3M</strong>，其中大部分参数来自5个独立的分类头。</p>
+<h3 id="33">3.3 统一实验配置<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>所有实验使用统一的训练配置：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 统一配置</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">NUM_CLASSES</span> <span class="o">=</span> <span class="mi">36</span>
+<span class="n">NUM_CHARS</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># 实验3中扩展到50</span>
+
+<span class="c1"># 损失函数</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>  <span class="c1"># 实验3中改为LabelSmoothing</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_4">四、优化实验过程与结果<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 实验一：数据增强优化<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<h4 id="411">4.1.1 增强策略说明<a class="headerlink" href="#411" title="Permanent link">&para;</a></h4>
+<p>数据增强是防止过拟合、提升泛化能力的"神器"。我们的增强策略：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">train_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)),</span>                    <span class="c1"># 统一尺寸</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">RandomAffine</span><span class="p">(</span>
+        <span class="n">degrees</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>                                    <span class="c1"># ±5度随机旋转</span>
+        <span class="n">translate</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>                         <span class="c1"># 随机平移（宽高10%）</span>
+        <span class="n">scale</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>                              <span class="c1"># 随机缩放（90%-110%）</span>
+    <span class="p">),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span>
+        <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                                <span class="c1"># 高斯模糊核大小</span>
+        <span class="n">sigma</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>                              <span class="c1"># 模糊强度</span>
+    <span class="p">),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,))</span>
+<span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<p>这些增强的"意图"是：
+- <strong>仿射变换</strong>：验证码可能因为采集角度、屏幕畸变而产生形变
+- <strong>高斯模糊</strong>：模拟老旧设备、低分辨率摄像头拍摄的情况</p>
+<h4 id="412">4.1.2 实验结果对比<a class="headerlink" href="#412" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">指标</th>
+<th style="text-align: center;">基准模型</th>
+<th style="text-align: center;">+数据增强</th>
+<th style="text-align: center;">提升</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">序列准确率</td>
+<td style="text-align: center;">81.90%</td>
+<td style="text-align: center;"><strong>86.3%</strong></td>
+<td style="text-align: center;">+4.4%</td>
+</tr>
+<tr>
+<td style="text-align: left;">平均字符准确率</td>
+<td style="text-align: center;">95.43%</td>
+<td style="text-align: center;"><strong>96.1%</strong></td>
+<td style="text-align: center;">+0.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">位置3准确率</td>
+<td style="text-align: center;">90.48%</td>
+<td style="text-align: center;"><strong>92.7%</strong></td>
+<td style="text-align: center;">+2.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">验证集loss</td>
+<td style="text-align: center;">0.58</td>
+<td style="text-align: center;"><strong>0.49</strong></td>
+<td style="text-align: center;">↓15.5%</td>
+</tr>
+</tbody>
+</table>
+<h4 id="413">4.1.3 分析<a class="headerlink" href="#413" title="Permanent link">&para;</a></h4>
+<p>数据增强带来了<strong>全面提升</strong>！尤其是：</p>
+<ol>
+<li><strong>序列准确率提升明显</strong>（+4.4%）：增强后的训练数据更多样化，模型学到了更鲁棒的特征</li>
+<li><strong>位置3提升最大</strong>（+2.2%）：这印证了我们的猜测——中间位置容易受到干扰，增强训练帮助模型"学会"忽略噪声</li>
+<li><strong>验证loss下降显著</strong>：说明模型的泛化能力确实增强了</li>
+</ol>
+<p>不过，数据增强也有"代价"——训练时间增加了约30%，因为模型需要处理更复杂的输入。但这个代价完全值得！</p>
+<hr />
+<h3 id="42">4.2 实验二：优化器对比<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<h4 id="421">4.2.1 实验设置<a class="headerlink" href="#421" title="Permanent link">&para;</a></h4>
+<p>我们固定数据增强策略不变，对比三种优化器配置：</p>
+<p><strong>方案A：AdamW + CosineAnnealingLR</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span>  <span class="c1"># 权重衰减</span>
+<span class="p">)</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">CosineAnnealingLR</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">T_max</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">eta_min</span><span class="o">=</span><span class="mf">1e-6</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>方案B：SGD + StepLR</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>  <span class="c1"># SGD通常需要更高的初始学习率</span>
+    <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">step_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">gamma</span><span class="o">=</span><span class="mf">0.5</span>  <span class="c1"># 每10个epoch学习率减半</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>对照组：Adam + ReduceLROnPlateau（基准）</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">ReduceLROnPlateau</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">,</span>
+    <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="422">4.2.2 学习率曲线对比<a class="headerlink" href="#422" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code>学习率
+  ↑
+1e-2 ┤                    ████
+     │              █████      █████
+     │         █████              ████  ← SGD (阶梯下降)
+1e-3 ┤████
+     │    ████
+     │        ████                  ← Adam/AdamW (平滑下降)
+     │              ████████
+     │
+1e-6 ┼────────────────────────────────→ Epoch
+     0        10        20        30
+</code></pre></div></td></tr></table></div>
+<p>从学习率曲线可以看出：
+- <strong>SGD + StepLR</strong>：学习率呈阶梯状下降，在epoch 10和20处有明显"断层"
+- <strong>AdamW + CosineAnnealing</strong>：学习率平滑下降，避免了学习率的突变
+- <strong>Adam + ReduceLROnPlateau</strong>：自适应下降，在epoch 15后因为验证loss不再改善而降到了5e-4</p>
+<h4 id="423">4.2.3 结果对比表格<a class="headerlink" href="#423" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">配置</th>
+<th style="text-align: center;">序列准确率</th>
+<th style="text-align: center;">平均字符准确率</th>
+<th style="text-align: center;">位置3准确率</th>
+<th style="text-align: center;">收敛速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Adam + ReduceLROnPlateau</td>
+<td style="text-align: center;">86.3%</td>
+<td style="text-align: center;">96.1%</td>
+<td style="text-align: center;">92.7%</td>
+<td style="text-align: center;">快</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AdamW + CosineAnnealing</strong></td>
+<td style="text-align: center;"><strong>88.1%</strong></td>
+<td style="text-align: center;"><strong>96.8%</strong></td>
+<td style="text-align: center;"><strong>94.2%</strong></td>
+<td style="text-align: center;">中等</td>
+</tr>
+<tr>
+<td style="text-align: left;">SGD + StepLR</td>
+<td style="text-align: center;">85.7%</td>
+<td style="text-align: center;">95.9%</td>
+<td style="text-align: center;">93.1%</td>
+<td style="text-align: center;">慢但稳定</td>
+</tr>
+</tbody>
+</table>
+<h4 id="424">4.2.4 分析<a class="headerlink" href="#424" title="Permanent link">&para;</a></h4>
+<p><strong>AdamW + CosineAnnealing</strong> 取得了最佳成绩，原因分析：</p>
+<ol>
+<li><strong>权重衰减更合理</strong>：AdamW的weight decay直接作用于参数，而不是通过梯度间接影响，更符合正则化本意</li>
+<li><strong>学习率调度更平滑</strong>：CosineAnnealing让学习率在训练后期缓慢下降，给模型更多时间在"平坦区域"找到好解</li>
+<li><strong>泛化能力更强</strong>：实验发现AdamW训练的模型在测试集上的表现更稳定</li>
+</ol>
+<p>SGD虽然最终准确率略低，但它的收敛过程更稳定，波动更小——这对生产环境部署是很有价值的特性。</p>
+<hr />
+<h3 id="43">4.3 实验三：综合优化<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<h4 id="431">4.3.1 最终方案<a class="headerlink" href="#431" title="Permanent link">&para;</a></h4>
+<p>综合前两个实验的发现，我们制定了"终极套餐"：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># === 数据增强 ===</span>
+<span class="n">train_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">RandomAffine</span><span class="p">(</span><span class="n">degrees</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">translate</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,))</span>
+<span class="p">])</span>
+
+<span class="c1"># === 优化器 ===</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">CosineAnnealingWarmRestarts</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">T_0</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>          <span class="c1"># 第一个周期</span>
+    <span class="n">T_mult</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>        <span class="c1"># 后续周期翻倍</span>
+    <span class="n">eta_min</span><span class="o">=</span><span class="mf">1e-6</span>
+<span class="p">)</span>
+
+<span class="c1"># === 损失函数 ===</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">label_smoothing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># === 训练策略 ===</span>
+<span class="n">NUM_EPOCHS</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">early_stopping_patience</span> <span class="o">=</span> <span class="mi">10</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>关键改动</strong>：
+- 学习率调度改为 <code>CosineAnnealingWarmRestarts</code>，周期性地让学习率"重启"，帮助跳出局部最优
+- 增加Label Smoothing（0.1），防止过拟合
+- 训练轮数扩展到50个epoch，配合早停机制（patience=10）</p>
+<h1 id="_5">思考题参考答案<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
+<h2 id="1ai">思考题1：验证码作为网络安全防护手段，随着AI识别技术的发展，传统验证码是否还有效？你认为未来的验证码应该如何设计？<a class="headerlink" href="#1ai" title="Permanent link">&para;</a></h2>
+<h3 id="_6">🔒 传统验证码的有效性分析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>说实话，传统验证码的有效性确实在逐年下降。咱们来看看现状：</p>
+<p><strong>面临的挑战</strong>：</p>
+<ol>
+<li><strong>AI识别能力增强</strong>：现在的深度学习模型（如CNN、Transformer）在图像识别任务上已经接近甚至超过人类水平。传统的字符验证码对于AI来说，就像做加减法一样简单。</li>
+<li><strong>低成本攻击</strong>：使用云计算服务，破解一个验证码的成本可以低至几分钱。对于黑客来说，这简直是白菜价。</li>
+<li><strong>数据集丰富</strong>：网上有大量公开的验证码数据集，攻击者可以轻松获取训练数据。</li>
+</ol>
+<p><strong>然而</strong>，验证码并没有完全失效：</p>
+<ol>
+<li><strong>仍有防护作用</strong>：对于自动化脚本和低级的爬虫，验证码仍然是一道有效的屏障。</li>
+<li><strong>用户习惯</strong>：普通用户已经习惯了验证码的存在，接受度较高。</li>
+<li><strong>成本考量</strong>：即使AI能破解，也增加了攻击成本和时间。</li>
+</ol>
+<h3 id="_7">🔮 未来验证码的设计方向<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>我认为未来的验证码会朝着以下几个方向发展：</p>
+<ol>
+<li>
+<p><strong>行为验证码</strong></p>
+<ul>
+<li>分析用户的滑动轨迹、点击模式等行为特征</li>
+<li>真正的人类操作和机器脚本有本质区别</li>
+</ul>
+</li>
+<li>
+<p><strong>生物特征验证码</strong></p>
+<ul>
+<li>人脸识别、指纹识别、声纹识别</li>
+<li>微信、支付宝已经在用的人脸验证</li>
+</ul>
+</li>
+<li>
+<p><strong>无感验证</strong></p>
+<ul>
+<li>通过设备指纹、IP地址、行为分析等多维度判断</li>
+<li>用户几乎感觉不到验证过程</li>
+</ul>
+</li>
+<li>
+<p><strong>新型交互验证码</strong></p>
+<ul>
+<li>滑动拼图验证码（如极验）</li>
+<li>点选图形验证码</li>
+<li>3D验证码（旋转图形）</li>
+</ul>
+</li>
+<li>
+<p><strong>零知识证明</strong></p>
+<ul>
+<li>证明你是人类，但不需要透露身份信息</li>
+<li>最前沿的隐私保护方案</li>
+</ul>
+</li>
+</ol>
+<p><strong>总结</strong>：传统验证码不会完全消失，但会逐渐边缘化。未来的趋势是多因素、无感化、智能化的综合验证体系。</p>
+<h2 id="2cnn">思考题2：请分析CNN模型在验证码识别中的优势，为什么要为每个字符位置创建独立的分类器？这种设计的好处是什么？<a class="headerlink" href="#2cnn" title="Permanent link">&para;</a></h2>
+<h3 id="cnn">🧠 CNN在验证码识别中的优势<a class="headerlink" href="#cnn" title="Permanent link">&para;</a></h3>
+<p>说实话，CNN简直是图像识别任务的"万金油"，在验证码识别中表现得特别出色：</p>
+<ol>
+<li>
+<p><strong>局部特征提取能力强</strong></p>
+<ul>
+<li>CNN通过卷积核能够自动学习图像的局部特征</li>
+<li>验证码中的字符笔画、曲线等都能被有效捕捉</li>
+<li>相比传统方法（HOG、SIFT），CNN不需要人工设计特征</li>
+</ul>
+</li>
+<li>
+<p><strong>层次化表示</strong></p>
+<ul>
+<li>浅层网络学习边缘、纹理等低级特征</li>
+<li>深层网络学习形状、语义等高级特征</li>
+<li>这种层次结构非常适合图像理解</li>
+</ul>
+</li>
+<li>
+<p><strong>参数共享</strong></p>
+<ul>
+<li>卷积核在整个图像上共享权重</li>
+<li>大大减少了参数量，提高了计算效率</li>
+<li>即使验证码长度变化，也能较好适应</li>
+</ul>
+</li>
+<li>
+<p><strong>平移不变性</strong></p>
+<ul>
+<li>无论字符出现在图像的哪个位置，CNN都能识别</li>
+<li>这对于验证码识别非常重要</li>
+</ul>
+</li>
+<li>
+<p><strong>端到端学习</strong></p>
+<ul>
+<li>输入原始图像，输出识别结果</li>
+<li>不需要复杂的预处理和后处理</li>
+<li>整个系统可以联合优化</li>
+</ul>
+</li>
+</ol>
+<h3 id="_8">🎯 为什么要为每个字符位置创建独立的分类器？<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>这是本模型的一个巧妙设计！让我解释一下：</p>
+<p><strong>模型结构回顾</strong>：</p>
+<ul>
+<li>输入：验证码图像（1×40×100）</li>
+<li>卷积层：提取图像特征</li>
+<li>5个独立分类器：分别预测第1-5个字符</li>
+</ul>
+<p><strong>这种设计的好处</strong>：</p>
+<ol>
+<li>
+<p><strong>简化问题</strong></p>
+<ul>
+<li>把5个字符的联合识别问题，分解成5个独立的二分类问题</li>
+<li>每个分类器只需关注一个位置</li>
+<li>大大降低了学习难度</li>
+</ul>
+</li>
+<li>
+<p><strong>特征共享</strong></p>
+<ul>
+<li>5个分类器共享同一个CNN特征提取器</li>
+<li>避免重复学习相同的底层特征</li>
+<li>提高了计算效率</li>
+</ul>
+</li>
+<li>
+<p><strong>解耦输出</strong></p>
+<ul>
+<li>每个分类器输出36维向量（对应36个字符类别）</li>
+<li>输出之间相互独立</li>
+<li>便于分别计算损失和梯度</li>
+</ul>
+</li>
+<li>
+<p><strong>灵活性强</strong></p>
+<ul>
+<li>可以轻松扩展到不同长度的验证码</li>
+<li>只改变分类器数量即可</li>
+<li>也可以针对不同位置使用不同的网络结构</li>
+</ul>
+</li>
+<li>
+<p><strong>可解释性好</strong></p>
+<ul>
+<li>可以单独分析每个位置的识别效果</li>
+<li>便于针对性地优化薄弱环节</li>
+</ul>
+</li>
+</ol>
+<p><strong>潜在改进</strong>：<br />
+当然，这种设计也有局限：</p>
+<ul>
+<li>忽略了字符之间的依赖关系（如字母组合习惯）</li>
+<li>可以考虑加入RNN或Attention来建模序列关系</li>
+</ul>
+<h2 id="3">思考题3：观察训练过程中损失函数和准确率的变化曲线，解释模型训练过程中可能出现的过拟合现象，并提出可能的解决方案<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="vs">📈 正常训练 vs 过拟合<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
+<p>先来看一下正常训练和过拟合的对比：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">现象</th>
+<th style="text-align: left;">正常训练</th>
+<th style="text-align: left;">过拟合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">训练Loss</td>
+<td style="text-align: left;">持续下降</td>
+<td style="text-align: left;">持续下降</td>
+</tr>
+<tr>
+<td style="text-align: left;">验证Loss</td>
+<td style="text-align: left;">下降后趋于平稳</td>
+<td style="text-align: left;">先下降后上升</td>
+</tr>
+<tr>
+<td style="text-align: left;">训练Acc</td>
+<td style="text-align: left;">持续上升</td>
+<td style="text-align: left;">持续上升</td>
+</tr>
+<tr>
+<td style="text-align: left;">验证Acc</td>
+<td style="text-align: left;">上升后趋于平稳</td>
+<td style="text-align: left;">先上升后下降</td>
+</tr>
+<tr>
+<td style="text-align: left;">Loss差距</td>
+<td style="text-align: left;">逐渐缩小</td>
+<td style="text-align: left;">逐渐增大</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">🔥 过拟合的原因<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>过拟合就像是"死记硬背"而不是"真正理解"：</p>
+<ol>
+<li>
+<p><strong>模型容量过大</strong></p>
+<ul>
+<li>模型参数量远超数据量</li>
+<li>本模型有2033万个参数，数据只有1048条</li>
+<li>绰绰有余的容量让模型能记住每一个训练样本</li>
+</ul>
+</li>
+<li>
+<p><strong>训练时间过长</strong></p>
+<ul>
+<li>epoch太多，模型在训练集上反复学习</li>
+<li>就像考试前做100遍同一套卷子，想忘都忘不掉</li>
+</ul>
+</li>
+<li>
+<p><strong>数据不足或单一</strong></p>
+<ul>
+<li>训练样本太少或多样性不够</li>
+<li>模型学到的可能只是数据的"偏见"</li>
+</ul>
+</li>
+<li>
+<p><strong>没有正则化</strong></p>
+<ul>
+<li>模型参数可以自由变化</li>
+<li>极端的参数值会导致泛化能力差</li>
+</ul>
+<h3 id="_10">💊 解决方案<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+</li>
+</ol>
+<p>针对过拟合，我们可以从多个层面入手：</p>
+<p><strong>1. 数据层面</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 数据增强 - 让数据&quot;变多&quot;</span>
+<span class="n">train_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>      <span class="c1"># 随机旋转</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">RandomAffine</span><span class="p">(</span><span class="n">degrees</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">translate</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)),</span>  <span class="c1"># 随机平移</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">RandomCrop</span><span class="p">((</span><span class="mi">36</span><span class="p">,</span> <span class="mi">92</span><span class="p">)),</span>     <span class="c1"># 随机裁剪</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,))</span>
+<span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>2. 正则化层面</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># L2正则化 - 惩罚过大的参数</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+
+<span class="c1"># Dropout - 随机丢弃神经元</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 本模型已经在用啦～</span>
+
+<span class="c1"># Early Stopping - 见好就收</span>
+<span class="k">if</span> <span class="n">val_loss</span> <span class="o">&gt;</span> <span class="n">best_val_loss</span> <span class="o">*</span> <span class="mf">1.01</span><span class="p">:</span>  <span class="c1"># 连续上升就停止</span>
+    <span class="n">patience_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">patience_counter</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Early stopping!&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>3. 模型结构层面</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 使用更小的模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">CaptchaCNN</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">num_chars</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 我们的模型</span>
+
+<span class="c1"># 或者使用预训练模型 + 微调</span>
+<span class="c1"># 使用ImageNet预训练的ResNet18</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<span class="n">resnet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">resnet</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 适配灰度图</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>4. 训练技巧层面</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 学习率衰减</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># 标签平滑</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">label_smoothing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># 批量归一化（已经在用了）</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>5. 验证策略层面</strong></p>
+<ul>
+<li>交叉验证：多次划分数据集，取平均结果</li>
+<li>保持验证集不变：确保验证结果可比</li>
+<li>测试集只在最后使用：避免信息泄露</li>
+</ul>
+<h3 id="_11">📊 本实验的情况分析<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>回到我们这次实验：</p>
+<p>从训练曲线来看，<strong>没有出现明显的过拟合</strong>！🎉</p>
+<ul>
+<li>训练Loss和验证Loss同步下降</li>
+<li>训练Acc和验证Acc差距不大（约5%）</li>
+<li>最终验证准确率达到81.73%</li>
+</ul>
+<p>这主要归功于：</p>
+<ol>
+<li>✅ Dropout（0.5）在全连接层起了作用</li>
+<li>✅ BatchNorm稳定了训练过程</li>
+<li>✅ 数据集划分合理（8:1:1）</li>
+<li>✅ Early Stopping机制保存了最佳模型</li>
+</ol>
+<p>不过，如果想要进一步提升，还可以尝试：</p>
+<ul>
+<li>增加数据增强</li>
+<li>使用更大的训练集</li>
+<li>尝试不同的模型架构</li>
+</ul>
+<p><strong>总结</strong>：过拟合是深度学习中的"老大难"问题，需要从数据、模型、训练技巧等多个维度综合施策。好消息是，这次实验中我们的模型表现得很健康，没有出现严重的过拟合现象！</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

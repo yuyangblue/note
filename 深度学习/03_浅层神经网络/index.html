@@ -1,0 +1,1868 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>浅层神经网络 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              浅层神经网络
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        神经网络基本概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经网络基本概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 浅层神经网络定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、激活函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、激活函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-relu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ReLU 函数（最常用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-relu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. ReLU 的可解释性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 浅层神经网络的工作原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 其他激活函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#universal-approximation-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、万能逼近定理（Universal Approximation Theorem）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、万能逼近定理（Universal Approximation Theorem）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 定理内容
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 定理的推广
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 定理的局限性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、多变量输入与输出
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、多变量输入与输出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 单变量输入、多变量输出
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 多变量输入、单变量输出
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 高维输入的特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、浅层神经网络：一般情形
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、浅层神经网络：一般情形">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 网络结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 参数数量分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 激活函数的重要性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、神经网络术语
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、神经网络术语">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 基本结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 网络类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 计算相关术语
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、神经网络发展简史
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 浅层神经网络的核心计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 万能逼近定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 多变量扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 激活函数的选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">浅层神经网络<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">神经网络基本概念<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 浅层神经网络定义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p><strong>浅层神经网络</strong>是一个以 <span class="arithmatex">\(\phi\)</span> 为参数的函数 <span class="arithmatex">\(y = f(x; \phi)\)</span>，它将多变量输入 <span class="arithmatex">\(\mathbf{x}\)</span> 映射至多变量输出 <span class="arithmatex">\(\mathbf{y}\)</span>。
+![[Pasted image 20260428154217.png]]
+<strong>例：输入与输出均为标量的浅层神经网络</strong>
+$$
+y = f(x; \phi) = \phi_0 + \phi_1 a(\theta_{10} + \theta_{11}x) + \phi_2 a(\theta_{20} + \theta_{21}x) + \phi_3 a(\theta_{30} + \theta_{31}x)
+$$</p>
+<p>其中包含 <strong>10个参数</strong>，记为：
+$$
+\phi = {\phi_0, \phi_1, \phi_2, \phi_3, \theta_{10}, \theta_{11}, \theta_{20}, \theta_{21}, \theta_{30}, \theta_{31}}
+$$</p>
+<p><span class="arithmatex">\(a(\cdot)\)</span> 称为<strong>激活函数</strong>。</p>
+<hr />
+<h2 id="_3">一、激活函数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="1-relu">1. ReLU 函数（最常用）<a class="headerlink" href="#1-relu" title="Permanent link">&para;</a></h3>
+<p>![[Pasted image 20260428154257.png|207]]
+<strong>线性整流函数（ReLU, Rectified Linear Unit）</strong>：
+$$
+a(z) = \text{ReLU}(z) = \max(0, z) = \begin{cases} 0, &amp; z &lt; 0 \ z, &amp; z &gt; 0 \end{cases}
+$$</p>
+<p><strong>ReLU 的特点</strong>：
+- <strong>优点</strong>：对于正输入，ReLU 的导数为 1，有助于训练的稳定性和有效性
+- <strong>缺点</strong>：对于负输入，ReLU 的导数为零。若某 ReLU 单元对所有训练样本均输出负值，则该单元的参数将无法通过梯度下降更新，称为 <strong>"死亡 ReLU 问题"（dying ReLU problem）</strong></p>
+<h3 id="2-relu">2. ReLU 的可解释性<a class="headerlink" href="#2-relu" title="Permanent link">&para;</a></h3>
+<p>采用 ReLU 激活函数时，网络将输入空间划分为多个<strong>凸多胞体（convex polytopes）</strong>：
+- 这些多胞体由 ReLU 函数中的"关节"（即超平面）的交集所定义
+- 每个凸多胞体对应一个不同的线性函数
+- 对于不同的输出分量，它们共享相同的多胞体划分，但每个多胞体所包含的线性函数可能不同</p>
+<h3 id="3">3. 浅层神经网络的工作原理<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>以单输入、三隐藏单元的浅层神经网络为例：</p>
+<p><strong>步骤1：计算线性函数</strong>
+![[Pasted image 20260428154708.png]]
+$$
+h_d = a(\theta_{d0} + \theta_{d1}x), \quad d = 1, 2, 3
+$$</p>
+<p><strong>步骤2：ReLU 激活</strong>![[Pasted image 20260428154723.png]]
+- 经过 ReLU 激活函数作用后，负值部分被截断为零
+<strong>步骤3：线性组合输出</strong>
+![[Pasted image 20260428154801.png]]
+$$
+y = \phi_0 + \phi_1 h_1 + \phi_2 h_2 + \phi_3 h_3
+$$</p>
+<blockquote>
+<p><strong>关键观察</strong>：
+- <span class="arithmatex">\(f(x; \phi)\)</span> 是<strong>分段线性函数</strong>
+- 函数图像包含 4 个线性区域
+- 随着参数调整，分段节点的位置、各线性区域内的斜率以及节点处的函数值均会发生变化</p>
+</blockquote>
+<h3 id="4">4. 其他激活函数<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>激活函数</th>
+<th>表达式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Leaky ReLU</strong></td>
+<td><span class="arithmatex">\(a(z) = \max(0.1z, z)\)</span></td>
+<td>负半轴具有较小的固定斜率，缓解死亡ReLU问题</td>
+</tr>
+<tr>
+<td><strong>Parametric ReLU</strong></td>
+<td><span class="arithmatex">\(a(z) = \max(\alpha z, z)\)</span></td>
+<td>负半轴的斜率 <span class="arithmatex">\(\alpha\)</span> 作为可学习参数</td>
+</tr>
+<tr>
+<td><strong>SoftPlus</strong></td>
+<td><span class="arithmatex">\(a(z) = \ln(1 + e^z)\)</span></td>
+<td>平滑近似ReLU</td>
+</tr>
+<tr>
+<td><strong>GELU</strong></td>
+<td><span class="arithmatex">\(a(z) = z \cdot \Phi(z)\)</span></td>
+<td>高斯误差线性单元，广泛用于Transformer</td>
+</tr>
+<tr>
+<td><strong>SiLU (Swish)</strong></td>
+<td><span class="arithmatex">\(a(z) = z \cdot \sigma(z)\)</span></td>
+<td>自门控激活函数</td>
+</tr>
+<tr>
+<td><strong>ELU</strong></td>
+<td><span class="arithmatex">\(a(z) = \begin{cases} z, &amp; z &gt; 0 \\ \alpha(e^z - 1), &amp; z \leq 0 \end{cases}\)</span></td>
+<td>负值区域有非零输出</td>
+</tr>
+<tr>
+<td><strong>SELU</strong></td>
+<td><span class="arithmatex">\(a(z) = \lambda \begin{cases} z, &amp; z &gt; 0 \\ \alpha(e^z - 1), &amp; z \leq 0 \end{cases}\)</span></td>
+<td>自归一化性质（<span class="arithmatex">\(\lambda \approx 1.0507\)</span>, <span class="arithmatex">\(\alpha \approx 1.6733\)</span>）</td>
+</tr>
+<tr>
+<td><strong>HardSwish</strong></td>
+<td><span class="arithmatex">\(a(z) = \begin{cases} 0, &amp; z &lt; -3 \\ z(z+3)/6, &amp; -3 \leq z \leq 3 \\ z, &amp; z &gt; 3 \end{cases}\)</span></td>
+<td>Swish的分段线性近似，计算更快</td>
+</tr>
+<tr>
+<td><strong>Tanh</strong></td>
+<td><span class="arithmatex">\(a(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}\)</span></td>
+<td>输出范围 [-1, 1]，零中心</td>
+</tr>
+<tr>
+<td><strong>Sigmoid</strong></td>
+<td><span class="arithmatex">\(a(z) = \frac{1}{1 + e^{-z}}\)</span></td>
+<td>输出范围 [0, 1]，易导致梯度消失</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="universal-approximation-theorem">二、万能逼近定理（Universal Approximation Theorem）<a class="headerlink" href="#universal-approximation-theorem" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. 定理内容<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p><strong>定理（万能逼近定理）</strong>：</p>
+<p>设 <span class="arithmatex">\(\varphi: \mathbb{R} \rightarrow \mathbb{R}\)</span> 为一个<strong>非常数的有界连续函数</strong>（称为激活函数），<span class="arithmatex">\(I_m = [0, 1]^m \subset \mathbb{R}^m\)</span> 为 <span class="arithmatex">\(m\)</span> 维单位超立方体，<span class="arithmatex">\(C(I_m)\)</span> 表示定义在 <span class="arithmatex">\(I_m\)</span> 上的所有连续函数构成的集合。</p>
+<p>对于任意给定的目标函数 <span class="arithmatex">\(f \in C(I_m)\)</span> 和任意精度 <span class="arithmatex">\(\varepsilon &gt; 0\)</span>，存在一个整数 <span class="arithmatex">\(N\)</span>（隐藏单元个数）以及一组参数 <span class="arithmatex">\(\{v_i, b_i \in \mathbb{R}, w_i \in \mathbb{R}^m\}_{i=1}^N\)</span>，使得如下形式的浅层神经网络：
+$$
+F(\mathbf{x}) = \sum_{i=1}^{N} v_i \cdot \varphi(w_i^T \mathbf{x} + b_i)
+$$</p>
+<p>能够以精度 <span class="arithmatex">\(\varepsilon\)</span> 一致逼近目标函数 <span class="arithmatex">\(f\)</span>：
+$$
+|F(\mathbf{x}) - f(\mathbf{x})| &lt; \varepsilon, \quad \forall \mathbf{x} \in I_m
+$$</p>
+<h3 id="2">2. 定理的推广<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>推广方向</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>定义域</strong></td>
+<td><span class="arithmatex">\(I_m\)</span> 可替换为 <span class="arithmatex">\(\mathbb{R}^m\)</span> 中的任意有界闭子集（紧集）<span class="arithmatex">\(K \subset \mathbb{R}^m\)</span></td>
+</tr>
+<tr>
+<td><strong>激活函数</strong></td>
+<td>任意非常数的有界连续函数（Cybenko, 1989）；任意非常数的有界可测函数（Hornik, 1991）；任意非多项式的局部有界分段连续函数（Leshno et al., 1993）</td>
+</tr>
+<tr>
+<td><strong>多输出</strong></td>
+<td>对于多输出情形 <span class="arithmatex">\(f: I_m \rightarrow \mathbb{R}^d\)</span>，只需对每个输出分量分别构造一个线性组合</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3_1">3. 定理的局限性<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>万能逼近定理仅保证了<strong>存在性</strong>：
+- ✅ 存在一组参数使得网络能够逼近任意连续函数
+- ❌ 未涉及如何通过算法（如梯度下降）找到这些参数
+- ❌ 未涉及需要多少隐藏单元（<span class="arithmatex">\(N\)</span> 的上界）与逼近精度之间的关系
+- ❌ 未涉及网络的泛化能力与过拟合问题</p>
+<hr />
+<h2 id="_4">三、多变量输入与输出<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1_2">1. 单变量输入、多变量输出<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<p>![[Pasted image 20260428155816.png]]
+考虑一个输入为标量 <span class="arithmatex">\(x\)</span>、四个隐藏单元 <span class="arithmatex">\(h_1, h_2, h_3, h_4\)</span> 和输出为二维向量 <span class="arithmatex">\(\mathbf{y} = (y_1, y_2)^T\)</span> 的浅层神经网络：</p>
+<p><strong>隐藏层</strong>：
+$$
+h_d = a(\theta_{d0} + \theta_{d1}x), \quad d = 1, 2, 3, 4
+$$</p>
+<p><strong>输出层</strong>：
+$$
+y_1 = \phi_{10} + \phi_{11}h_1 + \phi_{12}h_2 + \phi_{13}h_3 + \phi_{14}h_4
+$$
+$$
+y_2 = \phi_{20} + \phi_{21}h_1 + \phi_{22}h_2 + \phi_{23}h_3 + \phi_{24}h_4
+$$</p>
+<blockquote>
+<p><strong>关键观察</strong>：两个函数的四个节点被约束在<strong>相同位置</strong>，因为它们共享相同的隐藏单元，但各线性区域内的斜率以及节点处的函数值可以不同。</p>
+</blockquote>
+<h3 id="2_1">2. 多变量输入、单变量输出<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>![[Pasted image 20260428155831.png|302]]
+考虑一个输入为向量 <span class="arithmatex">\(\mathbf{x} = (x_1, x_2)^T\)</span>、三个隐藏单元和一个输出为标量 <span class="arithmatex">\(y\)</span> 的神经网络：</p>
+<p><strong>隐藏层</strong>：
+$$
+h_d = a(\theta_{d0} + \theta_{d1}x_1 + \theta_{d2}x_2), \quad d = 1, 2, 3
+$$</p>
+<p><strong>输出层</strong>：
+$$
+y = \phi_0 + \phi_1 h_1 + \phi_2 h_2 + \phi_3 h_3
+$$
+![[Pasted image 20260428160050.png|535]]
+![[Pasted image 20260428160008.png|395]]</p>
+<blockquote>
+<p><strong>几何解释</strong>：
+- 每个隐藏单元接收两个输入的线性组合，形成三维平面
+- 经过 ReLU 激活函数作用后，负值部分被裁剪为零
+- 最终得到由分片凸多边形区域构成的连续曲面</p>
+</blockquote>
+<h3 id="3_2">3. 高维输入的特性<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h3>
+<p>当输入维度大于 2 时：
+- 神经网络难以直接<strong>可视化</strong>
+- 但其数学解释是类似的：输出是输入的连续分片线性函数
+- 线性区域对应于输入空间中的<strong>凸多胞体（convex polytope）</strong>
+- 随着输入维度的增加，线性区域的数量会<strong>迅速增长</strong></p>
+<p><strong>线性区域数量公式</strong>：
+- 对于输入维度为 <span class="arithmatex">\(D_i\)</span>、含有 <span class="arithmatex">\(D_i\)</span> 个隐藏单元的模型，可以用 <span class="arithmatex">\(D_i\)</span> 个超平面划分输入空间
+- 最多可产生 <span class="arithmatex">\(2^{D_i}\)</span> 个线性区域</p>
+<hr />
+<h2 id="_5">四、浅层神经网络：一般情形<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="1_3">1. 网络结构<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h3>
+<p>考虑一个输入为 <span class="arithmatex">\(\mathbf{x} \in \mathbb{R}^{D_i}\)</span>、包含 <span class="arithmatex">\(D\)</span> 个隐藏单元、输出为 <span class="arithmatex">\(\mathbf{y} \in \mathbb{R}^{D_o}\)</span> 的浅层神经网络：</p>
+<p><strong>隐藏层</strong>：
+$$
+h_d = a\left(\theta_{d0} + \sum_{j=1}^{D_i} \theta_{dj} x_j\right), \quad d = 1, \ldots, D
+$$</p>
+<p><strong>输出层</strong>：
+$$
+y_j = \phi_{j0} + \sum_{d=1}^{D} \phi_{jd} h_d, \quad j = 1, \ldots, D_o
+$$</p>
+<h3 id="2_2">2. 参数数量分析<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h3>
+<p>对于上述网络：
+- <strong>权重参数</strong>：<span class="arithmatex">\(D_i \times D + D \times D_o\)</span>（箭头数量）
+- <strong>偏置参数</strong>：<span class="arithmatex">\(D + D_o\)</span>（偏移数量）
+- <strong>总参数</strong>：<span class="arithmatex">\(D_i \times D + D + D \times D_o + D_o = (D_i + 1) \times D + (D_o + 1) \times D_o\)</span></p>
+<h3 id="3_3">3. 激活函数的重要性<a class="headerlink" href="#3_3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>关键</strong>：激活函数的作用是为神经网络引入<strong>非线性关系</strong>，因此其本身必须是非线性的。</p>
+</blockquote>
+<ul>
+<li>若<strong>不使用激活函数</strong>或使用<strong>线性激活函数</strong>，则神经网络从输入到输出始终保持<strong>线性映射</strong>关系</li>
+<li>这意味着无论网络有多少层，堆叠多个线性变换等价于单个线性变换</li>
+</ul>
+<hr />
+<h2 id="_6">五、神经网络术语<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="1_4">1. 基本结构<a class="headerlink" href="#1_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>输入层</strong></td>
+<td>Input Layer</td>
+<td>接收输入特征 <span class="arithmatex">\(\mathbf{x}\)</span></td>
+</tr>
+<tr>
+<td><strong>隐藏层</strong></td>
+<td>Hidden Layer</td>
+<td>介于输入和输出之间的层，包含神经元/隐藏单元</td>
+</tr>
+<tr>
+<td><strong>输出层</strong></td>
+<td>Output Layer</td>
+<td>产生最终预测 <span class="arithmatex">\(\mathbf{y}\)</span></td>
+</tr>
+<tr>
+<td><strong>神经元/隐藏单元</strong></td>
+<td>Neuron / Hidden Unit</td>
+<td>隐藏层中的变量</td>
+</tr>
+<tr>
+<td><strong>权重</strong></td>
+<td>Weights</td>
+<td>连接上的斜率参数</td>
+</tr>
+<tr>
+<td><strong>偏置</strong></td>
+<td>Bias</td>
+<td>偏移参数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2_3">2. 网络类型<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>前馈网络</strong>（Feed-forward Network）</td>
+<td>连接关系构成无环图的神经网络</td>
+</tr>
+<tr>
+<td><strong>全连接网络</strong>（Fully-connected Network）</td>
+<td>每一层中的每个变量都连接到下一层的每个变量</td>
+</tr>
+<tr>
+<td><strong>多层感知器</strong>（MLP）</td>
+<td>任何具有至少一个隐藏层的神经网络</td>
+</tr>
+<tr>
+<td><strong>浅层神经网络</strong></td>
+<td>仅含一个隐藏层的网络</td>
+</tr>
+<tr>
+<td><strong>深度神经网络</strong></td>
+<td>包含多个隐藏层的网络</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3_4">3. 计算相关术语<a class="headerlink" href="#3_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>预激活</strong>（Pre-activation）</td>
+<td>馈送到隐藏单元的值，即激活函数的输入</td>
+</tr>
+<tr>
+<td><strong>激活</strong>（Activation）</td>
+<td>经过激活函数作用后的值</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_7">六、神经网络发展简史<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>里程碑事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1943</strong></td>
+<td>McCulloch &amp; Pitts 首次提出人工神经元的概念</td>
+</tr>
+<tr>
+<td><strong>1958</strong></td>
+<td>Rosenblatt 开发了感知机（Perceptron），提供从数据中学习权重的算法</td>
+</tr>
+<tr>
+<td><strong>1969</strong></td>
+<td>Minsky &amp; Papert 指出线性模型无法处理一般分类问题，但感知机算法无法学习多层网络的参数</td>
+</tr>
+<tr>
+<td><strong>1980s</strong></td>
+<td>反向传播（Backpropagation）算法的开发使神经网络研究重新蓬勃发展</td>
+</tr>
+<tr>
+<td><strong>2009-2011</strong></td>
+<td>ReLU 函数被重新推广，成为当前最常用的激活函数</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_8">本章小结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="1_5">1. 浅层神经网络的核心计算<a class="headerlink" href="#1_5" title="Permanent link">&para;</a></h3>
+<p>浅层神经网络含有一个隐藏层，其计算过程可分为三步：</p>
+<ol>
+<li><strong>计算输入的若干线性函数</strong></li>
+<li><strong>将每个线性组合的结果传递给激活函数</strong></li>
+<li><strong>对这些激活值进行线性组合以形成输出</strong></li>
+</ol>
+<h3 id="2_4">2. 万能逼近定理<a class="headerlink" href="#2_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>当隐藏单元（神经元）数量足够多时，浅层神经网络能够以<strong>任意精度逼近任意连续函数</strong></li>
+<li>定理仅保证存在性，不涉及如何找到这些参数</li>
+</ul>
+<h3 id="3_5">3. 多变量扩展<a class="headerlink" href="#3_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>多变量输入</strong>：每个隐藏单元接收多个输入的线性组合</li>
+<li><strong>多变量输出</strong>：每个输出分量是隐藏单元的独立线性组合</li>
+<li>线性区域数量随输入维度<strong>指数增长</strong></li>
+</ul>
+<h3 id="4_1">4. 激活函数的选择<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>激活函数</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ReLU</strong></td>
+<td>默认选择，计算高效</td>
+</tr>
+<tr>
+<td><strong>Leaky ReLU / PReLU</strong></td>
+<td>避免死亡ReLU问题</td>
+</tr>
+<tr>
+<td><strong>GELU / SiLU</strong></td>
+<td>现代深度学习模型（如Transformer）</td>
+</tr>
+<tr>
+<td><strong>Tanh</strong></td>
+<td>需要零中心输出时</td>
+</tr>
+<tr>
+<td><strong>Sigmoid</strong></td>
+<td>输出概率时（二分类输出层）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：ReLU 是当前最常用的激活函数，但对于负输入会梯度为零，可能导致"死亡ReLU"问题。可使用 Leaky ReLU、PReLU 等变体缓解。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

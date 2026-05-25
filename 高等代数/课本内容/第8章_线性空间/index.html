@@ -1,0 +1,2203 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第8章 线性空间 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#8" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第8章 线性空间
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        章节概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 域F上线性空间的基与维数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 域F上线性空间的基与维数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要引入线性空间？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、线性空间的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、线性空间的例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、基与维数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1（验证题）验证多项式空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2（计算题）求基与坐标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例3（证明题）维数的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 子空间及其交与和，子空间的直和
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 子空间及其交与和，子空间的直和">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要研究子空间？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、子空间的定义与判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、子空间的例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、子空间的交与和
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、维数公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、直和
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1（验证题）验证子空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2（计算题）求和与交
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例3（证明题）直和的判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 域F上线性空间的同构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3 域F上线性空间的同构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要研究同构？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、同构映射的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、同构的基本定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、同构的判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1（验证题）验证同构映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例2（构造题）构造同构映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 商空间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.4 商空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        商空间——最抽象的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、陪集与商空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、商空间的维数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例1（计算题）商空间的实例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点提醒
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思考题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="本章小结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念与关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式速记
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="8">第8章 线性空间<a class="headerlink" href="#8" title="Permanent link">&para;</a></h1>
+<h2 id="_1">章节概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章将向量、多项式、矩阵等看似不同的对象统一到一个抽象框架中，研究其共同的代数结构。这是从"具体"到"抽象"的重要飞跃，为后续学习抽象代数打下基础。</p>
+<p><strong>核心问题</strong>：
+- 为什么要引入"线性空间"这个抽象概念？
+- 如何刻画一个线性空间的"大小"？
+- 子空间之间如何"相加"和"求交"？
+- 两个线性空间何时可以认为是"相同"的？</p>
+<hr />
+<h2 id="81-f">8.1 域F上线性空间的基与维数<a class="headerlink" href="#81-f" title="Permanent link">&para;</a></h2>
+<h3 id="_2">为什么要引入线性空间？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><strong>问题引入</strong>：
+我们已经学习了 <span class="arithmatex">\(\mathbb{R}^n\)</span> 中的向量，它们可以相加、可以数乘，满足一些"自然"的运算规则。但仔细想想，下面的对象也都可以做类似的运算：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">对象</th>
+<th style="text-align: left;">加法</th>
+<th style="text-align: left;">数乘</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">向量 <span class="arithmatex">\((a_1, \ldots, a_n)\)</span></td>
+<td style="text-align: left;">分量相加</td>
+<td style="text-align: left;">分量乘以数</td>
+</tr>
+<tr>
+<td style="text-align: left;">多项式 <span class="arithmatex">\(a_0 + a_1 x + \cdots + a_n x^n\)</span></td>
+<td style="text-align: left;">系数相加</td>
+<td style="text-align: left;">系数乘以数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(m \times n\)</span> 矩阵</td>
+<td style="text-align: left;">对应元相加</td>
+<td style="text-align: left;">每元乘以数</td>
+</tr>
+<tr>
+<td style="text-align: left;">区间 <span class="arithmatex">\([a,b]\)</span> 上的连续函数</td>
+<td style="text-align: left;">逐点相加</td>
+<td style="text-align: left;">逐点乘以数</td>
+</tr>
+</tbody>
+</table>
+<p>这些对象的"长相"完全不同，但它们的运算规则惊人地相似。<strong>线性空间的概念就是为了抽取这种共同性</strong>——我们不关心对象"是什么"，只关心它们"怎么算"。</p>
+<hr />
+<h3 id="_3">一、线性空间的定义<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(V\)</span> 是一个非空集合，<span class="arithmatex">\(F\)</span> 是一个域。如果在 <span class="arithmatex">\(V\)</span> 上定义了加法运算 <span class="arithmatex">\(+\)</span>，在 <span class="arithmatex">\(F \times V\)</span> 上定义了数量乘法（简称数乘）运算 <span class="arithmatex">\(\cdot\)</span>，且满足以下 <strong>8条运算法则</strong>，则称 <span class="arithmatex">\(V\)</span> 是域 <span class="arithmatex">\(F\)</span> 上的一个<strong>线性空间</strong>（或<strong>向量空间</strong>），<span class="arithmatex">\(V\)</span> 中的元素称为<strong>向量</strong>。</p>
+</blockquote>
+<p><strong>加法法则</strong>（4条）：
+1. <strong>交换律</strong>：<span class="arithmatex">\(\alpha + \beta = \beta + \alpha\)</span>
+2. <strong>结合律</strong>：<span class="arithmatex">\((\alpha + \beta) + \gamma = \alpha + (\beta + \gamma)\)</span>
+3. <strong>零向量存在</strong>：存在 <span class="arithmatex">\(\mathbf{0} \in V\)</span>，使得对任意 <span class="arithmatex">\(\alpha \in V\)</span>，有 <span class="arithmatex">\(\alpha + \mathbf{0} = \alpha\)</span>
+4. <strong>负向量存在</strong>：对任意 <span class="arithmatex">\(\alpha \in V\)</span>，存在 <span class="arithmatex">\(-\alpha \in V\)</span>，使得 <span class="arithmatex">\(\alpha + (-\alpha) = \mathbf{0}\)</span></p>
+<p><strong>数乘法则</strong>（4条，设 <span class="arithmatex">\(k, l \in F\)</span>，<span class="arithmatex">\(\alpha, \beta \in V\)</span>）：
+5. <strong>单位元作用</strong>：<span class="arithmatex">\(1 \cdot \alpha = \alpha\)</span>
+6. <strong>数乘结合律</strong>：<span class="arithmatex">\((kl) \cdot \alpha = k \cdot (l \cdot \alpha)\)</span>
+7. <strong>向量分配律</strong>：<span class="arithmatex">\(k \cdot (\alpha + \beta) = k\alpha + k\beta\)</span>
+8. <strong>数的分配律</strong>：<span class="arithmatex">\((k + l) \cdot \alpha = k\alpha + l\alpha\)</span></p>
+<blockquote>
+<p>📌 <strong>理解要点</strong>：
+- 法则 1-4 说明 <span class="arithmatex">\((V, +)\)</span> 是一个<strong>交换群</strong>（Abelian group）
+- 法则 5-8 描述了域 <span class="arithmatex">\(F\)</span> 如何"作用"在 <span class="arithmatex">\(V\)</span> 上
+- 这8条是"公理"，凡是满足它们的都是线性空间</p>
+</blockquote>
+<hr />
+<h3 id="_4">二、线性空间的例子<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>例1</strong>：<span class="arithmatex">\(\mathbb{R}^n\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的线性空间</p>
+<p><strong>例2</strong>：所有次数不超过 <span class="arithmatex">\(n\)</span> 的实系数多项式集合 <span class="arithmatex">\(\mathbb{R}_n[x]\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的线性空间</p>
+<blockquote>
+<p><strong>验证</strong>：设 <span class="arithmatex">\(f(x) = a_0 + a_1 x + \cdots + a_n x^n\)</span>，<span class="arithmatex">\(g(x) = b_0 + b_1 x + \cdots + b_n x^n\)</span>
+- 加法：<span class="arithmatex">\(f + g = (a_0+b_0) + (a_1+b_1)x + \cdots + (a_n+b_n)x^n\)</span>，仍是 <span class="arithmatex">\(\mathbb{R}_n[x]\)</span> 中的多项式 ✓
+- 数乘：<span class="arithmatex">\(k \cdot f = (ka_0) + (ka_1)x + \cdots + (ka_n)x^n\)</span>，仍是 <span class="arithmatex">\(\mathbb{R}_n[x]\)</span> 中的多项式 ✓
+- 8条法则逐条验证（略）</p>
+</blockquote>
+<p><strong>例3</strong>：所有 <span class="arithmatex">\(m \times n\)</span> 实矩阵的集合 <span class="arithmatex">\(M_{m \times n}(\mathbb{R})\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的线性空间</p>
+<p><strong>例4</strong>：<span class="arithmatex">\([a, b]\)</span> 上所有连续实函数的集合 <span class="arithmatex">\(C[a,b]\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的线性空间</p>
+<hr />
+<h3 id="_5">三、基与维数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_n \in V\)</span>。如果：
+1. <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_n\)</span> <strong>线性无关</strong>
+2. <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_n\)</span> <strong>生成</strong> <span class="arithmatex">\(V\)</span>（即 <span class="arithmatex">\(V\)</span> 中每个向量都能被它们线性表示）</p>
+<p>则称 <span class="arithmatex">\(\{\alpha_1, \alpha_2, \ldots, \alpha_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的一组<strong>基</strong>，<span class="arithmatex">\(n\)</span> 称为 <span class="arithmatex">\(V\)</span> 的<strong>维数</strong>，记作 <span class="arithmatex">\(\dim V = n\)</span>。</p>
+<p>📌 <strong>理解要点</strong>：
+- 基是线性空间的"骨架"——知道了基，就知道了整个空间
+- 维数是线性空间的"大小"——它告诉我们这个空间"有多少自由度"
+- <span class="arithmatex">\(\mathbb{R}^n\)</span> 的一组自然基是 <span class="arithmatex">\(\{e_1, e_2, \ldots, e_n\}\)</span>，其中 <span class="arithmatex">\(e_i\)</span> 是第 <span class="arithmatex">\(i\)</span> 个分量为1、其余为0的向量</p>
+</blockquote>
+<p><strong>定理</strong>：设 <span class="arithmatex">\(\{\alpha_1, \alpha_2, \ldots, \alpha_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的一组基，则 <span class="arithmatex">\(V\)</span> 中每个向量 <span class="arithmatex">\(\beta\)</span> 都能<strong>唯一地</strong>表示为：
+$<span class="arithmatex">\(\beta = k_1 \alpha_1 + k_2 \alpha_2 + \cdots + k_n \alpha_n\)</span>$
+<span class="arithmatex">\((k_1, k_2, \ldots, k_n)\)</span> 称为 <span class="arithmatex">\(\beta\)</span> 在这组基下的<strong>坐标</strong>。</p>
+<hr />
+<h3 id="_6">典型例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h4 id="1">例1（验证题）验证多项式空间<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(V = \{f(x) = a_0 + a_1 x \mid a_0, a_1 \in \mathbb{R}\}\)</span> 是所有实系数一次多项式的集合。验证 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的线性空间，并求其维数和一组基。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步：验证是线性空间</strong></p>
+<p>需要验证加法和数乘封闭，以及8条运算法则。</p>
+<p><strong>封闭性</strong>：
+- 加法：<span class="arithmatex">\((a_0 + a_1 x) + (b_0 + b_1 x) = (a_0 + b_0) + (a_1 + b_1)x\)</span>，仍是一次多项式 ✓
+- 数乘：<span class="arithmatex">\(k(a_0 + a_1 x) = (ka_0) + (ka_1)x\)</span>，仍是一次多项式 ✓</p>
+<p><strong>8条法则</strong>：以交换律为例
+$<span class="arithmatex">\((a_0 + a_1 x) + (b_0 + b_1 x) = (a_0 + b_0) + (a_1 + b_1)x = (b_0 + b_1 x) + (a_0 + a_1 x)\)</span>$</p>
+<p>其他法则类似可验证。</p>
+<p><strong>第二步：求维数和基</strong></p>
+<p>考虑向量组 <span class="arithmatex">\(\{1, x\}\)</span>：
+- <strong>线性无关性</strong>：设 <span class="arithmatex">\(k_0 \cdot 1 + k_1 \cdot x = 0\)</span>，即 <span class="arithmatex">\(k_0 + k_1 x = 0\)</span>（零多项式），则 <span class="arithmatex">\(k_0 = k_1 = 0\)</span>，故线性无关
+- <strong>生成性</strong>：任意 <span class="arithmatex">\(f(x) = a_0 + a_1 x = a_0 \cdot 1 + a_1 \cdot x\)</span>，可被 <span class="arithmatex">\(\{1, x\}\)</span> 线性表示</p>
+<p>因此 <span class="arithmatex">\(\{1, x\}\)</span> 是一组基，<span class="arithmatex">\(\dim V = 2\)</span>。</p>
+<p><strong>关键思路</strong>：验证线性空间要抓住两个要点——封闭性和运算法则；求基时要证明线性无关性和生成性。</p>
+<hr />
+<h4 id="2">例2（计算题）求基与坐标<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中，设 <span class="arithmatex">\(\alpha_1 = (1, 0, 0)\)</span>，<span class="arithmatex">\(\alpha_2 = (1, 1, 0)\)</span>，<span class="arithmatex">\(\alpha_3 = (1, 1, 1)\)</span>。
+1. 证明 <span class="arithmatex">\(\{\alpha_1, \alpha_2, \alpha_3\}\)</span> 是 <span class="arithmatex">\(\mathbb{R}^3\)</span> 的一组基
+2. 求 <span class="arithmatex">\(\beta = (2, 3, 4)\)</span> 在这组基下的坐标</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一问：证明是基</strong></p>
+<p>方法：证明线性无关即可（因为 <span class="arithmatex">\(\mathbb{R}^3\)</span> 维数为3，三个线性无关向量必构成基）</p>
+<p>设 <span class="arithmatex">\(k_1 \alpha_1 + k_2 \alpha_2 + k_3 \alpha_3 = (0, 0, 0)\)</span>，即：
+$<span class="arithmatex">\(k_1(1,0,0) + k_2(1,1,0) + k_3(1,1,1) = (0,0,0)\)</span>$</p>
+<p>得到方程组：
+$<span class="arithmatex">\(\begin{cases} k_1 + k_2 + k_3 = 0 \\ k_2 + k_3 = 0 \\ k_3 = 0 \end{cases}\)</span>$</p>
+<p>解得 <span class="arithmatex">\(k_1 = k_2 = k_3 = 0\)</span>，故线性无关。</p>
+<p><strong>第二问：求坐标</strong></p>
+<p>设 <span class="arithmatex">\(\beta = x_1 \alpha_1 + x_2 \alpha_2 + x_3 \alpha_3\)</span>，即：
+$<span class="arithmatex">\(x_1(1,0,0) + x_2(1,1,0) + x_3(1,1,1) = (2,3,4)\)</span>$</p>
+<p>得到方程组：
+$<span class="arithmatex">\(\begin{cases} x_1 + x_2 + x_3 = 2 \\ x_2 + x_3 = 3 \\ x_3 = 4 \end{cases}\)</span>$</p>
+<p>解得 <span class="arithmatex">\(x_3 = 4\)</span>，<span class="arithmatex">\(x_2 = -1\)</span>，<span class="arithmatex">\(x_1 = -1\)</span>。</p>
+<p>因此 <span class="arithmatex">\(\beta\)</span> 在基 <span class="arithmatex">\(\{\alpha_1, \alpha_2, \alpha_3\}\)</span> 下的坐标为 <span class="arithmatex">\((-1, -1, 4)\)</span>。</p>
+<p><strong>关键思路</strong>：求坐标就是解线性方程组，可以写成矩阵形式求解。</p>
+<hr />
+<h4 id="3">例3（证明题）维数的性质<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(n\)</span> 维线性空间，<span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_m \in V\)</span> 线性无关。证明：<span class="arithmatex">\(m \leq n\)</span>，且可将 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_m\)</span> 扩充为 <span class="arithmatex">\(V\)</span> 的一组基。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一部分：证明 <span class="arithmatex">\(m \leq n\)</span></strong></p>
+<p>设 <span class="arithmatex">\(\beta_1, \beta_2, \ldots, \beta_n\)</span> 是 <span class="arithmatex">\(V\)</span> 的一组基。由于基生成 <span class="arithmatex">\(V\)</span>，每个 <span class="arithmatex">\(\alpha_i\)</span> 都可由 <span class="arithmatex">\(\beta_1, \ldots, \beta_n\)</span> 线性表示。</p>
+<p>假设 <span class="arithmatex">\(m &gt; n\)</span>，则 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_m\)</span> 可由 <span class="arithmatex">\(n\)</span> 个向量线性表示，根据线性相关性的基本结论，<span class="arithmatex">\(\alpha_1, \ldots, \alpha_m\)</span> 必线性相关，与已知矛盾。</p>
+<p>故 <span class="arithmatex">\(m \leq n\)</span>。</p>
+<p><strong>第二部分：扩充为基</strong></p>
+<p>若 <span class="arithmatex">\(m = n\)</span>，则 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_m\)</span> 已经是基（<span class="arithmatex">\(n\)</span> 个线性无关向量在 <span class="arithmatex">\(n\)</span> 维空间中必为基）。</p>
+<p>若 <span class="arithmatex">\(m &lt; n\)</span>，则存在 <span class="arithmatex">\(\alpha_{m+1} \in V\)</span> 不能被 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_m\)</span> 线性表示，于是 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_m, \alpha_{m+1}\)</span> 线性无关。</p>
+<p>继续这个过程，直到得到 <span class="arithmatex">\(n\)</span> 个线性无关向量，即为基。</p>
+<p><strong>关键思路</strong>：利用"线性无关向量的个数不能超过维数"这一基本事实。</p>
+<hr />
+<h3 id="_7">易错点提醒<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>⚠️ <strong>易错点1</strong>：验证线性空间时，容易忘记验证<strong>封闭性</strong>
+- 错误做法：只验证8条法则，忽略检查加法和数乘是否"还在集合里"
+- 例：所有次数等于2的多项式集合<strong>不是</strong>线性空间（加法不封闭：<span class="arithmatex">\((x^2) + (-x^2 + x) = x\)</span>，次数变成了1）</p>
+<p>⚠️ <strong>易错点2</strong>：线性空间的维数与"直观维数"可能不同
+- <span class="arithmatex">\(\mathbb{R}_n[x]\)</span>（次数不超过 <span class="arithmatex">\(n\)</span> 的多项式）的维数是 <span class="arithmatex">\(n+1\)</span>，不是 <span class="arithmatex">\(n\)</span>
+- <span class="arithmatex">\(M_{2 \times 3}(\mathbb{R})\)</span> 的维数是 <span class="arithmatex">\(2 \times 3 = 6\)</span>，不是 <span class="arithmatex">\(2\)</span> 或 <span class="arithmatex">\(3\)</span></p>
+<p>⚠️ <strong>易错点3</strong>：零向量不一定是 <span class="arithmatex">\((0, 0, \ldots, 0)\)</span>
+- 在多项式空间中，零向量是零多项式 <span class="arithmatex">\(0\)</span>
+- 在矩阵空间中，零向量是零矩阵 <span class="arithmatex">\(O\)</span>
+- 在函数空间中，零向量是零函数 <span class="arithmatex">\(f(x) \equiv 0\)</span></p>
+</blockquote>
+<hr />
+<h3 id="_8">思考题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>设 <span class="arithmatex">\(V = \{(x, y, z) \in \mathbb{R}^3 \mid x + y + z = 0\}\)</span>。证明 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(\mathbb{R}^3\)</span> 的子空间，并求其维数。</p>
+</li>
+<li>
+<p>设 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_n\)</span> 是 <span class="arithmatex">\(V\)</span> 的一组基。证明：对于任意 <span class="arithmatex">\(n\)</span> 个线性无关的向量 <span class="arithmatex">\(\beta_1, \beta_2, \ldots, \beta_n\)</span>，它们也构成 <span class="arithmatex">\(V\)</span> 的一组基。</p>
+</li>
+<li>
+<p>证明：线性空间的维数是唯一确定的（即任意两组基所含向量个数相同）。</p>
+</li>
+</ol>
+<hr />
+<h2 id="82">8.2 子空间及其交与和，子空间的直和<a class="headerlink" href="#82" title="Permanent link">&para;</a></h2>
+<h3 id="_9">为什么要研究子空间？<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><strong>问题引入</strong>：
+一个大的线性空间 <span class="arithmatex">\(V\)</span> 可能包含一些"小的线性空间"——它们在 <span class="arithmatex">\(V\)</span> 内部，但自己也是线性空间。研究这些"子空间"可以帮助我们：
+1. 把复杂空间分解成简单空间的"组合"
+2. 理解线性映射的结构（核、像都是子空间）
+3. 为后续的直和、商空间等概念做准备</p>
+<hr />
+<h3 id="_10">一、子空间的定义与判定<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(V\)</span> 是域 <span class="arithmatex">\(F\)</span> 上的线性空间，<span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(V\)</span> 的非空子集。如果 <span class="arithmatex">\(U\)</span> 对 <span class="arithmatex">\(V\)</span> 的加法和数乘运算也构成 <span class="arithmatex">\(F\)</span> 上的线性空间，则称 <span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(V\)</span> 的<strong>子空间</strong>。</p>
+</blockquote>
+<p><strong>判定定理</strong>：<span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(U\)</span> 对加法和数乘<strong>封闭</strong>，即：
+1. <span class="arithmatex">\(\alpha, \beta \in U \Rightarrow \alpha + \beta \in U\)</span>
+2. <span class="arithmatex">\(\alpha \in U, k \in F \Rightarrow k\alpha \in U\)</span></p>
+<blockquote>
+<p>📌 <strong>等价表述</strong>：<span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间 <span class="arithmatex">\(\iff\)</span> 对任意 <span class="arithmatex">\(\alpha, \beta \in U\)</span> 和 <span class="arithmatex">\(k, l \in F\)</span>，有 <span class="arithmatex">\(k\alpha + l\beta \in U\)</span></p>
+</blockquote>
+<p><strong>重要性质</strong>：子空间必包含零向量 <span class="arithmatex">\(\mathbf{0}\)</span></p>
+<blockquote>
+<p><strong>证明</strong>：取 <span class="arithmatex">\(k = 0\)</span>，则 <span class="arithmatex">\(0 \cdot \alpha = \mathbf{0} \in U\)</span></p>
+</blockquote>
+<hr />
+<h3 id="_11">二、子空间的例子<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p><strong>例1</strong>：<span class="arithmatex">\(\{\mathbf{0}\}\)</span> 和 <span class="arithmatex">\(V\)</span> 本身都是 <span class="arithmatex">\(V\)</span> 的子空间，称为<strong>平凡子空间</strong></p>
+<p><strong>例2</strong>：过原点的平面是 <span class="arithmatex">\(\mathbb{R}^3\)</span> 的子空间
+$<span class="arithmatex">\(U = \{(x, y, z) \mid ax + by + cz = 0\}\)</span>$</p>
+<p><strong>例3</strong>：设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m \times n\)</span> 矩阵，则 <span class="arithmatex">\(Ax = 0\)</span> 的解集合是 <span class="arithmatex">\(\mathbb{R}^n\)</span> 的子空间（称为 <span class="arithmatex">\(A\)</span> 的<strong>零空间</strong>或<strong>核</strong>）</p>
+<p><strong>例4</strong>：设 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_s \in V\)</span>，则
+$<span class="arithmatex">\(L(\alpha_1, \ldots, \alpha_s) = \{k_1\alpha_1 + k_2\alpha_2 + \cdots + k_s\alpha_s \mid k_i \in F\}\)</span>$
+是 <span class="arithmatex">\(V\)</span> 的子空间，称为由 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_s\)</span> <strong>生成</strong>（或<strong>张成</strong>）的子空间。</p>
+<hr />
+<h3 id="_12">三、子空间的交与和<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(U_1, U_2\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。
+- <strong>交</strong>：<span class="arithmatex">\(U_1 \cap U_2 = \{\alpha \mid \alpha \in U_1 \text{ 且 } \alpha \in U_2\}\)</span>
+- <strong>和</strong>：<span class="arithmatex">\(U_1 + U_2 = \{\alpha_1 + \alpha_2 \mid \alpha_1 \in U_1, \alpha_2 \in U_2\}\)</span></p>
+</blockquote>
+<p><strong>定理</strong>：<span class="arithmatex">\(U_1 \cap U_2\)</span> 和 <span class="arithmatex">\(U_1 + U_2\)</span> 都是 <span class="arithmatex">\(V\)</span> 的子空间。</p>
+<blockquote>
+<p><strong>证明（以和为例）</strong>：
+设 <span class="arithmatex">\(\alpha = \alpha_1 + \alpha_2 \in U_1 + U_2\)</span>，<span class="arithmatex">\(\beta = \beta_1 + \beta_2 \in U_1 + U_2\)</span>，则：
+- <span class="arithmatex">\(\alpha + \beta = (\alpha_1 + \beta_1) + (\alpha_2 + \beta_2) \in U_1 + U_2\)</span>（因为 <span class="arithmatex">\(\alpha_1 + \beta_1 \in U_1\)</span>，<span class="arithmatex">\(\alpha_2 + \beta_2 \in U_2\)</span>）
+- <span class="arithmatex">\(k\alpha = k\alpha_1 + k\alpha_2 \in U_1 + U_2\)</span>（因为 <span class="arithmatex">\(k\alpha_1 \in U_1\)</span>，<span class="arithmatex">\(k\alpha_2 \in U_2\)</span>）</p>
+</blockquote>
+<hr />
+<h3 id="_13">四、维数公式<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：设 <span class="arithmatex">\(U_1, U_2\)</span> 是 <span class="arithmatex">\(V\)</span> 的有限维子空间，则：
+$<span class="arithmatex">\(\dim(U_1 + U_2) = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2)\)</span>$</p>
+</blockquote>
+<p><strong>证明思路</strong>：</p>
+<p>设 <span class="arithmatex">\(\dim(U_1 \cap U_2) = r\)</span>，取 <span class="arithmatex">\(U_1 \cap U_2\)</span> 的一组基 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_r\)</span>。</p>
+<p><strong>关键步骤</strong>：将 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_r\)</span> 分别扩充为 <span class="arithmatex">\(U_1\)</span> 和 <span class="arithmatex">\(U_2\)</span> 的基：
+- <span class="arithmatex">\(U_1\)</span> 的基：<span class="arithmatex">\(\alpha_1, \ldots, \alpha_r, \beta_1, \ldots, \beta_s\)</span>
+- <span class="arithmatex">\(U_2\)</span> 的基：<span class="arithmatex">\(\alpha_1, \ldots, \alpha_r, \gamma_1, \ldots, \gamma_t\)</span></p>
+<p>则 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_r, \beta_1, \ldots, \beta_s, \gamma_1, \ldots, \gamma_t\)</span> 是 <span class="arithmatex">\(U_1 + U_2\)</span> 的基。</p>
+<p>因此：
+$<span class="arithmatex">\(\dim(U_1 + U_2) = r + s + t = (r + s) + (r + t) - r = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2)\)</span>$</p>
+<blockquote>
+<p>📌 <strong>几何直观</strong>：这与集合论中的容斥原理 <span class="arithmatex">\(|A \cup B| = |A| + |B| - |A \cap B|\)</span> 类似！</p>
+</blockquote>
+<hr />
+<h3 id="_14">五、直和<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(U_1, U_2\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。如果 <span class="arithmatex">\(U_1 + U_2\)</span> 中每个向量的分解式<strong>唯一</strong>，即：
+$<span class="arithmatex">\(\forall \alpha \in U_1 + U_2,\ \alpha = \alpha_1 + \alpha_2\ (\alpha_1 \in U_1, \alpha_2 \in U_2)\)</span>$
+的表示方式唯一，则称 <span class="arithmatex">\(U_1 + U_2\)</span> 为<strong>直和</strong>，记作 <span class="arithmatex">\(U_1 \oplus U_2\)</span>。</p>
+</blockquote>
+<p><strong>直和的等价条件</strong>：以下条件等价：
+1. <span class="arithmatex">\(U_1 + U_2\)</span> 是直和
+2. <span class="arithmatex">\(U_1 \cap U_2 = \{\mathbf{0}\}\)</span>
+3. <span class="arithmatex">\(\dim(U_1 + U_2) = \dim U_1 + \dim U_2\)</span>
+4. 零向量的分解式唯一（即若 <span class="arithmatex">\(\mathbf{0} = \alpha_1 + \alpha_2\)</span>，<span class="arithmatex">\(\alpha_1 \in U_1\)</span>，<span class="arithmatex">\(\alpha_2 \in U_2\)</span>，则 <span class="arithmatex">\(\alpha_1 = \alpha_2 = \mathbf{0}\)</span>）</p>
+<blockquote>
+<p><strong>证明</strong>：<span class="arithmatex">\((1) \Leftrightarrow (4)\)</span> 显然。</p>
+<p><span class="arithmatex">\((4) \Rightarrow (2)\)</span>：设 <span class="arithmatex">\(\alpha \in U_1 \cap U_2\)</span>，则 <span class="arithmatex">\(\alpha + (-\alpha) = \mathbf{0}\)</span>，其中 <span class="arithmatex">\(\alpha \in U_1\)</span>，<span class="arithmatex">\(-\alpha \in U_2\)</span>。由 (4)，<span class="arithmatex">\(\alpha = \mathbf{0}\)</span>。</p>
+<p><span class="arithmatex">\((2) \Rightarrow (4)\)</span>：设 <span class="arithmatex">\(\mathbf{0} = \alpha_1 + \alpha_2\)</span>，<span class="arithmatex">\(\alpha_1 \in U_1\)</span>，<span class="arithmatex">\(\alpha_2 \in U_2\)</span>。则 <span class="arithmatex">\(\alpha_1 = -\alpha_2 \in U_1 \cap U_2 = \{\mathbf{0}\}\)</span>，故 <span class="arithmatex">\(\alpha_1 = \alpha_2 = \mathbf{0}\)</span>。</p>
+<p><span class="arithmatex">\((2) \Leftrightarrow (3)\)</span>：由维数公式，<span class="arithmatex">\(\dim(U_1 + U_2) = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2)\)</span>，代入 <span class="arithmatex">\(U_1 \cap U_2 = \{\mathbf{0}\}\)</span> 即得。</p>
+</blockquote>
+<hr />
+<h3 id="_15">典型例题<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">例1（验证题）验证子空间<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(V = M_{2 \times 2}(\mathbb{R})\)</span>（所有 <span class="arithmatex">\(2 \times 2\)</span> 实矩阵），<span class="arithmatex">\(U = \{A \in V \mid A^T = A\}\)</span>（所有 <span class="arithmatex">\(2 \times 2\)</span> 对称矩阵）。验证 <span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法</strong>：验证对加法和数乘封闭。</p>
+<p><strong>加法封闭</strong>：设 <span class="arithmatex">\(A, B \in U\)</span>，则 <span class="arithmatex">\(A^T = A\)</span>，<span class="arithmatex">\(B^T = B\)</span>。
+$<span class="arithmatex">\((A + B)^T = A^T + B^T = A + B\)</span>$
+故 <span class="arithmatex">\(A + B \in U\)</span>。</p>
+<p><strong>数乘封闭</strong>：设 <span class="arithmatex">\(A \in U\)</span>，<span class="arithmatex">\(k \in \mathbb{R}\)</span>。
+$<span class="arithmatex">\((kA)^T = kA^T = kA\)</span>$
+故 <span class="arithmatex">\(kA \in U\)</span>。</p>
+<p>因此 <span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。</p>
+<p><strong>关键思路</strong>：利用转置运算的性质 <span class="arithmatex">\((A + B)^T = A^T + B^T\)</span>，<span class="arithmatex">\((kA)^T = kA^T\)</span>。</p>
+<hr />
+<h4 id="2_1">例2（计算题）求和与交<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中，设
+$<span class="arithmatex">\(U_1 = \{(x, y, z) \mid x + y + z = 0\}, \quad U_2 = \{(x, y, z) \mid x = y\}\)</span>$
+求 <span class="arithmatex">\(U_1 + U_2\)</span> 和 <span class="arithmatex">\(U_1 \cap U_2\)</span> 的维数。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步：求 <span class="arithmatex">\(U_1\)</span> 和 <span class="arithmatex">\(U_2\)</span> 的基</strong></p>
+<p><span class="arithmatex">\(U_1\)</span>：由 <span class="arithmatex">\(x + y + z = 0\)</span> 得 <span class="arithmatex">\(z = -x - y\)</span>，故 <span class="arithmatex">\((x, y, z) = x(1, 0, -1) + y(0, 1, -1)\)</span>。
+<span class="arithmatex">\(\dim U_1 = 2\)</span>，基为 <span class="arithmatex">\(\{(1, 0, -1), (0, 1, -1)\}\)</span>。</p>
+<p><span class="arithmatex">\(U_2\)</span>：由 <span class="arithmatex">\(x = y\)</span> 得 <span class="arithmatex">\((x, y, z) = x(1, 1, 0) + z(0, 0, 1)\)</span>。
+<span class="arithmatex">\(\dim U_2 = 2\)</span>，基为 <span class="arithmatex">\(\{(1, 1, 0), (0, 0, 1)\}\)</span>。</p>
+<p><strong>第二步：求 <span class="arithmatex">\(U_1 \cap U_2\)</span></strong></p>
+<p><span class="arithmatex">\((x, y, z) \in U_1 \cap U_2\)</span> 当且仅当：
+$<span class="arithmatex">\(\begin{cases} x + y + z = 0 \\ x = y \end{cases}\)</span>$</p>
+<p>代入得 <span class="arithmatex">\(2x + z = 0\)</span>，即 <span class="arithmatex">\(z = -2x\)</span>。故 <span class="arithmatex">\((x, y, z) = x(1, 1, -2)\)</span>。
+<span class="arithmatex">\(\dim(U_1 \cap U_2) = 1\)</span>。</p>
+<p><strong>第三步：求 <span class="arithmatex">\(\dim(U_1 + U_2)\)</span></strong></p>
+<p>由维数公式：
+$<span class="arithmatex">\(\dim(U_1 + U_2) = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2) = 2 + 2 - 1 = 3\)</span>$</p>
+<p><strong>关键思路</strong>：求交就是解联立方程，然后利用维数公式求和的维数。</p>
+<hr />
+<h4 id="3_1">例3（证明题）直和的判定<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^{n \times n}\)</span>（所有 <span class="arithmatex">\(n\)</span> 阶实矩阵），<span class="arithmatex">\(U_1 = \{A \in V \mid A^T = A\}\)</span>（对称矩阵），<span class="arithmatex">\(U_2 = \{A \in V \mid A^T = -A\}\)</span>（反对称矩阵）。证明：<span class="arithmatex">\(V = U_1 \oplus U_2\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p>需要证明：<span class="arithmatex">\(V = U_1 + U_2\)</span> 且 <span class="arithmatex">\(U_1 \cap U_2 = \{\mathbf{0}\}\)</span>。</p>
+<p><strong>第一部分：证明 <span class="arithmatex">\(V = U_1 + U_2\)</span></strong></p>
+<p>对于任意 <span class="arithmatex">\(A \in V\)</span>，有：
+$<span class="arithmatex">\(A = \frac{A + A^T}{2} + \frac{A - A^T}{2}\)</span>$</p>
+<p>验证：
+- <span class="arithmatex">\(\left(\frac{A + A^T}{2}\right)^T = \frac{A^T + A}{2} = \frac{A + A^T}{2}\)</span>，是对称矩阵 <span class="arithmatex">\(\in U_1\)</span>
+- <span class="arithmatex">\(\left(\frac{A - A^T}{2}\right)^T = \frac{A^T - A}{2} = -\frac{A - A^T}{2}\)</span>，是反对称矩阵 <span class="arithmatex">\(\in U_2\)</span></p>
+<p>故 <span class="arithmatex">\(V = U_1 + U_2\)</span>。</p>
+<p><strong>第二部分：证明 <span class="arithmatex">\(U_1 \cap U_2 = \{O\}\)</span></strong></p>
+<p>设 <span class="arithmatex">\(A \in U_1 \cap U_2\)</span>，则 <span class="arithmatex">\(A^T = A\)</span> 且 <span class="arithmatex">\(A^T = -A\)</span>，故 <span class="arithmatex">\(A = -A\)</span>，即 <span class="arithmatex">\(A = O\)</span>。</p>
+<p>因此 <span class="arithmatex">\(V = U_1 \oplus U_2\)</span>。</p>
+<p><strong>关键思路</strong>：证明直和需要两步——证明和是全空间，证明交集只有零元素。</p>
+<hr />
+<h3 id="_16">易错点提醒<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>⚠️ <strong>易错点1</strong>：子空间<strong>必须</strong>包含零向量
+- 若 <span class="arithmatex">\(U\)</span> 是子空间，则 <span class="arithmatex">\(\mathbf{0} \in U\)</span>（取 <span class="arithmatex">\(k = 0\)</span> 即得）
+- 这可以用来快速判断：不包含原点的直线/平面<strong>不是</strong>子空间</p>
+<p>⚠️ <strong>易错点2</strong>：直和的等价条件有<strong>四个</strong>，不只是"交集为零"
+- 学生常只记住 <span class="arithmatex">\(U_1 \cap U_2 = \{\mathbf{0}\}\)</span>，但另外三个条件同样重要
+- 特别是"零向量分解唯一"这个条件，证明中经常用到</p>
+<p>⚠️ <strong>易错点3</strong>：<span class="arithmatex">\(U_1 + U_2\)</span> 不是集合论中的并集
+- <span class="arithmatex">\(U_1 + U_2\)</span> 是 <span class="arithmatex">\(\{u_1 + u_2 \mid u_1 \in U_1, u_2 \in U_2\}\)</span>
+- <span class="arithmatex">\(U_1 \cup U_2\)</span> 通常<strong>不是</strong>子空间</p>
+</blockquote>
+<hr />
+<h3 id="_17">思考题<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>设 <span class="arithmatex">\(U_1, U_2\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。证明：<span class="arithmatex">\(U_1 \cup U_2\)</span> 是子空间 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(U_1 \subseteq U_2\)</span> 或 <span class="arithmatex">\(U_2 \subseteq U_1\)</span>。</p>
+</li>
+<li>
+<p>设 <span class="arithmatex">\(U_1, U_2, U_3\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间，且 <span class="arithmatex">\(V = U_1 \oplus U_2 = U_1 \oplus U_3\)</span>。问：<span class="arithmatex">\(U_2 = U_3\)</span> 是否成立？</p>
+</li>
+<li>
+<p>设 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_s\)</span> 和 <span class="arithmatex">\(\beta_1, \ldots, \beta_t\)</span> 是 <span class="arithmatex">\(V\)</span> 中的两组向量。证明：
+   $<span class="arithmatex">\(L(\alpha_1, \ldots, \alpha_s) + L(\beta_1, \ldots, \beta_t) = L(\alpha_1, \ldots, \alpha_s, \beta_1, \ldots, \beta_t)\)</span>$</p>
+</li>
+</ol>
+<hr />
+<h2 id="83-f">8.3 域F上线性空间的同构<a class="headerlink" href="#83-f" title="Permanent link">&para;</a></h2>
+<h3 id="_18">为什么要研究同构？<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p><strong>问题引入</strong>：
+我们已经知道 <span class="arithmatex">\(\mathbb{R}_2[x]\)</span>（次数不超过2的多项式）和 <span class="arithmatex">\(\mathbb{R}^3\)</span> 都是3维线性空间。它们"看起来"完全不同——一个是多项式，一个是向量。但从"线性结构"的角度看，它们是否"本质上相同"？</p>
+<p><strong>同构的概念</strong>就是为了回答这个问题：两个线性空间何时可以认为是"相同"的？</p>
+<hr />
+<h3 id="_19">一、同构映射的定义<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(V, V'\)</span> 是域 <span class="arithmatex">\(F\)</span> 上的线性空间。如果映射 <span class="arithmatex">\(\sigma: V \to V'\)</span> 满足：
+1. <span class="arithmatex">\(\sigma\)</span> 是<strong>双射</strong>（一一对应）
+2. <span class="arithmatex">\(\sigma(\alpha + \beta) = \sigma(\alpha) + \sigma(\beta)\)</span>（保持加法）
+3. <span class="arithmatex">\(\sigma(k\alpha) = k\sigma(\alpha)\)</span>（保持数乘）</p>
+<p>则称 <span class="arithmatex">\(\sigma\)</span> 是 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(V'\)</span> 的<strong>同构映射</strong>，称 <span class="arithmatex">\(V\)</span> 与 <span class="arithmatex">\(V'\)</span> <strong>同构</strong>，记作 <span class="arithmatex">\(V \cong V'\)</span>。</p>
+<p>📌 <strong>理解要点</strong>：
+- 同构映射保持所有线性运算——加法、数乘、线性组合
+- 同构的空间"线性结构完全相同"，只是元素的"名字"不同</p>
+</blockquote>
+<hr />
+<h3 id="_20">二、同构的基本定理<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：域 <span class="arithmatex">\(F\)</span> 上任意 <span class="arithmatex">\(n\)</span> 维线性空间都与 <span class="arithmatex">\(F^n\)</span> 同构。</p>
+</blockquote>
+<p><strong>证明</strong>：</p>
+<p>设 <span class="arithmatex">\(\alpha_1, \alpha_2, \ldots, \alpha_n\)</span> 是 <span class="arithmatex">\(V\)</span> 的一组基。定义映射：
+$<span class="arithmatex">\(\sigma: V \to F^n, \quad \sigma(\alpha) = (k_1, k_2, \ldots, k_n)\)</span>$</p>
+<p>其中 <span class="arithmatex">\((k_1, k_2, \ldots, k_n)\)</span> 是 <span class="arithmatex">\(\alpha\)</span> 在基 <span class="arithmatex">\(\{\alpha_1, \ldots, \alpha_n\}\)</span> 下的坐标。</p>
+<p><strong>验证同构映射的三个条件</strong>：
+1. <strong>双射</strong>：坐标表示唯一，故 <span class="arithmatex">\(\sigma\)</span> 是双射
+2. <strong>保持加法</strong>：设 <span class="arithmatex">\(\alpha, \beta\)</span> 的坐标分别为 <span class="arithmatex">\((k_1, \ldots, k_n)\)</span>，<span class="arithmatex">\((l_1, \ldots, l_n)\)</span>，则 <span class="arithmatex">\(\alpha + \beta\)</span> 的坐标为 <span class="arithmatex">\((k_1 + l_1, \ldots, k_n + l_n)\)</span>
+3. <strong>保持数乘</strong>：<span class="arithmatex">\(m\alpha\)</span> 的坐标为 <span class="arithmatex">\((mk_1, \ldots, mk_n)\)</span></p>
+<p>因此 <span class="arithmatex">\(V \cong F^n\)</span>。</p>
+<blockquote>
+<p>📌 <strong>意义</strong>：这个定理告诉我们，研究有限维线性空间，本质上只需要研究 <span class="arithmatex">\(F^n\)</span>！</p>
+</blockquote>
+<hr />
+<h3 id="_21">三、同构的判定<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：域 <span class="arithmatex">\(F\)</span> 上两个有限维线性空间 <span class="arithmatex">\(V, V'\)</span> 同构 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\dim V = \dim V'\)</span></p>
+</blockquote>
+<p><strong>证明</strong>：
+- (<span class="arithmatex">\(\Leftarrow\)</span>) 若 <span class="arithmatex">\(\dim V = \dim V' = n\)</span>，则 <span class="arithmatex">\(V \cong F^n\)</span>，<span class="arithmatex">\(V' \cong F^n\)</span>，故 <span class="arithmatex">\(V \cong V'\)</span>
+- (<span class="arithmatex">\(\Rightarrow\)</span>) 若 <span class="arithmatex">\(\sigma: V \to V'\)</span> 是同构映射，则 <span class="arithmatex">\(\sigma\)</span> 把 <span class="arithmatex">\(V\)</span> 的基映为 <span class="arithmatex">\(V'\)</span> 的基（为什么？），故维数相同</p>
+<hr />
+<h3 id="_22">典型例题<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">例1（验证题）验证同构映射<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(V = \mathbb{R}_2[x]\)</span>（次数不超过2的多项式），定义 <span class="arithmatex">\(\sigma: V \to \mathbb{R}^3\)</span> 为：
+$<span class="arithmatex">\(\sigma(a_0 + a_1 x + a_2 x^2) = (a_0, a_1, a_2)\)</span>$</p>
+<p>验证 <span class="arithmatex">\(\sigma\)</span> 是同构映射。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步：验证双射</strong></p>
+<p>对于任意 <span class="arithmatex">\((a_0, a_1, a_2) \in \mathbb{R}^3\)</span>，存在唯一的多项式 <span class="arithmatex">\(a_0 + a_1 x + a_2 x^2 \in V\)</span> 使得 <span class="arithmatex">\(\sigma\)</span> 把它映到 <span class="arithmatex">\((a_0, a_1, a_2)\)</span>。故 <span class="arithmatex">\(\sigma\)</span> 是双射。</p>
+<p><strong>第二步：验证保持加法</strong></p>
+<p>设 <span class="arithmatex">\(f(x) = a_0 + a_1 x + a_2 x^2\)</span>，<span class="arithmatex">\(g(x) = b_0 + b_1 x + b_2 x^2\)</span>，则：
+$<span class="arithmatex">\(\sigma(f + g) = \sigma((a_0 + b_0) + (a_1 + b_1)x + (a_2 + b_2)x^2) = (a_0 + b_0, a_1 + b_1, a_2 + b_2)\)</span>$
+$<span class="arithmatex">\(= (a_0, a_1, a_2) + (b_0, b_1, b_2) = \sigma(f) + \sigma(g)\)</span>$</p>
+<p><strong>第三步：验证保持数乘</strong></p>
+<div class="arithmatex">\[\sigma(kf) = \sigma(ka_0 + ka_1 x + ka_2 x^2) = (ka_0, ka_1, ka_2) = k(a_0, a_1, a_2) = k\sigma(f)\]</div>
+<p>因此 <span class="arithmatex">\(\sigma\)</span> 是同构映射，<span class="arithmatex">\(V \cong \mathbb{R}^3\)</span>。</p>
+<hr />
+<h4 id="2_2">例2（构造题）构造同构映射<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(V = M_{2 \times 2}(\mathbb{R})\)</span>（所有 <span class="arithmatex">\(2 \times 2\)</span> 矩阵），构造 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(\mathbb{R}^4\)</span> 的一个同构映射。</p>
+<p><strong>解答</strong>：</p>
+<p>取 <span class="arithmatex">\(V\)</span> 的标准基：
+$<span class="arithmatex">\(E_1 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \ E_2 = \begin{pmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}, \ E_3 = \begin{pmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{pmatrix}, \ E_4 = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>$</p>
+<p>定义映射：
+$<span class="arithmatex">\(\sigma: V \to \mathbb{R}^4, \quad \sigma\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} = (a, b, c, d)\)</span>$</p>
+<p>验证 <span class="arithmatex">\(\sigma\)</span> 是同构映射（类似例1，略）。</p>
+<p><strong>关键思路</strong>：把矩阵"拉直"成向量，这就是同构映射的本质。</p>
+<hr />
+<h3 id="_23">思考题<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>设 <span class="arithmatex">\(\sigma: V \to V'\)</span> 是同构映射。证明：<span class="arithmatex">\(\sigma\)</span> 把 <span class="arithmatex">\(V\)</span> 的基映为 <span class="arithmatex">\(V'\)</span> 的基。</p>
+</li>
+<li>
+<p>设 <span class="arithmatex">\(V, V'\)</span> 是有限维线性空间，<span class="arithmatex">\(\sigma: V \to V'\)</span> 是线性映射（保持加法和数乘但不一定是双射）。证明：
+   $<span class="arithmatex">\(\dim(\ker\sigma) + \dim(\text{Im}\sigma) = \dim V\)</span>$</p>
+</li>
+</ol>
+<hr />
+<h2 id="84">8.4 商空间<a class="headerlink" href="#84" title="Permanent link">&para;</a></h2>
+<h3 id="_24">商空间——最抽象的概念<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p><strong>问题引入</strong>：
+商空间是线性空间理论中最抽象的概念之一。为什么要引入它？</p>
+<p><strong>实际背景</strong>：考虑 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中过原点的平面 <span class="arithmatex">\(W\)</span>。如果我们"忽略"平行于 <span class="arithmatex">\(W\)</span> 的差异，会发生什么？</p>
+<ul>
+<li>向量 <span class="arithmatex">\((1, 0, 1)\)</span> 和 <span class="arithmatex">\((2, 0, 1)\)</span> 在 <span class="arithmatex">\(W\)</span> 的同一侧，它们到 <span class="arithmatex">\(W\)</span> 的"距离"相同</li>
+<li>我们可以把它们看作"等价"的</li>
+<li>这种"等价类"的集合，就构成了<strong>商空间</strong></li>
+</ul>
+<hr />
+<h3 id="_25">一、陪集与商空间<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间，<span class="arithmatex">\(\alpha \in V\)</span>。集合
+$<span class="arithmatex">\(\alpha + W = \{\alpha + w \mid w \in W\}\)</span>$
+称为 <span class="arithmatex">\(\alpha\)</span> 关于 <span class="arithmatex">\(W\)</span> 的<strong>陪集</strong>。</p>
+<p>📌 <strong>几何直观</strong>：
+- 在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中，若 <span class="arithmatex">\(W\)</span> 是过原点的平面，则 <span class="arithmatex">\(\alpha + W\)</span> 是平行于 <span class="arithmatex">\(W\)</span> 且过点 <span class="arithmatex">\(\alpha\)</span> 的平面
+- 陪集是 <span class="arithmatex">\(W\)</span> 的"平移"</p>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。在陪集集合 <span class="arithmatex">\(V/W = \{\alpha + W \mid \alpha \in V\}\)</span> 上定义：
+- 加法：<span class="arithmatex">\((\alpha + W) + (\beta + W) = (\alpha + \beta) + W\)</span>
+- 数乘：<span class="arithmatex">\(k(\alpha + W) = k\alpha + W\)</span></p>
+<p>则 <span class="arithmatex">\(V/W\)</span> 构成 <span class="arithmatex">\(F\)</span> 上的线性空间，称为 <span class="arithmatex">\(V\)</span> 关于 <span class="arithmatex">\(W\)</span> 的<strong>商空间</strong>。</p>
+<p>⚠️ <strong>注意</strong>：需要验证加法和数乘的定义是<strong>良定义</strong>的（即不依赖于代表元的选择）</p>
+</blockquote>
+<hr />
+<h3 id="_26">二、商空间的维数<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>定理</strong>：设 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的有限维子空间，则
+$<span class="arithmatex">\(\dim(V/W) = \dim V - \dim W\)</span>$</p>
+</blockquote>
+<p><strong>证明</strong>：</p>
+<p>设 <span class="arithmatex">\(\dim V = n\)</span>，<span class="arithmatex">\(\dim W = m\)</span>。取 <span class="arithmatex">\(W\)</span> 的一组基 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_m\)</span>，扩充为 <span class="arithmatex">\(V\)</span> 的基 <span class="arithmatex">\(\alpha_1, \ldots, \alpha_m, \alpha_{m+1}, \ldots, \alpha_n\)</span>。</p>
+<p><strong>关键观察</strong>：<span class="arithmatex">\(\{\alpha_{m+1} + W, \ldots, \alpha_n + W\}\)</span> 是 <span class="arithmatex">\(V/W\)</span> 的一组基。</p>
+<ul>
+<li><strong>线性无关性</strong>：若 <span class="arithmatex">\(k_{m+1}(\alpha_{m+1} + W) + \cdots + k_n(\alpha_n + W) = W\)</span>，则 <span class="arithmatex">\((k_{m+1}\alpha_{m+1} + \cdots + k_n\alpha_n) + W = W\)</span>，故 <span class="arithmatex">\(k_{m+1}\alpha_{m+1} + \cdots + k_n\alpha_n \in W\)</span>，因此 <span class="arithmatex">\(k_{m+1} = \cdots = k_n = 0\)</span>。</li>
+<li><strong>生成性</strong>：任意 <span class="arithmatex">\(\alpha + W \in V/W\)</span>，设 <span class="arithmatex">\(\alpha = \sum_{i=1}^n k_i \alpha_i\)</span>，则 <span class="arithmatex">\(\alpha + W = \sum_{i=m+1}^n k_i(\alpha_i + W)\)</span>。</li>
+</ul>
+<p>故 <span class="arithmatex">\(\dim(V/W) = n - m = \dim V - \dim W\)</span>。</p>
+<hr />
+<h3 id="_27">典型例题<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<h4 id="1_3">例1（计算题）商空间的实例<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h4>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(V = \mathbb{R}^3\)</span>，<span class="arithmatex">\(W = \{(x, y, 0) \mid x, y \in \mathbb{R}\}\)</span>（<span class="arithmatex">\(xy\)</span> 平面）。描述商空间 <span class="arithmatex">\(V/W\)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>陪集的几何意义</strong>：<span class="arithmatex">\(\alpha + W\)</span> 是平行于 <span class="arithmatex">\(xy\)</span> 平面且过点 <span class="arithmatex">\(\alpha\)</span> 的平面。</p>
+<p><strong>商空间的结构</strong>：两个向量 <span class="arithmatex">\(\alpha = (a_1, a_2, a_3)\)</span> 和 <span class="arithmatex">\(\beta = (b_1, b_2, b_3)\)</span> 在同一陪集中 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(a_3 = b_3\)</span>（因为 <span class="arithmatex">\(\alpha - \beta \in W \iff\)</span> 第三坐标相同）。</p>
+<p>因此，每个陪集由 <span class="arithmatex">\(z\)</span> 坐标唯一确定，<span class="arithmatex">\(V/W \cong \mathbb{R}\)</span>（同构映射：<span class="arithmatex">\((x, y, z) + W \mapsto z\)</span>）。</p>
+<p><strong>验证维数公式</strong>：<span class="arithmatex">\(\dim V = 3\)</span>，<span class="arithmatex">\(\dim W = 2\)</span>，<span class="arithmatex">\(\dim(V/W) = 1 = 3 - 2\)</span> ✓</p>
+<hr />
+<h3 id="_28">易错点提醒<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>⚠️ <strong>易错点1</strong>：商空间的元素是<strong>陪集</strong>，不是向量
+- <span class="arithmatex">\(V/W\)</span> 的元素是 <span class="arithmatex">\(\alpha + W\)</span>，不是 <span class="arithmatex">\(\alpha\)</span>
+- <span class="arithmatex">\(\alpha + W = \beta + W \iff \alpha - \beta \in W\)</span></p>
+<p>⚠️ <strong>易错点2</strong>：加法和数乘的定义需要验证<strong>良定义性</strong>
+- 若 <span class="arithmatex">\(\alpha + W = \alpha' + W\)</span> 和 <span class="arithmatex">\(\beta + W = \beta' + W\)</span>，需要验证 <span class="arithmatex">\((\alpha + \beta) + W = (\alpha' + \beta') + W\)</span></p>
+</blockquote>
+<hr />
+<h3 id="_29">思考题<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>设 <span class="arithmatex">\(V = \mathbb{R}^3\)</span>，<span class="arithmatex">\(W = \{(x, x, x) \mid x \in \mathbb{R}\}\)</span>（对角线）。求 <span class="arithmatex">\(\dim(V/W)\)</span> 并描述商空间的几何意义。</p>
+</li>
+<li>
+<p>证明：商空间的加法和数乘定义是良定义的。</p>
+</li>
+</ol>
+<hr />
+<h2 id="_30">本章小结<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h2>
+<h3 id="_31">核心概念与关系<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>线性空间 V
+    │
+    ├── 子空间 U ⊆ V
+    │       │
+    │       ├── 交 U₁ ∩ U₂
+    │       ├── 和 U₁ + U₂
+    │       └── 直和 U₁ ⊕ U₂ （分解唯一）
+    │
+    ├── 基与维数（刻画空间的&quot;大小&quot;）
+    │
+    ├── 同构 V ≅ V&#39;（维数相同）
+    │
+    └── 商空间 V/W（&quot;忽略&quot;W方向的差异）
+</code></pre></div></td></tr></table></div>
+<h3 id="_32">公式速记<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">公式</th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">维数公式</td>
+<td style="text-align: left;"><span class="arithmatex">\(\dim(U_1 + U_2) = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">直和条件</td>
+<td style="text-align: left;"><span class="arithmatex">\(U_1 \oplus U_2 \iff U_1 \cap U_2 = \{\mathbf{0}\}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">同构判定</td>
+<td style="text-align: left;"><span class="arithmatex">\(V \cong V' \iff \dim V = \dim V'\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">商空间维数</td>
+<td style="text-align: left;"><span class="arithmatex">\(\dim(V/W) = \dim V - \dim W\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_33">易错点总结<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<ol>
+<li>子空间必须包含零向量</li>
+<li>直和的等价条件有四个</li>
+<li>商空间的元素是陪集，不是向量</li>
+<li>线性空间的维数与"直观维数"可能不同</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3294 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>学习笔记：统计推断基础 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              学习笔记：统计推断基础
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换暗色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换暗色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="切换亮色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换亮色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../深度学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  深度学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../C++学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  C++学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../人工智能导引/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  人工智能导引
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../大数据解析和应用导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  大数据解析和应用导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../高等代数/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  高等代数
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../工科数学分析/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工科数学分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../华中杯/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  华中杯
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../英语阅读/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  英语阅读
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../疾病考古学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  疾病考古学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../民族传统体育/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  民族传统体育
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../通识选修课复习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  通识选修课复习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../html学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  html学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Linux学习/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Linux学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../2026_turing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  图灵论坛
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yuyangblue/note" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../深度学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../C++学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../人工智能导引/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人工智能导引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../大数据解析和应用导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据解析和应用导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../高等代数/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高等代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../工科数学分析/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工科数学分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../华中杯/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    华中杯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../英语阅读/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    英语阅读
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../疾病考古学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    疾病考古学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../民族传统体育/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    民族传统体育
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../通识选修课复习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    通识选修课复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../html学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    html学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux学习/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026_turing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图灵论坛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、什么是统计推断？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、什么是统计推断？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 描述统计 vs 推断统计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 核心思路
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、假设检验核心概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、假设检验核心概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 基本框架
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 决策规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 第一类与第二类错误
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、t检验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、t检验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 数学原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 数学原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.1 t统计量的构造
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2 为什么用t分布而不是正态分布？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 三种t检验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 三种t检验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1 单样本t检验
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2 独立样本t检验
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3 配对样本t检验
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 为什么配对样本更灵敏？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 判断流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、p值计算原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、p值计算原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 p值是什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 计算步骤
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 计算步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步：算出检验统计量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步：知道统计量的分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三步：算"尾部面积"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-pearsonp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 具体例子：Pearson相关的p值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 图形理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Python怎么算的？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 不同检验类型的 p 值计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 为什么用 t 分布而不是正态分布？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8 一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、卡方检验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、卡方检验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 卡方检验的类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 独立性检验原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-python-scipystatschi2_contingency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Python 实现：scipy.stats.chi2_contingency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Python 实现：scipy.stats.chi2_contingency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例：吸烟与肺癌的关联性分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 效应量指标
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 效应量指标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#541" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4.1 为什么需要效应量？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#542" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4.2 两个指标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#543-cramers-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4.3 Cramer's V 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#544" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4.4 一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、相关分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、相关分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-pearson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Pearson 相关系数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Pearson 相关系数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1 它是什么？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2 公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.3 更直观的理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#614" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.4 数值怎么读
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#615" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.5 图形理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#616" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.6 适用条件（重要！）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#617-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.7 为什么p值需要正态分布？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#618" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.8 一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#619-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.9 Python实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-spearman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Spearman 相关系数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Spearman 相关系数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#621-pearson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.1 它和Pearson有什么不同？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#622" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.2 公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#623" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.3 手算例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#624" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.4 为什么用"排名"就能检测非线性？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#625" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.5 图形理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#626-spearman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.6 什么时候用Spearman？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#627-spearmanp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.7 Spearman的p值怎么算？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#628" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.8 一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#629" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.9 简单记忆
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6210-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.10 Python实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、总结与选择指南
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、总结与选择指南">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 检验方法选择流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 关键记忆点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 竞赛应用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">学习笔记：统计推断基础<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">一、什么是统计推断？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="11-vs">1.1 描述统计 vs 推断统计<a class="headerlink" href="#11-vs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>内容</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>描述统计</strong></td>
+<td>用均值、方差、图表展示数据特征</td>
+<td>计算30名学生的平均分、画成绩直方图</td>
+</tr>
+<tr>
+<td><strong>推断统计</strong></td>
+<td>从样本推广到总体，判断差异是否真实存在</td>
+<td>判断某教学方法是否显著提高了成绩</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 核心思路<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p><strong>从样本推断总体</strong>：你不可能调查所有人，所以用样本数据推断整体规律。</p>
+<hr />
+<h2 id="_3">二、假设检验核心概念<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 基本框架<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>符号/定义</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>原假设 (H₀)</strong></td>
+<td>待检验的"零"假设</td>
+<td>通常表示"无效果"、"无差异"、"无关联"（如 μ = μ₀）</td>
+</tr>
+<tr>
+<td><strong>备择假设 (H₁)</strong></td>
+<td>与原假设对立</td>
+<td>表示"有效果"、"有差异"、"有关联"（如 μ ≠ μ₀）</td>
+</tr>
+<tr>
+<td><strong>显著性水平 (α)</strong></td>
+<td>通常取 0.05</td>
+<td>拒绝 H₀ 时允许的最大错误概率（第一类错误）</td>
+</tr>
+<tr>
+<td><strong>P 值</strong></td>
+<td>概率值（0≤P≤1）</td>
+<td>在 H₀ 成立的前提下，得到当前样本或更极端结果的概率</td>
+</tr>
+<tr>
+<td><strong>检验统计量</strong></td>
+<td>t、F、χ² 等</td>
+<td>根据样本数据计算的数值，用于与临界值比较</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22">2.2 决策规则<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>若 P ≤ α，则 <strong>拒绝 H₀</strong>，接受 H₁（差异有统计学意义）</li>
+<li>若 P &gt; α，则 <strong>不拒绝 H₀</strong>（证据不足以认为有差异）</li>
+</ul>
+<h3 id="23">2.3 第一类与第二类错误<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>现实</th>
+<th>判决无罪</th>
+<th>判决有罪</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实际上无罪</strong></td>
+<td>✅ 正确</td>
+<td>❌ 冤枉好人（第一类错误）</td>
+</tr>
+<tr>
+<td><strong>实际上有罪</strong></td>
+<td>❌ 放过坏人（第二类错误）</td>
+<td>✅ 正确</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>错误类型</th>
+<th>定义</th>
+<th>概率</th>
+<th>控制方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>第一类错误 (α)</strong></td>
+<td>H₀ 为真时错误拒绝</td>
+<td>α（通常 0.05）</td>
+<td>降低 α 值（如 0.01）</td>
+</tr>
+<tr>
+<td><strong>第二类错误 (β)</strong></td>
+<td>H₀ 为假时未能拒绝</td>
+<td>β</td>
+<td>增加样本量、提高效应量</td>
+</tr>
+</tbody>
+</table>
+<p><strong>功效 (Power)</strong> = 1 - β，即正确拒绝 H₀ 的概率。</p>
+<hr />
+<h2 id="t">三、t检验<a class="headerlink" href="#t" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 核心思想<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>用样本数据构造一个统计量，判断均值差异是否显著。</p>
+<h3 id="32">3.2 数学原理<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<h4 id="321-t">3.2.1 t统计量的构造<a class="headerlink" href="#321-t" title="Permanent link">&para;</a></h4>
+<p><strong>基本公式</strong>：</p>
+<div class="arithmatex">\[t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}\]</div>
+<p>其中：
+- <span class="arithmatex">\(\bar{x}\)</span>：样本均值
+- <span class="arithmatex">\(\mu_0\)</span>：假设的总体均值（或另一组样本的均值）
+- <span class="arithmatex">\(s\)</span>：样本标准差
+- <span class="arithmatex">\(n\)</span>：样本量
+- <span class="arithmatex">\(s/\sqrt{n}\)</span>：<strong>标准误</strong>（Standard Error）</p>
+<p><strong>关键洞察</strong>：
+- 分子 = 观察到的差异
+- 分母 = 这个差异的"不确定性"（误差范围）
+- t值 = 差异是误差的多少倍</p>
+<p><strong>如果t值很大</strong> → 差异远大于误差 → 差异是真实的，不是随机波动</p>
+<h4 id="322-t">3.2.2 为什么用t分布而不是正态分布？<a class="headerlink" href="#322-t" title="Permanent link">&para;</a></h4>
+<p><strong>问题</strong>：我们用样本标准差 <span class="arithmatex">\(s\)</span> 代替了总体标准差 <span class="arithmatex">\(\sigma\)</span>，这引入了额外的不确定性。</p>
+<p><strong>t分布的特点</strong>：
+- 比正态分布"更胖"（尾部更厚）
+- 自由度 <span class="arithmatex">\(df = n - 1\)</span> 越小，分布越胖
+- 当 <span class="arithmatex">\(n \to \infty\)</span> 时，t分布趋近于正态分布</p>
+<p><strong>胖尾意味着</strong>：极端值出现的概率更高，因为我们对总体标准差不确定。</p>
+<h3 id="33-t">3.3 三种t检验<a class="headerlink" href="#33-t" title="Permanent link">&para;</a></h3>
+<h4 id="331-t">3.3.1 单样本t检验<a class="headerlink" href="#331-t" title="Permanent link">&para;</a></h4>
+<p><strong>问题</strong>：样本均值 <span class="arithmatex">\(\bar{x}\)</span> 是否来自均值为 <span class="arithmatex">\(\mu_0\)</span> 的总体？</p>
+<p><strong>假设检验</strong>：
+- <span class="arithmatex">\(H_0: \mu = \mu_0\)</span>（样本来自该总体）
+- <span class="arithmatex">\(H_1: \mu \neq \mu_0\)</span>（样本不来自该总体）</p>
+<p><strong>检验统计量</strong>：
+$<span class="arithmatex">\(t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}\)</span>$</p>
+<p><strong>Python实现</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+
+<span class="c1"># 模拟数据：30 个样本，均值为 6.8，标准差 0.21</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">6.8</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.21</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># 单样本 t 检验：检验样本均值是否等于 7.4</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_1samp</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="n">popmean</span><span class="o">=</span><span class="mf">7.4</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;less&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 单样本 t 检验 (单侧检验) ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;样本均值: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;样本标准差: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t 统计量: </span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P 值: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P &lt; 0.05，拒绝 H₀。样本均值显著低于 7.4 分。&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P ≥ 0.05，不拒绝 H₀。无足够证据认为均值低于 7.4 分。&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>参数含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sample_data</code></td>
+<td>你的样本数据（30个观测值）</td>
+</tr>
+<tr>
+<td><code>popmean=7.4</code></td>
+<td>假设的总体均值</td>
+</tr>
+<tr>
+<td><code>alternative='less'</code></td>
+<td>备择假设：μ &lt; 7.4（单侧检验，左尾）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="332-t">3.3.2 独立样本t检验<a class="headerlink" href="#332-t" title="Permanent link">&para;</a></h4>
+<p><strong>问题</strong>：两组独立样本的均值是否相等？</p>
+<p><strong>假设检验</strong>：
+- <span class="arithmatex">\(H_0: \mu_1 = \mu_2\)</span>
+- <span class="arithmatex">\(H_1: \mu_1 \neq \mu_2\)</span></p>
+<p><strong>检验统计量</strong>（方差相等时）：
+$<span class="arithmatex">\(t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\)</span>$</p>
+<p><strong>合并方差</strong>（Pooled Variance）：
+$<span class="arithmatex">\(s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}\)</span>$</p>
+<p><strong>自由度</strong>：<span class="arithmatex">\(df = n_1 + n_2 - 2\)</span></p>
+<p><strong>Python实现</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 模拟两组独立样本</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">group_traditional</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># 传统方法</span>
+<span class="n">group_innovative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">82</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>   <span class="c1"># 创新方法（均值更高）</span>
+
+<span class="c1"># 先检查方差齐性（Levene 检验）</span>
+<span class="n">levene_stat</span><span class="p">,</span> <span class="n">levene_p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">levene</span><span class="p">(</span><span class="n">group_traditional</span><span class="p">,</span> <span class="n">group_innovative</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Levene 检验 (方差齐性): P = </span><span class="si">{</span><span class="n">levene_p</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 独立样本 t 检验（默认假设方差齐性）</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">group_traditional</span><span class="p">,</span> <span class="n">group_innovative</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== 独立样本 t 检验 ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;传统组均值: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">group_traditional</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">，标准差: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">group_traditional</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;创新组均值: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">group_innovative</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">，标准差: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">group_innovative</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t 统计量: </span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P 值 (双侧): </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P &lt; 0.05，拒绝 H₀。两种教学方法的效果有显著差异。&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P ≥ 0.05，不拒绝 H₀。无足够证据认为两种方法效果不同。&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="333-t">3.3.3 配对样本t检验<a class="headerlink" href="#333-t" title="Permanent link">&para;</a></h4>
+<p><strong>问题</strong>：同一组对象前后两次测量是否有差异？</p>
+<p><strong>核心思想</strong>：转化为<strong>差值的单样本t检验</strong></p>
+<p>设 <span class="arithmatex">\(d_i = x_{i,\text{后}} - x_{i,\text{前}}\)</span>，检验 <span class="arithmatex">\(\bar{d}\)</span> 是否显著不为0。</p>
+<p><strong>检验统计量</strong>：
+$<span class="arithmatex">\(t = \frac{\bar{d}}{s_d / \sqrt{n}}\)</span>$</p>
+<p>其中：
+- <span class="arithmatex">\(\bar{d}\)</span>：差值的均值
+- <span class="arithmatex">\(s_d\)</span>：差值的标准差
+- <span class="arithmatex">\(df = n - 1\)</span></p>
+<p><strong>Python实现</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 模拟配对数据（服药前、服药后）</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">before</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># 服药前体重（kg）</span>
+<span class="n">after</span> <span class="o">=</span> <span class="n">before</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># 服药后平均减重 3kg</span>
+
+<span class="c1"># 配对 t 检验</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_rel</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;greater&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 配对样本 t 检验 (单侧检验) ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;服药前均值: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">before</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg，标准差: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">before</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;服药后均值: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">after</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg，标准差: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">after</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;平均减重: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">before</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">after</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t 统计量: </span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P 值 (单侧): </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P &lt; 0.05，拒绝 H₀。减肥药有显著效果。&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P ≥ 0.05，不拒绝 H₀。无足够证据证明减肥药有效。&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="34">3.4 为什么配对样本更灵敏？<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p><strong>独立样本</strong>考虑的是组间差异 + 两组各自的变异</p>
+<p><strong>配对样本</strong>考虑的是每个人的变化，消除了个体差异</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>独立样本视角：
+A组：70, 75, 80, 85, 90  → 变异大
+B组：65, 70, 75, 80, 85  → 变异大
+差异似乎不明显？
+
+配对样本视角：
+学生1：70 → 75 (+5)
+学生2：75 → 82 (+7)
+学生3：80 → 86 (+6)
+...
+每个人都在进步 → 差异明显！
+</code></pre></div></td></tr></table></div>
+<p><strong>数学上</strong>：配对样本的标准误 <span class="arithmatex">\(s_d/\sqrt{n}\)</span> 通常远小于独立样本的标准误。</p>
+<h3 id="35">3.5 判断流程<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code>         计算 t 值
+             │
+             ▼
+    ┌────────────────┐
+    │ 查 t 分布表    │
+    │ 或计算 p 值    │
+    └────────┬───────┘
+             │
+             ▼
+    p &lt; 0.05？──否──→ 不能拒绝 H₀
+             │              （差异不显著）
+            是
+             │
+             ▼
+      拒绝 H₀
+    （差异显著）
+</code></pre></div></td></tr></table></div>
+<p><strong>p值的含义</strong>：如果H₀为真，观察到当前差异（或更极端）的概率。</p>
+<hr />
+<h2 id="p">四、p值计算原理<a class="headerlink" href="#p" title="Permanent link">&para;</a></h2>
+<h3 id="41-p">4.1 p值是什么？<a class="headerlink" href="#41-p" title="Permanent link">&para;</a></h3>
+<p><strong>p值 = 在零假设成立的情况下，出现当前结果（或更极端结果）的概率</strong></p>
+<p>打个比方：
+- 零假设 H₀：硬币是公平的
+- 你抛10次，9次正面
+- p值 = "公平硬币抛出9次及以上正面"的概率</p>
+<p>如果p值很小（比如&lt;0.05），说明"太巧合了"，硬币可能有问题。</p>
+<h3 id="42">4.2 计算步骤<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<h4 id="_4">第一步：算出检验统计量<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>不同的检验用不同的统计量：</p>
+<table>
+<thead>
+<tr>
+<th>检验类型</th>
+<th>检验统计量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t检验</td>
+<td>t值</td>
+</tr>
+<tr>
+<td>卡方检验</td>
+<td>χ²值</td>
+</tr>
+<tr>
+<td>Pearson相关</td>
+<td>t值（从r转换来）</td>
+</tr>
+<tr>
+<td>z检验</td>
+<td>z值</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_5">第二步：知道统计量的分布<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>检验统计量</th>
+<th>服从的分布</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t值</td>
+<td>t分布</td>
+</tr>
+<tr>
+<td>χ²值</td>
+<td>卡方分布</td>
+</tr>
+<tr>
+<td>z值</td>
+<td>标准正态分布</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_6">第三步：算"尾部面积"<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>根据统计量的值，在分布曲线上找位置，算出尾部面积——就是p值。</p>
+<h3 id="43-pearsonp">4.3 具体例子：Pearson相关的p值<a class="headerlink" href="#43-pearsonp" title="Permanent link">&para;</a></h3>
+<p><strong>从r到t</strong>：</p>
+<div class="arithmatex">\[t = r\sqrt{\frac{n-2}{1-r^2}}\]</div>
+<p>假设你算出：
+- r = 0.7
+- n = 30</p>
+<div class="arithmatex">\[t = 0.7 \times \sqrt{\frac{28}{1-0.49}} = 0.7 \times \sqrt{54.9} ≈ 5.18\]</div>
+<p><strong>查t分布表</strong>：</p>
+<p>自由度 df = n - 2 = 28</p>
+<p>t = 5.18 对应的尾部面积（双侧）≈ 0.00001</p>
+<p><strong>结论</strong>：p &lt; 0.05，显著相关。</p>
+<h3 id="44">4.4 图形理解<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>        t分布曲线（df=28）
+            ____
+          /      \
+         /        \
+    ____/          \____
+        ↑
+      t=5.18在这里
+        右边那个小尾巴的面积 = p值
+</code></pre></div></td></tr></table></div>
+<p>t值越大（离中心越远），尾部面积越小，p值越小。</p>
+<h3 id="45-python">4.5 Python怎么算的？<a class="headerlink" href="#45-python" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 方法1：直接用库</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># 库帮你算好了</span>
+
+<span class="c1"># 方法2：手动算</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># 双侧检验</span>
+</code></pre></div></td></tr></table></div>
+<p>那个 <code>stats.t.cdf</code> 就是查t分布的累积分布函数，相当于"查表"。</p>
+<h3 id="46-p">4.6 不同检验类型的 p 值计算<a class="headerlink" href="#46-p" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>检验类型</th>
+<th>p值计算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>双侧检验 <code>alternative='two-sided'</code></td>
+<td>p = 2 × (1 - CDF(</td>
+</tr>
+<tr>
+<td>右尾检验 <code>alternative='greater'</code></td>
+<td>p = 1 - CDF(t)</td>
+</tr>
+<tr>
+<td>左尾检验 <code>alternative='less'</code></td>
+<td>p = CDF(t)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="47-t">4.7 为什么用 t 分布而不是正态分布？<a class="headerlink" href="#47-t" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>用什么分布</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已知总体标准差 <span class="arithmatex">\(\sigma\)</span></td>
+<td>正态分布（Z检验）</td>
+</tr>
+<tr>
+<td>用样本标准差 <span class="arithmatex">\(s\)</span> 估计 <span class="arithmatex">\(\sigma\)</span></td>
+<td>t 分布（t检验）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>t分布比正态分布"更胖"</strong>，因为用样本标准差估计引入了额外的不确定性。</p>
+<h3 id="48">4.8 一句话总结<a class="headerlink" href="#48" title="Permanent link">&para;</a></h3>
+<p>p值 = 把你的统计量代入对应的概率分布，算出"这么极端或更极端"的概率。</p>
+<hr />
+<h2 id="_7">五、卡方检验<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>当变量为<strong>分类数据</strong>（如性别、血型、是否患病）时，卡方检验用于判断分类变量之间的关联性。</p>
+<h3 id="51">5.1 卡方检验的类型<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>检验类型</th>
+<th>目的</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>拟合优度检验</strong></td>
+<td>检验样本分布是否与理论分布一致</td>
+<td>判断骰子是否均匀、基因型分布是否符合孟德尔定律</td>
+</tr>
+<tr>
+<td><strong>独立性检验</strong></td>
+<td>检验两个分类变量是否独立</td>
+<td>吸烟与肺癌的关联、广告类型与购买意愿的关系</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52">5.2 独立性检验原理<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p>原假设 H₀：两个变量独立（无关联）
+备择假设 H₁：两个变量不独立（有关联）</p>
+<p>检验统计量：</p>
+<div class="arithmatex">\[\chi^2 = \sum \frac{(O_{ij} - E_{ij})^2}{E_{ij}}\]</div>
+<p>其中：
+- <span class="arithmatex">\(O_{ij}\)</span>：观察频数（实际观测到的计数）
+- <span class="arithmatex">\(E_{ij}\)</span>：期望频数（基于 H₀ 假设计算的期望计数）</p>
+<h3 id="53-python-scipystatschi2_contingency">5.3 Python 实现：<code>scipy.stats.chi2_contingency</code><a class="headerlink" href="#53-python-scipystatschi2_contingency" title="Permanent link">&para;</a></h3>
+<h4 id="_8">示例：吸烟与肺癌的关联性分析<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+
+<span class="c1"># 创建 2×2 列联表（吸烟 vs 肺癌）</span>
+<span class="c1"># 行：吸烟状态（吸烟、不吸烟）</span>
+<span class="c1"># 列：肺癌状态（患病、未患病）</span>
+<span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>   <span class="c1"># 吸烟组：120 人患病，80 人未患病</span>
+    <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">170</span><span class="p">]</span>    <span class="c1"># 不吸烟组：30 人患病，170 人未患病</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 2×2 列联表（吸烟 vs 肺癌）===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;            患病   未患病&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;吸烟     </span><span class="si">{</span><span class="n">observed</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">     </span><span class="si">{</span><span class="n">observed</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;不吸烟   </span><span class="si">{</span><span class="n">observed</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">     </span><span class="si">{</span><span class="n">observed</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;总计     </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">     </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 卡方独立性检验</span>
+<span class="n">chi2_stat</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== 卡方独立性检验结果 ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;卡方统计量: </span><span class="si">{</span><span class="n">chi2_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;自由度 (dof): </span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P 值: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;期望频数表:</span><span class="se">\n</span><span class="si">{</span><span class="n">expected</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 判断条件：期望频数至少大于 5</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">expected</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;检验有效性: 所有期望频数 ≥ 5，卡方检验有效。&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;警告: 部分期望频数 &lt; 5，卡方检验结果可能不可靠。&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P &lt; 0.05，拒绝 H₀。吸烟与肺癌存在显著关联。&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: P ≥ 0.05，不拒绝 H₀。无足够证据认为吸烟与肺癌有关。&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="54">5.4 效应量指标<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
+<h4 id="541">5.4.1 为什么需要效应量？<a class="headerlink" href="#541" title="Permanent link">&para;</a></h4>
+<p>卡方检验只告诉你："这两个变量有没有关系"（p值显著不显著）</p>
+<p>但它不说："关系有多强"</p>
+<p>打个比方：
+- p值显著 → 确认他俩是朋友
+- 效应量 → 告诉你是点头之交还是生死之交</p>
+<h4 id="542">5.4.2 两个指标<a class="headerlink" href="#542" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>适用场景</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phi 系数 (φ)</strong></td>
+<td>2×2 列联表</td>
+<td>取值范围 [0,1]，越大关联越强</td>
+</tr>
+<tr>
+<td><strong>Cramer's V</strong></td>
+<td>任意 r×c 列联表</td>
+<td>取值范围 [0,1]，修正样本量影响</td>
+</tr>
+</tbody>
+</table>
+<h4 id="543-cramers-v">5.4.3 Cramer's V 原理<a class="headerlink" href="#543-cramers-v" title="Permanent link">&para;</a></h4>
+<p><strong>从卡方统计量说起</strong>：</p>
+<p>卡方检验的统计量：</p>
+<div class="arithmatex">\[\chi^2 = \sum \frac{(O_{ij} - E_{ij})^2}{E_{ij}}\]</div>
+<p>问题来了：<strong>χ² 会受样本量影响</strong>。</p>
+<p>打个比方：
+- 同样的关联程度，样本量100 → χ² = 10
+- 样本量1000 → χ² = 100</p>
+<p>所以χ²不能直接衡量"关联强度"，因为它和样本量绑在一起。</p>
+<p><strong>Phi系数（2×2表格专用）</strong>：</p>
+<p>为了消除样本量影响，先有了Phi系数：</p>
+<div class="arithmatex">\[\phi = \sqrt{\frac{\chi^2}{n}}\]</div>
+<ul>
+<li><span class="arithmatex">\(n\)</span> 是总样本量</li>
+<li>除以n之后，就不受样本量影响了</li>
+<li>但只能用于2×2表格</li>
+</ul>
+<p><strong>Cramer's V（升级版）</strong>：</p>
+<p>当表格大于2×2时，Phi系数可能超过1，这就尴尬了。</p>
+<p>Cramer's V 加了个修正项：</p>
+<div class="arithmatex">\[V = \sqrt{\frac{\chi^2}{n \times k}}\]</div>
+<p>其中：
+- <span class="arithmatex">\(n\)</span> = 总样本量
+- <span class="arithmatex">\(k\)</span> = <span class="arithmatex">\(\min(r-1, c-1)\)</span>，即(行数-1)和(列数-1)中较小的那个</p>
+<p><strong>为什么除以k？</strong></p>
+<p>因为χ²的最大值和表格自由度有关。除以k之后，V就被"压"到0-1范围内了。</p>
+<p><strong>手算例子</strong>：</p>
+<p>假设一个3×2的列联表：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>购买</th>
+<th>不购买</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>看广告</td>
+<td>50</td>
+<td>30</td>
+</tr>
+<tr>
+<td>没看广告</td>
+<td>20</td>
+<td>40</td>
+</tr>
+<tr>
+<td>不确定</td>
+<td>10</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>χ² = 15.2（算出来的）
+n = 50+30+20+40+10+20 = 170
+k = min(3-1, 2-1) = min(2, 1) = 1
+
+V = √(15.2 / (170 × 1)) = √0.089 ≈ 0.30
+</code></pre></div></td></tr></table></div>
+<p><strong>解读</strong>：中等偏强的关联。</p>
+<p><strong>数值怎么读？</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>V &lt; 0.1   →  弱关联（有关系，但很弱）
+0.1-0.3   →  中等关联
+V ≥ 0.3   →  强关联
+</code></pre></div></td></tr></table></div>
+<p><strong>Python实现</strong>：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 计算效应量（以 Cramer&#39;s V 为例）</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cramers_v</span><span class="p">(</span><span class="n">observed</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算 Cramer&#39;s V 效应量&quot;&quot;&quot;</span>
+    <span class="n">chi2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">observed</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">min_dim</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">observed</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">chi2</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">min_dim</span><span class="p">))</span>
+
+<span class="n">v_stat</span> <span class="o">=</span> <span class="n">cramers_v</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cramer&#39;s V 效应量: </span><span class="si">{</span><span class="n">v_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">v_stat</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;效应量解释: 弱关联 (V &lt; 0.1)&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">v_stat</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;效应量解释: 中等关联 (0.1 ≤ V &lt; 0.3)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;效应量解释: 强关联 (V ≥ 0.3)&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="544">5.4.4 一句话总结<a class="headerlink" href="#544" title="Permanent link">&para;</a></h4>
+<p>Cramer's V 就是把卡方统计量"标准化"——除掉样本量和表格维度的影响，得到一个0-1之间的数，告诉你两个变量关联到底有多强。</p>
+<hr />
+<h2 id="_9">六、相关分析<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="61-pearson">6.1 Pearson 相关系数<a class="headerlink" href="#61-pearson" title="Permanent link">&para;</a></h3>
+<h4 id="611">6.1.1 它是什么？<a class="headerlink" href="#611" title="Permanent link">&para;</a></h4>
+<p>Pearson相关系数衡量的是<strong>两个变量之间的线性相关程度</strong>。</p>
+<p>注意关键词：<strong>线性</strong>。它只能发现"直线的"关系，曲线关系它检测不到。</p>
+<h4 id="612">6.1.2 公式<a class="headerlink" href="#612" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}\]</div>
+<p>看着吓人？拆开看：</p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\((x_i - \bar{x})\)</span></td>
+<td>x的离差（x到平均值的距离）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((y_i - \bar{y})\)</span></td>
+<td>y的离差</td>
+</tr>
+<tr>
+<td>分子</td>
+<td>x和y的<strong>协方差</strong></td>
+</tr>
+<tr>
+<td>分母</td>
+<td>x和y各自的标准差相乘</td>
+</tr>
+</tbody>
+</table>
+<h4 id="613">6.1.3 更直观的理解<a class="headerlink" href="#613" title="Permanent link">&para;</a></h4>
+<p>公式可以简化为：</p>
+<div class="arithmatex">\[r = \frac{\text{协方差}(X, Y)}{\sigma_X \cdot \sigma_Y}\]</div>
+<p><strong>协方差</strong>告诉你：x和y是不是"同进同退"
+- x大、y也大 → 协方差 &gt; 0
+- x大、y反而小 → 协方差 &lt; 0</p>
+<p><strong>除以标准差</strong>是为了"标准化"，把范围压到-1到1之间。</p>
+<h4 id="614">6.1.4 数值怎么读<a class="headerlink" href="#614" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>r值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(r = 1\)</span></td>
+<td>完美正相关（点都在一条直线上，斜向上）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(r = -1\)</span></td>
+<td>完美负相关（点都在一条直线上，斜向下）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(r = 0\)</span></td>
+<td>没有线性关系</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0 &lt; r &lt; 1\)</span></td>
+<td>正相关，越接近1越强</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(-1 &lt; r &lt; 0\)</span></td>
+<td>负相关，越接近-1越强</td>
+</tr>
+</tbody>
+</table>
+<h4 id="615">6.1.5 图形理解<a class="headerlink" href="#615" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>r = 0.9 (强正相关)      r = -0.8 (强负相关)      r ≈ 0 (无线性关系)
+    ·  ·                      ·                         ·    ·
+   ·  ·                    ·    ·                    ·        ·
+  ·  ·                   ·      ·                  ·  ·  ·    ·
+ ·  ·                  ·        ·                ·      ·     ·
+·  ·                 ·          ·             ·    ·    ·    ·
+/斜向上             \斜向下                    乱糟糟一团
+</code></pre></div></td></tr></table></div>
+<h4 id="616">6.1.6 适用条件（重要！）<a class="headerlink" href="#616" title="Permanent link">&para;</a></h4>
+<p>Pearson相关系数有前提假设：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>为什么重要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据是连续变量</td>
+<td>分类变量不能用</td>
+</tr>
+<tr>
+<td>两个变量都是正态分布</td>
+<td>不满足的话p值不准</td>
+</tr>
+<tr>
+<td>关系是线性的</td>
+<td>曲线关系它检测不到</td>
+</tr>
+<tr>
+<td>没有极端异常值</td>
+<td>异常值会严重拉偏r</td>
+</tr>
+</tbody>
+</table>
+<p>如果数据不符合这些条件，可以用 <strong>Spearman相关系数</strong>（基于秩次，不要求正态）。</p>
+<h4 id="617-p">6.1.7 为什么p值需要正态分布？<a class="headerlink" href="#617-p" title="Permanent link">&para;</a></h4>
+<p><strong>Pearson检验的逻辑</strong>：</p>
+<p>我们想检验：<strong>这个相关系数是真的有，还是随机凑出来的？</strong></p>
+<p>检验统计量：</p>
+<div class="arithmatex">\[t = r\sqrt{\frac{n-2}{1-r^2}}\]</div>
+<p>这个t值服从t分布——<strong>前提是数据来自二元正态分布</strong>。</p>
+<p>如果数据不正态，t分布就不准了，p值也就不可信。</p>
+<p><strong>r值为什么不受影响？</strong></p>
+<p>因为r只是描述性统计——它告诉你"这两个变量一起变化的程度"。</p>
+<p>不管数据正不正态，协方差和标准差都能算，r值也能算。</p>
+<p><strong>问题在于</strong>：算出r=0.7之后，你怎么知道这是"真的相关"还是"碰巧"？</p>
+<p>这就需要p值，而p值的计算假设了正态性。</p>
+<p><strong>怎么办？</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用Spearman</td>
+<td>数据不正态，换基于排名的方法</td>
+</tr>
+<tr>
+<td>做数据变换</td>
+<td>比如取log，让数据接近正态</td>
+</tr>
+<tr>
+<td>Bootstrap</td>
+<td>用重采样方法算p值，不依赖分布假设</td>
+</tr>
+</tbody>
+</table>
+<h4 id="618">6.1.8 一句话总结<a class="headerlink" href="#618" title="Permanent link">&para;</a></h4>
+<p>Pearson相关系数 = 标准化后的协方差，告诉你两个变量"一起变化"的程度，范围-1到1。</p>
+<h4 id="619-python">6.1.9 Python实现<a class="headerlink" href="#619-python" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># 生成模拟数据（身高 vs 体重）</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># 身高 (cm)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">height</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># 体重 (kg)</span>
+
+<span class="c1"># 计算 Pearson 相关系数</span>
+<span class="n">pearson_r</span><span class="p">,</span> <span class="n">pearson_p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Pearson 相关系数 ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pearson r = </span><span class="si">{</span><span class="n">pearson_r</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P 值 = </span><span class="si">{</span><span class="n">pearson_p</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">pearson_p</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">pearson_r</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 极强正相关 (r &gt; 0.7)&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pearson_r</span> <span class="o">&gt;</span> <span class="mf">0.4</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 中等正相关 (0.4 &lt; r ≤ 0.7)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 弱正相关 (0 &lt; r ≤ 0.4)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 相关系数不显著 (P ≥ 0.05)&quot;</span><span class="p">)</span>
+
+<span class="c1"># 可视化</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Height (cm)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Weight (kg)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Height vs Weight (Pearson r = </span><span class="si">{</span><span class="n">pearson_r</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, P = </span><span class="si">{</span><span class="n">pearson_p</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="62-spearman">6.2 Spearman 相关系数<a class="headerlink" href="#62-spearman" title="Permanent link">&para;</a></h3>
+<h4 id="621-pearson">6.2.1 它和Pearson有什么不同？<a class="headerlink" href="#621-pearson" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Pearson</th>
+<th>Spearman</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>衡量什么</td>
+<td><strong>线性</strong>关系</td>
+<td><strong>单调</strong>关系</td>
+</tr>
+<tr>
+<td>用什么数据</td>
+<td>原始数值</td>
+<td><strong>排名（秩次）</strong></td>
+</tr>
+<tr>
+<td>要正态分布吗</td>
+<td>要</td>
+<td>不用</td>
+</tr>
+<tr>
+<td>能检测曲线吗</td>
+<td>不能</td>
+<td>能（只要是单调的）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键区别</strong>：Spearman不看具体数值，只看"谁大谁小"——排名。</p>
+<h4 id="622">6.2.2 公式<a class="headerlink" href="#622" title="Permanent link">&para;</a></h4>
+<p>先给每个数据点算排名：</p>
+<div class="arithmatex">\[r_s = 1 - \frac{6\sum d_i^2}{n(n^2-1)}\]</div>
+<p>其中 <span class="arithmatex">\(d_i\)</span> = x的排名 - y的排名（排名差）</p>
+<h4 id="623">6.2.3 手算例子<a class="headerlink" href="#623" title="Permanent link">&para;</a></h4>
+<p>假设5个人的学习时间和成绩：</p>
+<table>
+<thead>
+<tr>
+<th>人</th>
+<th>学习时间</th>
+<th>成绩</th>
+<th>时间排名</th>
+<th>成绩排名</th>
+<th>d (排名差)</th>
+<th>d²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>10小时</td>
+<td>60分</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>B</td>
+<td>20小时</td>
+<td>75分</td>
+<td>2</td>
+<td>3</td>
+<td>-1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>C</td>
+<td>30小时</td>
+<td>70分</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>D</td>
+<td>40小时</td>
+<td>85分</td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>E</td>
+<td>50小时</td>
+<td>90分</td>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[r_s = 1 - \frac{6 \times (0+1+1+0+0)}{5 \times (25-1)} = 1 - \frac{12}{120} = 0.9\]</div>
+<p><strong>结论</strong>：强单调正相关。</p>
+<h4 id="624">6.2.4 为什么用"排名"就能检测非线性？<a class="headerlink" href="#624" title="Permanent link">&para;</a></h4>
+<p>看数据：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">exam_score</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">study_hours</span><span class="p">)</span> <span class="o">+</span> <span class="n">噪声</span>
+</code></pre></div></td></tr></table></div>
+<p>这是个<strong>对数曲线</strong>，不是直线！</p>
+<p>但它是<strong>单调递增</strong>的：
+- 学习时间越长 → 成绩越高
+- 曲线向上走，只是不是直线</p>
+<p>用Pearson的话，因为不是直线，r值会被拉低。
+用Spearman的话，它只关心排名——不管曲线多弯，只要"越大越大"，就能检测出来。</p>
+<h4 id="625">6.2.5 图形理解<a class="headerlink" href="#625" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>Pearson擅长：直线              Spearman擅长：单调曲线
+    ·                              ·
+   ·                                ·
+  ·                                  ·
+ ·                                    ·
+·                                      ·
+/直线                              ᵎ曲线（对数、指数等）
+</code></pre></div></td></tr></table></div>
+<h4 id="626-spearman">6.2.6 什么时候用Spearman？<a class="headerlink" href="#626-spearman" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>为什么选Spearman</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据有极端异常值</td>
+<td>排名对异常值不敏感</td>
+</tr>
+<tr>
+<td>数据不是正态分布</td>
+<td>Spearman不要求正态</td>
+</tr>
+<tr>
+<td>关系是非线性但单调</td>
+<td>Pearson检测不到曲线</td>
+</tr>
+<tr>
+<td>数据是顺序变量</td>
+<td>比如"很满意/满意/一般/不满意"</td>
+</tr>
+</tbody>
+</table>
+<h4 id="627-spearmanp">6.2.7 Spearman的p值怎么算？<a class="headerlink" href="#627-spearmanp" title="Permanent link">&para;</a></h4>
+<p><strong>分情况讨论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>样本量</th>
+<th>计算方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>小样本（n ≤ 30）</strong></td>
+<td>查表法（专门的Spearman临界值表）</td>
+</tr>
+<tr>
+<td><strong>大样本（n &gt; 30）</strong></td>
+<td>近似t检验（和Pearson类似）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>小样本：查表法</strong></p>
+<p>因为Spearman是基于排名的，当样本量很小时，可能的排名组合有限，p值可以<strong>精确计算</strong>。</p>
+<p>比如 n=5 时，两个变量的排名组合只有有限的几种，每种组合对应的ρ值是确定的。</p>
+<p>所以不用假设分布，直接查<strong>Spearman秩相关临界值表</strong>。</p>
+<p><strong>大样本：近似t检验</strong></p>
+<p>当n很大时（&gt;30），Spearman的ρ近似服从正态分布，可以用t检验：</p>
+<div class="arithmatex">\[t = \rho\sqrt{\frac{n-2}{1-\rho^2}}\]</div>
+<p>和Pearson公式一模一样，只是把r换成了ρ。</p>
+<p><strong>Python怎么实现的？</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>内部逻辑：
+- 如果n ≤ 30 → 用精确算法（permutation test或查表）
+- 如果n &gt; 30 → 用近似正态分布</p>
+<p>所以你不用自己操心，库会自动选方法。</p>
+<p><strong>和Pearson的区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Pearson</th>
+<th>Spearman</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小样本p值</td>
+<td>依赖正态假设，不准</td>
+<td>精确计算，更准</td>
+</tr>
+<tr>
+<td>大样本p值</td>
+<td>t检验</td>
+<td>也是t检验（近似）</td>
+</tr>
+<tr>
+<td>分布假设</td>
+<td>要求二元正态</td>
+<td>不要求分布</td>
+</tr>
+</tbody>
+</table>
+<h4 id="628">6.2.8 一句话总结<a class="headerlink" href="#628" title="Permanent link">&para;</a></h4>
+<p>Spearman相关系数 = 把数据换成排名，再算Pearson。能检测"单调关系"，不要求正态，不怕异常值。</p>
+<h4 id="629">6.2.9 简单记忆<a class="headerlink" href="#629" title="Permanent link">&para;</a></h4>
+<ul>
+<li>数据正态 + 线性关系 → 用Pearson</li>
+<li>数据不正态 / 非线性但单调 / 有异常值 → 用Spearman</li>
+</ul>
+<h4 id="6210-python">6.2.10 Python实现<a class="headerlink" href="#6210-python" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 生成非线性但单调的数据（学习时间 vs 考试成绩）</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">study_hours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># 学习时间 (小时)</span>
+<span class="n">exam_score</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">study_hours</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># 考试成绩</span>
+
+<span class="c1"># 计算 Spearman 相关系数</span>
+<span class="n">spearman_rho</span><span class="p">,</span> <span class="n">spearman_p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">study_hours</span><span class="p">,</span> <span class="n">exam_score</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Spearman 相关系数 ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spearman ρ = </span><span class="si">{</span><span class="n">spearman_rho</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P 值 = </span><span class="si">{</span><span class="n">spearman_p</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">spearman_p</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">spearman_rho</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 强单调正相关 (ρ &gt; 0.6)&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">spearman_rho</span> <span class="o">&gt;</span> <span class="mf">0.3</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 中等单调正相关 (0.3 &lt; ρ ≤ 0.6)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 弱单调正相关 (0 &lt; ρ ≤ 0.3)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论: 单调关系不显著 (P ≥ 0.05)&quot;</span><span class="p">)</span>
+
+<span class="c1"># 可视化</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">study_hours</span><span class="p">,</span> <span class="n">exam_score</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Study Hours&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Exam Score&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Study Hours vs Exam Score (Spearman ρ = </span><span class="si">{</span><span class="n">spearman_rho</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, P = </span><span class="si">{</span><span class="n">spearman_p</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_10">七、总结与选择指南<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 检验方法选择流程<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>数据类型？
+├─ 数值型（连续）
+│   ├─ 比较两组均值？
+│   │   ├─ 独立样本 → 独立样本t检验
+│   │   └─ 同一样本前后测量 → 配对样本t检验
+│   └─ 研究变量关系？
+│       ├─ 线性关系 + 正态 → Pearson相关
+│       └─ 单调关系 / 非正态 → Spearman相关
+└─ 分类（离散）
+    └─ 研究变量关联 → 卡方检验
+</code></pre></div></td></tr></table></div>
+<h3 id="72">7.2 关键记忆点<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>一句话记住</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p值</td>
+<td>零假设成立时，得到当前或更极端结果的概率</td>
+</tr>
+<tr>
+<td>t检验</td>
+<td>用"差异/误差"的比值判断均值差异</td>
+</tr>
+<tr>
+<td>卡方检验</td>
+<td>比较观察值和期望值的差距</td>
+</tr>
+<tr>
+<td>Pearson</td>
+<td>线性相关，要正态</td>
+</tr>
+<tr>
+<td>Spearman</td>
+<td>单调相关，看排名</td>
+</tr>
+<tr>
+<td>效应量</td>
+<td>告诉你关系有多强（不仅是有没有）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73">7.3 竞赛应用场景<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>问卷数据分析（满意度、选择偏好）</td>
+<td>卡方检验 + Cramer's V</td>
+</tr>
+<tr>
+<td>实验组vs对照组效果比较</td>
+<td>独立样本t检验</td>
+</tr>
+<tr>
+<td>前后测数据（培训效果、干预效果）</td>
+<td>配对样本t检验</td>
+</tr>
+<tr>
+<td>多个变量相关性分析（如经济指标）</td>
+<td>Pearson/Spearman相关分析</td>
+</tr>
+<tr>
+<td>寻找影响结果的关键因素</td>
+<td>结合相关分析和假设检验</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>最后提醒</strong>：选择方法时，先看数据类型，再看数据分布，最后看研究问题！</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 鱼汤
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
