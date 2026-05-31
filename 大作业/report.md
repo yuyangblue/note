@@ -171,11 +171,7 @@ $$
 
 其中 k 为预设的潜在维度。整体优化问题是**非凸**的：
 
-$$
-\min_{U,V} \; \sum_{(i,j)\in\Omega} \bigl( M_{ij} - (UV^T)_{ij} \bigr)^2 + \lambda\bigl(\|U\|_F^2 + \|V\|_F^2\bigr).
-\tag{10}
-\tag{LRMC}
-$$
+$$ \min_{U,V} \; \sum_{(i,j)\in\Omega} \bigl( M_{ij} - (UV^T)_{ij} \bigr)^2 + \lambda\bigl(\|U\|_F^2 + \|V\|_F^2\bigr) \tag{10, LRMC} $$
 
 式 (10) 即文献 [2] 中的 **(LRMC)** 问题形式化，也是文献 [3] 引言中讨论的优化目标。然而，若固定 U 优化 V（或反之），每个子问题都是凸的**正则化最小二乘**，可解析求解。这就是"交替"一词的含义。
 
