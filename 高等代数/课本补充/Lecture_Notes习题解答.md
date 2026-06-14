@@ -1,13 +1,3 @@
----
-AIGC:
-    Label: "1"
-    ContentProducer: 001191110102MACQD9K64018705
-    ProduceID: 7625646103391912243-data_volume/files/所有对话/主对话/Lecture_Notes习题解答.md
-    ReservedCode1: ""
-    ContentPropagator: 001191110102MACQD9K64028705
-    PropagateID: 1470511051441884#1781425430005
-    ReservedCode2: ""
----
 # Lecture Notes 习题解答
 
 ---
