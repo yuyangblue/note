@@ -875,7 +875,7 @@ $$P^2 = A(A^T A)^{-1} A^T = P$$
 
 **第三步：证明 $Pb \in \operatorname{Col}(A)$
 
-$$Pb = A(A^T A)^{-1} A^T b = A \cdot [(A^T A)^{-1} A^T b$$
+$$Pb = A(A^T A)^{-1} A^T b = A \cdot [(A^T A)^{-1} A^T b]$$
 
 这是 $A$ 乘以一个向量（即 $(A^T A)^{-1} A^T b$），因此 $Pb$ 是 $A$ 的列的线性组合，属于 $\operatorname{Col}(A)$。✓
 
