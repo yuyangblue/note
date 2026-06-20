@@ -1,23 +1,5 @@
----
-AIGC:
-  Label: "1",
-  "ContentProducer":   "00191310104MAC2G6EG4100000003",
-  "ContentPropagator": "00191310104MAC2G6EG4100000003",
-  "ProduceID":         "u-4dc2a7-2f9a1161-b6ea-4bf0-a2db-f7acf890add4",
-  "PropagateID":       "u-4dc2a7-2f9a1161-b6ea-4bf0-a2db-f7acf890add4",
-  "ReservedCode1":     "",
-  "ReservedCode2":     "",
----
----
-AIGC:
-  Label: "1",
-  "ContentProducer":   "00191310104MAC2G6EG4100000003",
-  "ContentPropagator": "00191310104MAC2G6EG4100000003",
-  "ProduceID":         "u-4dc2a7-313cc7fe-a1a2-436b-b572-24534dcc518e",
-  "PropagateID":       "u-4dc2a7-313cc7fe-a1a2-436b-b572-24534dcc518e",
-  "ReservedCode1":     "",
-  "ReservedCode2":     "",
----
+
+
 # 第五章 第四节　多元函数的 Taylor 公式与极值问题
 
 > 详尽学习笔记（基于《工科数学分析基础（第三版）下册》马知恩、王绵森 著）

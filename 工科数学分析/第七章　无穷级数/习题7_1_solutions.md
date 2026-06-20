@@ -1,13 +1,4 @@
----
-AIGC:
-  Label: "1",
-  "ContentProducer":   "00191310104MAC2G6EG4100000003",
-  "ContentPropagator": "00191310104MAC2G6EG4100000003",
-  "ProduceID":         "u-4dc2a7-9610f4a0-872e-4013-9462-939df90ee799",
-  "PropagateID":       "u-4dc2a7-9610f4a0-872e-4013-9462-939df90ee799",
-  "ReservedCode1":     "",
-  "ReservedCode2":     "",
----
+
 # 工科数学分析基础（下册·第三版，马知恩/王绵森）—— 习题 7.1 解答
 
 > 范围：习题 7.1（pp. 285–289）  
