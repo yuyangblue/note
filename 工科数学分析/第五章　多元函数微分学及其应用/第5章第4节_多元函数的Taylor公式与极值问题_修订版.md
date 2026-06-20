@@ -1,5 +1,4 @@
 
-
 # 第五章 第四节　多元函数的 Taylor 公式与极值问题
 
 > 详尽学习笔记（基于《工科数学分析基础（第三版）下册》马知恩、王绵森 著）
@@ -45,17 +44,91 @@ $$\varphi(1)=\varphi(0)+\varphi'(0)+\tfrac{1}{2}\varphi''(\theta),\quad \theta\i
 
 ### 4. 高阶二元 Taylor 公式（算子形式）
 
-记微分算子 $D=\Delta x\,\dfrac{\partial}{\partial x}+\Delta y\,\dfrac{\partial}{\partial y}$，则
+#### (1) 微分算子 $D$ 的定义
+
+为简化高阶 Taylor 项的书写，引入**一阶微分算子**
 
 $$
-f(x_0+\Delta x,y_0+\Delta y)=\sum_{k=0}^{n}\frac{1}{k!}D^k f(x_0,y_0)+R_n,
+D \;:=\; \Delta x\,\frac{\partial}{\partial x}+\Delta y\,\frac{\partial}{\partial y}.
 $$
 
-其中 Lagrange 余项
-$$R_n=\frac{1}{(n+1)!}D^{n+1}f(x_0+\theta\Delta x,\,y_0+\theta\Delta y),\quad \theta\in(0,1).$$
+注意三点：
 
-其中
-$$D^k f=\sum_{i=0}^{k}\binom{k}{i}\Delta x^{k-i}\Delta y^{i}\,\frac{\partial^k f}{\partial x^{k-i}\partial y^{i}}.$$
+- $D$ 不是数，而是一个**作用在函数上的算子**：把 $D$ 作用到 $f$ 上，得到一个新的函数
+  $$
+  Df = f_x\,\Delta x+f_y\,\Delta y;
+  $$
+- 这里的 $\Delta x,\Delta y$ 是**与 $x,y$ 无关的常数**（增量），求偏导时可视为常数因子；
+- 当 $f$ 有足够阶的连续偏导数时，$\partial_x$ 与 $\partial_y$ 可交换，故 $D$ 可像普通"变量"那样作幂运算。
+
+#### (2) $D^k f$ 的展开（二项式定理）
+
+由于 $\partial_x,\partial_y$ 可交换，对 $D^k$ 直接应用二项式定理：
+
+$$
+D^k=\Bigl(\Delta x\,\partial_x+\Delta y\,\partial_y\Bigr)^{k}
+=\sum_{i=0}^{k}\binom{k}{i}(\Delta x)^{k-i}(\Delta y)^{i}\,\frac{\partial^{k}}{\partial x^{k-i}\partial y^{i}},
+$$
+
+作用到 $f$ 上即
+
+$$
+\boxed{\;D^k f(x_0,y_0)=\sum_{i=0}^{k}\binom{k}{i}(\Delta x)^{k-i}(\Delta y)^{i}\,\frac{\partial^{k} f}{\partial x^{k-i}\partial y^{i}}\bigg|_{(x_0,y_0)}.\;}
+$$
+
+**低阶验证：**
+
+- $k=1$：$Df(x_0,y_0)=f_x\Delta x+f_y\Delta y$，正是 (4.1) 的一阶项；
+- $k=2$：$D^2 f(x_0,y_0)=f_{xx}\Delta x^2+2f_{xy}\Delta x\Delta y+f_{yy}\Delta y^2$，正是 (4.2) 方括号内的二阶项。
+
+#### (3) 用算子 $D$ 写出 $n$ 阶 Taylor 公式
+
+仍用"化多为一"的辅助函数
+
+$$
+\varphi(t)=f(x_0+t\,\Delta x,\;y_0+t\,\Delta y),\qquad t\in[0,1].
+$$
+
+**关键事实：** 由链式法则归纳可证
+
+$$
+\varphi^{(k)}(t)=D^k f\bigl(x_0+t\Delta x,\,y_0+t\Delta y\bigr),\quad k=0,1,2,\dots,n+1.
+$$
+
+> *归纳要点：* $k=1$ 时由链式法则直接验证；设结论对 $k$ 成立，再对 $t$ 求一次导并使用链式法则，即得 $\varphi^{(k+1)}=D(D^k f)=D^{k+1}f$。
+
+特别地
+
+$$
+\varphi^{(k)}(0)=D^k f(x_0,y_0).
+$$
+
+对一元函数 $\varphi$ 在 $t=0$ 处展开到 $n$ 阶并取 $t=1$：
+
+$$
+\varphi(1)=\sum_{k=0}^{n}\frac{\varphi^{(k)}(0)}{k!}+R_n=\sum_{k=0}^{n}\frac{1}{k!}D^k f(x_0,y_0)+R_n,
+$$
+
+而 $\varphi(1)=f(x_0+\Delta x,y_0+\Delta y)$，于是得到**算子形式的高阶 Taylor 公式**：
+
+$$
+\boxed{\;f(x_0+\Delta x,y_0+\Delta y)=\sum_{k=0}^{n}\frac{1}{k!}D^k f(x_0,y_0)+R_n,\;}
+$$
+
+其中 **Lagrange 余项**为
+
+$$
+R_n=\frac{1}{(n+1)!}D^{n+1}f\bigl(x_0+\theta\Delta x,\,y_0+\theta\Delta y\bigr),\qquad \theta\in(0,1).
+$$
+
+#### (4) 与一元 Taylor 公式的形式对照
+
+| 一元 | 多元（算子形式） |
+| --- | --- |
+| $(x-x_0)^k f^{(k)}(x_0)$ | $D^k f(x_0,y_0)$ |
+| $\displaystyle f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n$ | $\displaystyle f(\mathbf x_0+\Delta\mathbf x)=\sum_{k=0}^{n}\frac{1}{k!}D^k f(\mathbf x_0)+R_n$ |
+
+> **一句话理解：** 算子 $D$ 把"一次微小位移"打包成一个记号；$D$ 作用 $k$ 次（按二项式展开）就是 $k$ 阶 Taylor 项。借助 $\varphi(t)$，多元 Taylor 公式与一元在形式上**完全一致**。
 
 ### 5. $n$ 元函数 Taylor 公式（矩阵形式）
 
@@ -123,16 +196,45 @@ $$f(\boldsymbol{x})\le f(\boldsymbol{x}_0)\quad(\text{相应地，}\ge),$$
 
 ### 2. 极值的必要条件（驻点条件）
 
-**定理 4.3**  若 $n$ 元函数 $f$ 在 $\boldsymbol{x}_0$ 可微，且 $\boldsymbol{x}_0$ 是极值点，则
+**定理 4.3**　若 $n$ 元函数 $f$ 在 $\boldsymbol{x}_0$ **可微**，且 $\boldsymbol{x}_0$ 是 $f$ 的极值点，则
+
 $$
 \boxed{\;\nabla f(\boldsymbol{x}_0)=\boldsymbol{0}.\;}
 $$
 
 满足 $\nabla f(\boldsymbol{x}_0)=\boldsymbol{0}$ 的点称为 $f$ 的**驻点**（或临界点）。
 
-**反例（鞍点）**：$f(x,y)=x^2-y^2$ 在 $(0,0)$ 处 $\nabla f=\boldsymbol{0}$，但 $f(x,0)=x^2>0$，$f(0,y)=-y^2<0$，故 $(0,0)$ 不是极值点（鞍点）。
+#### 关于该必要条件的两点重要说明
 
-**注**：若 $f$ 在 $\boldsymbol{x}_0$ 处不可微（例如偏导数不存在），$\boldsymbol{x}_0$ 仍可能是极值点。例如 $z=\sqrt{x^2+y^2}$ 在 $(0,0)$ 取得极小值，但偏导数不存在。
+定理 4.3 是一个**单向蕴含**：
+
+$$
+\text{可微 + 极值点}\;\Longrightarrow\;\nabla f(\boldsymbol{x}_0)=\boldsymbol{0}.
+$$
+
+由此衍生出两个常被混淆、但方向完全不同的问题：
+
+**说明 1（逆命题不成立——驻点不一定是极值点）**
+
+定理 4.3 的逆命题"$\nabla f(\boldsymbol x_0)=\boldsymbol 0\Rightarrow \boldsymbol x_0$ 为极值点"**不成立**，即驻点条件**只是必要的，并非充分的**。
+
+> **例**：$f(x,y)=x^2-y^2$ 在 $(0,0)$ 处 $\nabla f=\boldsymbol 0$，但
+> $$f(x,0)=x^2>0,\qquad f(0,y)=-y^2<0,$$
+> 故 $(0,0)$ 不是极值点，这种点称为**鞍点**。
+
+因此，找到驻点后，**必须再用充分条件（下文 Hesse 矩阵判别法）作进一步判别**。
+
+**说明 2（前提不可省——不可微点也可能是极值点）**
+
+定理 4.3 的前提是"在 $\boldsymbol x_0$ 处**可微**"。若 $f$ 在某点不可微（例如偏导数不存在），结论 $\nabla f=\boldsymbol 0$ 当然就**不必成立**，但该点**仍可能是极值点**。
+
+> **例**：$z=\sqrt{x^2+y^2}$ 在 $(0,0)$ 处取得严格极小值，但 $z_x,z_y$ 在 $(0,0)$ 处不存在。
+
+因此，求一个函数的全部极值时，**极值候选点不能只看驻点**，完整的候选集为：
+
+$$
+\boxed{\;\text{驻点}\;\cup\;\text{偏导数不存在的点}\;\cup\;\text{（若在闭区域上）边界点}.\;}
+$$
 
 ### 3. 极值的充分条件（Hesse 矩阵判别法）
 
@@ -265,31 +367,83 @@ $$\nabla f(x_0,y_0)=-\lambda_0\,\nabla\varphi(x_0,y_0).$$
 
 #### 3.2 严格推导（隐函数法）
 
+> **核心思路**：把"约束极值"通过隐函数转化为"一元无约束极值"，再用几何手段（梯度与切向量的正交关系）得到 $\nabla f\parallel\nabla\varphi$。
+
+**第一步：用隐函数把约束"消掉"**
+
 **正则性条件**：设在候选点 $P_0(x_0,y_0)$ 处
 $$\varphi(x_0,y_0)=0,\quad \varphi_y(P_0)\ne 0.$$
-由隐函数存在定理，$\varphi(x,y)=0$ 在 $P_0$ 附近确定 $y=y(x)$。
 
-约束极值问题化为一元无约束问题 $z=f(x,y(x))$，由一元极值必要条件：
+由**隐函数存在定理**，$\varphi(x,y)=0$ 在 $P_0$ 附近**唯一确定**一个光滑函数 $y=y(x)$，且 $y_0=y(x_0)$。
+
+> *几何意义*：$\varphi_y\ne 0$ 保证约束曲线 $\varphi=0$ 在 $P_0$ 处不"垂直"，可显式写成 $y$ 关于 $x$ 的函数。
+
+**第二步：化为一元函数**
+
+将 $y=y(x)$ 代入 $z=f(x,y)$，得**一元函数**
+$$z(x)=f(x,y(x)).$$
+
+由一元极值必要条件 $\dfrac{\mathrm dz}{\mathrm dx}\Big|_{x_0}=0$，配合链式法则：
+
 $$
 \frac{\mathrm{d}z}{\mathrm{d}x}\bigg|_{x_0}=f_x(P_0)+f_y(P_0)\,y'(x_0)=0. \tag{4.19}
 $$
-**几何含义**：$\nabla f(P_0)\perp$ 切向量 $(1,y'(x_0))$。
 
-对 $\varphi(x,y(x))\equiv 0$ 求导：
+**第三步：几何理解（关键！）**
+
+把 (4.19) 改写为向量内积形式：
+$$
+\bigl(f_x(P_0),\,f_y(P_0)\bigr)\cdot\bigl(1,\,y'(x_0)\bigr)=0,
+$$
+即
+$$\nabla f(P_0)\;\perp\;\boldsymbol T,$$
+
+其中 $\boldsymbol T=(1,\,y'(x_0))$ 正是约束曲线 $\varphi(x,y)=0$ 在 $P_0$ 处的**切向量**。
+
+> **结论 ①**：目标函数的梯度 $\nabla f$ 垂直于约束曲线的切向量。
+
+**第四步：约束曲线自身的切向量条件**
+
+对恒等式 $\varphi(x,y(x))\equiv 0$ 两边关于 $x$ 求导：
+
 $$
 \varphi_x(P_0)+\varphi_y(P_0)\,y'(x_0)=0. \tag{4.20}
 $$
-即 $\nabla\varphi(P_0)\perp$ 同一切向量。
 
-故 $\nabla f(P_0)\parallel \nabla\varphi(P_0)$。把 $y'(x_0)=-\varphi_x/\varphi_y$ 代入 (4.19)：
+同样写成内积形式：
+$$\bigl(\varphi_x(P_0),\,\varphi_y(P_0)\bigr)\cdot\bigl(1,\,y'(x_0)\bigr)=0,$$
+即
+$$\nabla\varphi(P_0)\;\perp\;\boldsymbol T.$$
+
+> **结论 ②**：约束函数的梯度 $\nabla\varphi$ 也垂直于同一切向量。
+
+**第五步：两个梯度必平行**
+
+在平面 $\mathbb R^2$ 中，**同时垂直于同一直线（同一非零向量）的两个向量必平行**。又由正则性条件 $\nabla\varphi(P_0)\ne\boldsymbol 0$，故
+
+$$
+\boxed{\;\nabla f(P_0)\parallel \nabla\varphi(P_0).\;}
+$$
+
+**第六步：引入 Lagrange 乘数 $\lambda_0$**
+
+把 $y'(x_0)=-\dfrac{\varphi_x(P_0)}{\varphi_y(P_0)}$ 代回 (4.19)，整理得
+
 $$
 f_x(P_0)\,\varphi_y(P_0)-f_y(P_0)\,\varphi_x(P_0)=0,
 $$
-即用**行列式形式**：
+
+或写成**行列式形式**：
+
 $$
 \begin{vmatrix} f_x(P_0) & f_y(P_0)\\ \varphi_x(P_0) & \varphi_y(P_0)\end{vmatrix}=0. \tag{4.22}
 $$
-两行对应元素成比例，记比例系数为 $-\lambda_0$，得有约束极值的必要条件：
+
+行列式为零等价于"两行对应元素成比例"。记比例系数为 $-\lambda_0$（负号是为了让后面的 Lagrange 函数写成相加形式），即
+$$f_x(P_0)=-\lambda_0\,\varphi_x(P_0),\qquad f_y(P_0)=-\lambda_0\,\varphi_y(P_0).$$
+
+再补上约束条件本身，便得到**有约束极值的必要条件**：
+
 $$
 \begin{cases}
 f_x(P_0)+\lambda_0\,\varphi_x(P_0)=0,\\
@@ -298,6 +452,19 @@ f_y(P_0)+\lambda_0\,\varphi_y(P_0)=0,\\
 \end{cases} \tag{4.23}
 $$
 
+**一句话总结**
+
+> **Lagrange 乘数法的本质**：在约束极值点处，目标函数的等高线与约束曲线**相切**，因此两者的法向量（即梯度）必平行；比例系数 $-\lambda_0$ 就是 Lagrange 乘数。
+
+```
+        等高线 f = c
+           ╱  ╲
+          ╱    ╲    ← 相切于极值点 P₀
+    ─────●──────    ← 约束曲线 φ = 0
+         ╱╲
+        ╱  ╲
+   ∇f ↑    ↑ ∇φ     （两个梯度平行，都垂直于切向量 T）
+```
 #### 3.3 Lagrange 函数
 
 构造
