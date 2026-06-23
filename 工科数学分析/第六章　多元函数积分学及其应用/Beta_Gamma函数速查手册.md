@@ -1,13 +1,4 @@
----
-AIGC:
-  Label: "1",
-  "ContentProducer":   "00191310104MAC2G6EG4100000003",
-  "ContentPropagator": "00191310104MAC2G6EG4100000003",
-  "ProduceID":         "u-4dc2a7-22130fc0-013d-4384-a938-f4011a280ce5",
-  "PropagateID":       "u-4dc2a7-22130fc0-013d-4384-a938-f4011a280ce5",
-  "ReservedCode1":     "",
-  "ReservedCode2":     "",
----
+
 # Beta 函数与 Gamma 函数速查手册
 
 > 适用于工科数学分析 / 数学分析 / 高等数学中"含参变量反常积分"一章。  
