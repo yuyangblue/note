@@ -1,9 +1,19 @@
+---
+AIGC:
+  Label: "1",
+  "ContentProducer":   "00191310104MAC2G6EG4100000003",
+  "ContentPropagator": "00191310104MAC2G6EG4100000003",
+  "ProduceID":         "u-4dc2a7-899b9d5b-d79c-4ec9-b3bf-1b84a7500431",
+  "PropagateID":       "u-4dc2a7-899b9d5b-d79c-4ec9-b3bf-1b84a7500431",
+  "ReservedCode1":     "",
+  "ReservedCode2":     "",
+---
 
 # 工科数学分析基础（下册·第三版，马知恩/王绵森）—— 习题 7.1 解答
 
 > 范围：习题 7.1（pp. 285–289）  
 > 题号：(A) 组：3、8、12、14、15、16、18；(B) 组：3、4  
-> 说明：**第 16 题、第 18 题的题面在所提供的OCR中缺失**（页面切换时被跳过），本文档中标注 *题目待补*，请补充题面后我再补全解答。
+> 说明：第 16、18 题的题面已根据补充资料补全。
 
 ---
 
@@ -179,15 +189,133 @@ $|a_n|=\dfrac{\ln(2+1/n)}{\sqrt{9n^2-4}}$：分子 $\ln(2+1/n)$ 单减且趋于 
 
 ---
 
-## (A) 16. *题目待补*
+## (A) 16. 判别下列级数的敛散性
 
-> OCR 中此题题面缺失。请补充题面后我再补全解答。
+### (1) $\displaystyle\sum_{n=1}^{\infty}\frac{a^n}{n^p}\;(p>0,\,|a|\ne 1)$
+
+通项 $u_n=\dfrac{a^n}{n^p}$。先看 $\sum|u_n|=\sum\dfrac{|a|^n}{n^p}$，用**检比法**：
+$$\frac{|u_{n+1}|}{|u_n|}=|a|\cdot\Bigl(\frac{n}{n+1}\Bigr)^p\to|a|.$$
+
+- **$|a|<1$**：检比极限 $<1\Rightarrow\sum|u_n|$ 收敛 $\Rightarrow$ 原级数**绝对收敛**。
+- **$|a|>1$**：通项 $|u_n|=\dfrac{|a|^n}{n^p}\to+\infty$，不满足 $u_n\to 0$ ⇒ **发散**。
+
+**结论**：$|a|<1$ 时绝对收敛；$|a|>1$ 时发散。
+
+### (2) $\displaystyle a-\frac{b}{2}+\frac{a}{3}-\frac{b}{4}+\cdots+\frac{a}{2n-1}-\frac{b}{2n}+\cdots\;(a^2+b^2\ne 0)$
+
+记 $H_n=\sum_{k=1}^{n}\dfrac{1}{k}=\ln n+\gamma+o(1)$（$\gamma$ 为 Euler–Mascheroni 常数）。
+
+**部分和**：
+$$
+S_{2n}=\sum_{k=1}^{n}\Bigl(\frac{a}{2k-1}-\frac{b}{2k}\Bigr)
+=a\sum_{k=1}^{n}\frac{1}{2k-1}-b\sum_{k=1}^{n}\frac{1}{2k}.
+$$
+
+利用 $\sum_{k=1}^{n}\dfrac{1}{2k-1}=H_{2n}-\dfrac{1}{2}H_n$ 和 $\sum_{k=1}^{n}\dfrac{1}{2k}=\dfrac{1}{2}H_n$：
+$$
+S_{2n}=a\bigl(H_{2n}-\tfrac{1}{2}H_n\bigr)-\tfrac{b}{2}H_n=a\,H_{2n}-\tfrac{a+b}{2}H_n.
+$$
+
+代入 $H_n=\ln n+\gamma+o(1),\;H_{2n}=\ln(2n)+\gamma+o(1)=\ln n+\ln 2+\gamma+o(1)$：
+$$
+S_{2n}=a\bigl[\ln n+\ln 2+\gamma\bigr]-\tfrac{a+b}{2}\bigl[\ln n+\gamma\bigr]+o(1)
+=\boxed{\;a\ln 2+\tfrac{a-b}{2}(\ln n+\gamma)+o(1).\;}
+$$
+
+讨论：
+
+- **$a=b$**（且 $\ne 0$）：发散项 $\tfrac{a-b}{2}(\ln n+\gamma)$ 消失，$S_{2n}\to a\ln 2$；又 $S_{2n+1}=S_{2n}+\dfrac{a}{2n+1}\to a\ln 2$，故级数**收敛于 $a\ln 2$**。
+- **$a\ne b$**：发散项 $\tfrac{a-b}{2}\ln n\to\pm\infty$，$S_{2n}$ 无极限 ⇒ **发散**。
+
+**结论**：当且仅当 $a=b\ne 0$ 时收敛，和为 $a\ln 2$；其余情形发散。
+
+> 当 $a=b=1$ 时退化为 $1-\tfrac12+\tfrac13-\tfrac14+\cdots=\ln 2$，正是经典调和级数交错形式。
 
 ---
 
-## (A) 18. *题目待补*
+## (A) 17. 近似求和（误差 $<10^{-3}$）
 
-> OCR 中此题题面缺失。请补充题面后我再补全解答。
+**题目**：计算 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}\dfrac{1}{(2n-1)!}$ 的近似值，使绝对误差 $<10^{-3}$。
+
+**识别**：原级数 $=\sin 1$（由 $\sin x=\sum(-1)^{n-1}\dfrac{x^{2n-1}}{(2n-1)!}$ 取 $x=1$）。
+
+**Leibniz 余项估计**：交错级数取前 $n$ 项的误差
+$$|R_n|\le|a_{n+1}|=\frac{1}{(2n+1)!}.$$
+
+要使 $|R_n|<10^{-3}$，取
+$$\frac{1}{(2n+1)!}<10^{-3}\Rightarrow(2n+1)!>1000.$$
+
+试算：$5!=120,\;7!=5040$。故取 $2n+1=7\Rightarrow n=3$ 即可（$1/5040\approx 1.98\times 10^{-4}<10^{-3}$）。
+
+**前 3 项求和**：
+$$
+S_3=1-\frac{1}{3!}+\frac{1}{5!}=1-\frac{1}{6}+\frac{1}{120}=\frac{120-20+1}{120}=\frac{101}{120}\approx 0.8417.
+$$
+
+> 真值 $\sin 1\approx 0.84147$，误差 $\approx 1.98\times 10^{-4}$，符合要求。
+
+**结论**：$S\approx\dfrac{101}{120}\approx 0.842$。
+
+---
+
+## (A) 18. 判定下列级数是绝对收敛还是条件收敛
+
+### (1) $\displaystyle\sum_{n=1}^{\infty}\frac{\cos(n!)}{n\sqrt n}$
+
+绝对值估计：$\Bigl|\dfrac{\cos(n!)}{n\sqrt n}\Bigr|\le\dfrac{1}{n^{3/2}}$。
+
+由 $p=3/2>1$，$\sum\dfrac{1}{n^{3/2}}$ 收敛 ⇒ 由比较判别法 $\sum\bigl|\dfrac{\cos(n!)}{n\sqrt n}\bigr|$ 收敛。
+
+**结论**：**绝对收敛**。
+
+### (2) $\displaystyle\sum_{n=1}^{\infty}(-1)^{\frac{n(n+1)}{2}}\frac{n}{2^n}$
+
+绝对值 $\dfrac{n}{2^n}$，用**检比法**：
+$$\frac{(n+1)/2^{n+1}}{n/2^n}=\frac{n+1}{2n}\to\frac{1}{2}<1.$$
+
+故 $\sum\dfrac{n}{2^n}$ 收敛 ⇒ 原级数**绝对收敛**。
+
+> 符号 $(-1)^{n(n+1)/2}$ 按 $-,-,+,+,-,-,+,+,\cdots$ 周期 $4$ 变号；既然绝对值级数收敛，符号怎么变都不影响。
+
+**结论**：**绝对收敛**。
+
+### (3) $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}\frac{1}{\sqrt[4]{n}}$
+
+绝对值级数 $\sum\dfrac{1}{n^{1/4}}$：$p=1/4<1$，**发散**。
+
+原级数是交错级数，$\dfrac{1}{\sqrt[4]{n}}\downarrow 0$，由 **Leibniz 准则**收敛。
+
+**结论**：**条件收敛**。（与 (A)15(3) 同题。）
+
+### (4) $\displaystyle\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\ln(2+1/n)}{\sqrt{9n^2-4}}$
+
+**绝对值级数**：当 $n\to\infty$，
+$$\frac{\ln(2+1/n)}{\sqrt{9n^2-4}}\sim\frac{\ln 2}{3n}.$$
+
+由比较判别法 II（$\lambda=\ln 2/3>0$ 有限）+ 调和级数发散 ⇒ 绝对值级数**发散**。
+
+**原级数（交错）**：
+- $a_n=\dfrac{\ln(2+1/n)}{\sqrt{9n^2-4}}$；
+- $\ln(2+1/n)$ 随 $n$ 增大而减小（$1/n\downarrow$），$\sqrt{9n^2-4}$ 单调增 ⇒ $a_n\downarrow$；
+- $a_n\to 0$。
+
+由 **Leibniz 准则**收敛。
+
+**结论**：**条件收敛**。（与 (A)15(4) 同题。）
+
+---
+
+## 汇总表
+
+| 题目 | 结论 |
+|---|---|
+| 16 (1) | $\|a\|<1$ 绝对收敛；$\|a\|>1$ 发散 |
+| 16 (2) | $a=b\ne 0$ 收敛于 $a\ln 2$；$a\ne b$ 发散 |
+| 17 | $S\approx\dfrac{101}{120}\approx 0.842$（取 3 项即可） |
+| 18 (1) | 绝对收敛 |
+| 18 (2) | 绝对收敛 |
+| 18 (3) | 条件收敛 |
+| 18 (4) | 条件收敛 |
 
 ---
 
@@ -257,28 +385,3 @@ OCR中（A）组**第 16 题、第 18 题**的题面缺失（在 287 页与 288 
 
 ---
 
-# 补充：(A) 16、17、18 题解答
-
-## (A) 16. 判别敛散性
-
-### (1) $\displaystyle\sum_{n=1}^{\infty}\dfrac{a^n}{n^p}\;(p>0,\,|a|\neq 1)$
-- $|a|<1$：由比值法 $\dfrac{|a|^{n+1}/(n+1)^p}{|a|^n/n^p}\to|a|<1$，**绝对收敛**；
-- $|a|>1$：$|a|^n/n^p\to\infty$，通项不趋于 0，**发散**。
-
-### (2) $a-\dfrac{b}{2}+\dfrac{a}{3}-\dfrac{b}{4}+\cdots\;(a^2+b^2\neq 0)$
-$S_{2n}=a\,H_{2n}-\dfrac{a+b}{2}H_n=a\ln 2+\dfrac{a-b}{2}(\ln n+\gamma)+o(1)$。
-- $a=b\,(\neq 0)$：**收敛，和为 $a\ln 2$**；
-- $a\neq b$：**发散**。
-
-## (A) 17. 近似求和（误差 $<10^{-3}$）
-原级数 $=\sin 1$。由 Leibniz 准则误差 $\leq|a_{n+1}|=1/(2n+1)!$。取 $n=3$：$1/5040<10^{-3}$。
-$$S\approx 1-\frac16+\frac1{120}=\frac{101}{120}\approx 0.842.$$
-
-## (A) 18. 绝对/条件收敛
-
-| 子题 | 结论 |
-|------|------|
-| (1) $\sum\dfrac{\cos(n!)}{n\sqrt n}$ | 由 $|a_n|\le 1/n^{3/2}$，**绝对收敛** |
-| (2) $\sum(-1)^{n(n+1)/2}\dfrac{n}{2^n}$ | 比值 $\to 1/2<1$，**绝对收敛** |
-| (3) $\sum(-1)^{n-1}\dfrac{1}{\sqrt[4]{n}}$ | $\sum 1/n^{1/4}$ 发散，Leibniz 收敛，**条件收敛** |
-| (4) $\sum(-1)^{n+1}\dfrac{\ln(2+1/n)}{\sqrt{9n^2-4}}$ | $|a_n|\sim\ln 2/(3n)$ 发散，Leibniz 收敛，**条件收敛** |
