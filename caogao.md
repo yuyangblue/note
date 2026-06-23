@@ -1,21 +1,44 @@
-这是整理好的 **Green、Gauss、Stokes 三大公式对比表**：
-
-| 公式 | 必要条件 | 几何 / 物理意义 |
-|:---|:---|:---|
-| **Green** (8.1) | $P,Q\in C^{(1)}$，区域 $(\sigma)$ 由分段光滑闭曲线围成 | 平面 2D：$\displaystyle\iint_{(\sigma)}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm d\sigma=\oint_{(C)}P\,\mathrm dx+Q\,\mathrm dy$ |
-| **Gauss** (8.7) | $P,Q,R\in C^{(1)}$，体 $(V)$ 由分片光滑闭曲面围成（取外侧） | 通量守恒：$\displaystyle\iiint_{(V)}\nabla\!\cdot\!\boldsymbol A\,\mathrm dV=\oiint_{(S)}\boldsymbol A\cdot\mathrm d\boldsymbol S$ |
-| **Stokes** (8.18) | $P,Q,R\in C^{(1)}$，曲面 $(S)$ 光滑，$(C)$ 是其边界（右手定则） | 环量 = 旋度通量：$\displaystyle\oint_{(C)}\boldsymbol A\cdot\mathrm d\boldsymbol s=\iint_{(S)}(\nabla\times\boldsymbol A)\cdot\mathrm d\boldsymbol S$ |
+这是**保守场/有势场的等价条件**表，我来补全完整版本：
 
 ---
 
-### 三句话串记
+## 单连通区域上的等价命题
 
-- **Green**：平面区域上的"旋度"（面积分） = 边界上的环量（线积分）
-- **Gauss**：体域上的"散度"（体积分） = 边界上的通量（面积分）
-- **Stokes**：曲面上的"旋度"（面积分） = 边界上的环量（线积分）
-
-> **统一规律**：都是 **"内部某种微分量的积分" = "边界上对应积分"**，是微积分基本定理在高维的推广。
+| 命题              | 向量表述                                                                                                   |
+| :-------------- | :----------------------------------------------------------------------------------------------------- |
+| **(1) 闭路环量为零**  | $\displaystyle\oint_{(C)}\boldsymbol A\cdot\mathrm d\boldsymbol s=0$，对任意分段光滑闭曲线 $(C)$                  |
+| **(2) 积分与路径无关** | $\displaystyle\int_{(C)}\boldsymbol A\cdot\mathrm d\boldsymbol s$ 只与起点、终点有关，即 $\boldsymbol A$ 为**保守场** |
+| **(3) 存在势函数**   | 存在可微函数 $u$，使 $\nabla u=\boldsymbol A$，即 $\boldsymbol A$ 为**有势场**，$u$ 称为**势函数**（或原函数）                   |
+| **(4) 旋度为零**    | $\nabla\times\boldsymbol A=\boldsymbol 0$，即 $\boldsymbol A$ 为**无旋场**                                   |
 
 ---
 
-需要我把它导出成文件（Markdown / PDF）方便你打印或插入笔记吗？
+## 等价关系
+
+$$\text{(1)} \Leftrightarrow \text{(2)} \Leftrightarrow \text{(3)} \Leftrightarrow \text{(4)}$$
+
+> **前提**：区域必须是**单连通**的（没有"洞"）。如果区域有洞，(4) 推不出前三条。
+
+---
+
+## 势函数的求法
+
+若 $\boldsymbol A=(P,Q,R)$ 是有势场，则势函数 $u$ 满足：
+
+$$\frac{\partial u}{\partial x}=P,\quad \frac{\partial u}{\partial y}=Q,\quad \frac{\partial u}{\partial z}=R$$
+
+通过**逐次积分**或**折线积分**求出：
+
+$$u(x,y,z)=\int_{(x_0,y_0,z_0)}^{(x,y,z)}P\,\mathrm dx+Q\,\mathrm dy+R\,\mathrm dz$$
+
+---
+
+## 一句话总结
+
+> **保守场 = 有势场 = 无旋场 = 闭路环量为零 = 积分与路径无关**
+
+这是场论中最重要的等价关系之一，与复变函数中的**解析函数**、物理学中的**保守力**（重力、静电力）直接对应。
+
+---
+
+需要我把这个表和之前的 Green/Gauss/Stokes 表合并，导出成一份完整的场论公式速查？
