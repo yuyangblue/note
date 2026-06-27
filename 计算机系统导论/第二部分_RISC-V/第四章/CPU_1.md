@@ -447,10 +447,10 @@ Use ALU to calculate
     - `ALUSrc`：ALU源选择器，选择ALU的第二个操作数（寄存器值或立即数）
 - **数据流向**：
     - 寄存器堆 → ALU（输入第一个操作数：Read data 1）
-    - 寄存器堆 → ALUSrc → ALU（输入第二个操作数：Read data 2，仅R型指令使用）
-    - 立即数生成单元 → ALUSrc → ALU（输入第二个操作数：立即数，除R型指令外的所有指令使用）
+    - 寄存器堆 → Mux → ALU（输入第二个操作数：Read data 2，仅R型指令使用）
+    - 立即数生成单元 → Mux → ALU（输入第二个操作数：立即数，除R型指令外的所有指令使用）
     - ALU → 数据内存（输出地址：ALU result，仅Load和Store指令使用）
-    - ALU → MemtoReg → 寄存器堆（输出运算结果：ALU result，R型、I型、U型、J型指令使用）
+    - ALU → Mux → 寄存器堆（输出运算结果：ALU result，R型、I型、U型、J型指令使用）
 - **控制信号**：
     - `ALU operation`：ALU操作控制信号，指定ALU执行的运算类型
     - `ALUSrc`：ALU源选择控制信号，0表示选择寄存器值，1表示选择立即数
