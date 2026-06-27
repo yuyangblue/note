@@ -328,32 +328,49 @@ if (MEM/WB.RegisterRd = ID/EX.RegisterRs1 或 Rs2)
 
 ![[幻灯片72.png]]
 
-**这张图展示了什么？**
+这张图是经典的 **带转发（Forwarding/Bypassing）的流水线数据通路**。
 
-这是带转发机制的完整CPU数据通路，包含：
-- 五级流水线的所有模块（PC、指令内存、寄存器堆、ALU、数据内存）
-- 四个流水线寄存器（IF/ID、ID/EX、EX/MEM、MEM/WB）
-- 新增的 Forwarding Unit（转发单元）
-- 两个多路选择器（用于ALU操作数选择）
+## Forwarding unit（转发单元）的输入
 
-**从图中观察数据流向**：
+转发单元需要比较"**当前指令要用到的寄存器**"和"**前面指令要写入的寄存器**"是否冲突，所以输入包括：
 
-1. **转发数据流**（蓝色线）：
-   - EX/MEM → Mux（选择ALU操作数）
-   - MEM/WB → Mux（选择ALU操作数）
+| 输入信号 | 来源 | 含义 |
+|----------|------|------|
+| **ID/EX.RegisterRs1** | ID/EX 流水线寄存器 | 当前指令的源操作数 1 的寄存器编号 |
+| **ID/EX.RegisterRs2** | ID/EX 流水线寄存器 | 当前指令的源操作数 2 的寄存器编号 |
+| **EX/MEM.RegisterRd** | EX/MEM 流水线寄存器 | **上一条**指令的目标寄存器编号 |
+| **EX/MEM.RegWrite** | EX/MEM 控制信号 | **上一条**指令是否写回寄存器 |
+| **MEM/WB.RegisterRd** | MEM/WB 流水线寄存器 | **上上条**指令的目标寄存器编号 |
+| **MEM/WB.RegWrite** | MEM/WB 控制信号 | **上上条**指令是否写回寄存器 |
 
-3. **控制信号流**：
-   - Control 单元输出信号到 ID/EX
-   - Forwarding Unit 输出 ForwardA/B 到两个 Mux
+> 简单说：转发单元接收 **当前指令的两个源寄存器号**，以及 **前面两条指令的目标寄存器号和写使能信号**。
 
-**转发单元的位置和作用**：
+---
 
-| 位置 | 底部，ID/EX寄存器下方 |
-|-----|----------------------|
-| 输入 | 来自三个流水线寄存器的寄存器编号 |
-| 输出 | ForwardA、ForwardB 控制信号 |
-| 作用 | 比较 Rs1、Rs2 与 Rd，决定是否转发 |
+## Forwarding unit 的输出
 
+输出是**两个 2 位的控制信号**，分别控制 ALU 输入端的两个多路选择器（Mux）：
+
+| 输出信号 | 控制对象 | 含义 |
+|----------|----------|------|
+| **ForwardA**（2位） | ALU 上面的 Mux | 选择 ALU 第一个操作数的来源 |
+| **ForwardB**（2位） | ALU 下面的 Mux | 选择 ALU 第二个操作数的来源 |
+
+---
+
+## Mux 的选择逻辑（ForwardA / ForwardB）
+
+| 信号值 | 选择来源 | 场景 |
+|--------|----------|------|
+| **00** | 寄存器堆读出的值 | 正常情况，无数据冒险 |
+| **10** | **EX/MEM 流水线寄存器**（ALU result） | 上一条指令的结果刚算出来，直接前递 |
+| **01** | **MEM/WB 流水线寄存器**（Write Data） | 上上条指令的结果，从 MEM/WB 前递 |
+
+---
+
+## 一句话总结
+
+> **转发单元输入"当前指令要读谁"和"前面指令要写谁"，判断是否有 RAW（写后读）冲突；输出两个 Mux 控制信号，让 ALU 直接使用前面指令的运算结果，而不必等到写回寄存器堆。**
 ---
 
 ## 四、数据冒险总结
@@ -366,67 +383,9 @@ if (MEM/WB.RegisterRd = ID/EX.RegisterRs1 或 Rs2)
 
 ---
 
-## 五、关键公式速查
-
-### 转发检测条件
-
-```
-EX冒险：EX/MEM.RegisterRd = ID/EX.RegisterRs1 或 Rs2
-        且 EX/MEM.RegWrite = 1
-        且 EX/MEM.RegisterRd ≠ 0
-
-MEM冒险：MEM/WB.RegisterRd = ID/EX.RegisterRs1 或 Rs2
-         且 MEM/WB.RegWrite = 1
-         且 MEM/WB.RegisterRd ≠ 0
-         且 EX冒险条件不成立（避免双重冒险）
-```
-
-
----
-
-## 六、转发条件详解
-
-### （一）ForwardA 和 ForwardB 的取值
-
-![[幻灯片69.png]]
-
-| 控制信号 | 取值 | 数据来源 | 说明 |
-|---------|-----|---------|------|
-| **ForwardA** | 00 | ID/EX | 来自寄存器堆（正常情况） |
-| | 10 | EX/MEM | 来自前一条指令的ALU结果 |
-| | 01 | MEM/WB | 来自数据内存或更早的ALU结果 |
-| **ForwardB** | 00 | ID/EX | 来自寄存器堆（正常情况） |
-| | 10 | EX/MEM | 来自前一条指令的ALU结果 |
-| | 01 | MEM/WB | 来自数据内存或更早的ALU结果 |
-
----
-
-### （二）修正的MEM转发条件
-
-![[幻灯片71.png]]
-
-**问题**：双重数据冒险时，应该优先使用EX/MEM的结果（最新的值）。
-
-**修正后的MEM转发条件**：
-
-```
-MEM冒险条件：
-if (MEM/WB.RegWrite and (MEM/WB.RegisterRd ≠ 0)
-    and not (EX/MEM.RegWrite and (EX/MEM.RegisterRd ≠ 0)
-             and (EX/MEM.RegisterRd = ID/EX.RegisterRs1 
-                  or EX/MEM.RegisterRd = ID/EX.RegisterRs2))):
-    ForwardA = 01 或 ForwardB = 01
-```
-
-**核心逻辑**：只有当EX冒险条件不成立时，才使用MEM转发。
-
----
-
 ## 七、Load-Use 冒险
 
 ### （一）什么是 Load-Use 冒险
-
-![[幻灯片73.png]]
 
 **为什么 Load-Use 冒险不能用转发解决？**
 
@@ -470,8 +429,6 @@ ID/EX.MemRead = 1                                    ← 前一条是Load指令
 
 ### （二）如何暂停流水线
 
-![[幻灯片74.png]]
-
 **暂停流水线需要做什么？**
 
 图中列出四个关键操作：
@@ -482,27 +439,6 @@ ID/EX.MemRead = 1                                    ← 前一条是Load指令
 | Prevent update of PC and IF/ID register | PC 不更新，IF/ID 不更新 | 让取指和译码"重来一次" |
 | Using instruction is decoded again | 当前指令下一周期重新译码 | 相当于多给它一个周期等待数据 |
 | Following instruction is fetched again | 下一条指令重新取指 | 配合暂停，确保正确执行顺序 |
-
-**"气泡"是如何产生的？**
-
-```
-正常情况：
-CC1    CC2    CC3    CC4
-ld     → ID   → EX   → MEM
-and           → ID   → EX
-
-暂停后：
-CC1    CC2    CC3    CC4    CC5
-ld     → ID   → EX   → MEM  → WB
-and           → ID   → 气泡 → EX
-                     ↑ ID/EX控制信号=0，ALU不工作
-```
-
-**图中最后一行说明**：
-- "1-cycle stall allows MEM to read data for ld"
-- "Can subsequently forward to EX stage"
-
-意思是：暂停1个周期后，Load指令完成MEM阶段，数据可以转发了。
 
 ---
 
