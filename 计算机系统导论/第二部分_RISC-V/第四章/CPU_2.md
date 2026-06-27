@@ -411,7 +411,7 @@ and x4,x2,x5         [IF] → [ID] → [EX] → ...
 
 **检测条件**（在 ID 阶段检测）：
 
-图中给出检测条件：
+检测条件：
 
 ```
 Load-Use冒险检测：
@@ -420,25 +420,10 @@ ID/EX.MemRead = 1                                    ← 前一条是Load指令
     或 ID/ID.RegisterRd = IF/ID.RegisterRs2)         ← 或源寄存器2 = Load的目标寄存器
 ```
 
-**图中关键信息**：
+**关键信息**：
 - 检测在 **ID 阶段** 进行（"Check when using instruction is decoded in ID stage"）
 - 需要比较 Load 指令的目标寄存器和当前指令的源寄存器
 - 如果检测到冒险，"stall and insert bubble"——暂停并插入气泡
-
----
-
-### （二）如何暂停流水线
-
-**暂停流水线需要做什么？**
-
-图中列出四个关键操作：
-
-| 操作 | 效果 | 为什么这样做 |
-|-----|------|------------|
-| Force control values in ID/EX register to 0 | EX、MEM、WB 阶段执行 nop（空操作） | 让当前指令"暂停"在ID阶段，不继续执行 |
-| Prevent update of PC and IF/ID register | PC 不更新，IF/ID 不更新 | 让取指和译码"重来一次" |
-| Using instruction is decoded again | 当前指令下一周期重新译码 | 相当于多给它一个周期等待数据 |
-| Following instruction is fetched again | 下一条指令重新取指 | 配合暂停，确保正确执行顺序 |
 
 ---
 
