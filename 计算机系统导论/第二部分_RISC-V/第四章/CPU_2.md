@@ -306,8 +306,6 @@ add x1,x1,x4               [IF]→[ID]→[EX]→...
 
 **解决原则**：
 
-图中写明："Want to use the most recent"——使用最新的值
-
 | 原则 | 说明 |
 |-----|------|
 | **使用最新的值** | 转发距离当前指令最近的那个结果 |
@@ -340,10 +338,7 @@ if (MEM/WB.RegisterRd = ID/EX.RegisterRs1 或 Rs2)
 
 **从图中观察数据流向**：
 
-1. **正常数据流**（黑色线）：
-   - PC → 指令内存 → IF/ID → 寄存器堆 → ID/EX → ALU → EX/MEM → 数据内存 → MEM/WB → 寄存器堆
-
-2. **转发数据流**（蓝色线）：
+1. **转发数据流**（蓝色线）：
    - EX/MEM → Mux（选择ALU操作数）
    - MEM/WB → Mux（选择ALU操作数）
 
@@ -358,14 +353,6 @@ if (MEM/WB.RegisterRd = ID/EX.RegisterRs1 或 Rs2)
 | 输入 | 来自三个流水线寄存器的寄存器编号 |
 | 输出 | ForwardA、ForwardB 控制信号 |
 | 作用 | 比较 Rs1、Rs2 与 Rd，决定是否转发 |
-
-**新增硬件开销**：
-
-| 新增组件 | 功能 | 成本 |
-|---------|------|------|
-| Forwarding Unit | 比较寄存器编号，生成控制信号 | 少量比较器 |
-| 2个Mux | 选择ALU操作数来源 | 2个多路选择器 |
-| 额外连线 | 从EX/MEM、MEM/WB连到ALU输入 | 若干数据线 |
 
 ---
 
