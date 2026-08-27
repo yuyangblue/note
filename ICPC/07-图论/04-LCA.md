@@ -156,58 +156,6 @@ int main() {
 
 ---
 
-### 应用：树上差分（LCA 的黄金搭档）
-
-很多题要"给 u-v 路径上的所有点/边加 1，最后问每个点/边被加了几次"。暴力爬路径 O(长度)，用**差分 + LCA** 做到 O(n + q log n)。
-
-**点差分**（路径 u-v 上每个点 +1）：
-
-```
-diff[u] += 1
-diff[v] += 1
-diff[l]  -= 1      // l = lca(u, v)
-diff[fa[l]] -= 1   // l 的爸爸也 -1，防止 l 被多算
-```
-
-**边差分**（路径 u-v 上每条边 +1，把边权记在"深度深的端点"上）：
-
-```
-diff[u] += 1
-diff[v] += 1
-diff[l]  -= 2      // 不用管 fa[l]
-```
-
-最后**从叶子向根累加**（类似树形 DP 回溯）：`cnt[u] = diff[u] + Σ cnt[child]`，cnt[u] 就是 u 点/边被覆盖的次数。
-
-**为什么点差分要 `fa[l] -= 1`？** 手算一条链 `1-2-3-4`，给路径 3→4 加 1：diff[3]++, diff[4]++, diff[l=3]--, diff[fa[3]=2]--。累加时 4 得 1、3 得 1、2 得 0、1 得 0——正好只有 3 和 4 被加。如果漏掉 `fa[l]--`，累加会漫到 2、1（因为 diff[3]-- 只抵消了 3 自己，减不掉往上的蔓延）。
-
-```cpp
-#include <bits/stdc++.h>
-using namespace std;
-
-// 核心示意：点差分 + 回溯累加（lca 见上面模板，这里只展示差分思路）
-// diff 数组先按上面的公式打点，然后：
-// 最小声明 + 空 main 只是为了能编译验证，完整实现配合上面 LCA 模板
-const int MAXN = 100005;
-vector<int> g[MAXN];
-int diff[MAXN], cnt[MAXN];
-
-void dfs_sum(int u, int fa) {
-    for (int v : g[u]) {
-        if (v == fa) continue;
-        dfs_sum(v, u);
-        diff[u] += diff[v];      // 孩子的覆盖数累加到 u（类似树形 DP 回溯）
-    }
-    cnt[u] = diff[u];            // 累加完，cnt[u] = u 被覆盖的次数
-}
-
-int main() { return 0; }         // 示意块不运行，配合 LCA 模板使用
-```
-
-> 对应到树形 DP 笔记里的成都银牌题：答案里的 `sum1[u] + sum1[v] - 2*sum1[l]` 就是"根到点前缀和 + LCA"的查询形式——把路径上的 dp1 之和拆成两段前缀和相减，LCA 负责定位拆点。
-
----
-
 ## 洛谷题
 
 | 题号 | 题目 | 难度 | 提示 |
@@ -216,5 +164,290 @@ int main() { return 0; }         // 示意块不运行，配合 LCA 模板使用
 | P3258 | [JLOI2014] 松鼠的新家 | ⭐ 普及+/提高 | LCA + 点差分 + 端点修正（起点终点重复算） |
 | P3128 | [USACO15DEC] Max Flow | ⭐ 提高+ | LCA + 点差分模板：路径覆盖计数 |
 | P3398 | 仓鼠找 sugar | ⭐ 普及+/提高 | 判断两路径是否相交：LCA 深度比较结论 |
+
+---
+
+### Tarjan 离线算法
+
+**核心思想**：DFS 回溯时用并查集合并子树，离线处理所有查询。
+
+**步骤**：
+1. 把所有询问存到每个节点的邻接表（离线）
+2. DFS 遍历树，标记已访问节点
+3. 子树回溯时，用并查集把子树合并到父节点
+4. 处理当前节点的询问：如果另一个点已访问，LCA = `find(另一个点)`
+
+**复杂度**：均摊 O(1) 每次查询（并查集近似常数），但必须离线。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 500005;
+vector<int> g[MAXN];
+vector<pair<int, int>> queries[MAXN];  // queries[u] = {(v, query_id)}
+int ans[MAXN];
+bool vis[MAXN];
+int fa[MAXN];  // 并查集
+
+int find(int x) {
+    return fa[x] == x ? x : fa[x] = find(fa[x]);
+}
+
+void tarjan_lca(int u, int parent) {
+    fa[u] = u;  // 初始化并查集
+    
+    for (int v : g[u]) {
+        if (v == parent) continue;
+        tarjan_lca(v, u);
+        fa[v] = u;  // 子树回溯，合并到父节点
+    }
+    
+    vis[u] = true;
+    
+    // 处理当前节点的所有询问
+    for (auto& [v, id] : queries[u]) {
+        if (vis[v]) {
+            ans[id] = find(v);  // 另一个点已访问，LCA = find(v)
+        }
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int n, m, root;
+    cin >> n >> m >> root;
+    
+    for (int i = 1; i < n; i++) {
+        int u, v;
+        cin >> u >> v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    
+    for (int i = 1; i <= m; i++) {
+        int u, v;
+        cin >> u >> v;
+        queries[u].push_back({v, i});
+        queries[v].push_back({u, i});
+    }
+    
+    tarjan_lca(root, 0);
+    
+    for (int i = 1; i <= m; i++) {
+        cout << ans[i] << '\n';
+    }
+    
+    return 0;
+}
+```
+
+**适用场景**：所有询问已知（离线），且需要极快查询速度。
+
+---
+
+### 树剖（HLD）求 LCA
+
+**核心思想**：重链剖分，每次跳过整条重链，O(log n) 查询。
+
+**关键定义**：
+- **重儿子**：子树大小最大的儿子
+- **重链**：重儿子连成的链
+- **链顶**：重链深度最浅的节点
+
+**查询逻辑**：
+1. 比较两点链顶深度，深的跳到链顶的父节点
+2. 重复直到两点在同一条重链
+3. 深度较小的点就是 LCA
+
+**复杂度**：预处理 O(n)（两次 DFS），查询 O(log n)（常数比倍增小）。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 500005;
+vector<int> g[MAXN];
+int parent_node[MAXN], depth[MAXN], sz[MAXN], heavy[MAXN];
+int top[MAXN];  // 链顶
+
+// 第一次 DFS：求父节点、深度、子树大小、重儿子
+void dfs1(int u, int p, int d) {
+    parent_node[u] = p;
+    depth[u] = d;
+    sz[u] = 1;
+    heavy[u] = 0;
+    int max_sz = 0;
+    
+    for (int v : g[u]) {
+        if (v == p) continue;
+        dfs1(v, u, d + 1);
+        sz[u] += sz[v];
+        if (sz[v] > max_sz) {
+            max_sz = sz[v];
+            heavy[u] = v;
+        }
+    }
+}
+
+// 第二次 DFS：求链顶
+void dfs2(int u, int t) {
+    top[u] = t;
+    if (heavy[u]) {
+        dfs2(heavy[u], t);  // 重儿子继承链顶
+    }
+    for (int v : g[u]) {
+        if (v == parent_node[u] || v == heavy[u]) continue;
+        dfs2(v, v);  // 轻儿子是新链顶
+    }
+}
+
+int lca(int u, int v) {
+    while (top[u] != top[v]) {
+        // 链顶深的往上跳
+        if (depth[top[u]] < depth[top[v]]) {
+            v = parent_node[top[v]];
+        } else {
+            u = parent_node[top[u]];
+        }
+    }
+    // 同一条重链，深度小的就是 LCA
+    return depth[u] < depth[v] ? u : v;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int n, m, root;
+    cin >> n >> m >> root;
+    
+    for (int i = 1; i < n; i++) {
+        int u, v;
+        cin >> u >> v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    
+    dfs1(root, 0, 0);
+    dfs2(root, root);
+    
+    while (m--) {
+        int u, v;
+        cin >> u >> v;
+        cout << lca(u, v) << '\n';
+    }
+    
+    return 0;
+}
+```
+
+**为什么 O(log n)**：每跳一条重链，子树大小至少减半（最坏情况），所以最多跳 log n 次。
+
+**对比**：
+| 算法 | 预处理 | 查询 | 特点 |
+|------|--------|------|------|
+| 倍增 | O(n log n) | O(log n) | 在线，码量小 |
+| Tarjan | O(n) | 均摊 O(1) | 离线，最快 |
+| 树剖 | O(n) | O(log n) | 在线，常数小，支持修改 |
+
+---
+
+### 应用：树上距离查询
+
+**公式**：`dist(u, v) = depth[u] + depth[v] - 2 * depth[lca(u, v)]`
+
+**推导**：u 到 v 的路径 = u 到 LCA + LCA 到 v，用容斥思想。
+
+```cpp
+// 树上距离查询示意（需要配合上面的 LCA 模板使用）
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 500005;
+int depth[MAXN];
+
+// lca 函数占位定义（实际使用时用上面的倍增/Tarjan/树剖实现替换）
+int lca(int u, int v) { return 0; }
+
+// 树上距离查询
+int dist(int u, int v) {
+    return depth[u] + depth[v] - 2 * depth[lca(u, v)];
+}
+
+int main() { return 0; }  // 示意块不运行
+```
+
+**例题**：P1099 查询树上两点距离，直接套公式。
+
+---
+
+### 应用：树上差分（路径覆盖计数）
+
+**问题**：给 u-v 路径上所有点 +1，最后问每个点被加了几次。
+
+**点差分**：
+```
+diff[u] += 1
+diff[v] += 1
+diff[lca] -= 1
+diff[parent[lca]] -= 1  // 防止 LCA 被多算
+```
+
+**边差分**（边权记在深度深的端点）：
+```
+diff[u] += 1
+diff[v] += 1
+diff[lca] -= 2
+```
+
+**还原**：从叶子向根累加 `cnt[u] = diff[u] + Σ cnt[child]`
+
+**为什么点差分要 `parent[lca] -= 1`**：LCA 被 u 和 v 两条路径各加一次，需要减一次；但 LCA 的父节点也会被累加到，所以要再减一次防止蔓延。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 100005;
+vector<int> g[MAXN];
+int diff[MAXN], cnt[MAXN];
+int parent_node[MAXN], depth[MAXN];
+
+void dfs_sum(int u, int p) {
+    parent_node[u] = p;
+    for (int v : g[u]) {
+        if (v == p) continue;
+        depth[v] = depth[u] + 1;
+        dfs_sum(v, u);
+        diff[u] += diff[v];  // 孩子的覆盖数累加到 u
+    }
+    cnt[u] = diff[u];
+}
+
+// 给 u-v 路径上所有点 +1
+void add_path(int u, int v, int lca) {
+    diff[u]++;
+    diff[v]++;
+    diff[lca]--;
+    if (parent_node[lca]) {
+        diff[parent_node[lca]]--;
+    }
+}
+
+int main() {
+    // 读入树，预处理 LCA
+    // 对每条路径调用 add_path
+    // dfs_sum 还原
+    // 输出 cnt 数组
+    return 0;
+}
+```
+
+**例题**：P3128 [USACO15DEC] Max Flow —— 给 K 条路径 +1，求最大覆盖次数。
+
+---
 
 > 下一篇（规划）：**05-树链剖分** —— LCA 的加强版，支持路径上带修改的查询（线段树 + 剖分序）
