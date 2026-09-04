@@ -68,17 +68,29 @@ def main():
         print(f"Login status: {is_login}")
         
         if not is_login:
-            print("需要登录B站。正在打开登录页...")
-            page.goto("https://passport.bilibili.com/login")
-            print("请在浏览器中扫码登录，登录完成后按回车继续...")
-            input()
-            # 重新检查登录态
-            page.goto("https://api.bilibili.com/x/web-interface/nav")
-            nav_data = page.evaluate("JSON.parse(document.body.innerText)")
-            is_login = nav_data.get("data", {}).get("isLogin", False)
-            print(f"Login status after login: {is_login}")
+            print("需要登录B站。正在打开B站首页，请在浏览器中点击登录按钮扫码...")
+            page.goto("https://www.bilibili.com/", wait_until="domcontentloaded")
+            # 截图排查
+            page.screenshot(path=str(OUT_DIR / "login_page.png"))
+            print(f"页面已打开: {page.url}")
+            print(f"页面标题: {page.title()}")
+            # 轮询检测登录态，最多等180秒
+            for i in range(180):
+                time.sleep(1)
+                try:
+                    nav_resp = page.request.get("https://api.bilibili.com/x/web-interface/nav")
+                    nav_data = nav_resp.json()
+                    is_login = nav_data.get("data", {}).get("isLogin", False)
+                    if is_login:
+                        uname = nav_data.get("data", {}).get("uname", "")
+                        print(f"登录成功: {uname}")
+                        break
+                except Exception as e:
+                    pass
+                if i % 15 == 0:
+                    print(f"  等待登录... ({i}s) 请在浏览器中扫码登录")
             if not is_login:
-                print("登录失败，退出")
+                print("登录超时，退出")
                 context.close()
                 return
         
