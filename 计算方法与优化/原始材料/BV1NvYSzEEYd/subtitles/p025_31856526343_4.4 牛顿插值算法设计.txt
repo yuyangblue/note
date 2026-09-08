@@ -1,0 +1,1836 @@
+{
+  "font_size": 0.4,
+  "font_color": "#FFFFFF",
+  "background_alpha": 0.5,
+  "background_color": "#9C27B0",
+  "Stroke": "none",
+  "type": "AIsubtitle",
+  "lang": "zh",
+  "version": "v1.7.0.4",
+  "body": [
+    {
+      "from": 12.2,
+      "to": 13.22,
+      "sid": 1,
+      "location": 2,
+      "content": "大家好",
+      "music": 0.0
+    },
+    {
+      "from": 13.22,
+      "to": 17.52,
+      "sid": 2,
+      "location": 2,
+      "content": "现在我们学习牛顿插值法的算法设计",
+      "music": 0.0
+    },
+    {
+      "from": 20.9,
+      "to": 25.38,
+      "sid": 3,
+      "location": 2,
+      "content": "函数F关于这N加一个差值节点的N次",
+      "music": 0.0
+    },
+    {
+      "from": 25.38,
+      "to": 28.89,
+      "sid": 4,
+      "location": 2,
+      "content": "牛顿差值多项式是这样一个形式",
+      "music": 0.0
+    },
+    {
+      "from": 29.49,
+      "to": 30.57,
+      "sid": 5,
+      "location": 2,
+      "content": "在上一个知识点",
+      "music": 0.0
+    },
+    {
+      "from": 30.57,
+      "to": 32.35,
+      "sid": 6,
+      "location": 2,
+      "content": "我们已经推导出了公式",
+      "music": 0.0
+    },
+    {
+      "from": 32.35,
+      "to": 36.73,
+      "sid": 7,
+      "location": 2,
+      "content": "现在我们考虑如何编程计算牛顿差值",
+      "music": 0.0
+    },
+    {
+      "from": 36.73,
+      "to": 38.224,
+      "sid": 8,
+      "location": 2,
+      "content": "多项式的值",
+      "music": 0.0
+    },
+    {
+      "from": 38.879,
+      "to": 41.759,
+      "sid": 9,
+      "location": 2,
+      "content": "要想计算牛顿差值对象时的值",
+      "music": 0.0
+    },
+    {
+      "from": 41.759,
+      "to": 45.31,
+      "sid": 10,
+      "location": 2,
+      "content": "也就是要计算函数F的近似值",
+      "music": 0.0
+    },
+    {
+      "from": 45.75,
+      "to": 46.87,
+      "sid": 11,
+      "location": 2,
+      "content": "需要两个步骤",
+      "music": 0.0
+    },
+    {
+      "from": 47.99,
+      "to": 51.35,
+      "sid": 12,
+      "location": 2,
+      "content": "第一步先计算这些差商",
+      "music": 0.0
+    },
+    {
+      "from": 51.35,
+      "to": 54.43,
+      "sid": 13,
+      "location": 2,
+      "content": "也就是公式中出现的这些差商",
+      "music": 0.0
+    },
+    {
+      "from": 55.69,
+      "to": 59.75,
+      "sid": 14,
+      "location": 2,
+      "content": "把叉商代入公式求出函数值",
+      "music": 0.0
+    },
+    {
+      "from": 60.11,
+      "to": 61.99,
+      "sid": 15,
+      "location": 2,
+      "content": "我们在算法设计的时候",
+      "music": 0.0
+    },
+    {
+      "from": 61.99,
+      "to": 63.87,
+      "sid": 16,
+      "location": 2,
+      "content": "要考虑算法的效率",
+      "music": 0.0
+    },
+    {
+      "from": 63.87,
+      "to": 67.23,
+      "sid": 17,
+      "location": 2,
+      "content": "尽可能设计高效的算法",
+      "music": 0.0
+    },
+    {
+      "from": 68.13,
+      "to": 72.05,
+      "sid": 18,
+      "location": 2,
+      "content": "我们先看差商表的计算和存储",
+      "music": 0.0
+    },
+    {
+      "from": 72.85,
+      "to": 78.14,
+      "sid": 19,
+      "location": 2,
+      "content": "差商表的形式正好是一个矩阵的下三角部分",
+      "music": 0.0
+    },
+    {
+      "from": 78.14,
+      "to": 82.12,
+      "sid": 20,
+      "location": 2,
+      "content": "所以我们很自然的想到用一个二维数组",
+      "music": 0.0
+    },
+    {
+      "from": 82.12,
+      "to": 85.919,
+      "sid": 21,
+      "location": 2,
+      "content": "也就是矩阵在存储查商表",
+      "music": 0.0
+    },
+    {
+      "from": 86.199,
+      "to": 89.119,
+      "sid": 22,
+      "location": 2,
+      "content": "实际上只用到这个矩阵的下三角部分",
+      "music": 0.0
+    },
+    {
+      "from": 90.119,
+      "to": 93.08,
+      "sid": 23,
+      "location": 2,
+      "content": "严格上三角部分是用不到的",
+      "music": 0.0
+    },
+    {
+      "from": 93.28,
+      "to": 95.5,
+      "sid": 24,
+      "location": 2,
+      "content": "根据差商表的计算次序",
+      "music": 0.0
+    },
+    {
+      "from": 95.5,
+      "to": 97.58,
+      "sid": 25,
+      "location": 2,
+      "content": "我们是逐列计算",
+      "music": 0.0
+    },
+    {
+      "from": 97.58,
+      "to": 100.3,
+      "sid": 26,
+      "location": 2,
+      "content": "先从一阶差商开始",
+      "music": 0.0
+    },
+    {
+      "from": 100.3,
+      "to": 102.18,
+      "sid": 27,
+      "location": 2,
+      "content": "然后计算二阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 102.18,
+      "to": 103.86,
+      "sid": 28,
+      "location": 2,
+      "content": "三阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 104.479,
+      "to": 106.279,
+      "sid": 29,
+      "location": 2,
+      "content": "在计算机程序中",
+      "music": 0.0
+    },
+    {
+      "from": 106.279,
+      "to": 108.319,
+      "sid": 30,
+      "location": 2,
+      "content": "我们用这一个矩阵来存储",
+      "music": 0.0
+    },
+    {
+      "from": 108.319,
+      "to": 111.439,
+      "sid": 31,
+      "location": 2,
+      "content": "这是它们的对应的关系",
+      "music": 0.0
+    },
+    {
+      "from": 112.78,
+      "to": 115.18,
+      "sid": 32,
+      "location": 2,
+      "content": "按照查伤的计算次序",
+      "music": 0.0
+    },
+    {
+      "from": 115.56,
+      "to": 118.7,
+      "sid": 33,
+      "location": 2,
+      "content": "我们先计算一阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 118.7,
+      "to": 122.23,
+      "sid": 34,
+      "location": 2,
+      "content": "AII1代表第一列的这几个叉商",
+      "music": 0.0
+    },
+    {
+      "from": 122.23,
+      "to": 124.03,
+      "sid": 35,
+      "location": 2,
+      "content": "这是他们统一的计算公式",
+      "music": 0.0
+    },
+    {
+      "from": 124.03,
+      "to": 129.019,
+      "sid": 36,
+      "location": 2,
+      "content": "每一个一叉商都是用左侧和左上方两个数相减",
+      "music": 0.0
+    },
+    {
+      "from": 129.019,
+      "to": 129.759,
+      "sid": 37,
+      "location": 2,
+      "content": "做分子",
+      "music": 0.0
+    },
+    {
+      "from": 129.759,
+      "to": 132.439,
+      "sid": 38,
+      "location": 2,
+      "content": "分母上是相应的节点相减",
+      "music": 0.0
+    },
+    {
+      "from": 132.439,
+      "to": 135.219,
+      "sid": 39,
+      "location": 2,
+      "content": "然后我们计算二阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 137.46,
+      "to": 141.46,
+      "sid": 40,
+      "location": 2,
+      "content": "我们用AI2来表示二阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 142.86,
+      "to": 145.54,
+      "sid": 41,
+      "location": 2,
+      "content": "这是他们统一的计算公式",
+      "music": 0.0
+    },
+    {
+      "from": 148.14,
+      "to": 149.7,
+      "sid": 42,
+      "location": 2,
+      "content": "在计算三阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 151.82,
+      "to": 154.2,
+      "sid": 43,
+      "location": 2,
+      "content": "仍然有相同的计算规律",
+      "music": 0.0
+    },
+    {
+      "from": 154.52,
+      "to": 158.61,
+      "sid": 44,
+      "location": 2,
+      "content": "每一个三阶差商都表示为这样一个分式",
+      "music": 0.0
+    },
+    {
+      "from": 158.61,
+      "to": 163.47,
+      "sid": 45,
+      "location": 2,
+      "content": "分子上是左侧的元素减去左上方的元素",
+      "music": 0.0
+    },
+    {
+      "from": 163.47,
+      "to": 166.85,
+      "sid": 46,
+      "location": 2,
+      "content": "分母上是相应的节点之差",
+      "music": 0.0
+    },
+    {
+      "from": 168.8,
+      "to": 172.42,
+      "sid": 47,
+      "location": 2,
+      "content": "我们总结出一般的计算公式",
+      "music": 0.0
+    },
+    {
+      "from": 172.82,
+      "to": 177.82,
+      "sid": 48,
+      "location": 2,
+      "content": "计算一阶到N阶差商有统一的这个计算公式",
+      "music": 0.0
+    },
+    {
+      "from": 178.06,
+      "to": 183.46,
+      "sid": 49,
+      "location": 2,
+      "content": "通过两重循环就可以把整个差商表来计算完了",
+      "music": 0.0
+    },
+    {
+      "from": 185.88,
+      "to": 189.96,
+      "sid": 50,
+      "location": 2,
+      "content": "把计算公式我全部的罗列在这个地方",
+      "music": 0.0
+    },
+    {
+      "from": 192.94,
+      "to": 194.66,
+      "sid": 51,
+      "location": 2,
+      "content": "现在我们进一步的考虑",
+      "music": 0.0
+    },
+    {
+      "from": 195.66,
+      "to": 199.94,
+      "sid": 52,
+      "location": 2,
+      "content": "用一个矩阵来存储查长表是不是合适的",
+      "music": 0.0
+    },
+    {
+      "from": 201.84,
+      "to": 206.12,
+      "sid": 53,
+      "location": 2,
+      "content": "是不是需要存储整个的下三角部分",
+      "music": 0.0
+    },
+    {
+      "from": 206.64,
+      "to": 209.86,
+      "sid": 54,
+      "location": 2,
+      "content": "在牛顿插值公式中所用到的差商",
+      "music": 0.0
+    },
+    {
+      "from": 209.86,
+      "to": 213.6,
+      "sid": 55,
+      "location": 2,
+      "content": "仅仅是差商表中对角线的这些元素",
+      "music": 0.0
+    },
+    {
+      "from": 214.48,
+      "to": 218.92,
+      "sid": 56,
+      "location": 2,
+      "content": "其他的厂商都是中间计算结果可以不存储",
+      "music": 0.0
+    },
+    {
+      "from": 219.92,
+      "to": 223.5,
+      "sid": 57,
+      "location": 2,
+      "content": "如果是我们仅仅存储这些用到的数据",
+      "music": 0.0
+    },
+    {
+      "from": 223.96,
+      "to": 227.82,
+      "sid": 58,
+      "location": 2,
+      "content": "可以用一个一维数组来存储各阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 227.82,
+      "to": 232.55,
+      "sid": 59,
+      "location": 2,
+      "content": "现在我们用一个一维数组A来存储它的初值呢",
+      "music": 0.0
+    },
+    {
+      "from": 232.55,
+      "to": 234.67,
+      "sid": 60,
+      "location": 2,
+      "content": "先表示零阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 234.67,
+      "to": 236.37,
+      "sid": 61,
+      "location": 2,
+      "content": "也就是函数值",
+      "music": 0.0
+    },
+    {
+      "from": 236.37,
+      "to": 238.43,
+      "sid": 62,
+      "location": 2,
+      "content": "看这个示意图",
+      "music": 0.0
+    },
+    {
+      "from": 238.43,
+      "to": 241.47,
+      "sid": 63,
+      "location": 2,
+      "content": "A0到a an来",
+      "music": 0.0
+    },
+    {
+      "from": 241.47,
+      "to": 245.99,
+      "sid": 64,
+      "location": 2,
+      "content": "表示是函数F在各个节点的函数值",
+      "music": 0.0
+    },
+    {
+      "from": 246.93,
+      "to": 251.89,
+      "sid": 65,
+      "location": 2,
+      "content": "然后用这个公式来计算一减产商计算之后",
+      "music": 0.0
+    },
+    {
+      "from": 251.89,
+      "to": 256.64,
+      "sid": 66,
+      "location": 2,
+      "content": "那么原来的A1A2A三它的数值发生了改变",
+      "music": 0.0
+    },
+    {
+      "from": 256.64,
+      "to": 258.96,
+      "sid": 67,
+      "location": 2,
+      "content": "就表示了一夜差成",
+      "music": 0.0
+    },
+    {
+      "from": 260.28,
+      "to": 265.659,
+      "sid": 68,
+      "location": 2,
+      "content": "换句话说这三个ea叉商就覆盖了原来这三个值",
+      "music": 0.0
+    },
+    {
+      "from": 265.659,
+      "to": 267.579,
+      "sid": 69,
+      "location": 2,
+      "content": "而这A0是不动的",
+      "music": 0.0
+    },
+    {
+      "from": 267.579,
+      "to": 270.879,
+      "sid": 70,
+      "location": 2,
+      "content": "A0仍然保持着原来的零阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 270.879,
+      "to": 272.539,
+      "sid": 71,
+      "location": 2,
+      "content": "也就是函数值",
+      "music": 0.0
+    },
+    {
+      "from": 272.819,
+      "to": 275.319,
+      "sid": 72,
+      "location": 2,
+      "content": "用一维数组来存储差商的时候",
+      "music": 0.0
+    },
+    {
+      "from": 275.319,
+      "to": 277.63,
+      "sid": 73,
+      "location": 2,
+      "content": "还要注意计算的次序",
+      "music": 0.0
+    },
+    {
+      "from": 278.03,
+      "to": 280.99,
+      "sid": 74,
+      "location": 2,
+      "content": "I从N到一",
+      "music": 0.0
+    },
+    {
+      "from": 281.31,
+      "to": 283.71,
+      "sid": 75,
+      "location": 2,
+      "content": "为什么要采用这样的计算次序呢",
+      "music": 0.0
+    },
+    {
+      "from": 284.87,
+      "to": 286.53,
+      "sid": 76,
+      "location": 2,
+      "content": "如果是把次序反过来",
+      "music": 0.0
+    },
+    {
+      "from": 286.53,
+      "to": 290.12,
+      "sid": 77,
+      "location": 2,
+      "content": "先计算这个一插上A1",
+      "music": 0.0
+    },
+    {
+      "from": 290.6,
+      "to": 293.72,
+      "sid": 78,
+      "location": 2,
+      "content": "那么计算的时候呢就把这个A1覆盖了",
+      "music": 0.0
+    },
+    {
+      "from": 293.72,
+      "to": 295.68,
+      "sid": 79,
+      "location": 2,
+      "content": "那么在计算A2的时候呢",
+      "music": 0.0
+    },
+    {
+      "from": 295.68,
+      "to": 297.61,
+      "sid": 80,
+      "location": 2,
+      "content": "还要用到原来的A1",
+      "music": 0.0
+    },
+    {
+      "from": 297.61,
+      "to": 299.09,
+      "sid": 81,
+      "location": 2,
+      "content": "那计算结果就错了",
+      "music": 0.0
+    },
+    {
+      "from": 299.09,
+      "to": 301.23,
+      "sid": 82,
+      "location": 2,
+      "content": "所以呢我们计算的时候呢",
+      "music": 0.0
+    },
+    {
+      "from": 301.23,
+      "to": 304.05,
+      "sid": 83,
+      "location": 2,
+      "content": "应该是按照下标由大到小来计算",
+      "music": 0.0
+    },
+    {
+      "from": 304.05,
+      "to": 307.25,
+      "sid": 84,
+      "location": 2,
+      "content": "这样需要的数据呢就不会被覆盖",
+      "music": 0.0
+    },
+    {
+      "from": 307.8,
+      "to": 310.2,
+      "sid": 85,
+      "location": 2,
+      "content": "然后我们再计算二阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 310.2,
+      "to": 314.76,
+      "sid": 86,
+      "location": 2,
+      "content": "三阶差商都采用相同的方式",
+      "music": 0.0
+    },
+    {
+      "from": 315.08,
+      "to": 316.8,
+      "sid": 87,
+      "location": 2,
+      "content": "按照下标由大到小",
+      "music": 0.0
+    },
+    {
+      "from": 316.8,
+      "to": 317.64,
+      "sid": 88,
+      "location": 2,
+      "content": "这样来计算",
+      "music": 0.0
+    },
+    {
+      "from": 319.6,
+      "to": 321.28,
+      "sid": 89,
+      "location": 2,
+      "content": "循环结束之后",
+      "music": 0.0
+    },
+    {
+      "from": 321.68,
+      "to": 324.32,
+      "sid": 90,
+      "location": 2,
+      "content": "一维数组A所存储的数据",
+      "music": 0.0
+    },
+    {
+      "from": 324.32,
+      "to": 327.64,
+      "sid": 91,
+      "location": 2,
+      "content": "正好是插上表中对角线的元素",
+      "music": 0.0
+    },
+    {
+      "from": 327.64,
+      "to": 330.82,
+      "sid": 92,
+      "location": 2,
+      "content": "也就是牛顿差值公式中所用到的差商",
+      "music": 0.0
+    },
+    {
+      "from": 330.82,
+      "to": 334.84,
+      "sid": 93,
+      "location": 2,
+      "content": "我们把计算各阶差商的公式总结一下",
+      "music": 0.0
+    },
+    {
+      "from": 334.84,
+      "to": 337.56,
+      "sid": 94,
+      "location": 2,
+      "content": "通过两重循环执行两重循环呢",
+      "music": 0.0
+    },
+    {
+      "from": 337.56,
+      "to": 339.52,
+      "sid": 95,
+      "location": 2,
+      "content": "就能够计算出各界差商",
+      "music": 0.0
+    },
+    {
+      "from": 339.52,
+      "to": 343.75,
+      "sid": 96,
+      "location": 2,
+      "content": "那么最后这个速度A所表示的就是这些差商",
+      "music": 0.0
+    },
+    {
+      "from": 343.75,
+      "to": 345.31,
+      "sid": 97,
+      "location": 2,
+      "content": "对计算差商的算法",
+      "music": 0.0
+    },
+    {
+      "from": 345.31,
+      "to": 348.33,
+      "sid": 98,
+      "location": 2,
+      "content": "我们做一个简单的效率分析",
+      "music": 0.0
+    },
+    {
+      "from": 348.78,
+      "to": 354.66,
+      "sid": 99,
+      "location": 2,
+      "content": "看计算量计算每一个差商都需要一次除法",
+      "music": 0.0
+    },
+    {
+      "from": 354.76,
+      "to": 357.76,
+      "sid": 100,
+      "location": 2,
+      "content": "差商表中呢有多少个差商需要计算",
+      "music": 0.0
+    },
+    {
+      "from": 357.76,
+      "to": 361.4,
+      "sid": 101,
+      "location": 2,
+      "content": "当然就需要多少次除法计算",
+      "music": 0.0
+    },
+    {
+      "from": 361.4,
+      "to": 364.4,
+      "sid": 102,
+      "location": 2,
+      "content": "每一个茶商需要两次减法",
+      "music": 0.0
+    },
+    {
+      "from": 364.4,
+      "to": 367.4,
+      "sid": 103,
+      "location": 2,
+      "content": "所以一共呢需要这么多减法",
+      "music": 0.0
+    },
+    {
+      "from": 368.96,
+      "to": 370.8,
+      "sid": 104,
+      "location": 2,
+      "content": "再看存储量",
+      "music": 0.0
+    },
+    {
+      "from": 371.599,
+      "to": 373.739,
+      "sid": 105,
+      "location": 2,
+      "content": "我们介绍了两种存储方式",
+      "music": 0.0
+    },
+    {
+      "from": 373.739,
+      "to": 376.499,
+      "sid": 106,
+      "location": 2,
+      "content": "分别用二维数组和一维数组",
+      "music": 0.0
+    },
+    {
+      "from": 376.499,
+      "to": 379.959,
+      "sid": 107,
+      "location": 2,
+      "content": "它们的存储量呢显然是不一样的",
+      "music": 0.0
+    },
+    {
+      "from": 382.2,
+      "to": 386.36,
+      "sid": 108,
+      "location": 2,
+      "content": "我们在讨论牛顿差值多项式函数值的计算",
+      "music": 0.0
+    },
+    {
+      "from": 387.35,
+      "to": 392.71,
+      "sid": 109,
+      "location": 2,
+      "content": "计算完查伤之后代入到牛顿查实公式之中",
+      "music": 0.0
+    },
+    {
+      "from": 393.72,
+      "to": 394.72,
+      "sid": 110,
+      "location": 2,
+      "content": "如果是这样",
+      "music": 0.0
+    },
+    {
+      "from": 394.72,
+      "to": 395.9,
+      "sid": 111,
+      "location": 2,
+      "content": "直接计算的时候",
+      "music": 0.0
+    },
+    {
+      "from": 395.9,
+      "to": 397.54,
+      "sid": 112,
+      "location": 2,
+      "content": "计算量是比较大的",
+      "music": 0.0
+    },
+    {
+      "from": 397.54,
+      "to": 400.52,
+      "sid": 113,
+      "location": 2,
+      "content": "这里面有许多重复的计算",
+      "music": 0.0
+    },
+    {
+      "from": 401.9,
+      "to": 407.02,
+      "sid": 114,
+      "location": 2,
+      "content": "前后两项之间这个连乘积有共同的运算",
+      "music": 0.0
+    },
+    {
+      "from": 407.02,
+      "to": 408.14,
+      "sid": 115,
+      "location": 2,
+      "content": "不同的是",
+      "music": 0.0
+    },
+    {
+      "from": 408.14,
+      "to": 410.86,
+      "sid": 116,
+      "location": 2,
+      "content": "后面一项比前一项呢多了这么一个因式",
+      "music": 0.0
+    },
+    {
+      "from": 411.94,
+      "to": 414.58,
+      "sid": 117,
+      "location": 2,
+      "content": "所以直接计算是不合适的",
+      "music": 0.0
+    },
+    {
+      "from": 415.18,
+      "to": 417.6,
+      "sid": 118,
+      "location": 2,
+      "content": "直接用公式计算一个函数值",
+      "music": 0.0
+    },
+    {
+      "from": 417.6,
+      "to": 423.46,
+      "sid": 119,
+      "location": 2,
+      "content": "需要二分之N乘以N加一这么多次乘法",
+      "music": 0.0
+    },
+    {
+      "from": 424.13,
+      "to": 427.17,
+      "sid": 120,
+      "location": 2,
+      "content": "我们可以利用前后两项之间的关系",
+      "music": 0.0
+    },
+    {
+      "from": 428.37,
+      "to": 431.159,
+      "sid": 121,
+      "location": 2,
+      "content": "按照这个算法来计算",
+      "music": 0.0
+    },
+    {
+      "from": 431.599,
+      "to": 433.239,
+      "sid": 122,
+      "location": 2,
+      "content": "在这个PAD图中",
+      "music": 0.0
+    },
+    {
+      "from": 434.359,
+      "to": 437.039,
+      "sid": 123,
+      "location": 2,
+      "content": "我们令U等于一",
+      "music": 0.0
+    },
+    {
+      "from": 437.71,
+      "to": 440.75,
+      "sid": 124,
+      "location": 2,
+      "content": "在循环过程中又不断地做连乘积",
+      "music": 0.0
+    },
+    {
+      "from": 442.07,
+      "to": 443.47,
+      "sid": 125,
+      "location": 2,
+      "content": "那么这个U就表示了",
+      "music": 0.0
+    },
+    {
+      "from": 443.47,
+      "to": 446.885,
+      "sid": 126,
+      "location": 2,
+      "content": "牛顿插值公式中的这些连乘积",
+      "music": 0.0
+    },
+    {
+      "from": 448.7,
+      "to": 450.54,
+      "sid": 127,
+      "location": 2,
+      "content": "U再乘以这个系数",
+      "music": 0.0
+    },
+    {
+      "from": 450.54,
+      "to": 456.039,
+      "sid": 128,
+      "location": 2,
+      "content": "这个系数就是各阶差商累加到S上去",
+      "music": 0.0
+    },
+    {
+      "from": 456.519,
+      "to": 459.039,
+      "sid": 129,
+      "location": 2,
+      "content": "这样就大大的节省了计算量",
+      "music": 0.0
+    },
+    {
+      "from": 461.26,
+      "to": 464.86,
+      "sid": 130,
+      "location": 2,
+      "content": "一共需要用到2N次乘法",
+      "music": 0.0
+    },
+    {
+      "from": 465.02,
+      "to": 467.94,
+      "sid": 131,
+      "location": 2,
+      "content": "当然这个算法呢还不是最优秀的",
+      "music": 0.0
+    },
+    {
+      "from": 467.94,
+      "to": 472.06,
+      "sid": 132,
+      "location": 2,
+      "content": "最好的算法是秦九韶算法",
+      "music": 0.0
+    },
+    {
+      "from": 475.14,
+      "to": 477.32,
+      "sid": 133,
+      "location": 2,
+      "content": "我用三次多项式作为例子",
+      "music": 0.0
+    },
+    {
+      "from": 477.32,
+      "to": 480.1,
+      "sid": 134,
+      "location": 2,
+      "content": "来介绍一下清酒烧算法",
+      "music": 0.0
+    },
+    {
+      "from": 480.49,
+      "to": 484.31,
+      "sid": 135,
+      "location": 2,
+      "content": "PX这是一个三次牛顿差值多项式",
+      "music": 0.0
+    },
+    {
+      "from": 484.31,
+      "to": 487.77,
+      "sid": 136,
+      "location": 2,
+      "content": "我们将这个多项式的形式改写一下",
+      "music": 0.0
+    },
+    {
+      "from": 488.809,
+      "to": 491.729,
+      "sid": 137,
+      "location": 2,
+      "content": "定A3先乘以X减去X2",
+      "music": 0.0
+    },
+    {
+      "from": 493.169,
+      "to": 497.9,
+      "sid": 138,
+      "location": 2,
+      "content": "然后加上A2以后再乘一项",
+      "music": 0.0
+    },
+    {
+      "from": 497.9,
+      "to": 500.24,
+      "sid": 139,
+      "location": 2,
+      "content": "再加一个数乘一个数",
+      "music": 0.0
+    },
+    {
+      "from": 500.24,
+      "to": 501.28,
+      "sid": 140,
+      "location": 2,
+      "content": "加一个数",
+      "music": 0.0
+    },
+    {
+      "from": 501.28,
+      "to": 502.95,
+      "sid": 141,
+      "location": 2,
+      "content": "重复这个工作",
+      "music": 0.0
+    },
+    {
+      "from": 502.95,
+      "to": 506.59,
+      "sid": 142,
+      "location": 2,
+      "content": "我们会发现呢这个预算是很有规律的",
+      "music": 0.0
+    },
+    {
+      "from": 507.19,
+      "to": 510.75,
+      "sid": 143,
+      "location": 2,
+      "content": "我们令变量P的初值呢是A3",
+      "music": 0.0
+    },
+    {
+      "from": 511.93,
+      "to": 516.67,
+      "sid": 144,
+      "location": 2,
+      "content": "然后执行这条赋值语句乘以X减去X2",
+      "music": 0.0
+    },
+    {
+      "from": 516.67,
+      "to": 518.13,
+      "sid": 145,
+      "location": 2,
+      "content": "再加上A2",
+      "music": 0.0
+    },
+    {
+      "from": 518.13,
+      "to": 521.899,
+      "sid": 146,
+      "location": 2,
+      "content": "那么这个时候的P就表示这一部分",
+      "music": 0.0
+    },
+    {
+      "from": 523.899,
+      "to": 527.7,
+      "sid": 147,
+      "location": 2,
+      "content": "原来的表达式就可以写成这样的形式",
+      "music": 0.0
+    },
+    {
+      "from": 528.3,
+      "to": 530.24,
+      "sid": 148,
+      "location": 2,
+      "content": "然后我们在执行这个操作",
+      "music": 0.0
+    },
+    {
+      "from": 530.24,
+      "to": 533.1,
+      "sid": 149,
+      "location": 2,
+      "content": "令P乘以X减去X1",
+      "music": 0.0
+    },
+    {
+      "from": 533.1,
+      "to": 535.06,
+      "sid": 150,
+      "location": 2,
+      "content": "再加上A1",
+      "music": 0.0
+    },
+    {
+      "from": 536.18,
+      "to": 540.58,
+      "sid": 151,
+      "location": 2,
+      "content": "那么这个函数PX就可以表示为这个形式",
+      "music": 0.0
+    },
+    {
+      "from": 540.58,
+      "to": 543.51,
+      "sid": 152,
+      "location": 2,
+      "content": "我们在执行这条复制语句",
+      "music": 0.0
+    },
+    {
+      "from": 543.51,
+      "to": 547.11,
+      "sid": 153,
+      "location": 2,
+      "content": "这个时候大PX就等于这个P",
+      "music": 0.0
+    },
+    {
+      "from": 548.27,
+      "to": 550.62,
+      "sid": 154,
+      "location": 2,
+      "content": "这样就求出了函数值",
+      "music": 0.0
+    },
+    {
+      "from": 551.22,
+      "to": 555.3,
+      "sid": 155,
+      "location": 2,
+      "content": "我们观察这几个公式找到规律",
+      "music": 0.0
+    },
+    {
+      "from": 555.3,
+      "to": 557.94,
+      "sid": 156,
+      "location": 2,
+      "content": "对于一般的N次差值多项式",
+      "music": 0.0
+    },
+    {
+      "from": 557.94,
+      "to": 560.41,
+      "sid": 157,
+      "location": 2,
+      "content": "我们领P的初值是a an",
+      "music": 0.0
+    },
+    {
+      "from": 561.43,
+      "to": 566.099,
+      "sid": 158,
+      "location": 2,
+      "content": "在以后的循环过程中观察这几个公式特点",
+      "music": 0.0
+    },
+    {
+      "from": 566.099,
+      "to": 571.139,
+      "sid": 159,
+      "location": 2,
+      "content": "这个循环体中执行P赋值为P乘以X减去X",
+      "music": 0.0
+    },
+    {
+      "from": 571.139,
+      "to": 575.31,
+      "sid": 160,
+      "location": 2,
+      "content": "I加上AI对于三次多项式",
+      "music": 0.0
+    },
+    {
+      "from": 575.31,
+      "to": 579.24,
+      "sid": 161,
+      "location": 2,
+      "content": "这个下标是210这样的变化",
+      "music": 0.0
+    },
+    {
+      "from": 579.24,
+      "to": 581.4,
+      "sid": 162,
+      "location": 2,
+      "content": "那么相应的对于N次差值",
+      "music": 0.0
+    },
+    {
+      "from": 581.4,
+      "to": 587.16,
+      "sid": 163,
+      "location": 2,
+      "content": "多项式I的变化范围就是从N减一变为零",
+      "music": 0.0
+    },
+    {
+      "from": 588.44,
+      "to": 592.48,
+      "sid": 164,
+      "location": 2,
+      "content": "整个的这个循环一共需要多少次乘法呢",
+      "music": 0.0
+    },
+    {
+      "from": 592.48,
+      "to": 596.52,
+      "sid": 165,
+      "location": 2,
+      "content": "每循环一次只需要执行一次乘法",
+      "music": 0.0
+    },
+    {
+      "from": 596.72,
+      "to": 599.72,
+      "sid": 166,
+      "location": 2,
+      "content": "所以呢整个的循环呢需要N次乘法",
+      "music": 0.0
+    },
+    {
+      "from": 599.72,
+      "to": 601.72,
+      "sid": 167,
+      "location": 2,
+      "content": "这样计算量呢达到了最节省",
+      "music": 0.0
+    },
+    {
+      "from": 601.72,
+      "to": 606.149,
+      "sid": 168,
+      "location": 2,
+      "content": "我们把计算差商的算法和计算函数值的算法",
+      "music": 0.0
+    },
+    {
+      "from": 606.149,
+      "to": 607.26,
+      "sid": 169,
+      "location": 2,
+      "content": "合在一起",
+      "music": 0.0
+    },
+    {
+      "from": 607.26,
+      "to": 608.1,
+      "sid": 170,
+      "location": 2,
+      "content": "就得到",
+      "music": 0.0
+    },
+    {
+      "from": 608.1,
+      "to": 609.54,
+      "sid": 171,
+      "location": 2,
+      "content": "用牛顿插值方法",
+      "music": 0.0
+    },
+    {
+      "from": 609.54,
+      "to": 611.94,
+      "sid": 172,
+      "location": 2,
+      "content": "来计算函数值的一个完整的算法",
+      "music": 0.0
+    },
+    {
+      "from": 611.94,
+      "to": 615.19,
+      "sid": 173,
+      "location": 2,
+      "content": "输入的参数有差值次数",
+      "music": 0.0
+    },
+    {
+      "from": 615.19,
+      "to": 617.13,
+      "sid": 174,
+      "location": 2,
+      "content": "全部的节点构成的数组",
+      "music": 0.0
+    },
+    {
+      "from": 617.13,
+      "to": 619.03,
+      "sid": 175,
+      "location": 2,
+      "content": "函数值构成的数组差值点",
+      "music": 0.0
+    },
+    {
+      "from": 619.03,
+      "to": 623.37,
+      "sid": 176,
+      "location": 2,
+      "content": "第一个循环是将函数值赋给数组A",
+      "music": 0.0
+    },
+    {
+      "from": 624.01,
+      "to": 626.41,
+      "sid": 177,
+      "location": 2,
+      "content": "现在A表示的是函数值",
+      "music": 0.0
+    },
+    {
+      "from": 626.41,
+      "to": 628.69,
+      "sid": 178,
+      "location": 2,
+      "content": "或者说是零阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 629.2,
+      "to": 631.81,
+      "sid": 179,
+      "location": 2,
+      "content": "通过这一个二重循环",
+      "music": 0.0
+    },
+    {
+      "from": 632.33,
+      "to": 636.61,
+      "sid": 180,
+      "location": 2,
+      "content": "A就变为是差商表中对角线的元素",
+      "music": 0.0
+    },
+    {
+      "from": 637.27,
+      "to": 641.11,
+      "sid": 181,
+      "location": 2,
+      "content": "然后赋值SVAN",
+      "music": 0.0
+    },
+    {
+      "from": 641.11,
+      "to": 643.27,
+      "sid": 182,
+      "location": 2,
+      "content": "然后执行N次循环",
+      "music": 0.0
+    },
+    {
+      "from": 643.27,
+      "to": 645.9,
+      "sid": 183,
+      "location": 2,
+      "content": "那么S就表示了函数值",
+      "music": 0.0
+    },
+    {
+      "from": 645.9,
+      "to": 649.2,
+      "sid": 184,
+      "location": 2,
+      "content": "最后呢返回S我们在讨论这个问题",
+      "music": 0.0
+    },
+    {
+      "from": 649.2,
+      "to": 653.329,
+      "sid": 185,
+      "location": 2,
+      "content": "利用牛顿差值多项式计算差值多项式的系数",
+      "music": 0.0
+    },
+    {
+      "from": 653.329,
+      "to": 654.709,
+      "sid": 186,
+      "location": 2,
+      "content": "在有些问题中",
+      "music": 0.0
+    },
+    {
+      "from": 654.709,
+      "to": 657.92,
+      "sid": 187,
+      "location": 2,
+      "content": "我们并不是要求某一点的函数值",
+      "music": 0.0
+    },
+    {
+      "from": 657.92,
+      "to": 661.0,
+      "sid": 188,
+      "location": 2,
+      "content": "而是要把这个差值多项式表示出来",
+      "music": 0.0
+    },
+    {
+      "from": 661.0,
+      "to": 665.08,
+      "sid": 189,
+      "location": 2,
+      "content": "也就是要求出差值多项式的系数",
+      "music": 0.0
+    },
+    {
+      "from": 665.98,
+      "to": 669.78,
+      "sid": 190,
+      "location": 2,
+      "content": "现在我通过这个三次多项式为例来推导",
+      "music": 0.0
+    },
+    {
+      "from": 669.98,
+      "to": 671.66,
+      "sid": 191,
+      "location": 2,
+      "content": "假设我们已经计算好了",
+      "music": 0.0
+    },
+    {
+      "from": 671.66,
+      "to": 671.98,
+      "sid": 192,
+      "location": 2,
+      "content": "差商",
+      "music": 0.0
+    },
+    {
+      "from": 672.98,
+      "to": 676.62,
+      "sid": 193,
+      "location": 2,
+      "content": "仍然是用前面我们用的符号AI来表示",
+      "music": 0.0
+    },
+    {
+      "from": 676.62,
+      "to": 679.28,
+      "sid": 194,
+      "location": 2,
+      "content": "这个I阶差商",
+      "music": 0.0
+    },
+    {
+      "from": 680.189,
+      "to": 684.029,
+      "sid": 195,
+      "location": 2,
+      "content": "那么牛顿插值多项式表示为这样一个形式",
+      "music": 0.0
+    },
+    {
+      "from": 684.84,
+      "to": 687.2,
+      "sid": 196,
+      "location": 2,
+      "content": "我们先从最内层的括号开始",
+      "music": 0.0
+    },
+    {
+      "from": 687.2,
+      "to": 693.16,
+      "sid": 197,
+      "location": 2,
+      "content": "逐层的错括号A3成金曲加上A2",
+      "music": 0.0
+    },
+    {
+      "from": 694.06,
+      "to": 697.78,
+      "sid": 198,
+      "location": 2,
+      "content": "把这一部分表示为是一个一次多项式",
+      "music": 0.0
+    },
+    {
+      "from": 699.4,
+      "to": 701.2,
+      "sid": 199,
+      "location": 2,
+      "content": "然后我们执行赋值语句",
+      "music": 0.0
+    },
+    {
+      "from": 702.2,
+      "to": 706.36,
+      "sid": 200,
+      "location": 2,
+      "content": "将这个常数部分赋值为A2",
+      "music": 0.0
+    },
+    {
+      "from": 707.05,
+      "to": 710.619,
+      "sid": 201,
+      "location": 2,
+      "content": "那么这个对象式就表示为这样一个形式",
+      "music": 0.0
+    },
+    {
+      "from": 710.939,
+      "to": 712.879,
+      "sid": 202,
+      "location": 2,
+      "content": "我们再脱掉一层括号",
+      "music": 0.0
+    },
+    {
+      "from": 712.879,
+      "to": 714.619,
+      "sid": 203,
+      "location": 2,
+      "content": "将这两项相乘",
+      "music": 0.0
+    },
+    {
+      "from": 714.619,
+      "to": 717.979,
+      "sid": 204,
+      "location": 2,
+      "content": "把它展成是一个二次多项式",
+      "music": 0.0
+    },
+    {
+      "from": 719.96,
+      "to": 722.4,
+      "sid": 205,
+      "location": 2,
+      "content": "在执行这两条赋值语句",
+      "music": 0.0
+    },
+    {
+      "from": 722.4,
+      "to": 726.599,
+      "sid": 206,
+      "location": 2,
+      "content": "那么这个对象是PX就表示为这样一个形式",
+      "music": 0.0
+    },
+    {
+      "from": 726.599,
+      "to": 728.799,
+      "sid": 207,
+      "location": 2,
+      "content": "我们最后再把这层括号去掉",
+      "music": 0.0
+    },
+    {
+      "from": 730.519,
+      "to": 735.33,
+      "sid": 208,
+      "location": 2,
+      "content": "表示为这样形式执行赋值语句",
+      "music": 0.0
+    },
+    {
+      "from": 735.9,
+      "to": 739.04,
+      "sid": 209,
+      "location": 2,
+      "content": "将这一项赋给A0",
+      "music": 0.0
+    },
+    {
+      "from": 739.04,
+      "to": 741.2,
+      "sid": 210,
+      "location": 2,
+      "content": "类似的这一项赋给A1",
+      "music": 0.0
+    },
+    {
+      "from": 741.2,
+      "to": 743.68,
+      "sid": 211,
+      "location": 2,
+      "content": "这一项呢付给A2",
+      "music": 0.0
+    },
+    {
+      "from": 744.08,
+      "to": 746.48,
+      "sid": 212,
+      "location": 2,
+      "content": "执行这些复制语句之后",
+      "music": 0.0
+    },
+    {
+      "from": 747.07,
+      "to": 749.51,
+      "sid": 213,
+      "location": 2,
+      "content": "PX就表示为这样一个形式",
+      "music": 0.0
+    },
+    {
+      "from": 749.51,
+      "to": 750.91,
+      "sid": 214,
+      "location": 2,
+      "content": "我们可以看出",
+      "music": 0.0
+    },
+    {
+      "from": 750.91,
+      "to": 753.61,
+      "sid": 215,
+      "location": 2,
+      "content": "这个时候A0A1A二",
+      "music": 0.0
+    },
+    {
+      "from": 753.61,
+      "to": 757.22,
+      "sid": 216,
+      "location": 2,
+      "content": "A3正好是多项式的全部的系数",
+      "music": 0.0
+    },
+    {
+      "from": 757.22,
+      "to": 761.38,
+      "sid": 217,
+      "location": 2,
+      "content": "刚才的计算过程统一的写为这样一个公式",
+      "music": 0.0
+    },
+    {
+      "from": 761.38,
+      "to": 763.62,
+      "sid": 218,
+      "location": 2,
+      "content": "是个二重循环",
+      "music": 0.0
+    },
+    {
+      "from": 764.14,
+      "to": 767.08,
+      "sid": 219,
+      "location": 2,
+      "content": "现在我们设计出算法给定差值次数",
+      "music": 0.0
+    },
+    {
+      "from": 767.08,
+      "to": 772.94,
+      "sid": 220,
+      "location": 2,
+      "content": "插值节点对应的函数值输出全部的系数",
+      "music": 0.0
+    },
+    {
+      "from": 774.1,
+      "to": 777.22,
+      "sid": 221,
+      "location": 2,
+      "content": "这个循环刚才我们已经讲过",
+      "music": 0.0
+    },
+    {
+      "from": 777.22,
+      "to": 779.18,
+      "sid": 222,
+      "location": 2,
+      "content": "这是计算差商的",
+      "music": 0.0
+    },
+    {
+      "from": 779.18,
+      "to": 783.82,
+      "sid": 223,
+      "location": 2,
+      "content": "然后再执行这一个两重循环构成的公式",
+      "music": 0.0
+    },
+    {
+      "from": 784.29,
+      "to": 786.81,
+      "sid": 224,
+      "location": 2,
+      "content": "那么执行这个循环之后",
+      "music": 0.0
+    },
+    {
+      "from": 787.62,
+      "to": 790.02,
+      "sid": 225,
+      "location": 2,
+      "content": "数组A从零下标",
+      "music": 0.0
+    },
+    {
+      "from": 790.02,
+      "to": 794.98,
+      "sid": 226,
+      "location": 2,
+      "content": "零到N表示的正好是差值多项式的全部的系数",
+      "music": 0.0
+    },
+    {
+      "from": 795.67,
+      "to": 797.23,
+      "sid": 227,
+      "location": 2,
+      "content": "本节课就讲到这",
+      "music": 0.0
+    },
+    {
+      "from": 797.23,
+      "to": 798.32,
+      "sid": 228,
+      "location": 2,
+      "content": "休息一下",
+      "music": 0.0
+    }
+  ]
+}

@@ -1,26 +1,45 @@
-# OI Wiki 本地版 · 数据结构
+# OI Wiki 本地版
 
 > 提取自 OI Wiki GitHub 官方仓库（OI-wiki/OI-wiki，master 分支），2026-09-08 下载。
-> **仅保留数据结构（ds）目录**，其余主题已删除。与 ICPC 笔记库（`..\ICPC\`）并列，配合 AI伴学计划使用。
+> 与 ICPC 笔记库（`..\ICPC\`）并列，配合 AI伴学计划使用。
 
 ## 内容
 
-- **`ds\` 目录 59 篇 Markdown**：链表、栈、队列、单调栈/队列、堆、并查集、哈希表、BST/AVL/红黑树/Splay/Treap、线段树系、树状数组、分块、ST 表、字典树系、可持久化系等
+- **465 篇 Markdown**，覆盖 OI Wiki 全部主题
+- **14 个顶层目录已改为中文**：
+
+| 目录 | 原名 | 目录 | 原名 |
+|------|------|------|------|
+| 算法基础 | basic | 数据结构 | ds |
+| 图论 | graph | 字符串 | string |
+| 数学 | math | 动态规划 | dp |
+| 搜索 | search | 计算几何 | geometry |
+| 编程语言 | lang | 杂项 | misc |
+| 工具 | tools | 竞赛 | contest |
+| 简介 | intro | 专题 | topic |
+
 - 代码块完整（C++），可直接复制到洛谷验证
 - 公式为 LaTeX 源文本（Obsidian 可渲染）
+- md 内跨目录链接已同步替换为中文路径
+
+## 图片说明
+
+- **全部配图已在本地**（619 处图片引用 100% 可显示，2026-09-08 已从在线版补齐数据结构章节缺失的 149 张图）
+- 需要最新内容时可对照在线版 https://oi-wiki.org/
 
 ## 文件翻译
 
-见同目录 `目录翻译.md`（仅 ds 部分）。
+见同目录 `目录翻译.md`（中英对照，全目录）。
 
 ## 与学习计划周次表对应（ICPC学习路线.md）
 
-| 周次 | 本地读（OI-Wiki\ds\） | 非 ds 章节（用在线版 oi-wiki.org） |
-|------|----------------------|-----------------------------------|
-| 第2-4周 | `linked-list.md`（线性表/链表） | — |
-| 第5周 | `stack.md` `queue.md` `monotonic-stack.md` `monotonic-queue.md` | — |
-| 第7周 | `bst.md` | 树基础 → 在线 `graph/tree-basic/` |
-| 第9周 | `hash.md` `bst.md` `avl.md` | 查找概念 → 在线 |
-| 其他周 | — | 复杂度/串/图/排序等 → 在线版 |
-
-> 本地版不含图片；需要配图时查在线版 https://oi-wiki.org/ 对应页面。
+| 周次 | 读（OI-Wiki 本地文件，中文目录） |
+|------|----------------------|
+| 第1周 | `算法基础\complexity.md` |
+| 第2-4周 | `数据结构\linked-list.md` |
+| 第5周 | `数据结构\stack.md` + `数据结构\queue.md` + `数据结构\monotonic-stack.md` + `数据结构\monotonic-queue.md` |
+| 第6周 | `字符串\kmp.md` + `字符串\hash.md` |
+| 第7周 | `图论\tree-basic.md` + `数据结构\bst.md` |
+| 第8周 | `图论\concept.md` `图论\save.md` `图论\dfs.md` `图论\bfs.md` `图论\shortest-path.md` `图论\mst.md` `图论\topo.md` |
+| 第9周 | `数据结构\hash.md` + `数据结构\bst.md` + `数据结构\avl.md` |
+| 第10周 | `算法基础\sort-intro.md` + `算法基础\` 下各排序文件 |
