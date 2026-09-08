@@ -1,5 +1,5 @@
 ???+ note "Note"
-    本页面将着重介绍 Git 这一版本控制系统，与 GitHub 相关的内容，请参考 [GitHub 帮助](https://docs.github.com/cn) 和 [如何参与 - OI Wiki](../简介/htc.md)．
+    本页面将着重介绍 Git 这一版本控制系统，与 GitHub 相关的内容，请参考 [GitHub 帮助](https://docs.github.com/cn) 和 [如何参与 - OI Wiki](../简介/如何参与.md)．
 
 Git 是目前使用最广泛的版本控制系统之一．**OI Wiki** 也使用了 Git 作为版本控制系统．
 
@@ -40,7 +40,7 @@ $ git config --global user.email oi-wiki@example.com
 $ git config --global core.editor emacs
 ```
 
-执行如上命令可以将编辑器更改为 [Emacs](./editor/emacs.md)．
+执行如上命令可以将编辑器更改为 [Emacs](./editor/Emacs.md)．
 
 在 Windows 下，Git 的默认编辑器可以在安装 Git 时选择（见前文）．之后若要修改，在 Git Bash 里输入如上命令，将编辑器名换成编辑器的绝对路径，运行命令即可．
 

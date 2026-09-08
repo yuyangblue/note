@@ -36,7 +36,7 @@ Eclipse 最初是由 IBM 公司开发的替代商业软件 Visual Age for Java �
 
 这个软件的帮助手册很详细，建议刚接触的同学多看帮助手册，多百度，并且这个 IDE 的使用手感与 Visual Studio 相近．
 
-和 [VS Code](./vscode.md) 类似，Eclipse 中也提供了很多插件，这些插件可以让 Eclipse 变得更加易用．[^ref2]
+和 [VS Code](./VSCode.md) 类似，Eclipse 中也提供了很多插件，这些插件可以让 Eclipse 变得更加易用．[^ref2]
 
 ## 参考资料与注释
 

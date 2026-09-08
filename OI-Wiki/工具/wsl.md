@@ -265,7 +265,7 @@ $
 # apt install -y build-essential vim ddd gdb fpc emacs gedit anjuta lazarus
 ```
 
-GUIDE 的安装请参考 [Debian 或 Ubuntu 下 GUIDE 的安装](./editor/guide.md#在-debian-或-ubuntu-安装)．
+GUIDE 的安装请参考 [Debian 或 Ubuntu 下 GUIDE 的安装](./editor/编辑器选择指南.md#在-debian-或-ubuntu-安装)．
 
 这里安装的是基础 + NOI 官方要求的环境，如有需要可以用 `sudo apt install <程序名>` 来安装其它软件包．
 若想安装其他版本可以参考 Debian 官方的 [包管理手册](https://www.debian.org/doc/manuals/debian-reference/ch02.zh-cn.html)．
@@ -398,7 +398,7 @@ Welcome!
 
 ### 配合 Visual Sudio Code 进行编辑
 
-如果习惯在 Windows 环境下使用 [Visual Studio Code](./editor/vscode.md) 进行代码编辑，可以安装 VS Code 中的 `Remote - WSL` 插件，更方便地对 WSL 系统中的文件进行编辑．
+如果习惯在 Windows 环境下使用 [Visual Studio Code](./editor/VSCode.md) 进行代码编辑，可以安装 VS Code 中的 `Remote - WSL` 插件，更方便地对 WSL 系统中的文件进行编辑．
 
 通过 `Remote - WSL`，可以在 Windows 下的 VS Code 界面中直接对 WSL 子系统进行操作，更加方便地编辑子系统目录下的文件、更方便地使用终端进行调试．
 
@@ -450,7 +450,7 @@ Welcome!
     比如说 vim，在命令行中键入 `man vim`，会给出一份详尽的使用方法．
     亦可使用 `vim --help`．
 
-    关于命令行，可阅读 [命令行](./cmd.md)
+    关于命令行，可阅读 [命令行](./命令行.md)
 
 -   对系统资源的占用量？
 

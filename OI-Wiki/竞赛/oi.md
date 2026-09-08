@@ -322,5 +322,5 @@ eJOI 每年都公开题面、测试数据和题解，官网地址见 [帖子](ht
 
 ## 参考资料
 
--   [ICPC/CCPC 赛事与赛制](./icpc.md)
+-   [ICPC/CCPC 赛事与赛制](./ICPC.md)
 -   [「翻译组」一些大洲级 OI 比赛的地址](https://loj.ac/article/416)

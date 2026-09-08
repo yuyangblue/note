@@ -81,17 +81,17 @@ grader 式交互参见 [官方教程](https://codeforces.com/blog/entry/66916)�
 
 testlib.h 提供了一些内置的 checker，在选择框中有简要介绍，也可以选择后再点 "View source" 查看源码．
 
-如果需要自己编写 checker，请参考 [checker 教程](./testlib/checker.md)．
+如果需要自己编写 checker，请参考 [checker 教程](./testlib/checker校验器.md)．
 
 下面的 "Checker tests" 是通过 "Add test" 添加若干组输出以及对应的期望评测结果，然后点击 "Run tests" 就可以测试 checker 是否正确返回了评测结果．
 
 ### Interactor
 
-仅 IO 式交互题需要，请参考 [interactor 教程](./testlib/interactor.md)．
+仅 IO 式交互题需要，请参考 [interactor 教程](./testlib/interactor交互器.md)．
 
 ### Validator
 
-validator 用来检测数据合法性，编写请参考 [validator 教程](./testlib/validator.md)．
+validator 用来检测数据合法性，编写请参考 [validator 教程](./testlib/validator验证器.md)．
 
 下面的 "Validator tests" 类似于 "Checker tests"，需要提供输入和期望是否合法，用来测试 validator．
 
@@ -99,7 +99,7 @@ validator 用来检测数据合法性，编写请参考 [validator 教程](./tes
 
 这个页面是用来管理数据的．
 
-在 Polygon 上，推荐的做法是使用少量 **带命令行参数** 的 [generator](./testlib/generator.md) 来生成数据，而不是写一堆 generator 或者每生成一组数据都修改 generator．并且，只需要生成输入，输出会自动生成．
+在 Polygon 上，推荐的做法是使用少量 **带命令行参数** 的 [generator](./testlib/generator生成器.md) 来生成数据，而不是写一堆 generator 或者每生成一组数据都修改 generator．并且，只需要生成输入，输出会自动生成．
 
 "Testset" 就是一个测试集，如果是给 CF 出题需要手动添加 "pretests" 这个 Testset，并且 "pretests" 需要是 "tests" 的子集．
 

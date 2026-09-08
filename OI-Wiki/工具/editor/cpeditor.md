@@ -65,4 +65,4 @@ author: zarttic, xk2013
 
 ## 参考资料
 
-[^compiler]: [编译器 - OI Wiki](../compiler.md)
+[^compiler]: [编译器 - OI Wiki](../编译器.md)
