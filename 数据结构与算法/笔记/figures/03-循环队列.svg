@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="PingFang SC, Microsoft YaHei, 'Segoe UI', Arial, sans-serif">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="48" y="44" font-size="26" font-weight="700" fill="#2F5597">循环队列：数组首尾相接</text>
+<text x="48" y="72" font-size="15" fill="#6B7280">解决顺序队列的'假队满'——指针加 1 后必须取模</text><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#6B7280"/></marker></defs>
+<rect x="40" y="100" width="880" height="330" rx="14" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="2"/>
+<circle cx="280" cy="145" r="30" fill="#FFFFFF" stroke="#C9CDD4" stroke-width="2"/><text x="280" y="149" font-size="13" fill="#6B7280" font-weight="600" text-anchor="middle">0</text>
+<circle cx="364" cy="180" r="30" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/><text x="364" y="184" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">1</text>
+<circle cx="400" cy="265" r="30" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/><text x="400" y="269" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">2</text>
+<circle cx="364" cy="349" r="30" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/><text x="364" y="354" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">3</text>
+<circle cx="280" cy="385" r="30" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/><text x="280" y="389" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">4</text>
+<circle cx="195" cy="349" r="30" fill="#FFFFFF" stroke="#C9CDD4" stroke-width="2"/><text x="195" y="354" font-size="13" fill="#6B7280" font-weight="600" text-anchor="middle">5</text>
+<circle cx="160" cy="265" r="30" fill="#FFFFFF" stroke="#C9CDD4" stroke-width="2"/><text x="160" y="269" font-size="13" fill="#6B7280" font-weight="600" text-anchor="middle">6</text>
+<circle cx="195" cy="180" r="30" fill="#FFFFFF" stroke="#C9CDD4" stroke-width="2"/><text x="195" y="184" font-size="13" fill="#6B7280" font-weight="600" text-anchor="middle">7</text>
+<line x1="280" y1="191" x2="332" y2="212" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="332" y1="212" x2="354" y2="265" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="354" y1="265" x2="332" y2="317" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="332" y1="317" x2="280" y2="339" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="280" y1="339" x2="227" y2="317" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="227" y1="317" x2="206" y2="265" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="206" y1="265" x2="227" y2="212" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="227" y1="212" x2="280" y2="191" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<text x="364" y="185" font-size="13" fill="#375623" font-weight="700" text-anchor="middle">a1</text>
+<text x="400" y="270" font-size="13" fill="#375623" font-weight="700" text-anchor="middle">a2</text>
+<text x="364" y="354" font-size="13" fill="#375623" font-weight="700" text-anchor="middle">a3</text>
+<text x="280" y="390" font-size="13" fill="#375623" font-weight="700" text-anchor="middle">a4</text>
+<text x="430" y="133" font-size="13" fill="#8A6D1A" font-weight="700" text-anchor="start">rear（队尾）</text>
+<line x1="430" y1="139" x2="382" y2="169" stroke="#E0BC5E" stroke-width="2" marker-end="url(#arr)"/>
+<text x="114" y="391" font-size="13" fill="#8B2222" font-weight="700" text-anchor="start">front（队头前）</text>
+<line x1="114" y1="397" x2="178" y2="367" stroke="#C0392B" stroke-width="2" marker-end="url(#arr)"/>
+<text x="640" y="170" font-size="17" fill="#2F5597" font-weight="700" text-anchor="start">取模：rear = (rear+1) % M</text>
+<text x="640" y="210" font-size="15" fill="#1A1B1C" font-weight="600" text-anchor="start">判空：front == rear</text>
+<text x="640" y="246" font-size="15" fill="#1A1B1C" font-weight="600" text-anchor="start">判满：(rear+1) % M == front</text>
+<text x="640" y="290" font-size="13" fill="#6B7280" font-weight="400" text-anchor="start">牺牲一个单元区分空满</text>
+<text x="640" y="322" font-size="13" fill="#6B7280" font-weight="400" text-anchor="start">也可用标志位 / 计数器</text>
+<text x="640" y="400" font-size="14" fill="#6B7280" font-weight="400" text-anchor="start">像钟表：13 点记作 1 点（12 取模）</text>
+<rect x="36" y="478" width="888" height="46" rx="12" fill="#F0F4FA" stroke="#D6E0F0" stroke-width="1"/>
+<text x="480" y="501" font-size="15" fill="#2F5597" font-weight="600">指针移动必须取模；rear+1==front 判满，front==rear 判空</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="PingFang SC, Microsoft YaHei, 'Segoe UI', Arial, sans-serif">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="48" y="44" font-size="26" font-weight="700" fill="#2F5597">马踏棋盘：前进 + 回退（栈）的循环流程</text>
+<text x="48" y="72" font-size="15" fill="#6B7280">能进则进、不能进则退——回溯法的标准框架</text><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#6B7280"/></marker></defs>
+<rect x="80" y="120" width="190" height="64" rx="12" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="2"/>
+<text x="175" y="146" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">设置起点</text>
+<text x="175" y="166" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">step=1，填 1</text>
+<rect x="340" y="120" width="150" height="64" rx="12" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="2"/>
+<text x="415" y="146" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">step &lt; 64 ?</text>
+<rect x="560" y="120" width="190" height="64" rx="12" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="2"/>
+<text x="655" y="146" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">NextDirection</text>
+<text x="655" y="166" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">探测方向 K</text>
+<rect x="800" y="120" width="150" height="64" rx="12" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="2"/>
+<text x="875" y="146" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">K != 0 ?</text>
+<rect x="560" y="320" width="240" height="92" rx="12" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/>
+<text x="680" y="346" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">前进：cur 入栈（记 d=K）</text>
+<text x="680" y="366" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">next 设为当前点</text>
+<text x="680" y="386" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">step++ 更新棋盘</text>
+<rect x="250" y="320" width="240" height="92" rx="12" fill="#FBE5E5" stroke="#C0392B" stroke-width="2"/>
+<text x="370" y="346" font-size="13" fill="#8B2222" font-weight="600" text-anchor="middle">回退：棋盘置 0，step--</text>
+<text x="370" y="366" font-size="13" fill="#8B2222" font-weight="600" text-anchor="middle">出栈恢复上一步</text>
+<text x="370" y="386" font-size="13" fill="#8B2222" font-weight="600" text-anchor="middle">从 d+1 方向继续探测</text>
+<line x1="272" y1="152" x2="338" y2="152" stroke="#6B7280" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="492" y1="152" x2="558" y2="152" stroke="#6B7280" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="752" y1="152" x2="798" y2="152" stroke="#6B7280" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="875" y1="186" x2="700" y2="318" stroke="#70AD47" stroke-width="2" marker-end="url(#arr)"/>
+<text x="830" y="250" font-size="13" fill="#375623" font-weight="700" text-anchor="start">有路</text>
+<line x1="650" y1="186" x2="470" y2="318" stroke="#C0392B" stroke-width="2" marker-end="url(#arr)"/>
+<text x="585" y="250" font-size="13" fill="#8B2222" font-weight="700" text-anchor="start">无路</text>
+<line x1="375" y1="186" x2="375" y2="300" stroke="#6B7280" stroke-width="2" marker-end="url(#arr)"/>
+<text x="400" y="240" font-size="13" fill="#6B7280" font-weight="600" text-anchor="start">否 → 输出棋盘</text>
+<rect x="480" y="450" width="560" height="42" rx="13" fill="#FBE5E5" stroke="#C0392B" stroke-width="1.6"/><text x="760" y="475" font-size="14" fill="#8B2222" font-weight="700" text-anchor="middle">回退后只能从 d+1 继续探测，不能从头开始（否则死循环）</text>
+<rect x="36" y="478" width="888" height="46" rx="12" fill="#F0F4FA" stroke="#D6E0F0" stroke-width="1"/>
+<text x="480" y="501" font-size="15" fill="#2F5597" font-weight="600">栈的作用：保存走过的点，回退时 O(1) 恢复到上一步</text>
+</svg>

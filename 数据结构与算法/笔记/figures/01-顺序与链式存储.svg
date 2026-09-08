@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="PingFang SC, Microsoft YaHei, 'Segoe UI', Arial, sans-serif">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="48" y="44" font-size="26" font-weight="700" fill="#2F5597">两种存储结构：逻辑关系如何映射到物理位置</text>
+<text x="48" y="72" font-size="15" fill="#6B7280">同一逻辑结构（线性表）的两种实现——按需选择</text><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#6B7280"/></marker></defs>
+<rect x="40" y="100" width="420" height="340" rx="14" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="2"/>
+<text x="250" y="130" font-size="19" fill="#2F5597" font-weight="700" text-anchor="middle">顺序存储</text>
+<text x="250" y="156" font-size="14" fill="#6B7280" font-weight="400" text-anchor="middle">物理相邻 = 逻辑相邻</text>
+<rect x="70" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<rect x="116" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<rect x="162" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<rect x="208" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<rect x="254" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<rect x="300" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<rect x="346" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<rect x="392" y="180" width="44" height="44" rx="6" fill="#FFFFFF" stroke="#4A6FB5" stroke-width="1.6"/>
+<text x="92" y="207" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">a1</text>
+<text x="138" y="207" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">a2</text>
+<text x="184" y="207" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">a3</text>
+<text x="230" y="207" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">a4</text>
+<text x="276" y="207" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">…</text>
+<text x="322" y="207" font-size="13" fill="#2F5597" font-weight="600" text-anchor="middle">an</text>
+<line x1="116" y1="202" x2="160" y2="202" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="162" y1="202" x2="206" y2="202" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="208" y1="202" x2="252" y2="202" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="254" y1="202" x2="298" y2="202" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="300" y1="202" x2="344" y2="202" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="346" y1="202" x2="390" y2="202" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="392" y1="202" x2="436" y2="202" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<text x="250" y="262" font-size="16" fill="#2F5597" font-weight="700" text-anchor="middle">loc(ai) = loc(a1) + (i-1)×k</text>
+<text x="250" y="292" font-size="14" fill="#6B7280" font-weight="400" text-anchor="middle">地址连续 → 随机存取 O(1)</text>
+<text x="250" y="318" font-size="14" fill="#6B7280" font-weight="400" text-anchor="middle">插入/删除要移动大量元素 O(n)</text>
+<text x="250" y="352" font-size="14" fill="#6B7280" font-weight="400" text-anchor="middle">需预分配连续空间</text>
+<rect x="250" y="380" width="220" height="34" rx="13" fill="#E2EFDA" stroke="#70AD47" stroke-width="1.6"/><text x="360" y="401" font-size="14" fill="#375623" font-weight="700" text-anchor="middle">优点：查得快</text>
+<rect x="500" y="100" width="420" height="340" rx="14" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/>
+<text x="710" y="130" font-size="19" fill="#375623" font-weight="700" text-anchor="middle">链式存储</text>
+<text x="710" y="156" font-size="14" fill="#6B7280" font-weight="400" text-anchor="middle">指针相连，物理可散乱</text>
+<rect x="560" y="210" width="64" height="40" rx="8" fill="#FFFFFF" stroke="#70AD47" stroke-width="1.6"/>
+<text x="580" y="227" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">a1</text>
+<text x="610" y="227" font-size="13" fill="#6B7280" font-weight="400" text-anchor="middle">→</text>
+<rect x="790" y="250" width="64" height="40" rx="8" fill="#FFFFFF" stroke="#70AD47" stroke-width="1.6"/>
+<text x="810" y="267" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">a2</text>
+<text x="840" y="267" font-size="13" fill="#6B7280" font-weight="400" text-anchor="middle">→</text>
+<rect x="650" y="320" width="64" height="40" rx="8" fill="#FFFFFF" stroke="#70AD47" stroke-width="1.6"/>
+<text x="670" y="337" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">a3</text>
+<text x="700" y="337" font-size="13" fill="#6B7280" font-weight="400" text-anchor="middle">→</text>
+<rect x="860" y="340" width="64" height="40" rx="8" fill="#FFFFFF" stroke="#70AD47" stroke-width="1.6"/>
+<text x="880" y="357" font-size="13" fill="#375623" font-weight="600" text-anchor="middle">an</text>
+<text x="910" y="357" font-size="13" fill="#6B7280" font-weight="400" text-anchor="middle">→</text>
+<path d="M 624 230 Q 609 291 650 340" fill="none" stroke="#70AD47" stroke-width="2" marker-end="url(#arr)"/>
+<path d="M 714 340 Q 769 324 790 270" fill="none" stroke="#70AD47" stroke-width="2" marker-end="url(#arr)"/>
+<path d="M 854 270 Q 834 316 860 360" fill="none" stroke="#70AD47" stroke-width="2" marker-end="url(#arr)"/>
+<text x="536" y="205" font-size="13" fill="#375623" font-weight="700" text-anchor="start">头指针 H</text>
+<line x1="536" y1="215" x2="560" y2="222" stroke="#70AD47" stroke-width="2" marker-end="url(#arr)"/>
+<text x="710" y="400" font-size="14" fill="#6B7280" font-weight="400" text-anchor="middle">插入/删除只改指针 O(1)</text>
+<text x="710" y="426" font-size="14" fill="#6B7280" font-weight="400" text-anchor="middle">只能顺序存取 O(n)</text>
+<rect x="600" y="380" width="220" height="34" rx="13" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="1.6"/><text x="710" y="401" font-size="14" fill="#2F5597" font-weight="700" text-anchor="middle">优点：改得快</text>
+<rect x="36" y="478" width="888" height="46" rx="12" fill="#F0F4FA" stroke="#D6E0F0" stroke-width="1"/>
+<text x="480" y="501" font-size="15" fill="#2F5597" font-weight="600">查多选顺序，改多选链表（口诀）</text>
+</svg>
