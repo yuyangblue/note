@@ -42,26 +42,27 @@ Garsia–Wachs 算法的第三阶段的证明，即存在另一棵具有相同�
 
 函数性编程语言 Haskell 的 [garsia-wachs package](https://hackage.haskell.org/package/garsia-wachs) 对 Garsia–Wachs 算法做了函数性实现．它主要用于构建最佳搜索表，或者以最优复杂度平衡 [rope](https://hackage.haskell.org/package/rope) 数据结构．
 
-???+ note "注释"
-    **rope** 是 Haskell 语言中用于操作带有可选注释的字节串（bytestring）[手指树](../数据结构/手指树.md) 的工具．
-
+> [!note]- 注释
+> **rope** 是 Haskell 语言中用于操作带有可选注释的字节串（bytestring）[手指树](../数据结构/手指树.md) 的工具．
+> 
 ## 例题
-
-???+ note "[POJ 1738 An old Stone Game](http://poj.org/problem?id=1738)"
-    有一个古老的石头游戏．在游戏开始时，玩家将 $n$($1 \leq n \leq 50000$) 堆石头排成一行．目标是将石头合并成一堆，规则如下：在游戏的每一步，玩家可以将相邻的两个堆合并成一个新的堆．分数是新堆的石头总数．请计算总分中的最小值．
-
-??? note "解题思路"
-    石子合并的题目很经典，一般我们可以用区间 DP 解答，但是当数据量很大，例如此题中的 $n$($1 \leq n \leq 50000$) 时，用 Garsia–Wachs 算法求解更高效：第一步，初始化一个大小为 $n$ 的数组 $\mathit{num}[n]$，其中 $\mathit{num}[0] = \mathit{num}[n+1] = \infty$．第二步，每次找到一个最小的 $i$ 使 $\mathit{num}[i-1] \leq \mathit{num}[i+1]$，并将 $\mathit{num}[i-1], \mathit{num}[i]$ 合并为 $\mathit{temp}$; 找到前面一个最大的 $j$ 使得 $\mathit{num}[j] > \mathit{temp}$, 将 $\mathit{temp}$ 移到 $j$ 后面．重复这一步直到剩余堆数为 $1$．
-    关于每次只能合并相邻石子堆的要求，因为 $\mathit{num}[j]\geq \mathit{num}[i-1] + \mathit{num}[i]$，我们可以将 $\mathit{num}[j+1]$ 到 $\mathit{num}[i-2]$ 看成一个 $\mathit{num}[mid]$ 的整体，所以一定是先合并 $\mathit{sum}$．因此没有违背题目要求．
-
-???+ note "[ATCODER N-Slimes](https://atcoder.jp/contests/dp/tasks/dp_n)"
-    $N$ 个史莱姆排成一排．最初左边第 $i$ 个史莱姆的大小为 $a_{i}$．Taro 试图将所有史莱姆组合成一个更大的史莱姆．他会反复执行以下操作，直到只有一个史莱姆：
-    选择两个相邻的史莱姆，并将它们组合成一个新的史莱姆．新的史莱姆的大小为 $x+y$，其中 $x$ 和 $y$ 是组合之前史莱姆的大小．这一步骤有产生 $x+y$ 的成本．合成史莱姆时史莱姆的位置关系不会改变．找出可能发生的最小总成本．
-
+> 
+> [!note]- [POJ 1738 An old Stone Game](http://poj.org/problem?id=1738)
+> 有一个古老的石头游戏．在游戏开始时，玩家将 $n$($1 \leq n \leq 50000$) 堆石头排成一行．目标是将石头合并成一堆，规则如下：在游戏的每一步，玩家可以将相邻的两个堆合并成一个新的堆．分数是新堆的石头总数．请计算总分中的最小值．
+> 
+> [!note]- 解题思路
+> 石子合并的题目很经典，一般我们可以用区间 DP 解答，但是当数据量很大，例如此题中的 $n$($1 \leq n \leq 50000$) 时，用 Garsia–Wachs 算法求解更高效：第一步，初始化一个大小为 $n$ 的数组 $\mathit{num}[n]$，其中 $\mathit{num}[0] = \mathit{num}[n+1] = \infty$．第二步，每次找到一个最小的 $i$ 使 $\mathit{num}[i-1] \leq \mathit{num}[i+1]$，并将 $\mathit{num}[i-1], \mathit{num}[i]$ 合并为 $\mathit{temp}$; 找到前面一个最大的 $j$ 使得 $\mathit{num}[j] > \mathit{temp}$, 将 $\mathit{temp}$ 移到 $j$ 后面．重复这一步直到剩余堆数为 $1$．
+> 关于每次只能合并相邻石子堆的要求，因为 $\mathit{num}[j]\geq \mathit{num}[i-1] + \mathit{num}[i]$，我们可以将 $\mathit{num}[j+1]$ 到 $\mathit{num}[i-2]$ 看成一个 $\mathit{num}[mid]$ 的整体，所以一定是先合并 $\mathit{sum}$．因此没有违背题目要求．
+> 
+> [!note]- [ATCODER N-Slimes](https://atcoder.jp/contests/dp/tasks/dp_n)
+> $N$ 个史莱姆排成一排．最初左边第 $i$ 个史莱姆的大小为 $a_{i}$．Taro 试图将所有史莱姆组合成一个更大的史莱姆．他会反复执行以下操作，直到只有一个史莱姆：
+> 选择两个相邻的史莱姆，并将它们组合成一个新的史莱姆．新的史莱姆的大小为 $x+y$，其中 $x$ 和 $y$ 是组合之前史莱姆的大小．这一步骤有产生 $x+y$ 的成本．合成史莱姆时史莱姆的位置关系不会改变．找出可能发生的最小总成本．
+> 
 ## 参考资料与拓展阅读
-
+> 
 1.  [Garsia–Wachs algorithm - Wikipedia](https://en.wikipedia.org/wiki/Garsia%E2%80%93Wachs_algorithm)
 2.  [Data.Algorithm.GarsiaWachs - Hackage Haskell](https://hackage.haskell.org/package/garsia-wachs-1.2/docs/Data-Algorithm-GarsiaWachs.html)
 3.  [garsia-wachs: A Functional Implementation of the Garsia-Wachs Algorithm](https://hackage.haskell.org/package/garsia-wachs)
 4.  [Sentinel value - Wikipedia](https://en.wikipedia.org/wiki/Sentinel_value)
 5.  [A new proof of the Garsia-Wachs algorithm](https://www.sciencedirect.com/science/article/abs/pii/0196677488900090)
+> 

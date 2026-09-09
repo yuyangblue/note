@@ -80,48 +80,49 @@ $w(A, i) = \sum_{j \in A} d(i, j)$
 
 定义诱导割 $C_v$ 为 $C \cap E_v$．$w(C_v) = \sum_{(i,j) \in C_v} d(i, j)$．
 
-???+ note "Lemma 1"
-    对于任何被激活的点 $v$，$w(A_v, v) \le w(C_v)$．
-    
-    证明：使用数学归纳法．
-    
-    对于第一个被激活的点 $v_0$，由定义可知 $w(A_{v_0}, v_0) = w(C_{v_0})$．
-    
-    对于之后两个被激活的点 $u, v$，假设 $\operatorname{pos}(v) < \operatorname{pos}(u)$，则有：
-    
-    $w(A_u, u) = w(A_v, u) + w(A_u - A_v, u)$
-    
-    又，已知：
-    
-    $w(A_v, u) \le w(A_v, v)$ 并且 $w(A_v, v) \le w(C_v)$ 联立可得：
-    
-    $w(A_u, u) \le w(C_v) + w(A_u - A_v, u)$
-    
-    由于 $w(A_u - A_v, u)$ 对 $w(C_u)$ 有贡献而对 $w(C_v)$ 没有贡献，在所有边均为正权的情况下，可导出：
-    
-    $w(A_u,u) \le w(C_u)$
-    
-    由归纳法得证．
-
+> [!note]- Lemma 1
+> 对于任何被激活的点 $v$，$w(A_v, v) \le w(C_v)$．
+> 
+> 证明：使用数学归纳法．
+> 
+> 对于第一个被激活的点 $v_0$，由定义可知 $w(A_{v_0}, v_0) = w(C_{v_0})$．
+> 
+> 对于之后两个被激活的点 $u, v$，假设 $\operatorname{pos}(v) < \operatorname{pos}(u)$，则有：
+> 
+> $w(A_u, u) = w(A_v, u) + w(A_u - A_v, u)$
+> 
+> 又，已知：
+> 
+> $w(A_v, u) \le w(A_v, v)$ 并且 $w(A_v, v) \le w(C_v)$ 联立可得：
+> 
+> $w(A_u, u) \le w(C_v) + w(A_u - A_v, u)$
+> 
+> 由于 $w(A_u - A_v, u)$ 对 $w(C_u)$ 有贡献而对 $w(C_v)$ 没有贡献，在所有边均为正权的情况下，可导出：
+> 
+> $w(A_u,u) \le w(C_u)$
+> 
+> 由归纳法得证．
+> 
 由于 $\operatorname{pos}(s) < \operatorname{pos}(t)$，并且 $s, t$ 不在同一连通块，因此 $t$ 会被激活，由此可以得出 $w(A_t, t) \le w(C_t) = w(C)$．
-
-??? note "[P5632【模板】Stoer–Wagner 算法](https://www.luogu.com.cn/problem/P5632)"
-    ```cpp
-    --8<-- "docs/graph/code/stoer-wagner/stoer-wagner_1.cpp"
-    ```
-
+> 
+> [!note]- [P5632【模板】Stoer–Wagner 算法](https://www.luogu.com.cn/problem/P5632)
+> ```cpp
+> --8<-- "docs/graph/code/stoer-wagner/stoer-wagner_1.cpp"
+> ```
+> 
 ***
-
+> 
 ### 复杂度分析与优化
-
+> 
 *contract*操作的复杂度为 $O(|E| + |V|\log|V|)$．
-
+> 
 一共进行 $O(|V|)$ 次*contract*，总复杂度为 $O(|E||V| + |V|^2\log|V|)$．
-
+> 
 根据 [最短路](./最短路.md) 的经验，算法瓶颈在于找到权值最大的点．
-
+> 
 在一次*contract*中需要找 $|V|$ 次堆顶，并递增地修改 $|E|$ 次权值．
-
+> 
 斐波那契堆 可以胜任 $O(\log|V|)$ 查找堆顶和 $O(1)$ 递增修改权值的工作，理论复杂度可以达到 $O(|E| + |V|\log|V|)$，但是由于斐波那契堆常数过大，码量高，实际应用价值偏低．
-
+> 
 （实际测试中开 O2 还要卡评测波动才能过．）
+> 

@@ -98,13 +98,14 @@ ensuref(s.length() % 2 == 0,
 
 它有一个简化版 `ensure()`，我们可以直接使用 `ensure(x> y)` 而不添加说明内容（也不支持添加说明内容），如果条件不满足报错将为 `FAIL Condition failed: "x > y"`．很多情况下不加额外的说明的这种报错很不友好，所以我们通常使用 `ensuref()` 并加以说明内容，而非使用 `ensure()`．
 
-???+ warning "Warning"
-    注意全局与成员 `ensuref/ensure()` 的区别
-    
-    全局函数 `::ensuref/ensure()` 多用于 generator 和 validator 中，如果检查失败将统一返回 `_fail`．
-    
-    成员函数 `InStream::ensuref/ensure()` 一般用于判断选手和参考程序的输出是否合法．当 `InStream` 为 `ouf` 时，返回 `_wa`；为 `inf`（一般不在 checker 中检查输入数据，这应当在 validator 中完成）或 `ans` 时，返回 `_fail`．详见 [Checker - 编写 readAns 函数](./checker校验器.md#好的实现)．
-
+> [!warning]- Warning
+> 注意全局与成员 `ensuref/ensure()` 的区别
+> 
+> 全局函数 `::ensuref/ensure()` 多用于 generator 和 validator 中，如果检查失败将统一返回 `_fail`．
+> 
+> 成员函数 `InStream::ensuref/ensure()` 一般用于判断选手和参考程序的输出是否合法．当 `InStream` 为 `ouf` 时，返回 `_wa`；为 `inf`（一般不在 checker 中检查输入数据，这应当在 validator 中完成）或 `ans` 时，返回 `_fail`．详见 [Checker - 编写 readAns 函数](./checker校验器.md#好的实现)．
+> 
 **本文主要翻译并综合自 [Testlib - Codeforces](https://codeforces.com/testlib) 系列．`testlib.h` 的 GitHub 存储库为 [MikeMirzayanov/testlib](https://github.com/MikeMirzayanov/testlib)．**
-
+> 
 [^1]: [issue 链接](https://github.com/MikeMirzayanov/testlib/issues/115#issuecomment-863414940)
+> 

@@ -77,41 +77,42 @@ $$
 
 ## 例题
 
-???+ note "例 1 [CF348D Turtles](https://codeforces.com/contest/348/problem/D)"
-    题意：有一个 $n\times m$ 的格点棋盘，其中某些格子可走，某些格子不可走．有一只海龟从 $(x, y)$ 只能走到 $(x+1, y)$ 和 $(x, y+1)$ 的位置，求海龟从 $(1, 1)$ 到 $(n, m)$ 的不相交路径数对 $10^9+7$ 取模之后的结果．$2\le n,m\le3000$．
-
+> [!note]- 例 1 [CF348D Turtles](https://codeforces.com/contest/348/problem/D)
+> 题意：有一个 $n\times m$ 的格点棋盘，其中某些格子可走，某些格子不可走．有一只海龟从 $(x, y)$ 只能走到 $(x+1, y)$ 和 $(x, y+1)$ 的位置，求海龟从 $(1, 1)$ 到 $(n, m)$ 的不相交路径数对 $10^9+7$ 取模之后的结果．$2\le n,m\le3000$．
+> 
 比较直接的 LGV 引理的应用．考虑所有合法路径，发现从 $(1,1)$ 出发一定要经过 $A=\{(1,2), (2,1)\}$，而到达终点一定要经过 $B=\{(n-1, m), (n, m-1)\}$，则 $A, B$ 可立即选定．应用 LGV 引理可得答案为：
-
+> 
 $$
 \begin{vmatrix}
 f(a_1, b_1) & f(a_1, b_2) \\
 f(a_2, b_1) & f(a_2, b_2)
 \end{vmatrix} = f(a_1, b_1)\times f(a_2, b_2) - f(a_1, b_2)\times f(a_2, b_1)
 $$
-
+> 
 其中 $f(a, b)$ 为图上 $a\rightarrow b$ 的路径数，带有障碍格点的路径计数问题可以直接做一个 $O(nm)$ 的 dp，则 $f$ 易求．最终复杂度 $O(nm)$．
-
-??? note "参考代码"
-    ```cpp
-    --8<-- "docs/graph/code/lgv/lgv_2.cpp"
-    ```
-
-???+ note "例 2 [HDU 5852 Intersection is not allowed!](https://acm.hdu.edu.cn/showproblem.php?pid=5852)"
-    题意：有一个 $n\times n$ 的棋盘，一个棋子从 $(x, y)$ 只能走到 $(x, y+1)$ 或 $(x + 1, y)$，有 $k$ 个棋子，一开始第 $i$ 个棋子放在 $(1, a_i)$，最终要到 $(n, b_i)$，路径要两两不相交，求方案数对 $10^9+7$ 取模．$1\le n\le 10^5$，$1\le k\le 100$，保证 $1\le a_1<a_2<\dots<a_n\le n$，$1\le b_1<b_2<\dots<b_n\le n$．
-
+> 
+> [!note]- 参考代码
+> ```cpp
+> --8<-- "docs/graph/code/lgv/lgv_2.cpp"
+> ```
+> 
+> [!note]- 例 2 [HDU 5852 Intersection is not allowed!](https://acm.hdu.edu.cn/showproblem.php?pid=5852)
+> 题意：有一个 $n\times n$ 的棋盘，一个棋子从 $(x, y)$ 只能走到 $(x, y+1)$ 或 $(x + 1, y)$，有 $k$ 个棋子，一开始第 $i$ 个棋子放在 $(1, a_i)$，最终要到 $(n, b_i)$，路径要两两不相交，求方案数对 $10^9+7$ 取模．$1\le n\le 10^5$，$1\le k\le 100$，保证 $1\le a_1<a_2<\dots<a_n\le n$，$1\le b_1<b_2<\dots<b_n\le n$．
+> 
 观察到如果路径不相交就一定是 $a_i$ 到 $b_i$，因此 LGV 引理中一定有 $\sigma(S)_i=i$，不需要考虑符号问题．边权设为 $1$，直接套用引理即可．
-
+> 
 从 $(1, a_i)$ 到 $(n, b_j)$ 的路径条数相当于从 $n-1+b_j-a_i$ 步中选 $n-1$ 步向下走，所以 $e(A_i, B_j)=\binom{n-1+b_j-a_i}{n-1}$．
-
+> 
 行列式可以使用高斯消元求．
-
+> 
 复杂度为 $O(n+k(k^2 + \log p))$，其中 $\log p$ 是求逆元复杂度．
-
-??? note "参考代码"
-    ```cpp
-    --8<-- "docs/graph/code/lgv/lgv_1.cpp"
-    ```
-
+> 
+> [!note]- 参考代码
+> ```cpp
+> --8<-- "docs/graph/code/lgv/lgv_1.cpp"
+> ```
+> 
 ## 参考资料
-
+> 
 [^1]: 证明来源于 [知乎 - LGV 引理证明](https://zhuanlan.zhihu.com/p/517819133)
+> 

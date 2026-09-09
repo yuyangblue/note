@@ -105,32 +105,33 @@ Timsort 的时间复杂度取决于数据的有序性：
 
 ## 实现
 
-???+ note "伪代码实现"
-    $$
-    \begin{array}{ll}
-    1 & nRemaining \gets \text{数组长度} \\
-    2 & minRun \gets \text{选择合适的 MinRun 的值}(nRemaining) \\
-    3 & startIndex \gets 0 \\
-    4 & \textbf{while } nRemaining > 0 \ \textbf{do} \\
-    5 & \qquad runLength \gets \text{识别 Run }(array, startIndex, nRemaining) \\
-    6 & \qquad \textbf{if } runLength < minRun \ \textbf{then} \\
-    7 & \qquad \qquad extendLength \gets \min(minRun, nRemaining) \\
-    8 & \qquad \qquad \text{使用插入排序扩展区间 } [startIndex, startIndex + extendLength - 1]\\
-    9 & \qquad \qquad runLength \gets extendLength \\
-    10 & \qquad \textbf{end if} \\
-    11 & \qquad \text{将 Run  } (startIndex, runLength) \text{ 压入栈中} \\
-    12 & \qquad \textbf{调用 } \text{mergeCollapse(栈)} \ \text{检查并合并栈中的 Run } \\
-    13 & \qquad startIndex \gets startIndex + runLength \ \text{更新起始位置} \\
-    14 & \qquad nRemaining \gets nRemaining - runLength \ \text{更新剩余长度} \\
-    15 & \textbf{end while} \\
-    16 & \textbf{调用 } \text{mergeForceCollapse(栈)} \ \text{对栈中所有 Run 进行最终的合并} \\
-    \end{array}
-    $$
-
+> [!note]- 伪代码实现
+> $$
+> \begin{array}{ll}
+> 1 & nRemaining \gets \text{数组长度} \\
+> 2 & minRun \gets \text{选择合适的 MinRun 的值}(nRemaining) \\
+> 3 & startIndex \gets 0 \\
+> 4 & \textbf{while } nRemaining > 0 \ \textbf{do} \\
+> 5 & \qquad runLength \gets \text{识别 Run }(array, startIndex, nRemaining) \\
+> 6 & \qquad \textbf{if } runLength < minRun \ \textbf{then} \\
+> 7 & \qquad \qquad extendLength \gets \min(minRun, nRemaining) \\
+> 8 & \qquad \qquad \text{使用插入排序扩展区间 } [startIndex, startIndex + extendLength - 1]\\
+> 9 & \qquad \qquad runLength \gets extendLength \\
+> 10 & \qquad \textbf{end if} \\
+> 11 & \qquad \text{将 Run  } (startIndex, runLength) \text{ 压入栈中} \\
+> 12 & \qquad \textbf{调用 } \text{mergeCollapse(栈)} \ \text{检查并合并栈中的 Run } \\
+> 13 & \qquad startIndex \gets startIndex + runLength \ \text{更新起始位置} \\
+> 14 & \qquad nRemaining \gets nRemaining - runLength \ \text{更新剩余长度} \\
+> 15 & \textbf{end while} \\
+> 16 & \textbf{调用 } \text{mergeForceCollapse(栈)} \ \text{对栈中所有 Run 进行最终的合并} \\
+> \end{array}
+> $$
+> 
 ## 参考资料
-
+> 
 1.  [Timsort](https://en.wikipedia.org/wiki/Timsort)
 2.  [On the Worst-Case Complexity of TimSort](https://drops.dagstuhl.de/opus/volltexte/2018/9467/pdf/LIPIcs-ESA-2018-4.pdf)
 3.  [Original Explanation by Tim Peters](https://github.com/python/cpython/blob/main/Objects/listsort.txt)
 4.  [Java 实现](https://cs.android.com/android/platform/superproject/main/+/main:libcore/ojluni/src/main/java/java/util/TimSort.java)
 5.  [C 语言实现](https://github.com/python/cpython/blob/main/Objects/listobject.c)
+> 

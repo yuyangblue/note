@@ -107,171 +107,172 @@ vim stdc++.h
 
 将下面这段代码块复制并粘贴到终端中：
 
-??? note "万能头文件代码块"
-    ```cpp
-    // C++ includes used for precompiling -*- C++ -*-
-    
-    // Copyright (C) 2003-2020 Free Software Foundation, Inc.
-    //
-    // This file is part of the GNU ISO C++ Library.  This library is free
-    // software; you can redistribute it and/or modify it under the
-    // terms of the GNU General Public License as published by the
-    // Free Software Foundation; either version 3, or (at your option)
-    // any later version.
-    
-    // This library is distributed in the hope that it will be useful,
-    // but WITHOUT ANY WARRANTY; without even the implied warranty of
-    // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    // GNU General Public License for more details.
-    
-    // Under Section 7 of GPL version 3, you are granted additional
-    // permissions described in the GCC Runtime Library Exception, version
-    // 3.1, as published by the Free Software Foundation.
-    
-    // You should have received a copy of the GNU General Public License and
-    // a copy of the GCC Runtime Library Exception along with this program;
-    // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-    // <http://www.gnu.org/licenses/>.
-    
-    /** @file stdc++.h
-     *  This is an implementation file for a precompiled header.
-     */
-    
-    // 17.4.1.2 Headers
-    
-    // C
-    #ifndef _GLIBCXX_NO_ASSERT
-    #include <cassert>
-    #endif
-    #include <cctype>
-    #include <cerrno>
-    #include <cfloat>
-    #include <ciso646>
-    #include <climits>
-    #include <clocale>
-    #include <cmath>
-    #include <csetjmp>
-    #include <csignal>
-    #include <cstdarg>
-    #include <cstddef>
-    #include <cstdio>
-    #include <cstdlib>
-    #include <cstring>
-    #include <ctime>
-    #include <cwchar>
-    #include <cwctype>
-    
-    #if __cplusplus >= 201103L
-    #include <ccomplex>
-    #include <cfenv>
-    #include <cinttypes>
-    #include <cstdbool>
-    #include <cstdint>
-    #include <ctgmath>
-    /* https://stackoverflow.com/a/25892335/15125422 */
-    #if defined(__GLIBCXX__) || defined(__GLIBCPP__)
-    #include <cstdalign>
-    #include <cuchar>
-    #endif
-    #endif
-    
-    // C++
-    #include <algorithm>
-    #include <bitset>
-    #include <complex>
-    #include <deque>
-    #include <exception>
-    #include <fstream>
-    #include <functional>
-    #include <iomanip>
-    #include <ios>
-    #include <iosfwd>
-    #include <iostream>
-    #include <istream>
-    #include <iterator>
-    #include <limits>
-    #include <list>
-    #include <locale>
-    #include <map>
-    #include <memory>
-    #include <new>
-    #include <numeric>
-    #include <ostream>
-    #include <queue>
-    #include <set>
-    #include <sstream>
-    #include <stack>
-    #include <stdexcept>
-    #include <streambuf>
-    #include <string>
-    #include <typeinfo>
-    #include <utility>
-    #include <valarray>
-    #include <vector>
-    
-    #if __cplusplus >= 201103L
-    #include <array>
-    #include <atomic>
-    #include <chrono>
-    #include <codecvt>
-    #include <condition_variable>
-    #include <forward_list>
-    #include <future>
-    #include <initializer_list>
-    #include <mutex>
-    #include <random>
-    #include <ratio>
-    #include <regex>
-    #include <scoped_allocator>
-    #include <system_error>
-    #include <thread>
-    #include <tuple>
-    #include <type_traits>
-    #include <typeindex>
-    #include <unordered_map>
-    #include <unordered_set>
-    #endif
-    
-    #if __cplusplus >= 201402L
-    #include <shared_mutex>
-    #endif
-    
-    #if __cplusplus >= 201703L
-    #include <any>
-    #include <charconv>
-    // #include <execution>
-    #include <filesystem>
-    #include <memory_resource>
-    #include <optional>
-    #include <string_view>
-    #include <variant>
-    #endif
-    
-    #if __cplusplus > 201703L
-    #include <bit>
-    #include <compare>
-    #include <concepts>
-    #include <numbers>
-    #include <ranges>
-    #include <span>
-    #include <stop_token>
-    // #include <syncstream>
-    #include <version>
-    #endif
-    ```
-
+> [!note]- 万能头文件代码块
+> ```cpp
+> // C++ includes used for precompiling -*- C++ -*-
+> 
+> // Copyright (C) 2003-2020 Free Software Foundation, Inc.
+> //
+> // This file is part of the GNU ISO C++ Library.  This library is free
+> // software; you can redistribute it and/or modify it under the
+> // terms of the GNU General Public License as published by the
+> // Free Software Foundation; either version 3, or (at your option)
+> // any later version.
+> 
+> // This library is distributed in the hope that it will be useful,
+> // but WITHOUT ANY WARRANTY; without even the implied warranty of
+> // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> // GNU General Public License for more details.
+> 
+> // Under Section 7 of GPL version 3, you are granted additional
+> // permissions described in the GCC Runtime Library Exception, version
+> // 3.1, as published by the Free Software Foundation.
+> 
+> // You should have received a copy of the GNU General Public License and
+> // a copy of the GCC Runtime Library Exception along with this program;
+> // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+> // <http://www.gnu.org/licenses/>.
+> 
+> /** @file stdc++.h
+>  *  This is an implementation file for a precompiled header.
+>  */
+> 
+> // 17.4.1.2 Headers
+> 
+> // C
+> #ifndef _GLIBCXX_NO_ASSERT
+> #include <cassert>
+> #endif
+> #include <cctype>
+> #include <cerrno>
+> #include <cfloat>
+> #include <ciso646>
+> #include <climits>
+> #include <clocale>
+> #include <cmath>
+> #include <csetjmp>
+> #include <csignal>
+> #include <cstdarg>
+> #include <cstddef>
+> #include <cstdio>
+> #include <cstdlib>
+> #include <cstring>
+> #include <ctime>
+> #include <cwchar>
+> #include <cwctype>
+> 
+> #if __cplusplus >= 201103L
+> #include <ccomplex>
+> #include <cfenv>
+> #include <cinttypes>
+> #include <cstdbool>
+> #include <cstdint>
+> #include <ctgmath>
+> /* https://stackoverflow.com/a/25892335/15125422 */
+> #if defined(__GLIBCXX__) || defined(__GLIBCPP__)
+> #include <cstdalign>
+> #include <cuchar>
+> #endif
+> #endif
+> 
+> // C++
+> #include <algorithm>
+> #include <bitset>
+> #include <complex>
+> #include <deque>
+> #include <exception>
+> #include <fstream>
+> #include <functional>
+> #include <iomanip>
+> #include <ios>
+> #include <iosfwd>
+> #include <iostream>
+> #include <istream>
+> #include <iterator>
+> #include <limits>
+> #include <list>
+> #include <locale>
+> #include <map>
+> #include <memory>
+> #include <new>
+> #include <numeric>
+> #include <ostream>
+> #include <queue>
+> #include <set>
+> #include <sstream>
+> #include <stack>
+> #include <stdexcept>
+> #include <streambuf>
+> #include <string>
+> #include <typeinfo>
+> #include <utility>
+> #include <valarray>
+> #include <vector>
+> 
+> #if __cplusplus >= 201103L
+> #include <array>
+> #include <atomic>
+> #include <chrono>
+> #include <codecvt>
+> #include <condition_variable>
+> #include <forward_list>
+> #include <future>
+> #include <initializer_list>
+> #include <mutex>
+> #include <random>
+> #include <ratio>
+> #include <regex>
+> #include <scoped_allocator>
+> #include <system_error>
+> #include <thread>
+> #include <tuple>
+> #include <type_traits>
+> #include <typeindex>
+> #include <unordered_map>
+> #include <unordered_set>
+> #endif
+> 
+> #if __cplusplus >= 201402L
+> #include <shared_mutex>
+> #endif
+> 
+> #if __cplusplus >= 201703L
+> #include <any>
+> #include <charconv>
+> // #include <execution>
+> #include <filesystem>
+> #include <memory_resource>
+> #include <optional>
+> #include <string_view>
+> #include <variant>
+> #endif
+> 
+> #if __cplusplus > 201703L
+> #include <bit>
+> #include <compare>
+> #include <concepts>
+> #include <numbers>
+> #include <ranges>
+> #include <span>
+> #include <stop_token>
+> // #include <syncstream>
+> #include <version>
+> #endif
+> ```
+> 
 该文件来源于 [10.2.0 版本的 libstdc++](https://github.com/gcc-mirror/gcc/blob/ee5c3db6c5b2c3332912fb4c9cfa2864569ebd9a/libstdc++-v3/include/precompiled/stdc++.h) 并经少许修改以兼容 libc++．
-
+> 
 按键盘左上角的<kbd>Esc</kbd>退出编辑模式，然后直接输入 `:wq` 并换行即可保存文件．
-
+> 
 ### 步骤 3
-
+> 
 关闭终端，回到 Xcode．重新按下 ⌘B/⌘R 进行编译，发现编译成功：
-
+> 
 ![](images/xcode-13.jpg)
-
+> 
 ## 优缺点
-
+> 
 优点：由苹果开发，适合 Mac 用户，界面齐全、美观．
-
+> 
 缺点：Xcode 主要用来苹果程序的开发，对于竞赛来说功能冗余，安装包大小较大，而且仅能在 Mac 端上使用．
+> 

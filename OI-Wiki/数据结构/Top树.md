@@ -444,119 +444,119 @@ void cut(int x, int y) {
 
 ### 完整代码
 
-??? note "[Luogu P3690【模板】动态树](https://www.luogu.com.cn/problem/P3690)"
-    ```cpp
-    --8<-- "docs/ds/code/top-tree/top-tree_1.cpp"
-    ```
-
+> [!note]- [Luogu P3690【模板】动态树](https://www.luogu.com.cn/problem/P3690)
+> ```cpp
+> --8<-- "docs/ds/code/top-tree/top-tree_1.cpp"
+> ```
+> 
 ### SATT 的时间复杂度证明
-
+> 
 设在一棵 SATT（点数为 $n$）中，其当前状态 $x$ 的势能函数为
-
+> 
 $$
 \varphi(x)= \sum_{i=1}^{n} r(i)
 $$
-
+> 
 其中 $r(i) = \lceil \log_2 \text{siz}(i) \rceil$．$\text{siz}(i)$ 为以 $i$ 为根的子树大小．
-
+> 
 则 SATT 的 splay 的均摊复杂度显然仍是 $3n\log n + 1$，即使 SATT 是一个三叉树．
-
+> 
 因此对于 SATT，我们只要证得 Access 函数复杂度正确，就能证得 SATT 的时间复杂度．
-
+> 
 我们逐步分析 Accese 的均摊复杂度．
-
+> 
 我们先要将点 $x$ 旋至其所在 Compress Tree 的根，则这一步的均摊复杂度
-
+> 
 $$
 a \leq  3\log n +1
 $$
-
+> 
 接着我们要使点 $x$ 无右儿子，则这一步的均摊复杂度
-
+> 
 $$
 a = 1 + r'(\gamma)- 0 \leq \log n +1
 $$
-
+> 
 ![](./images/top-tree16.jpg)
-
+> 
 如图，为去掉点 $x$ 的右儿子过程．
-
+> 
 然后是 Local Splay，Splice 交替进行的过程，经过若干次 Splice，点 $x$ 被旋至 SATT 的根．我们对其中一组 Local Splay，Splice 进行分析：
-
+> 
 ![](./images/top-tree17.jpg)
-
+> 
 ![](./images/top-tree18.jpg)
-
+> 
 ![](./images/top-tree19.jpg)
-
+> 
 如图，体现了对点 $x$ 做一次 Splice 的过程，不包括最后左旋点 $x$ 的部分．
-
+> 
 为表达方便，设 $r_x(i)$ 为点 $i$ 在状态 $x$ 时的 $r$ 值．
-
+> 
 由图，易知由状态 1 到状态 2 的操作（将点 $x$ 的父亲旋至其 Rake Tree 的根部的 Local Splay 操作）的均摊复杂度
-
+> 
 $$
 a \leq  3(r_2(\gamma)- r_1(\gamma))+1
 $$
-
+> 
 由图，易知由状态 2 到状态 3 的操作（将点 $x$ 的爷节点旋至其 Compress Tree 的根部的 Local Splay 操作）的均摊复杂度
-
+> 
 $$
 a \leq  3(r_3(B)- r_2(B))+1
 $$
-
+> 
 重点分析由状态 3 到状态 4 的操作（Splice）
-
+> 
 $$
 a = r_4(\gamma) -r_3(\gamma) +1
 $$
-
+> 
 不难发现 $r_4(\gamma) \leq r_3(B)$
-
+> 
 故这一次操作的均摊复杂度为
-
+> 
 $$
 \begin{aligned}
 a &\leq r_3(B)- r_3(\gamma)+1\\
 &\leq 3(r_3(B)- r_3(\gamma))+1\\
 \end{aligned}
 $$
-
+> 
 综合上述过程，一次 Splice 的复杂度为
-
+> 
 $$
 a\leq 3r_3(B)+3r_3(B)+3r_2(\gamma)-3r_3(\gamma)-3r_2(B)-3r_1(\gamma)+3
 $$
-
+> 
 记下一次 Splice 的点 $X$（即状态 4 中的点 $B$）的 $r$ 值为 $r'(X)$，并注意到 $r_3(\gamma),r_1(\gamma) \ge r_1(X)$，$r_3(B),r_2(\gamma) \leq r'(X)$ 且 $r_3(B)=r_2(B)$，所以
-
+> 
 $$
 a\leq  9(r'(X)-r(X))+3
 $$
-
+> 
 除了上面这个复杂度以外，在 Splice 中可能还会有因 `delete(x)` 产生的额外均摊复杂度，记这一部分为 $a' \leq 3\log n +1$．
-
+> 
 先不管 $a'$ 部分，每次 Splice 的 $r'(X)$ 等于下一次的 $r(X)$，且第一次 Splice 的 $r(X)$ 等于我们一开始旋转点 $x$ 到其 Compress Tree 树根时的 $r(X)$，则对于不计 `delete(x)` 的一次 `access(x)` 复杂度，我们有：
-
+> 
 $$
 a \leq 9(r'(x)-r(x))+ 3k + 1
 $$
-
+> 
 其中 $k$ 为 Splice 次数．
-
+> 
 看样子 $a$ 会带一个 $3k+1$ 导致均摊复杂度无法分析，但我们有办法来对付它，注意到 zig-zig/zig-zag 的旋转可以这么均摊
-
+> 
 $$
 \begin{aligned}
 a &\leq 3(r'(X)-r(X)) + q\\
 &\leq 3(q-1)(r'(X)-r(X))
 \end{aligned}
 $$
-
+> 
 如果我们能找到足够多的 zig-zig，zig-zag 操作，我们就可以将这 $3k+1$ 平摊到这些操作上去，从而消掉这个 $3k+1$．
-
+> 
 我们发现 Globel Splay 里面就有这么多的 zig-zig，zag-zig 来给我们使用，因为 Globel Splay 里面点的个数一定大于 $k$，而从点 $x$ 到 Globel Splay 根部路径的点数一定不少于 $k$，也就是说一次 `access(x)` 中一定会至少有 $\dfrac k2$ 个 zig-zag 操作，算上 Globel Splay 的均摊复杂度 $a \leq 3\log n +1$，一次 `access(x)` 不记 `delete(x)` 的均摊复杂度为
-
+> 
 $$
 \begin{aligned}
 a&\leq 9(r'(X)-r(X)) + 3k + 1 + 18(r''(X)-r'(X)) -S+1 +3 \log n +1,S \ge 3k\\
@@ -564,70 +564,70 @@ a&\leq 18(r''(X)-r(X)) +2 +3\log n+1\\
 a&\leq 21(r''(X)-r(X)) +3
 \end{aligned}
 $$
-
+> 
 现在算上 $a'$，列出进行 $m$ 次 `access(x)` 操作的总式子．
-
+> 
 $$
 \sum_{i=1}^m a_i' + \sum_{i=1}^m a_i = \sum_{i=1}^m c_i + \varphi(x_n) -\varphi(x_0)
 $$
-
+> 
 我们要求的是实际复杂度
-
+> 
 $$
 \begin{aligned}
 \sum_{i=1}^m c_i &= \sum_{i=1}^m a_i +\sum_{i=1}^m a_i' - \varphi(x_n) +\varphi(x_0)\\
 &\le \sum_{i=1}^m a_i' + 21m\log n +n\log n +3m
 \end{aligned}
 $$
-
+> 
 注意到 `delete(x)` 操作的本质是删掉一个 Rake Node，但我们在 $m$ 次操作中最多只会添加 $m$ 个 Rake Node，由 Rake Node 的定义，我们初始时最多有 $n$ 个 Rake Node，也就是说我们总共只会做 $m+n$ 次 `delete(x)` 操作，由 $a' \leq 3\log n +1$ 可知
-
+> 
 $$
 \sum_{i=1}^m c_i \leq 3(m+n)\log n + 21m\log n +n\log n +4m +n
 $$
-
+> 
 所以我们就证明了 Access 的复杂度，而其他函数要么基于 Access 要么单次时间复杂度为常数，所以我们就证明了 SATT 的复杂度．
-
+> 
 顺便一提，如果像 LCT 一样省略 Global Splay 的过程，改为在每次 Splice 时直接将要 Access 的点旋转一下，这样做时间复杂度也是对的（实测省略 Global Splay 的版本要快很多，能与 LCT 在 Luogu P3690 跑得不分上下）．
-
+> 
 ### 例题
-
+> 
 #### 例题 1
-
-???+ note "[CEOI 2019 Dynamic Diameter](https://loj.ac/p/3163)"
-    给定一棵 $n$ 个节点的树，每条边有边权，有 $q$ 次更新，每次修改一条边的边权，并询问树的直径．强制在线．
-
+> 
+> [!note]- [CEOI 2019 Dynamic Diameter](https://loj.ac/p/3163)
+> 给定一棵 $n$ 个节点的树，每条边有边权，有 $q$ 次更新，每次修改一条边的边权，并询问树的直径．强制在线．
+> 
 维护动态直径，建出 SATT 后，我们只需要在 `Pushup(x)` 里面维护每个点的答案，最后查询根节点的答案（即整棵树的直径）就可以了．
-
+> 
 ```cpp
 void pushup(int x, int op) {
   if (op == 0) {
-    // 是 Compress Node
-    len[x] = len[ls(x)] + len[rs(x)];
-    diam[x] = maxs[ls(x)][1] + maxs[rs(x)][0];
-    diam[x] =
-        max(diam[x], max(maxs[ls(x)][1], maxs[rs(x)][0]) + maxs[ms(x)][0]);
-    diam[x] = max(diam[x], max(max(diam[ls(x)], diam[rs(x)]), diam[ms(x)]));
-    maxs[x][0] =
-        max(maxs[ls(x)][0], len[ls(x)] + max(maxs[ms(x)][0], maxs[rs(x)][0]));
-    maxs[x][1] =
-        max(maxs[rs(x)][1], len[rs(x)] + max(maxs[ms(x)][0], maxs[ls(x)][1]));
+> // 是 Compress Node
+> len[x] = len[ls(x)] + len[rs(x)];
+> diam[x] = maxs[ls(x)][1] + maxs[rs(x)][0];
+> diam[x] =
+>     max(diam[x], max(maxs[ls(x)][1], maxs[rs(x)][0]) + maxs[ms(x)][0]);
+> diam[x] = max(diam[x], max(max(diam[ls(x)], diam[rs(x)]), diam[ms(x)]));
+> maxs[x][0] =
+>     max(maxs[ls(x)][0], len[ls(x)] + max(maxs[ms(x)][0], maxs[rs(x)][0]));
+> maxs[x][1] =
+>     max(maxs[rs(x)][1], len[rs(x)] + max(maxs[ms(x)][0], maxs[ls(x)][1]));
   } else {
-    // 是 Rake Node
-    diam[x] = maxs[ls(x)][0] + maxs[rs(x)][0];
-    diam[x] =
-        max(diam[x], maxs[ms(x)][0] + max(maxs[ls(x)][0], maxs[rs(x)][0]));
-    diam[x] = max(max(diam[x], diam[ms(x)]), max(diam[ls(x)], diam[rs(x)]));
-    maxs[x][0] = max(maxs[ms(x)][0], max(maxs[ls(x)][0], maxs[rs(x)][0]));
+> // 是 Rake Node
+> diam[x] = maxs[ls(x)][0] + maxs[rs(x)][0];
+> diam[x] =
+>     max(diam[x], maxs[ms(x)][0] + max(maxs[ls(x)][0], maxs[rs(x)][0]));
+> diam[x] = max(max(diam[x], diam[ms(x)]), max(diam[ls(x)], diam[rs(x)]));
+> maxs[x][0] = max(maxs[ms(x)][0], max(maxs[ls(x)][0], maxs[rs(x)][0]));
   }
   return;
 }
 ```
-
+> 
 其中 $diam$ 是当前点的答案（这个点代表的簇的直径）．$len$ 表示当前 Compress Node 所在簇路径的长度，$maxs_{0/1}$ 表示 Compress Node 到簇内点和端点的不选簇路径儿子/不选父亲的最大距离（如果是 Rake Node 则只存储选取当前簇的上端点到簇内点和端点的最大距离 $maxs_0$）．每次查询 SATT 根节点的 diam 即可，正确性显然．
-
+> 
 注意对 `Pushrev(x)` 做一些改动．
-
+> 
 ```cpp
 void pushrev(int x) {
   if (!x) return;
@@ -636,126 +636,127 @@ void pushrev(int x) {
   swap(maxs[x][0], maxs[x][1]);
 }
 ```
-
+> 
 #### 例题 2
-
-???+ note "[「CSP-S 2019」树的重心](https://loj.ac/p/3213)"
-    给定一棵树，求出单独删去树的每条边后，分裂出的两个子树的重心编号和之和．
-
+> 
+> [!note]- [「CSP-S 2019」树的重心](https://loj.ac/p/3213)
+> 给定一棵树，求出单独删去树的每条边后，分裂出的两个子树的重心编号和之和．
+> 
 假如我们能动态 $O(\log n)$ 维护树的重心，我们就做出这个题了．
-
+> 
 SATT 支持动态 $O(\log n)$ 维护树的重心，做到这需要 **非局部搜索（Non-local Search）**．
-
+> 
 对于一种树上的性质，如果一个点/一条边在整棵树中有这种性质，且在所有包含它的子树中都包含此种性质，我们就称这个性质是 **局部的（Local）**，否则称它是 **非局部的（Non-local）**．局部信息一般可以通过 `pushup(x)` 来维护
-
+> 
 例如，权值最小值是局部的，因为一个点/一条边如果在整棵树中权值最小，那么在所有包含它的子树中它也是权值最小的，而权值第二小显然就是非局部的．
-
+> 
 我们上文维护的 $diam$ 也是局部信息．
-
+> 
 回到正题，重心显然是一个非局部信息，无法通过简单的 `pushup(x)` 来维护．我们考虑在 SATT 上搜索：
-
+> 
 我们的搜索从 SATT 的根节点，即根簇开始．注意到重心有很好的性质：假如有一条边的一侧点的个数大于等于另一侧点的个数，那么边的这一侧一定至少有一个重心（重心可能有两个）．
-
+> 
 记 $sum$ 表示某一个簇的点个数，$maxs$ 为一棵 Rake Tree 的所有 Rake Node 中儿子的 $sum$ 最大值．
-
+> 
 ```cpp
 void pushup(int x, int op) {
   if (op == 0) {
-    // 是 Compress Node
-    sum[x] = sum[ls(x)] + sum[rs(x)] + sum[ms(x)] + 1;
+> // 是 Compress Node
+> sum[x] = sum[ls(x)] + sum[rs(x)] + sum[ms(x)] + 1;
   } else {
-    // 是 Rake Node
-    maxs[x] = max(maxs[ls(x)], max(maxs[rs(x)], sum[ms(x)]));
-    sum[x] = sum[ls(x)] + sum[rs(x)] + sum[ms(x)];
+> // 是 Rake Node
+> maxs[x] = max(maxs[ls(x)], max(maxs[rs(x)], sum[ms(x)]));
+> sum[x] = sum[ls(x)] + sum[rs(x)] + sum[ms(x)];
   }
 }
 ```
-
+> 
 ![](./images/top-tree20.jpg)
-
+> 
 如图，为在进行 Non-local Search 时的 SATT 和对应的原树 $T$．
-
+> 
 我们做如下比较：
-
+> 
 1.  比较簇 $compress(Y)$ 的 $sum$ 值与簇 $compress(Z)$、簇 $A$ 和点 $X$ 的并（我们暂称为簇 $\alpha$）的 $sum$ 值．若 $compress(Y)$ 的 $sum$ 值大于等于后者，说明至少有一个重心在 $compress(Y)$ 的子树中，我们递归到 $compress(Y)$ 搜索．（如果此处取等，点 $X$ 也是一个重心，需要记录）
-
+> 
 2.  比较簇 $compress(Z)$ 的 $sum$ 值与簇 $compress(Y)$、簇 $A$ 和点 $X$ 的并（我们暂称为簇 $\beta$）的 $sum$ 值．若 $compress(Z)$ 的 $sum$ 值大于等于后者，说明至少有一个重心在 $compress(Z)$ 的子树中，我们递归到 $compress(Z)$ 搜索．（如果此处取等，点 $X$ 也是一个重心，需要记录）
-
+> 
 3.  比较点 $x$ 中儿子 Rake tree 之中 $sum$ 最大的更小簇的 $sum$ 值与簇 $compress(Y)$、簇 $A$、点 $X$ 及其它更小簇的并（我们暂称为簇 $Y$）的 $sum$ 值，若那个更小簇的 $sum$ 值大于等于后者，说明至少有一个重心在那个更小簇的子树中，我们递归到它搜索．如果此处取等，点 $X$ 也是一个重心，需要记录．
-
+> 
 4.  若以上比较都不递归，则点 $X$ 一定是一个重心，记录并退出．
-
+> 
 第一步的搜索显然正确，之后应该怎么搜呢？
-
+> 
 假如我们递归到 $Y$，则现在 $Y$ 储存信息的并不完整，因为 $compress(Y)$ 里面只存储了它自己这个簇的信息，而我们要求的是整棵树的重心．解决方法是，将之前簇的信息记录下来，在点 $Y$ 上比较计算时将上一个簇的信息与点 $Y$ 自己的信息合并处理．具体实现如下：
-
+> 
 ```cpp
 void non_local_search(int x, int lv, int rv, int op) {
   // lv 和 rv 都是搜索的上一个簇的信息
   if (!x) return;
   psd(x, 0);
   if (op == 0) {
-    if (maxs[ms(x)] >=
-        sum[ms(x)] - maxs[ms(x)] + sum[rs(x)] + sum[ls(x)] + lv + 1 + rv) {
-      if (maxs[ms(x)] ==
-          sum[ms(x)] - maxs[ms(x)] + sum[rs(x)] + sum[ls(x)] + lv + 1 + rv) {
-        if (ans1)
-          ans2 = x;
-        else
-          ans1 = x;
-      }
-      non_local_search(
-          ms(x),
-          sum[ms(x)] - maxs[ms(x)] + sum[rs(x)] + sum[ls(x)] + 1 + lv + rv, 0,
-          1);
-      return;
-    }
-    if (ss[rs(x)] + rv >= ss[ms(x)] + ss[ls(x)] + lv + 1) {
-      if (ss[rs(x)] + rv == ss[ms(x)] + ss[ls(x)] + lv + 1) {
-        if (ans1)
-          ans2 = x;
-        else
-          ans1 = x;
-      }
-      non_local_search(rs(x), sum[ms(x)] + 1 + sum[ls(x)] + lv, rv, 0);
-      return;
-    }
-    if (sum[ls(x)] + lv >= sum[ms(x)] + sum[rs(x)] + 1 + rv) {
-      if (sum[ls(x)] + lv == sum[ms(x)] + sum[rs(x)] + 1 + rv) {
-        if (ans1)
-          ans2 = x;
-        else
-          ans1 = x;
-      }
-      non_local_search(ls(x), lv, rv + sum[ms(x)] + 1 + sum[rs(x)], 0);
-      return;
-    }
+> if (maxs[ms(x)] >=
+>     sum[ms(x)] - maxs[ms(x)] + sum[rs(x)] + sum[ls(x)] + lv + 1 + rv) {
+>   if (maxs[ms(x)] ==
+>       sum[ms(x)] - maxs[ms(x)] + sum[rs(x)] + sum[ls(x)] + lv + 1 + rv) {
+>     if (ans1)
+>       ans2 = x;
+>     else
+>       ans1 = x;
+>   }
+>   non_local_search(
+>       ms(x),
+>       sum[ms(x)] - maxs[ms(x)] + sum[rs(x)] + sum[ls(x)] + 1 + lv + rv, 0,
+>       1);
+>   return;
+> }
+> if (ss[rs(x)] + rv >= ss[ms(x)] + ss[ls(x)] + lv + 1) {
+>   if (ss[rs(x)] + rv == ss[ms(x)] + ss[ls(x)] + lv + 1) {
+>     if (ans1)
+>       ans2 = x;
+>     else
+>       ans1 = x;
+>   }
+>   non_local_search(rs(x), sum[ms(x)] + 1 + sum[ls(x)] + lv, rv, 0);
+>   return;
+> }
+> if (sum[ls(x)] + lv >= sum[ms(x)] + sum[rs(x)] + 1 + rv) {
+>   if (sum[ls(x)] + lv == sum[ms(x)] + sum[rs(x)] + 1 + rv) {
+>     if (ans1)
+>       ans2 = x;
+>     else
+>       ans1 = x;
+>   }
+>   non_local_search(ls(x), lv, rv + sum[ms(x)] + 1 + sum[rs(x)], 0);
+>   return;
+> }
   } else {
-    if (maxs[ls(x)] == maxs[x]) {
-      non_local_search(ls(x), lv, rv, 1);
-      return;
-    }
-    if (maxs[rs(x)] == maxs[x]) {
-      non_local_search(rs(x), lv, rv, 1);
-      return;
-    }
-    non_local_search(ms(x), lv, rv, 0);
-    return;
+> if (maxs[ls(x)] == maxs[x]) {
+>   non_local_search(ls(x), lv, rv, 1);
+>   return;
+> }
+> if (maxs[rs(x)] == maxs[x]) {
+>   non_local_search(rs(x), lv, rv, 1);
+>   return;
+> }
+> non_local_search(ms(x), lv, rv, 0);
+> return;
   }
   if (ans1)
-    ans2 = x;
+> ans2 = x;
   else
-    ans1 = x;
+> ans1 = x;
 }
 ```
-
-??? note "示例代码"
-    ```cpp
-    --8<-- "docs/ds/code/top-tree/top-tree_2.cpp"
-    ```
-
+> 
+> [!note]- 示例代码
+> ```cpp
+> --8<-- "docs/ds/code/top-tree/top-tree_2.cpp"
+> ```
+> 
 ### Reference
-
+> 
 1.  Robert E. Tarjan and Renato F. Werneck. 2005. Self-adjusting top trees. In Proceedings of the sixteenth annual ACM-SIAM symposium on Discrete algorithms (SODA '05). Society for Industrial and Applied Mathematics, USA, 813–822. DOI 10.5555/1070432.1070547
-
+> 
 2.  [negiizhao 的博客](https://negiizhao.blog.uoj.ac/blog/4912)
+> 

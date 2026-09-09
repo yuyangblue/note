@@ -8,9 +8,10 @@
 
 Telegram 群组链接为 [@OI\_wiki](https://t.me/OI_wiki)，QQ 群号码为 [588793226](https://jq.qq.com/?_wv=1027&k=5EfkM6K)，欢迎加入．
 
-???+ note "Note"
-    原则上来说，上述群组是 **OI Wiki 讨论群**，所以请尽量不要在群组中发表过多与 **OI Wiki** 无关的内容．
-
+> [!note]- Note
+> 原则上来说，上述群组是 **OI Wiki 讨论群**，所以请尽量不要在群组中发表过多与 **OI Wiki** 无关的内容．
+> 
 ## 项目方针
-
+> 
 -   [OI Wiki 不是什么](./OIWiki不是什么.md)
+> 

@@ -38,27 +38,28 @@ A\* 算法的一个经典应用是解决 k 短路问题．关于该问题的描�
 
 本节介绍一个可以用 A\* 算法解决的经典问题．
 
-???+ example "[八数码](https://www.luogu.com.cn/problem/P1379)"
-    在 $3\times 3$ 的棋盘上，摆有八个棋子，每个棋子上标有 $1$ 至 $8$ 的某一数字．棋盘中留有一个空格，空格用 $0$ 来表示．空格周围的棋子可以移到空格中，这样原来的位置就会变成空格．给出一种初始布局和目标布局（为了使题目简单，设目标状态如下），找到一种从初始布局到目标布局最少步骤的移动方法．
-    
-    $$
-    \begin{aligned}
-    123\\
-    804\\
-    765
-    \end{aligned}
-    $$
-
-??? note "解题思路"
-    $h$ 函数可以定义为，不在应该在的位置的棋子个数．容易发现，$h$ 既是可采纳的，也是一致的．此题可以使用 A\* 算法求解．
-
-??? note "参考代码"
-    ```cpp
-    --8<-- "docs/search/code/astar/astar_1.cpp"
-    ```
-
+> [!example]- [八数码](https://www.luogu.com.cn/problem/P1379)
+> 在 $3\times 3$ 的棋盘上，摆有八个棋子，每个棋子上标有 $1$ 至 $8$ 的某一数字．棋盘中留有一个空格，空格用 $0$ 来表示．空格周围的棋子可以移到空格中，这样原来的位置就会变成空格．给出一种初始布局和目标布局（为了使题目简单，设目标状态如下），找到一种从初始布局到目标布局最少步骤的移动方法．
+> 
+> $$
+> \begin{aligned}
+> 123\\
+> 804\\
+> 765
+> \end{aligned}
+> $$
+> 
+> [!note]- 解题思路
+> $h$ 函数可以定义为，不在应该在的位置的棋子个数．容易发现，$h$ 既是可采纳的，也是一致的．此题可以使用 A\* 算法求解．
+> 
+> [!note]- 参考代码
+> ```cpp
+> --8<-- "docs/search/code/astar/astar_1.cpp"
+> ```
+> 
 ## 参考资料与注释
-
+> 
 -   [A\* search algorithm - Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
-
+> 
 [^note1]: 此处的 $h$ 意为 heuristic．详见 [启发式搜索 - 维基百科](https://zh.wikipedia.org/wiki/%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2) 和 [A\* search algorithm - Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm#Bounded_relaxation) 的 Bounded relaxation 一节．
+> 
