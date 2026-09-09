@@ -24,7 +24,7 @@
     \nu_p\left(x^n+y^n\right)=\nu_p(x+y)
     $$
 
-> [!note]- 证明
+> [!note] 证明
 > 若 $p\mid x-y$，则不难发现 $p\mid x-y\iff x\equiv y\pmod p$，则显然有：
 > 
 > $$
@@ -36,22 +36,22 @@
 > 对 $p\mid x+y$ 的情况证明方法类似．
 > 
 ### 第二部分
-> 
+
 若 $p$ 是奇素数，
-> 
+
 1.  若 $p\mid x-y$，则：
-> 
-> $$
-> \nu_p\left(x^n-y^n\right)=\nu_p(x-y)+\nu_p(n)
-> $$
-> 
+
+    $$
+    \nu_p\left(x^n-y^n\right)=\nu_p(x-y)+\nu_p(n)
+    $$
+
 2.  若 $p\mid x+y$，则对奇数 $n$ 有：
-> 
-> $$
-> \nu_p\left(x^n+y^n\right)=\nu_p(x+y)+\nu_p(n)
-> $$
-> 
-> [!note]- 证明
+
+    $$
+    \nu_p\left(x^n+y^n\right)=\nu_p(x+y)+\nu_p(n)
+    $$
+
+> [!note] 证明
 > 若 $p\mid x-y$，令 $y=x+kp$，我们只需证明 $p\mid n$ 的情况．
 > 
 > -   若 $n=p$，则由二项式定理：
@@ -79,29 +79,29 @@
 > 对 $p\mid x+y$ 的情况证明方法类似．
 > 
 ### 第三部分
-> 
+
 若 $p=2$ 且 $p\mid x-y$，
-> 
+
 1.  对奇数 $n$ 有（与第一部分的 1 相同）：
-> 
-> $$
-> \nu_p\left(x^n-y^n\right)=\nu_p(x-y)
-> $$
-> 
+
+    $$
+    \nu_p\left(x^n-y^n\right)=\nu_p(x-y)
+    $$
+
 2.  对偶数 $n$ 有：
-> 
-> $$
-> \nu_p\left(x^n-y^n\right)=\nu_p(x-y)+\nu_p(x+y)+\nu_p(n)-1
-> $$
-> 
+
+    $$
+    \nu_p\left(x^n-y^n\right)=\nu_p(x-y)+\nu_p(x+y)+\nu_p(n)-1
+    $$
+
 另外对上述的 $x,y,n$，我们有：
-> 
+
 若 $4\mid x-y$，则：
-> 
+
 -   $\nu_2(x+y)=1$
 -   $\nu_2\left(x^n-y^n\right)=\nu_2(x-y)+\nu_2(n)$
-> 
-> [!note]- 证明
+
+> [!note] 证明
 > 我们只需证明 $n$ 为偶数的情况．由于此时 $p\nmid \dbinom{p}{2}$，故我们不能用第二部分的方法证明．
 > 
 > 令 $n=2^a b$，其中 $a=\nu_p(n)$，$2\nmid b$，从而
@@ -122,6 +122,5 @@
 > 因此命题得证．
 > 
 ## 参考资料
-> 
+
 1.  [Lifting-the-exponent lemma - Wikipedia](https://en.wikipedia.org/wiki/Lifting-the-exponent_lemma)
-> 

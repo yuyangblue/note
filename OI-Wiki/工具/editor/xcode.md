@@ -261,18 +261,17 @@ vim stdc++.h
 > ```
 > 
 该文件来源于 [10.2.0 版本的 libstdc++](https://github.com/gcc-mirror/gcc/blob/ee5c3db6c5b2c3332912fb4c9cfa2864569ebd9a/libstdc++-v3/include/precompiled/stdc++.h) 并经少许修改以兼容 libc++．
-> 
+
 按键盘左上角的<kbd>Esc</kbd>退出编辑模式，然后直接输入 `:wq` 并换行即可保存文件．
-> 
+
 ### 步骤 3
-> 
+
 关闭终端，回到 Xcode．重新按下 ⌘B/⌘R 进行编译，发现编译成功：
-> 
+
 ![](images/xcode-13.jpg)
-> 
+
 ## 优缺点
-> 
+
 优点：由苹果开发，适合 Mac 用户，界面齐全、美观．
-> 
+
 缺点：Xcode 主要用来苹果程序的开发，对于竞赛来说功能冗余，安装包大小较大，而且仅能在 Mac 端上使用．
-> 

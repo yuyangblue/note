@@ -98,24 +98,23 @@ add_compile_options(-std=c++17 -DDEBUG)
 
 CLion 为付费产品，但是可以通过教育邮箱或开源项目申请特殊许可证．申请之后不仅可以免费使用正版 CLion IDE，还可以免费使用 JetBrains 公司开发的其他付费产品．
 
-> [!note]- Note
+> [!note] Note
 > [自 2025 年 5 月起，CLion 对非商业用途免费．](https://blog.jetbrains.com/clion/2025/05/clion-is-now-free-for-non-commercial-use)
 > 
 > 根据 Toolbox 非商业用途订阅协议中的定义，商业产品是指有偿分发或提供或者作为您的商业活动的一部分使用的产品．但某些类别被明确排除在这一定义之外．常见的非商业用例包括学习和自我教育、任何形式的内容创作、开源代码和业余爱好开发．
 > 
 ### 使用教育邮箱获取
-> 
+
 进入官网的 [Free Educational Licenses 页面](https://www.jetbrains.com/community/education/#students), 点击 `Apply` 按钮，填写相关信息即可申请．
-> 
+
 ![Educational Licenses](./images/clion-edu.png)
-> 
+
 注意：在注册时于邮箱选项请填如 @edu.cn 后缀的教育邮箱，特殊许可证需要邮箱验证后方可拿到．
-> 
+
 你可以到所在高校的教务中心官网去申请教育邮箱，如果申请不到需要使用 [学信网](https://www.chsi.com.cn) 进行认证（仅中国大陆）．
-> 
+
 ### 使用开源项目获取
-> 
+
 如果您是某个开源项目的核心开发者或维护者之一，您可以尝试申请开源开发许可证 (Open Source Development License). 申请流程与教育许可证类似，但需要填写开源项目的仓库地址．
-> 
+
 ![Open Source Development License](./images/clion-oss.png)
-> 

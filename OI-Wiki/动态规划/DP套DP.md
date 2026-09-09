@@ -43,7 +43,7 @@ $$
 
 ### 例一
 
-> [!example]- [Hero meet devil](https://www.luogu.com.cn/problem/P10614)
+> [!example] [Hero meet devil](https://www.luogu.com.cn/problem/P10614)
 > 给定一个字符集为 `ACGT` 的字符串 $S$，且 $|S|\le 15$．对于每个 $0\leq i \leq |S|$，求有多少个长度为 $m$，字符集 `ACGT` 的字符串 $T$，满足它与 $S$ 的最长公共子序列长度为 $i$．
 > 
 > [!note]- 题解
@@ -69,8 +69,8 @@ $$
 > ```
 > 
 ### 例二
-> 
-> [!example]- [\[ZJOI2019\] 麻将](https://loj.ac/p/3042)
+
+> [!example] [\[ZJOI2019\] 麻将](https://loj.ac/p/3042)
 > 假设麻将牌有 $n$ 种大小的牌，每种大小有 $4$ 张牌．定义面子为三张相邻大小的麻将牌 $i,i+1,i+2$（顺子）或三种相同大小的麻将牌 $i,i,i$（刻子），对子为两张相同大小的麻将牌 $i,i$．定义一个麻将牌的序列是胡的，当且仅当它（看作多重集合）可以拆成四个面子和一个对子，或者七个不同的对子．给定 $13$ 张麻将牌，问期望再摸多少张牌可以满足存在一个胡牌的子序列的条件．
 > 
 > [!note]- 题解
@@ -138,8 +138,7 @@ $$
 > ```
 > 
 ## 习题
-> 
+
 -   [CF979E Kuro and Topological Parity](https://codeforces.com/problemset/problem/979/E)
 -   [\[TJOI2018\] 游园会](https://loj.ac/p/2575)
 -   [\[NOI2022\] 移除石子](https://loj.ac/p/3848)
-> 

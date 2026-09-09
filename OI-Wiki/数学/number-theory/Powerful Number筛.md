@@ -111,9 +111,9 @@ $$
 > ```
 > 
 ### [「LOJ #6053」简单的函数](https://loj.ac/problem/6053)
-> 
+
 给定 $f(n)$：
-> 
+
 $$
 f(n) =
 \begin{cases}
@@ -122,9 +122,9 @@ p \oplus c & n=p^c \\
 f(a)f(b) & n=ab \text{ and } a \perp b
 \end{cases}
 $$
-> 
+
 易得：
-> 
+
 $$
 f(p) =
 \begin{cases}
@@ -132,9 +132,9 @@ p + 1 & p = 2 \\
 p - 1 & \text{otherwise} \\
 \end{cases}
 $$
-> 
+
 构造 $g$ 为
-> 
+
 $$
 g(n) =
 \begin{cases}
@@ -142,11 +142,11 @@ g(n) =
 \varphi(n) & \text{otherwise} \\
 \end{cases}
 $$
-> 
+
 易证 $g(p) = f(p)$ 且 $g$ 为积性函数．
-> 
+
 下面考虑求 $G(n)$．
-> 
+
 $$
 \begin{aligned}
 G(n)
@@ -155,11 +155,11 @@ G(n)
 &= \sum_{i=1}^{n} \varphi(i) + 2\sum_{i=1}^{\lfloor \frac{n}{2} \rfloor} \varphi(2i)
 \end{aligned}
 $$
-> 
+
 记 $S_1(n) = \sum_{i=1}^{n} \varphi(i)$，$S_2(n) = \sum_{i=1}^{n} \varphi(2i)$，则 $G(n) = S_1(n) + 2S_2\left(\left\lfloor \dfrac{n}{2} \right\rfloor\right)$．
-> 
+
 当 $2 \mid n$ 时，有
-> 
+
 $$
 \begin{aligned}
 S_2(n)
@@ -171,9 +171,9 @@ S_2(n)
 &= S_1(n) + S_2\left(\left\lfloor \frac{n}{2} \right\rfloor\right)\\
 \end{aligned}
 $$
-> 
+
 当 $2 \nmid n$ 时，有
-> 
+
 $$
 \begin{aligned}
 S_2(n)
@@ -183,24 +183,23 @@ S_2(n)
 &= S_1(n) + S_2\left(\left\lfloor \frac{n}{2} \right\rfloor\right)\\
 \end{aligned}
 $$
-> 
+
 综上，有 $S_2(n) = S_1(n) + S_2\left(\left\lfloor \dfrac{n}{2} \right\rfloor\right)$．
-> 
+
 $S_1$ 可以用杜教筛求，$S_2$ 直接按照公式推，这样 $G$ 也可以求出来了．
-> 
+
 > [!note]- 参考代码
 > ```cpp
 > --8<-- "docs/math/code/powerful-number/powerful-number_2.cpp"
 > ```
 > 
 ## 习题
-> 
+
 -   [PE708 Twos are all you need](https://projecteuler.net/problem=708)
 -   [PE639 Summing a multiplicative function](https://projecteuler.net/problem=639)
 -   [PE484 Arithmetic Derivative](https://projecteuler.net/problem=484)
-> 
+
 ## 参考资料
-> 
+
 -   [破壁人五号 - Powerful number 筛略解](https://www.cnblogs.com/wallbreaker5th/p/13901487.html)
 -   [command\_block - 杜教筛（+ 贝尔级数 + powerful number）](https://www.luogu.com.cn/blog/command-block/du-jiao-shai)
-> 

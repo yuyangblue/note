@@ -8,22 +8,22 @@ $$
 
 而非函数本身，往往能够起到优化转移的效果．这种优化 DP 的思想，就称为 Slope Trick．
 
-> [!info]- 「斜率」
+> [!info] 「斜率」
 > 因为大多数题目中涉及的函数都只在整点处取值，所以称它为差分和斜率没有本质区别，本文按照 Slope Trick 这个名词统一称呼它为斜率．
 > 
 具体题目中，斜率的维护方式可能各不相同．如果斜率的取值范围较窄，维护斜率变化的点（即拐点）更为方便；而如果函数定义域较窄，维护斜率序列本身可能更为方便．更复杂的情形，可能需要同时维护每段斜率的大小和该段的长度．无论具体维护方式是什么，这类问题的本质都是利用状态转移中斜率序列变化较少这一点简化转移．因此，它们都可以称作 Slope Trick．
-> 
+
 ## 凸函数
-> 
+
 在讨论具体的题目之前，有必要首先了解一下凸函数的基本性质，以及在对凸函数进行各种变换时，它的斜率会如何变化．
-> 
+
 ### 实轴上的凸函数
-> 
+
 凸函数较为一般的定义是在 $\mathbf R$ 上给出的．
-> 
+
 ![](../images/slope-trick/epigraph-convex-def.svg)
-> 
-> [!abstract]- $\mathbf R$ 上的凸函数
+
+> [!abstract] $\mathbf R$ 上的凸函数
 > 如果函数 $f:\mathbf R\rightarrow\mathbf R\cup\{\pm\infty\}$ 对于所有 $x,y\in\mathbf R$ 和 $\alpha\in(0,1)$ 都满足
 > 
 > $$
@@ -33,19 +33,19 @@ $$
 > 就称函数 $f$ 为 **凸函数**（convex function），其中 $\pm\infty$ 的运算法则规定为 $\pm\infty$ 乘以任何正实数或是加上任何实数都等于其自身，且对于任何实数 $x\in\mathbf R$ 都有 $-\infty<x<+\infty$．
 > 
 当然，如果不等号换作 $\ge$，就相应地称它为凹函数[^convex-def]．因为对于凹函数 $f$，总有 $-f$ 为凸函数，所以本节只考虑凸函数．
-> 
-> [!info]- 本文只考虑正常凸函数
+
+> [!info] 本文只考虑正常凸函数
 > 为了避免讨论 $\infty-\infty$ 的取值和额外的复杂分析，本文在讨论凸函数相关概念时，总是默认函数不会取到 $-\infty$，且不总是 $+\infty$．这样的凸函数称为 **正常凸函数**（proper convex function）．这对于理解算法竞赛涉及的内容已经足够．
 > 
 当然，函数 $f$ 往往并不会对所有实数都有定义．如果函数 $f$ 的定义域仅是 $\mathbf R$ 的子集，那么可以将它拓展为 $\mathbf R$ 上的函数：
-> 
+
 $$
 \tilde f(x) = \begin{cases} f(x), & x\in\operatorname{dom}f,\\ +\infty,& x\notin\operatorname{dom}f.\end{cases}
 $$
-> 
+
 此时，称 $f$ 是凸函数，当且仅当相应的 $\tilde f$ 满足上述凸函数的定义．因此，如果没有特别指出，本文提到的凸函数的定义域均是实数集 $\mathbf R$．显然，凸函数 $f$ 只能在一个区间（即 $\mathbf R$ 的凸子集）上取得有限值．
-> 
-> [!example]- 简单例子
+
+> [!example] 简单例子
 > 常见的凸函数的例子包括：
 > 
 > 1.  常数函数：$f(x)=c$，其中 $c\in\mathbf R$；
@@ -54,14 +54,14 @@ $$
 > 4.  任何凸函数限制在某个区间上的结果，例如 $0_{[a,b]}(x)$（在凸分析的语境下也称作 $[a,b]$ 的指示函数）．
 > 
 当然，可以通过下文提到的保持凸性的变换组合出更为复杂的凸函数．
-> 
+
 ### 离散点集上的凸函数
-> 
+
 算法竞赛中，很多函数仅在部分整数值处有定义．它们在一般情况下并不是（上文定义的）凸函数，因为它们的定义域不再是凸集．为了处理这种情形，需要单独定义离散点集上的函数的凸性．简单来说，需要首先对函数做线性插值，将其定义域拓展到区间，再判断它的凸性．
-> 
+
 ![](../images/slope-trick/epigraph-convex-discrete.svg)
-> 
-> [!abstract]- 离散点集上的凸函数
+
+> [!abstract] 离散点集上的凸函数
 > 设 $S\subset\mathbf R$ 为离散点集，即对任意闭区间 $[a,b]$，$S\cap[a,b]$ 都是有限集．对于函数 $f:S\rightarrow\mathbf R\cup\{\pm\infty\}$，可以定义函数 $\tilde f:\mathbf R\rightarrow\mathbf R\cup\{\pm\infty\}$ 使得：
 > 
 > -   当 $x\in S$ 时，$\tilde f(x)=f(x)$，
@@ -75,10 +75,10 @@ $$
 > 那么，如果 $\tilde f(x)$ 是 $\mathbf R$ 上的凸函数，就称 $f(x)$ 是 $S$ 上的 **凸函数**．
 > 
 因为 $\mathbf R$ 上的凸函数处理起来更为方便，所以本文在提及凸函数时，若非特别说明，指的都是 $\mathbf R$ 上的凸函数．如果本文中某个函数仅给出了部分整数处的取值，那么它在其他实数处的取值应由定义中的 $\tilde f$ 确定，也就相当于直接讨论对应的分段线性函数 $\tilde f$．
-> 
+
 整数集 $\mathbf Z$ 上的凸函数有一个更为直观的等价定义：
-> 
-> [!note]- $\mathbf Z$ 上的凸函数的等价定义
+
+> [!note] $\mathbf Z$ 上的凸函数的等价定义
 > 函数 $f:\mathbf Z\rightarrow\mathbf R\cup\{\pm\infty\}$ 是凸的，当且仅当
 > 
 > $$
@@ -107,12 +107,12 @@ $$
 > 这相当于对所有满足 $x_1\le i<x_2$ 的差分的算术平均值．如果 $x_2$ 增加一，就相当于插入一项更大的差分；如果 $x_1$ 增加一，就相当于移除一项最小的差分．这两个操作都会使得平均值上升．这就说明斜率 $\Delta f(x_1,x_2)$ 弱增，即 $f$ 是 $\mathbf Z$ 上的凸函数．
 > 
 也就是说，只要斜率（差分）单调不减，这个序列就可以看作是 $\mathbf Z$ 上的凸函数．
-> 
+
 ### 凸函数的两种刻画
-> 
+
 其实，用斜率刻画凸函数的方式也可以推广到一般情况．
-> 
-> [!note]- 凸函数的斜率刻画
+
+> [!note] 凸函数的斜率刻画
 > 设 $S$ 为 $\mathbf R$ 或它的离散子集，则函数 $f:S\rightarrow\mathbf R\cup\{\pm\infty\}$ 为凸函数，当且仅当斜率
 > 
 > $$
@@ -155,16 +155,16 @@ $$
 > 代入 $x_3$ 的表达式，就得到 $\tilde f(x)$ 的凸性．
 > 
 斜率单调不减，可以看作是凸函数的等价定义．正因为凸函数的斜率具有单调性，在维护斜率时，通常需要选择 [堆（优先队列）](../../数据结构/堆.md) 或 [平衡树](../../数据结构/二叉搜索树.md) 等数据结构．
-> 
+
 本文还会用到凸函数的另一种等价刻画．对于函数 $f:\mathbf R\rightarrow\mathbf R\cup\{\pm\infty\}$，可以考察平面内函数图像上方的区域，即
-> 
+
 $$
 \operatorname{epi} f = \{(x,y)\in\mathbf R^2 : y\ge f(x)\}.
 $$
-> 
+
 这个区域也称为函数 $f$ 的 **上境图**（epigraph）．函数的凸性，等价于它的上境图的凸性：
-> 
-> [!note]- 凸函数的上境图刻画
+
+> [!note] 凸函数的上境图刻画
 > 函数 $f:\mathbf R\rightarrow\mathbf R\cup\{\pm\infty\}$ 是凸函数，当且仅当 $\operatorname{epi}f$ 是 $\mathbf R^2$ 内的凸集．
 > 
 > [!note]- 证明
@@ -185,40 +185,40 @@ $$
 > 这就等价于 $\alpha f(x_1)+(1-\alpha)f(x_2)\ge f\left(\alpha x_1+(1-\alpha)x_2\right)$，即 $f$ 的凸性．
 > 
 稍后会看到，利用上境图，可以将凸函数的卷积下确界与凸集的 Minkowski 和联系起来．
-> 
+
 ## 凸函数的变换
-> 
+
 紧接着，本文介绍一些 Slope Trick 中经常遇见的保持凸性的变换．
-> 
+
 ### 非负线性组合
-> 
+
 对于凸函数 $f$ 和 $g$ 以及非负实数 $\alpha,\beta\ge0$，函数 $\alpha f+\beta g$ 也是凸函数．而且，
-> 
+
 $$
 \Delta(\alpha f+\beta g) = \alpha\Delta f + \beta\Delta g.
 $$
-> 
+
 因此，如果维护了凸函数 $f$ 和 $g$ 的斜率，要得到它们的非负线性组合 $\alpha f+\beta g$ 的斜率，只需要逐段计算即可．
-> 
+
 在维护斜率的问题中，往往其中一个函数的形式比较简单，此时可以通过懒标记的方式降低修改复杂度．在维护拐点的问题中，要计算 $f+g$ 的斜率拐点，只需要将 $f$ 和 $g$ 的斜率拐点合并即可．
-> 
+
 ### 卷积下确界（Minkowski 和）
-> 
+
 凸函数的另一种常见操作是卷积下确界．对于函数 $f$ 和 $g$，函数
-> 
+
 $$
 h(x) = \inf_{y\in\mathbf R}f(y)+g(x-y)
 $$
-> 
+
 称为 $f$ 和 $g$ 的 **卷积下确界**[^inf-conv]（infimal convolution）．如果 $f$ 和 $g$ 都是凸函数，它们的卷积下确界也是凸函数．
-> 
+
 ![](../images/slope-trick/epigraph-convex-minkowski.svg)
-> 
+
 > [!example]- 对图示的解释
 > 如图所示，要求 $f$ 和 $g$ 的卷积下确界 $h$，可以将 $f$ 的图像（第三个图的红色虚线）上的每一个点都视作原点，在相应的坐标系内画出 $g$ 的图像（第三个图中的蓝色虚线）．当坐标系原点沿着 $f$ 的图像移动时，$g$ 的图像（上境图）移动的轨迹轮廓（即下凸壳），就是 $h$ 的图像．可以看出，$h$ 的每一个斜率段，都要么是 $f$ 的斜率段，要么是 $g$ 的斜率段：只是重新按照斜率大小排序了．这个过程中，$f$ 和 $g$ 的角色可以互换，即让 $f$ 的图像沿着 $g$ 的图像移动，得到的结果是一致的．
 > 
 几何直观上，$\operatorname{epi}h$ 就是 $\operatorname{epi}f$ 和 $\operatorname{epi}g$ 的 [Minkowski 和](../../计算几何/凸包.md#闵可夫斯基和)．如果 $f$ 和 $g$ 都是分段线性函数，那么 $h$ 同样是分段线性函数，且它的斜率段可以看作是 $f$ 和 $g$ 的斜率段合并（再排序）的结果．
-> 
+
 > [!note]- 证明
 > 设 $f,g$ 都是凸函数，$h$ 是它们的卷积下确界．设 $x_1<x_2$，且 $\alpha\in(0,1)$．根据卷积下确界的定义，对任意 $\varepsilon>0$，存在 $y_i,z_i\in\mathbf R$ 使得 $y_i+z_i=x_i$ 且
 > 
@@ -272,14 +272,14 @@ $$
 > 所以，$\operatorname{epi} f + \operatorname{epi} g = \operatorname{epi}h$ 当且仅当它是闭凸集．一个使其满足的条件是，$f$ 和 $g$ 都是正常凸函数且 [下半连续](https://en.wikipedia.org/wiki/Semi-continuity)．对于算法竞赛的应用来说，这已经足够了，比如分段线性函数总是满足这些条件的．
 > 
 在实际问题中，如果 $f$ 和 $g$ 其中一个的斜率段数较少，可以直接将较少的斜率段插入到较多的斜率段中；否则，可能需要利用 [启发式合并](../../图论/树上启发式合并.md) 或 [可并堆](../../数据结构/堆.md) 等方法，降低合并的整体复杂度，或者根据具体问题寻找相应的处理方式．
-> 
+
 ### 最值操作
-> 
+
 两个凸函数的最大值仍然是凸函数，但是，两个凸函数的最小值未必仍然是凸函数．
-> 
+
 很多常见的最小值操作可以转化为卷积下确界：
-> 
-> [!example]- 例子
+
+> [!example] 例子
 > -   $f(x)=\min_{y\in [x+a,x+b]}g(y)$ 仍然是凸函数，因为它可以看作是卷积下确界：
 > 
 >     $$
@@ -294,31 +294,31 @@ $$
 >     因此，延拓之前的函数 $f(x)$ 也是凸函数．
 > 
 但并不是所有的最小值操作都保持凸性．
-> 
-> [!example]- 反例
+
+> [!example] 反例
 > 设 $g(x)$ 是凸函数，函数 $f(x)=\min\{g(x-1)+kx,g(x)\}$ 并不一定是凸函数．
 > 
 在一些特殊的问题中，尽管动态规划的转移方程可以写作两个凸函数的最小值的形式，且难以转化为卷积下确界的形式，但是价值函数依然能够保持凸性．在实际处理时，通常需要结合打表和猜测找到这类问题的合理的斜率转移方式．
-> 
+
 了解了凸函数及其常见变换后，就可以通过具体的问题理解 Slope Trick 优化 DP 的方法．本文的例题大致分为维护拐点和维护斜率两组，用于理解这两种维护方式的常见操作和实施细节．但是，正如前文所强调的那样，维护方式并不是 Slope Trick 的本质，应当根据具体的问题需要选取合适的斜率段维护方式．
-> 
+
 ## 维护拐点
-> 
+
 这类问题通常出现在需要最小化若干个绝对值的和式的问题中．因为这类问题中，价值函数的斜率的绝对值并不大，因此维护斜率变化的拐点更为方便．
-> 
+
 维护拐点是指维护分段线性函数中，斜率发生变化的点．相当于对于每个斜率为 $k_i$ 的斜率段 $[l_i,r_i]$，只维护其端点信息，而斜率本身不需要格外维护；因此，这类问题斜率每次发生变化时，都应当只变化一个固定的量．比如，如果维护了拐点集 $\xi_{-s}\le\cdots\le\xi_{-1}\le\xi_{1}\le\cdots\le\xi_{t}$，就相当于说：区间 $[\xi_{-1},\xi_1]$ 内斜率为 $0$；向左每经过一个拐点，斜率减少一；向右每经过一个拐点，斜率增加一；故而，区间 $[\xi_2,\xi_3]$ 内，斜率就是 $2$，区间 $[\xi_{-3},\xi_{-2}]$ 内，斜率就是 $-2$，诸如此类．用形式语言表示，函数可以利用斜率拐点写作
-> 
+
 $$
 f(x) = f(\xi_1) + \sum_{i=-s}^{-1}\max\{\xi_i-x,0\} + \sum_{i=1}^{\ell}\max\{x-\xi_i,0\}.
 $$
-> 
+
 它的最小值就是 $f(\xi_{-1})=f(\xi_1)$，且可以在区间 $[\xi_{-1},\xi_1]$ 内任意位置取到．
-> 
+
 ![](../images/slope-trick/epigraph-convex-kinks.svg)
-> 
+
 ### 例题：最小成本递增序列
-> 
-> [!example]- [\[BalticOI 2004\] Sequence 数字序列](https://www.luogu.com.cn/problem/P4331)
+
+> [!example] [\[BalticOI 2004\] Sequence 数字序列](https://www.luogu.com.cn/problem/P4331)
 > 给定长度为 $n$ 的序列 $\{a_i\}$，求严格递增序列 $\{b_i\}$ 使得 $\sum_i|a_i-b_i|$ 最小，输出最小值和任意一种最优方案 $\{b_i\}$．
 > 
 > [!note]- 解答
@@ -370,16 +370,16 @@ $$
 > ```
 > 
 模板题：
-> 
+
 -   [Codeforces 713 C. Sonya and Problem Without a Legend](https://codeforces.com/problemset/problem/713/C)
 -   [Luogu P2893 \[USACO08FEB\] Making the Grade G](https://www.luogu.com.cn/problem/P2893)
 -   [Luogu P4331 \[BalticOI 2004\] Sequence 数字序列](https://www.luogu.com.cn/problem/P4331)
 -   [Luogu P4597 序列 sequence](https://www.luogu.com.cn/problem/P4597)
 -   [AtCoder 第 2 回 ドワンゴからの挑戦状 予選 E - 花火](https://atcoder.jp/contests/dwango2016-prelims/tasks/dwango2016qual_e)
-> 
+
 ### 例题：转移带限制的情形
-> 
-> [!example]- [\[NOISG 2018 Finals\] Safety](https://www.luogu.com.cn/problem/P11598)
+
+> [!example] [\[NOISG 2018 Finals\] Safety](https://www.luogu.com.cn/problem/P11598)
 > 给定长度为 $n$ 的序列 $\{a_i\}$，求序列 $\{b_i\}$ 使其满足 $|b_i-b_{i-1}|\le h$ 对所有 $1<i\le n$ 都成立，并使得 $\sum_i|a_i-b_i|$ 最小，输出最小值．
 > 
 > [!note]- 解答
@@ -430,20 +430,20 @@ $$
 > ```
 > 
 模板题：
-> 
+
 -   [Luogu P4272 \[CTSC2009\] 序列变换](https://www.luogu.com.cn/problem/P4272)
 -   [Luogu P11598 \[NOISG 2018 Finals\] Safety](https://www.luogu.com.cn/problem/P11598)
 -   [AtCoder Beginner Contest 217 H - Snuketoon](https://atcoder.jp/contests/abc217/tasks/abc217_h)
 -   [AtCoder Regular Contest 070 E - NarrowRectangles](https://atcoder.jp/contests/arc070/tasks/arc070_c)
 -   [AtCoder Regular Contest 123 D - Inc, Dec - Decomposition](https://atcoder.jp/contests/arc123/tasks/arc123_d)
-> 
+
 ## 维护斜率
-> 
+
 还有一些问题，维护斜率更为方便．这类问题通常也可以使用 [反悔贪心](../../算法基础/贪心.md#后悔解法) 或模拟费用流的思想解决．费用流模型中，最小费用往往是流量的凸函数，这就为使用 Slope Trick 提供了基础．
-> 
+
 ### 例题：股票交易问题
-> 
-> [!example]- [Codeforces 865 D. Buy Low Sell High](https://codeforces.com/problemset/problem/865/D)
+
+> [!example] [Codeforces 865 D. Buy Low Sell High](https://codeforces.com/problemset/problem/865/D)
 > 给定 $n$ 天股票价格序列 $\{p_i\}$（均为正数），初始持股为 $0$，每天可买入一股、卖出一股或不交易，求 $n$ 天后最大利润．
 > 
 > [!note]- 解答
@@ -487,12 +487,12 @@ $$
 > ```
 > 
 模板题：
-> 
+
 -   [Codeforces 865 D. Buy Low Sell High](https://codeforces.com/problemset/problem/865/D)
-> 
+
 ### 例题：搬运土石问题
-> 
-> [!example]- [\[USACO16OPEN\] Landscaping P](https://www.luogu.com.cn/problem/P2748)
+
+> [!example] [\[USACO16OPEN\] Landscaping P](https://www.luogu.com.cn/problem/P2748)
 > 给定长度为 $n$ 的序列 $\{a_i\}$ 和 $\{b_i\}$，分别表示第 $i$ 个花园已经有的泥土数量和需要的泥土数量（不能多也不能少）．购买一单位泥土放入任意花园价格为 $X$，从任意花园运走一单位泥土价格为 $Y$，从花园 $i$ 向花园 $j$ 运送一单位泥土价格为 $Z|i-j|$．求满足所有花园需求的最小成本．（$a_i,b_i\le 10$）
 > 
 > [!note]- 解答
@@ -543,15 +543,15 @@ $$
 > ```
 > 
 模板题：
-> 
+
 -   [Luogu P2748 \[USACO16OPEN\] Landscaping P](https://www.luogu.com.cn/problem/P2748)
 -   [Kyoto University PC 2016 H - WAAAAAAAAAAAAALL](https://atcoder.jp/contests/kupc2016/tasks/kupc2016_h)
 -   [JAG Practice Contest 2017 J - Farm Village](https://atcoder.jp/contests/jag2017autumn/tasks/jag2017autumn_j)
-> 
+
 ## 习题
-> 
+
 本文的最后，提供一些各类算法竞赛中出现过的且可以使用 Slope Trick 解决的问题，以供练习．
-> 
+
 -   [Luogu P3642 \[APIO2016\] 烟火表演](https://www.luogu.com.cn/problem/P3642)
 -   [Luogu P9962 \[THUPC 2024 初赛\] 一棵树](https://www.luogu.com.cn/problem/P9962)
 -   [Luogu P11317 \[RMI 2021\] 路径/Paths](https://www.luogu.com.cn/problem/P11317)
@@ -566,15 +566,14 @@ $$
 -   [2019 Summer Petrozavodsk Camp H. Honorable Mention](https://codeforces.com/gym/102331/problem/H)
 -   [2018 ACM-ICPC World Finals C. Conquer The World](https://codeforces.com/gym/102482/problem/C)
 -   [300iq Contest 3 F. Farm of Monsters](https://codeforces.com/gym/102538/problem/F)
-> 
+
 ## 参考文献与注释
-> 
+
 -   [\[Tutorial\] Slope Trick - zscoder](https://codeforces.com/blog/entry/47821)
 -   [Slope trick explained - Kuroni](https://codeforces.com/blog/entry/77298)
 -   [Slope Trick - USACO Guide](https://usaco.guide/adv/slope-trick?lang=cpp)
 -   [\[Tutorial\] Intuition on Slope Trick - maomao90](https://codeforces.com/blog/entry/103222)
-> 
+
 [^convex-def]: 不同教材对于凸函数的称呼可能不同．
-> 
+
 [^inf-conv]: 也常称为 $\min$ 卷积、$\inf$ 卷积或者 $(\min,+)$ 卷积．
-> 

@@ -57,7 +57,7 @@ AA 树的每个节点维护一个 **level** 字段，类似红黑树的每个节
 
 ![aa-tree-split](images/aa-tree-split.svg)
 
-> [!note]- 伪代码实现
+> [!note] 伪代码实现
 > $$
 > \begin{array}{ll}
 > 1 & \textbf{function } \text{split}(\text{root}) \\
@@ -68,17 +68,17 @@ AA 树的每个节点维护一个 **level** 字段，类似红黑树的每个节
 > $$
 > 
 ### skew（右旋）
-> 
+
 出现向左的水平方向链（连续两个向左的孩子属于同一 level）
-> 
+
 向右旋转节点*T*，把小于等于此 level 的节点看做一个子树．
-> 
+
 1.  子树的根的左孩子变为新的子树根；
 2.  原来的子树根变为新子树根的右孩子．
-> 
+
 ![aa-tree-skew](images/aa-tree-skew.svg)
-> 
-> [!note]- 伪代码实现
+
+> [!note] 伪代码实现
 > $$
 > \begin{array}{ll}
 > 1 & \textbf{function } \text{skew}(\text{root}) \\
@@ -89,12 +89,12 @@ AA 树的每个节点维护一个 **level** 字段，类似红黑树的每个节
 > $$
 > 
 ## AA 树的操作
-> 
+
 AA 树本身是一棵二叉搜索树，所以搜索操作与其他二叉搜索树相同．插入和删除操作与*AVL*树相同，首先在树中将 key 插入或删除，然后沿着搜索路径回退到根，并在此过程中重构树．
-> 
+
 ### 插入
-> 
-> [!note]- 伪代码实现
+
+> [!note] 伪代码实现
 > $$
 > \begin{array}{ll}
 > 1 & \textbf{function } \text{insert}(\text{root}, \text{add}) \\
@@ -113,10 +113,10 @@ AA 树本身是一棵二叉搜索树，所以搜索操作与其他二叉搜索�
 > $$
 > 
 ### 删除
-> 
+
 删除过程与其他二叉平衡树类似，首先将内部节点的删除转换为叶子节点的删除．具体方法是将内部节点与它最接近的前驱或后继节点替换．由于 AA 树的所有 level 大于 1 的节点都有两个子节点，前驱或后继节点将位于 level 1，删除 level 1 的节点较为简单．
-> 
-> [!note]- 伪代码实现
+
+> [!note] 伪代码实现
 > $$
 > \begin{array}{ll}
 > 1 &  \text{//To rebalance the tree} \\
@@ -136,13 +136,12 @@ AA 树本身是一棵二叉搜索树，所以搜索操作与其他二叉搜索�
 > $$
 > 
 ## 性能
-> 
+
 AA 树的性能与红黑树的性能相当．尽管 AA 树进行的旋转操作比红黑树多，但 AA 树的算法更简单，最终导致相近的性能．红黑树的性能在各种情况下更加一致，而 AA 树往往更扁平，这使 AA 树有稍快的搜索速度．
-> 
+
 ## 参考资料
-> 
+
 1.  [AA tree - Wikipedia](https://en.wikipedia.org/wiki/AA_tree)
 2.  [Introduction to AA trees](https://iq.opengenus.org/aa-trees/)
 3.  [AA tree - Visualization](https://kubokovac.eu/gnarley-trees/AAtree.html)
 4.  [CMSC 420 Lecture 6: 2-3, Red-black, and AA trees](https://www.cs.umd.edu/class/fall2019/cmsc420-0201/Lects/lect06-aa.pdf)
-> 

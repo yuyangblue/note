@@ -596,69 +596,69 @@ $$
 > 详见 [更多阅读](#更多阅读) 中第一篇资料的「4.4 多行公式」．
 > 
 ### 数学符号
-> 
+
 尽管一些基础的符号可以直接键入，但大多数特殊符号需要使用命令来显示．
-> 
+
 本书只是数学符号使用的入门教程，LaTeX Wikibook 的数学符号章节是另一个更好更完整的教程．如果想要了解更多关于数学符号的内容请移步．如果你想找到一个特定的符号，可以使用 [Detexfiy](http://detexify.kirelabs.org)，它可以识别手写字符．
-> 
+
 #### 上标和下标
-> 
+
 上标（Powers）使用 `^` 来表示，比如 `$n^2$` 生成的效果为 $n^2$．
-> 
+
 下标（Indices）使用 `_` 表示，比如 `$2_a$` 生成的效果为 $2_a$．
-> 
+
 如果上标或下标的内容包含多个字符，请使用花括号包裹起来．比如 `$b_{a-2}$` 的效果为 $b_{a-2}$．
-> 
+
 #### 分数
-> 
+
 分数使用 `\frac{numerator}{denominator}` 命令插入．比如 `$$\frac{a}{3}$$` 的生成效果为
-> 
+
 $$
 \frac{a}{3}
 $$
-> 
+
 分数可以嵌套．比如 `$$\frac{y}{\frac{3}{x}+b}$$` 的生成效果为
-> 
+
 $$
 \frac{y}{\frac{3}{x}+b}
 $$
-> 
+
 #### 根号
-> 
+
 我们使用 `\sqrt{...}` 命令插入根号．省略号的内容由被开根的内容替代．如果需要添加开根的次数，使用方括号括起来即可．
-> 
+
 例如 `$$\sqrt{y^2}$$` 的生成效果为
-> 
+
 $$
 \sqrt{y^2}
 $$
-> 
+
 而 `$$\sqrt[x]{y^2}$$` 的生成效果为
-> 
+
 $$
 \sqrt[x]{y^2}
 $$
-> 
+
 #### 求和与积分
-> 
+
 使用 `\sum` 和 `\int` 来插入求和式与积分式．对于两种符号，上限使用 `^` 来表示，而下限使用 `_` 表示．
-> 
+
 `$$\sum_{x=1}^5 y^z$$` 的生成效果为
-> 
+
 $$
 \sum_{x=1}^5y^z
 $$
-> 
+
 而 `$$\int_a^b f(x)$$` 的生成效果为
-> 
+
 $$
 \int_a^b f(x)
 $$
-> 
+
 #### 希腊字母
-> 
+
 我们可以使用反斜杠加希腊字母的名称来表示一个希腊字母．名称的首字母的大小写决定希腊字母的形态．例如
-> 
+
 -   `$\alpha$`=$\alpha$
 -   `$\beta$`=$\beta$
 -   `$\delta, \Delta$`=$\delta, \Delta$
@@ -667,113 +667,112 @@ $$
 -   `$\phi, \Phi, \varphi$`=$\phi, \Phi, \varphi$
 -   `$\psi, \Psi$`=$\psi, \Psi$
 -   `$\omega, \Omega$`=$\omega, \Omega$
-> 
+
 ### 实践
-> 
+
 $\rightarrow$ 撰写代码来生成下列公式：
-> 
+
 ![p15](images/latex-for-beginners-15.png)
-> 
+
 如果需要帮助，可以查看本页面的 [源代码](https://github.com/OI-wiki/OI-wiki/blob/master/docs/tools/LaTeX.md?plain=1)．
-> 
+
 ## 参考文献
-> 
+
 ### 介绍
-> 
+
 LaTeX 可以轻松插入参考文献以及目录．本文会介绍如何使用另一个 BibTeX 文件来存储参考文献．
-> 
+
 ### BibTeX 文件类型
-> 
+
 BibTeX 文件包含了所有你想要在你文档中引用的文献．它的文件后缀名为 `.bib`．它的名字应设置为你的 TeX 文档的名字．`.bib` 文件是文本文件．你需要将你的参考文献按照下列格式输入：
-> 
+
 ```text
 @article{
-> Birdetal2001,
-> Author = {Bird, R. B. and Smith, E. A. and Bird, D. W.},
-> Title = {The hunting handicap: costly signaling in human foraging strategies},
-> Journal = {Behavioral Ecology and Sociobiology},
-> Volume = {50},
-> Pages = {9-19},
-> Year = {2001} 
+    Birdetal2001,
+    Author = {Bird, R. B. and Smith, E. A. and Bird, D. W.},
+    Title = {The hunting handicap: costly signaling in human foraging strategies},
+    Journal = {Behavioral Ecology and Sociobiology},
+    Volume = {50},
+    Pages = {9-19},
+    Year = {2001} 
 }
 ```
-> 
+
 每一个参考文献先声名它的文献类型（reference type）．示例中使用的是 @article，其他的类型包括 @book，@incollection 用于引用一本书的中的章节，@inproceedings 用于引用会议论文．可以 [在此](http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management) 查看更多支持的类型．
-> 
+
 接下来的花括号内首先要列出一个引用键值（citation key）．必须保证你引用的文献的引用键值是不同的．你可以自定义键值串，不过使用第一作者名字加上年分会是一个表义清晰的选择．
-> 
+
 接下来的若干行包括文献的若干信息，格式如下：
-> 
+
 ```text
 Field name = {field contents},
 ```
-> 
+
 你可以使用 LaTeX 命令来生成特殊的文字效果．比如意大利斜体可以使用 `\emph{Rattus norvegicus}`．
-> 
+
 对于需要大写的字母，请用花括号包裹起来．BibTeX 会自动把标题中除第一个字母外所有大写字母替换为小写．比如 `Dispersal in the contemporary United States` 的生成效果为 $\text{Dispersal in the contemporary united states}$，而 `Dispersal in the contemporary {U}nited {S}tates` 的生成效果为 $\text{Dispersal in the contemporary United States}$．
-> 
+
 你可以手写 BibTeX 文件，也可以使用软件来生成．
-> 
+
 ### 插入文献列表
-> 
+
 使用下列命令在文档当前位置插入文献列表：
-> 
+
 ```tex
 \bibliographystyle{plain}
 \bibliography{references}
 ```
-> 
+
 参考文献写在 `references.bib` 里．
-> 
+
 ### 参考文献标注
-> 
+
 使用 `\cite{citationkey}` 来在你想要引用文献的地方插入一个标注．如果你不希望在正文中插入一个引用标注，但仍想要在文献列表中显示这次引用，使用 `\nocite{citationkey}` 命令．
-> 
+
 想要在引用中插入页码信息，使用方括号：`\cite[p. 215]{citationkay}`．
-> 
+
 要引用多个文献，使用逗号分隔：`\cite{citation01,citation02,citation03}`．
-> 
+
 ### 引用格式
-> 
+
 #### 数字标号引用
-> 
+
 LaTeX 包含了多种行内数字标号引用的格式：
-> 
+
 **Plain** 方括号包裹数字的形式，如 $[1]$．文献列表按照第一作者的字母表顺序排列．每一个作者的名字是全称．
-> 
+
 **Abbrv** 与 **plain** 是相同的，但作者的名字是缩写．
-> 
+
 **Unsrt** 与 **plain** 是相同的，但文献列表的排序按照在文中引用的先后顺序排列．
-> 
+
 **Alpha** 与 **plain** 一样，但引用的标注是作者的名字与年份组合在一起，不是数字，如 $[Kop10]$．
-> 
+
 #### 作者日期引用
-> 
+
 如果你想使用作者日期的引用，使用 **natbib** 包．它使用 `\citep{...}` 命令来生成一个方括号标注，如 $[Koppe,2010]$，使用 `\citet{...}` 来生成一个标注，只把年份放到方括号里，如 $Koppe [2010]$．[在此](http://mirror.ctan.org/macros/latex/contrib/natbib/natnotes.pdf) 查看它的更多用法．
-> 
+
 Natbib 包也有三种格式：**plainnat**，**abbrvnat** 和 **unsrtnat**，他们与 **plain**，**abbrv** 和 **unsrt** 的效果是一样的．
-> 
+
 #### 其他引用格式
-> 
+
 如果你需要使用不同的格式，你需要在同一个文件夹下创建一个格式文件（`.bst` 文件），引用这个格式的时候使用它的文件名调用 `\bibliographystyle{...}` 命令实现．
-> 
+
 ### 实践
-> 
+
 $\rightarrow$ 在同一文件夹下新建一个同名的 BibTeX 文件，用正确的格式输入参考文献的信息．$\rightarrow$ 切换到 TeX 文档，并使用 `\cite`，`\bibliographystyle` 和 `\bibliograph` 命令来引用文献．$\rightarrow$ 编译 TeX 文件．$\rightarrow$ 切换到 BibTeX 文件，并编译（点击 **Typeset** 按扭）$\rightarrow$ 切换到 TeX 文件并编译它 **两次**，然后核对 PDF 文档．
-> 
+
 ## 更多阅读
-> 
+
 -   一份（不太）简短的 LATEX 2ε 介绍 <https://github.com/CTeX-org/lshort-zh-cn/releases/download/v6.02/lshort-zh-cn.pdf> 或 112 分钟了解 LaTeX 2ε.
-> 
+
 -   LaTeX Project <http://www.latex-project.org/> Official website - has links to documentation, information about installing LATEX on your own computer, and information about where to look for help.
-> 
+
 -   LaTeX Wikibook <http://en.wikibooks.org/wiki/LaTeX/> Comprehensive and clearly written, although still a work in progress. A downloadable PDF is also available.
-> 
+
 -   Comparison of TeX Editors on Wikipedia <http://en.wikipedia.org/wiki/Comparison_of_TeX_editors> Information to help you to choose which L A TEX editor to install on your own computer.
-> 
+
 -   TeX Live <http://www.tug.org/texlive/>"An easy way to get up and running with the TeX document production system". Available for Unix and Windows (links to MacTeX for MacOSX users). Includes the TeXworks editor.
-> 
+
 -   Workbook Source Files <http://edin.ac/17EQPM1> Download the .tex file and other files needed to compile this workbook.
-> 
+
 **本文译自 [http://www.docs.is.ed.ac.uk/skills/documents/3722/3722-2014.pdf](https://web.archive.org/web/20220309055041/http://www.docs.is.ed.ac.uk/skills/documents/3722/3722-2014.pdf)**, 依据其他文献略有修改．
-> 

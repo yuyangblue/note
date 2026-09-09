@@ -106,7 +106,7 @@ Alpha–Beta 剪枝的剪枝策略依赖于搜索当前节点时 $\alpha$ 和 $\
 
 ### 实现
 
-> [!example]- 参考代码
+> [!example] 参考代码
 > ```cpp
 > int alpha_beta(int u, int alph, int beta, bool is_max) {
 >   if (!son_num[u]) return val[u];
@@ -129,9 +129,8 @@ Alpha–Beta 剪枝的剪枝策略依赖于搜索当前节点时 $\alpha$ 和 $\
 > ```
 > 
 ## 参考资料与注释
-> 
+
 -   [Minimax Algorithm - Wikipedia](https://en.wikipedia.org/wiki/Minimax#Minimax_algorithm_with_alternate_moves)
 -   [Alpha–beta pruning - Wikipedia](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
-> 
+
 **本文部分引用自博文 [详解 Minimax 算法与α-β剪枝\_文剑木然](https://blog.csdn.net/wenjianmuran/article/details/90633418)，遵循 CC 4.0 BY-SA 版权协议．内容有改动．**
-> 

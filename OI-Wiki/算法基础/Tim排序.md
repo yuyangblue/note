@@ -105,7 +105,7 @@ Timsort 的时间复杂度取决于数据的有序性：
 
 ## 实现
 
-> [!note]- 伪代码实现
+> [!note] 伪代码实现
 > $$
 > \begin{array}{ll}
 > 1 & nRemaining \gets \text{数组长度} \\
@@ -128,10 +128,9 @@ Timsort 的时间复杂度取决于数据的有序性：
 > $$
 > 
 ## 参考资料
-> 
+
 1.  [Timsort](https://en.wikipedia.org/wiki/Timsort)
 2.  [On the Worst-Case Complexity of TimSort](https://drops.dagstuhl.de/opus/volltexte/2018/9467/pdf/LIPIcs-ESA-2018-4.pdf)
 3.  [Original Explanation by Tim Peters](https://github.com/python/cpython/blob/main/Objects/listsort.txt)
 4.  [Java 实现](https://cs.android.com/android/platform/superproject/main/+/main:libcore/ojluni/src/main/java/java/util/TimSort.java)
 5.  [C 语言实现](https://github.com/python/cpython/blob/main/Objects/listobject.c)
-> 

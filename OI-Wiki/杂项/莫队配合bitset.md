@@ -18,8 +18,7 @@ bitset 常用于常规数据结构难以维护的判定、统计问题，而莫�
 > ```
 > 
 ## 习题
-> 
+
 -   [小清新人渣的本愿](https://www.luogu.com.cn/problem/P3674)
 -   [「Ynoi2017」由乃的玉米田](https://www.luogu.com.cn/problem/P5355)
 -   [「Ynoi2011」WBLT](https://www.luogu.com.cn/problem/P5313)
-> 

@@ -10,7 +10,7 @@ author: Tiphereth-A, ShaoChenHeng, Enter-tainer, ksyx, c-forrest, StudyingFather
 
 ### 例题
 
-> [!example]- [Codeforces 148D Bag of mice](https://codeforces.com/problemset/problem/148/D)
+> [!example] [Codeforces 148D Bag of mice](https://codeforces.com/problemset/problem/148/D)
 > 袋子里有 $w$ 只白鼠和 $b$ 只黑鼠，公主和龙轮流从袋子里抓老鼠．谁先抓到白色老鼠谁就赢，如果袋子里没有老鼠了并且没有谁抓到白色老鼠，那么算龙赢．公主每次抓一只老鼠，龙每次抓完一只老鼠之后会有一只老鼠跑出来．每次抓的老鼠和跑出来的老鼠都是随机的．公主先抓．问公主赢的概率．
 > 
 > [!note]- 解答
@@ -30,15 +30,15 @@ author: Tiphereth-A, ShaoChenHeng, Enter-tainer, ksyx, c-forrest, StudyingFather
 > ```
 > 
 ### 习题
-> 
+
 -   [POJ3071 Football](http://poj.org/problem?id=3071)
 -   [CodeForces 768D Jon and Orbs](https://codeforces.com/problemset/problem/768/D)
-> 
+
 ## 期望 DP
-> 
+
 ### 例题
-> 
-> [!example]- [POJ2096 Collecting Bugs](http://poj.org/problem?id=2096)
+
+> [!example] [POJ2096 Collecting Bugs](http://poj.org/problem?id=2096)
 > 一个软件有 $s$ 个子系统，会产生 $n$ 种 bug．某人一天发现一个 bug，这个 bug 属于某种 bug 分类，也属于某个子系统．每个 bug 属于某个子系统的概率是 $\dfrac{1}{s}$，属于某种 bug 分类的概率是 $\dfrac{1}{n}$．求发现 $n$ 种 bug，且 $s$ 个子系统都找到 bug 的期望天数．
 > 
 > [!note]- 解答
@@ -65,7 +65,7 @@ author: Tiphereth-A, ShaoChenHeng, Enter-tainer, ksyx, c-forrest, StudyingFather
 > --8<-- "docs/dp/code/probability/probability_2.cpp"
 > ```
 > 
-> [!example]- [「NOIP2016」换教室](http://uoj.ac/problem/262)
+> [!example] [「NOIP2016」换教室](http://uoj.ac/problem/262)
 > 牛牛要上 $n$ 个时间段的课，第 $i$ 个时间段在 $c_i$ 号教室，可以申请换到 $d_i$ 号教室，申请成功的概率为 $p_i$，至多可以申请 $m$ 节课进行交换．第 $i$ 个时间段的课上完后要走到第 $i+1$ 个时间段的教室，给出一张图 $v$ 个教室 $e$ 条路，移动会消耗体力，申请哪几门课程可以使他因在教室间移动耗费的体力值的总和的期望值最小，也就是求出最小的期望路程和．
 > 
 > [!note]- 解答
@@ -91,18 +91,18 @@ author: Tiphereth-A, ShaoChenHeng, Enter-tainer, ksyx, c-forrest, StudyingFather
 > ```
 > 
 比较这两个问题可以发现，DP 求期望题目在对具体是求一个值或是最优化问题上会对方程得到转移方式有一些影响，但无论是 DP 求概率还是 DP 求期望，总是离不开概率知识和列出、化简计算公式的步骤，在写状态转移方程时需要思考的细节也类似．
-> 
+
 ### 习题
-> 
+
 -   [HDU3853 LOOPS](https://acm.hdu.edu.cn/showproblem.php?pid=3853)
 -   [HDU4035 Maze](https://acm.hdu.edu.cn/showproblem.php?pid=4035)
 -   [「SCOI2008」奖励关](https://www.luogu.com.cn/problem/P2473)
-> 
+
 ## 有后效性 DP
-> 
+
 ### 例题
-> 
-> [!example]- [CodeForces 24D Broken robot](https://codeforces.com/problemset/problem/24/D)
+
+> [!example] [CodeForces 24D Broken robot](https://codeforces.com/problemset/problem/24/D)
 > 给出一个 $n \times m$ 的矩阵区域．一个机器人初始在第 $x$ 行第 $y$ 列，每一步机器人会等概率地选择停在原地、左移一步、右移一步、下移一步．如果机器人在边界则不会往区域外移动，问机器人到达最后一行的期望步数．
 > 
 > [!note]- 解答
@@ -130,11 +130,10 @@ author: Tiphereth-A, ShaoChenHeng, Enter-tainer, ksyx, c-forrest, StudyingFather
 > ```
 > 
 ### 习题
-> 
+
 -   [HDU 4418 Time Travel](https://acm.hdu.edu.cn/showproblem.php?pid=4418)
 -   [「HNOI2013」游走](https://loj.ac/problem/2383)
-> 
+
 ## 参考文献
-> 
+
 [kuangbin 概率 DP 总结](https://www.cnblogs.com/kuangbin/archive/2012/10/02/2710606.html)
-> 

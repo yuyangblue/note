@@ -8,17 +8,17 @@
 
 温故而知新，在开始学习插头 DP 之前，不妨先让我们回顾一个经典问题．
 
-> [!note]- 例题 [「HDU 1400」Mondriaan’s Dream](https://acm.hdu.edu.cn/showproblem.php?pid=1400)
+> [!note] 例题 [「HDU 1400」Mondriaan’s Dream](https://acm.hdu.edu.cn/showproblem.php?pid=1400)
 > 题目大意：在 $N\times M$ 的棋盘内铺满 $1\times 2$ 或 $2\times 1$ 的多米诺骨牌，求方案数．
 > 
 当 $n$ 或 $m$ 规模不大的时候，这类问题可以使用 [状压 DP](./状态设计.md) 解决．逐行划分阶段，设 $dp(i,s)$ 表示当前已考虑过前 $i$ 行，且第 $i$ 行的状态为 $s$ 的方案数．这里的状态 $s$ 的每一位可以表示这个位置是否已被上一行覆盖．
-> 
+
 ![domino](./images/domino.svg)
-> 
+
 另一种划分阶段的方法是逐格 DP，或者称之为轮廓线 DP．$dp(i,j,s)$ 表示已经考虑到第 $i$ 行第 $j$ 列，且当前轮廓线上的状态为 $s$ 的方案数．
-> 
+
 虽然逐格 DP 中我们的状态增加了一个维度，但是转移的时间复杂度减少为 $O(1)$，所以时间复杂度未变．我们用 $f_0$ 表示当前阶段的状态，用 $f_1$ 表示下一阶段的状态，$u = f_0(s)$ 表示当前枚举的函数值，那么有如下的状态转移方程：
-> 
+
 ```cpp
 if (s >> j & 1) {       // 如果已被覆盖
   f1[s ^ 1 << j] += u;  // 不放
@@ -27,9 +27,9 @@ if (s >> j & 1) {       // 如果已被覆盖
   f1[s ^ 1 << j] += u;                                             // 竖放
 }
 ```
-> 
+
 观察到这里不放和竖放的方程可以合并．
-> 
+
 > [!note]- 实现
 > ```cpp
 > #include <algorithm>
@@ -72,62 +72,62 @@ if (s >> j & 1) {       // 如果已被覆盖
 > 问所有 $2^{nm}$ 种矩阵的得分的和．
 > 
 ### 术语
-> 
+
 阶段：动态规划执行的顺序，后续阶段的结果只与前序阶段的结果有关（无后效性）．很多 DP 问题可以有多种划分阶段的方式．例如在背包问题中，我们通常既可以按照物品划分阶段，也可以按照背包容量划分阶段（外层循环先枚举什么）．而在多米诺骨牌问题中，我们可以按照行、列、格子以及对角线等特征划分阶段．
-> 
+
 轮廓线：已决策状态和未决策状态的分界线．
-> 
+
 ![contour line](./images/contour_line.svg)
-> 
+
 插头：一个格子某个方向的插头存在，表示这个格子在这个方向与相邻格子相连．
-> 
+
 ![plug](./images/plug.svg)
-> 
+
 ## 路径模型
-> 
+
 ### 多条回路
-> 
+
 #### 例题
-> 
-> [!note]- 例题 [「HDU 1693」Eat the Trees](https://acm.hdu.edu.cn/showproblem.php?pid=1693)
+
+> [!note] 例题 [「HDU 1693」Eat the Trees](https://acm.hdu.edu.cn/showproblem.php?pid=1693)
 > 题目大意：求用若干条回路覆盖 $N\times M$ 棋盘的方案数，有些位置有障碍．
 > 
 严格来说，多条回路问题并不属于插头 DP，因为我们只需要和上面的骨牌覆盖问题一样，记录插头是否存在，然后成对的合并和生成插头就可以了．
-> 
+
 注意对于一个宽度为 $m$ 的棋盘，轮廓线的宽度为 $m+1$，因为包含 $m$ 个上插头，和 $1$ 个左插头．注意，当一行迭代完成之后，最右边的左插头通常是不合法的状态，同时我们需要补上下一行第一个左插头，这需要我们调整当前轮廓线的状态，通常是所有状态进行左移，我们把这个操作称为滚动 `roll()`．
-> 
+
 > [!note]- 例题代码
 > ```cpp
 > --8<-- "docs/dp/code/plug/plug_1.cpp"
 > ```
 > 
 #### 习题
-> 
+
 > [!note]- 习题 [「ZOJ 3466」The Hive II](https://pintia.cn/problem-sets/91827364500/exam/problems/type/7?problemSetProblemId=91827368730)
 > 题目大意：同上题，但格子变成了六边形．
 > 
 ### 一条回路
-> 
+
 #### 例题
-> 
-> [!note]- 例题 [「Andrew Stankevich Contest 16 - Problem F」Pipe Layout](https://codeforces.com/gym/100220)
+
+> [!note] 例题 [「Andrew Stankevich Contest 16 - Problem F」Pipe Layout](https://codeforces.com/gym/100220)
 > 题目大意：求用一条回路覆盖 $N\times M$ 棋盘的方案数．
 > 
 在上面的状态表示中我们每合并一组连通的插头，就会生成一条独立的回路，因而在本题中，我们还需要区分插头之间的连通性（出现了！）．这需要我们对状态进行额外的编码．
-> 
+
 #### 状态编码
-> 
+
 通常的编码方案有括号表示和最小表示，这里着重介绍泛用性更好的最小表示．我们用长度 $m+1$ 的整形数组，记录轮廓线上每个插头的状态，$0$ 表示没有插头，并约定连通的插头用相同的数字进行标记．
-> 
+
 那么下面两组编码方式表示的是相同的状态：
-> 
+
 -   `0 3 1 0 1 3`
 -   `0 1 2 0 2 1`
-> 
+
 我们将相同的状态都映射成字典序最小表示，例如在上例中的 `0 1 2 0 2 1` 就是一组最小表示．
-> 
+
 我们用 `b[]` 数组表示轮廓线上插头的状态．`bb[]` 表示在最小表示的编码的过程中，每个数字被映射到的最小数字．注意 $0$ 表示插头不存在，不能被映射成其他值．
-> 
+
 > [!note]- 代码实现
 > ```cpp
 > int b[M + 1], bb[M + 1];
@@ -155,12 +155,12 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 我们注意到插头总是成对出现，成对消失的．因而 `0 1 2 0 1 2` 这样的状态是不合法的．合法的状态构成一组括号序列，实际中合法状态可能是非常稀疏的．
-> 
+
 #### 手写哈希
-> 
+
 在一些 [状压 DP](./状态设计.md) 的问题中，合法的状态可能是稀疏的（例如本题），为了优化时空复杂度，我们可以使用哈希表存储合法的 DP 状态．对于 C++ 选手，我们可以使用 [std::unordered\_map](http://www.cplusplus.com/reference/unordered_map/unordered_map/)，当然也可以直接手写，这样可以灵活的将状态转移函数也封装于其中．
-> 
-> [!note]- 代码实现
+
+> [!note] 代码实现
 > ```cpp
 > constexpr int MaxSZ = 16796, Prime = 9973;
 > 
@@ -192,7 +192,7 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 上面的代码中：
-> 
+
 -   `MaxSZ` 表示合法状态的上界，可以估计，也可以预处理出较为精确的值．
 -   `Prime` 一个小于 `MaxSZ` 的大素数．
 -   `head[]` 表头节点的指针．
@@ -202,12 +202,12 @@ if (s >> j & 1) {       // 如果已被覆盖
 -   `clear()` 初始化函数，和手写邻接表类似，我们只需要初始化表头节点的指针．
 -   `push()` 状态转移函数，其中 `d` 是一个全局变量（偷懒），表示每次状态转移所带来的增量．如果找到的话就 `+=`，否则就创建一个状态为 `s`，关键字为 `d` 的新节点．
 -   `roll()` 迭代完一整行之后，滚动轮廓线．
-> 
+
 关于哈希表的复杂度分析，以及开哈希和闭哈希的不同，可以参见 [《算法导论》](../竞赛/资源.md#书籍) 中关于散列表的相关章节．
-> 
+
 #### 状态转移
-> 
-> [!note]- 代码实现
+
+> [!note] 代码实现
 > ```cpp
 > REP(ii, H0->sz) {
 >   decode(H0->state[ii]);                  // 取出状态，并解码
@@ -246,7 +246,7 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 #### 习题
-> 
+
 > [!note]- 习题 [「Ural 1519」Formula 1](https://acm.timus.ru/problem.aspx?space=1&num=1519)
 > 题目大意：求用一条回路覆盖 $N\times M$ 棋盘的方案数，有些位置有障碍．
 > 
@@ -266,19 +266,19 @@ if (s >> j & 1) {       // 如果已被覆盖
 > 题目大意：用多条回路覆盖 $n\times n$ 的方阵，每个有 $m$ 条回路的方案对答案的贡献是 $2^m$，求所有方案的贡献和．
 > 
 ### 一条路径
-> 
+
 #### 例题
-> 
-> [!note]- 例题 [「ZOJ 3213」Beautiful Meadow](https://pintia.cn/problem-sets/91827364500/exam/problems/type/7?page=22&problemSetProblemId=91827367895)
+
+> [!note] 例题 [「ZOJ 3213」Beautiful Meadow](https://pintia.cn/problem-sets/91827364500/exam/problems/type/7?page=22&problemSetProblemId=91827367895)
 > 题目大意：一个 $N\times M$ 的方阵（$N,M\le 8$），每个格点有一个权值，求一段路径，最大化路径覆盖的格点的权值和．
 > 
 本题是标准的一条路径问题，在一条路径问题中，编码的状态中还会存在不能配对的独立插头．需要在状态转移函数中，额外讨论独立插头的生成、合并与消失的情况．独立插头的生成和消失对应着路径的一端，因而这类事件不会发生超过两次（一次生成一次消失，或者两次生成一次合并），否则最终结果一定会出现多个连通块．
-> 
+
 我们需要在状态中额外记录这类事件发生的总次数，可以将这个信息编码进状态里（注意，类似这样的额外信息在调整轮廓线的时候，不需要跟着滚动），当然也可以在 `hashTable` 数组的外面加维．下面的范例程序中我们选择后者．
-> 
+
 #### 状态转移
-> 
-> [!note]- 代码实现
+
+> [!note] 代码实现
 > ```cpp
 > REP(i, n) {
 >   REP(j, m) {
@@ -340,7 +340,7 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 #### 习题
-> 
+
 > [!note]- 习题 [「BZOJ 2310」ParkII](https://hydro.ac/p/bzoj-P2310)
 > 题目大意：$m\times n$ 的棋盘，每个格点有一个权值，求一条路径覆盖，最大化路径经过的点的权值和．
 > 
@@ -353,29 +353,29 @@ if (s >> j & 1) {       // 如果已被覆盖
 > 求可行的方案数．
 > 
 ## 染色模型
-> 
+
 除了路径模型之外，还有一类常见的模型，需要我们对棋盘进行染色，相邻的相同颜色节点被视为连通．在路径类问题中，状态转移的时候我们枚举当前路径的方向，而在染色类问题中，我们枚举当前节点染何种颜色．在染色模型中，状态中处在相同连通性的节点可能不止两个．但总体来说依然大同小异．我们不妨来看一个经典的例题．
-> 
+
 ### 例题「UVa 10572」Black & White
-> 
-> [!note]- 例题 [「UVa 10572」Black & White](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1513)
+
+> [!note] 例题 [「UVa 10572」Black & White](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1513)
 > 题目大意：在 $N\times M$ 的棋盘内对未染色的格点进行黑白染色，要求所有黑色区域和白色区域连通，且任意一个 $2\times 2$ 的子矩形内的颜色不能完全相同（例如下图中的情况非法），求合法的方案数，并构造一组合法的方案．
 > 
 > ![black\_and\_white1](./images/black_and_white1.svg)
 > 
 ### 状态编码
-> 
+
 我们先考虑状态编码．不考虑连通性，那么就是 [SGU 197. Nice Patterns Strike Back](https://codeforces.com/problemsets/acmsguru/problem/99999/197)，不难用 [状压 DP](./状态设计.md) 直接解决．现在我们需要在状态中同时体现颜色和连通性的信息，考察轮廓线上每个位置的状态，二进制的每 `Offset` 位描述轮廓线上的一个位置，因为只有黑白两种颜色，我们用最低位的奇偶性表示颜色，其余部分示连通性．
-> 
+
 考虑第一行上面的节点，和第一列左侧节点，如果要避免特判的话，可以考虑引入第三种颜色区分它们，这里我们观察到这些边界状态的连通性信息一定为 0，所以不需要对第三种颜色再进行额外编码．
-> 
+
 在路径问题中我们的轮廓线是由 $m$ 个上插头与 $1$ 个左插头组成的．本题中，由于我们还需要判断当前格点为右下角的 $2\times 2$ 子矩形是否合法，所以需要记录左上角格子的颜色，因此轮廓线的长度依然是 $m+1$．
-> 
+
 这样的编码方案中依然保留了很多冗余信息，（连通的区域颜色一定相同，且左上角的格子只需要颜色信息不需要连通性），但是因为已经用了哈希表和最小表示，对时间复杂度的影响不大，为了降低编程压力，就不再细化了．
-> 
+
 在最多情况下（例如第一行黑白相间），每个插头的连通性信息都不一样，因此我们需要 $4$ 位二进制位记录连通性，再加上颜色信息，本题的 `Offset` 为 $5$ 位．
-> 
-> [!note]- 代码实现
+
+> [!note] 代码实现
 > ```cpp
 > constexpr int Offset = 5, Mask = (1 << Offset) - 1;
 > int c[N + 2];
@@ -406,10 +406,10 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 ### 手写哈希
-> 
+
 因为需要构造任意一组方案，这里的哈希表我们需要添加一组域 `pre[]` 来记录每个状态在上一阶段的任意一个前驱．
-> 
-> [!note]- 代码实现
+
+> [!note] 代码实现
 > ```cpp
 > constexpr int Prime = 9979, MaxSZ = 1 << 20;
 > 
@@ -445,10 +445,10 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 ### 方案构造
-> 
+
 有了上面的信息，我们就可以容易的构造方案了．首先遍历当前哈希表中的状态，如果连通块数目不超过 $2$，那么统计进方案数．如果方案数不为 $0$，我们倒序用 `pre` 数组构造出方案，注意每一行的末尾因为我们执行了 `Roll()` 操作，颜色需要取 `c[j+1]`．
-> 
-> [!note]- 代码实现
+
+> [!note] 代码实现
 > ```cpp
 > void print() {
 >   T_key z = 0;
@@ -478,17 +478,17 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 ### 状态转移
-> 
+
 我们记：
-> 
+
 -   `cc` 当前正在染色的格子的颜色
 -   `lf` 左边格子的颜色
 -   `up` 上边格子的颜色
 -   `lu` 左上格子的颜色
-> 
+
 我们用 $-1$ 表示颜色不存在．接下来讨论状态转移，一共有三种情况，合并，继承与生成：
-> 
-> [!note]- 状态转移 - 代码
+
+> [!note] 状态转移 - 代码
 > ```cpp
 > void trans(int i, int j, int u, int cc) {
 >   decode(H0->state[u]);
@@ -515,8 +515,8 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 对于最后一种情况需要注意的是，如果已经生成了一个封闭的连通区域，那么我们不能再使用她的颜色染色，否则这种颜色会出现两个连通块．我们似乎需要额度记录这种事件，可以参考 [「ZOJ 3213」Beautiful Meadow](#例题_2) 中的做法，再开一维记录这个事件．不过利用本题的特殊性，我们也可以特判掉．
-> 
-> [!note]- 特判 - 代码
+
+> [!note] 特判 - 代码
 > ```cpp
 > bool ok(int i, int j, int cc) {
 >   if (cc == c[j + 1]) return true;
@@ -539,20 +539,20 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 进一步讨论连通块消失的情况．每当我们对一个格子进行染色后，如果没有其他格子与其上侧的格子连通，那么会形成一个封闭的连通块．这个事件仅在最后一行的最后两列时可以发生，否则后续为了不出现 $2\times 2$ 的同色连通块，这个颜色一定会再次出现，除了下面的情况：
-> 
-> 2 2
-> o#
-> #o
-> 
+
+    2 2
+    o#
+    #o
+
 我们特判掉这种情况，这样在本题中，就可以偷懒不用记录之前是否已经生成了封闭的连通块了．
-> 
+
 > [!note]- 例题代码
 > ```cpp
 > --8<-- "docs/dp/code/plug/plug_4.cpp"
 > ```
 > 
 ### 习题
-> 
+
 > [!note]- 习题 [「Topcoder SRM 312. Div1 Hard」CheapestIsland](https://archive.topcoder.com/ProblemStatement/pm/6482)
 > 题目大意：给一个棋盘图，每个格子有权值，求权值之和最小的连通块．
 > 
@@ -563,11 +563,11 @@ if (s >> j & 1) {       // 如果已被覆盖
 > 题目大意：给一个 $N\times N$ 大小的棋盘图，每个格子初始为黑色或白色．你可以从白色格子中挑选恰好 $K$ 个并将之染成红色，问有多少种染色方案满足红色格子形成一个连通块．
 > 
 ## 图论模型
-> 
-> [!note]- 例题 [「NOI 2007 Day2」生成树计数](https://www.luogu.com.cn/problem/P2109)
+
+> [!note] 例题 [「NOI 2007 Day2」生成树计数](https://www.luogu.com.cn/problem/P2109)
 > 题目大意：某类特殊图的生成树计数，每个节点恰好与其前 $k$ 个节点之间有边相连．
 > 
-> [!note]- 例题 [「2015 ACM-ICPC Asia Shenyang Regional Contest - Problem E」Efficient Tree](https://acm.hdu.edu.cn/showproblem.php?pid=5513)
+> [!note] 例题 [「2015 ACM-ICPC Asia Shenyang Regional Contest - Problem E」Efficient Tree](https://acm.hdu.edu.cn/showproblem.php?pid=5513)
 > 题目大意：给出一个 $N\times M$ 的网格图，以及相邻四连通格子之间的边权．
 > 对于一颗生成树，每个节点的得分为 1+\[有一条连向上的边]+\[有一条连向左的边]．
 > 生成树的得分为所有节点的得分之积．
@@ -576,27 +576,27 @@ if (s >> j & 1) {       // 如果已被覆盖
 > （$n\le 800,m\le 7$）
 > 
 ## 实战篇
-> 
+
 ### 例题
-> 
-> [!note]- 例题 [「HDU 4113」Construct the Great Wall](https://acm.hdu.edu.cn/showproblem.php?pid=4113)
+
+> [!note] 例题 [「HDU 4113」Construct the Great Wall](https://acm.hdu.edu.cn/showproblem.php?pid=4113)
 > 题目大意：在 $N\times M$ 的棋盘内构造一组回路，分割所有的 `x` 和 `o`．
 > 
 有一类插头 DP 问题要求我们在棋盘上构造一组墙，以分割棋盘上的某些元素．不妨称之为修墙问题，这类问题既可视作染色模型，也可视作路径模型．
-> 
+
 ![greatwall](./images/greatwall.svg)
-> 
+
 在本题中，如果视作染色模型的话，不仅需要额外讨论染色区域的周长，还要判断在角上触碰而导致不合法的情况（图 2）．另外与 [「UVa 10572」Black & White](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1513) 不同的是，本题中要求围墙为简单多边形，因而对于下面的回字形的情况，在本题中是不合法的．
-> 
-> 3 3
-> ooo
-> oxo
-> ooo
-> 
+
+    3 3
+    ooo
+    oxo
+    ooo
+
 因而我们使用路径模型，转化为 [一条回路](#一条回路) 来处理．
-> 
+
 我们沿着棋盘的交叉点进行 DP（因而长宽需要增加 $1$），每次转移时，需要保证所有的 `x` 在回路之外，`o` 在回路之内．因此我们还需要维护当前位置是否在回路内部．对于这个信息我们可以加维，也可以直接统计轮廓线上到这个位置之前出现下插头次数的奇偶性（射线法）．
-> 
+
 > [!note]- 例题代码
 > ```cpp
 > #include <cstring>
@@ -747,7 +747,7 @@ if (s >> j & 1) {       // 如果已被覆盖
 > ```
 > 
 ### 习题
-> 
+
 > [!note]- 习题 [「SCOI 2011」地板](https://www.luogu.com.cn/problem/P3272)
 > 题目大意：$r\times c$ 的棋盘上有一些位置设置障碍，问使用 L 型的瓷砖铺满所有没有障碍的格子，有多少种方案．
 > 
@@ -787,30 +787,29 @@ if (s >> j & 1) {       // 如果已被覆盖
 > 题目大意：一块可视为 $N\times M$ 网格的蛋糕，现沿着格线将蛋糕切成数块，问有多少种不同的切割方法．切法相同当且仅当切成的每块蛋糕都形状相同且在同一位置上．（$\min(N,M) \le 5, \max(N,M) \le 130$）
 > 
 ## 本章注记
-> 
+
 插头 DP 问题通常编码难度较大，讨论复杂，因而属于 OI/ACM 中相对较为 [偏门的领域](https://github.com/OI-wiki/libs/blob/master/topic/7-%E7%8E%8B%E5%A4%A9%E6%87%BF-%E8%AE%BA%E5%81%8F%E9%A2%98%E7%9A%84%E5%8D%B1%E5%AE%B3.ppt)．这方面最为经典的资料，当属 2008 年 [陈丹琦](https://www.cs.princeton.edu/~danqic/) 的集训队论文——[基于连通性状态压缩的动态规划问题](https://github.com/AngelKitty/review_the_national_post-graduate_entrance_examination/tree/master/books_and_notes/professional_courses/data_structures_and_algorithms/sources/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F%E8%AE%BA%E6%96%87/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F2008%E8%AE%BA%E6%96%87%E9%9B%86/%E9%99%88%E4%B8%B9%E7%90%A6%E3%80%8A%E5%9F%BA%E4%BA%8E%E8%BF%9E%E9%80%9A%E6%80%A7%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E7%9A%84%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98%E3%80%8B)．其次，HDU 的 notonlysuccess 2011 年曾经在博客中连续写过两篇由浅入深的专题，也是不可多得的好资料，不过现在需要在 Web Archive 里考古．
-> 
+
 -   [notonlysuccess，【专辑】插头 DP](https://web.archive.org/web/20110815044829/http://www.notonlysuccess.com/?p=625)
 -   [notonlysuccess，【完全版】插头 DP](https://web.archive.org/web/20111007185146/http://www.notonlysuccess.com/?p=931)
-> 
+
 ### 多米诺骨牌覆盖
-> 
+
 [「HDU 1400」Mondriaan’s Dream](https://acm.hdu.edu.cn/showproblem.php?pid=1400) 也出现在 [《算法竞赛入门经典训练指南》](../竞赛/资源.md#书籍) 中，并作为《轮廓线上的动态规划》一节的例题．[多米诺骨牌覆盖（Domino tiling）](https://en.wikipedia.org/wiki/Domino_tiling) 是一组非常经典的数学问题，稍微修改其数据范围就可以得到不同难度，需要应用不同的算法解决的子问题．
-> 
+
 当限定 $m=2$ 时，多米诺骨牌覆盖等价于斐波那契数列．[《具体数学》](https://www.csie.ntu.edu.tw/~r97002/temp/Concrete%20Mathematics%202e.pdf) 中使用了该问题以引出斐波那契数列，并使用了多种方法得到其解析解．
-> 
+
 当 $m\le 10,n\le 10^9$ 时，可以将转移方程预处理成矩阵形式，并使用 [矩阵乘法进行加速](http://www.matrix67.com/blog/archives/276)．
-> 
+
 ![domino\_v2\_transform\_matrix](./images/domino_v2_transform_matrix.svg)
-> 
+
 当 $n,m\le 100$，可以用 [FKT Algorithm](https://en.wikipedia.org/wiki/FKT_algorithm) 计算其所对应平面图的完美匹配数．
-> 
+
 -   [「51nod 1031」骨牌覆盖](https://www.51nod.com/Html/Challenge/Problem.html#problemId=1031)
 -   [「51nod 1033」骨牌覆盖 V2](https://www.51nod.com/Html/Challenge/Problem.html#problemId=1033)|[「Vijos 1194」Domino](https://vijos.org/p/1194)
 -   [「51nod 1034」骨牌覆盖 V3](https://www.51nod.com/Html/Challenge/Problem.html#problemId=1034)|[「Ural 1594」Aztec Treasure](https://acm.timus.ru/problem.aspx?space=1&num=1594)
 -   [Wolfram MathWorld, Chebyshev Polynomial of the Second Kind](https://mathworld.wolfram.com/ChebyshevPolynomialoftheSecondKind.html)
-> 
+
 ### 一条路径
-> 
+
 「一条路径」是 [哈密顿路径（Hamiltonian Path）](https://en.wikipedia.org/wiki/Hamiltonian_path) 问题在 [格点图（Grid Graph）](https://mathworld.wolfram.com/GridGraph.html) 中的一种特殊情况．哈密顿路径的判定性问题是 [NP-complete](https://en.wikipedia.org/wiki/NP-completeness) 家族中的重要成员．
-> 
