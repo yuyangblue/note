@@ -1,0 +1,946 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC2%E7%AB%A0%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/p12%202.3%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>《概率论与数理统计》2.3 随机变量的分布函数 - 笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#23-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              《概率论与数理统计》2.3 随机变量的分布函数 - 笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、分布函数的定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、分布函数的三个性质
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、例一：用性质求分布函数里的参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、由分布函数算概率的几个公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、例三：由分布律求分布函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、由分布函数反求分布律
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、例二：已知分布函数算各类概率
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、补充：怎么理解"变量与常量"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="23-">《概率论与数理统计》2.3 随机变量的分布函数 - 笔记<a class="headerlink" href="#23-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自 B 站《概率论与数理统计》教学视频 2.0 版本（up：宋浩老师官方）p12。
+前置：p08 2.1 随机变量、p09 2.2 概率分布。</p>
+</blockquote>
+<p>本节是第二章承上启下的一节：前面（p08、p09）讲了随机变量和概率分布（分布律），那是"离散地"描述随机变量的取值及其概率；这一节引入一个能<strong>统一描述所有随机变量</strong>的工具——分布函数，用它把离散型、连续型两种随机变量都"装进一个框架"里，后续连续型随机变量的密度函数（将在 <strong>p13 2.4 连续型随机变量及其密度函数</strong> 详讲）正是从它推导出来的。</p>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#一分布函数的定义">一、分布函数的定义</a></li>
+<li><a href="#二分布函数的三个性质">二、分布函数的三个性质</a></li>
+<li><a href="#三例一用性质求分布函数里的参数">三、例一：用性质求分布函数里的参数</a></li>
+<li><a href="#四由分布函数算概率的几个公式">四、由分布函数算概率的几个公式</a></li>
+<li><a href="#五例三由分布律求分布函数">五、例三：由分布律求分布函数</a></li>
+<li><a href="#六由分布函数反求分布律">六、由分布函数反求分布律</a></li>
+<li><a href="#七例二已知分布函数算各类概率">七、例二：已知分布函数算各类概率</a></li>
+<li><a href="#八补充怎么理解变量与常量">八、补充：怎么理解"变量与常量"</a></li>
+<li><a href="#本节重点">本节重点</a></li>
+</ul>
+<h2 id="_2">一、分布函数的定义<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(X\)</span> 是一个随机变量，对任意实数 <span class="arithmatex">\(x\)</span>，定义</p>
+<div class="arithmatex">\[F(x)=P\{X\le x\},\qquad x\in(-\infty,+\infty)\]</div>
+<p>称 <span class="arithmatex">\(F(x)\)</span> 为 <span class="arithmatex">\(X\)</span> 的<strong>分布函数</strong>。</p>
+<p><strong>人话解释</strong>：分布函数回答的是一个"截至到某处、累积起来有多少"的问题。给定一个点 <span class="arithmatex">\(x\)</span>，<span class="arithmatex">\(F(x)\)</span> 就是把随机变量 <span class="arithmatex">\(X\)</span> 落在 <span class="arithmatex">\(x\)</span> <strong>左边（含 <span class="arithmatex">\(x\)</span> 本身）</strong> 的所有可能取值的概率全部累加起来的总和。可以把它想象成一个"累积水位"：随着 <span class="arithmatex">\(x\)</span> 从 <span class="arithmatex">\(-\infty\)</span> 一路往右扫，每经过一个"有概率"的点，水位就往上抬一格，抬到 <span class="arithmatex">\(+\infty\)</span> 时刚好把全部概率（等于 1）累积满。</p>
+<p>一个关键细节是"大小写"：这里的 <span class="arithmatex">\(X\)</span> 是随机变量，而 <span class="arithmatex">\(x\)</span> 是一个普通实数（自变量）。<span class="arithmatex">\(F\)</span> 是 <span class="arithmatex">\(x\)</span> 的函数——你先把 <span class="arithmatex">\(x\)</span> 固定成某个具体数，再去看"<span class="arithmatex">\(X\)</span> 比这个数小或相等"这件事的概率有多大。</p>
+<h2 id="_3">二、分布函数的三个性质<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>分布函数有三条基本性质，它们是做题时反复使用的"工具"，并且<strong>对离散型、连续型随机变量都成立</strong>。</p>
+<p><strong>性质一：有界，且两端极限为 0 和 1。</strong></p>
+<div class="arithmatex">\[0\le F(x)\le 1,\qquad F(-\infty)=0,\qquad F(+\infty)=1\]</div>
+<p><strong>人话解释</strong>：<span class="arithmatex">\(F(x)\)</span> 本身是一个概率，当然落在 <span class="arithmatex">\([0,1]\)</span> 内。当 <span class="arithmatex">\(x\to-\infty\)</span> 时，"<span class="arithmatex">\(X\le -\infty\)</span>"这件事根本不可能发生，概率为 0；当 <span class="arithmatex">\(x\to+\infty\)</span> 时，"<span class="arithmatex">\(X\le +\infty\)</span>"是必然事件，把所有可能情况一网打尽，概率为 1。这两条（尤其 <span class="arithmatex">\(F(+\infty)=1\)</span>）是求参数、检验答案的"试金石"。</p>
+<p><strong>性质二：单调不减（不是严格增）。</strong></p>
+<p>若 <span class="arithmatex">\(x_1&lt;x_2\)</span>，则 <span class="arithmatex">\(F(x_1)\le F(x_2)\)</span>。</p>
+<p><strong>人话解释</strong>：扫过的范围越往右越大，累积的概率只会越来越多、不会减少，所以它"不减"；但中间可能有一段是平的（比如某段区间里根本没有取值，概率没增加），所以不是严格的"递增"。</p>
+<p>证明也不难：因为"<span class="arithmatex">\(X\le x_2\)</span>"包含"<span class="arithmatex">\(X\le x_1\)</span>"再加上中间那一截"<span class="arithmatex">\(x_1&lt;X\le x_2\)</span>"，所以</p>
+<div class="arithmatex">\[F(x_2)-F(x_1)=P\{x_1&lt;X\le x_2\}\ge 0\]</div>
+<p>注意左边是 <span class="arithmatex">\(x_1&lt;X\)</span>（没有等号）：因为 <span class="arithmatex">\(F(x_1)\)</span> 把 <span class="arithmatex">\(x_1\)</span> 这个点也算进去了，减掉之后 <span class="arithmatex">\(x_1\)</span> 就被"抠掉"了，剩下的自然是严格大于 <span class="arithmatex">\(x_1\)</span>。</p>
+<p><strong>性质三：右连续。</strong></p>
+<div class="arithmatex">\[F(x+0)=F(x)\]</div>
+<p><strong>人话解释</strong>：右连续是说，从某个点 <span class="arithmatex">\(x\)</span> 的<strong>右边</strong>逼近它时，函数极限值等于它在该点的取值。配合离散型分布函数"阶梯状"的图像看最直观：每个跳跃点处，函数值是"右端实心、左端空心"，也就是从右边靠过来是连着的、从左边靠过来会有一个"跳空"。</p>
+<h2 id="_4">三、例一：用性质求分布函数里的参数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>题目</strong>：已知分布函数</p>
+<div class="arithmatex">\[F(x)=\begin{cases}A+B\,e^{-\lambda x}, &amp; x&gt;0\\[4pt]0, &amp; x\le 0\end{cases}\]</div>
+<p>其中 <span class="arithmatex">\(\lambda&gt;0\)</span> 为常数，求 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 的值。</p>
+<p><strong>解题步骤</strong>：</p>
+<ol>
+<li>用 <span class="arithmatex">\(F(+\infty)=1\)</span>。当 <span class="arithmatex">\(x\to+\infty\)</span> 时，因 <span class="arithmatex">\(\lambda&gt;0\)</span>，有 <span class="arithmatex">\(e^{-\lambda x}\to 0\)</span>，所以</li>
+</ol>
+<div class="arithmatex">\[F(+\infty)=A+B\cdot 0=A=1\quad\Rightarrow\quad A=1\]</div>
+<ol>
+<li>用右连续。在 <span class="arithmatex">\(x=0\)</span> 处，从右边逼近：</li>
+</ol>
+<div class="arithmatex">\[\lim_{x\to 0^+}F(x)=1+B\,e^{-\lambda\cdot 0}=1+B\]</div>
+<p>而 <span class="arithmatex">\(x\le 0\)</span> 时 <span class="arithmatex">\(F(x)=0\)</span>，故 <span class="arithmatex">\(F(0)=0\)</span>。由右连续 <span class="arithmatex">\(F(0+0)=F(0)\)</span>，得</p>
+<div class="arithmatex">\[1+B=0\quad\Rightarrow\quad B=-1\]</div>
+<p><strong>答案</strong>：<span class="arithmatex">\(A=1\)</span>，<span class="arithmatex">\(B=-1\)</span>，即</p>
+<div class="arithmatex">\[F(x)=\begin{cases}1-e^{-\lambda x}, &amp; x&gt;0\\[4pt]0, &amp; x\le 0\end{cases}\]</div>
+<p>（这正是后面指数分布的分布函数，将在 <strong>p14 2.4 均匀分布和指数分布</strong> 见到。）</p>
+<p><strong>人话解释</strong>：这一题是"分布函数里含未知参数"的标准套路——参数不知道，就搬出性质来"逼"它：先让 <span class="arithmatex">\(x\to+\infty\)</span> 用"累积到满"把 <span class="arithmatex">\(A\)</span> 逼出来，再在分段点用"右连续"把 <span class="arithmatex">\(B\)</span> 逼出来。<span class="arithmatex">\(F(-\infty)=0\)</span> 在这里已经天然满足（<span class="arithmatex">\(x\le0\)</span> 那段本身就是 0），所以用不上。</p>
+<h2 id="_5">四、由分布函数算概率的几个公式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(a&lt;b\)</span>，以下公式对离散型、连续型都成立，做题时直接套用：</p>
+<table>
+<thead>
+<tr>
+<th>目标概率</th>
+<th>用分布函数表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(P\{a&lt;X\le b\}\)</span></td>
+<td><span class="arithmatex">\(F(b)-F(a)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P\{X&gt;a\}\)</span></td>
+<td><span class="arithmatex">\(1-F(a)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P\{X&lt;a\}\)</span></td>
+<td><span class="arithmatex">\(F(a)-P\{X=a\}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>人话解释</strong>：</p>
+<ul>
+<li>第一个公式就是"大区间减小区间"：<span class="arithmatex">\(F(b)\)</span> 是 <span class="arithmatex">\(\le b\)</span> 的全部，<span class="arithmatex">\(F(a)\)</span> 是 <span class="arithmatex">\(\le a\)</span> 的全部，两者相减剩下"<span class="arithmatex">\(a&lt;X\le b\)</span>"这一截。注意结果是<strong>左边 <span class="arithmatex">\(a\)</span> 开、右边 <span class="arithmatex">\(b\)</span> 闭</strong>（等号只跟 <span class="arithmatex">\(b\)</span>）。</li>
+<li>第二个公式：分布函数天然给的是"<span class="arithmatex">\(\le\)</span>"，遇到"<span class="arithmatex">\(&gt;\)</span>"就用对立事件 <span class="arithmatex">\(1-P\{X\le a\}\)</span> 转化。</li>
+<li>第三个公式：<span class="arithmatex">\(P\{X&lt;a\}\)</span> 比 <span class="arithmatex">\(P\{X\le a\}\)</span> 只少了 <span class="arithmatex">\(X=a\)</span> 这一个点，所以从 <span class="arithmatex">\(F(a)\)</span> 里单独减掉 <span class="arithmatex">\(P\{X=a\}\)</span>。</li>
+</ul>
+<p><strong>关键提醒</strong>：这些等号"有没有"，对<strong>离散型</strong>至关重要——因为离散型在单个点上可能有正概率，<span class="arithmatex">\(X=a\)</span> 这个点包不包含，结果就不同；而对<strong>连续型</strong>，单个点的概率恒为 0，等号无所谓（将在 <strong>p13 2.4 连续型随机变量及其密度函数</strong> 展开）。</p>
+<h2 id="_6">五、例三：由分布律求分布函数<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p><strong>题目</strong>：已知 <span class="arithmatex">\(X\)</span> 的分布律为 <span class="arithmatex">\(P\{X=-1\}=\frac12\)</span>，<span class="arithmatex">\(P\{X=1\}=\frac13\)</span>，<span class="arithmatex">\(P\{X=2\}=\frac16\)</span>，求分布函数 <span class="arithmatex">\(F(x)\)</span>。</p>
+<p><strong>解题步骤</strong>：按 <span class="arithmatex">\(x\)</span> 所在的区间分类，看"<span class="arithmatex">\(X\le x\)</span>"能取到哪些值，把对应概率累加。</p>
+<ul>
+<li>当 <span class="arithmatex">\(x&lt;-1\)</span>：<span class="arithmatex">\(X\)</span> 只能取 <span class="arithmatex">\(-1,1,2\)</span>，都比 <span class="arithmatex">\(-1\)</span> 大，没有一个 <span class="arithmatex">\(\le x\)</span>，故 <span class="arithmatex">\(F(x)=0\)</span>。</li>
+<li>当 <span class="arithmatex">\(-1\le x&lt;1\)</span>：只有 <span class="arithmatex">\(X=-1\)</span> 满足 <span class="arithmatex">\(\le x\)</span>，故 <span class="arithmatex">\(F(x)=P\{X=-1\}=\frac12\)</span>。</li>
+<li>当 <span class="arithmatex">\(1\le x&lt;2\)</span>：<span class="arithmatex">\(X=-1\)</span> 与 <span class="arithmatex">\(X=1\)</span> 都满足，故 <span class="arithmatex">\(F(x)=\frac12+\frac13=\frac56\)</span>。</li>
+<li>当 <span class="arithmatex">\(x\ge 2\)</span>：三个值全都 <span class="arithmatex">\(\le x\)</span>，故 <span class="arithmatex">\(F(x)=\frac12+\frac13+\frac16=1\)</span>。</li>
+</ul>
+<p>于是</p>
+<div class="arithmatex">\[F(x)=\begin{cases}0, &amp; x&lt;-1\\[4pt]\dfrac12, &amp; -1\le x&lt;1\\[4pt]\dfrac56, &amp; 1\le x&lt;2\\[4pt]1, &amp; x\ge 2\end{cases}\]</div>
+<p><strong>图像</strong>：这是一条从左往右"上台阶"的阶梯线。在 <span class="arithmatex">\(-1\)</span> 处从 0 跳到 <span class="arithmatex">\(\frac12\)</span>，在 <span class="arithmatex">\(1\)</span> 处跳到 <span class="arithmatex">\(\frac56\)</span>，在 <span class="arithmatex">\(2\)</span> 处跳到 1；每一段的左端点实心、右端点空心——这正是"单调不减 + 右连续"的直观体现。</p>
+<p><strong>由分布函数反推概率的规律</strong>：每个跳跃点"抬高了多高"，就是这个点上的概率。这里 <span class="arithmatex">\(-1\)</span> 抬了 <span class="arithmatex">\(\frac12\)</span>、<span class="arithmatex">\(1\)</span> 抬了 <span class="arithmatex">\(\frac13\)</span>（<span class="arithmatex">\(\frac56-\frac12\)</span>）、<span class="arithmatex">\(2\)</span> 抬了 <span class="arithmatex">\(\frac16\)</span>（<span class="arithmatex">\(1-\frac56\)</span>），正好对应原来的分布律。</p>
+<h2 id="_7">六、由分布函数反求分布律<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>上一节是"给分布律求分布函数"，这里反过来"给分布函数求分布律"，是同一个过程的逆操作。</p>
+<p><strong>题目</strong>：已知离散型 <span class="arithmatex">\(X\)</span> 的分布函数</p>
+<div class="arithmatex">\[F(x)=\begin{cases}0, &amp; x&lt;-1\\[4pt]0.2, &amp; -1\le x&lt;0\\[4pt]0.3, &amp; 0\le x&lt;1\\[4pt]0.6, &amp; 1\le x&lt;2\\[4pt]1, &amp; x\ge 2\end{cases}\]</div>
+<p>求 <span class="arithmatex">\(X\)</span> 的分布律。</p>
+<p><strong>解题步骤（看"跳跃"）</strong>：离散型分布函数只在取值点处跳跃，所以"在哪些点分段，<span class="arithmatex">\(X\)</span> 就取哪些值"——分段点 <span class="arithmatex">\(-1,0,1,2\)</span> 就是 <span class="arithmatex">\(X\)</span> 的取值。每个点的概率等于该点"抬起来的高度"：</p>
+<ul>
+<li><span class="arithmatex">\(X=-1\)</span>：<span class="arithmatex">\(F(-1)-F(-1-0)=0.2-0=0.2\)</span></li>
+<li><span class="arithmatex">\(X=0\)</span>：<span class="arithmatex">\(0.3-0.2=0.1\)</span></li>
+<li><span class="arithmatex">\(X=1\)</span>：<span class="arithmatex">\(0.6-0.3=0.3\)</span></li>
+<li><span class="arithmatex">\(X=2\)</span>：<span class="arithmatex">\(1-0.6=0.4\)</span></li>
+</ul>
+<p>校验：<span class="arithmatex">\(0.2+0.1+0.3+0.4=1\)</span>，概率和为 1，正确。</p>
+<p><strong>通用公式</strong>：对离散型随机变量的任意取值点 <span class="arithmatex">\(x_k\)</span>，</p>
+<div class="arithmatex">\[P\{X=x_k\}=F(x_k)-F(x_k-0)\]</div>
+<p>其中 <span class="arithmatex">\(F(x_k-0)\)</span> 表示从 <span class="arithmatex">\(x_k\)</span> <strong>左边</strong>逼近的左极限。</p>
+<p><strong>人话解释</strong>：<span class="arithmatex">\(F(x_k)\)</span> 是"<span class="arithmatex">\(\le x_k\)</span>"的概率（把这个点算进去了），<span class="arithmatex">\(F(x_k-0)\)</span> 是"严格 <span class="arithmatex">\(&lt;x_k\)</span>"的概率（差一点没算进去），两者之差恰好就是 <span class="arithmatex">\(X\)</span> 恰好等于 <span class="arithmatex">\(x_k\)</span> 的那一点概率。实际做题时，用"看图读跳跃高度"更快，公式是用来理解原理的。</p>
+<h2 id="_8">七、例二：已知分布函数算各类概率<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p><strong>题目</strong>：已知离散型 <span class="arithmatex">\(X\)</span> 的分布函数</p>
+<div class="arithmatex">\[F(x)=\begin{cases}0, &amp; x&lt;0\\[4pt]\dfrac12, &amp; 0\le x&lt;1\\[4pt]\dfrac34, &amp; 1\le x&lt;2\\[4pt]1, &amp; x\ge 2\end{cases}\]</div>
+<p>（它对应的分布律是 <span class="arithmatex">\(P\{X=0\}=\frac12\)</span>，<span class="arithmatex">\(P\{X=1\}=\frac14\)</span>，<span class="arithmatex">\(P\{X=2\}=\frac14\)</span>，可由第六节的"跳跃"法立刻读出。）</p>
+<p>求下列概率：</p>
+<p><strong>(1) <span class="arithmatex">\(P\{-\frac12&lt;X\le\frac12\}\)</span></strong> —— 直接套公式 <span class="arithmatex">\(P\{a&lt;X\le b\}=F(b)-F(a)\)</span>：</p>
+<div class="arithmatex">\[P\{-\tfrac12&lt;X\le\tfrac12\}=F(\tfrac12)-F(-\tfrac12)=\tfrac12-0=\tfrac12\]</div>
+<p><strong>(2) <span class="arithmatex">\(P\{X\le\frac32\}\)</span></strong> —— 这本身就是分布函数的定义：</p>
+<div class="arithmatex">\[P\{X\le\tfrac32\}=F(\tfrac32)=\tfrac34\]</div>
+<p><strong>(3) <span class="arithmatex">\(P\{X&gt;\frac12\}\)</span></strong> —— 用对立事件转化：</p>
+<div class="arithmatex">\[P\{X&gt;\tfrac12\}=1-P\{X\le\tfrac12\}=1-F(\tfrac12)=1-\tfrac12=\tfrac12\]</div>
+<p><strong>(4) <span class="arithmatex">\(P\{\frac32&lt;X&lt;\frac85\}\)</span></strong> —— 右边是"<span class="arithmatex">\(&lt;\)</span>"没有等号，先补成"<span class="arithmatex">\(\le\)</span>"再减掉那个点：</p>
+<div class="arithmatex">\[P\{\tfrac32&lt;X&lt;\tfrac85\}=F(\tfrac85)-F(\tfrac32)-P\{X=\tfrac85\}=\tfrac34-\tfrac34-0=0\]</div>
+<p>（<span class="arithmatex">\(\frac85=1.6\)</span> 落在 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(2\)</span> 之间，<span class="arithmatex">\(F(\frac85)=F(\frac32)=\frac34\)</span>；而 <span class="arithmatex">\(X\)</span> 只取 <span class="arithmatex">\(0,1,2\)</span>，<span class="arithmatex">\(X=\frac85\)</span> 不可能，概率为 0，故结果为 0。直观上也对：<span class="arithmatex">\(1.5\)</span> 到 <span class="arithmatex">\(1.6\)</span> 之间根本没有取值点。）</p>
+<p><strong>人话解释</strong>：这题展示了"分布函数算概率"的两条路——(1)(2)(3) 是标准的公式与转化，(4) 则提醒你<strong>等号问题</strong>：<span class="arithmatex">\(F(b)-F(a)\)</span> 天然给的是"<span class="arithmatex">\(a\)</span> 开、<span class="arithmatex">\(b\)</span> 闭"，若题目右边是开区间，就要把右端点单独减掉。离散型里这个"点"往往不为 0，绝不能漏；这里恰好 <span class="arithmatex">\(X=\frac85\)</span> 概率为 0 才没影响。</p>
+<h2 id="_9">八、补充：怎么理解"变量与常量"<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>视频里花了不少篇幅解释"<span class="arithmatex">\(F(x)\)</span> 里到底谁是变量"，这里用两个类比帮助理解：</p>
+<ol>
+<li>
+<p><strong>变上限积分类比</strong>：高等数学里的变上限积分 <span class="arithmatex">\(\int_a^x f(t)\,dt\)</span>，对整个函数而言 <span class="arithmatex">\(x\)</span> 是变量，但 <span class="arithmatex">\(x\)</span> 一旦取定，<span class="arithmatex">\(t\)</span> 就是只在积分内部变化的"内部变量"。分布函数同理：整体看 <span class="arithmatex">\(x\)</span> 是自变量，<span class="arithmatex">\(x\)</span> 定住以后，<span class="arithmatex">\(X\)</span> 才是在"内部"变化、被拿去和这个固定的 <span class="arithmatex">\(x\)</span> 比较的随机变量。</p>
+</li>
+<li>
+<p><strong>排队类比</strong>：全班同学按身高从前到后站好，你用鼠标指定某个同学（对应固定的 <span class="arithmatex">\(x\)</span>），问"他后面一共有几个人"——鼠标随便动（<span class="arithmatex">\(x\)</span> 是变量），一旦指定，后面那串同学（对应 <span class="arithmatex">\(X\)</span>）就是被统计的对象。所谓"谁变谁不变"其实是相对的。</p>
+</li>
+</ol>
+<p>另外一个视频里强调的做题心态：算概率时"直接观察法"（直接看取值算）当然简单，但一定要<strong>训练自己走分布函数这条路</strong>，因为直接法只能对付离散的少数几个值，遇到连续型就失灵了；分布函数的公式才是通用的。</p>
+<h2 id="_10">本节重点<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<blockquote>
+<ul>
+<li>分布函数定义 <span class="arithmatex">\(F(x)=P\{X\le x\}\)</span>：本质是"截至 <span class="arithmatex">\(x\)</span> 处累积概率"，像累积水位一样单调往右涨、涨满为 1。</li>
+<li>三条性质：<span class="arithmatex">\(0\le F(x)\le1\)</span> 且 <span class="arithmatex">\(F(-\infty)=0\)</span>、<span class="arithmatex">\(F(+\infty)=1\)</span>；单调不减；右连续——这三条对离散型、连续型都成立，是求参数、验证答案的通用工具。</li>
+<li>三个概率公式：<span class="arithmatex">\(P\{a&lt;X\le b\}=F(b)-F(a)\)</span>、<span class="arithmatex">\(P\{X&gt;a\}=1-F(a)\)</span>、<span class="arithmatex">\(P\{X&lt;a\}=F(a)-P\{X=a\}\)</span>。</li>
+<li>离散型"分布律 ↔ 分布函数"互推：正着做是分区间累加概率，反着做是"读跳跃高度"，核心公式 <span class="arithmatex">\(P\{X=x_k\}=F(x_k)-F(x_k-0)\)</span>。</li>
+<li><strong>常见坑</strong>：① 求参数时 <span class="arithmatex">\(F(+\infty)=1\)</span> 与右连续两个条件要配套用（例一中 <span class="arithmatex">\(B\)</span> 应为 <span class="arithmatex">\(-1\)</span> 而非 <span class="arithmatex">\(1\)</span>）；② <span class="arithmatex">\(F(b)-F(a)\)</span> 结果是"左开右闭"，题目区间右边若没有等号必须单独减掉端点概率；③ 离散型里等号（单点概率）不能忽略，连续型里单点概率为 0、等号无所谓。</li>
+</ul>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

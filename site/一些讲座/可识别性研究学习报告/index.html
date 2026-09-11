@@ -1,0 +1,1194 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E4%B8%80%E4%BA%9B%E8%AE%B2%E5%BA%A7/%E5%8F%AF%E8%AF%86%E5%88%AB%E6%80%A7%E7%A0%94%E7%A9%B6%E5%AD%A6%E4%B9%A0%E6%8A%A5%E5%91%8A/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>可识别性研究及应用分析 - 学习报告 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              可识别性研究及应用分析 - 学习报告
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、报告概览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、核心概念梳理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、核心概念梳理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-representation-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 表征学习（Representation Learning）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-disentanglement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 解耦（Disentanglement）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-identifiability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 可识别性（Identifiability）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、轨迹预测项目回顾
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、轨迹预测项目回顾">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 项目背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 工作拓展
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、可识别性研究详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、可识别性研究详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 恢复可识别隐变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 恢复可识别隐变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        面临的挑战及解决方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不同数据类型的可识别性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 可识别隐变量的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 可识别隐变量的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vqa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用一：VQA 环境（交通事故分析）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#few-shot-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用二：少样本学习（Few-shot Learning）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#world-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用三：世界模型（World Model）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 验证可识别隐变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 验证可识别隐变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benchmark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmark 设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        初步验证结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、未来工作设想
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、未来工作设想">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-trustworthy-world-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 构建可信世界模型（Trustworthy World Model）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-general-induction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 实现通用归纳（General Induction）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-feasible-physics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 可行物理角度研究（Feasible Physics）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-unknown-world-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 未知世界发现（Unknown World Discovery）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、关键洞察与思考
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、金句摘录
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="-">可识别性研究及应用分析 - 学习报告<a class="headerlink" href="#-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>来源：2026年6月11日智能会议纪要 | 整理时间：2026年6月16日</p>
+</blockquote>
+<hr />
+<h2 id="_1">一、报告概览<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本次分享围绕讲者在加拿大和美国的研究工作展开，系统介绍了从轨迹预测到表征学习，再到可识别性研究的发展脉络。核心内容涵盖：<strong>轨迹预测项目回顾</strong>、<strong>表征学习与解耦概念</strong>、<strong>可识别性研究（恢复/应用/验证）</strong>、以及<strong>未来工作设想</strong>四大板块。</p>
+<hr />
+<h2 id="_2">二、核心概念梳理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21-representation-learning">2.1 表征学习（Representation Learning）<a class="headerlink" href="#21-representation-learning" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>定义</strong>：一种<strong>自上而下（top-down）</strong> 的思维方式，基于数据生成过程假设，认为存在隐变量（latent variable）能生成观测数据</li>
+<li><strong>核心思想</strong>：通过 encoder 学习隐变量，隐变量可能是高维的</li>
+<li><strong>与特征工程的区别</strong>：</li>
+<li>特征工程：通过 backbone 提取特征，进行统计分析（自下而上）</li>
+<li>表征学习：基于数据生成过程的假设，学习隐变量表示（自上而下）</li>
+</ul>
+<blockquote>
+<p>💡 金句：「表征学习是一种基于数据生成过程，假设存在隐变量来生成观测的思维方式，与传统特征工程不同，它是一种自上而下的思维。」</p>
+</blockquote>
+<h3 id="22-disentanglement">2.2 解耦（Disentanglement）<a class="headerlink" href="#22-disentanglement" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>概念</strong>：将高维隐变量分解为各个独立的语义因子</li>
+<li><strong>核心问题</strong>：如何保证假设的隐变量是正确的？→ 这就是<strong>可识别性（Identifiability）</strong>问题</li>
+<li><strong>直观示例</strong>：以猫的图像为例，隐变量可分解为颜色、姿态、视角三个独立因子</li>
+<li>数据生成过程：三个隐变量通过混合函数 g 生成观测图像</li>
+<li>学习过程：用 encoder 学习后验隐变量</li>
+<li>可识别性：当生成过程和 encoder 产生的隐变量相等时，达到可识别（FIB）</li>
+</ul>
+<blockquote>
+<p>💡 金句：「在已有的表征学习和既有的工作之中，缺失的是可识别性。」</p>
+</blockquote>
+<h3 id="23-identifiability">2.3 可识别性（Identifiability）<a class="headerlink" href="#23-identifiability" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>别名</strong>：因果表征学习（Causal Representation Learning）</li>
+<li><strong>因果关系</strong>：存在于隐变量到观测变量的方程中</li>
+<li><strong>意义</strong>：学到可识别的隐变量后，可以摒弃噪声变量，避免错误分类</li>
+</ul>
+<hr />
+<h2 id="_3">三、轨迹预测项目回顾<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 项目背景<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>时间</strong>：2016年</li>
+<li><strong>领域状态</strong>：当时轨迹预测领域处于蓝海，仅有四篇相关文章</li>
+<li><strong>初始做法</strong>：将行人作为质点，输入过去轨迹，输出图像平面上的 XY 坐标，预测未来 3-5 秒轨迹</li>
+<li><strong>局限性</strong>：</li>
+<li>自动驾驶需要 3D 环境（XYZ），而非 2D 图像平面</li>
+<li>不能将车辆简单作为质点处理</li>
+<li>回归算法无法得知哪些数据对预测结果有真正影响</li>
+</ul>
+<h3 id="32">3.2 工作拓展<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>维度拓展</strong>：从图像 XY 扩展到 3D 环境 XYZ</li>
+<li><strong>环境感知</strong>：将驾驶环境（道路、建筑等先验知识）作为算法输入</li>
+</ol>
+<hr />
+<h2 id="_4">四、可识别性研究详解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 恢复可识别隐变量<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<h4 id="_5">面临的挑战及解决方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>挑战</th>
+<th>说明</th>
+<th>解决思路</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>分布变化与不确定性</strong></td>
+<td>高斯分布的隐变量旋转后分布不变，无法识别</td>
+<td>采用<strong>非高斯分布</strong>，旋转后分布改变，观测与隐变量可一一对应</td>
+</tr>
+<tr>
+<td><strong>线性 vs 非线性</strong></td>
+<td>线性条件下可通过统计观测分布判断可识别性</td>
+<td>非线性条件下需引入<strong>额外变量（如域索引）</strong>和更多假设（结构先验、条件独立性等）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_6">不同数据类型的可识别性<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Non-IID 数据</strong>：</li>
+<li>通过<strong>充分变化假设</strong>、<strong>结构假设</strong>等可得到可识别性</li>
+<li>域索引适用于表征学习或迁移学习任务</li>
+<li>
+<p>不同分布情况需对结构假设进行扩展</p>
+</li>
+<li>
+<p><strong>IID 数据</strong>：</p>
+</li>
+<li>充分变化假设可能不存在</li>
+<li>需对结构假设进行<strong>松弛</strong>（如采用稀疏结构假设）</li>
+<li>引入充分变化条件</li>
+</ul>
+<h3 id="42">4.2 可识别隐变量的应用<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<h4 id="vqa">应用一：VQA 环境（交通事故分析）<a class="headerlink" href="#vqa" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>场景</strong>：新加坡国立大学 2023 年发布的 SUT 数据库交通事故分析</li>
+<li><strong>方法</strong>：学习可识别隐变量和因果生成机制</li>
+<li><strong>价值</strong>：支持<strong>干预</strong>和<strong>反事实推理</strong>，可准确归因交通事故原因</li>
+</ul>
+<blockquote>
+<p>💡 金句：「通过视频数据学习可识别的隐变量及其因果生成机制，能让框架自然地支持干预和反事实推理，用于交通事故归因等分析。」</p>
+</blockquote>
+<h4 id="few-shot-learning">应用二：少样本学习（Few-shot Learning）<a class="headerlink" href="#few-shot-learning" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>问题</strong>：少样本学习是业界难题</li>
+<li><strong>思路</strong>：假设数据生成过程中某些变量不变（如人的 hand 和物体的 interaction 不变）</li>
+<li><strong>方法</strong>：冻住 Encoder，只训练 Decoder</li>
+<li><strong>效果</strong>：使 base data 和 novel data 分布接近，提高分类结果</li>
+</ul>
+<h4 id="world-model">应用三：世界模型（World Model）<a class="headerlink" href="#world-model" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>理论基础</strong>：遵循 Christensen 提出的自由能结构</li>
+<li><strong>核心方法</strong>：学习稀疏结构</li>
+<li><strong>效果</strong>：</li>
+<li>明确不同任务与 state 的关联</li>
+<li>在图片生成任务中，稀疏结构可使生成结果更完美</li>
+</ul>
+<h3 id="43">4.3 验证可识别隐变量<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<h4 id="benchmark">Benchmark 设计<a class="headerlink" href="#benchmark" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>提出背景</strong>：缺乏隐变量方程和函数，难以直接验证是否真正学到可识别隐变量</li>
+<li><strong>规模</strong>：4 个任务 × 24 个场景，共 20 万帧单独图像</li>
+<li><strong>四大任务</strong>：</li>
+<li>图像生成</li>
+<li>物理模拟</li>
+<li>交通场景分析</li>
+<li>Robotic manipulation</li>
+</ul>
+<h4 id="_7">初步验证结果<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>实验任务：球从斜坡上滚下</li>
+<li>结论：在<strong>充分变化假设</strong>下，结果优于稀疏机制处理</li>
+<li>备注：具体原因有待进一步分析</li>
+</ul>
+<hr />
+<h2 id="_8">五、未来工作设想<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="51-trustworthy-world-model">5.1 构建可信世界模型（Trustworthy World Model）<a class="headerlink" href="#51-trustworthy-world-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li>目标：验证学习到的内容与真实情况的一致性</li>
+<li>实现完美对齐，构建真实核心模型</li>
+</ul>
+<h3 id="52-general-induction">5.2 实现通用归纳（General Induction）<a class="headerlink" href="#52-general-induction" title="Permanent link">&para;</a></h3>
+<ul>
+<li>减少当前 inference 对假设的依赖</li>
+<li>形成适用于各种任务和数据的通用归纳方法</li>
+</ul>
+<h3 id="53-feasible-physics">5.3 可行物理角度研究（Feasible Physics）<a class="headerlink" href="#53-feasible-physics" title="Permanent link">&para;</a></h3>
+<ul>
+<li>确保感知数据符合物理规律</li>
+<li>例如：机械手抓物体时不穿过物体</li>
+</ul>
+<h3 id="54-unknown-world-discovery">5.4 未知世界发现（Unknown World Discovery）<a class="headerlink" href="#54-unknown-world-discovery" title="Permanent link">&para;</a></h3>
+<ul>
+<li>将算法工作应用于科学发现</li>
+<li>案例：与吴院长合作的分子结构工作取得较好结果（文章在审）</li>
+</ul>
+<hr />
+<h2 id="_9">六、关键洞察与思考<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>研究范式转变</strong>：从传统特征工程（自下而上）→ 表征学习（自上而下假设生成过程）→ 可识别性研究（保证隐变量的正确性），体现了研究层次的不断深化</p>
+</li>
+<li>
+<p><strong>可识别性的核心价值</strong>：不仅仅是理论问题，更是实际应用的基础——只有隐变量可识别，干预和反事实推理才成为可能</p>
+</li>
+<li>
+<p><strong>从数据到因果的路径</strong>：观测数据 → 表征学习 → 可识别性验证 → 因果推理 → 实际应用</p>
+</li>
+<li>
+<p><strong>未来方向</strong>：可信、通用、物理可行、可探索未知——这四个方向构成了下一代 AI 研究的重要维度</p>
+</li>
+</ol>
+<hr />
+<h2 id="_10">七、金句摘录<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>「表征学习是一种基于数据生成过程，假设存在隐变量来生成观测的思维方式，与传统特征工程不同，它是一种自上而下的思维。」</p>
+<p>「在已有的表征学习和既有的工作之中，缺失的是可识别性。」</p>
+<p>「通过视频数据学习可识别的隐变量及其因果生成机制，能让框架自然地支持干预和反事实推理，用于交通事故归因等分析。」</p>
+</blockquote>
+<hr />
+<p><em>本报告基于2026年6月11日《可识别性研究及应用分析》会议智能纪要整理</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

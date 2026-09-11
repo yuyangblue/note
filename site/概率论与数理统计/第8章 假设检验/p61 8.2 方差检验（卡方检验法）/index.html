@@ -1,0 +1,852 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC8%E7%AB%A0%20%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/p61%208.2%20%E6%96%B9%E5%B7%AE%E6%A3%80%E9%AA%8C%EF%BC%88%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C%E6%B3%95%EF%BC%89/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>《概率论与数理统计》8.2 一个正态总体的方差检验（卡方检验法） - 笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#82-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              《概率论与数理统计》8.2 一个正态总体的方差检验（卡方检验法） - 笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、 假设的三种形式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、 检验统计量（μ 已知 vs μ 未知）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、 拒绝域（注意非对称）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、 例题
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="82-">《概率论与数理统计》8.2 一个正态总体的方差检验（卡方检验法） - 笔记<a class="headerlink" href="#82-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自 B 站《概率论与数理统计》教学视频 2.0 版本（up：宋浩老师官方）p61。
+前置：p60 均值检验、p50 抽样分布结论。检验 <span class="arithmatex">\(\sigma^2\)</span> 一律用<strong>卡方检验法</strong>，只分"μ 已知/未知"两个自由度。</p>
+</blockquote>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#一-假设的三种形式">一、 假设的三种形式</a></li>
+<li><a href="#二-检验统计量μ-已知-vs-μ-未知">二、 检验统计量（μ 已知 vs μ 未知）</a></li>
+<li><a href="#三-拒绝域注意非对称">三、 拒绝域（注意非对称）</a></li>
+<li><a href="#四-例题">四、 例题</a></li>
+<li><a href="#本节重点">本节重点</a></li>
+</ul>
+<hr />
+<h2 id="_2">一、 假设的三种形式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(X_1,\dots,X_n\)</span> iid <span class="arithmatex">\(\sim N(\mu,\sigma^2)\)</span>，<span class="arithmatex">\(\sigma_0^2\)</span> 为标准值：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th><span class="arithmatex">\(H_0\)</span></th>
+<th><span class="arithmatex">\(H_1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>双边</td>
+<td><span class="arithmatex">\(\sigma^2=\sigma_0^2\)</span></td>
+<td><span class="arithmatex">\(\sigma^2\ne\sigma_0^2\)</span></td>
+</tr>
+<tr>
+<td>右侧</td>
+<td><span class="arithmatex">\(\sigma^2\le\sigma_0^2\)</span></td>
+<td><span class="arithmatex">\(\sigma^2&gt;\sigma_0^2\)</span></td>
+</tr>
+<tr>
+<td>左侧</td>
+<td><span class="arithmatex">\(\sigma^2\ge\sigma_0^2\)</span></td>
+<td><span class="arithmatex">\(\sigma^2&lt;\sigma_0^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>等号同样给 <span class="arithmatex">\(H_0\)</span></strong>：假定 <span class="arithmatex">\(H_0\)</span> 成立时代入 <span class="arithmatex">\(\sigma^2=\sigma_0^2\)</span>。</p>
+<h2 id="vs">二、 检验统计量（μ 已知 vs μ 未知）<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
+<p><strong>情况 1：<span class="arithmatex">\(\mu=\mu_0\)</span> 已知</strong>（理论情形，少见）</p>
+<div class="arithmatex">\[\chi^2=\frac{\sum_{i=1}^{n}(X_i-\mu_0)^2}{\sigma_0^2}\sim\chi^2(n)\]</div>
+<p><strong>情况 2：<span class="arithmatex">\(\mu\)</span> 未知</strong>（<strong>考试常见</strong>，用 <span class="arithmatex">\(\bar X\)</span> 替换 <span class="arithmatex">\(\mu_0\)</span>）</p>
+<div class="arithmatex">\[\chi^2=\frac{(n-1)S^2}{\sigma_0^2}\sim\chi^2(n-1)\]</div>
+<blockquote>
+<p><strong>自由度规律</strong>：把 <span class="arithmatex">\(\mu_0\)</span> 换成 <span class="arithmatex">\(\bar X\)</span> 少一个自由度——与 p50 抽样分布结论完全一致。<strong>检验方差永远用卡方分布</strong>。</p>
+</blockquote>
+<h2 id="_3">三、 拒绝域（注意非对称）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><span class="arithmatex">\(\chi^2\)</span> 分布<strong>不对称</strong>，左右临界值独立查表：</p>
+<table>
+<thead>
+<tr>
+<th>检验</th>
+<th>拒绝域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>双边</td>
+<td><span class="arithmatex">\(\chi^2&gt;\chi^2_{\alpha/2}(n-1)\)</span> <strong>或</strong> <span class="arithmatex">\(\chi^2&lt;\chi^2_{1-\alpha/2}(n-1)\)</span></td>
+</tr>
+<tr>
+<td>右侧</td>
+<td><span class="arithmatex">\(\chi^2&gt;\chi^2_\alpha(n-1)\)</span></td>
+</tr>
+<tr>
+<td>左侧</td>
+<td><span class="arithmatex">\(\chi^2&lt;\chi^2_{1-\alpha}(n-1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>易错点</strong>：左侧临界值是 <span class="arithmatex">\(\chi^2_{1-\alpha/2}\)</span>（<strong>大</strong>分位点在小概率一侧？不——是<strong>小</strong>分位点），查表时 <span class="arithmatex">\(\chi^2_{0.975}\)</span> 这种"大概率"分位要专门查 <span class="arithmatex">\(\alpha=0.975\)</span> 那一列；<strong>不能写成 <span class="arithmatex">\(-\chi^2_{\alpha/2}\)</span></strong>。</p>
+<p><strong>图6</strong> 卡方检验的拒绝域（<span class="arithmatex">\(\chi^2\)</span> 非对称分布）：过大或过小都拒绝；例 6 的 <span class="arithmatex">\(\chi^2=15.517\)</span> 落在接受域（自绘）。</p>
+</blockquote>
+<p><img alt="卡方检验拒绝域" src="../figures/08-%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C-%E6%8B%92%E7%BB%9D%E5%9F%9F.png" /></p>
+<h2 id="_4">四、 例题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>例 6（μ 未知·双边，考试最爱）</strong>：成年男子身高 <span class="arithmatex">\(X\sim N(\mu,\sigma^2)\)</span>，<span class="arithmatex">\(n=20\)</span>，<span class="arithmatex">\(S=0.07\)</span>，<span class="arithmatex">\(\alpha=0.05\)</span>，检验 <span class="arithmatex">\(H_0:\sigma^2=0.006\)</span> vs <span class="arithmatex">\(H_1:\sigma^2\ne0.006\)</span>。</p>
+<div class="arithmatex">\[\chi^2=\frac{(n-1)S^2}{\sigma_0^2}=\frac{19\times0.07^2}{0.006}\approx15.517\]</div>
+<p>临界值（自由度 19）：<span class="arithmatex">\(\chi^2_{0.025}(19)=32.9\)</span>，<span class="arithmatex">\(\chi^2_{0.975}(19)=8.91\)</span>：</p>
+<div class="arithmatex">\[8.91&lt;15.517&lt;32.9\]</div>
+<p><strong>接受 <span class="arithmatex">\(H_0\)</span></strong>：认为总体方差为 <span class="arithmatex">\(0.006\)</span>（<span class="arithmatex">\(m^2\)</span>）。</p>
+<p><strong>例 7（μ 未知·右侧，"显著偏大"的提法坑）</strong>：导线电阻 <span class="arithmatex">\(X\sim N(\mu,\sigma^2)\)</span>，要求标准差 <span class="arithmatex">\(\sigma=0.005\)</span>，抽 9 根得样本标准差 <span class="arithmatex">\(s=0.008\)</span>，<span class="arithmatex">\(\alpha=0.05\)</span>，能否认为这批导线标准差<strong>显著偏大</strong>？</p>
+<p>检验者希望"偏大（<span class="arithmatex">\(&gt;\)</span>）"成立 → 放 <span class="arithmatex">\(H_1\)</span>（严格不等号）；<span class="arithmatex">\(H_0\)</span> 取等号边界：</p>
+<div class="arithmatex">\[H_0:\ \sigma^2\le0.005^2,\qquad H_1:\ \sigma^2&gt;0.005^2\]</div>
+<div class="arithmatex">\[\chi^2=\frac{(n-1)S^2}{\sigma_0^2}=\frac{8\times0.008^2}{0.005^2}=20.48&gt;\chi^2_{0.05}(8)=15.5\]</div>
+<p><strong>拒绝 <span class="arithmatex">\(H_0\)</span></strong>：认为这批导线电阻标准差显著偏大。</p>
+<blockquote>
+<p><strong>易错点（例 7 的坑）</strong>：题目问"<strong>显著偏大</strong>"（严格大于），<span class="arithmatex">\(H_1\)</span> 必须写 <span class="arithmatex">\(\sigma^2&gt;0.005^2\)</span>。若误写 <span class="arithmatex">\(\ge\)</span>，接受 <span class="arithmatex">\(H_1\)</span> 时只能得"不小于"、与"偏大"结论矛盾——<strong>单边假设方向写反，结论正好相反</strong>。双边检验（"是否是 <span class="arithmatex">\(0.005\)</span>"）则无此问题。</p>
+</blockquote>
+<hr />
+<h2 id="_5">本节重点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<blockquote>
+<ul>
+<li><strong>检验方差一律用卡方检验法</strong>：<span class="arithmatex">\(\mu\)</span> 已知 <span class="arithmatex">\(\chi^2=\dfrac{\sum(X_i-\mu_0)^2}{\sigma_0^2}\sim\chi^2(n)\)</span>；<span class="arithmatex">\(\mu\)</span> 未知 <span class="arithmatex">\(\chi^2=\dfrac{(n-1)S^2}{\sigma_0^2}\sim\chi^2(n-1)\)</span>。</li>
+<li><strong>拒绝域</strong>：双边 <span class="arithmatex">\(\chi^2&gt;\chi^2_{\alpha/2}\)</span> 或 <span class="arithmatex">\(&lt;\chi^2_{1-\alpha/2}\)</span>；右侧 <span class="arithmatex">\(&gt;\chi^2_\alpha\)</span>；左侧 <span class="arithmatex">\(&lt;\chi^2_{1-\alpha}\)</span>。</li>
+<li><strong>等号给 <span class="arithmatex">\(H_0\)</span></strong>；"显著偏大/偏小" ⇒ <span class="arithmatex">\(H_1\)</span> 用严格不等号。</li>
+<li><strong>常见坑</strong>：① 左侧临界值写成 <span class="arithmatex">\(-\chi^2_{\alpha/2}\)</span>（<span class="arithmatex">\(\chi^2\)</span> 无负值）；② 自由度用 <span class="arithmatex">\(n\)</span> 还是 <span class="arithmatex">\(n-1\)</span>（看 <span class="arithmatex">\(\mu\)</span> 已知与否）；③ 单边方向写反导致结论相反。</li>
+</ul>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

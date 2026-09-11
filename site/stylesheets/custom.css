@@ -1,0 +1,420 @@
+/* ============================================================
+   鱼汤的笔记库 · 全站自定义样式
+   基于 MkDocs Material 主题变量体系
+   ============================================================ */
+
+/* ---------- 字体 ---------- */
+:root {
+  --md-text-font: "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  --md-code-font: "JetBrains Mono", "Cascadia Code", "SFMono-Regular",
+    "Consolas", "Liberation Mono", "Courier New", monospace;
+}
+
+/* ---------- 亮色模式 · 主题色 ---------- */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #6c5ce7;
+  --md-primary-fg-color--light: #a29bfe;
+  --md-primary-fg-color--dark: #4a3cb8;
+  --md-accent-fg-color: #e07b1f;
+  --md-accent-fg-color--light: #f4a62a;
+  --md-accent-fg-color--dark: #b95f0e;
+
+  --md-default-bg-color: #f5f6fa;
+
+  --md-typeset-a-color: #5a48d6;
+  --md-typeset-mark-color: rgb(244 166 42 / 0.35);
+  --md-typeset-table-color: rgb(15 23 42 / 0.12);
+  --md-typeset-table-color--light: rgb(15 23 42 / 0.035);
+}
+
+/* ---------- 暗色模式 · 主题色 ---------- */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #8b7cf5;
+  --md-primary-fg-color--light: #a99df7;
+  --md-primary-fg-color--dark: #6c5ce7;
+  --md-accent-fg-color: #f4b942;
+  --md-accent-fg-color--light: #f7cb6b;
+  --md-accent-fg-color--dark: #d99a1d;
+
+  --md-default-bg-color: #0e1116;
+  --md-default-fg-color: #e6edf3;
+  --md-default-fg-color--light: #b3bcc8;
+  --md-default-fg-color--lighter: #8b949e;
+  --md-default-fg-color--lightest: #6b7280;
+  --md-default-bg-color--light: #161b26;
+  --md-default-bg-color--lighter: #1b2230;
+  --md-default-bg-color--lightest: #232b3b;
+
+  --md-typeset-a-color: #a99df7;
+  --md-typeset-mark-color: rgb(244 185 66 / 0.28);
+  --md-typeset-table-color: rgb(230 237 243 / 0.12);
+  --md-typeset-table-color--light: rgb(230 237 243 / 0.035);
+}
+
+/* ---------- 亮暗通用 · 代码块统一暗色（GitHub Dark 风格） ---------- */
+:root,
+[data-md-color-scheme="default"],
+[data-md-color-scheme="slate"] {
+  --md-code-bg-color: #0f1117;
+  --md-code-fg-color: #e6edf3;
+  --md-code-hl-color: #3b3b5c;
+  --md-code-hl-color--light: #ffffff1a;
+  --md-code-hl-color--dark: #ffffff1f;
+  --md-code-hl-keyword-color: #ff7b72;
+  --md-code-hl-name-color: #79c0ff;
+  --md-code-hl-function-color: #d2a8ff;
+  --md-code-hl-string-color: #a5d6ff;
+  --md-code-hl-number-color: #79c0ff;
+  --md-code-hl-operator-color: #ff7b72;
+  --md-code-hl-punctuation-color: #e6edf3;
+  --md-code-hl-comment-color: #8b949e;
+  --md-code-hl-generic-color: #ffa657;
+  --md-code-hl-variable-color: #ffa657;
+  --md-code-linenum-color: #4d5566;
+}
+
+/* ---------- 顶部导航栏 · 毛玻璃 ---------- */
+.md-header {
+  background-color: rgb(108 92 231 / 0.88);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.08), 0 4px 18px rgb(15 23 42 / 0.12);
+}
+[data-md-color-scheme="slate"] .md-header {
+  background-color: rgb(14 17 22 / 0.82);
+}
+
+.md-tabs {
+  background-color: rgb(108 92 231 / 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: rgb(14 17 22 / 0.78);
+}
+
+/* 页脚 */
+[data-md-color-scheme="default"] .md-footer {
+  background-color: #2a2440;
+}
+[data-md-color-scheme="slate"] .md-footer {
+  background-color: #0a0d12;
+}
+.md-footer-meta {
+  background-color: rgb(0 0 0 / 0.28);
+}
+
+/* ---------- 正文区 · 卡片化 ---------- */
+.md-main__inner {
+  margin-top: 1.4rem;
+}
+.md-content {
+  background-color: var(--md-default-bg-color--light, #ffffff);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgb(15 23 42 / 0.05);
+}
+[data-md-color-scheme="default"] .md-content {
+  background-color: #ffffff;
+}
+
+/* ---------- 排版 ---------- */
+.md-typeset {
+  font-size: 0.8rem;
+  line-height: 1.75;
+}
+.md-typeset h1 {
+  font-size: 1.9em;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin-bottom: 1.2rem;
+}
+.md-typeset h2 {
+  font-size: 1.32em;
+  font-weight: 700;
+  padding-left: 0.6rem;
+  border-left: 4px solid var(--md-primary-fg-color);
+}
+.md-typeset h3 {
+  font-size: 1.08em;
+  font-weight: 600;
+}
+.md-typeset a {
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+.md-typeset a:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* 引用块 */
+.md-typeset blockquote {
+  border-left: 4px solid var(--md-accent-fg-color--light, #f4a62a);
+  background-color: rgb(108 92 231 / 0.06);
+  border-radius: 0 10px 10px 0;
+  padding: 0.5rem 1rem;
+}
+
+/* 代码块 */
+.md-typeset pre > code {
+  border-radius: 12px;
+  font-size: 0.76rem;
+}
+.md-typeset code {
+  border-radius: 6px;
+}
+.md-typeset .highlight {
+  border-radius: 12px;
+}
+.md-typeset .highlighttable {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* 表格 */
+.md-typeset table:not([class]) {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgb(15 23 42 / 0.06);
+  font-size: 0.78rem;
+}
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* admonition / details */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgb(15 23 42 / 0.06);
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(100 116 139 / 0.35);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(100 116 139 / 0.55);
+}
+
+/* 选中文本 */
+::selection {
+  background: rgb(108 92 231 / 0.22);
+}
+[data-md-color-scheme="slate"] ::selection {
+  background: rgb(139 124 245 / 0.32);
+}
+
+/* 搜索对话框 */
+[data-md-component="search"] .md-search__form {
+  border-radius: 10px;
+}
+
+/* ============================================================
+   首页 · Hero
+   ============================================================ */
+.hero {
+  position: relative;
+  border-radius: 20px;
+  padding: 3.4rem 2.6rem 2.4rem;
+  margin: 0.4rem 0 2.4rem;
+  color: #fff;
+  overflow: hidden;
+  background:
+    radial-gradient(1100px 460px at 88% -12%, rgb(255 255 255 / 0.3), transparent 62%),
+    radial-gradient(820px 380px at -8% 118%, rgb(244 166 42 / 0.38), transparent 55%),
+    linear-gradient(135deg, #6c5ce7 0%, #4a3cb8 58%, #372a96 100%);
+  box-shadow: 0 18px 44px rgb(76 60 200 / 0.35);
+}
+[data-md-color-scheme="slate"] .hero {
+  background:
+    radial-gradient(1100px 460px at 88% -12%, rgb(255 255 255 / 0.16), transparent 62%),
+    radial-gradient(820px 380px at -8% 118%, rgb(244 185 66 / 0.22), transparent 55%),
+    linear-gradient(135deg, #3d3190 0%, #2b2266 60%, #211a50 100%);
+  box-shadow: 0 18px 44px rgb(0 0 0 / 0.45);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.9rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.16);
+  border: 1px solid rgb(255 255 255 / 0.24);
+  font-size: 0.78rem;
+  letter-spacing: 0.4px;
+  backdrop-filter: blur(6px);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 1rem 0 0.6rem;
+  letter-spacing: 1px;
+}
+
+.hero-sub {
+  font-size: 1.02rem;
+  color: rgb(255 255 255 / 0.88);
+  line-height: 1.8;
+  margin: 0 0 1.8rem;
+  max-width: 40rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.hero-actions .md-button {
+  border-radius: 999px;
+  padding: 0.55em 1.6em;
+  font-weight: 600;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.hero-actions .md-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 0.25);
+}
+.hero-actions .md-button--primary {
+  background: #fff;
+  color: #4a3cb8;
+  border-color: transparent;
+}
+[data-md-color-scheme="slate"] .hero-actions .md-button--primary {
+  color: #3d3190;
+}
+
+/* 首页 · 数据统计 */
+.hero-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2.4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgb(255 255 255 / 0.2);
+  text-align: center;
+}
+.stat {
+  flex: 1;
+}
+.stat + .stat {
+  border-left: 1px solid rgb(255 255 255 / 0.18);
+}
+.stat-num {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: rgb(255 255 255 / 0.82);
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   首页 · 课程卡片
+   ============================================================ */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.1rem;
+  margin: 1rem 0 2.4rem;
+}
+
+.course-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem 1.3rem;
+  border-radius: 16px;
+  background: var(--md-default-bg-color--light, #fff);
+  border: 1px solid rgb(100 116 139 / 0.16);
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  text-decoration: none !important;
+}
+[data-md-color-scheme="default"] .course-card {
+  background: #fff;
+}
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgb(15 23 42 / 0.12);
+  border-color: var(--md-primary-fg-color);
+}
+
+.course-icon {
+  font-size: 1.9rem;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+.course-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.course-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--md-typeset-color);
+}
+.course-desc {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--md-default-fg-color--light);
+  margin: 0.3rem 0 0.5rem;
+}
+.course-meta {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--md-accent-fg-color);
+  letter-spacing: 0.3px;
+}
+
+/* 首页 · 指南清单 */
+.guide-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0 2.2rem;
+}
+.guide-item {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  background: rgb(108 92 231 / 0.06);
+  border: 1px solid rgb(108 92 231 / 0.14);
+  font-size: 0.88rem;
+  color: var(--md-typeset-color);
+}
+.guide-item .g-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ---------- 响应式 ---------- */
+@media screen and (max-width: 60em) {
+  .hero {
+    padding: 2.4rem 1.6rem 1.8rem;
+  }
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+}

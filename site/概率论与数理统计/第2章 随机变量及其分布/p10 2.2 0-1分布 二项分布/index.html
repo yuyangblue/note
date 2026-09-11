@@ -1,0 +1,1106 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC2%E7%AB%A0%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/p10%202.2%200-1%E5%88%86%E5%B8%83%20%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>概率论与数理统计学习笔记：0-1分布与二项分布 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0-1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              概率论与数理统计学习笔记：0-1分布与二项分布
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-0-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 0-1分布 (伯努利分布)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 0-1分布 (伯努利分布)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 定义与特点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 数学描述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 二项分布
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 二项分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 定义与背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 概率公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 公式理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 记法与参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 二项分布的重要说明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 二项分布的重要说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-0-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 0-1分布是二项分布的特例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 归一性（概率总和为1）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 “至少发生一次”的计算技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 二项分布应用例题解析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 二项分布应用例题解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 例6：射击问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 例7：参数反求问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 二项分布的最可能值
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 二项分布的最可能值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 确定方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 示例分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="0-1">概率论与数理统计学习笔记：0-1分布与二项分布<a class="headerlink" href="#0-1" title="Permanent link">&para;</a></h1>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>0-1分布 (伯努利分布)</strong></li>
+<li><strong>二项分布</strong></li>
+<li><strong>二项分布的重要说明</strong></li>
+<li><strong>二项分布应用例题解析</strong></li>
+<li><strong>二项分布的最可能值</strong></li>
+</ol>
+<hr />
+<h2 id="1-0-1">1. 0-1分布 (伯努利分布)<a class="headerlink" href="#1-0-1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 定义与特点<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>0-1分布是最简单的离散型概率分布，描述一个<strong>仅进行一次</strong>的随机试验的结果。该试验的结果只有两种可能：发生或不发生（如：是/否、成功/失败、正面/反面）。</p>
+<h3 id="12">1.2 数学描述<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>随机变量 X 的取值</strong>：<span class="arithmatex">\(X\)</span> 只取两个值：<span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span>。<ul>
+<li><span class="arithmatex">\(X=1\)</span>：表示事件发生（成功）。</li>
+<li><span class="arithmatex">\(X=0\)</span>：表示事件不发生（失败）。</li>
+</ul>
+</li>
+<li><strong>概率分布</strong>：<ul>
+<li>设事件发生的概率为 <span class="arithmatex">\(P(X=1) = p\)</span>。</li>
+<li>则事件不发生的概率为 <span class="arithmatex">\(P(X=0) = 1-p\)</span>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="13">1.3 示例<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>抛一枚硬币</strong>：设 <span class="arithmatex">\(X\)</span> 表示正面出现的次数。<ul>
+<li><span class="arithmatex">\(P(X=1) = P(\text{正面}) = \frac{1}{2}\)</span></li>
+<li><span class="arithmatex">\(P(X=0) = P(\text{反面}) = 1 - \frac{1}{2} = \frac{1}{2}\)</span></li>
+</ul>
+</li>
+<li><strong>抽取一件产品</strong>：设 <span class="arithmatex">\(X\)</span> 表示抽到废品的个数，已知废品率为 <span class="arithmatex">\(0.1\)</span>。<ul>
+<li><span class="arithmatex">\(P(X=1) = P(\text{废品}) = 0.1\)</span></li>
+<li><span class="arithmatex">\(P(X=0) = P(\text{正品}) = 1 - 0.1 = 0.9\)</span></li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="2">2. 二项分布<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 定义与背景<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>二项分布描述 <span class="arithmatex">\(n\)</span> 重伯努利试验中事件发生的次数。</p>
+<ul>
+<li><strong>伯努利试验</strong>：在同样条件下重复进行、相互独立的试验，每次试验只有两种可能结果（成功/失败），且单次试验中成功的概率 <span class="arithmatex">\(p\)</span> 保持不变。</li>
+<li><strong><span class="arithmatex">\(n\)</span> 重伯努利试验</strong>：将伯努利试验独立重复地进行 <span class="arithmatex">\(n\)</span> 次。</li>
+<li><strong>随机变量 X</strong>：表示在这 <span class="arithmatex">\(n\)</span> 次试验中事件（成功）发生的总次数。</li>
+</ul>
+<h3 id="22">2.2 概率公式<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>在 <span class="arithmatex">\(n\)</span> 次试验中，事件恰好发生 <span class="arithmatex">\(k\)</span> 次的概率为：
+[
+P{X=k} = C_n^k p^k (1-p)^{n-k} = C_n^k p^k q^{n-k}
+]
+其中：
+- <span class="arithmatex">\(k = 0, 1, 2, \ldots, n\)</span>
+- <span class="arithmatex">\(C_n^k = \frac{n!}{k!(n-k)!}\)</span> 是组合数，表示从 <span class="arithmatex">\(n\)</span> 次试验中选出 <span class="arithmatex">\(k\)</span> 次发生的方案数。
+- <span class="arithmatex">\(p\)</span> 是单次试验中事件发生的概率。
+- <span class="arithmatex">\(q = 1-p\)</span> 是单次试验中事件不发生的概率。</p>
+<h3 id="23">2.3 公式理解<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>选择次数</strong>：<span class="arithmatex">\(C_n^k\)</span> 表示从总共 <span class="arithmatex">\(n\)</span> 次试验中，选择哪 <span class="arithmatex">\(k\)</span> 次发生。</li>
+<li><strong>计算概率</strong>：这 <span class="arithmatex">\(k\)</span> 次都发生的概率是 <span class="arithmatex">\(p^k\)</span>；其余 <span class="arithmatex">\(n-k\)</span> 次都不发生的概率是 <span class="arithmatex">\(q^{n-k}\)</span>。</li>
+<li><strong>独立性</strong>：由于各次试验独立，将上述两部分概率相乘。</li>
+</ol>
+<h3 id="24">2.4 记法与参数<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<p>若随机变量 <span class="arithmatex">\(X\)</span> 服从参数为 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(p\)</span> 的二项分布，则记为：
+[
+X \sim B(n, p)
+]
+其中：
+- <strong><span class="arithmatex">\(n\)</span></strong>：试验次数。
+- <strong><span class="arithmatex">\(p\)</span></strong>：单次试验成功的概率。
+这两个参数对于确定分布至关重要。</p>
+<hr />
+<h2 id="3">3. 二项分布的重要说明<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31-0-1">3.1 0-1分布是二项分布的特例<a class="headerlink" href="#31-0-1" title="Permanent link">&para;</a></h3>
+<p>当 <span class="arithmatex">\(n=1\)</span> 时，二项分布 <span class="arithmatex">\(B(1, p)\)</span> 退化为0-1分布。
+- 此时，<span class="arithmatex">\(P\{X=k\} = C_1^k p^k q^{1-k}\)</span>，其中 <span class="arithmatex">\(k=0, 1\)</span>。
+- 计算可得：
+    - <span class="arithmatex">\(P\{X=0\} = C_1^0 p^0 q^{1} = q = 1-p\)</span>
+    - <span class="arithmatex">\(P\{X=1\} = C_1^1 p^1 q^{0} = p\)</span></p>
+<h3 id="32-1">3.2 归一性（概率总和为1）<a class="headerlink" href="#32-1" title="Permanent link">&para;</a></h3>
+<p>对二项分布所有可能取值的概率求和，结果等于1，这符合概率分布的归一性要求。
+[
+\sum_{k=0}^{n} P{X=k} = \sum_{k=0}^{n} C_n^k p^k q^{n-k} = (p + q)^n
+]
+根据二项式定理 <span class="arithmatex">\((a+b)^n = \sum_{k=0}^{n} C_n^k a^{n-k} b^k\)</span>，上式等于 <span class="arithmatex">\((p + q)^n\)</span>。因为 <span class="arithmatex">\(p + q = 1\)</span>，所以：
+[
+(p + q)^n = 1^n = 1
+]</p>
+<h3 id="33">3.3 “至少发生一次”的计算技巧<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>求“事件至少发生一次”的概率 <span class="arithmatex">\(P\{X \geq 1\}\)</span> 时，直接计算 <span class="arithmatex">\(P\{X=1\} + P\{X=2\} + \ldots + P\{X=n\}\)</span> 非常繁琐。更简便的方法是使用其<strong>对立事件</strong>（一次都没发生）的概率来计算。
+[
+P{X \geq 1} = 1 - P{X = 0}
+]
+其中，<span class="arithmatex">\(P\{X=0\}\)</span> 表示 <span class="arithmatex">\(n\)</span> 次试验均未发生，概率为 <span class="arithmatex">\(q^n\)</span>。因此：
+[
+P{X \geq 1} = 1 - q^n
+]</p>
+<hr />
+<h2 id="4">4. 二项分布应用例题解析<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41-6">4.1 例6：射击问题<a class="headerlink" href="#41-6" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：某人射击，每次命中的概率为 <span class="arithmatex">\(0.02\)</span>，独立射击 <span class="arithmatex">\(400\)</span> 次，求至少命中两次的概率。</p>
+<p><strong>解析</strong>：
+1.  <strong>模型识别</strong>：射击 <span class="arithmatex">\(400\)</span> 次，每次结果独立且只有“中”或“不中”，是典型的 <span class="arithmatex">\(400\)</span> 重伯努利试验。
+2.  <strong>定义变量</strong>：设随机变量 <span class="arithmatex">\(X\)</span> 表示 <span class="arithmatex">\(400\)</span> 次射击中命中的次数。
+    - 则 <span class="arithmatex">\(X \sim B(400, 0.02)\)</span>。
+3.  <strong>问题转化</strong>：求 <span class="arithmatex">\(P\{X \geq 2\}\)</span>。
+4.  <strong>运用技巧</strong>：使用对立事件公式。
+    [
+    P{X \geq 2} = 1 - P{X=0} - P{X=1}
+    ]
+5.  <strong>计算概率</strong>：
+    - <span class="arithmatex">\(P\{X=0\} = C_{400}^{0} (0.02)^0 (0.98)^{400} = (0.98)^{400}\)</span>
+    - <span class="arithmatex">\(P\{X=1\} = C_{400}^{1} (0.02)^1 (0.98)^{399} = 400 \times 0.02 \times (0.98)^{399}\)</span>
+6.  <strong>最终结果</strong>：
+    [
+    P{X \geq 2} = 1 - (0.98)^{400} - 400 \times 0.02 \times (0.98)^{399} \approx 0.9972
+    ]
+    <em>注：实际计算时，<span class="arithmatex">\((0.98)^{400}\)</span> 值很小，直接相减即可。精确计算需要计算器或后续的近似方法（如泊松近似）。</em></p>
+<h3 id="42-7">4.2 例7：参数反求问题<a class="headerlink" href="#42-7" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(X \sim B(2, p)\)</span>， <span class="arithmatex">\(Y \sim B(3, p)\)</span>，且 <span class="arithmatex">\(P\{X \geq 1\} = \frac{5}{9}\)</span>，求 <span class="arithmatex">\(P\{Y \geq 1\}\)</span>。</p>
+<p><strong>解析</strong>：
+1.  <strong>利用已知条件求 <span class="arithmatex">\(p\)</span></strong>：
+    - 根据 <span class="arithmatex">\(X \sim B(2, p)\)</span> 和 <span class="arithmatex">\(P\{X \geq 1\} = \frac{5}{9}\)</span>。
+    - 使用对立事件公式：<span class="arithmatex">\(P\{X \geq 1\} = 1 - P\{X=0\}\)</span>。
+    - <span class="arithmatex">\(P\{X=0\} = C_2^0 p^0 (1-p)^2 = (1-p)^2\)</span>。
+    - 所以：<span class="arithmatex">\(1 - (1-p)^2 = \frac{5}{9}\)</span>。
+    - 解得：<span class="arithmatex">\((1-p)^2 = \frac{4}{9} \implies 1-p = \frac{2}{3} \implies p = \frac{1}{3}\)</span>。
+2.  <strong>计算 <span class="arithmatex">\(P\{Y \geq 1\}\)</span></strong>：
+    - 已知 <span class="arithmatex">\(Y \sim B(3, p) = B(3, \frac{1}{3})\)</span>。
+    - 同样使用对立事件公式：<span class="arithmatex">\(P\{Y \geq 1\} = 1 - P\{Y=0\}\)</span>。
+    - <span class="arithmatex">\(P\{Y=0\} = C_3^0 (\frac{1}{3})^0 (1-\frac{1}{3})^3 = (\frac{2}{3})^3 = \frac{8}{27}\)</span>。
+    - 所以：<span class="arithmatex">\(P\{Y \geq 1\} = 1 - \frac{8}{27} = \frac{19}{27}\)</span>。</p>
+<hr />
+<h2 id="5">5. 二项分布的最可能值<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 定义<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p>对于二项分布 <span class="arithmatex">\(B(n, p)\)</span>，使概率 <span class="arithmatex">\(P\{X=k\}\)</span> 达到最大值的随机变量 <span class="arithmatex">\(k\)</span> 的取值 <span class="arithmatex">\(k_0\)</span>，称为该二项分布的<strong>最可能值</strong>。</p>
+<h3 id="52">5.2 确定方法<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p>最可能值 <span class="arithmatex">\(k_0\)</span> 由 <span class="arithmatex">\((n+1)p\)</span> 的值决定：
+[
+k_0 = 
+\begin{cases} 
+[(n+1)p] &amp; \text{当 } (n+1)p \text{ 不是整数时} \
+(n+1)p - 1 \quad \text{和} \quad (n+1)p &amp; \text{当 } (n+1)p \text{ 是整数时}
+\end{cases}
+]
+其中，<span class="arithmatex">\([x]\)</span> 表示对 <span class="arithmatex">\(x\)</span> 向下取整。</p>
+<h3 id="53">5.3 示例分析<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p>通过 Excel 表格模拟 <span class="arithmatex">\(X \sim B(5, 0.4)\)</span> 的概率分布：
+- <span class="arithmatex">\(n=5, p=0.4, q=0.6\)</span>
+- 计算各 <span class="arithmatex">\(k\)</span> 值对应的概率：
+  - <span class="arithmatex">\(k=2\)</span> 时，<span class="arithmatex">\(P\{X=2\} = C_5^2 (0.4)^2 (0.6)^3 = 0.3456\)</span> 为最大值。
+- 验证公式：<span class="arithmatex">\((n+1)p = 6 \times 0.4 = 2.4\)</span>，非整数。取 <span class="arithmatex">\(k_0 = [2.4] = 2\)</span>，与计算结果一致。</p>
+<p><strong>结论</strong>：二项分布的最可能值 <span class="arithmatex">\(k_0\)</span> 围绕其均值 <span class="arithmatex">\(np\)</span> 分布。当 <span class="arithmatex">\((n+1)p\)</span> 为整数时，分布会在两个点上取得相等的最大概率值。</p>
+<hr />
+<blockquote>
+<p><strong>本节重点</strong>：
+- 0-1 分布（伯努利分布）：一次试验，<span class="arithmatex">\(P(X=1)=p\)</span>，<span class="arithmatex">\(P(X=0)=1-p\)</span>
+- 二项分布 <span class="arithmatex">\(X \sim B(n, p)\)</span>：<span class="arithmatex">\(n\)</span> 重伯努利试验中成功次数，<span class="arithmatex">\(P\{X=k\} = C_n^k p^k (1-p)^{n-k}\)</span>
+- <strong>"至少一次"用对立事件</strong>：<span class="arithmatex">\(P\{X \geq 1\} = 1 - P\{X=0\} = 1 - (1-p)^n\)</span>
+- 二项分布的最可能值 <span class="arithmatex">\(k_0\)</span>：<span class="arithmatex">\((n+1)p\)</span> 非整数时取整，整数时有两个（详见 p11 泊松分布补充）</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

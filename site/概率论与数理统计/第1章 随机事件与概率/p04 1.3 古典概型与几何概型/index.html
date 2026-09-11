@@ -1,0 +1,918 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC1%E7%AB%A0%20%E9%9A%8F%E6%9C%BA%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%A6%82%E7%8E%87/p04%201.3%20%E5%8F%A4%E5%85%B8%E6%A6%82%E5%9E%8B%E4%B8%8E%E5%87%A0%E4%BD%95%E6%A6%82%E5%9E%8B/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>P04 1.3 古典概型与几何概型 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P04 1.3 古典概型与几何概型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        《概率论与数理统计》笔记：1.3 古典概型与几何概型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="《概率论与数理统计》笔记：1.3 古典概型与几何概型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classical-probability-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        古典概型 (Classical Probability Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        古典概型公式与示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        古典概型典型例题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometric-probability-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何概型 (Geometric Probability Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何概型典型例题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>P04 1.3 古典概型与几何概型</h1>
+
+<h2 id="13">《概率论与数理统计》笔记：1.3 古典概型与几何概型<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<p><strong>课程信息</strong>
+*   <strong>主讲人</strong>: 宋浩老师
+*   <strong>视频系列</strong>: 《概率论与数理统计》教学视频 2.0版本
+*   <strong>知识点</strong>: 古典概型 (Classical Probability Model)、几何概型 (Geometric Probability Model)</p>
+<p><strong>目录</strong>
+- <a href="#古典概型-classical-probability-model">古典概型 (Classical Probability Model)</a>
+- <a href="#古典概型公式与示例">古典概型公式与示例</a>
+- <a href="#古典概型典型例题">古典概型典型例题</a>
+- <a href="#几何概型-geometric-probability-model">几何概型 (Geometric Probability Model)</a>
+- <a href="#几何概型典型例题">几何概型典型例题</a></p>
+<h3 id="classical-probability-model">古典概型 (Classical Probability Model)<a class="headerlink" href="#classical-probability-model" title="Permanent link">&para;</a></h3>
+<p>古典概型，也称为<strong>等可能概率模型</strong>，是我们高中阶段学习的概率基础。</p>
+<p><strong>定义与两个基本条件</strong>：
+1.  <strong>有限性</strong>：样本空间 Ω 中的样本点总数是<strong>有限</strong>的。
+    *   例如：抛硬币（正、反，2个样本点）、掷骰子（1, 2, 3, 4, 5, 6，6个样本点）。
+    *   反例：电话呼叫次数、线段上的点（可以是无限多个）不属于古典概型。
+2.  <strong>等可能性</strong>：每个样本点出现的概率是<strong>相等</strong>的。
+    *   例如：公平硬币正反面概率均为 1/2；公平骰子每个点数出现的概率均为 1/6。</p>
+<h3 id="_1">古典概型公式与示例<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p><strong>概率计算公式</strong>：
+对于事件 A，其概率为：
+$<span class="arithmatex">\(P(A) = \frac{M}{N}\)</span>$
+其中：
+*   <span class="arithmatex">\(N\)</span> 是样本空间 Ω 中<strong>所有可能结果的总数</strong>（分母）。
+*   <span class="arithmatex">\(M\)</span> 是事件 A 包含的<strong>样本点的个数</strong>（分子）。
+*   <strong>理解要点</strong>：公式无需死记，解题时只需明确“所有情况数”和“你所要求的事件的情况数”。</p>
+<p><strong>示例</strong>：掷骰子，事件 A = “出现奇数点”。
+*   样本空间 Ω = {1, 2, 3, 4, 5, 6}，N = 6。
+*   事件 A = {1, 3, 5}，M = 3。
+*   因此， <span class="arithmatex">\(P(A) = \frac{3}{6} = \frac{1}{2}\)</span>。</p>
+<h3 id="_2">古典概型典型例题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><strong>例一</strong>：从 0~9 十个数字中随机取一个数，求取到偶数的概率。
+*   总数 N = 10。
+*   偶数 A = {0, 2, 4, 6, 8}，M = 5。
+*   <span class="arithmatex">\(P(A) = \frac{5}{10} = \frac{1}{2}\)</span>。</p>
+<p><strong>例二</strong>：从 1~1000 中随机取一个数，求以下事件概率：
+1.  <strong>事件A：能被6整除</strong>
+    *   <span class="arithmatex">\(N = 1000\)</span>。
+    *   <span class="arithmatex">\(1000 \div 6 \approx 166.67\)</span>，所以有 166 个数能被6整除，即 <span class="arithmatex">\(M = 166\)</span>。
+    *   <span class="arithmatex">\(P(A) = \frac{166}{1000} = 0.166\)</span>。
+2.  <strong>事件B：能被8整除</strong>
+    *   <span class="arithmatex">\(1000 \div 8 = 125\)</span>，所以有 125 个数能被8整除，即 <span class="arithmatex">\(M = 125\)</span>。
+    *   <span class="arithmatex">\(P(B) = \frac{125}{1000} = 0.125\)</span>。
+3.  <strong>事件C：既不能被6也不能被8整除</strong>
+    *   这是事件“能被6或8整除”的<strong>对立事件</strong>。设 <span class="arithmatex">\(D\)</span> = “能被6或8整除”。
+    *   利用<strong>概率的加法公式</strong>： <span class="arithmatex">\(P(D) = P(A) + P(B) - P(AB)\)</span>。
+    *   其中，<span class="arithmatex">\(AB\)</span> 表示既能被6整除也能被8整除，即能被 <strong>LCM(6,8)=24</strong> 整除。
+    *   <span class="arithmatex">\(1000 \div 24 \approx 41.67\)</span>，所以有 41 个，即 <span class="arithmatex">\(P(AB) = \frac{41}{1000}\)</span>。
+    *   <span class="arithmatex">\(P(D) = 0.166 + 0.125 - 0.041 = 0.25\)</span>。
+    *   因此，<span class="arithmatex">\(P(C) = 1 - P(D) = 1 - 0.25 = 0.75\)</span>。</p>
+<p><strong>例三（房间问题）</strong>：有 N 个房间，n 个人 (n ≤ N) 随机选择房间入住。
+*   <strong>总样本数</strong>：每个人有 N 种选择，n 个人独立选择，总数为 <span class="arithmatex">\(N^n\)</span>。
+*   <strong>第一问</strong>：某指定的 n 个房间各有一人。
+    *   第一个人有 n 种选择，第二个人有 n-1 种，...，第 n 个人有 1 种。
+    *   情况数为 <span class="arithmatex">\(n!\)</span>。
+    *   概率 <span class="arithmatex">\(P = \frac{n!}{N^n}\)</span>。
+*   <strong>第二问</strong>：恰好有 n 个房间各有一人（房间未指定）。
+    *   先从 N 个房间中选出 n 个房间，有 <span class="arithmatex">\(C_N^n\)</span> 种选法。
+    *   然后 n 个人在这 n 个房间中进行全排列，有 <span class="arithmatex">\(n!\)</span> 种。
+    *   概率 <span class="arithmatex">\(P = \frac{C_N^n \cdot n!}{N^n} = \frac{P_N^n}{N^n}\)</span>。
+*   <strong>第三问</strong>：某指定的一间房内恰有 k 个人。
+    *   先从 n 个人中选出 k 个人住进指定房间，有 <span class="arithmatex">\(C_n^k\)</span> 种。
+    *   剩下的 n-k 个人在剩下的 N-1 个房间中任意选择，每人有 N-1 种选择，共 <span class="arithmatex">\((N-1)^{n-k}\)</span> 种。
+    *   概率 <span class="arithmatex">\(P = \frac{C_n^k \cdot (N-1)^{n-k}}{N^n}\)</span>。
+*   <strong>第四问</strong> (N=n)：恰好有一间房空着。
+    *   总数仍为 <span class="arithmatex">\(N^N\)</span>。
+    *   思路：一间房空着，则其余 N-1 间房需容纳 N 个人，必然有一间房住2人，其他 N-2 间房各住1人。
+    *   步骤：
+        1.  选出空房：<span class="arithmatex">\(C_N^1\)</span> 种。
+        2.  选出住2人的那间房：<span class="arithmatex">\(C_{N-1}^1\)</span> 种。
+        3.  从 N 个人中选出2人住进该房间：<span class="arithmatex">\(C_N^2\)</span> 种（两人无顺序）。
+        4.  剩下的 N-2 个人进行全排列，住进剩下的 N-2 个房间：<span class="arithmatex">\((N-2)!\)</span> 种。
+    *   概率 <span class="arithmatex">\(P = \frac{C_N^1 \cdot C_{N-1}^1 \cdot C_N^2 \cdot (N-2)!}{N^N}\)</span>。</p>
+<p><strong>例四（生日问题）</strong>：一年365天，求班级中至少有两人生日相同的概率。
+*   <strong>模型</strong>：将365天看作365个“房间”，N 个人看作“人”随机入住。
+*   <strong>求解思路</strong>：先求<strong>对立事件</strong>“所有人生日都不相同”的概率 <span class="arithmatex">\(P_1\)</span>，再用 <span class="arithmatex">\(1-P_1\)</span>。
+*   <strong>计算</strong>：
+    *   第一个人有365种选择，第二个人有364种（不能与第一人相同），...，第N个人有 <span class="arithmatex">\(365-N+1\)</span> 种。
+    *   <span class="arithmatex">\(P_1 = \frac{P_{365}^N}{365^N} = \frac{365 \times 364 \times \cdots \times (365-N+1)}{365^N}\)</span>。
+    *   所求概率 <span class="arithmatex">\(P = 1 - P_1\)</span>。
+*   <strong>结论</strong>：当班级人数 N=55 时，至少有两人生日相同的概率高达 0.99。</p>
+<p><strong>例五（抽签公平性）</strong>：10张考签（4难6易），甲乙丙依次不放回抽取。
+*   <strong>核心结论</strong>：抽签的顺序<strong>不影响</strong>每个人抽到难签的概率，对每个人都是公平的。
+*   <strong>证明（以甲为例）</strong>：
+    *   总排列数：<span class="arithmatex">\(10 \times 9 \times 8\)</span>。
+    *   甲抽到难签的情况：甲有4种选法，乙有9种，丙有8种，共 <span class="arithmatex">\(4 \times 9 \times 8\)</span>。
+    *   <span class="arithmatex">\(P(\text{甲难}) = \frac{4 \times 9 \times 8}{10 \times 9 \times 8} = \frac{4}{10}\)</span>。
+*   <strong>推广（例六）</strong>：有 <span class="arithmatex">\(\alpha\)</span> 张易卷和 <span class="arithmatex">\(\beta\)</span> 张难卷，王某是第 k 个抽签者。
+    *   总排列数：<span class="arithmatex">\((\alpha+\beta)!\)</span>。
+    *   王某抽到易卷的情况：先从 <span class="arithmatex">\(\alpha\)</span> 张易卷中取1张给王某，剩下卷子全排列。
+    *   <span class="arithmatex">\(P = \frac{C_\alpha^1 \cdot (\alpha+\beta-1)!}{(\alpha+\beta)!} = \frac{\alpha}{\alpha+\beta}\)</span>。
+    *   <strong>结论</strong>：概率仅取决于他会的卷子占总数的比例，与抽签次序 k 无关。</p>
+<p><strong>例七（产品抽检）</strong>：50件产品（6次品，44合格品），任取3件（不放回）。
+*   <strong>本质是组合问题</strong>（“一把抓”，不考虑顺序）。
+*   总情况数：<span class="arithmatex">\(C_{50}^3\)</span>。
+*   <strong>各种情况概率</strong>：
+    1.  恰有1件次品： <span class="arithmatex">\(P = \frac{C_6^1 \cdot C_{44}^2}{C_{50}^3}\)</span>。
+    2.  恰有2件次品： <span class="arithmatex">\(P = \frac{C_6^2 \cdot C_{44}^1}{C_{50}^3}\)</span>。
+    3.  3件均次品： <span class="arithmatex">\(P = \frac{C_6^3}{C_{50}^3}\)</span>。
+    4.  3件均合格品： <span class="arithmatex">\(P = \frac{C_{44}^3}{C_{50}^3}\)</span>。</p>
+<p><strong>例八（排队问题）</strong>：6人随机坐成一排。
+*   <strong>总情况数</strong>：全排列 <span class="arithmatex">\(6!\)</span>。
+*   <strong>第一问</strong>：甲乙两人必须相邻。
+    *   使用 <strong>“捆绑法”</strong>：将甲乙视为一个整体，内部有 <span class="arithmatex">\(2!\)</span> 种排法。
+    *   整体与其余4人共5个元素全排列：<span class="arithmatex">\(5!\)</span>。
+    *   <span class="arithmatex">\(P = \frac{2! \cdot 5!}{6!} = \frac{1}{3}\)</span>。
+*   <strong>第二问</strong>：甲乙两人之间恰有一人。
+    *   <strong>“插空法”</strong> 或分步：
+        1.  从其余4人中选1人插入甲乙之间：<span class="arithmatex">\(C_4^1\)</span>。
+        2.  甲乙两人在两端位置全排列：<span class="arithmatex">\(2!\)</span>。
+        3.  将这3人视为一个整体，与剩余3人全排列：<span class="arithmatex">\(4!\)</span>。
+    *   <span class="arithmatex">\(P = \frac{C_4^1 \cdot 2! \cdot 4!}{6!}\)</span>。</p>
+<p><strong>例九（配对问题）</strong>：5双不同的鞋（共10只），任取4只。
+*   <strong>求“至少有一双成对”的概率</strong>。
+*   <strong>方法一（对立事件）</strong>：
+    *   对立事件 <span class="arithmatex">\(A^c\)</span> = “4只鞋全是单只，均不成对”。
+    *   从5双中选4双：<span class="arithmatex">\(C_5^4\)</span>。
+    *   从每双中选1只（左或右）：<span class="arithmatex">\(2^4\)</span>。
+    *   <span class="arithmatex">\(P(A^c) = \frac{C_5^4 \cdot 2^4}{C_{10}^4} = \frac{8}{21}\)</span>。
+    *   <span class="arithmatex">\(P(A) = 1 - \frac{8}{21} = \frac{13}{21}\)</span>。
+*   <strong>方法二（直接计算）</strong>：
+    *   <span class="arithmatex">\(A\)</span> 包含两种情况：① 恰有一双成对，另2只单；② 恰有两双成对。
+    *   情况①：选1双成对的：<span class="arithmatex">\(C_5^1\)</span>；从剩下4双中选2双，并从每双中选1只：<span class="arithmatex">\(C_4^2 \cdot 2^2\)</span>。
+    *   情况②：直接选2双成对的：<span class="arithmatex">\(C_5^2\)</span>。
+    *   <span class="arithmatex">\(P(A) = \frac{C_5^1 \cdot C_4^2 \cdot 2^2 + C_5^2}{C_{10}^4} = \frac{13}{21}\)</span>。</p>
+<h3 id="geometric-probability-model">几何概型 (Geometric Probability Model)<a class="headerlink" href="#geometric-probability-model" title="Permanent link">&para;</a></h3>
+<p>当样本空间是一个<strong>可度量的几何区域</strong>（如线段、平面区域、立体图形），且样本点的分布是<strong>均匀</strong>的，就构成了几何概型。</p>
+<p><strong>核心思想</strong>：事件的概率等于构成事件 A 的区域<strong>长度（面积或体积）</strong> 与样本空间 Ω 的总<strong>长度（面积或体积）</strong> 之比。
+$<span class="arithmatex">\(P(A) = \frac{\mu(A)}{\mu(\Omega)}\)</span>$
+其中 <span class="arithmatex">\(\mu\)</span> 代表几何测度（长度、面积、体积），具体取决于问题背景。</p>
+<p><strong>关键</strong>：通过<strong>画图</strong>将问题转化为几何图形的测度比计算。</p>
+<h3 id="_3">几何概型典型例题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>例十（等车问题）</strong>：公交车每5分钟一班，乘客随机到达车站，求等车时间不超过2分钟的概率。
+*   <strong>建模</strong>：乘客到达时间 <span class="arithmatex">\(X\)</span> 在 <span class="arithmatex">\([0, 5]\)</span> 分钟内均匀分布。
+*   <strong>事件 A</strong>：等车时间 ≤ 2 分钟，即乘客需在发车前的2分钟内到达。
+    *   若发车时刻为0和5，则乘客需在区间 <span class="arithmatex">\([3, 5]\)</span> 内到达。
+*   <strong>计算</strong>：<span class="arithmatex">\(P(A) = \frac{\text{区间}[3,5]\text{的长度}}{\text{区间}[0,5]\text{的长度}} = \frac{2}{5}\)</span>。</p>
+<p><strong>例十一（约会问题）</strong>：两人约定在7点到8点间见面，先到者等15分钟，等不到则离去。求两人能见面的概率。
+*   <strong>建模</strong>：设甲到达时间为 <span class="arithmatex">\(x\)</span>，乙到达时间为 <span class="arithmatex">\(y\)</span>，<span class="arithmatex">\(x, y \in [0, 60]\)</span>（分钟）。
+    *   样本空间 Ω 是边长为60的正方形，面积 <span class="arithmatex">\(S_\Omega = 60^2\)</span>。
+*   <strong>事件 A（能见面）的条件</strong>：两人到达时间差的绝对值不超过15分钟，即 <span class="arithmatex">\(|x - y| \leq 15\)</span>。
+    *   这等价于 <span class="arithmatex">\(-15 \leq x - y \leq 15\)</span>。
+*   <strong>几何表示</strong>：
+    1.  画出直线 <span class="arithmatex">\(y = x\)</span>（对角线）。
+    2.  <span class="arithmatex">\(x - y \leq 15\)</span> 对应直线 <span class="arithmatex">\(y = x - 15\)</span> 的上方区域。
+    3.  <span class="arithmatex">\(x - y \geq -15\)</span> 对应直线 <span class="arithmatex">\(y = x + 15\)</span> 的下方区域。
+    4.  事件 A 的区域是正方形内夹在两条平行直线之间的<strong>带状区域</strong>（阴影部分）。
+*   <strong>面积计算</strong>：
+    *   阴影部分面积 <span class="arithmatex">\(S_A = S_\Omega - 2 \times (\text{两个白色直角三角形的面积})\)</span>。
+    *   每个白色三角形是等腰直角三角形，直角边长为 <span class="arithmatex">\(60-15=45\)</span>。
+    *   <span class="arithmatex">\(S_A = 60^2 - 2 \times \frac{1}{2} \times 45 \times 45 = 3600 - 2025 = 1575\)</span>。
+*   <strong>最终概率</strong>：<span class="arithmatex">\(P(A) = \frac{S_A}{S_\Omega} = \frac{1575}{3600} = \frac{7}{16}\)</span>。</p>
+<p><strong>学习要点总结</strong>：
+*   <strong>古典概型</strong>的关键是<strong>有限</strong>和<strong>等可能</strong>，概率计算是计数之比。难点在于运用<strong>排列组合</strong>知识准确计算 <span class="arithmatex">\(N\)</span> 和 <span class="arithmatex">\(M\)</span>，并灵活运用<strong>对立事件</strong>、<strong>捆绑法</strong>、<strong>插空法</strong>等技巧。
+*   <strong>几何概型</strong>的关键是将概率问题转化为<strong>几何测度比</strong>，并通过<strong>画图</strong>直观求解，尤其要注意建立正确的<strong>数学模型</strong>。</p>
+<hr />
+<blockquote>
+<p><strong>本节重点</strong>：
+- 古典概型 = 样本空间<strong>有限</strong> + <strong>等可能</strong>，概率是计数之比 <span class="arithmatex">\(P(A)=\frac{M}{N}\)</span>；计数时"一把抓"用组合、有顺序用排列。
+- 几何概型 = 概率是测度比 <span class="arithmatex">\(P(A)=\frac{\mu(A)}{\mu(\Omega)}\)</span>（长度/面积/体积），核心是画图建模。
+- 常用技巧：<strong>对立事件</strong>（"至少……"）、<strong>捆绑法</strong>（相邻）、<strong>插空法</strong>（隔人）。
+- <strong>常见坑</strong>：① 无限样本空间（等车、线段取点）不能套古典概型；② 房间/生日问题先分清"指定"还是"不指定"；③ 约会问题画图别把区域画错，<span class="arithmatex">\(|x-y|\le15\)</span> 是正方形内夹在两条平行线之间的带状区域。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,876 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC3%E7%AB%A0%20%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/p28%203.4%20%E8%BF%9E%E7%BB%AD%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8FX%E4%B8%8EY%E7%9B%B8%E4%BA%92%E7%8B%AC%E7%AB%8B%E7%9A%84%E5%88%A4%E5%AE%9A%E3%80%902%E3%80%91/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>《概率论与数理统计》3.4 连续型随机变量X与Y相互独立的判定【2】 - 笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#34-xy2-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              《概率论与数理统计》3.4 连续型随机变量X与Y相互独立的判定【2】 - 笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、例7：两个标准正态分布独立
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、一般结论：两个正态独立 → 二维正态
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、四条注释与两条推论
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、四条注释与两条推论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rho0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注释 1 二维正态 + 独立 ⟹ \(\rho=0\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注释 2 矩形均匀 → 独立，圆域均匀 → 不独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注释 3 联合 → 边缘（能求），边缘 → 联合（求不出）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注释 4 独立 ⟹ 条件密度 = 边缘密度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        推论 独立随机变量的函数也独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、补充
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="34-xy2-">《概率论与数理统计》3.4 连续型随机变量X与Y相互独立的判定【2】 - 笔记<a class="headerlink" href="#34-xy2-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自 B 站《概率论与数理统计》教学视频 2.0 版本（up：宋浩老师官方）p28。
+前置：p22 3.2 二维连续型随机变量的边缘密度、p13 2.4 连续型随机变量及其密度函数、p24 3.3 连续型随机变量的条件密度。</p>
+</blockquote>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#一例7两个标准正态分布独立">一、例7：两个标准正态分布独立</a></li>
+<li><a href="#二一般结论两个正态独立--二维正态">二、一般结论：两个正态独立 → 二维正态</a></li>
+<li><a href="#三四条注释与两条推论">三、四条注释与两条推论</a></li>
+<li><a href="#四补充">四、补充</a></li>
+<li><a href="#本节重点">本节重点</a></li>
+</ul>
+<h2 id="7">一、例7：两个标准正态分布独立<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(X\sim N(0,1)\)</span>，<span class="arithmatex">\(Y\sim N(0,1)\)</span>，且 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 相互独立，求联合密度。</p>
+<p><strong>解</strong>：标准正态分布的密度为</p>
+<div class="arithmatex">\[f_X(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}},\qquad f_Y(y)=\frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}\qquad(-\infty&lt;x,y&lt;+\infty)\]</div>
+<p>因为独立，联合密度 = 边缘密度相乘：</p>
+<div class="arithmatex">\[f(x,y)=f_X(x)f_Y(y)=\frac{1}{\sqrt{2\pi}}\cdot\frac{1}{\sqrt{2\pi}}\,e^{-\frac{x^2}{2}-\frac{y^2}{2}}=\frac{1}{2\pi}e^{-\frac{x^2+y^2}{2}}\]</div>
+<p><strong>人话</strong>：两个标准正态独立，联合密度就是把两个"钟形"乘起来，得到一个二维的"帽子"，指数上是 <span class="arithmatex">\(x^2+y^2\)</span>。这就是二维正态分布 <span class="arithmatex">\(N(0,0;1,1;0)\)</span>（一元正态见 <strong>p15 2.4 正态分布</strong>）。</p>
+<h2 id="_2">二、一般结论：两个正态独立 → 二维正态<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>更一般地，若 <span class="arithmatex">\(X\sim N(\mu_1,\sigma_1^2)\)</span>，<span class="arithmatex">\(Y\sim N(\mu_2,\sigma_2^2)\)</span>，且相互独立，则</p>
+<div class="arithmatex">\[(X,Y)\sim N(\mu_1,\mu_2;\ \sigma_1^2,\sigma_2^2;\ 0)\]</div>
+<p>即 <span class="arithmatex">\((X,Y)\)</span> 服从<strong>二维正态分布</strong>，其中最后一个参数是相关系数 <span class="arithmatex">\(\rho=0\)</span>。</p>
+<p><strong>人话</strong>：两个独立的正态随机变量，拼在一起一定是二维正态；由于独立，相关系数 <span class="arithmatex">\(\rho=0\)</span>。这个结论做选择、填空题（"问 <span class="arithmatex">\((X,Y)\)</span> 是什么分布"）可以直接用。</p>
+<h2 id="_3">三、四条注释与两条推论<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="1-rho0">注释 1　二维正态 + 独立 ⟹ <span class="arithmatex">\(\rho=0\)</span><a class="headerlink" href="#1-rho0" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\((X,Y)\)</span> 服从二维正态，且 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 独立，则相关系数 <span class="arithmatex">\(\rho=0\)</span>。</p>
+<p><strong>人话</strong>：对二维正态而言，"独立"意味着 <span class="arithmatex">\(\rho=0\)</span>。反过来要特别注意——一般情形下 <span class="arithmatex">\(\rho=0\)</span>（不相关）<strong>不一定</strong>独立，但<strong>二维正态是个特例</strong>：二维正态里 <span class="arithmatex">\(\rho=0\)</span> 与独立是等价的。</p>
+<h3 id="2">注释 2　矩形均匀 → 独立，圆域均匀 → 不独立<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>若 <span class="arithmatex">\((X,Y)\)</span> 在一个<strong>矩形区域</strong>上服从均匀分布，则 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> <strong>独立</strong>（两个边缘密度都是常数）；</li>
+<li>若 <span class="arithmatex">\((X,Y)\)</span> 在一个<strong>圆域</strong>上服从均匀分布，则 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> <strong>不独立</strong>（<span class="arithmatex">\(X\)</span> 的取值会牵制 <span class="arithmatex">\(Y\)</span> 的取值范围）。</li>
+</ul>
+<p><strong>人话</strong>：矩形能"横竖拆开"，所以独立；圆是"横竖耦合"的（<span class="arithmatex">\(x\)</span> 定了，<span class="arithmatex">\(y\)</span> 的范围就是 <span class="arithmatex">\(\pm\sqrt{r^2-x^2}\)</span>），所以不独立。这个结论在 <strong>p22 3.2 二维连续型随机变量的边缘密度</strong> 里详细推过。</p>
+<h3 id="3">注释 3　联合 → 边缘（能求），边缘 → 联合（求不出）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>有<strong>联合密度</strong>，分别对 <span class="arithmatex">\(y\)</span>、对 <span class="arithmatex">\(x\)</span> 积分，就能得到两个<strong>边缘密度</strong>；</li>
+<li>但只有<strong>边缘密度</strong>，一般<strong>推不出联合密度</strong>；</li>
+<li><strong>唯一例外</strong>：若已知 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> <strong>独立</strong>，则 <span class="arithmatex">\(f(x,y)=f_X(x)f_Y(y)\)</span>，可以相乘还原。</li>
+</ul>
+<h3 id="4">注释 4　独立 ⟹ 条件密度 = 边缘密度<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 独立，则</p>
+<div class="arithmatex">\[f_{X\mid Y}(x\mid y)=\frac{f(x,y)}{f_Y(y)}=\frac{f_X(x)f_Y(y)}{f_Y(y)}=f_X(x)\]</div>
+<p><strong>人话</strong>：知道了 <span class="arithmatex">\(Y\)</span> 的值，对 <span class="arithmatex">\(X\)</span> 的密度毫无影响，条件密度直接等于 <span class="arithmatex">\(X\)</span> 的边缘密度。这是"条件分布 = 边缘分布"的连续版（离散版对照 <strong>p25 3.4 离散型随机变量X与Y相互独立的判定</strong> 的结论 2；条件密度的定义见 <strong>p24 3.3 连续型随机变量的条件密度</strong>）。</p>
+<h3 id="_4">推论　独立随机变量的函数也独立<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 独立，<span class="arithmatex">\(g_1(x)\)</span>、<span class="arithmatex">\(g_2(y)\)</span> 是两个<strong>一元连续函数</strong>，则 <span class="arithmatex">\(g_1(X)\)</span> 与 <span class="arithmatex">\(g_2(Y)\)</span> 也独立。</p>
+<p>例如：</p>
+<ul>
+<li><span class="arithmatex">\(X^2\)</span> 与 <span class="arithmatex">\(Y^2\)</span> 独立（<span class="arithmatex">\(g_1(x)=x^2,\ g_2(y)=y^2\)</span>）；</li>
+<li><span class="arithmatex">\(aX+b\)</span> 与 <span class="arithmatex">\(cY+d\)</span> 独立（<span class="arithmatex">\(g_1(x)=ax+b,\ g_2(y)=cy+d\)</span>，其中 <span class="arithmatex">\(a\neq0,\ c\neq0\)</span>）。</li>
+</ul>
+<p><strong>人话</strong>：独立性是"基因"，会遗传给各自构造的新变量——只要两个新变量分别只由 <span class="arithmatex">\(X\)</span>、只由 <span class="arithmatex">\(Y\)</span> 构造，且函数连续，独立就保住了。</p>
+<h2 id="_5">四、补充<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>本节是 3.4 连续型独立性的收尾，把前面几节课的零散结论（矩形/圆域均匀、联合与边缘的关系、条件密度）做了一次汇总。</li>
+<li>相关系数 <span class="arithmatex">\(\rho\)</span> 的完整定义与性质，会在后面相关系数相关章节正式讲，这里只需记住"二维正态 + 独立 ⟺ <span class="arithmatex">\(\rho=0\)</span>"。</li>
+</ul>
+<hr />
+<h2 id="_6">本节重点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>本节重点</strong>：
+- 要点 1：<span class="arithmatex">\(X\sim N(\mu_1,\sigma_1^2)\)</span>、<span class="arithmatex">\(Y\sim N(\mu_2,\sigma_2^2)\)</span> 独立 <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\((X,Y)\)</span> 服从二维正态，<span class="arithmatex">\(\rho=0\)</span>。
+- 要点 2：矩形均匀 → 独立；圆域均匀 → 不独立。
+- 要点 3：独立 ⟹ 条件密度 = 边缘密度；独立随机变量的一元连续函数仍独立。
+- <strong>常见坑</strong>：把"<span class="arithmatex">\(\rho=0\)</span> ⟹ 独立"当成普遍结论——它只在二维正态（联合密度可分解）时成立；"平方后仍独立"也以"<span class="arithmatex">\(X\)</span>、<span class="arithmatex">\(Y\)</span> 独立"为前提，不要凭空认定。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

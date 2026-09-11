@@ -1,0 +1,1200 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86_RISC-V/%E7%AC%AC%E4%BA%8C%E7%AB%A0/02_%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B8%8E%E5%B8%B8%E6%95%B0%E6%9E%84%E9%80%A0/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>RISC-V 数据操作与常数构造 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#risc-v" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RISC-V 数据操作与常数构造
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、加载与存储指令详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、加载与存储指令详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 核心逻辑速查表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 加载指令 (Load) —— 从内存读数据到寄存器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 加载指令 (Load) —— 从内存读数据到寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-lb-lh-lw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 有符号加载 (lb, lh, lw)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-lbu-lhu-lwu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 无符号加载 (lbu, lhu, lwu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 存储指令 (Store) —— 从寄存器存数据到内存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 存储指令 (Store) —— 从寄存器存数据到内存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sb-sh-sw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        存储 (sb, sh, sw)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-lw-lwu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 为什么要区分 lw 和 lwu？（易错点）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 指令格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、构造大常数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、构造大常数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-lui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 为什么需要 lui？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-lui-load-upper-immediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 lui 指令（Load Upper Immediate）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-lui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 示例：lui 单独执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-addi-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 配合 addi 构建完整 32 位常数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-addi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 注意：addi 的立即数是有符号的
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、数据操作总结
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、数据操作总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 加载存储口诀
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 常数构造步骤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 实际应用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="risc-v">RISC-V 数据操作与常数构造<a class="headerlink" href="#risc-v" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本文档整合了 RISC-V 加载存储指令和常数构造方法，涵盖从内存访问到大常数生成的完整数据操作流程。</p>
+</blockquote>
+<hr />
+<h2 id="_1">一、加载与存储指令详解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 核心逻辑速查表<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>英文全称</th>
+<th>数据大小</th>
+<th>填充方式 (扩展)</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>lb</strong></td>
+<td>Load Byte</td>
+<td>8 bit</td>
+<td><strong>有符号扩展 (Sign Extend)</strong></td>
+<td>取 1 字节，高位补符号位</td>
+</tr>
+<tr>
+<td><strong>lh</strong></td>
+<td>Load Halfword</td>
+<td>16 bit</td>
+<td><strong>有符号扩展</strong></td>
+<td>取 2 字节，高位补符号位</td>
+</tr>
+<tr>
+<td><strong>lw</strong></td>
+<td>Load Word</td>
+<td>32 bit</td>
+<td><strong>有符号扩展</strong></td>
+<td>取 4 字节，高位补符号位</td>
+</tr>
+<tr>
+<td><strong>lbu</strong></td>
+<td>Load Byte Unsigned</td>
+<td>8 bit</td>
+<td><strong>零扩展 (Zero Extend)</strong></td>
+<td>取 1 字节，高位补 0</td>
+</tr>
+<tr>
+<td><strong>lhu</strong></td>
+<td>Load Halfword Unsigned</td>
+<td>16 bit</td>
+<td><strong>零扩展</strong></td>
+<td>取 2 字节，高位补 0</td>
+</tr>
+<tr>
+<td><strong>lwu</strong></td>
+<td>Load Word Unsigned</td>
+<td>32 bit</td>
+<td><strong>零扩展</strong></td>
+<td>取 4 字节，高位补 0</td>
+</tr>
+<tr>
+<td><strong>sb</strong></td>
+<td>Store Byte</td>
+<td>8 bit</td>
+<td><strong>直接存储</strong></td>
+<td>只存最低 8 位</td>
+</tr>
+<tr>
+<td><strong>sh</strong></td>
+<td>Store Halfword</td>
+<td>16 bit</td>
+<td><strong>直接存储</strong></td>
+<td>只存最低 16 位</td>
+</tr>
+<tr>
+<td><strong>sw</strong></td>
+<td>Store Word</td>
+<td>32 bit</td>
+<td><strong>直接存储</strong></td>
+<td>存 32 位</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="12-load">1.2 加载指令 (Load) —— 从内存读数据到寄存器<a class="headerlink" href="#12-load" title="Permanent link">&para;</a></h3>
+<p>RISC-V 是 64 位架构（RISC-V 64），寄存器是 64 位宽的，但内存数据可能只有 8/16/32 位。读进来后必须处理<strong>高位</strong>。</p>
+<h4 id="a-lb-lh-lw">A. 有符号加载 (<code>lb</code>, <code>lh</code>, <code>lw</code>)<a class="headerlink" href="#a-lb-lh-lw" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>原理</strong>：将读取的数据的 <strong>符号位（最高位）</strong> 复制到寄存器的所有高位上</li>
+<li><strong>目的</strong>：保持负数的正确性。例如 <code>0xFF</code> (byte) 代表 -1，加载到 64 位寄存器应变为 <code>0xFFFFFFFFFFFFFFFF</code></li>
+<li><strong>例子</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>lb  t0, 0(a0)   # 从内存取 1 字节，如果最高位是 1，t0 高位全填 1
+</code></pre></div></td></tr></table></div></li>
+</ul>
+<h4 id="b-lbu-lhu-lwu">B. 无符号加载 (<code>lbu</code>, <code>lhu</code>, <code>lwu</code>)<a class="headerlink" href="#b-lbu-lhu-lwu" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>原理</strong>：直接把寄存器的<strong>高位全部补 0</strong></li>
+<li><strong>目的</strong>：用于处理字符、数组索引、地址等非负数</li>
+<li><strong>例子</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>lbu t1, 1(a0)   # 取 1 字节，高位全填 0 (0~255)
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>lwu t2, 4(a0)   # 取 4 字节，高位全填 0 (0~4294967295)
+</code></pre></div></td></tr></table></div></li>
+</ul>
+<hr />
+<h3 id="13-store">1.3 存储指令 (Store) —— 从寄存器存数据到内存<a class="headerlink" href="#13-store" title="Permanent link">&para;</a></h3>
+<p>存储时不需要扩展，直接截断。</p>
+<h4 id="sb-sh-sw">存储 (<code>sb</code>, <code>sh</code>, <code>sw</code>)<a class="headerlink" href="#sb-sh-sw" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>原理</strong>：只取寄存器<strong>最右边</strong>对应的位数写入内存，其余位忽略</li>
+<li><strong>例子</strong>：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>sb  ra, 0(sp)  # 存 ra 寄存器的最低 8 位到内存
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>sh  ra, 0(sp)  # 存 ra 寄存器的最低 16 位到内存
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>sw  ra, 0(sp)  # 存 ra 寄存器的最低 32 位到内存
+</code></pre></div></td></tr></table></div></li>
+</ul>
+<hr />
+<h3 id="14-lw-lwu">1.4 为什么要区分 <code>lw</code> 和 <code>lwu</code>？（易错点）<a class="headerlink" href="#14-lw-lwu" title="Permanent link">&para;</a></h3>
+<p>在 <strong>RISC-V 64</strong> 中：</p>
+<ul>
+<li><strong><code>lw</code></strong>：加载 32 位并<strong>符号扩展</strong>到 64 位。如果你的数据本来是无符号的 32 位大数，用 <code>lw</code> 会导致符号位误判（变成负数）</li>
+<li><strong><code>lwu</code></strong>：加载 32 位并<strong>零扩展</strong>到 64 位。<strong>这是访问 32 位无符号整数的正确指令</strong></li>
+</ul>
+<hr />
+<h3 id="15">1.5 指令格式<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
+<p>所有这些指令都属于 <strong>I-type (加载)</strong> 或 <strong>S-type (存储)</strong> 格式：</p>
+<ul>
+<li>
+<p><strong>加载 (I-type)</strong>: <code>lb rd, offset(rs1)</code></p>
+<ul>
+<li><code>rs1</code>: 基地址寄存器</li>
+<li><code>rd</code>: 目标寄存器（结果存这里）</li>
+<li><code>offset</code>: 12 位立即数偏移</li>
+</ul>
+</li>
+<li>
+<p><strong>存储 (S-type)</strong>: <code>sb rs2, offset(rs1)</code></p>
+<ul>
+<li><code>rs1</code>: 基地址寄存器</li>
+<li><code>rs2</code>: 源寄存器（要存的数据）</li>
+<li><code>offset</code>: 12 位立即数偏移</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="_2">二、构造大常数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><img alt="Pasted image 20260330204015.png" src="../%E5%9B%BE%E7%89%87/Pasted%20image%2020260330204015.png" /></p>
+<h3 id="21-lui">2.1 为什么需要 <code>lui</code>？<a class="headerlink" href="#21-lui" title="Permanent link">&para;</a></h3>
+<p>RISC-V 的常规 I-type 指令只有 <strong>12 位立即数</strong>，范围仅为 ±2048，根本放不下完整的 32 位常数。</p>
+<p>因此，构造任意 32 位常数必须分两步：</p>
+<ul>
+<li><strong><code>lui</code></strong>：负责填充高 20 位</li>
+<li><strong><code>addi</code></strong>：负责填充低 12 位</li>
+</ul>
+<p><strong>20 + 12 = 32 位</strong></p>
+<hr />
+<h3 id="22-lui-load-upper-immediate">2.2 <code>lui</code> 指令（Load Upper Immediate）<a class="headerlink" href="#22-lui-load-upper-immediate" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nf">lui</span><span class="w"> </span><span class="no">rd</span><span class="p">,</span><span class="w"> </span><span class="no">immediate</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>作用：</strong></p>
+<ul>
+<li>把 <strong>20 位无符号立即数</strong> 放到寄存器的 <strong>bit[31:12]</strong></li>
+<li><strong>bit[11:0] 全部清零</strong></li>
+<li>64 位架构下，自动将 <strong>bit[31]</strong> 符号扩展到 <strong>bit[63:32]</strong></li>
+</ul>
+<p><strong>一句话：<code>lui</code> = 把常数放到高 20 位，低 12 位归零。</strong></p>
+<hr />
+<h3 id="23-lui">2.3 示例：<code>lui</code> 单独执行<a class="headerlink" href="#23-lui" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nf">lui</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">0x3D0</span><span class="w">       </span><span class="c1"># 0x3D0 = 976</span>
+</code></pre></div></td></tr></table></div>
+<p>执行后，寄存器 <code>x19</code> 的值为：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>0x00000000_003D0000
+</code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="24-addi-32">2.4 配合 <code>addi</code> 构建完整 32 位常数<a class="headerlink" href="#24-addi-32" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nf">lui</span><span class="w">  </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">0x3D0</span><span class="w">       </span><span class="c1"># x19 = 0x003D0000</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nf">addi</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">0x80</span><span class="w">   </span><span class="c1"># 0x80 = 128</span>
+</code></pre></div></td></tr></table></div>
+<p>现在：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>x19 = 0x003D0000 + 0x80 = 0x003D0080
+</code></pre></div></td></tr></table></div>
+<p>最终效果：寄存器 <code>x19</code> 中存放了完整的 32 位常数 <code>0x0003D0080</code>。</p>
+<hr />
+<h3 id="25-addi">2.5 注意：<code>addi</code> 的立即数是有符号的<a class="headerlink" href="#25-addi" title="Permanent link">&para;</a></h3>
+<p><code>addi</code> 的 12 位立即数是<strong>有符号数</strong>（范围：-2048 ～ +2047）。</p>
+<p>如果目标常数的低 12 位 <strong>≥ 0x800</strong>（例如 <code>0xF00</code>），直接相加会产生符号扩展错误：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="nf">lui</span><span class="w">  </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">0x3D0</span><span class="w">       </span><span class="c1"># x19 = 0x003D0000</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="nf">addi</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">0xF00</span><span class="w">   </span><span class="c1"># 错误！0xF00 被当作 -256，结果变成 0x003CF000</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>正确做法</strong>：调整 <code>lui</code> 的高位，让 <code>addi</code> 使用一个正数立即数：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nf">lui</span><span class="w">  </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">0x3D1</span><span class="w">       </span><span class="c1"># x19 = 0x003D1000</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="nf">addi</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">-0</span><span class="no">x100</span><span class="w">  </span><span class="c1"># 0x100 = 256，最终 0x003D1000 - 0x100 = 0x003D0F00</span>
+</code></pre></div></td></tr></table></div>
+<p>或者更简单地，直接使用伪指令 <strong><code>li</code></strong>，让汇编器自动处理：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nf">li</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">0x3D0F00</span><span class="w">      </span><span class="c1"># 汇编器自动拆成合适的 lui + addi 组合</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h2 id="_3">三、数据操作总结<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 加载存储口诀<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>加载看后缀</strong>：带 <code>u</code> 的高位补 0，不带 <code>u</code> 的高位补符号</li>
+<li><strong>存储看宽度</strong>：<code>sb</code>(8) / <code>sh</code>(16) / <code>sw</code>(32)，存多少取多少</li>
+</ul>
+<h3 id="32">3.2 常数构造步骤<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>指令</th>
+<th>作用</th>
+<th>覆盖位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>lui rd, imm20</code></td>
+<td>填充 bit[31:12]，低 12 位清零</td>
+<td>高 20 位</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>addi rd, rd, imm12</code></td>
+<td>填充 bit[11:0]</td>
+<td>低 12 位</td>
+</tr>
+<tr>
+<td>结果</td>
+<td>—</td>
+<td>完整 32 位常数</td>
+<td>32 位</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心原因</strong>：单条指令的 12 位立即数太小，必须 <code>lui + addi</code> 配合才能构造任意 32 位常数。</p>
+<h3 id="33">3.3 实际应用场景<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐指令组合</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加载小常数</td>
+<td><code>li rd, imm</code></td>
+<td>汇编器自动选择最优方式</td>
+</tr>
+<tr>
+<td>加载大常数</td>
+<td><code>lui + addi</code></td>
+<td>手动控制高位和低位</td>
+</tr>
+<tr>
+<td>加载全局变量地址</td>
+<td><code>lui + lw</code></td>
+<td>基址+偏移访问</td>
+</tr>
+<tr>
+<td>函数调用</td>
+<td><code>auipc + jalr</code></td>
+<td>位置无关代码</td>
+</tr>
+<tr>
+<td>动态链接</td>
+<td><code>auipc</code></td>
+<td>相对地址计算</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>本文档整合完成，涵盖了RISC-V数据操作的核心知识点。</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

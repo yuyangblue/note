@@ -1,0 +1,953 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC3%E7%AB%A0%20%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/p32%203.5%20max%7BX%2CY%7D%20min%7BX%2CY%7D%E7%9A%84%E5%88%86%E5%B8%83/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>《概率论与数理统计》3.5 max{X,Y} min{X,Y}的分布 - 笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#35-maxxy-minxy-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              《概率论与数理统计》3.5 max{X,Y} min{X,Y}的分布 - 笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、 两个常考问题：取最大与取最小
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#max" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、 max 的分布函数公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、 min 的分布函数公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、 完整例题：均匀分布加指数分布
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、 串联并联的理解与独立同分布推广
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、 补充：求导捷径
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="35-maxxy-minxy-">《概率论与数理统计》3.5 max{X,Y} min{X,Y}的分布 - 笔记<a class="headerlink" href="#35-maxxy-minxy-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自 B 站《概率论与数理统计》教学视频 2.0 版本（up：宋浩老师官方）p32。
+前置：p30 3.5 两个随机变量函数的分布（连续型）、p14 2.4 均匀分布和指数分布。</p>
+</blockquote>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#一两个常考问题取最大与取最小">一、 两个常考问题：取最大与取最小</a></li>
+<li><a href="#二max-的分布函数公式">二、 max 的分布函数公式</a></li>
+<li><a href="#三min-的分布函数公式">三、 min 的分布函数公式</a></li>
+<li><a href="#四完整例题均匀分布加指数分布">四、 完整例题：均匀分布加指数分布</a></li>
+<li><a href="#五串联并联的理解与独立同分布推广">五、 串联并联的理解与独立同分布推广</a></li>
+<li><a href="#六补充求导捷径">六、 补充：求导捷径</a></li>
+<li><a href="#本节重点">本节重点</a></li>
+</ul>
+<hr />
+<h2 id="_2">一、 两个常考问题：取最大与取最小<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(X,Y\)</span> 是两个随机变量，定义两个新随机变量：</p>
+<div class="arithmatex">\[M=\max\{X,Y\},\qquad N=\min\{X,Y\}\]</div>
+<p>它们在实际中非常常见（系统寿命、多人等待时间、最大值最小值等），而且<strong>有固定套路</strong>：它们的分布函数可以直接用 <span class="arithmatex">\(X,Y\)</span> 各自的分布函数"拼"出来，不用像 p30 那样做复杂积分。</p>
+<p>先交代符号（视频里老师特意强调，因为符号最容易绕晕）：</p>
+<ul>
+<li><span class="arithmatex">\(M,N\)</span> 是<strong>随机变量</strong>（大写），代表"取最大 / 取最小"后的结果；</li>
+<li><span class="arithmatex">\(z\)</span> 是分布函数里的<strong>自变量</strong>（小写），<span class="arithmatex">\(F_M(z)=P\{M\le z\}\)</span>；</li>
+<li><span class="arithmatex">\(F_X,F_Y\)</span> 是 <span class="arithmatex">\(X,Y\)</span> 各自的分布函数。</li>
+</ul>
+<h2 id="max">二、 max 的分布函数公式<a class="headerlink" href="#max" title="Permanent link">&para;</a></h2>
+<p><strong>目标</strong>：<span class="arithmatex">\(F_M(z)=P\{M\le z\}=P\{\max\{X,Y\}\le z\}\)</span>。</p>
+<p><strong>关键等价关系</strong>：最大值 <span class="arithmatex">\(\le z\)</span>，等价于"<span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> <strong>都</strong> <span class="arithmatex">\(\le z\)</span>"。因为最大值都不超过 <span class="arithmatex">\(z\)</span>，那每一个分量当然也不超过 <span class="arithmatex">\(z\)</span>。</p>
+<blockquote>
+<p>直观理解（宋浩的比喻）：全班<strong>最高</strong>的同学都没你高，那每个同学都没你高。</p>
+</blockquote>
+<p>设 <span class="arithmatex">\(X,Y\)</span> 相互独立，则：</p>
+<div class="arithmatex">\[F_M(z)=P\{X\le z,\ Y\le z\}=P\{X\le z\}\,P\{Y\le z\}=F_X(z)\,F_Y(z)\]</div>
+<p>人话：max 的分布函数 = 两个分布函数<strong>相乘</strong>。因为"都 <span class="arithmatex">\(\le z\)</span>"这件事，在两个独立变量身上就是"各自的概率相乘"。</p>
+<h2 id="min">三、 min 的分布函数公式<a class="headerlink" href="#min" title="Permanent link">&para;</a></h2>
+<p><strong>目标</strong>：<span class="arithmatex">\(F_N(z)=P\{N\le z\}=P\{\min\{X,Y\}\le z\}\)</span>。</p>
+<p><strong>关键陷阱</strong>：这里<strong>不能</strong>照抄 max 的思路——最小值 <span class="arithmatex">\(\le z\)</span> 只要求"至少有一个 <span class="arithmatex">\(\le z\)</span>"，<strong>推不出</strong>"两个都 <span class="arithmatex">\(\le z\)</span>"。</p>
+<blockquote>
+<p>直观理解（宋浩的比喻）：全班<strong>最矮</strong>的同学比你矮，不能保证每个同学都比你矮（班里可能还有 2 米的大高个）。</p>
+</blockquote>
+<p>所以换个方向，用<strong>对立事件</strong>：<span class="arithmatex">\(N&gt;z\)</span>（最小值 <span class="arithmatex">\(&gt;z\)</span>）等价于"<span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> <strong>都</strong> <span class="arithmatex">\(&gt;z\)</span>"——最小值都比 <span class="arithmatex">\(z\)</span> 大，那每个分量都比 <span class="arithmatex">\(z\)</span> 大。</p>
+<div class="arithmatex">\[F_N(z)=P\{N\le z\}=1-P\{N&gt;z\}=1-P\{X&gt;z,\ Y&gt;z\}\]</div>
+<p>独立 → 拆开：</p>
+<div class="arithmatex">\[F_N(z)=1-P\{X&gt;z\}\,P\{Y&gt;z\}=1-[1-F_X(z)]\,[1-F_Y(z)]\]</div>
+<p>（最后一步：<span class="arithmatex">\(P\{X&gt;z\}=1-P\{X\le z\}=1-F_X(z)\)</span>，<span class="arithmatex">\(Y\)</span> 同理。）</p>
+<p>人话：min 的分布函数 = <span class="arithmatex">\(1\)</span> 减去"两个都超过 <span class="arithmatex">\(z\)</span> 的概率"。"两个都超过 <span class="arithmatex">\(z\)</span>"的概率 = 各自"超过 <span class="arithmatex">\(z\)</span>"的概率相乘，而"超过 <span class="arithmatex">\(z\)</span>"的概率就是 <span class="arithmatex">\(1-F\)</span>。</p>
+<blockquote>
+<p>对比记忆：max 直接"都 <span class="arithmatex">\(\le z\)</span>"相乘；min 走对立事件"都 <span class="arithmatex">\(&gt;z\)</span>"再取反。一个正着乘，一个反着乘。</p>
+</blockquote>
+<h2 id="_3">四、 完整例题：均匀分布加指数分布<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><strong>例</strong>：设 <span class="arithmatex">\(X,Y\)</span> 相互独立，<span class="arithmatex">\(X\sim U(0,1)\)</span>（<span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(1\)</span> 的均匀分布），<span class="arithmatex">\(Y\sim E(3)\)</span>（参数 <span class="arithmatex">\(\lambda=3\)</span> 的指数分布）。令 <span class="arithmatex">\(M=\max\{X,Y\}\)</span>，<span class="arithmatex">\(N=\min\{X,Y\}\)</span>，求 <span class="arithmatex">\(M,N\)</span> 的概率密度。</p>
+<p><strong>Step 1：写出 <span class="arithmatex">\(X,Y\)</span> 的密度与分布函数。</strong></p>
+<p><span class="arithmatex">\(X\sim U(0,1)\)</span>：</p>
+<div class="arithmatex">\[f_X(x)=\begin{cases}1,&amp;0\le x\le1\\ 0,&amp;\text{其他}\end{cases},\qquad F_X(x)=\begin{cases}0,&amp;x&lt;0\\ x,&amp;0\le x&lt;1\\ 1,&amp;x\ge1\end{cases}\]</div>
+<p><span class="arithmatex">\(Y\sim E(3)\)</span>：</p>
+<div class="arithmatex">\[f_Y(y)=\begin{cases}3e^{-3y},&amp;y&gt;0\\ 0,&amp;y\le0\end{cases},\qquad F_Y(y)=\begin{cases}0,&amp;y\le0\\ 1-e^{-3y},&amp;y&gt;0\end{cases}\]</div>
+<p>（<span class="arithmatex">\(F_Y\)</span> 由 <span class="arithmatex">\(f_Y\)</span> 积分得到：<span class="arithmatex">\(\int_0^y 3e^{-3t}\,dt=1-e^{-3y}\)</span>。均匀分布与指数分布的定义见 <strong>p14 2.4 均匀分布和指数分布</strong>。）</p>
+<p><strong>Step 2：求 <span class="arithmatex">\(M=\max\{X,Y\}\)</span>。</strong></p>
+<p><span class="arithmatex">\(F_M(z)=F_X(z)\,F_Y(z)\)</span>，分段（换段点 0 和 1）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(z\)</span> 的范围</th>
+<th><span class="arithmatex">\(F_X(z)\)</span></th>
+<th><span class="arithmatex">\(F_Y(z)\)</span></th>
+<th><span class="arithmatex">\(F_M(z)=F_X(z)\,F_Y(z)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(z&lt;0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0\le z&lt;1\)</span></td>
+<td><span class="arithmatex">\(z\)</span></td>
+<td><span class="arithmatex">\(1-e^{-3z}\)</span></td>
+<td><span class="arithmatex">\(z\,(1-e^{-3z})\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(z\ge1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1-e^{-3z}\)</span></td>
+<td><span class="arithmatex">\(1-e^{-3z}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>求导得密度：</p>
+<div class="arithmatex">\[f_M(z)=\begin{cases}0,&amp;z&lt;0\\ 1-e^{-3z}+3z\,e^{-3z},&amp;0&lt;z&lt;1\\ 3e^{-3z},&amp;z\ge1\end{cases}\]</div>
+<p>（<span class="arithmatex">\(0&lt;z&lt;1\)</span> 段是乘积求导：<span class="arithmatex">\((z)'\cdot(1-e^{-3z})+z\cdot(1-e^{-3z})'=1-e^{-3z}+z\cdot3e^{-3z}\)</span>；<span class="arithmatex">\(z\ge1\)</span> 段是 <span class="arithmatex">\((1-e^{-3z})'=3e^{-3z}\)</span>。）</p>
+<p><strong>Step 3：求 <span class="arithmatex">\(N=\min\{X,Y\}\)</span>。</strong></p>
+<p><span class="arithmatex">\(F_N(z)=1-[1-F_X(z)]\,[1-F_Y(z)]\)</span>。先分别算"超过 <span class="arithmatex">\(z\)</span>"的概率：</p>
+<div class="arithmatex">\[1-F_X(z)=\begin{cases}1,&amp;z&lt;0\\ 1-z,&amp;0\le z&lt;1\\ 0,&amp;z\ge1\end{cases},\qquad 1-F_Y(z)=\begin{cases}1,&amp;z\le0\\ e^{-3z},&amp;z&gt;0\end{cases}\]</div>
+<p>相乘再取反：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(z\)</span> 的范围</th>
+<th><span class="arithmatex">\(1-F_X(z)\)</span></th>
+<th><span class="arithmatex">\(1-F_Y(z)\)</span></th>
+<th>乘积 <span class="arithmatex">\((1-F_X)(1-F_Y)\)</span></th>
+<th><span class="arithmatex">\(F_N(z)=1-\)</span> 乘积</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(z&lt;0\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0\le z&lt;1\)</span></td>
+<td><span class="arithmatex">\(1-z\)</span></td>
+<td><span class="arithmatex">\(e^{-3z}\)</span></td>
+<td><span class="arithmatex">\((1-z)e^{-3z}\)</span></td>
+<td><span class="arithmatex">\(1-(1-z)e^{-3z}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(z\ge1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(e^{-3z}\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>求导得密度：</p>
+<div class="arithmatex">\[f_N(z)=\begin{cases}(4-3z)\,e^{-3z},&amp;0&lt;z&lt;1\\ 0,&amp;\text{其他}\end{cases}\]</div>
+<p>（<span class="arithmatex">\(0&lt;z&lt;1\)</span> 段求导：<span class="arithmatex">\(-[(1-z)e^{-3z}]'=-[-e^{-3z}-3(1-z)e^{-3z}]=[1+3(1-z)]e^{-3z}=(4-3z)e^{-3z}\)</span>。）</p>
+<blockquote>
+<p>检验：<span class="arithmatex">\(N=\min\{X,Y\}\)</span> 最小取 <span class="arithmatex">\(0\)</span>（<span class="arithmatex">\(X\)</span> 可为 <span class="arithmatex">\(0\)</span>），最大取 <span class="arithmatex">\(1\)</span>（被 <span class="arithmatex">\(X\sim U(0,1)\)</span> 卡住，<span class="arithmatex">\(X\le1\)</span>），所以 <span class="arithmatex">\(f_N\)</span> 只活在 <span class="arithmatex">\([0,1]\)</span>；<span class="arithmatex">\(M=\max\{X,Y\}\)</span> 则可以任意大（<span class="arithmatex">\(Y\)</span> 无上界），所以 <span class="arithmatex">\(z\ge1\)</span> 后仍是 <span class="arithmatex">\(Y\)</span> 的尾巴 <span class="arithmatex">\(3e^{-3z}\)</span>。</p>
+</blockquote>
+<h2 id="_4">五、 串联并联的理解与独立同分布推广<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>串联 / 并联系统（最直观的应用）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>正常工作条件</th>
+<th>系统寿命 =</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>串联</strong>（一条线串起来，一个坏全坏）</td>
+<td>全部元件都正常</td>
+<td><span class="arithmatex">\(\min\{X_1,\dots,X_n\}\)</span></td>
+</tr>
+<tr>
+<td><strong>并联</strong>（并列冗余，坏光了才坏）</td>
+<td>至少一个元件正常</td>
+<td><span class="arithmatex">\(\max\{X_1,\dots,X_n\}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>人话：<strong>串联 = 全部成功 = 取最小</strong>（寿命由"最脆弱"的那个决定）；<strong>并联 = 至少一个成功 = 取最大</strong>（寿命由"最强"的那个撑住）。所以 max/min 的公式正好对应并联 / 串联系统寿命的分布。</p>
+<p><strong>独立同分布的推广</strong>（视频里是 <span class="arithmatex">\(n=2\)</span> 的特例）：若 <span class="arithmatex">\(X_1,\dots,X_n\)</span> 相互独立且同分布，共同分布函数为 <span class="arithmatex">\(F(x)\)</span>，令 <span class="arithmatex">\(M=\max\{X_1,\dots,X_n\}\)</span>、<span class="arithmatex">\(N=\min\{X_1,\dots,X_n\}\)</span>，则：</p>
+<div class="arithmatex">\[F_M(z)=[F(z)]^n,\qquad F_N(z)=1-[1-F(z)]^n\]</div>
+<p>人话：max 是"每个都 <span class="arithmatex">\(\le z\)</span>"——<span class="arithmatex">\(n\)</span> 个相同的 <span class="arithmatex">\(F(z)\)</span> 相乘 = <span class="arithmatex">\([F(z)]^n\)</span>；min 是"每个都 <span class="arithmatex">\(&gt;z\)</span>"的概率 <span class="arithmatex">\([1-F(z)]^n\)</span> 再取反。<span class="arithmatex">\(n=2\)</span> 时代回上面的公式，完全一致。</p>
+<h2 id="_5">六、 补充：求导捷径<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>若只求密度，可以先直接对分布函数公式求导（乘积法则 / 链式法则），得到 max/min 的<strong>密度公式</strong>（<span class="arithmatex">\(X,Y\)</span> 独立）：</li>
+</ul>
+<div class="arithmatex">\[f_M(z)=f_X(z)\,F_Y(z)+F_X(z)\,f_Y(z)\]</div>
+<div class="arithmatex">\[f_N(z)=f_X(z)\,[1-F_Y(z)]+f_Y(z)\,[1-F_X(z)]\]</div>
+<p>这两个公式和"先求 <span class="arithmatex">\(F\)</span> 再求导"等价，只是把乘积求导提前做了；分段时同样要小心换段点。
+- <strong>符号再提醒</strong>：<span class="arithmatex">\(F_X,F_Y\)</span> 里的自变量原本是 <span class="arithmatex">\(x,y\)</span>，代入公式时<strong>统统换成 <span class="arithmatex">\(z\)</span></strong>（视频里老师吐槽"早知道一开始就写小 <span class="arithmatex">\(z\)</span>"）。别把 <span class="arithmatex">\(F_X(z)\)</span> 写成 <span class="arithmatex">\(F_X(x)\)</span>。</p>
+<hr />
+<h2 id="_6">本节重点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<blockquote>
+<ul>
+<li><strong>两条核心公式</strong>（<span class="arithmatex">\(X,Y\)</span> 独立）：<span class="arithmatex">\(F_M(z)=F_X(z)\,F_Y(z)\)</span>；<span class="arithmatex">\(F_N(z)=1-[1-F_X(z)]\,[1-F_Y(z)]\)</span>。</li>
+<li><strong>推导关键</strong>：max 用"都 <span class="arithmatex">\(\le z\)</span>"；min 用对立事件"都 <span class="arithmatex">\(&gt;z\)</span>"（min <strong>不能</strong>直接"都 <span class="arithmatex">\(\le z\)</span>"）。</li>
+<li><strong>独立同分布 <span class="arithmatex">\(n\)</span> 个</strong>：<span class="arithmatex">\(F_M=[F]^n\)</span>，<span class="arithmatex">\(F_N=1-[1-F]^n\)</span>。</li>
+<li><strong>直观类比</strong>：串联 = 全部成功 = <span class="arithmatex">\(\min\)</span>；并联 = 至少一个成功 = <span class="arithmatex">\(\max\)</span>。</li>
+<li><strong>常见坑</strong>：① min 套成 <span class="arithmatex">\(F_XF_Y\)</span>（把 max 公式抄过来）；② 分段点没取并集；③ 分布函数自变量忘统一成 <span class="arithmatex">\(z\)</span>；④ 指数分布参数 <span class="arithmatex">\(\lambda\)</span> 弄反（<span class="arithmatex">\(E(3)\)</span> 即 <span class="arithmatex">\(\lambda=3\)</span>，密度 <span class="arithmatex">\(3e^{-3y}\)</span>）；⑤ 求导漏乘积法则（<span class="arithmatex">\(z\ge1\)</span> 后 <span class="arithmatex">\(F_M=1-e^{-3z}\)</span> 求导是 <span class="arithmatex">\(3e^{-3z}\)</span>，不是 <span class="arithmatex">\(e^{-3z}\)</span>）。</li>
+</ul>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

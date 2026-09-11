@@ -1,0 +1,1290 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/%E7%AC%94%E8%AE%B0/06-%E5%87%BD%E6%95%B0/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第6章 函数 - 学习笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第6章 函数 - 学习笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 函数的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 函数的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 定义域与值域
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 不是函数的两种情况
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 所有函数的集合
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 函数与一般关系的区别
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 函数的类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 函数的类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 单射（入射）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 满射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 双射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 必要条件（有限集）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 常见函数类型判断
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 函数类型的数学化描述与证明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 函数类型的数学化描述与证明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 数学化描述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 典型映射（自然映射）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 偏序集到幂集的单射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 函数的复合运算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 函数的复合运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 复合的前提与性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 结合律
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 类型保守性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 函数的并交运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 函数的逆运算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 函数的逆运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 逆函数存在的条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 逆函数的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 本节重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-">第6章 函数 - 学习笔记<a class="headerlink" href="#6-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自 B站《【电子科技大学】《离散数学》全63讲》（BV16Btc6VEpE，up主：哔哩大学-学生中心）P40-P42
+字幕来源：AI字幕，已核对数学逻辑</p>
+</blockquote>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#1-函数的定义">1. 函数的定义</a></li>
+<li><a href="#2-函数与一般关系的区别">2. 函数与一般关系的区别</a></li>
+<li><a href="#3-函数的类型">3. 函数的类型</a></li>
+<li><a href="#4-函数类型的数学化描述与证明">4. 函数类型的数学化描述与证明</a></li>
+<li><a href="#5-函数的复合运算">5. 函数的复合运算</a></li>
+<li><a href="#6-函数的逆运算">6. 函数的逆运算</a></li>
+<li><a href="#7-本节重点">7. 本节重点</a></li>
+</ul>
+<hr />
+<h2 id="1">1. 函数的定义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 定义<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F\)</span> 是集合 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(B\)</span> 的关系，如果对<strong>每个</strong> <span class="arithmatex">\(x \in A\)</span>，都存在<strong>唯一的</strong> <span class="arithmatex">\(y \in B\)</span>，使得 <span class="arithmatex">\(\langle x, y \rangle \in F\)</span>，则称 <span class="arithmatex">\(F\)</span> 为从 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(B\)</span> 的<strong>函数</strong>（或<strong>映射</strong>），记作 <span class="arithmatex">\(F: A \to B\)</span>。</p>
+<p>两个核心要求：
+1. <strong>存在性</strong>：每个 <span class="arithmatex">\(x \in A\)</span> 都有像（不能有元素没有映射）
+2. <strong>唯一性</strong>：每个 <span class="arithmatex">\(x \in A\)</span> 只有一个像（不能有一对多）</p>
+<p>当 <span class="arithmatex">\(\langle x, y \rangle \in F\)</span> 时，记为 <span class="arithmatex">\(y = F(x)\)</span>：
+- <span class="arithmatex">\(x\)</span> 称为<strong>自变量</strong>或<strong>原像</strong>
+- <span class="arithmatex">\(y\)</span> 称为<strong>函数值</strong>或<strong>像</strong></p>
+<blockquote>
+<p>注意区分 <span class="arithmatex">\(F\)</span> 和 <span class="arithmatex">\(F(x)\)</span>：<span class="arithmatex">\(F\)</span> 是函数（关系），<span class="arithmatex">\(F(x)\)</span> 是 <span class="arithmatex">\(x\)</span> 对应的函数值（变量）。</p>
+</blockquote>
+<h3 id="12">1.2 定义域与值域<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>定义域：<span class="arithmatex">\(\text{dom}(F) = A\)</span>（因为每个 <span class="arithmatex">\(x\)</span> 都有像）</li>
+<li>值域：<span class="arithmatex">\(\text{ran}(F) = F(A) = \{F(x) \mid x \in A\} \subseteq B\)</span></li>
+</ul>
+<h3 id="13">1.3 不是函数的两种情况<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>一个关系 <span class="arithmatex">\(F\)</span> 不是函数，当且仅当以下至少一种情况成立：
+1. 存在 <span class="arithmatex">\(x \in A\)</span> <strong>没有像</strong>（<span class="arithmatex">\(\nexists y, \langle x,y \rangle \in F\)</span>）
+2. 存在 <span class="arithmatex">\(x \in A\)</span> <strong>有两个及以上的像</strong>（<span class="arithmatex">\(\exists y_1 \neq y_2, \langle x,y_1 \rangle \in F \land \langle x,y_2 \rangle \in F\)</span>）</p>
+<p><img alt="函数定义" src="../figures/06-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89.png" /></p>
+<blockquote>
+<p><strong>图1</strong> 函数的两个核心要求（自绘）：存在性（每个 <span class="arithmatex">\(x\)</span> 都有像）+ 唯一性（每个 <span class="arithmatex">\(x\)</span> 至多一个像），任一破坏即不是函数。</p>
+</blockquote>
+<h3 id="14">1.4 所有函数的集合<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<p>所有从 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(B\)</span> 的函数构成的集合记作 <span class="arithmatex">\(B^A\)</span>：</p>
+<div class="arithmatex">\[B^A = \{F \mid F: A \to B\}\]</div>
+<p>若 <span class="arithmatex">\(|A|=m, |B|=n\)</span>，则 <span class="arithmatex">\(|B^A| = n^m\)</span>（每个 <span class="arithmatex">\(A\)</span> 中元素有 <span class="arithmatex">\(n\)</span> 种选择，共 <span class="arithmatex">\(m\)</span> 个元素）。</p>
+<hr />
+<h2 id="2">2. 函数与一般关系的区别<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>当 <span class="arithmatex">\(A, B\)</span> 为有限集合时：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>一般关系</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数量</td>
+<td><span class="arithmatex">\(2^{\|A\| \times \|B\|}\)</span>（<span class="arithmatex">\(A \times B\)</span> 的所有子集）</td>
+<td><span class="arithmatex">\(\|B\|^{\|A\|}\)</span></td>
+</tr>
+<tr>
+<td>基数（元素个数）</td>
+<td><span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(\|A\| \times \|B\|\)</span> 均可</td>
+<td>恒为 <span class="arithmatex">\(\|A\|\)</span></td>
+</tr>
+<tr>
+<td>第一元素</td>
+<td>可以重复（一对多）</td>
+<td>必须互不相同（每个x唯一）</td>
+</tr>
+</tbody>
+</table>
+<p>例：<span class="arithmatex">\(|A|=3, |B|=2\)</span> 时，关系有 <span class="arithmatex">\(2^6=64\)</span> 个，函数只有 <span class="arithmatex">\(2^3=8\)</span> 个。</p>
+<hr />
+<h2 id="3">3. 函数的类型<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p><img alt="函数类型" src="../figures/06-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B.png" /></p>
+<blockquote>
+<p><strong>图2</strong> 单射/满射/双射的映射示意（自绘）：单射=不同原像不同像（允许 <span class="arithmatex">\(B\)</span> 有余），满射=值域等于 <span class="arithmatex">\(B\)</span>（允许碰撞），双射=两者兼得。</p>
+</blockquote>
+<h3 id="31">3.1 单射（入射）<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F: A \to B\)</span>，若对任意 <span class="arithmatex">\(x_1, x_2 \in A\)</span>，<span class="arithmatex">\(x_1 \neq x_2 \Rightarrow F(x_1) \neq F(x_2)\)</span>，则称 <span class="arithmatex">\(F\)</span> 为<strong>单射</strong>。</p>
+<blockquote>
+<p>不同的原像对应不同的像（不能多对一）。</p>
+</blockquote>
+<h3 id="32">3.2 满射<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F: A \to B\)</span>，若 <span class="arithmatex">\(\text{ran}(F) = B\)</span>（值域等于后域），则称 <span class="arithmatex">\(F\)</span> 为<strong>满射</strong>。</p>
+<blockquote>
+<p><span class="arithmatex">\(B\)</span> 中每个元素都有原像（不能有元素没被映射到）。</p>
+</blockquote>
+<h3 id="33">3.3 双射<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F: A \to B\)</span>，若 <span class="arithmatex">\(F\)</span> 既是单射又是满射，则称 <span class="arithmatex">\(F\)</span> 为<strong>双射</strong>（一一对应）。</p>
+<h3 id="34">3.4 必要条件（有限集）<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F: A \to B\)</span>，<span class="arithmatex">\(A, B\)</span> 为有限集：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>必要条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单射</td>
+<td><span class="arithmatex">\(\|A\| \leq \|B\|\)</span></td>
+</tr>
+<tr>
+<td>满射</td>
+<td><span class="arithmatex">\(\|A\| \geq \|B\|\)</span></td>
+</tr>
+<tr>
+<td>双射</td>
+<td><span class="arithmatex">\(\|A\| = \|B\|\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>这些是<strong>必要条件</strong>而非充分条件：满足基数条件不一定就是单射/满射/双射，但不满足一定不是。</p>
+</blockquote>
+<h3 id="35">3.5 常见函数类型判断<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>单射</th>
+<th>满射</th>
+<th>双射</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f(x)=x^2\)</span>（<span class="arithmatex">\(\mathbb{R} \to \mathbb{R}\)</span>）</td>
+<td>✗（<span class="arithmatex">\(1\)</span>和<span class="arithmatex">\(-1\)</span>都映到<span class="arithmatex">\(1\)</span>）</td>
+<td>✗（值域<span class="arithmatex">\(\geq 0\)</span>）</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f(x)=x+1\)</span>（<span class="arithmatex">\(\mathbb{R} \to \mathbb{R}\)</span>）</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f(x)=e^x\)</span>（<span class="arithmatex">\(\mathbb{R} \to \mathbb{R}\)</span>）</td>
+<td>✓</td>
+<td>✗（值域<span class="arithmatex">\(&gt;0\)</span>）</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f(x)=x^2\)</span>（<span class="arithmatex">\(\mathbb{R}^+ \to \mathbb{R}^+\)</span>）</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4. 函数类型的数学化描述与证明<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 数学化描述<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>单射</strong>：<span class="arithmatex">\(\forall x_1, x_2 \in A, x_1 \neq x_2 \Rightarrow F(x_1) \neq F(x_2)\)</span></li>
+<li><strong>满射</strong>：<span class="arithmatex">\(\forall y \in B, \exists x \in A, F(x) = y\)</span></li>
+<li><strong>双射</strong>：同时满足以上两条</li>
+</ul>
+<h3 id="42">4.2 典型映射（自然映射）<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(R\)</span> 是 <span class="arithmatex">\(A\)</span> 上的等价关系，定义典型映射 <span class="arithmatex">\(g: A \to A/R\)</span>，<span class="arithmatex">\(g(a) = [a]_R\)</span>。</p>
+<p><strong>证明 <span class="arithmatex">\(g\)</span> 是满射</strong>：对任意等价类 <span class="arithmatex">\([a]_R \in A/R\)</span>，取代表元 <span class="arithmatex">\(a \in A\)</span>，有 <span class="arithmatex">\(g(a) = [a]_R\)</span>，故每个商集中元素都有原像。</p>
+<h3 id="43">4.3 偏序集到幂集的单射<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\langle A, \preceq \rangle\)</span> 是偏序集，定义 <span class="arithmatex">\(F: A \to P(A)\)</span>，<span class="arithmatex">\(F(a) = \{x \in A \mid x \preceq a\}\)</span>。</p>
+<p><strong>证明 <span class="arithmatex">\(F\)</span> 是单射且保序</strong>：
+1. <strong>是函数</strong>：<span class="arithmatex">\(F(a)\)</span> 是 <span class="arithmatex">\(A\)</span> 的子集，故 <span class="arithmatex">\(F(a) \in P(A)\)</span>
+2. <strong>单射</strong>：若 <span class="arithmatex">\(a \neq b\)</span>，分情况讨论（可比/不可比），总能找到一个元素属于 <span class="arithmatex">\(F(a)\)</span> 但不属于 <span class="arithmatex">\(F(b)\)</span>（或反之），故 <span class="arithmatex">\(F(a) \neq F(b)\)</span>
+3. <strong>保序</strong>：若 <span class="arithmatex">\(a \preceq b\)</span>，任取 <span class="arithmatex">\(y \in F(a)\)</span>（即 <span class="arithmatex">\(y \preceq a\)</span>），由传递性 <span class="arithmatex">\(y \preceq b\)</span>，故 <span class="arithmatex">\(y \in F(b)\)</span>，即 <span class="arithmatex">\(F(a) \subseteq F(b)\)</span></p>
+<hr />
+<h2 id="5">5. 函数的复合运算<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 定义<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F: A \to B\)</span>，<span class="arithmatex">\(G: B \to C\)</span>，则 <span class="arithmatex">\(F\)</span> 与 <span class="arithmatex">\(G\)</span> 的复合函数 <span class="arithmatex">\(F \circ G: A \to C\)</span> 定义为：</p>
+<div class="arithmatex">\[(F \circ G)(x) = G(F(x))\]</div>
+<p><img alt="复合函数" src="../figures/06-%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0.png" /></p>
+<blockquote>
+<p><strong>图3</strong> 复合函数 <span class="arithmatex">\((F \circ G)(x)=G(F(x))\)</span> 示意（自绘）：先作用 <span class="arithmatex">\(F\)</span> 再作用 <span class="arithmatex">\(G\)</span>，即沿 <span class="arithmatex">\(a \to b \to c\)</span> 走两级。</p>
+<p>这是<strong>右复合</strong>记法：先作用 <span class="arithmatex">\(F\)</span>，再作用 <span class="arithmatex">\(G\)</span>，写为 <span class="arithmatex">\(G(F(x))\)</span>。部分教材使用左复合记法，注意区分。</p>
+</blockquote>
+<h3 id="52">5.2 复合的前提与性质<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>前提</strong>：<span class="arithmatex">\(F\)</span> 的后域 = <span class="arithmatex">\(G\)</span> 的前域（即 <span class="arithmatex">\(\text{ran}(F) \subseteq \text{dom}(G)\)</span>）</li>
+<li><strong>定义域</strong>：<span class="arithmatex">\(\text{dom}(F \circ G) = A = \text{dom}(F)\)</span></li>
+<li><strong>值域</strong>：<span class="arithmatex">\(\text{ran}(F \circ G) \subseteq \text{ran}(G)\)</span></li>
+<li><strong>恒等函数</strong>：<span class="arithmatex">\(I_A \circ F = F \circ I_B = F\)</span>（恒等关系也是函数）</li>
+</ul>
+<h3 id="53">5.3 结合律<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p>函数复合满足结合律：</p>
+<div class="arithmatex">\[(F \circ G) \circ H = F \circ (G \circ H)\]</div>
+<blockquote>
+<p>函数复合<strong>不满足交换律</strong>：<span class="arithmatex">\(F \circ G \neq G \circ F\)</span>（定义域和值域都可能不同）。</p>
+</blockquote>
+<h3 id="54">5.4 类型保守性<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F: A \to B\)</span>，<span class="arithmatex">\(G: B \to C\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(F\)</span> 的类型</th>
+<th><span class="arithmatex">\(G\)</span> 的类型</th>
+<th><span class="arithmatex">\(F \circ G\)</span> 的类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>满射</td>
+<td>满射</td>
+<td>满射</td>
+</tr>
+<tr>
+<td>单射</td>
+<td>单射</td>
+<td>单射</td>
+</tr>
+<tr>
+<td>双射</td>
+<td>双射</td>
+<td>双射</td>
+</tr>
+</tbody>
+</table>
+<p><strong>满射复合证明</strong>：对任意 <span class="arithmatex">\(c \in C\)</span>，因 <span class="arithmatex">\(G\)</span> 满射，<span class="arithmatex">\(\exists b \in B, G(b)=c\)</span>；因 <span class="arithmatex">\(F\)</span> 满射，<span class="arithmatex">\(\exists a \in A, F(a)=b\)</span>；故 <span class="arithmatex">\((F \circ G)(a) = G(F(a)) = G(b) = c\)</span>。</p>
+<p><strong>单射复合证明</strong>：若 <span class="arithmatex">\(a_1 \neq a_2\)</span>，因 <span class="arithmatex">\(F\)</span> 单射，<span class="arithmatex">\(F(a_1) \neq F(a_2)\)</span>；因 <span class="arithmatex">\(G\)</span> 单射，<span class="arithmatex">\(G(F(a_1)) \neq G(F(a_2))\)</span>。</p>
+<h3 id="55">5.5 函数的并交运算<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
+<p>两个函数的并和交<strong>不一定是函数</strong>：
+- 若 <span class="arithmatex">\(F(x)=y_1, G(x)=y_2, y_1 \neq y_2\)</span>，则 <span class="arithmatex">\(F \cup G\)</span> 中 <span class="arithmatex">\(x\)</span> 有两个像 → 不是函数
+- <span class="arithmatex">\(F \cap G\)</span> 可能导致某些 <span class="arithmatex">\(x\)</span> 没有像 → 不是函数</p>
+<blockquote>
+<p>有广泛应用意义的是复合和逆运算，并交运算对函数不封闭。</p>
+</blockquote>
+<hr />
+<h2 id="6">6. 函数的逆运算<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 定义<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(F: A \to B\)</span> 是函数，若其逆关系 <span class="arithmatex">\(F^{-1} = \{\langle y, x \rangle \mid \langle x, y \rangle \in F\}\)</span> 也是从 <span class="arithmatex">\(B\)</span> 到 <span class="arithmatex">\(A\)</span> 的函数，则称 <span class="arithmatex">\(F^{-1}\)</span> 为 <span class="arithmatex">\(F\)</span> 的<strong>逆函数</strong>。</p>
+<h3 id="62">6.2 逆函数存在的条件<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p><strong>定理</strong>：函数 <span class="arithmatex">\(F: A \to B\)</span> 存在逆函数，当且仅当 <span class="arithmatex">\(F\)</span> 是<strong>双射</strong>。</p>
+<p><img alt="逆函数条件" src="../figures/06-%E9%80%86%E5%87%BD%E6%95%B0%E6%9D%A1%E4%BB%B6.png" /></p>
+<blockquote>
+<p><strong>图4</strong> 逆函数存在的条件（自绘，红色虚线=逆关系方向）：双射时逆关系满足函数定义；非单射使某个 <span class="arithmatex">\(y\)</span> 有多个原像（破坏唯一性），非满射使某个 <span class="arithmatex">\(y\)</span> 没有原像（破坏存在性）。</p>
+</blockquote>
+<ul>
+<li>若 <span class="arithmatex">\(F\)</span> 不是单射（多对一），则 <span class="arithmatex">\(F^{-1}\)</span> 中某些 <span class="arithmatex">\(y\)</span> 有多个原像 → 不是函数</li>
+<li>若 <span class="arithmatex">\(F\)</span> 不是满射，则 <span class="arithmatex">\(F^{-1}\)</span> 中某些 <span class="arithmatex">\(y\)</span> 没有原像 → 不是函数</li>
+<li>只有双射才能保证 <span class="arithmatex">\(F^{-1}\)</span> 满足函数的存在性和唯一性</li>
+</ul>
+<h3 id="63">6.3 逆函数的性质<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<ul>
+<li>若 <span class="arithmatex">\(F\)</span> 是双射，则 <span class="arithmatex">\(F^{-1}\)</span> 也是双射</li>
+<li><span class="arithmatex">\(F \circ F^{-1} = I_B\)</span>（<span class="arithmatex">\(B\)</span> 上的恒等函数）</li>
+<li><span class="arithmatex">\(F^{-1} \circ F = I_A\)</span>（<span class="arithmatex">\(A\)</span> 上的恒等函数）</li>
+</ul>
+<p>例：
+- <span class="arithmatex">\(f(x)=2x\)</span>（<span class="arithmatex">\(\mathbb{R} \to \mathbb{R}\)</span>）是双射，<span class="arithmatex">\(f^{-1}(x) = \frac{x}{2}\)</span>
+- <span class="arithmatex">\(f(x)=x^2\)</span>（<span class="arithmatex">\(\mathbb{R} \to \mathbb{R}\)</span>）不是双射，无逆函数；但若限制为 <span class="arithmatex">\(\mathbb{R}^+ \to \mathbb{R}^+\)</span>，则 <span class="arithmatex">\(f^{-1}(x) = \sqrt{x}\)</span></p>
+<hr />
+<h2 id="7">7. 本节重点<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>本节重点</strong>：
+- <strong>要点1</strong>：函数是特殊的二元关系：每个 <span class="arithmatex">\(x \in A\)</span> 有<strong>唯一的</strong> <span class="arithmatex">\(y \in B\)</span> 对应。两个核心：存在性（不能没像）+ 唯一性（不能一对多）
+- <strong>要点2</strong>：从 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(B\)</span> 的函数有 <span class="arithmatex">\(|B|^{|A|}\)</span> 个；函数的基数恒为 <span class="arithmatex">\(|A|\)</span>；函数的第一元素必须互不相同
+- <strong>要点3</strong>：单射 = 不同原像不同像；满射 = 值域=B；双射 = 单射+满射。有限集上：单射需 <span class="arithmatex">\(|A| \leq |B|\)</span>，满射需 <span class="arithmatex">\(|A| \geq |B|\)</span>，双射需 <span class="arithmatex">\(|A|=|B|\)</span>
+- <strong>要点4</strong>：函数复合 <span class="arithmatex">\((F \circ G)(x) = G(F(x))\)</span>（右复合记法），满足结合律但不满足交换律。单射/满射/双射在复合下保持
+- <strong>要点5</strong>：逆函数存在当且仅当函数是双射。逆函数也是双射，且 <span class="arithmatex">\(F \circ F^{-1}=I_B, F^{-1} \circ F=I_A\)</span>
+- <strong>要点6</strong>：函数的并交运算不封闭（可能破坏唯一性或存在性），有应用价值的是复合和逆运算
+- <strong>常见坑</strong>：必要条件不等于充分条件（<span class="arithmatex">\(|A|=|B|\)</span> 不一定是双射）；复合记法 <span class="arithmatex">\(F \circ G\)</span> 是先 <span class="arithmatex">\(F\)</span> 后 <span class="arithmatex">\(G\)</span>，写为 <span class="arithmatex">\(G(F(x))\)</span>；<span class="arithmatex">\(f(x)=x^2\)</span> 在 <span class="arithmatex">\(\mathbb{R}\)</span> 上无逆函数，限制定义域后才有</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

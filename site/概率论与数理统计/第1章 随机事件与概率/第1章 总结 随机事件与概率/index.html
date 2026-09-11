@@ -1,0 +1,1102 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC1%E7%AB%A0%20%E9%9A%8F%E6%9C%BA%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%A6%82%E7%8E%87/%E7%AC%AC1%E7%AB%A0%20%E6%80%BB%E7%BB%93%20%E9%9A%8F%E6%9C%BA%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%A6%82%E7%8E%87/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>《概率论与数理统计》第1章 总结 随机事件与概率 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              《概率论与数理统计》第1章 总结 随机事件与概率
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、本章知识地图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、各节要点回顾
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、各节要点回顾">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p01 预备知识（加法原理、乘法原理、排列与组合）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p02-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p02 1.1 随机试验与随机事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p03-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p03 1.2 频率与概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p04-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p04 1.3 古典概型与几何概型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p05-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p05 1.4 条件概率与乘法公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p06-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p06 1.5 全概率公式与贝叶斯公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p07-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p07 1.6 事件的独立性和伯努利实验
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、核心公式速查表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、常考题型与易错点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、补充
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1">《概率论与数理统计》第1章 总结 随机事件与概率<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本章总结：随机事件与概率（对应视频 p01-p07）。
+包含：预备知识、随机试验与随机事件、频率与概率、古典概型与几何概型、条件概率与乘法公式、全概率公式与贝叶斯公式、事件的独立性和伯努利实验。</p>
+</blockquote>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#一本章知识地图">一、本章知识地图</a></li>
+<li><a href="#二各节要点回顾">二、各节要点回顾</a></li>
+<li><a href="#三核心公式速查表">三、核心公式速查表</a></li>
+<li><a href="#四常考题型与易错点">四、常考题型与易错点</a></li>
+<li><a href="#五补充">五、补充</a></li>
+<li><a href="#本章重点">本章重点</a></li>
+</ul>
+<h2 id="_2">一、本章知识地图<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>节</th>
+<th>核心内容</th>
+<th>关键公式 / 概念</th>
+<th>记忆要点（比喻）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p01 预备知识</td>
+<td>加法原理、乘法原理、排列、组合</td>
+<td><span class="arithmatex">\(P_n^m = n(n-1)\cdots(n-m+1)\)</span>，<span class="arithmatex">\(C_n^m=\frac{P_n^m}{m!}\)</span></td>
+<td>一步选就「加」，分步走就「乘」；有顺序是排列，无顺序是组合</td>
+</tr>
+<tr>
+<td>p02 随机试验与随机事件</td>
+<td>样本空间、事件关系与运算</td>
+<td><span class="arithmatex">\(A\cup B\)</span>、<span class="arithmatex">\(A\cap B\)</span>、<span class="arithmatex">\(\bar{A}\)</span>、德摩根律</td>
+<td>事件是样本空间的子集，运算就是集合运算</td>
+</tr>
+<tr>
+<td>p03 频率与概率</td>
+<td>频率、公理化定义、加法公式</td>
+<td><span class="arithmatex">\(P(A\cup B)=P(A)+P(B)-P(AB)\)</span></td>
+<td>频率是概率的「估计值」，概率是频率的「极限值」</td>
+</tr>
+<tr>
+<td>p04 古典概型与几何概型</td>
+<td>等可能计数、几何测度比</td>
+<td><span class="arithmatex">\(P(A)=\frac{M}{N}\)</span>，<span class="arithmatex">\(P(A)=\frac{\mu(A)}{\mu(\Omega)}\)</span></td>
+<td>古典是「数格子」，几何是「量面积/长度」</td>
+</tr>
+<tr>
+<td>p05 条件概率与乘法公式</td>
+<td>缩小样本空间、链式相乘</td>
+<td><span class="arithmatex">\(P(B\mid A)=\frac{P(AB)}{P(A)}\)</span></td>
+<td>已知 A 发生，就把目光缩到 A 这片「小仓库」里</td>
+</tr>
+<tr>
+<td>p06 全概率与贝叶斯公式</td>
+<td>由因溯果、由果溯因</td>
+<td><span class="arithmatex">\(P(B)=\sum P(A_i)P(B\mid A_i)\)</span></td>
+<td>全概率是「化整为零」，贝叶斯是「事后诸葛亮」</td>
+</tr>
+<tr>
+<td>p07 独立性与伯努利实验</td>
+<td>相互独立、n 重伯努利</td>
+<td><span class="arithmatex">\(P(AB)=P(A)P(B)\)</span>，<span class="arithmatex">\(P_n(k)=C_n^k p^k(1-p)^{n-k}\)</span></td>
+<td>独立是「各过各的，互不干扰」，伯努利是「抛 n 次硬币命中 k 次」</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">二、各节要点回顾<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="p01">p01 预备知识（加法原理、乘法原理、排列与组合）<a class="headerlink" href="#p01" title="Permanent link">&para;</a></h3>
+<ul>
+<li>计数两大支柱：<strong>加法原理</strong>（一步完成、各类互斥，方案数相加）；<strong>乘法原理</strong>（分步完成、每步连续，方案数相乘）。一道题常是「步与步之间乘、每步内部加」。</li>
+<li>排列与顺序有关：<span class="arithmatex">\(P_n^m=n(n-1)\cdots(n-m+1)\)</span>；组合与顺序无关：<span class="arithmatex">\(C_n^m=\frac{P_n^m}{m!}\)</span>，即「排列数除以内部全排列 <span class="arithmatex">\(m!\)</span>」。</li>
+<li>常用技巧：插板法（<span class="arithmatex">\(n\)</span> 个相同物分 <span class="arithmatex">\(k\)</span> 个非空盒 <span class="arithmatex">\(=C_{n-1}^{k-1}\)</span>）、捆绑法、插空法。（详见 <strong>p01 预备知识</strong>）</li>
+</ul>
+<h3 id="p02-11">p02 1.1 随机试验与随机事件<a class="headerlink" href="#p02-11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>随机试验三特点：<strong>可重复、多结果、不确定</strong>。样本空间 <span class="arithmatex">\(\Omega\)</span> 是所有可能结果的集合，事件是 <span class="arithmatex">\(\Omega\)</span> 的子集。</li>
+<li>事件关系与运算：包含 <span class="arithmatex">\(\subseteq\)</span>、并（至少一个发生）、交（同时发生）、差 <span class="arithmatex">\(A-B=A\bar{B}\)</span>、互斥（<span class="arithmatex">\(AB=\emptyset\)</span>）、对立（<span class="arithmatex">\(A\cup B=\Omega\)</span> 且 <span class="arithmatex">\(AB=\emptyset\)</span>）、完备事件组（两两互斥且并为全集，即样本空间的一个「划分」）。</li>
+<li>运算律核心是<strong>德摩根律</strong>：<span class="arithmatex">\(\overline{A\cup B}=\bar{A}\cap\bar{B}\)</span>，<span class="arithmatex">\(\overline{A\cap B}=\bar{A}\cup\bar{B}\)</span>（长杠变短杠，开口换方向）。（详见 <strong>p02 1.1 随机试验与随机事件</strong>）</li>
+</ul>
+<h3 id="p03-12">p03 1.2 频率与概率<a class="headerlink" href="#p03-12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>频率 <span class="arithmatex">\(f_n(A)=\frac{n_A}{n}\)</span>，具有非负性、规范性、可加性；大量重复下频率稳定在常数附近，这就是概率的客观基础（伯努利大数定律）。</li>
+<li>柯尔莫哥洛夫公理化定义三公理：非负性、规范性 <span class="arithmatex">\(P(\Omega)=1\)</span>、可列可加性。</li>
+<li>由公理推出常用性质：<span class="arithmatex">\(P(\emptyset)=0\)</span>、<span class="arithmatex">\(P(\bar{A})=1-P(A)\)</span>、减法公式、加法公式（两个、三个事件）。（详见 <strong>p03 1.2 频率与概率</strong>）</li>
+</ul>
+<h3 id="p04-13">p04 1.3 古典概型与几何概型<a class="headerlink" href="#p04-13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>古典概型两条件：<strong>有限性</strong> + <strong>等可能性</strong>，公式 <span class="arithmatex">\(P(A)=\frac{M}{N}\)</span>（分子是有利样本点，分母是总样本点），难点全在排列组合计数。</li>
+<li>几何概型：样本点是某区域上的均匀分布，<span class="arithmatex">\(P(A)=\frac{\mu(A)}{\mu(\Omega)}\)</span>（长度/面积/体积之比），关键是<strong>画图建模</strong>。</li>
+<li>经典模型：抽签公平性、生日问题、配对问题、等车问题、约会问题。（详见 <strong>p04 1.3 古典概型与几何概型</strong>）</li>
+</ul>
+<h3 id="p05-14">p05 1.4 条件概率与乘法公式<a class="headerlink" href="#p05-14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>条件概率 <span class="arithmatex">\(P(B\mid A)=\frac{P(AB)}{P(A)}\)</span>（要求 <span class="arithmatex">\(P(A)&gt;0\)</span>），本质是「样本空间缩小到 A」。</li>
+<li>乘法公式：<span class="arithmatex">\(P(AB)=P(A)P(B\mid A)\)</span>，可链式推广 <span class="arithmatex">\(P(ABC)=P(A)P(B\mid A)P(C\mid AB)\)</span>。</li>
+<li>牢记：条件概率 <span class="arithmatex">\(P(B\mid A)\)</span> 与联合概率 <span class="arithmatex">\(P(AB)\)</span> 是两码事。（详见 <strong>p05 1.4 条件概率与乘法公式</strong>）</li>
+</ul>
+<h3 id="p06-15">p06 1.5 全概率公式与贝叶斯公式<a class="headerlink" href="#p06-15" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>全概率公式</strong> <span class="arithmatex">\(P(B)=\sum_{i=1}^{n}P(A_i)P(B\mid A_i)\)</span>（<span class="arithmatex">\(A_i\)</span> 为完备事件组）：<strong>由因溯果</strong>，把复杂事件按原因拆开求和。</li>
+<li><strong>贝叶斯公式</strong> <span class="arithmatex">\(P(A_k\mid B)=\frac{P(A_k)P(B\mid A_k)}{\sum_{i=1}^{n}P(A_i)P(B\mid A_i)}\)</span>：<strong>由果溯因</strong>，已知结果反推各原因的概率（后验概率）。分母就是全概率，分子是分母中的第 <span class="arithmatex">\(k\)</span> 项。</li>
+<li>反直觉提醒：疾病诊断中「检测阳性 ≠ 患病」，因为健康人群基数大，低误诊率也会产生大量假阳性。（详见 <strong>p06 1.5 全概率公式与贝叶斯公式</strong>）</li>
+</ul>
+<h3 id="p07-16">p07 1.6 事件的独立性和伯努利实验<a class="headerlink" href="#p07-16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>相互独立的实用判据：<span class="arithmatex">\(P(AB)=P(A)P(B)\)</span>（做题几乎只用它）。独立与互斥是两回事：独立看「概率相乘」，互斥看「不能同时发生」。</li>
+<li>两两独立 <span class="arithmatex">\(\neq\)</span> 相互独立，三个事件须额外满足 <span class="arithmatex">\(P(ABC)=P(A)P(B)P(C)\)</span>。</li>
+<li>n 重伯努利实验（每次成功概率 <span class="arithmatex">\(p\)</span>，独立重复 <span class="arithmatex">\(n\)</span> 次，恰成功 <span class="arithmatex">\(k\)</span> 次）：<span class="arithmatex">\(P_n(k)=C_n^k p^k(1-p)^{n-k}\)</span>，即二项分布。（详见 <strong>p07 1.6 事件的独立性和伯努利实验</strong>）</li>
+</ul>
+<h2 id="_4">三、核心公式速查表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>公式名称</th>
+<th>公式</th>
+<th>白话解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加法公式（两个事件）</td>
+<td><span class="arithmatex">\(P(A\cup B)=P(A)+P(B)-P(AB)\)</span></td>
+<td>至少一个发生，先各自相加，再减去重叠部分</td>
+</tr>
+<tr>
+<td>加法公式（三个事件）</td>
+<td><span class="arithmatex">\(P(A\cup B\cup C)=P(A)+P(B)+P(C)-P(AB)-P(AC)-P(BC)+P(ABC)\)</span></td>
+<td>加单、减双、加三，容斥原理</td>
+</tr>
+<tr>
+<td>对立事件</td>
+<td><span class="arithmatex">\(P(\bar{A})=1-P(A)\)</span></td>
+<td>反面概率 = 1 减正面概率</td>
+</tr>
+<tr>
+<td>减法公式（<span class="arithmatex">\(A\subseteq B\)</span>）</td>
+<td><span class="arithmatex">\(P(B-A)=P(B)-P(A)\)</span></td>
+<td>大的减小的</td>
+</tr>
+<tr>
+<td>条件概率</td>
+<td><span class="arithmatex">\(P(B\mid A)=\frac{P(AB)}{P(A)}\)</span></td>
+<td>已知 A 发生，B 的概率 = 同时发生概率 ÷ A 的概率</td>
+</tr>
+<tr>
+<td>乘法公式</td>
+<td><span class="arithmatex">\(P(AB)=P(A)P(B\mid A)\)</span></td>
+<td>先 A 再 B，链式相乘</td>
+</tr>
+<tr>
+<td>乘法公式（三个事件）</td>
+<td><span class="arithmatex">\(P(ABC)=P(A)P(B\mid A)P(C\mid AB)\)</span></td>
+<td>一步步缩着算</td>
+</tr>
+<tr>
+<td>全概率公式</td>
+<td><span class="arithmatex">\(P(B)=\sum_{i=1}^{n}P(A_i)P(B\mid A_i)\)</span></td>
+<td>按完备原因分组求和</td>
+</tr>
+<tr>
+<td>贝叶斯公式</td>
+<td><span class="arithmatex">\(P(A_k\mid B)=\frac{P(A_k)P(B\mid A_k)}{\sum_{i=1}^{n}P(A_i)P(B\mid A_i)}\)</span></td>
+<td>分母是全概率，分子取其中一项</td>
+</tr>
+<tr>
+<td>独立性判据</td>
+<td><span class="arithmatex">\(P(AB)=P(A)P(B)\)</span></td>
+<td>同时发生概率 = 各自概率相乘</td>
+</tr>
+<tr>
+<td>n 重伯努利公式</td>
+<td><span class="arithmatex">\(P_n(k)=C_n^k p^k(1-p)^{n-k}\)</span></td>
+<td>选位置 × 成功 k 次 × 失败 n-k 次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">四、常考题型与易错点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>题目特征 / 易错点</th>
+<th>解题套路 / 提醒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计数：排列 vs 组合</td>
+<td>从 n 中取 m，交换顺序是否算不同结果</td>
+<td>看「顺序/位置/等级」：有差别用 <span class="arithmatex">\(P_n^m\)</span>，无差别用 <span class="arithmatex">\(C_n^m\)</span></td>
+</tr>
+<tr>
+<td>加法 vs 乘法原理</td>
+<td>事件是「一步选一种」还是「分步全做」</td>
+<td>一步加、分步乘；步间乘、步内加</td>
+</tr>
+<tr>
+<td>对立事件求反面</td>
+<td>「至少一个」「都不」等否定表述</td>
+<td>先算对立事件概率再用 <span class="arithmatex">\(1-P\)</span>，常比正面算更快</td>
+</tr>
+<tr>
+<td>互斥 vs 对立</td>
+<td><span class="arithmatex">\(AB=\emptyset\)</span> vs 还需 <span class="arithmatex">\(A\cup B=\Omega\)</span></td>
+<td>对立必互斥，互斥不一定对立</td>
+</tr>
+<tr>
+<td>零概率事件</td>
+<td><span class="arithmatex">\(P(A)=0\)</span> 的事件</td>
+<td>零概率 <span class="arithmatex">\(\neq\)</span> 不可能事件（几何概型中的单点概率为 0 但可能发生）</td>
+</tr>
+<tr>
+<td>条件概率 vs 联合概率</td>
+<td>题目问「已知…求…」还是「同时发生」</td>
+<td><span class="arithmatex">\(P(B\mid A)\)</span> 缩样本空间；<span class="arithmatex">\(P(AB)\)</span> 是整体概率，别混</td>
+</tr>
+<tr>
+<td>全概率 vs 贝叶斯</td>
+<td>求结果概率 vs 已知结果反推原因</td>
+<td>由因溯果用全概率，由果溯因用贝叶斯</td>
+</tr>
+<tr>
+<td>独立 vs 互斥</td>
+<td>判断 <span class="arithmatex">\(P(AB)=P(A)P(B)\)</span> 还是 <span class="arithmatex">\(P(AB)=0\)</span></td>
+<td><span class="arithmatex">\(P(A),P(B)&gt;0\)</span> 时独立必相容、互斥必不独立</td>
+</tr>
+<tr>
+<td>两两独立 vs 相互独立</td>
+<td>三个事件</td>
+<td>两两独立不够，还要 <span class="arithmatex">\(P(ABC)=P(A)P(B)P(C)\)</span></td>
+</tr>
+<tr>
+<td>伯努利「至少 k 次」</td>
+<td><span class="arithmatex">\(P(k\ge1)\)</span> 类</td>
+<td>用 <span class="arithmatex">\(1-P(k=0)\)</span> 等对立事件简化，别逐项硬加</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6">五、补充<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>完备事件组（划分）</strong> 是全概率公式和贝叶斯公式的前提：把样本空间切成互不重叠的几块，每一块是一个「原因」。全概率公式其实就是「每块里 B 的概率 × 该块的权重」再相加。</li>
+<li><strong>频率与概率的对照</strong>：频率随试验变化（随机），概率是客观常数（确定）；频率是估计值，概率是极限值。</li>
+<li><strong>抽签公平性</strong> 贯穿全章：无论古典概型（排列法）还是全概率公式都能证明「先抽后抽概率相同」，是常考结论。</li>
+</ul>
+<h2 id="_7">本章重点<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>要点</strong>：
+- 计数是地基：加法/乘法原理、排列 <span class="arithmatex">\(P_n^m\)</span> 与组合 <span class="arithmatex">\(C_n^m\)</span>，是古典概型计数的工具。
+- 事件语言：样本空间、事件运算、德摩根律，是「把文字题翻译成集合」的基本功。
+- 概率计算四大核心公式：加法公式、乘法公式、全概率公式、贝叶斯公式，外加独立性判据 <span class="arithmatex">\(P(AB)=P(A)P(B)\)</span> 与伯努利公式 <span class="arithmatex">\(P_n(k)=C_n^k p^k(1-p)^{n-k}\)</span>。
+- 两条主线：古典概型（数格子）与几何概型（量面积）；由因溯果（全概率）与由果溯因（贝叶斯）。</p>
+<p><strong>常见坑</strong>：
+- 互斥 <span class="arithmatex">\(\neq\)</span> 对立；独立 <span class="arithmatex">\(\neq\)</span> 互斥；两两独立 <span class="arithmatex">\(\neq\)</span> 相互独立。
+- 条件概率 <span class="arithmatex">\(P(B\mid A)\)</span> 与联合概率 <span class="arithmatex">\(P(AB)\)</span> 分不清；<span class="arithmatex">\(P(A\mid B)\)</span> 中分母是谁容易写反。
+- 零概率事件不一定是空集（连续情形 <span class="arithmatex">\(P(X=x_0)=0\)</span>）。
+- 全概率/贝叶斯忘了先验证「完备事件组」这一前提，或把先验、后验、似然张冠李戴。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

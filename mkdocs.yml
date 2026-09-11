@@ -1,45 +1,98 @@
 site_name: 鱼汤的笔记库
+site_description: 鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统
+site_url: https://yuyangblue.github.io/note/
+site_author: 鱼汤
+copyright: Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+
 docs_dir: docs
 site_dir: site
 
 theme:
   name: material
+  icon:
+    logo: assets/favicon.svg
+    repo: fontawesome/brands/github
   palette:
-    - scheme: default
-      primary: blue
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
       toggle:
-        icon: material/brightness-7
-        name: 切换暗色
-    - scheme: slate
-      primary: blue
+        icon: material/weather-night
+        name: 切换到暗色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
       toggle:
-        icon: material/brightness-4
-        name: 切换亮色
+        icon: material/weather-sunny
+        name: 切换到亮色模式
   features:
     - navigation.instant
+    - navigation.tracking
     - navigation.tabs
     - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
     - search.suggest
     - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - header.autohide
+  font: false
+  favicon: assets/favicon.svg
+  logo: assets/favicon.svg
 
-repo_url: https://github.com/yuyangblue/note
-repo_name: GitHub
-copyright: © 2025 鱼汤
+extra_css:
+  - stylesheets/custom.css
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yuyangblue
+      name: GitHub
+
+nav:
+  - 首页: index.md
+  - ICPC 竞赛: ICPC/
+  - 离散数学: 离散数学/
+  - 概率论与数理统计: 概率论与数理统计/
+  - 计算机系统导论: 计算机系统导论/
+  - 一些讲座: 一些讲座/
+  - 关于本项目: README.md
 
 markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.highlight:
-      linenums: true
-  - pymdownx.superfences
   - admonition
   - footnotes
   - toc:
       permalink: true
+  - attr_list
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      linenums: true
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
 
 plugins:
   - search
   - roamlinks
+
+hooks:
+  - hooks/exclude_raw.py
 
 extra_javascript:
   - javascripts/mathjax.js

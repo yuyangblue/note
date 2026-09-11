@@ -1,0 +1,3176 @@
+{
+  "font_size": 0.4,
+  "font_color": "#FFFFFF",
+  "background_alpha": 0.5,
+  "background_color": "#9C27B0",
+  "Stroke": "none",
+  "type": "AIsubtitle",
+  "lang": "zh",
+  "version": "sync-v1.4.0.4",
+  "body": [
+    {
+      "from": 1.62,
+      "to": 2.7,
+      "sid": 1,
+      "location": 2,
+      "content": "同学们好"
+    },
+    {
+      "from": 2.7,
+      "to": 6.89,
+      "sid": 2,
+      "location": 2,
+      "content": "这一小节呢咱们继续学习哈弗曼树及其应用"
+    },
+    {
+      "from": 6.89,
+      "to": 10.04,
+      "sid": 3,
+      "location": 2,
+      "content": "上一小节我们介绍了如何构造half man数"
+    },
+    {
+      "from": 10.04,
+      "to": 13.74,
+      "sid": 4,
+      "location": 2,
+      "content": "那么这一小节呢我们就来实现一下这个算法嗯"
+    },
+    {
+      "from": 13.74,
+      "to": 15.66,
+      "sid": 5,
+      "location": 2,
+      "content": "好那么实现算法之前呢"
+    },
+    {
+      "from": 15.66,
+      "to": 20.14,
+      "sid": 6,
+      "location": 2,
+      "content": "我们首先需要知道这这个哈弗曼树如何存储"
+    },
+    {
+      "from": 20.14,
+      "to": 20.65,
+      "sid": 7,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 20.65,
+      "to": 24.1,
+      "sid": 8,
+      "location": 2,
+      "content": "嗯所有的算法呢都需要考虑它怎么存储的"
+    },
+    {
+      "from": 24.1,
+      "to": 26.65,
+      "sid": 9,
+      "location": 2,
+      "content": "然后再来决定怎么样来实现"
+    },
+    {
+      "from": 26.65,
+      "to": 29.5,
+      "sid": 10,
+      "location": 2,
+      "content": "那么哈弗曼树呢就是二叉树怎么存呢"
+    },
+    {
+      "from": 29.5,
+      "to": 31.63,
+      "sid": 11,
+      "location": 2,
+      "content": "我们既可以用链式存储结构"
+    },
+    {
+      "from": 31.63,
+      "to": 33.62,
+      "sid": 12,
+      "location": 2,
+      "content": "也可以用顺序存储结构"
+    },
+    {
+      "from": 33.62,
+      "to": 36.56,
+      "sid": 13,
+      "location": 2,
+      "content": "在这儿呢我们使用顺序存储结构"
+    },
+    {
+      "from": 36.56,
+      "to": 42.18,
+      "sid": 14,
+      "location": 2,
+      "content": "顺序存储结构呢比链式存储结构实现这个算法要来个简单"
+    },
+    {
+      "from": 42.18,
+      "to": 43.83,
+      "sid": 15,
+      "location": 2,
+      "content": "所谓顺序存储结构呢"
+    },
+    {
+      "from": 43.83,
+      "to": 46.23,
+      "sid": 16,
+      "location": 2,
+      "content": "哎就是用一个数组来存储"
+    },
+    {
+      "from": 46.23,
+      "to": 46.56,
+      "sid": 17,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 46.56,
+      "to": 47.7,
+      "sid": 18,
+      "location": 2,
+      "content": "用一个数组来存储"
+    },
+    {
+      "from": 47.7,
+      "to": 51.54,
+      "sid": 19,
+      "location": 2,
+      "content": "那么在这儿呢我们用一个一维的结构数组诶"
+    },
+    {
+      "from": 51.54,
+      "to": 53.16,
+      "sid": 20,
+      "location": 2,
+      "content": "为什么是结构数组啊"
+    },
+    {
+      "from": 53.16,
+      "to": 58.079,
+      "sid": 21,
+      "location": 2,
+      "content": "原因是因为我们来保存这个哈夫曼树当中的节点啊"
+    },
+    {
+      "from": 58.079,
+      "to": 59.579,
+      "sid": 22,
+      "location": 2,
+      "content": "要保存的值比较多"
+    },
+    {
+      "from": 59.579,
+      "to": 61.14,
+      "sid": 23,
+      "location": 2,
+      "content": "嗯我从哪几个值呢"
+    },
+    {
+      "from": 61.14,
+      "to": 63.55,
+      "sid": 24,
+      "location": 2,
+      "content": "我们来看一下这个节点的类型定义"
+    },
+    {
+      "from": 63.55,
+      "to": 65.53,
+      "sid": 25,
+      "location": 2,
+      "content": "我们首先说每一个节点呢"
+    },
+    {
+      "from": 65.53,
+      "to": 68.0,
+      "sid": 26,
+      "location": 2,
+      "content": "我们都需要知道它的全值是多少"
+    },
+    {
+      "from": 68.0,
+      "to": 71.3,
+      "sid": 27,
+      "location": 2,
+      "content": "另外呢我们还需要知道构造出来以后嗯"
+    },
+    {
+      "from": 71.3,
+      "to": 72.44,
+      "sid": 28,
+      "location": 2,
+      "content": "他的双亲是谁"
+    },
+    {
+      "from": 72.44,
+      "to": 74.669,
+      "sid": 29,
+      "location": 2,
+      "content": "他的左孩子和右孩子是谁"
+    },
+    {
+      "from": 74.669,
+      "to": 76.919,
+      "sid": 30,
+      "location": 2,
+      "content": "所以我们需要这样的四个值"
+    },
+    {
+      "from": 76.919,
+      "to": 80.699,
+      "sid": 31,
+      "location": 2,
+      "content": "哎我们把这四个值呢就定义成一个结构类型嗯"
+    },
+    {
+      "from": 80.699,
+      "to": 82.82,
+      "sid": 32,
+      "location": 2,
+      "content": "结构类型有四个成员"
+    },
+    {
+      "from": 83.24,
+      "to": 86.24,
+      "sid": 33,
+      "location": 2,
+      "content": "那咱们的数组呢就是这个样子嗯"
+    },
+    {
+      "from": 86.24,
+      "to": 87.38,
+      "sid": 34,
+      "location": 2,
+      "content": "数组就这个样子"
+    },
+    {
+      "from": 87.38,
+      "to": 91.49,
+      "sid": 35,
+      "location": 2,
+      "content": "我们每一个元素呢都有四个成员都是"
+    },
+    {
+      "from": 91.49,
+      "to": 93.26,
+      "sid": 36,
+      "location": 2,
+      "content": "那么这个数组多大呢"
+    },
+    {
+      "from": 93.26,
+      "to": 94.7,
+      "sid": 37,
+      "location": 2,
+      "content": "那数组多大呢"
+    },
+    {
+      "from": 94.7,
+      "to": 98.36,
+      "sid": 38,
+      "location": 2,
+      "content": "我们说我们需要2n减一个元素"
+    },
+    {
+      "from": 98.36,
+      "to": 99.17,
+      "sid": 39,
+      "location": 2,
+      "content": "2n减一"
+    },
+    {
+      "from": 99.17,
+      "to": 100.31,
+      "sid": 40,
+      "location": 2,
+      "content": "为什么2n减一个"
+    },
+    {
+      "from": 100.31,
+      "to": 102.29,
+      "sid": 41,
+      "location": 2,
+      "content": "咱们在构造哈弗曼树的时候"
+    },
+    {
+      "from": 102.29,
+      "to": 104.15,
+      "sid": 42,
+      "location": 2,
+      "content": "已经知道了n个节点"
+    },
+    {
+      "from": 104.15,
+      "to": 106.729,
+      "sid": 43,
+      "location": 2,
+      "content": "我们要进行n减一次合并"
+    },
+    {
+      "from": 106.729,
+      "to": 109.459,
+      "sid": 44,
+      "location": 2,
+      "content": "每次合并都产生一个新的节点"
+    },
+    {
+      "from": 109.459,
+      "to": 115.0,
+      "sid": 45,
+      "location": 2,
+      "content": "所以这个事物当中哈弗曼树当中总共有2n减一个节点嗯"
+    },
+    {
+      "from": 115.0,
+      "to": 117.17,
+      "sid": 46,
+      "location": 2,
+      "content": "所以咱们的数组需要这么多"
+    },
+    {
+      "from": 117.17,
+      "to": 121.1,
+      "sid": 47,
+      "location": 2,
+      "content": "那么在这儿呢我们保存这2n减一个元素啊"
+    },
+    {
+      "from": 121.1,
+      "to": 123.89,
+      "sid": 48,
+      "location": 2,
+      "content": "我们为了简单不使用零下标啊"
+    },
+    {
+      "from": 123.89,
+      "to": 126.88,
+      "sid": 49,
+      "location": 2,
+      "content": "就从一就从1~2n减一"
+    },
+    {
+      "from": 126.88,
+      "to": 128.05,
+      "sid": 50,
+      "location": 2,
+      "content": "这样比较简单"
+    },
+    {
+      "from": 128.05,
+      "to": 132.87,
+      "sid": 51,
+      "location": 2,
+      "content": "所以呢这个数组的大小需要2n2 n呢"
+    },
+    {
+      "from": 132.87,
+      "to": 135.87,
+      "sid": 52,
+      "location": 2,
+      "content": "那它就是从0~2n减一"
+    },
+    {
+      "from": 135.87,
+      "to": 137.49,
+      "sid": 53,
+      "location": 2,
+      "content": "我们不用零就可以了"
+    },
+    {
+      "from": 137.49,
+      "to": 142.0,
+      "sid": 54,
+      "location": 2,
+      "content": "嗯那我们说定义这样的一个数组怎么来定义呢"
+    },
+    {
+      "from": 142.0,
+      "to": 144.899,
+      "sid": 55,
+      "location": 2,
+      "content": "每一个元素都有这样的四个成员"
+    },
+    {
+      "from": 144.899,
+      "to": 148.289,
+      "sid": 56,
+      "location": 2,
+      "content": "唉我们用这样的类型呢定义一个指针类型"
+    },
+    {
+      "from": 148.289,
+      "to": 149.7,
+      "sid": 57,
+      "location": 2,
+      "content": "叫做half man true"
+    },
+    {
+      "from": 149.7,
+      "to": 151.02,
+      "sid": 58,
+      "location": 2,
+      "content": "嗯half man"
+    },
+    {
+      "from": 152.04,
+      "to": 154.38,
+      "sid": 59,
+      "location": 2,
+      "content": "half man shoe这样的一个指针类型"
+    },
+    {
+      "from": 154.38,
+      "to": 157.47,
+      "sid": 60,
+      "location": 2,
+      "content": "我们用这个指针类型定义一个h"
+    },
+    {
+      "from": 157.47,
+      "to": 160.89,
+      "sid": 61,
+      "location": 2,
+      "content": "那我们说h呢就可以表示一个指针"
+    },
+    {
+      "from": 160.89,
+      "to": 162.51,
+      "sid": 62,
+      "location": 2,
+      "content": "也可以表示一个数组"
+    },
+    {
+      "from": 162.51,
+      "to": 163.41,
+      "sid": 63,
+      "location": 2,
+      "content": "为什么呢"
+    },
+    {
+      "from": 163.41,
+      "to": 167.84,
+      "sid": 64,
+      "location": 2,
+      "content": "因为数组当中的这个数组的名字嗯"
+    },
+    {
+      "from": 167.84,
+      "to": 170.39,
+      "sid": 65,
+      "location": 2,
+      "content": "它就是存在数组当中第一个元素的地址"
+    },
+    {
+      "from": 170.39,
+      "to": 173.65,
+      "sid": 66,
+      "location": 2,
+      "content": "所以我们这个名字直接是一个指针类型"
+    },
+    {
+      "from": 173.65,
+      "to": 176.22,
+      "sid": 67,
+      "location": 2,
+      "content": "你还表示定义了一个数组嗯"
+    },
+    {
+      "from": 176.22,
+      "to": 178.2,
+      "sid": 68,
+      "location": 2,
+      "content": "好定义好这个数组之后呢"
+    },
+    {
+      "from": 178.2,
+      "to": 181.98,
+      "sid": 69,
+      "location": 2,
+      "content": "我们就可以操作里面的这些元素了"
+    },
+    {
+      "from": 181.98,
+      "to": 186.6,
+      "sid": 70,
+      "location": 2,
+      "content": "嗯比如说我们将这个某一个元素嗯"
+    },
+    {
+      "from": 186.6,
+      "to": 188.28,
+      "sid": 71,
+      "location": 2,
+      "content": "它的全职啊"
+    },
+    {
+      "from": 188.28,
+      "to": 192.56,
+      "sid": 72,
+      "location": 2,
+      "content": "全职设置为五嗯比如说第一个节点的全值是五"
+    },
+    {
+      "from": 192.56,
+      "to": 194.06,
+      "sid": 73,
+      "location": 2,
+      "content": "那我们怎么操作啊"
+    },
+    {
+      "from": 194.06,
+      "to": 196.13,
+      "sid": 74,
+      "location": 2,
+      "content": "哎那我们就可以这样嗯"
+    },
+    {
+      "from": 196.13,
+      "to": 198.81,
+      "sid": 75,
+      "location": 2,
+      "content": "h i下标为i的"
+    },
+    {
+      "from": 198.81,
+      "to": 200.43,
+      "sid": 76,
+      "location": 2,
+      "content": "我们现在i等于一"
+    },
+    {
+      "from": 200.43,
+      "to": 202.45,
+      "sid": 77,
+      "location": 2,
+      "content": "就可以是第一个元素嗯"
+    },
+    {
+      "from": 202.45,
+      "to": 205.12,
+      "sid": 78,
+      "location": 2,
+      "content": "他的weight成员嗯"
+    },
+    {
+      "from": 205.12,
+      "to": 207.739,
+      "sid": 79,
+      "location": 2,
+      "content": "wait成员它的值是五"
+    },
+    {
+      "from": 207.739,
+      "to": 209.899,
+      "sid": 80,
+      "location": 2,
+      "content": "唉我们将五扶持给他"
+    },
+    {
+      "from": 209.899,
+      "to": 212.74,
+      "sid": 81,
+      "location": 2,
+      "content": "哎这样就可以让第一个节点呢全值为五"
+    },
+    {
+      "from": 212.74,
+      "to": 214.66,
+      "sid": 82,
+      "location": 2,
+      "content": "那么同理嗯"
+    },
+    {
+      "from": 214.66,
+      "to": 216.7,
+      "sid": 83,
+      "location": 2,
+      "content": "第二个我们可以继续第三个"
+    },
+    {
+      "from": 216.7,
+      "to": 217.66,
+      "sid": 84,
+      "location": 2,
+      "content": "第四个等等"
+    },
+    {
+      "from": 217.66,
+      "to": 218.19,
+      "sid": 85,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 218.19,
+      "to": 221.43,
+      "sid": 86,
+      "location": 2,
+      "content": "好这就是咱们的存储结构嗯"
+    },
+    {
+      "from": 221.43,
+      "to": 225.98,
+      "sid": 87,
+      "location": 2,
+      "content": "用这样的一个一维的结构数组来存储"
+    },
+    {
+      "from": 225.98,
+      "to": 229.68,
+      "sid": 88,
+      "location": 2,
+      "content": "数组当中每个元素都有四个成员嗯"
+    },
+    {
+      "from": 229.68,
+      "to": 231.0,
+      "sid": 89,
+      "location": 2,
+      "content": "都有四个成员好了"
+    },
+    {
+      "from": 231.0,
+      "to": 238.42,
+      "sid": 90,
+      "location": 2,
+      "content": "那我们说我们怎么样来把哈弗曼树当中这些嗯所有的节点嗯"
+    },
+    {
+      "from": 238.42,
+      "to": 241.0,
+      "sid": 91,
+      "location": 2,
+      "content": "所有的节点他的双亲是谁"
+    },
+    {
+      "from": 241.0,
+      "to": 242.24,
+      "sid": 92,
+      "location": 2,
+      "content": "他的孩子是谁"
+    },
+    {
+      "from": 242.24,
+      "to": 243.95,
+      "sid": 93,
+      "location": 2,
+      "content": "哎都给构造出来呢"
+    },
+    {
+      "from": 243.95,
+      "to": 246.98,
+      "sid": 94,
+      "location": 2,
+      "content": "那么接下来咱们通过一个例子来看一下"
+    },
+    {
+      "from": 246.98,
+      "to": 247.5,
+      "sid": 95,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 247.66,
+      "to": 252.7,
+      "sid": 96,
+      "location": 2,
+      "content": "好假设呢我这一块有八个全职啊"
+    },
+    {
+      "from": 252.7,
+      "to": 253.78,
+      "sid": 97,
+      "location": 2,
+      "content": "八个全职"
+    },
+    {
+      "from": 253.78,
+      "to": 256.54,
+      "sid": 98,
+      "location": 2,
+      "content": "那么我就用这八个全职呢"
+    },
+    {
+      "from": 257.16,
+      "to": 259.04,
+      "sid": 99,
+      "location": 2,
+      "content": "这个有八个叶子嗯"
+    },
+    {
+      "from": 259.04,
+      "to": 260.78,
+      "sid": 100,
+      "location": 2,
+      "content": "有八个叶n等于八"
+    },
+    {
+      "from": 260.78,
+      "to": 264.5,
+      "sid": 101,
+      "location": 2,
+      "content": "然后呢来构造嗯这个half man树"
+    },
+    {
+      "from": 264.5,
+      "to": 265.75,
+      "sid": 102,
+      "location": 2,
+      "content": "构造half man树"
+    },
+    {
+      "from": 265.75,
+      "to": 271.65,
+      "sid": 103,
+      "location": 2,
+      "content": "那我现在呢我就需要一个有多少个元素的数组呢"
+    },
+    {
+      "from": 271.65,
+      "to": 274.02,
+      "sid": 104,
+      "location": 2,
+      "content": "诶有八个节点"
+    },
+    {
+      "from": 274.02,
+      "to": 276.34,
+      "sid": 105,
+      "location": 2,
+      "content": "再加上产生的嗯"
+    },
+    {
+      "from": 276.34,
+      "to": 279.58,
+      "sid": 106,
+      "location": 2,
+      "content": "七个我需要有这么大的一个数组嗯"
+    },
+    {
+      "from": 279.58,
+      "to": 284.72,
+      "sid": 107,
+      "location": 2,
+      "content": "那我定义数组的时候就可以定义一个16的这样的一个数组"
+    },
+    {
+      "from": 284.72,
+      "to": 287.4,
+      "sid": 108,
+      "location": 2,
+      "content": "我们只用这个定义"
+    },
+    {
+      "from": 287.4,
+      "to": 290.1,
+      "sid": 109,
+      "location": 2,
+      "content": "这几16呢是零到15嗯"
+    },
+    {
+      "from": 290.1,
+      "to": 291.03,
+      "sid": 110,
+      "location": 2,
+      "content": "零到15"
+    },
+    {
+      "from": 291.03,
+      "to": 294.18,
+      "sid": 111,
+      "location": 2,
+      "content": "那我们呃零到10 15嗯"
+    },
+    {
+      "from": 294.18,
+      "to": 296.04,
+      "sid": 112,
+      "location": 2,
+      "content": "那我们只用一到15"
+    },
+    {
+      "from": 296.04,
+      "to": 297.42,
+      "sid": 113,
+      "location": 2,
+      "content": "0号不用嗯"
+    },
+    {
+      "from": 297.42,
+      "to": 298.08,
+      "sid": 114,
+      "location": 2,
+      "content": "0号不用"
+    },
+    {
+      "from": 298.08,
+      "to": 300.21,
+      "sid": 115,
+      "location": 2,
+      "content": "这样呢就可以存储15个元素"
+    },
+    {
+      "from": 300.21,
+      "to": 301.14,
+      "sid": 116,
+      "location": 2,
+      "content": "15个节点了"
+    },
+    {
+      "from": 301.14,
+      "to": 305.72,
+      "sid": 117,
+      "location": 2,
+      "content": "嗯好那我们接下来呢就初始化这样的一个数组"
+    },
+    {
+      "from": 306.08,
+      "to": 314.55,
+      "sid": 118,
+      "location": 2,
+      "content": "首先呢这个数组当中的所有元素的所有元素的双亲以及孩子都为零"
+    },
+    {
+      "from": 314.55,
+      "to": 316.92,
+      "sid": 119,
+      "location": 2,
+      "content": "嗯这就是咱们叫什么呢"
+    },
+    {
+      "from": 316.92,
+      "to": 318.36,
+      "sid": 120,
+      "location": 2,
+      "content": "嗯构造half man"
+    },
+    {
+      "from": 318.36,
+      "to": 321.45,
+      "sid": 121,
+      "location": 2,
+      "content": "树的第一步叫做构造森林"
+    },
+    {
+      "from": 321.45,
+      "to": 322.32,
+      "sid": 122,
+      "location": 2,
+      "content": "全是根"
+    },
+    {
+      "from": 322.32,
+      "to": 324.27,
+      "sid": 123,
+      "location": 2,
+      "content": "是不是嗯全是根"
+    },
+    {
+      "from": 324.27,
+      "to": 325.92,
+      "sid": 124,
+      "location": 2,
+      "content": "那么每一个根节点呢"
+    },
+    {
+      "from": 325.92,
+      "to": 327.72,
+      "sid": 125,
+      "location": 2,
+      "content": "它既没有双亲"
+    },
+    {
+      "from": 327.72,
+      "to": 329.28,
+      "sid": 126,
+      "location": 2,
+      "content": "也没有孩子"
+    },
+    {
+      "from": 329.28,
+      "to": 329.67,
+      "sid": 127,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 329.67,
+      "to": 331.38,
+      "sid": 128,
+      "location": 2,
+      "content": "我们怎么表示没有双亲"
+    },
+    {
+      "from": 331.38,
+      "to": 332.37,
+      "sid": 129,
+      "location": 2,
+      "content": "没有孩子呢"
+    },
+    {
+      "from": 332.37,
+      "to": 335.01,
+      "sid": 130,
+      "location": 2,
+      "content": "的双亲节点和孩子"
+    },
+    {
+      "from": 335.01,
+      "to": 337.05,
+      "sid": 131,
+      "location": 2,
+      "content": "我们都记录一个零啊"
+    },
+    {
+      "from": 337.05,
+      "to": 338.159,
+      "sid": 132,
+      "location": 2,
+      "content": "都记录一个零"
+    },
+    {
+      "from": 338.159,
+      "to": 339.689,
+      "sid": 133,
+      "location": 2,
+      "content": "意思就是他没有双亲"
+    },
+    {
+      "from": 339.689,
+      "to": 340.949,
+      "sid": 134,
+      "location": 2,
+      "content": "也没有孩子嗯"
+    },
+    {
+      "from": 340.949,
+      "to": 344.32,
+      "sid": 135,
+      "location": 2,
+      "content": "失灵的就表示没有嗯没有"
+    },
+    {
+      "from": 344.58,
+      "to": 348.42,
+      "sid": 136,
+      "location": 2,
+      "content": "那我们说构造这个呃森林全是根"
+    },
+    {
+      "from": 348.42,
+      "to": 351.59,
+      "sid": 137,
+      "location": 2,
+      "content": "这个这这八个根节点"
+    },
+    {
+      "from": 351.59,
+      "to": 354.14,
+      "sid": 138,
+      "location": 2,
+      "content": "它们的全职分别是这么多"
+    },
+    {
+      "from": 354.14,
+      "to": 359.0,
+      "sid": 139,
+      "location": 2,
+      "content": "那我们给这个1~8号节点输入全职"
+    },
+    {
+      "from": 359.0,
+      "to": 362.03,
+      "sid": 140,
+      "location": 2,
+      "content": "按输入全值分别是这么多"
+    },
+    {
+      "from": 362.03,
+      "to": 362.78,
+      "sid": 141,
+      "location": 2,
+      "content": "好了"
+    },
+    {
+      "from": 363.12,
+      "to": 365.82,
+      "sid": 142,
+      "location": 2,
+      "content": "那咱们的初始化过程完成了嗯"
+    },
+    {
+      "from": 365.82,
+      "to": 366.72,
+      "sid": 143,
+      "location": 2,
+      "content": "这是第一步"
+    },
+    {
+      "from": 366.72,
+      "to": 368.34,
+      "sid": 144,
+      "location": 2,
+      "content": "我们先初始化一下"
+    },
+    {
+      "from": 368.34,
+      "to": 368.86,
+      "sid": 145,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 368.86,
+      "to": 372.61,
+      "sid": 146,
+      "location": 2,
+      "content": "接下来呢我们就要构造这个哈夫曼树了"
+    },
+    {
+      "from": 372.61,
+      "to": 375.669,
+      "sid": 147,
+      "location": 2,
+      "content": "来生成n减一个节点"
+    },
+    {
+      "from": 375.669,
+      "to": 378.309,
+      "sid": 148,
+      "location": 2,
+      "content": "嗯那我们说生成n减一个节点的话"
+    },
+    {
+      "from": 378.309,
+      "to": 380.979,
+      "sid": 149,
+      "location": 2,
+      "content": "我们就要一个节点一个节点的来生成"
+    },
+    {
+      "from": 380.979,
+      "to": 383.59,
+      "sid": 150,
+      "location": 2,
+      "content": "所以呢我们这儿需要一个循环"
+    },
+    {
+      "from": 383.59,
+      "to": 388.21,
+      "sid": 151,
+      "location": 2,
+      "content": "首先生成的第一个呢嗯如果用i来表示它的下标"
+    },
+    {
+      "from": 388.21,
+      "to": 390.2,
+      "sid": 152,
+      "location": 2,
+      "content": "下标是从几开始的呢"
+    },
+    {
+      "from": 390.2,
+      "to": 393.05,
+      "sid": 153,
+      "location": 2,
+      "content": "嗯我们这儿一共有n个叶子"
+    },
+    {
+      "from": 393.05,
+      "to": 395.9,
+      "sid": 154,
+      "location": 2,
+      "content": "下标呢是从n加一开始"
+    },
+    {
+      "from": 395.9,
+      "to": 396.41,
+      "sid": 155,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 396.41,
+      "to": 399.89,
+      "sid": 156,
+      "location": 2,
+      "content": "那么一直到嗯多少结束呢"
+    },
+    {
+      "from": 399.89,
+      "to": 403.31,
+      "sid": 157,
+      "location": 2,
+      "content": "我们总共有n2 n减一啊"
+    },
+    {
+      "from": 403.31,
+      "to": 409.15,
+      "sid": 158,
+      "location": 2,
+      "content": "一直到这个2n减一小于等于2n减一嗯"
+    },
+    {
+      "from": 409.15,
+      "to": 412.51,
+      "sid": 159,
+      "location": 2,
+      "content": "我们要产生g n减一个新的节点"
+    },
+    {
+      "from": 412.51,
+      "to": 414.34,
+      "sid": 160,
+      "location": 2,
+      "content": "哎这就是咱们的循环嗯"
+    },
+    {
+      "from": 414.34,
+      "to": 416.48,
+      "sid": 161,
+      "location": 2,
+      "content": "i加加i加加"
+    },
+    {
+      "from": 417.12,
+      "to": 419.63,
+      "sid": 162,
+      "location": 2,
+      "content": "那么每一次做什么呢"
+    },
+    {
+      "from": 419.63,
+      "to": 422.08,
+      "sid": 163,
+      "location": 2,
+      "content": "每一次我们说接下来干什么"
+    },
+    {
+      "from": 422.539,
+      "to": 427.2,
+      "sid": 164,
+      "location": 2,
+      "content": "第一步叫做第一步叫做生成"
+    },
+    {
+      "from": 427.2,
+      "to": 428.64,
+      "sid": 165,
+      "location": 2,
+      "content": "是森林啊"
+    },
+    {
+      "from": 428.64,
+      "to": 430.32,
+      "sid": 166,
+      "location": 2,
+      "content": "构造这个森林全是根"
+    },
+    {
+      "from": 430.32,
+      "to": 431.73,
+      "sid": 167,
+      "location": 2,
+      "content": "是不是已经构造好了"
+    },
+    {
+      "from": 431.73,
+      "to": 435.96,
+      "sid": 168,
+      "location": 2,
+      "content": "接下来呢嗯选择两小造新数"
+    },
+    {
+      "from": 435.96,
+      "to": 442.38,
+      "sid": 169,
+      "location": 2,
+      "content": "我们要从所有的根节点当中选择两个全职最小的啊"
+    },
+    {
+      "from": 442.38,
+      "to": 446.77,
+      "sid": 170,
+      "location": 2,
+      "content": "选择两个全职最小的来造一棵新树好"
+    },
+    {
+      "from": 446.77,
+      "to": 448.72,
+      "sid": 171,
+      "location": 2,
+      "content": "那我们说从这些节点当中"
+    },
+    {
+      "from": 448.72,
+      "to": 450.16,
+      "sid": 172,
+      "location": 2,
+      "content": "我们找两个最小的"
+    },
+    {
+      "from": 450.16,
+      "to": 451.24,
+      "sid": 173,
+      "location": 2,
+      "content": "我们找到了嗯"
+    },
+    {
+      "from": 451.24,
+      "to": 452.65,
+      "sid": 174,
+      "location": 2,
+      "content": "一个呢是这个二"
+    },
+    {
+      "from": 452.65,
+      "to": 454.659,
+      "sid": 175,
+      "location": 2,
+      "content": "一个是这个三是最小的"
+    },
+    {
+      "from": 454.659,
+      "to": 460.989,
+      "sid": 176,
+      "location": 2,
+      "content": "那我们把这个二和这个三合并为它添加一个根节点"
+    },
+    {
+      "from": 460.989,
+      "to": 461.589,
+      "sid": 177,
+      "location": 2,
+      "content": "是不是啊"
+    },
+    {
+      "from": 461.589,
+      "to": 464.829,
+      "sid": 178,
+      "location": 2,
+      "content": "哎那我们画成图呢就是这个样子的嗯"
+    },
+    {
+      "from": 464.829,
+      "to": 467.62,
+      "sid": 179,
+      "location": 2,
+      "content": "就是这个样子的好嘞"
+    },
+    {
+      "from": 467.62,
+      "to": 471.89,
+      "sid": 180,
+      "location": 2,
+      "content": "那我们说这个时候呢就可以新生成一个节点了"
+    },
+    {
+      "from": 471.89,
+      "to": 475.46,
+      "sid": 181,
+      "location": 2,
+      "content": "那么新生成的这个节点的权值是多少呢"
+    },
+    {
+      "from": 475.46,
+      "to": 476.78,
+      "sid": 182,
+      "location": 2,
+      "content": "全职是五"
+    },
+    {
+      "from": 476.78,
+      "to": 477.86,
+      "sid": 183,
+      "location": 2,
+      "content": "全职是五"
+    },
+    {
+      "from": 477.86,
+      "to": 481.5,
+      "sid": 184,
+      "location": 2,
+      "content": "然后呢这个新生成的这个节点呢"
+    },
+    {
+      "from": 481.5,
+      "to": 483.09,
+      "sid": 185,
+      "location": 2,
+      "content": "它是9号节点嗯"
+    },
+    {
+      "from": 483.09,
+      "to": 486.0,
+      "sid": 186,
+      "location": 2,
+      "content": "它是这两个节点的双亲嗯"
+    },
+    {
+      "from": 486.0,
+      "to": 487.85,
+      "sid": 187,
+      "location": 2,
+      "content": "它是这两个节点的双亲"
+    },
+    {
+      "from": 487.85,
+      "to": 491.43,
+      "sid": 188,
+      "location": 2,
+      "content": "唉我们说这这就是咱们的第三步了嗯"
+    },
+    {
+      "from": 491.43,
+      "to": 492.78,
+      "sid": 189,
+      "location": 2,
+      "content": "第二步叫什么呢"
+    },
+    {
+      "from": 492.78,
+      "to": 494.67,
+      "sid": 190,
+      "location": 2,
+      "content": "选择两小造新数"
+    },
+    {
+      "from": 494.67,
+      "to": 495.93,
+      "sid": 191,
+      "location": 2,
+      "content": "我们造了一个新数了"
+    },
+    {
+      "from": 495.93,
+      "to": 499.97,
+      "sid": 192,
+      "location": 2,
+      "content": "嗯接下来呢删除两小天新人"
+    },
+    {
+      "from": 499.97,
+      "to": 500.66,
+      "sid": 193,
+      "location": 2,
+      "content": "是不是啊"
+    },
+    {
+      "from": 500.66,
+      "to": 502.79,
+      "sid": 194,
+      "location": 2,
+      "content": "哎我们要把这两个小的删掉"
+    },
+    {
+      "from": 502.79,
+      "to": 503.93,
+      "sid": 195,
+      "location": 2,
+      "content": "怎么删掉啊"
+    },
+    {
+      "from": 503.93,
+      "to": 506.58,
+      "sid": 196,
+      "location": 2,
+      "content": "也就是说他们两个不再是根节点了"
+    },
+    {
+      "from": 506.58,
+      "to": 508.62,
+      "sid": 197,
+      "location": 2,
+      "content": "他们两个现在有双亲了"
+    },
+    {
+      "from": 508.62,
+      "to": 510.3,
+      "sid": 198,
+      "location": 2,
+      "content": "嗯双亲节点是谁呢"
+    },
+    {
+      "from": 510.3,
+      "to": 511.84,
+      "sid": 199,
+      "location": 2,
+      "content": "是9号节点"
+    },
+    {
+      "from": 511.84,
+      "to": 514.42,
+      "sid": 200,
+      "location": 2,
+      "content": "这样呢就把他们两个删掉了"
+    },
+    {
+      "from": 514.42,
+      "to": 515.71,
+      "sid": 201,
+      "location": 2,
+      "content": "他们两个有双亲了"
+    },
+    {
+      "from": 515.71,
+      "to": 518.48,
+      "sid": 202,
+      "location": 2,
+      "content": "那就不是就不是这个根了"
+    },
+    {
+      "from": 518.48,
+      "to": 519.62,
+      "sid": 203,
+      "location": 2,
+      "content": "嗯就不是根了"
+    },
+    {
+      "from": 519.62,
+      "to": 521.809,
+      "sid": 204,
+      "location": 2,
+      "content": "来删除两小天心术"
+    },
+    {
+      "from": 521.809,
+      "to": 527.72,
+      "sid": 205,
+      "location": 2,
+      "content": "那么这个心数呢就是它嗯他的左孩子呢是这个3号节点"
+    },
+    {
+      "from": 527.72,
+      "to": 530.0,
+      "sid": 206,
+      "location": 2,
+      "content": "右孩子呢是6号节点"
+    },
+    {
+      "from": 530.0,
+      "to": 533.06,
+      "sid": 207,
+      "location": 2,
+      "content": "所以呢我们修改它的左孩子和右孩子"
+    },
+    {
+      "from": 533.06,
+      "to": 533.48,
+      "sid": 208,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 533.48,
+      "to": 535.28,
+      "sid": 209,
+      "location": 2,
+      "content": "左孩子右孩子好了"
+    },
+    {
+      "from": 535.28,
+      "to": 536.72,
+      "sid": 210,
+      "location": 2,
+      "content": "那么这一步就完成了"
+    },
+    {
+      "from": 536.72,
+      "to": 537.38,
+      "sid": 211,
+      "location": 2,
+      "content": "是不是啊"
+    },
+    {
+      "from": 537.38,
+      "to": 541.0,
+      "sid": 212,
+      "location": 2,
+      "content": "哎那我们说选择两小灶心术"
+    },
+    {
+      "from": 541.48,
+      "to": 547.74,
+      "sid": 213,
+      "location": 2,
+      "content": "这个删除两小天天心十天新人哎"
+    },
+    {
+      "from": 547.74,
+      "to": 548.52,
+      "sid": 214,
+      "location": 2,
+      "content": "这两部都完了"
+    },
+    {
+      "from": 548.52,
+      "to": 549.7,
+      "sid": 215,
+      "location": 2,
+      "content": "接下来干什么了"
+    },
+    {
+      "from": 549.7,
+      "to": 551.95,
+      "sid": 216,
+      "location": 2,
+      "content": "重复二三是不是啊"
+    },
+    {
+      "from": 551.95,
+      "to": 554.14,
+      "sid": 217,
+      "location": 2,
+      "content": "重复刚才这这两步"
+    },
+    {
+      "from": 554.14,
+      "to": 557.68,
+      "sid": 218,
+      "location": 2,
+      "content": "直到我们剩下一棵树一个根就结束了"
+    },
+    {
+      "from": 557.68,
+      "to": 558.01,
+      "sid": 219,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 558.01,
+      "to": 560.02,
+      "sid": 220,
+      "location": 2,
+      "content": "那我们现在还有好多根呢"
+    },
+    {
+      "from": 560.02,
+      "to": 561.22,
+      "sid": 221,
+      "location": 2,
+      "content": "这些为零的啊"
+    },
+    {
+      "from": 561.22,
+      "to": 563.23,
+      "sid": 222,
+      "location": 2,
+      "content": "parent值为零的都是根"
+    },
+    {
+      "from": 563.23,
+      "to": 565.839,
+      "sid": 223,
+      "location": 2,
+      "content": "所以呢我们继续选择啊"
+    },
+    {
+      "from": 566.18,
+      "to": 567.5,
+      "sid": 224,
+      "location": 2,
+      "content": "两小嗯"
+    },
+    {
+      "from": 567.5,
+      "to": 568.49,
+      "sid": 225,
+      "location": 2,
+      "content": "继续选择两小"
+    },
+    {
+      "from": 568.49,
+      "to": 570.32,
+      "sid": 226,
+      "location": 2,
+      "content": "那么这回在选择的时候呢"
+    },
+    {
+      "from": 570.32,
+      "to": 574.53,
+      "sid": 227,
+      "location": 2,
+      "content": "我们就不能用之前已经合并了"
+    },
+    {
+      "from": 574.53,
+      "to": 575.25,
+      "sid": 228,
+      "location": 2,
+      "content": "为什么呢"
+    },
+    {
+      "from": 575.25,
+      "to": 576.15,
+      "sid": 229,
+      "location": 2,
+      "content": "他们有双亲了"
+    },
+    {
+      "from": 576.15,
+      "to": 577.23,
+      "sid": 230,
+      "location": 2,
+      "content": "他们不再是跟了"
+    },
+    {
+      "from": 577.23,
+      "to": 577.83,
+      "sid": 231,
+      "location": 2,
+      "content": "是不是啊"
+    },
+    {
+      "from": 577.83,
+      "to": 581.1,
+      "sid": 232,
+      "location": 2,
+      "content": "哎所以我们就不选这些双亲不为零的"
+    },
+    {
+      "from": 581.1,
+      "to": 584.89,
+      "sid": 233,
+      "location": 2,
+      "content": "我们从双亲为零的里头再找两个最小的嗯"
+    },
+    {
+      "from": 584.89,
+      "to": 588.01,
+      "sid": 234,
+      "location": 2,
+      "content": "那我们这回找到了一个呢是这个六"
+    },
+    {
+      "from": 588.01,
+      "to": 589.99,
+      "sid": 235,
+      "location": 2,
+      "content": "一个呢是这个五啊"
+    },
+    {
+      "from": 589.99,
+      "to": 590.8,
+      "sid": 236,
+      "location": 2,
+      "content": "一个是这个五"
+    },
+    {
+      "from": 590.8,
+      "to": 593.64,
+      "sid": 237,
+      "location": 2,
+      "content": "选择两小造新数诶"
+    },
+    {
+      "from": 593.64,
+      "to": 595.68,
+      "sid": 238,
+      "location": 2,
+      "content": "六和五造一个新数"
+    },
+    {
+      "from": 595.68,
+      "to": 596.97,
+      "sid": 239,
+      "location": 2,
+      "content": "就是这个11"
+    },
+    {
+      "from": 596.97,
+      "to": 599.1,
+      "sid": 240,
+      "location": 2,
+      "content": "这11呢就是下一个了嗯"
+    },
+    {
+      "from": 599.1,
+      "to": 601.81,
+      "sid": 241,
+      "location": 2,
+      "content": "下一个它的全职为11"
+    },
+    {
+      "from": 601.81,
+      "to": 603.52,
+      "sid": 242,
+      "location": 2,
+      "content": "选择两小灶心术"
+    },
+    {
+      "from": 603.52,
+      "to": 604.72,
+      "sid": 243,
+      "location": 2,
+      "content": "接下来该干什么了"
+    },
+    {
+      "from": 604.72,
+      "to": 606.76,
+      "sid": 244,
+      "location": 2,
+      "content": "删除两小天心人"
+    },
+    {
+      "from": 606.76,
+      "to": 607.82,
+      "sid": 245,
+      "location": 2,
+      "content": "是不是诶"
+    },
+    {
+      "from": 607.82,
+      "to": 609.89,
+      "sid": 246,
+      "location": 2,
+      "content": "我们刚才的这个六和五"
+    },
+    {
+      "from": 609.89,
+      "to": 613.64,
+      "sid": 247,
+      "location": 2,
+      "content": "它的双亲呢就是我们新产生的这个10号节点"
+    },
+    {
+      "from": 613.64,
+      "to": 616.88,
+      "sid": 248,
+      "location": 2,
+      "content": "所以我们修改他们俩的双亲为十"
+    },
+    {
+      "from": 616.88,
+      "to": 617.3,
+      "sid": 249,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 617.3,
+      "to": 619.56,
+      "sid": 250,
+      "location": 2,
+      "content": "修改他们俩的双亲为十"
+    },
+    {
+      "from": 619.56,
+      "to": 622.26,
+      "sid": 251,
+      "location": 2,
+      "content": "然后呢天心数天心术"
+    },
+    {
+      "from": 622.26,
+      "to": 626.67,
+      "sid": 252,
+      "location": 2,
+      "content": "那我们这个新造出来的这棵树呢添加到森林里去"
+    },
+    {
+      "from": 626.67,
+      "to": 630.01,
+      "sid": 253,
+      "location": 2,
+      "content": "也就是说刚才这两个呢是他的嗯"
+    },
+    {
+      "from": 630.01,
+      "to": 634.79,
+      "sid": 254,
+      "location": 2,
+      "content": "这个4号和这个9号呢是他的左孩子"
+    },
+    {
+      "from": 634.79,
+      "to": 635.719,
+      "sid": 255,
+      "location": 2,
+      "content": "右孩子"
+    },
+    {
+      "from": 635.72,
+      "to": 637.64,
+      "sid": 256,
+      "location": 2,
+      "content": "小孩子有孩子诶"
+    },
+    {
+      "from": 637.64,
+      "to": 641.52,
+      "sid": 257,
+      "location": 2,
+      "content": "那么这样呢我们就又造了一棵新树"
+    },
+    {
+      "from": 641.52,
+      "to": 641.76,
+      "sid": 258,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 641.76,
+      "to": 646.18,
+      "sid": 259,
+      "location": 2,
+      "content": "嗯那么原来的这个森林当中呢又少了两个节点好"
+    },
+    {
+      "from": 646.18,
+      "to": 648.34,
+      "sid": 260,
+      "location": 2,
+      "content": "那么接下来继续嗯"
+    },
+    {
+      "from": 648.34,
+      "to": 649.81,
+      "sid": 261,
+      "location": 2,
+      "content": "继续刚才的操作"
+    },
+    {
+      "from": 649.81,
+      "to": 655.44,
+      "sid": 262,
+      "location": 2,
+      "content": "再从这些双亲嗯为零的节点当中选两个最小的"
+    },
+    {
+      "from": 655.44,
+      "to": 658.63,
+      "sid": 263,
+      "location": 2,
+      "content": "那我们选出来的是七和十嗯"
+    },
+    {
+      "from": 658.63,
+      "to": 661.15,
+      "sid": 264,
+      "location": 2,
+      "content": "选择两小造心术啊"
+    },
+    {
+      "from": 661.15,
+      "to": 664.79,
+      "sid": 265,
+      "location": 2,
+      "content": "心术的这个这个全职实习期"
+    },
+    {
+      "from": 664.79,
+      "to": 667.91,
+      "sid": 266,
+      "location": 2,
+      "content": "然后呢删除两小嗯"
+    },
+    {
+      "from": 667.91,
+      "to": 669.59,
+      "sid": 267,
+      "location": 2,
+      "content": "他们两个是有双亲了"
+    },
+    {
+      "from": 669.59,
+      "to": 670.719,
+      "sid": 268,
+      "location": 2,
+      "content": "是11号"
+    },
+    {
+      "from": 671.08,
+      "to": 674.62,
+      "sid": 269,
+      "location": 2,
+      "content": "这个天津人把这个11号填进去"
+    },
+    {
+      "from": 674.62,
+      "to": 677.879,
+      "sid": 270,
+      "location": 2,
+      "content": "这两个小的呢是他的孩子嗯"
+    },
+    {
+      "from": 677.879,
+      "to": 679.169,
+      "sid": 271,
+      "location": 2,
+      "content": "重复二三"
+    },
+    {
+      "from": 679.169,
+      "to": 684.13,
+      "sid": 272,
+      "location": 2,
+      "content": "继续在这些双亲不为零的里头来找找两个小单"
+    },
+    {
+      "from": 684.13,
+      "to": 686.2,
+      "sid": 273,
+      "location": 2,
+      "content": "找到了找到了以后呢"
+    },
+    {
+      "from": 686.2,
+      "to": 690.76,
+      "sid": 274,
+      "location": 2,
+      "content": "哎这个这个天心人嗯"
+    },
+    {
+      "from": 690.76,
+      "to": 696.07,
+      "sid": 275,
+      "location": 2,
+      "content": "这个造新术造出来的新树的全职是他们两个的和28嗯"
+    },
+    {
+      "from": 696.07,
+      "to": 699.79,
+      "sid": 276,
+      "location": 2,
+      "content": "然后呢他们两个嗯值为11和17的"
+    },
+    {
+      "from": 699.79,
+      "to": 702.53,
+      "sid": 277,
+      "location": 2,
+      "content": "他们两个是10号和11号哎"
+    },
+    {
+      "from": 702.53,
+      "to": 704.21,
+      "sid": 278,
+      "location": 2,
+      "content": "作为他的左右孩子"
+    },
+    {
+      "from": 704.21,
+      "to": 707.49,
+      "sid": 279,
+      "location": 2,
+      "content": "12号呢是他们两个的双亲好"
+    },
+    {
+      "from": 707.49,
+      "to": 708.42,
+      "sid": 280,
+      "location": 2,
+      "content": "那我们继续"
+    },
+    {
+      "from": 708.42,
+      "to": 714.6,
+      "sid": 281,
+      "location": 2,
+      "content": "现在呢还有还有这个嗯12344个双亲为零的"
+    },
+    {
+      "from": 714.6,
+      "to": 715.26,
+      "sid": 282,
+      "location": 2,
+      "content": "是不是啊"
+    },
+    {
+      "from": 715.26,
+      "to": 721.92,
+      "sid": 283,
+      "location": 2,
+      "content": "哎所以我们呢还得继续要继续重复刚才的步骤哎"
+    },
+    {
+      "from": 721.92,
+      "to": 724.71,
+      "sid": 284,
+      "location": 2,
+      "content": "选择两小造心术哎"
+    },
+    {
+      "from": 724.71,
+      "to": 726.69,
+      "sid": 285,
+      "location": 2,
+      "content": "造出来新数之后呢"
+    },
+    {
+      "from": 726.69,
+      "to": 728.64,
+      "sid": 286,
+      "location": 2,
+      "content": "就是我们的新节点"
+    },
+    {
+      "from": 728.64,
+      "to": 730.22,
+      "sid": 287,
+      "location": 2,
+      "content": "就是我们的新节点"
+    },
+    {
+      "from": 730.22,
+      "to": 734.96,
+      "sid": 288,
+      "location": 2,
+      "content": "然后呢这两棵新树的双亲就是我们的新节点嗯"
+    },
+    {
+      "from": 734.96,
+      "to": 738.65,
+      "sid": 289,
+      "location": 2,
+      "content": "这两颗这个全职小的新节点嗯"
+    },
+    {
+      "from": 738.65,
+      "to": 743.63,
+      "sid": 290,
+      "location": 2,
+      "content": "然后呢咱们这个新节点的孩子就是我们刚才的这两个比较小的"
+    },
+    {
+      "from": 743.63,
+      "to": 743.99,
+      "sid": 291,
+      "location": 2,
+      "content": "好"
+    },
+    {
+      "from": 743.99,
+      "to": 746.65,
+      "sid": 292,
+      "location": 2,
+      "content": "继续继续刚才的这个操作"
+    },
+    {
+      "from": 746.65,
+      "to": 748.92,
+      "sid": 293,
+      "location": 2,
+      "content": "选择两小早期数嗯"
+    },
+    {
+      "from": 748.92,
+      "to": 752.16,
+      "sid": 294,
+      "location": 2,
+      "content": "然后呢删除两小甜心人嗯"
+    },
+    {
+      "from": 752.16,
+      "to": 755.04,
+      "sid": 295,
+      "location": 2,
+      "content": "删除两小甜心人什么时候结束啊"
+    },
+    {
+      "from": 755.04,
+      "to": 761.65,
+      "sid": 296,
+      "location": 2,
+      "content": "什么时候咱们这个表里头就剩下一个值为零的嗯"
+    },
+    {
+      "from": 761.65,
+      "to": 763.51,
+      "sid": 297,
+      "location": 2,
+      "content": "就剩下一个值为零的"
+    },
+    {
+      "from": 763.51,
+      "to": 765.37,
+      "sid": 298,
+      "location": 2,
+      "content": "那么咱们就结束了嗯"
+    },
+    {
+      "from": 765.37,
+      "to": 767.77,
+      "sid": 299,
+      "location": 2,
+      "content": "就剩下一个值为零的就结束了"
+    },
+    {
+      "from": 767.77,
+      "to": 770.79,
+      "sid": 300,
+      "location": 2,
+      "content": "哎你看那个parent值为零了"
+    },
+    {
+      "from": 770.79,
+      "to": 771.45,
+      "sid": 301,
+      "location": 2,
+      "content": "剩一个了"
+    },
+    {
+      "from": 771.45,
+      "to": 773.67,
+      "sid": 302,
+      "location": 2,
+      "content": "说明咱们现在只有一个根了"
+    },
+    {
+      "from": 773.67,
+      "to": 774.96,
+      "sid": 303,
+      "location": 2,
+      "content": "嗯只有一个根了"
+    },
+    {
+      "from": 774.96,
+      "to": 776.4,
+      "sid": 304,
+      "location": 2,
+      "content": "好咱们结束"
+    },
+    {
+      "from": 776.4,
+      "to": 781.42,
+      "sid": 305,
+      "location": 2,
+      "content": "这就是呢咱们哈夫曼树构造算法的思路嗯"
+    },
+    {
+      "from": 781.42,
+      "to": 784.18,
+      "sid": 306,
+      "location": 2,
+      "content": "接下来呢咱们就来实现这个算法嗯"
+    },
+    {
+      "from": 784.18,
+      "to": 786.91,
+      "sid": 307,
+      "location": 2,
+      "content": "这个算法呢我们分两步来实现"
+    },
+    {
+      "from": 786.91,
+      "to": 789.46,
+      "sid": 308,
+      "location": 2,
+      "content": "第一步呢我们先初始化一下啊"
+    },
+    {
+      "from": 789.46,
+      "to": 791.95,
+      "sid": 309,
+      "location": 2,
+      "content": "先初始化就是把什么呢"
+    },
+    {
+      "from": 791.95,
+      "to": 795.31,
+      "sid": 310,
+      "location": 2,
+      "content": "把这嗯2n减一个元素"
+    },
+    {
+      "from": 795.31,
+      "to": 796.21,
+      "sid": 311,
+      "location": 2,
+      "content": "它的左孩子"
+    },
+    {
+      "from": 796.21,
+      "to": 797.05,
+      "sid": 312,
+      "location": 2,
+      "content": "右孩子"
+    },
+    {
+      "from": 797.05,
+      "to": 799.54,
+      "sid": 313,
+      "location": 2,
+      "content": "还有parent的值都设置为零"
+    },
+    {
+      "from": 799.54,
+      "to": 803.98,
+      "sid": 314,
+      "location": 2,
+      "content": "然后呢然后呢把前n个元素"
+    },
+    {
+      "from": 803.98,
+      "to": 806.25,
+      "sid": 315,
+      "location": 2,
+      "content": "也就是前面的n个叶节点嗯"
+    },
+    {
+      "from": 806.25,
+      "to": 807.93,
+      "sid": 316,
+      "location": 2,
+      "content": "从第一个到第n个"
+    },
+    {
+      "from": 807.93,
+      "to": 810.36,
+      "sid": 317,
+      "location": 2,
+      "content": "它的weight值呢输入设置好"
+    },
+    {
+      "from": 810.36,
+      "to": 813.81,
+      "sid": 318,
+      "location": 2,
+      "content": "那么这样不完成咱们的初始化就完成了"
+    },
+    {
+      "from": 813.81,
+      "to": 815.2,
+      "sid": 319,
+      "location": 2,
+      "content": "初始化就完成了"
+    },
+    {
+      "from": 815.2,
+      "to": 815.62,
+      "sid": 320,
+      "location": 2,
+      "content": "好"
+    },
+    {
+      "from": 815.62,
+      "to": 818.62,
+      "sid": 321,
+      "location": 2,
+      "content": "那我们说要完成这两步是怎么做的呢"
+    },
+    {
+      "from": 818.62,
+      "to": 820.09,
+      "sid": 322,
+      "location": 2,
+      "content": "哎很简单嗯"
+    },
+    {
+      "from": 820.09,
+      "to": 822.83,
+      "sid": 323,
+      "location": 2,
+      "content": "我们定义一个这么大的数组"
+    },
+    {
+      "from": 822.83,
+      "to": 825.93,
+      "sid": 324,
+      "location": 2,
+      "content": "2n减一总共有2n减一个元素"
+    },
+    {
+      "from": 825.93,
+      "to": 827.91,
+      "sid": 325,
+      "location": 2,
+      "content": "那我们数组呢只加一"
+    },
+    {
+      "from": 827.91,
+      "to": 828.48,
+      "sid": 326,
+      "location": 2,
+      "content": "为什么呢"
+    },
+    {
+      "from": 828.48,
+      "to": 830.01,
+      "sid": 327,
+      "location": 2,
+      "content": "2n减1+1就是2n"
+    },
+    {
+      "from": 830.01,
+      "to": 831.21,
+      "sid": 328,
+      "location": 2,
+      "content": "我们这个0号不用"
+    },
+    {
+      "from": 831.21,
+      "to": 832.11,
+      "sid": 329,
+      "location": 2,
+      "content": "0号不用"
+    },
+    {
+      "from": 832.11,
+      "to": 835.15,
+      "sid": 330,
+      "location": 2,
+      "content": "那么其中最后的这个m嗯"
+    },
+    {
+      "from": 835.15,
+      "to": 838.96,
+      "sid": 331,
+      "location": 2,
+      "content": "也就是2n减一这个位置上呢就是咱们的根节点"
+    },
+    {
+      "from": 838.96,
+      "to": 840.28,
+      "sid": 332,
+      "location": 2,
+      "content": "那咱们初始化呢"
+    },
+    {
+      "from": 840.28,
+      "to": 845.2,
+      "sid": 333,
+      "location": 2,
+      "content": "首先将所有元素从一一直到m位置"
+    },
+    {
+      "from": 845.2,
+      "to": 846.76,
+      "sid": 334,
+      "location": 2,
+      "content": "按到2n减一这个位置"
+    },
+    {
+      "from": 846.76,
+      "to": 848.59,
+      "sid": 335,
+      "location": 2,
+      "content": "所有元素的左孩子"
+    },
+    {
+      "from": 848.59,
+      "to": 852.55,
+      "sid": 336,
+      "location": 2,
+      "content": "右孩子还有parent都设置为零嗯"
+    },
+    {
+      "from": 852.55,
+      "to": 853.42,
+      "sid": 337,
+      "location": 2,
+      "content": "设置为零"
+    },
+    {
+      "from": 854.54,
+      "to": 857.2,
+      "sid": 338,
+      "location": 2,
+      "content": "然后呢我们把前面的n个"
+    },
+    {
+      "from": 857.2,
+      "to": 859.13,
+      "sid": 339,
+      "location": 2,
+      "content": "前面的n个元素"
+    },
+    {
+      "from": 859.13,
+      "to": 861.5,
+      "sid": 340,
+      "location": 2,
+      "content": "它的weight呢都设置好"
+    },
+    {
+      "from": 861.5,
+      "to": 863.09,
+      "sid": 341,
+      "location": 2,
+      "content": "那么这个weight不一样"
+    },
+    {
+      "from": 863.09,
+      "to": 864.11,
+      "sid": 342,
+      "location": 2,
+      "content": "没有什么规律"
+    },
+    {
+      "from": 864.11,
+      "to": 866.51,
+      "sid": 343,
+      "location": 2,
+      "content": "所以我们要一个一个的输入嗯"
+    },
+    {
+      "from": 866.51,
+      "to": 870.08,
+      "sid": 344,
+      "location": 2,
+      "content": "从键盘上输入前n个元素的嗯"
+    },
+    {
+      "from": 870.08,
+      "to": 871.04,
+      "sid": 345,
+      "location": 2,
+      "content": "这个位置值"
+    },
+    {
+      "from": 871.04,
+      "to": 874.76,
+      "sid": 346,
+      "location": 2,
+      "content": "那么这样我们的这个初始化就结束了"
+    },
+    {
+      "from": 874.76,
+      "to": 876.26,
+      "sid": 347,
+      "location": 2,
+      "content": "嗯初始化就结束了"
+    },
+    {
+      "from": 876.26,
+      "to": 880.26,
+      "sid": 348,
+      "location": 2,
+      "content": "这就是咱们说的唉这个第一步"
+    },
+    {
+      "from": 880.26,
+      "to": 883.44,
+      "sid": 349,
+      "location": 2,
+      "content": "接下来呢我们就要进行n减一次合并了"
+    },
+    {
+      "from": 883.44,
+      "to": 883.8,
+      "sid": 350,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 883.8,
+      "to": 888.62,
+      "sid": 351,
+      "location": 2,
+      "content": "通过n减一次合并来产生这个n减一个新的节点"
+    },
+    {
+      "from": 888.62,
+      "to": 891.06,
+      "sid": 352,
+      "location": 2,
+      "content": "那么新产生的节点放在哪里啊"
+    },
+    {
+      "from": 891.06,
+      "to": 892.86,
+      "sid": 353,
+      "location": 2,
+      "content": "前面已经有n个叶子了"
+    },
+    {
+      "from": 892.86,
+      "to": 894.42,
+      "sid": 354,
+      "location": 2,
+      "content": "所以就放在n加一"
+    },
+    {
+      "from": 894.42,
+      "to": 895.95,
+      "sid": 355,
+      "location": 2,
+      "content": "一直到2n减一"
+    },
+    {
+      "from": 895.95,
+      "to": 897.819,
+      "sid": 356,
+      "location": 2,
+      "content": "n加一直到2n减一"
+    },
+    {
+      "from": 897.819,
+      "to": 901.279,
+      "sid": 357,
+      "location": 2,
+      "content": "我们从这个所有的根节点当中呢"
+    },
+    {
+      "from": 901.279,
+      "to": 903.199,
+      "sid": 358,
+      "location": 2,
+      "content": "挑两个最小的"
+    },
+    {
+      "from": 903.199,
+      "to": 906.15,
+      "sid": 359,
+      "location": 2,
+      "content": "挑两个最小的这个两个最小的"
+    },
+    {
+      "from": 906.15,
+      "to": 908.37,
+      "sid": 360,
+      "location": 2,
+      "content": "假如说它的下标一个是s"
+    },
+    {
+      "from": 908.37,
+      "to": 909.9,
+      "sid": 361,
+      "location": 2,
+      "content": "一个是s2 "
+    },
+    {
+      "from": 909.9,
+      "to": 912.45,
+      "sid": 362,
+      "location": 2,
+      "content": "嗯那么再挑两个最小的时候呢"
+    },
+    {
+      "from": 912.45,
+      "to": 916.23,
+      "sid": 363,
+      "location": 2,
+      "content": "我们需要从嗯这些未选过的"
+    },
+    {
+      "from": 916.23,
+      "to": 921.95,
+      "sid": 364,
+      "location": 2,
+      "content": "也就是说从parent等于零的这些节点当中去找两个最小的"
+    },
+    {
+      "from": 921.95,
+      "to": 923.979,
+      "sid": 365,
+      "location": 2,
+      "content": "那么找到了怎么办呢"
+    },
+    {
+      "from": 924.42,
+      "to": 925.35,
+      "sid": 366,
+      "location": 2,
+      "content": "找到了"
+    },
+    {
+      "from": 925.35,
+      "to": 928.329,
+      "sid": 367,
+      "location": 2,
+      "content": "那么他们两个的升迁"
+    },
+    {
+      "from": 928.329,
+      "to": 932.649,
+      "sid": 368,
+      "location": 2,
+      "content": "他们两个的双亲就是我们接下来要产生的这个节点"
+    },
+    {
+      "from": 932.649,
+      "to": 935.18,
+      "sid": 369,
+      "location": 2,
+      "content": "这个节点i他们俩的双亲"
+    },
+    {
+      "from": 935.18,
+      "to": 937.55,
+      "sid": 370,
+      "location": 2,
+      "content": "那么新产生的这个节点呢"
+    },
+    {
+      "from": 937.55,
+      "to": 940.58,
+      "sid": 371,
+      "location": 2,
+      "content": "他俩的孩子做孩子就是s1 "
+    },
+    {
+      "from": 940.58,
+      "to": 942.15,
+      "sid": 372,
+      "location": 2,
+      "content": "右孩子就是s2 "
+    },
+    {
+      "from": 942.15,
+      "to": 946.54,
+      "sid": 373,
+      "location": 2,
+      "content": "然后新产生节点的权重呢就是两个呃"
+    },
+    {
+      "from": 946.54,
+      "to": 951.72,
+      "sid": 374,
+      "location": 2,
+      "content": "两个这个最小的权重的和两个最小的权重的和"
+    },
+    {
+      "from": 951.72,
+      "to": 956.04,
+      "sid": 375,
+      "location": 2,
+      "content": "这就是咱们的唉产生n减一个嗯"
+    },
+    {
+      "from": 956.04,
+      "to": 957.66,
+      "sid": 376,
+      "location": 2,
+      "content": "产生n减一个节点"
+    },
+    {
+      "from": 957.66,
+      "to": 959.55,
+      "sid": 377,
+      "location": 2,
+      "content": "那么这一步怎么实现呢"
+    },
+    {
+      "from": 959.55,
+      "to": 961.92,
+      "sid": 378,
+      "location": 2,
+      "content": "哎这一步我们就是这样嗯"
+    },
+    {
+      "from": 961.92,
+      "to": 965.54,
+      "sid": 379,
+      "location": 2,
+      "content": "就这样我们要产生n减一个jn减一个放在哪呢"
+    },
+    {
+      "from": 965.54,
+      "to": 969.14,
+      "sid": 380,
+      "location": 2,
+      "content": "从n加一前面已经有n个叶子了嗯"
+    },
+    {
+      "from": 969.14,
+      "to": 971.35,
+      "sid": 381,
+      "location": 2,
+      "content": "所以从n加一一直到二"
+    },
+    {
+      "from": 971.35,
+      "to": 974.05,
+      "sid": 382,
+      "location": 2,
+      "content": "n减一这个位置也就是到m嗯"
+    },
+    {
+      "from": 974.05,
+      "to": 977.42,
+      "sid": 383,
+      "location": 2,
+      "content": "也就是到m然后我们一个一个的去产生"
+    },
+    {
+      "from": 977.42,
+      "to": 978.53,
+      "sid": 384,
+      "location": 2,
+      "content": "怎么产生呢"
+    },
+    {
+      "from": 978.53,
+      "to": 981.639,
+      "sid": 385,
+      "location": 2,
+      "content": "我们先从这个数组当中嗯"
+    },
+    {
+      "from": 981.639,
+      "to": 986.81,
+      "sid": 386,
+      "location": 2,
+      "content": "这个parent为零的里头挑两个最小的嗯"
+    },
+    {
+      "from": 986.81,
+      "to": 991.22,
+      "sid": 387,
+      "location": 2,
+      "content": "从这个数组当中parent为零的这个里头挑两个最小的"
+    },
+    {
+      "from": 991.22,
+      "to": 992.97,
+      "sid": 388,
+      "location": 2,
+      "content": "那么挑出来了"
+    },
+    {
+      "from": 992.97,
+      "to": 996.27,
+      "sid": 389,
+      "location": 2,
+      "content": "下标呢我们通过s一和s2 返回"
+    },
+    {
+      "from": 996.27,
+      "to": 998.73,
+      "sid": 390,
+      "location": 2,
+      "content": "那么这个怎么实现比较简单"
+    },
+    {
+      "from": 998.73,
+      "to": 998.97,
+      "sid": 391,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 998.97,
+      "to": 1004.76,
+      "sid": 392,
+      "location": 2,
+      "content": "也就是这个找最小值就不会找两个最小的和次小的都找出来"
+    },
+    {
+      "from": 1004.76,
+      "to": 1005.63,
+      "sid": 393,
+      "location": 2,
+      "content": "这个比较简单"
+    },
+    {
+      "from": 1005.63,
+      "to": 1008.03,
+      "sid": 394,
+      "location": 2,
+      "content": "所以就直接写这样的一个字"
+    },
+    {
+      "from": 1008.03,
+      "to": 1011.7,
+      "sid": 395,
+      "location": 2,
+      "content": "这个嗯函数啊就用这个函数来实现"
+    },
+    {
+      "from": 1011.7,
+      "to": 1012.09,
+      "sid": 396,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 1012.09,
+      "to": 1013.32,
+      "sid": 397,
+      "location": 2,
+      "content": "用这个函数来实现"
+    },
+    {
+      "from": 1013.32,
+      "to": 1015.88,
+      "sid": 398,
+      "location": 2,
+      "content": "那我们这儿呢唉就就不管了"
+    },
+    {
+      "from": 1015.88,
+      "to": 1016.78,
+      "sid": 399,
+      "location": 2,
+      "content": "它具体怎么实现的"
+    },
+    {
+      "from": 1016.78,
+      "to": 1021.1,
+      "sid": 400,
+      "location": 2,
+      "content": "不管反正挑了两个最小的两个下标是s一和s2 "
+    },
+    {
+      "from": 1021.1,
+      "to": 1023.25,
+      "sid": 401,
+      "location": 2,
+      "content": "嗯我们已经知道了嗯"
+    },
+    {
+      "from": 1023.25,
+      "to": 1024.21,
+      "sid": 402,
+      "location": 2,
+      "content": "知道了嗯"
+    },
+    {
+      "from": 1024.21,
+      "to": 1026.49,
+      "sid": 403,
+      "location": 2,
+      "content": "接下来呢我们说就干什么"
+    },
+    {
+      "from": 1026.49,
+      "to": 1030.42,
+      "sid": 404,
+      "location": 2,
+      "content": "这个两个最小的双亲就是我们当前的这一个节点"
+    },
+    {
+      "from": 1030.42,
+      "to": 1033.189,
+      "sid": 405,
+      "location": 2,
+      "content": "我们当前要生成的这个节点嗯"
+    },
+    {
+      "from": 1033.189,
+      "to": 1037.06,
+      "sid": 406,
+      "location": 2,
+      "content": "我们当前要生成的这个节点的左孩子呢就设置为s1 "
+    },
+    {
+      "from": 1037.06,
+      "to": 1039.369,
+      "sid": 407,
+      "location": 2,
+      "content": "女孩子呢就设置为s2 "
+    },
+    {
+      "from": 1039.369,
+      "to": 1041.919,
+      "sid": 408,
+      "location": 2,
+      "content": "我们新生成节点的weight"
+    },
+    {
+      "from": 1041.919,
+      "to": 1047.349,
+      "sid": 409,
+      "location": 2,
+      "content": "全职呢就是这两个小的的全职的和全职的和好"
+    },
+    {
+      "from": 1047.349,
+      "to": 1052.77,
+      "sid": 410,
+      "location": 2,
+      "content": "那我们反复嗯一个一个一个把这n减一个节点都生成"
+    },
+    {
+      "from": 1052.77,
+      "to": 1053.58,
+      "sid": 411,
+      "location": 2,
+      "content": "都生成"
+    },
+    {
+      "from": 1053.58,
+      "to": 1055.86,
+      "sid": 412,
+      "location": 2,
+      "content": "那咱们的算法就结束了"
+    },
+    {
+      "from": 1055.94,
+      "to": 1060.379,
+      "sid": 413,
+      "location": 2,
+      "content": "这就是哈弗曼树构造的算法"
+    },
+    {
+      "from": 1061.2,
+      "to": 1062.48,
+      "sid": 414,
+      "location": 2,
+      "content": "同学们可以呢"
+    },
+    {
+      "from": 1062.48,
+      "to": 1065.48,
+      "sid": 415,
+      "location": 2,
+      "content": "唉再来看一下咱们课本上的这个例子"
+    },
+    {
+      "from": 1065.48,
+      "to": 1065.78,
+      "sid": 416,
+      "location": 2,
+      "content": "嗯"
+    },
+    {
+      "from": 1065.78,
+      "to": 1067.13,
+      "sid": 417,
+      "location": 2,
+      "content": "再来看课本上的例子"
+    },
+    {
+      "from": 1067.13,
+      "to": 1068.27,
+      "sid": 418,
+      "location": 2,
+      "content": "八个节点"
+    },
+    {
+      "from": 1068.27,
+      "to": 1073.52,
+      "sid": 419,
+      "location": 2,
+      "content": "然后呢这个来生成一个half man树啊"
+    },
+    {
+      "from": 1073.52,
+      "to": 1077.15,
+      "sid": 420,
+      "location": 2,
+      "content": "生成一个half man树m的值呢就是15啊"
+    },
+    {
+      "from": 1077.15,
+      "to": 1082.31,
+      "sid": 421,
+      "location": 2,
+      "content": "所以呢我们定义一个嗯大小为16的数组"
+    },
+    {
+      "from": 1082.31,
+      "to": 1084.02,
+      "sid": 422,
+      "location": 2,
+      "content": "但是我们不用0号啊"
+    },
+    {
+      "from": 1084.02,
+      "to": 1086.18,
+      "sid": 423,
+      "location": 2,
+      "content": "我们只用一到15号"
+    },
+    {
+      "from": 1086.18,
+      "to": 1087.58,
+      "sid": 424,
+      "location": 2,
+      "content": "就一到15号"
+    },
+    {
+      "from": 1087.58,
+      "to": 1093.81,
+      "sid": 425,
+      "location": 2,
+      "content": "然后呢一开始初始化初始化左孩子所有元素的左孩子都为零"
+    },
+    {
+      "from": 1093.81,
+      "to": 1096.03,
+      "sid": 426,
+      "location": 2,
+      "content": "所有元素的双亲为零"
+    },
+    {
+      "from": 1096.03,
+      "to": 1098.58,
+      "sid": 427,
+      "location": 2,
+      "content": "所有元素的右孩子为零"
+    },
+    {
+      "from": 1098.58,
+      "to": 1104.6,
+      "sid": 428,
+      "location": 2,
+      "content": "然后呢输入输入前面的n个元素的全职n"
+    },
+    {
+      "from": 1104.6,
+      "to": 1107.27,
+      "sid": 429,
+      "location": 2,
+      "content": "输入全念的n个元素的全职好了"
+    },
+    {
+      "from": 1107.27,
+      "to": 1108.35,
+      "sid": 430,
+      "location": 2,
+      "content": "那么走到这一步呢"
+    },
+    {
+      "from": 1108.35,
+      "to": 1110.24,
+      "sid": 431,
+      "location": 2,
+      "content": "咱们的初始化就完成了"
+    },
+    {
+      "from": 1110.24,
+      "to": 1113.15,
+      "sid": 432,
+      "location": 2,
+      "content": "这就是咱们哈弗曼树的初代嗯"
+    },
+    {
+      "from": 1113.15,
+      "to": 1114.659,
+      "sid": 433,
+      "location": 2,
+      "content": "哈弗曼树的初代"
+    },
+    {
+      "from": 1114.659,
+      "to": 1120.02,
+      "sid": 434,
+      "location": 2,
+      "content": "那么接下来呢我们就去生成这n减一个节点嗯"
+    },
+    {
+      "from": 1120.02,
+      "to": 1121.58,
+      "sid": 435,
+      "location": 2,
+      "content": "n减一个节点唉"
+    },
+    {
+      "from": 1121.58,
+      "to": 1123.17,
+      "sid": 436,
+      "location": 2,
+      "content": "n减一个节点怎么生成呢"
+    },
+    {
+      "from": 1123.17,
+      "to": 1127.94,
+      "sid": 437,
+      "location": 2,
+      "content": "哎咱们前面已经详细介绍了嗯好那我们说生成完毕以后呢"
+    },
+    {
+      "from": 1127.94,
+      "to": 1131.95,
+      "sid": 438,
+      "location": 2,
+      "content": "这就是咱们这个half man树的中泰哎"
+    },
+    {
+      "from": 1131.95,
+      "to": 1133.84,
+      "sid": 439,
+      "location": 2,
+      "content": "那么有了这样的一个数组"
+    },
+    {
+      "from": 1133.84,
+      "to": 1137.08,
+      "sid": 440,
+      "location": 2,
+      "content": "我们就知道我们的哈弗曼树长什么样子了"
+    },
+    {
+      "from": 1137.08,
+      "to": 1138.29,
+      "sid": 441,
+      "location": 2,
+      "content": "嗯长什么样子"
+    },
+    {
+      "from": 1138.29,
+      "to": 1142.03,
+      "sid": 442,
+      "location": 2,
+      "content": "那么这块呢给我们n个节点"
+    },
+    {
+      "from": 1142.03,
+      "to": 1145.7,
+      "sid": 443,
+      "location": 2,
+      "content": "然后呢给我们n个节点的这个全职嗯"
+    },
+    {
+      "from": 1145.7,
+      "to": 1147.53,
+      "sid": 444,
+      "location": 2,
+      "content": "就n知道w知道"
+    },
+    {
+      "from": 1147.53,
+      "to": 1152.3,
+      "sid": 445,
+      "location": 2,
+      "content": "那么请同学们来写出这个嗯来写出这个"
+    },
+    {
+      "from": 1152.3,
+      "to": 1154.01,
+      "sid": 446,
+      "location": 2,
+      "content": "大家写一些试试嗯"
+    },
+    {
+      "from": 1154.01,
+      "to": 1156.64,
+      "sid": 447,
+      "location": 2,
+      "content": "看能不能嗯写出来这个结果"
+    },
+    {
+      "from": 1156.64,
+      "to": 1157.69,
+      "sid": 448,
+      "location": 2,
+      "content": "嗯能写出来呢"
+    },
+    {
+      "from": 1157.69,
+      "to": 1160.51,
+      "sid": 449,
+      "location": 2,
+      "content": "咱们说明这个算法已经掌握了"
+    },
+    {
+      "from": 1160.51,
+      "to": 1161.44,
+      "sid": 450,
+      "location": 2,
+      "content": "嗯好的"
+    },
+    {
+      "from": 1161.44,
+      "to": 1165.35,
+      "sid": 451,
+      "location": 2,
+      "content": "那么关于这个构造哈夫曼数的算法"
+    },
+    {
+      "from": 1165.35,
+      "to": 1166.82,
+      "sid": 452,
+      "location": 2,
+      "content": "咱们就介绍到这里"
+    }
+  ]
+}

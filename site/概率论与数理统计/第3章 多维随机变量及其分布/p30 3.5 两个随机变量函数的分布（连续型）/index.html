@@ -1,0 +1,908 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E7%AC%AC3%E7%AB%A0%20%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/p30%203.5%20%E4%B8%A4%E4%B8%AA%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83%EF%BC%88%E8%BF%9E%E7%BB%AD%E5%9E%8B%EF%BC%89/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>《概率论与数理统计》3.5 两个随机变量函数的分布（连续型） - 笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#35-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              《概率论与数理统计》3.5 两个随机变量函数的分布（连续型） - 笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#f" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、 通用方法：先求分布函数 F 再求导
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#z-x2y2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、 例五：Z = X²+Y²（极坐标 + 分段讨论）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#z-xy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、 卷积公式：Z = X+Y 的特快通道
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、 卷积公式的推导思路
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#n02" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、 例六：两个独立标准正态的和 → N(0,2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、 正态分布的可加性结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="35-">《概率论与数理统计》3.5 两个随机变量函数的分布（连续型） - 笔记<a class="headerlink" href="#35-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自 B 站《概率论与数理统计》教学视频 2.0 版本（up：宋浩老师官方）p30。
+前置：p22 3.2 二维连续型随机变量的边缘密度、p17 2.5 随机变量函数的分布（连续型）。</p>
+</blockquote>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#一-通用方法先求分布函数-f-再求导">一、 通用方法：先求分布函数 F 再求导</a></li>
+<li><a href="#二-例五z--x²y²极坐标--分段讨论">二、 例五：Z = X²+Y²（极坐标 + 分段讨论）</a></li>
+<li><a href="#三-卷积公式z--xy-的特快通道">三、 卷积公式：Z = X+Y 的特快通道</a></li>
+<li><a href="#四-卷积公式的推导思路">四、 卷积公式的推导思路</a></li>
+<li><a href="#五-例六两个独立标准正态的和--n02">五、 例六：两个独立标准正态的和 → N(0,2)</a></li>
+<li><a href="#六-正态分布的可加性结论">六、 正态分布的可加性结论</a></li>
+<li><a href="#补充">补充</a></li>
+<li><a href="#本节重点">本节重点</a></li>
+</ul>
+<hr />
+<h2 id="f">一、 通用方法：先求分布函数 F 再求导<a class="headerlink" href="#f" title="Permanent link">&para;</a></h2>
+<p>二维连续型随机变量函数分布的<strong>通用方法</strong>，本质上就是把 p17 的"分布函数法"从一维搬到二维。</p>
+<p>设 <span class="arithmatex">\(Z = g(X,Y)\)</span>，<span class="arithmatex">\((X,Y)\)</span> 的联合密度为 <span class="arithmatex">\(f(x,y)\)</span>。求 <span class="arithmatex">\(Z\)</span> 的密度分两步：</p>
+<p><strong>Step 1（先求分布函数）</strong>：按定义写</p>
+<div class="arithmatex">\[F_Z(z) = P\{Z \le z\} = P\{g(X,Y) \le z\} = \iint_{g(x,y) \le z} f(x,y)\, dx\, dy\]</div>
+<p><strong>Step 2（再求导）</strong>：对 <span class="arithmatex">\(z\)</span> 求导得密度</p>
+<div class="arithmatex">\[f_Z(z) = F_Z'(z)\]</div>
+<p><strong>人话</strong>：第一步把 "<span class="arithmatex">\(Z \le z\)</span>" 这个关于新变量的事件，翻译成 "<span class="arithmatex">\((X,Y)\)</span> 落在平面某个区域 <span class="arithmatex">\(D_z\)</span> 上"——区域 <span class="arithmatex">\(D_z\)</span> 由不等式 <span class="arithmatex">\(g(x,y) \le z\)</span> 圈出来；第二步就在这个区域上对联合密度做二重积分，得到分布函数；最后求导得到密度函数。</p>
+<p><strong>两个要拎清的细节</strong>：</p>
+<ol>
+<li><strong>记号</strong>：<span class="arithmatex">\(F_Z(z)\)</span> 里的 <span class="arithmatex">\(z\)</span> 是自变量（小写），<span class="arithmatex">\(Z\)</span> 是随机变量（大写），别混。</li>
+<li><strong>"变量 vs 常量"的相对论</strong>：对最终结果来说 <span class="arithmatex">\(z\)</span> 是变量（密度是 <span class="arithmatex">\(z\)</span> 的函数）；但在计算某一步积分时，<span class="arithmatex">\(z\)</span> 是<strong>取定的常量</strong>，区域 <span class="arithmatex">\(D_z\)</span> 的大小由这个常量决定。<strong>每个 <span class="arithmatex">\(z\)</span> 对应不同的区域，这就是"分段讨论积分上下限"的来源</strong>——<span class="arithmatex">\(z\)</span> 落在不同区间，<span class="arithmatex">\(D_z\)</span> 形状不同，积分结果也不同（例五就是 <span class="arithmatex">\(z&lt;0\)</span> 和 <span class="arithmatex">\(z\ge 0\)</span> 两段）。</li>
+</ol>
+<blockquote>
+<p>这一方法对任意 <span class="arithmatex">\(g(X,Y)\)</span> 都通用，但往往要在二重积分里分段讨论，比较繁琐。下面先看一个完整例题，再引入 <span class="arithmatex">\(Z=X+Y\)</span> 时的特快公式（卷积公式）。</p>
+</blockquote>
+<h2 id="z-x2y2">二、 例五：Z = X²+Y²（极坐标 + 分段讨论）<a class="headerlink" href="#z-x2y2" title="Permanent link">&para;</a></h2>
+<p><strong>问题</strong>：设 <span class="arithmatex">\((X,Y)\)</span> 的联合密度为</p>
+<div class="arithmatex">\[f(x,y) = \frac{1}{2\pi} e^{-\frac{x^2 + y^2}{2}}, \qquad -\infty &lt; x, y &lt; +\infty\]</div>
+<p>求 <span class="arithmatex">\(Z = X^2 + Y^2\)</span> 的密度函数 <span class="arithmatex">\(f_Z(z)\)</span>。</p>
+<p><strong>（这其实就是两个独立标准正态的联合密度，<span class="arithmatex">\(Z=X^2+Y^2\)</span> 是"到原点的距离平方"。）</strong></p>
+<p><strong>解答</strong>：用通用方法，先求 <span class="arithmatex">\(F_Z(z) = P\{X^2+Y^2 \le z\}\)</span>，分两段：</p>
+<p><strong>（1）<span class="arithmatex">\(z &lt; 0\)</span></strong>：<span class="arithmatex">\(X^2+Y^2 \ge 0\)</span> 恒成立，不可能 <span class="arithmatex">\(\le\)</span> 一个负数：</p>
+<div class="arithmatex">\[F_Z(z) = 0\]</div>
+<p><strong>（2）<span class="arithmatex">\(z \ge 0\)</span></strong>：区域 <span class="arithmatex">\(D_z = \{x^2+y^2 \le z\}\)</span> 是以原点为圆心、半径 <span class="arithmatex">\(\sqrt{z}\)</span> 的<strong>圆面</strong>，在其上对 <span class="arithmatex">\(f(x,y)\)</span> 做二重积分：</p>
+<div class="arithmatex">\[F_Z(z) = \iint_{x^2+y^2 \le z} \frac{1}{2\pi} e^{-\frac{x^2+y^2}{2}}\, dx\, dy\]</div>
+<p><strong>圆面最擅长用极坐标</strong>（高数二重积分的老朋友）：<span class="arithmatex">\(x = r\cos\theta\)</span>，<span class="arithmatex">\(y = r\sin\theta\)</span>，<span class="arithmatex">\(x^2+y^2 = r^2\)</span>，且<strong>别忘了多乘一个 <span class="arithmatex">\(r\)</span></strong>（<span class="arithmatex">\(dx\,dy = r\,dr\,d\theta\)</span>）。<span class="arithmatex">\(\theta\)</span> 转满一圈 <span class="arithmatex">\(0 \to 2\pi\)</span>，半径从圆心 <span class="arithmatex">\(0\)</span> 扫到边界 <span class="arithmatex">\(\sqrt{z}\)</span>：</p>
+<div class="arithmatex">\[F_Z(z) = \frac{1}{2\pi} \int_{0}^{2\pi} d\theta \int_{0}^{\sqrt{z}} e^{-\frac{r^2}{2}} \cdot r\, dr\]</div>
+<p>内层积分：令 <span class="arithmatex">\(u = \frac{r^2}{2}\)</span>，<span class="arithmatex">\(du = r\,dr\)</span>：</p>
+<div class="arithmatex">\[\int_{0}^{\sqrt{z}} e^{-\frac{r^2}{2}} r\, dr = \int_{0}^{z/2} e^{-u}\, du = 1 - e^{-\frac{z}{2}}\]</div>
+<p>外层 <span class="arithmatex">\(\theta\)</span> 积出来是 <span class="arithmatex">\(2\pi\)</span>，与前面的 <span class="arithmatex">\(\frac{1}{2\pi}\)</span> 抵消：</p>
+<div class="arithmatex">\[F_Z(z) = \frac{1}{2\pi} \cdot 2\pi \cdot \left(1 - e^{-\frac{z}{2}}\right) = 1 - e^{-\frac{z}{2}}\]</div>
+<p><strong>（3）求导得密度</strong>：对 <span class="arithmatex">\(z\)</span> 求导（注意复合函数求导，<span class="arithmatex">\(e^{-\frac{z}{2}}\)</span> 外面提出 <span class="arithmatex">\(-\frac12\)</span>）：</p>
+<div class="arithmatex">\[f_Z(z) = F_Z'(z) = \frac12 e^{-\frac{z}{2}}, \qquad z &gt; 0\]</div>
+<p>合起来：</p>
+<div class="arithmatex">\[f_Z(z) = \begin{cases} \dfrac12 e^{-\frac{z}{2}}, &amp; z &gt; 0 \\[6pt] 0, &amp; z \le 0 \end{cases}\]</div>
+<p><strong>结论</strong>：<span class="arithmatex">\(Z = X^2+Y^2\)</span> 服从<strong>指数分布</strong>，参数为 <span class="arithmatex">\(\frac12\)</span>（详见 <strong>p14</strong>）。</p>
+<p><strong>人话</strong>：两个独立标准正态的"模平方"（离原点距离的平方）服从指数分布。整个计算的骨架就是"先 <span class="arithmatex">\(F\)</span> 后 <span class="arithmatex">\(f\)</span>"：<span class="arithmatex">\(z&lt;0\)</span> 时概率为 0，<span class="arithmatex">\(z\ge 0\)</span> 时积分区域是一个半径为 <span class="arithmatex">\(\sqrt{z}\)</span> 的圆，用极坐标一步到位；最后求导时指数里的 <span class="arithmatex">\(\frac12\)</span> 掉下来，正好是密度。</p>
+<h2 id="z-xy">三、 卷积公式：Z = X+Y 的特快通道<a class="headerlink" href="#z-xy" title="Permanent link">&para;</a></h2>
+<p>当 <span class="arithmatex">\(Z = X + Y\)</span> 时，有专门的公式（<strong>卷积公式</strong>），<strong>直接给出密度，省去"先 <span class="arithmatex">\(F\)</span> 后 <span class="arithmatex">\(f\)</span>"</strong>：</p>
+<div class="arithmatex">\[f_Z(z) = \int_{-\infty}^{+\infty} f(x,\ z - x)\, dx = \int_{-\infty}^{+\infty} f(z - y,\ y)\, dy\]</div>
+<p>若 <span class="arithmatex">\(X\)</span>、<span class="arithmatex">\(Y\)</span> <strong>相互独立</strong>，联合密度可拆开，公式更简洁：</p>
+<div class="arithmatex">\[f_Z(z) = \int_{-\infty}^{+\infty} f_X(x)\, f_Y(z - x)\, dx = \int_{-\infty}^{+\infty} f_X(z - y)\, f_Y(y)\, dy\]</div>
+<p><strong>人话（公式怎么记）</strong>：</p>
+<ul>
+<li>第一个积分：<strong>把 <span class="arithmatex">\(x\)</span> 固定住，<span class="arithmatex">\(y\)</span> 必须取 <span class="arithmatex">\(z - x\)</span></strong>（这样 <span class="arithmatex">\(x + y\)</span> 才等于 <span class="arithmatex">\(z\)</span>），于是联合密度写成 <span class="arithmatex">\(f(x, z-x)\)</span>，再让 <span class="arithmatex">\(x\)</span> 从 <span class="arithmatex">\(-\infty\)</span> 扫到 <span class="arithmatex">\(+\infty\)</span> 累加，就得到 <span class="arithmatex">\(Z\)</span> 取 <span class="arithmatex">\(z\)</span> 处的密度。</li>
+<li>第二个积分是对称写法：固定 <span class="arithmatex">\(y\)</span>，<span class="arithmatex">\(x = z - y\)</span>，积分变量换成 <span class="arithmatex">\(y\)</span>。</li>
+<li>两个式子选哪个，看哪个算起来方便（一般哪个被积函数简单、积分限好写就选哪个）。</li>
+<li><strong>独立时的口诀</strong>：<span class="arithmatex">\(f_X(\cdot) f_Y(z - \cdot)\)</span>，把 <span class="arithmatex">\(Y\)</span> 的自变量换成 <span class="arithmatex">\(z - x\)</span>。</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>适用范围</strong>：卷积公式<strong>只适用于 <span class="arithmatex">\(Z = X + Y\)</span> 这种"和"</strong>。<span class="arithmatex">\(Z = X \cdot Y\)</span>、<span class="arithmatex">\(Z = X / Y\)</span>、<span class="arithmatex">\(Z = 2X + 5Y\)</span> 都不能直接套（<span class="arithmatex">\(2X+5Y\)</span> 得先换元或回到通用方法）。</p>
+</blockquote>
+<h2 id="_2">四、 卷积公式的推导思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>（本节是"为什么"，看懂大意即可，不用背推导过程。）</p>
+<p>从通用方法出发：<span class="arithmatex">\(F_Z(z) = P\{X+Y \le z\}\)</span>，积分区域是直线 <span class="arithmatex">\(x + y \le z\)</span> 左下方（"<span class="arithmatex">\(y \le z - x\)</span> 这条线下面的面"）。把它化成 <span class="arithmatex">\(X\)</span> 型累次积分：</p>
+<div class="arithmatex">\[F_Z(z) = \int_{-\infty}^{+\infty} \left[ \int_{-\infty}^{z - x} f(x, y)\, dy \right] dx\]</div>
+<p>对内层积分做<strong>换元</strong> <span class="arithmatex">\(t = x + y\)</span>（<span class="arithmatex">\(x\)</span> 固定看作常数，<span class="arithmatex">\(dy = dt\)</span>）：</p>
+<ul>
+<li>当 <span class="arithmatex">\(y\)</span> 从 <span class="arithmatex">\(-\infty\)</span> 到 <span class="arithmatex">\(z - x\)</span>，<span class="arithmatex">\(t = x + y\)</span> 就从 <span class="arithmatex">\(-\infty\)</span> 到 <span class="arithmatex">\(z\)</span>；</li>
+<li>内层变成 <span class="arithmatex">\(\int_{-\infty}^{z} f(x,\ t - x)\, dt\)</span>。</li>
+</ul>
+<p>于是</p>
+<div class="arithmatex">\[F_Z(z) = \int_{-\infty}^{+\infty} \left[ \int_{-\infty}^{z} f(x,\ t - x)\, dt \right] dx\]</div>
+<p>交换积分次序（<span class="arithmatex">\(X\)</span> 型换 <span class="arithmatex">\(Y\)</span> 型，把 <span class="arithmatex">\(t\)</span> 当"竖轴"看），再对 <span class="arithmatex">\(z\)</span> 用<strong>变上限积分求导</strong>（上限是 <span class="arithmatex">\(z\)</span>，直接把 <span class="arithmatex">\(z\)</span> 代进被积函数的 <span class="arithmatex">\(t\)</span> 处）：</p>
+<div class="arithmatex">\[f_Z(z) = F_Z'(z) = \int_{-\infty}^{+\infty} f(x,\ z - x)\, dx\]</div>
+<p><strong>人话</strong>：推导的两大工具都是高数老朋友——① 累次积分换元 <span class="arithmatex">\(t = x+y\)</span>（把"斜线左下方"这个区域化成"矩形"）；② 变上限积分求导（<span class="arithmatex">\(\frac{d}{dz}\int_{-\infty}^{z} g(t)dt = g(z)\)</span>，把上限 <span class="arithmatex">\(z\)</span> 直接带进 <span class="arithmatex">\(g\)</span> 里的 <span class="arithmatex">\(t\)</span>）。换元时 <span class="arithmatex">\(x\)</span> 固定、<span class="arithmatex">\(t = x+y\)</span> 把 <span class="arithmatex">\(y\)</span> 换成 <span class="arithmatex">\(t - x\)</span>，这就是公式里 <span class="arithmatex">\(f(x, z-x)\)</span> 里"<span class="arithmatex">\(z-x\)</span>"的出处。</p>
+<h2 id="n02">五、 例六：两个独立标准正态的和 → N(0,2)<a class="headerlink" href="#n02" title="Permanent link">&para;</a></h2>
+<p><strong>问题</strong>：设 <span class="arithmatex">\(X \sim N(0,1)\)</span>、<span class="arithmatex">\(Y \sim N(0,1)\)</span> 且相互独立，求 <span class="arithmatex">\(Z = X + Y\)</span> 的密度函数。</p>
+<p><strong>解答</strong>：<span class="arithmatex">\(Z = X+Y\)</span>，独立，直接套卷积公式：</p>
+<div class="arithmatex">\[f_Z(z) = \int_{-\infty}^{+\infty} f_X(x)\, f_Y(z - x)\, dx\]</div>
+<p>标准正态密度 <span class="arithmatex">\(f_X(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}\)</span>，<span class="arithmatex">\(f_Y(z-x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(z-x)^2}{2}}\)</span>，代入：</p>
+<div class="arithmatex">\[f_Z(z) = \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} \cdot \frac{1}{\sqrt{2\pi}} e^{-\frac{(z-x)^2}{2}}\, dx = \frac{1}{2\pi} \int_{-\infty}^{+\infty} e^{-\frac{x^2 + (z-x)^2}{2}}\, dx\]</div>
+<p><strong>配方</strong>（把指数整理成关于 <span class="arithmatex">\(x\)</span> 的完全平方）：<span class="arithmatex">\(x^2 + (z-x)^2 = 2x^2 - 2xz + z^2 = 2\left(x - \frac{z}{2}\right)^2 + \frac{z^2}{2}\)</span>：</p>
+<div class="arithmatex">\[f_Z(z) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} e^{-\left(x - \frac{z}{2}\right)^2 - \frac{z^2}{4}}\, dx = \frac{1}{2\pi} e^{-\frac{z^2}{4}} \int_{-\infty}^{+\infty} e^{-\left(x - \frac{z}{2}\right)^2}\, dx\]</div>
+<p>用到<strong>高斯积分</strong> <span class="arithmatex">\(\int_{-\infty}^{+\infty} e^{-u^2}\, du = \sqrt{\pi}\)</span>（换元 <span class="arithmatex">\(u = x - \frac{z}{2}\)</span>，<span class="arithmatex">\(dx = du\)</span>，积分限不变）：</p>
+<div class="arithmatex">\[f_Z(z) = \frac{1}{2\pi} e^{-\frac{z^2}{4}} \cdot \sqrt{\pi} = \frac{1}{2\sqrt{\pi}} e^{-\frac{z^2}{4}}\]</div>
+<p>再往正态分布标准形式 <span class="arithmatex">\(f(z) = \frac{1}{\sqrt{2\pi}\,\sigma} e^{-\frac{(z-\mu)^2}{2\sigma^2}}\)</span> 上凑：<span class="arithmatex">\(\frac{1}{2\sqrt{\pi}} = \frac{1}{\sqrt{2\pi \cdot 2}}\)</span>，<span class="arithmatex">\(\frac{z^2}{4} = \frac{z^2}{2 \cdot 2}\)</span>，可见 <span class="arithmatex">\(\mu = 0\)</span>、<span class="arithmatex">\(\sigma^2 = 2\)</span>。</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(Z = X + Y \sim N(0, 2)\)</span>。</p>
+<p><strong>人话</strong>：两个独立标准正态相加，<strong>仍然是正态</strong>，均值 <span class="arithmatex">\(0 + 0 = 0\)</span>，但方差变成 <span class="arithmatex">\(1 + 1 = 2\)</span>（波动叠加，比原来更"胖"）。注意结果<strong>不是标准正态</strong>——方差从 1 涨到 2，要标准化还得再除以 <span class="arithmatex">\(\sqrt{2}\)</span>。卷积公式在这里的威力是：不用先求分布函数，一步积分（配方 + 高斯积分）直接得到密度。</p>
+<h2 id="_3">六、 正态分布的可加性结论<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>从例六推广出两条<strong>填空/小题必考结论</strong>：</p>
+<p><strong>结论一（两个正态的和差仍正态）</strong>：若 <span class="arithmatex">\(X \sim N(\mu_1, \sigma_1^2)\)</span>、<span class="arithmatex">\(Y \sim N(\mu_2, \sigma_2^2)\)</span> 且相互独立，则</p>
+<div class="arithmatex">\[X \pm Y \sim N\left(\mu_1 \pm \mu_2,\ \sigma_1^2 + \sigma_2^2\right)\]</div>
+<p><strong>结论二（线性组合仍正态）</strong>：对任意常数 <span class="arithmatex">\(a, b\)</span>，</p>
+<div class="arithmatex">\[aX \pm bY \sim N\left(a\mu_1 \pm b\mu_2,\ a^2\sigma_1^2 + b^2\sigma_2^2\right)\]</div>
+<p><strong>人话（三条记忆要点）</strong>：</p>
+<ol>
+<li><strong>均值跟着加减</strong>：<span class="arithmatex">\(X+Y\)</span> 的均值是 <span class="arithmatex">\(\mu_1 + \mu_2\)</span>，<span class="arithmatex">\(X-Y\)</span> 是 <span class="arithmatex">\(\mu_1 - \mu_2\)</span>（加号对加号、减号对减号）；</li>
+<li><strong>方差永远相加</strong>：无论 <span class="arithmatex">\(X+Y\)</span> 还是 <span class="arithmatex">\(X-Y\)</span>，方差都是 <span class="arithmatex">\(\sigma_1^2 + \sigma_2^2\)</span>——<strong>减号也要加</strong>（两个随机变量相减，波动不是抵消而是叠加）；</li>
+<li><strong>系数要平方</strong>：<span class="arithmatex">\(aX \pm bY\)</span> 的方差是 <span class="arithmatex">\(a^2\sigma_1^2 + b^2\sigma_2^2\)</span>，系数 <span class="arithmatex">\(a\)</span>、<span class="arithmatex">\(b\)</span> 进方差时变成 <span class="arithmatex">\(a^2\)</span>、<span class="arithmatex">\(b^2\)</span>（这和 p17 里 <span class="arithmatex">\(Y=aX+b \Rightarrow \sigma\)</span> 变 <span class="arithmatex">\(a^2\)</span> 倍的道理一致）。</li>
+</ol>
+<p><strong>考试套路</strong>："<span class="arithmatex">\(X \sim N(1, 4)\)</span>，<span class="arithmatex">\(Y \sim N(2, 9)\)</span>，问 <span class="arithmatex">\(X-Y \sim\)</span> <strong><em>_" → 答案 <span class="arithmatex">\(N(1-2,\ 4+9) = N(-1, 13)\)</span>；"<span class="arithmatex">\(2X+3Y \sim\)</span> </em></strong>_" → <span class="arithmatex">\(N(2 \cdot 1 + 3 \cdot 2,\ 2^2 \cdot 4 + 3^2 \cdot 9) = N(8, 97)\)</span>。</p>
+<h2 id="_4">补充<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>卷积公式的"名字"</strong>：<span class="arithmatex">\(f_Z(z) = \int f(x, z-x)dx\)</span> 在数学里正是两个函数的<strong>卷积</strong>（卷积积分的定义），所以叫"卷积公式"；独立时的 <span class="arithmatex">\(\int f_X(x) f_Y(z-x)dx\)</span> 就是两个密度的卷积 <span class="arithmatex">\(f_X * f_Y\)</span>。</li>
+<li><strong>卷积公式是"和"的专利</strong>：视频里反复强调——只有 <span class="arithmatex">\(Z = X + Y\)</span> 才能套；<span class="arithmatex">\(Z = X\cdot Y\)</span>、<span class="arithmatex">\(Z = X/Y\)</span>、<span class="arithmatex">\(Z = 2X + 5Y\)</span> 都不能直接用，需先换元或回到通用方法（先 <span class="arithmatex">\(F\)</span> 后 <span class="arithmatex">\(f\)</span>）。</li>
+<li><strong>本集没展开的卷积例题</strong>：均匀分布的和（会得出"三角分布"）、指数分布的和等，属于卷积公式的进一步应用，可自行练习或参考后续视频；离散型与连续型混搭的 <span class="arithmatex">\(Z = X+Y\)</span> 见 <strong>p31</strong>，<span class="arithmatex">\(\max\{X,Y\}\)</span>、<span class="arithmatex">\(\min\{X,Y\}\)</span> 的分布见 <strong>p32</strong>。</li>
+</ul>
+<hr />
+<h2 id="_5">本节重点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<blockquote>
+<ul>
+<li><strong>通用方法（先 F 后 f）</strong>：<span class="arithmatex">\(F_Z(z) = \iint_{g(x,y) \le z} f(x,y)\, dx\, dy\)</span>，再求导。适用于任意 <span class="arithmatex">\(g(X,Y)\)</span>，但要在二重积分里按 <span class="arithmatex">\(z\)</span> 的取值<strong>分段讨论积分区域</strong>（例五：<span class="arithmatex">\(z&lt;0\)</span> 与 <span class="arithmatex">\(z\ge 0\)</span>）。</li>
+<li><strong>卷积公式（Z=X+Y 专用）</strong>：<span class="arithmatex">\(f_Z(z) = \int f(x, z-x)\, dx\)</span>；独立时 <span class="arithmatex">\(f_Z(z) = \int f_X(x) f_Y(z-x)\, dx\)</span>。<strong>只适用于"和"</strong>，<span class="arithmatex">\(X\cdot Y\)</span>、<span class="arithmatex">\(X/Y\)</span>、<span class="arithmatex">\(2X+5Y\)</span> 都不能套。</li>
+<li><strong>两大结论</strong>：① 独立标准正态之和 <span class="arithmatex">\(N(0,1)+N(0,1) \to N(0,2)\)</span>（方差相加）；② 正态可加性 <span class="arithmatex">\(X\pm Y \sim N(\mu_1\pm\mu_2,\ \sigma_1^2+\sigma_2^2)\)</span>、<span class="arithmatex">\(aX\pm bY \sim N(a\mu_1\pm b\mu_2,\ a^2\sigma_1^2+b^2\sigma_2^2)\)</span>。</li>
+<li><strong>常见坑</strong>：① 极坐标换元<strong>忘乘 <span class="arithmatex">\(r\)</span></strong>（<span class="arithmatex">\(dx\,dy = r\,dr\,d\theta\)</span>）；② 求导时漏复合函数的系数（例五的 <span class="arithmatex">\(\frac12\)</span>）；③ 方差做减法时写成 <span class="arithmatex">\(\sigma_1^2 - \sigma_2^2\)</span>——<strong>减号也要加</strong>；④ 系数进方差忘平方（<span class="arithmatex">\(a^2\)</span>、<span class="arithmatex">\(b^2\)</span>）。</li>
+<li>离散型版本见 <strong>p29</strong>，混合型见 <strong>p31</strong>，<span class="arithmatex">\(\max/\min\)</span> 分布见 <strong>p32</strong>。</li>
+</ul>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

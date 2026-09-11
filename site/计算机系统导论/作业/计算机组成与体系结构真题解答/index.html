@@ -1,0 +1,1595 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/%E4%BD%9C%E4%B8%9A/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9C%9F%E9%A2%98%E8%A7%A3%E7%AD%94/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>计算机组成与体系结构真题汇总 —— 答案与详细解答 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              计算机组成与体系结构真题汇总 —— 答案与详细解答
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2024-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2024-2025 学年第一学期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2024-2025 学年第一学期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、单项选择题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、性能计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、指令系统
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、数据表示与运算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、单周期 CPU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、流水线 CPU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、虚拟存储器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、输入输出系统（6 分）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2023-2024 学年第一学期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-2024 学年第一学期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、单项选择题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、性能计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、指令系统
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、运算器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、单周期 CPU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、流水线 CPU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、Cache / 虚拟存储综合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、虚拟存储器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：关键公式速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">计算机组成与体系结构真题汇总 —— 答案与详细解答<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="2024-2025">2024-2025 学年第一学期<a class="headerlink" href="#2024-2025" title="Permanent link">&para;</a></h2>
+<h3 id="_2">一、单项选择题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><strong>1. 不改变处理器型号，只增加处理器数量，则有（A）</strong>
+- <strong>答案：A. 提高吞吐率</strong>
+- <strong>解析：</strong> 增加处理器数量属于多处理器/多核架构，可在单位时间内完成更多任务，从而提高系统吞吐率（Throughput）。但单个任务的响应时间（Latency）并不会因此减少，甚至可能因通信开销略有增加。</p>
+<p><strong>2. （D）能被 GPU 和所有线程块共享</strong>
+- <strong>答案：D. GPU 存储器（全局存储器）</strong>
+- <strong>解析：</strong> GPU 的存储器层次中，寄存器、私有存储器、局部存储器都是线程私有的；只有 GPU 全局存储器（Global Memory）可被所有线程块及所有线程共享。</p>
+<p><strong>3. 有利于实现指令流水线的是（D）</strong>
+- <strong>答案：D. I、II、III</strong>
+- <strong>解析：</strong>
+  - I. 指令格式规整且长度一致：便于取指和译码阶段统一处理，有利于流水线。
+  - II. 算术逻辑指令的数据来自于寄存器：避免访存操作，使执行阶段规整。
+  - III. 只有 Load/Store 指令才能对操作数进行存储访问：将访存操作限制在特定指令中，简化流水线的访存阶段控制。</p>
+<p><strong>4. RISC-V 转移指令目标地址（C）</strong>
+- <strong>答案：C. 0x2010</strong>
+- <strong>解析：</strong> RISC-V 的 J-type（jal）和 B-type 指令中，立即数字段表示的是<strong>半字偏移</strong>，硬件会自动将其左移 1 位（乘以 2）得到字节偏移。题目中“相对位移量字段的内容为 0x08”，实际字节偏移为 0x08 × 2 = 0x10。当前 PC = 0x2000，目标地址 = 0x2000 + 0x10 = <strong>0x2010</strong>。</p>
+<p><strong>5. 8 位补码运算（题目不完整，补充典型分析）</strong>
+- r1 = 0xF9 = -7, r2 = 0xFB = -5, r3 = 0x91 = -111, r4 = 0xEE = -18
+- 若问“r1 × r2”：(-7) × (-5) = 35，8 位补码范围 -128 ~ 127，35 可表示，不溢出。
+- 若问“r3 + r4”：(-111) + (-18) = -129，超出 -128，<strong>溢出</strong>。</p>
+<hr />
+<h3 id="_3">二、性能计算<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>1. Cache 缺失对 CPI 的影响（8 分）</strong></p>
+<p>已知：
+- 全命中 CPI = 1
+- Load/Store 占比 50%（只有它们可能访存）
+- Cache 缺失率 = 2%
+- 缺失代价 = 200 时钟周期</p>
+<p>只有 Load/Store 可能触发 Cache 缺失。每条指令因 Cache 缺失带来的额外时钟周期为：</p>
+<div class="arithmatex">\[
+\text{额外 CPI} = 0.50 \times 0.02 \times 200 = 2
+\]</div>
+<p>实际平均 CPI：</p>
+<div class="arithmatex">\[
+\text{CPI}_{\text{实际}} = 1 + 2 = 3
+\]</div>
+<p>与全命中相比，性能下降为原来的 <strong>1/3</strong>（即性能是全命中时的 33.3%）。</p>
+<p><strong>2. Amdahl 定律加速比（7 分）</strong></p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>占比</th>
+<th>可优化</th>
+<th>加速比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>11%</td>
+<td>否</td>
+<td>—</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>18%</td>
+<td>是</td>
+<td>5</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>23%</td>
+<td>是</td>
+<td>20</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>48%</td>
+<td>是</td>
+<td>1.6</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(1) 总体加速比</strong></p>
+<p>优化后执行时间比例：</p>
+<div class="arithmatex">\[
+T_{\text{new}} = 0.11 + \frac{0.18}{5} + \frac{0.23}{20} + \frac{0.48}{1.6}
+\]</div>
+<div class="arithmatex">\[
+= 0.11 + 0.036 + 0.0115 + 0.30 = 0.4575
+\]</div>
+<p>总体加速比：</p>
+<div class="arithmatex">\[
+S = \frac{1}{0.4575} \approx \boxed{2.19}
+\]</div>
+<p><strong>(2) 原因说明</strong>
+- S4 占比最大（48%），但加速比仅 1.6 倍，对总体性能提升有限；
+- S3 虽可加速 20 倍，但占比仅 23%，且优化后只占 1.15%，贡献相对较小；
+- S1 不可优化（11%），成为瓶颈之一；
+- <strong>加速比受限于不可优化部分和占比大但加速有限的步骤</strong>，符合 Amdahl 定律：总体加速比受串行部分约束。</p>
+<hr />
+<h3 id="_4">三、指令系统<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>1. 操作码最小长度（2 分）</strong></p>
+<p>列出的指令共 9 条：add, and, lw, sw, addi, beq, lui, jal, stw。
+取消 funct3/funct7，仅使用操作码区分，需要能编码至少 9 种状态。</p>
+<div class="arithmatex">\[
+\lceil \log_2 9 \rceil = 4
+\]</div>
+<p><strong>答案：4 位</strong>（2^4 = 16 &gt;= 9）。</p>
+<p><strong>2. 最多寄存器数量（2 分）</strong></p>
+<p>指令长度 64 位，opcode 7 位，imm1 和 imm2 各 11 位。</p>
+<p>剩余位数：64 - 7 - 11 - 11 = <strong>35 位</strong>。</p>
+<p>X 型指令需支持最多 5 个寄存器字段（如 add 需 rd1/rs1/rs2，stw 需 rs1/rs3，统一格式下可设计为 5 个寄存器槽位）：</p>
+<div class="arithmatex">\[
+5 \times k = 35 \Rightarrow k = 7
+\]</div>
+<p>寄存器数量 = <strong>2^7 = 128 个</strong>。</p>
+<blockquote>
+<p>注：若采用 4 个寄存器字段，则 4k = 35 无整数解；5 个 7 位字段恰好填满，且能覆盖所有指令的寄存器需求。</p>
+</blockquote>
+<p><strong>3. stw 机器码（4 分）</strong></p>
+<p>指令格式（7+7+7+7+7+11+11 = 64 位）：
+<code>opcode | rd1 | rs1 | rs2 | rs3 | imm1 | imm2</code></p>
+<p>操作码顺序编码（从 0 开始）：
+- 0: add, 1: and, 2: lw, 3: sw, 4: addi, 5: beq, 6: lui, 7: jal, <strong>8: stw</strong></p>
+<p>stw 操作码：8 = <code>0001000</code>（7 位）</p>
+<p>stw x8, 0, 4(x5)：
+- rs1 = x5 = <code>0000101</code>
+- rs3 = x8 = <code>0001000</code>
+- rd1, rs2 未使用，填 <code>xxxxxxx</code>
+- imm1 = 0 = <code>00000000000</code>
+- imm2 = 4 = <code>00000000100</code></p>
+<p>机器码：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>0001000 xxxxxxx 0000101 xxxxxxx 0001000 00000000000 00000000100
+</code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="_5">四、数据表示与运算<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>1. 死循环分析（2 分）</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span>
+<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">f1</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">        </span><span class="n">power</span><span class="o">*=</span><span class="mi">2</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="n">sum</span><span class="o">+=</span><span class="n">power</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="p">}</span><span class="w">    </span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>当 n = 0 时</strong>：<code>i &lt;= n - 1</code> 即 <code>i &lt;= 0xFFFFFFFF</code>（unsigned 下溢为最大值）。条件恒成立，<strong>会死循环</strong>。</li>
+<li><strong>若 i 和 n 都改为 int</strong>：<code>i &lt;= n - 1</code> 即 <code>i &lt;= -1</code>。i 初始为 0，0 &lt;= -1 为假，循环不执行，返回 sum = 1。<strong>不会死循环</strong>。</li>
+</ul>
+<p><strong>2. f1(24) 与 f2(24) 是否相等（4 分）</strong></p>
+<ul>
+<li>
+<p><strong>f1(24)</strong>：int 精确计算
+  $$
+  f(24) = 2^{25} - 1 = 33,554,431
+  $$
+  32 位 int 可精确表示（最大 2^31-1）。</p>
+</li>
+<li>
+<p><strong>f2(24)</strong>：float（IEEE 754 单精度，23 位尾数 + 1 位隐含位 = 24 位有效位）
+  $$
+  2^{25} - 1 = \underbrace{111\dots1}_{25\text{个}1}
+  $$
+  需要 25 位有效位，超出 float 的 24 位精度，会被舍入到最接近的可表示数 <strong>2^25 = 33,554,432</strong>。</p>
+</li>
+</ul>
+<p><strong>结论：不相等</strong>。f1(24) = 33,554,431，f2(24) = 33,554,432.0。</p>
+<p><strong>3. 0x7F800000 与 f2 最大 n（4 分）</strong></p>
+<ul>
+<li><strong>0x7F800000</strong>：</li>
+<li>符号位 0，指数 11111111（255），尾数全 0</li>
+<li>
+<p><strong>表示 +∞（正无穷）</strong></p>
+</li>
+<li>
+<p><strong>f2(n) 不溢出的最大 n</strong>：
+  float 最大正规数约为 (2 - 2^-23) * 2^127 = 2^128 - 2^104。
+  f2(n) = 2^(n+1) - 1 &lt;= 2^128 - 2^104 时安全。
+  当 n + 1 = 128（即 n = 127）时，2^128 - 1 &gt; 最大正规数，溢出为 +∞。
+  <strong>最大 n = 126</strong>。</p>
+</li>
+</ul>
+<hr />
+<h3 id="cpu">五、单周期 CPU<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nf">addi</span><span class="w"> </span><span class="no">x6</span><span class="p">,</span><span class="w"> </span><span class="no">x6</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w">      </span><span class="c1">// 0x00000030</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nf">addi</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="no">x19</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">// 0x00000034</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nf">jal</span><span class="w">  </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="no">FOR</span><span class="w">        </span><span class="c1">// 0x00000038</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>1. 能否正确执行？（2 分）</strong></p>
+<p><strong>不能。</strong> 原因：<code>jal</code> 指令需将返回地址（PC+4）写入目标寄存器 rd。此处 rd = x0（零寄存器），若数据通路未对 x0 做特殊处理（硬连线为 0），PC+4 会被写入 x0，破坏零寄存器恒为 0 的约定，导致后续依赖 x0 的指令出错。</p>
+<p><strong>2. 最简单的修改方案（4 分）</strong></p>
+<p><strong>方案：将寄存器 x0 的输出端恒置 0（或增加写使能屏蔽逻辑，当写寄存器号为 0 时不写入）。</strong></p>
+<p>原因：RISC-V 架构约定 x0 寄存器值恒为 0，且不可写入。通过在寄存器堆输出端加硬连线 0 的逻辑，可确保任何写入 x0 的操作都被丢弃，从而保证 <code>jal x0, FOR</code>（即伪指令 <code>j FOR</code>）能正确跳转而不破坏寄存器状态。</p>
+<p><strong>3. 重构 SB 型指令扩大分支范围（4 分）</strong></p>
+<p>原 SB 型指令：imm[12:1] 左移 1 位，范围 +-4 KB。
+要扩大到 32 字节寻址（即字节偏移范围更大），需要增加立即数字段位数。</p>
+<ul>
+<li><strong>修改/增加的功能部件</strong>：</li>
+<li><strong>立即数扩展单元</strong>：支持新的、更宽的立即数扩展（如从 13 位有效位增加到更多位）。</li>
+<li><strong>PC 更新逻辑</strong>：支持更宽偏移量的加法。</li>
+<li>
+<p><strong>控制信号</strong>：增加新的分支类型控制信号，区分普通分支和扩大范围分支。</p>
+</li>
+<li>
+<p><strong>新 SB 指令数据通路图要点</strong>：</p>
+</li>
+<li>在 ID 阶段，立即数扩展单元输出更宽的分支偏移量。</li>
+<li>PC 加法器计算 <code>PC + 扩展后的偏移量</code>。</li>
+<li>比较器（Branch 判断）结果与新的控制信号共同决定是否用新 PC 值更新 PC。</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>        +-------------+
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>   PC --+   加法器    +---&gt; 新 PC 候选
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>        |  (PC+4/偏移) |
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>        +-------------+
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>              ^
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>        +-------------+
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>  Inst --+ 立即数扩展  +---&gt; 扩展后的分支偏移
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>        |  (新 SB 型) |
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>        +-------------+
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>              ^
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>        +-------------+
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a>  Reg --+   比较器    +---&gt; Branch 控制信号
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>        |  (rs1,rs2)  |
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a>        +-------------+
+</code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="cpu_1">六、流水线 CPU<a class="headerlink" href="#cpu_1" title="Permanent link">&para;</a></h3>
+<p>代码：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nf">sw</span><span class="w">   </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">(</span><span class="no">x2</span><span class="p">)</span><span class="w">       </span><span class="c1">// I1</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="nf">add</span><span class="w">  </span><span class="no">x10</span><span class="p">,</span><span class="w"> </span><span class="no">x11</span><span class="p">,</span><span class="w"> </span><span class="no">x12</span><span class="w">   </span><span class="c1">// I2</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="nf">addi</span><span class="w"> </span><span class="no">x10</span><span class="p">,</span><span class="w"> </span><span class="no">x13</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="c1">// I3</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="nf">sub</span><span class="w">  </span><span class="no">x14</span><span class="p">,</span><span class="w"> </span><span class="no">x15</span><span class="p">,</span><span class="w"> </span><span class="no">x10</span><span class="w">   </span><span class="c1">// I4</span>
+</code></pre></div></td></tr></table></div></p>
+<p><strong>1. 多周期流水线状态示意图（5 分）</strong></p>
+<table>
+<thead>
+<tr>
+<th>周期</th>
+<th>IF</th>
+<th>ID</th>
+<th>EX</th>
+<th>MEM</th>
+<th>WB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>I1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>C2</td>
+<td>I2</td>
+<td>I1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>C3</td>
+<td>I3</td>
+<td>I2</td>
+<td>I1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>C4</td>
+<td>I4</td>
+<td>I3</td>
+<td>I2</td>
+<td>I1</td>
+<td></td>
+</tr>
+<tr>
+<td>C5</td>
+<td></td>
+<td>I4</td>
+<td>I3</td>
+<td>I2</td>
+<td>I1</td>
+</tr>
+<tr>
+<td>C6</td>
+<td></td>
+<td></td>
+<td>I4</td>
+<td>I3</td>
+<td>I2</td>
+</tr>
+<tr>
+<td>C7</td>
+<td></td>
+<td></td>
+<td></td>
+<td>I4</td>
+<td>I3</td>
+</tr>
+<tr>
+<td>C8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>I4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. 冒险检测单元相关内容（5 分）</strong></p>
+<p>检测到的数据冒险：
+- <strong>I3 (addi) -&gt; I4 (sub)</strong>：I3 写 x10，I4 读 x10（rs2）。
+  - I3 在 EX 阶段时，I4 在 ID 阶段。
+  - 检测逻辑：<code>EX/MEM.RegWrite == 1</code> 且 <code>EX/MEM.RegisterRd == ID/EX.RegisterRs2</code>（即 x10）。</p>
+<ul>
+<li><strong>I2 (add) -&gt; I3 (addi)</strong>：I2 写 x10，但 I3 的源寄存器是 x13，不读 x10，<strong>无冒险</strong>。</li>
+</ul>
+<p><strong>3. 前递单元输入输出（5 分）</strong></p>
+<ul>
+<li><strong>ForwardA / ForwardB 输入</strong>：</li>
+<li><code>EX/MEM.RegisterRd</code>, <code>EX/MEM.RegWrite</code></li>
+<li><code>MEM/WB.RegisterRd</code>, <code>MEM/WB.RegWrite</code></li>
+<li>
+<p><code>ID/EX.RegisterRs1</code>, <code>ID/EX.RegisterRs2</code></p>
+</li>
+<li>
+<p><strong>输出控制</strong>：</p>
+</li>
+<li>对 I4 的 rs2（x10）：I3 在 EX/MEM 阶段，结果可前递。</li>
+<li><code>ForwardB = 10</code>（从 EX/MEM 前递到 ALU 输入 B）。</li>
+</ul>
+<hr />
+<h3 id="cache">七、Cache<a class="headerlink" href="#cache" title="Permanent link">&para;</a></h3>
+<p>参数：2 路组相联，16 KiB，块大小 32 B，LRU。</p>
+<p><strong>1. 求和阶段命中率（STRIDE=1）（4 分）</strong></p>
+<ul>
+<li>Cache 组数 = 16 KiB / (2 * 32 B) = 256 组</li>
+<li>块大小 32 B，int 为 4 B，每块容纳 <strong>8 个 int</strong></li>
+<li>顺序访问：<code>array[0], array[1], array[2]...</code></li>
+</ul>
+<p>访问模式：每 8 个元素为一组，首次访问块内第 1 个元素时 <strong>Cold Miss</strong>，随后 7 次 <strong>Hit</strong>。</p>
+<div class="arithmatex">\[
+\text{命中率} = \frac{7}{8} = \boxed{87.5\%}
+\]</div>
+<blockquote>
+<p>注：数组 50000 个 int（200 KB）远大于 Cache（16 KiB），但<strong>求和阶段是顺序单次遍历</strong>，每个块仅被访问一次，因此替换策略不影响，仍为 7/8 命中。</p>
+</blockquote>
+<p><strong>2. 平均访存时间（3 分）</strong></p>
+<div class="arithmatex">\[
+\text{AMAT} = t_c + (1 - H) \times t_m = 4\text{ns} + 0.125 \times 40\text{ns} = 4 + 5 = \boxed{9\text{ ns}}
+\]</div>
+<p>或按定义：
+$$
+0.875 \times 4 + 0.125 \times (4 + 40) = 3.5 + 5.5 = 9\text{ ns}
+$$</p>
+<p><strong>3. STRIDE=100 的情况（3 分）</strong></p>
+<ul>
+<li>STRIDE = 100 个 int = 400 字节。</li>
+<li>400 mod 32 = 16 != 0，每次访问都落在<strong>不同的块</strong>中。</li>
+<li>每块仅被访问一次，且块内无连续访问（下次访问已跳到 100 个元素之后，远超块容量 8 个元素）。</li>
+</ul>
+<p><strong>结果：</strong>
+- <strong>命中率约 0%</strong>（几乎全部 Cold Miss）
+- <strong>平均访存时间约 44 ns</strong>（或 40 ns，取决于是否计入 Cache 命中时间，但几乎每次都要访问主存）</p>
+<p><strong>原因：</strong> 空间局部性完全丧失。步长过大导致每次访问都跨越块边界，Cache 预取的块无法被后续访问重用。</p>
+<hr />
+<h3 id="_6">八、虚拟存储器<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>参数：虚拟地址 256 TiB = 2^48，页面 64 KiB = 2^16，物理内存 64 GiB = 2^36，TLB 全相联 128 项。</p>
+<p><strong>1. 地址字段位数（4 分）</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>计算</th>
+<th>位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>页内偏移 (offset)</td>
+<td>log2(64 KiB)</td>
+<td><strong>16 位</strong></td>
+</tr>
+<tr>
+<td>VPN</td>
+<td>48 - 16</td>
+<td><strong>32 位</strong></td>
+</tr>
+<tr>
+<td>PPN</td>
+<td>36 - 16</td>
+<td><strong>20 位</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. TLB 能容纳的最大物理内存页数（3 分）</strong></p>
+<p>TLB 有 128 个表项，每项映射一个虚拟页到一个物理页。</p>
+<p><strong>最大物理内存页数 = 128 页</strong></p>
+<p>对应内存容量：128 * 64 KiB = <strong>8 MiB</strong>。</p>
+<p><strong>3. TLB 缺失后的内存访问次数（3 分）</strong></p>
+<p>采用一级页表：
+1. <strong>第 1 次访存</strong>：读取页表项（PTE），获取物理页号 PPN。
+2. <strong>第 2 次访存</strong>：用得到的物理地址访问实际数据。</p>
+<p><strong>共需 2 次内存访问</strong>。</p>
+<hr />
+<h3 id="6">九、输入输出系统（6 分）<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<p><strong>向量中断处理基本过程：</strong></p>
+<ol>
+<li><strong>中断请求</strong>：外设通过 IR0~IR7 向中断控制器发出请求。</li>
+<li><strong>中断屏蔽检查</strong>：若总开关 INTE = 0，所有请求被屏蔽；若 INTE = 1，进入下一步。</li>
+<li><strong>优先级判优</strong>：中断控制器对多个同时到达的请求进行优先级排队（如固定优先级或轮转）。</li>
+<li><strong>向 CPU 发请求</strong>：控制器将最高优先级的中断请求发送给 CPU。</li>
+<li><strong>CPU 响应</strong>：CPU 完成当前指令后，发出中断响应信号（INTA）。</li>
+<li><strong>向量寻址</strong>：中断控制器将对应中断源的<strong>向量地址</strong>（或中断类型号）送上数据总线。</li>
+<li><strong>保存现场</strong>：CPU 自动保存 PC、PSW 等关键寄存器到堆栈。</li>
+<li><strong>转入服务程序</strong>：CPU 根据向量地址查中断向量表，获取中断服务程序入口地址，跳转执行。</li>
+<li><strong>中断处理</strong>：执行中断服务程序（ISR），处理外设请求。</li>
+<li><strong>恢复现场与返回</strong>：ISR 结束执行，恢复之前保存的 PC 和寄存器，执行 <code>IRET</code> 返回主程序。</li>
+<li><strong>不允许嵌套</strong>：由于系统禁止中断嵌套，在处理过程中新的中断请求被屏蔽，直到当前中断处理完毕。</li>
+</ol>
+<hr />
+<h2 id="2023-2024">2023-2024 学年第一学期<a class="headerlink" href="#2023-2024" title="Permanent link">&para;</a></h2>
+<h3 id="_7">一、单项选择题<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>1. 吊桥和缆车与（C）思想匹配</strong>
+- <strong>答案：C. 通过冗余提高可靠性</strong>
+- 解析：吊桥和缆车是两种独立的跨山方式，互为冗余，提高系统可靠性。</p>
+<p><strong>2. 将双字第 8~15 位置 1（B）</strong>
+- <strong>答案：B. OR</strong>
+- 解析：与掩码 <code>0x0000FF00</code> 进行 OR 操作可将对应位置 1。</p>
+<p><strong>3. 大端方式，LSB 地址（D）</strong>
+- <strong>答案：D. EFFF FF15H</strong>
+- 解析：偏移 0xFF12（补码）= -238。有效地址 = 0xF00000 - 0xEE = 0xEFFF FF12（起始地址）。大端方式下四字节操作数占 FF12~FF15，<strong>最低有效字节（LSB）在最高地址 FF15</strong>。</p>
+<p><strong>4. ALU 描述（D）</strong>
+- <strong>答案：D. 能完成算术与逻辑运算</strong></p>
+<p><strong>5. Cache 行位数（题目选项缺失，给出计算）</strong>
+- 直接映射，32 KB / 32 B = 1024 行，索引 10 位，偏移 5 位，标记 32-10-5=17 位。
+- 每行 = 数据 256 位 + 标记 17 位 + 有效位 1 位 = <strong>274 位</strong>（写直达无需脏位）。</p>
+<p><strong>6. 2 位分支预测器准确率（C）</strong>
+- <strong>答案：C. 20%</strong>
+- 解析：初始状态为强不取（00），预测序列：N-&gt;N-&gt;N-&gt;N-&gt;T，仅最后 1 次正确，准确率 1/5 = 20%。</p>
+<p><strong>7. 存储器说法（D）</strong>
+- <strong>答案：D. 以上说法都不对</strong>
+- 解析：A 中 Flash 虽快但寿命/成本限制，不能简单取代磁盘；B 全相联实现复杂、查表慢，不一定更好；C L1 Cache 过大导致访问延迟增加，并非越大越好。</p>
+<hr />
+<h3 id="_8">二、性能计算<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><strong>1. 平均 CPI（4 分）</strong></p>
+<div class="arithmatex">\[
+\text{MIPS} = \frac{f}{\text{CPI} \times 10^6} \Rightarrow 1500 = \frac{2 \times 10^9}{\text{CPI} \times 10^6}
+\]</div>
+<div class="arithmatex">\[
+\text{CPI} = \frac{2000}{1500} = \boxed{\frac{4}{3} \approx 1.33}
+\]</div>
+<p><strong>2. 新平均 CPI（6 分）</strong></p>
+<p>存储子系统速率不变，原访存延迟 = 1 个时钟周期（2 GHz 时）= 0.5 ns。
+时钟频率提高到 4 GHz，新时钟周期 = 0.25 ns。
+访存延迟变为 0.5 / 0.25 = <strong>2 个时钟周期</strong>。</p>
+<p>访存指令额外增加 1 个周期：
+- 30% 指令各 1 次访存：增加 0.30 * 1 = 0.30
+- 5% 指令各 2 次访存：增加 0.05 * 2 = 0.10</p>
+<div class="arithmatex">\[
+\text{新 CPI} = \frac{4}{3} + 0.30 + 0.10 = \frac{4}{3} + 0.4 = \frac{26}{15} \approx \boxed{1.73}
+\]</div>
+<hr />
+<h3 id="_9">三、指令系统<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>注</strong>：原题中未给出具体汇编代码片段，无法完成 C 代码反推及指令计数。请补充完整汇编代码后作答。</p>
+</blockquote>
+<hr />
+<h3 id="_10">四、运算器<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>1. 表示 4.75（3 分）</strong></p>
+<p>4.75 = 100.11_2 = 1.0011 * 2^2</p>
+<ul>
+<li>符号位：0</li>
+<li>指数（无偏）：2 + 1023 = 1025 = <code>10000000001</code>（11 位）</li>
+<li>尾数：<code>0011</code>（4 位，截断）</li>
+</ul>
+<p>机器码：<strong><code>0 10000000001 0011</code></strong></p>
+<p><strong>2. [0,1) 范围内表示多少个数（4 分）</strong></p>
+<ul>
+<li><strong>正规数</strong>：指数 E = 1 ~ 1022（实际指数 -1022 ~ -1），共 1022 个指数值。每个指数对应 2^4 = 16 个尾数。</li>
+<li>正规数数量：1022 * 16 = <strong>16,352</strong></li>
+<li><strong>非正规正数</strong>：E = 0，尾数 0001 ~ 1111（15 个）</li>
+<li><strong>+0</strong>：1 个</li>
+</ul>
+<p>总计：16,352 + 15 + 1 = <strong>16,368 个</strong></p>
+<p><strong>3. 浮点加法器溢出判断（3 分）</strong></p>
+<ul>
+<li><strong>指数上溢</strong>：若结果规格化后的指数 &gt; 1023（即无偏指数 &gt; 1023，或编码 E &gt; 2046），则发生上溢，输出 +∞ 或 -∞。</li>
+<li><strong>具体实现</strong>：在指数调整阶段，若相加/相减后的指数超出 11 位无符号数可表示的最大正规数范围（1~2046），置溢出标志。</li>
+</ul>
+<hr />
+<h3 id="cpu_2">五、单周期 CPU<a class="headerlink" href="#cpu_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>注</strong>：原题要求根据 RISC-V 数据通路图填写表格，但 PDF 中未提供该图。请补充数据通路图后完成端口与控制信号表格。</p>
+</blockquote>
+<hr />
+<h3 id="cpu_3">六、流水线 CPU<a class="headerlink" href="#cpu_3" title="Permanent link">&para;</a></h3>
+<p><strong>1. 转发控制单元输入信号（4 分）</strong></p>
+<p>除 <code>Control.branch</code> 外，还需：
+- <code>ID/EX.RegisterRs1</code>、<code>ID/EX.RegisterRs2</code>（当前指令源寄存器号）
+- <code>EX/MEM.RegisterRd</code>、<code>EX/MEM.RegWrite</code>（前条指令写回信息）
+- <code>MEM/WB.RegisterRd</code>、<code>MEM/WB.RegWrite</code>（前两条指令写回信息）
+- 可选：<code>EX/MEM.MemRead</code>（用于检测 load-use 冒险）</p>
+<p><strong>2. ForwardX 工作逻辑（4 分）</strong></p>
+<p>以 ForwardA（ALU 输入 A）为例：
+1. <strong>EX 冒险</strong>：若 <code>EX/MEM.RegWrite == 1</code> 且 <code>EX/MEM.RegisterRd != 0</code> 且 <code>EX/MEM.RegisterRd == ID/EX.RegisterRs1</code>，则 <code>ForwardA = 01</code>（从 EX/MEM 前递）。
+2. <strong>MEM 冒险</strong>：若 <code>MEM/WB.RegWrite == 1</code> 且 <code>MEM/WB.RegisterRd != 0</code> 且 <code>MEM/WB.RegisterRd == ID/EX.RegisterRs1</code> 且非 EX 冒险条件，则 <code>ForwardA = 10</code>（从 MEM/WB 前递）。
+3. <strong>无冒险</strong>：<code>ForwardA = 00</code>（从寄存器堆读取）。</p>
+<p><strong>3. 数据冒险（3 分）</strong></p>
+<p>代码：
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nf">add</span><span class="w">  </span><span class="no">x12</span><span class="p">,</span><span class="w"> </span><span class="no">x1</span><span class="p">,</span><span class="w"> </span><span class="no">x2</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="nf">ld</span><span class="w">   </span><span class="no">x10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">(</span><span class="no">x5</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nf">sub</span><span class="w">  </span><span class="no">x10</span><span class="p">,</span><span class="w"> </span><span class="no">x3</span><span class="p">,</span><span class="w"> </span><span class="no">x2</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nf">beq</span><span class="w">  </span><span class="no">x10</span><span class="p">,</span><span class="w"> </span><span class="no">x11</span><span class="p">,</span><span class="w"> </span><span class="no">target</span>
+</code></pre></div></td></tr></table></div></p>
+<ul>
+<li><strong>ld -&gt; beq</strong>：<code>ld</code> 写 x10，<code>beq</code> 读 x10。Load-Use 冒险。</li>
+<li><strong>sub -&gt; beq</strong>：<code>sub</code> 写 x10，<code>beq</code> 读 x10。RAW 冒险。</li>
+</ul>
+<blockquote>
+<p>注：若分支比较提前到 ID 阶段，上述冒险需停顿解决，因为结果尚未产生。</p>
+</blockquote>
+<p><strong>4. 第 5 周期转发控制信号（4 分）</strong></p>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ForwardA</td>
+<td>00 或 10</td>
+<td>取决于 sub 是否需要前递</td>
+</tr>
+<tr>
+<td>ForwardB</td>
+<td>01</td>
+<td>beq 的 rs2（x11）无冒险，但若 x10 来自 sub，需前递</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>具体值需结合完整调度表确定。核心逻辑：检查 EX/MEM 和 MEM/WB 阶段的目的寄存器是否与 ID/EX 的源寄存器匹配。</p>
+</blockquote>
+<hr />
+<h3 id="cache_1">七、Cache / 虚拟存储综合<a class="headerlink" href="#cache_1" title="Permanent link">&para;</a></h3>
+<p><strong>1. 虚拟地址 0x00350 分析（7 分）</strong></p>
+<ul>
+<li>虚拟地址 24 位，页大小 256 B（2^8），偏移 8 位。</li>
+<li>0x00350 = <code>0000 0000 0011 0101 0000</code></li>
+<li><strong>VPN</strong> = 高 16 位 = <code>0x003</code></li>
+<li><strong>页内偏移</strong> = <code>0x50</code></li>
+</ul>
+<blockquote>
+<p>注：后续 PTE 地址、物理地址、TLB 状态需依赖页表基址和页表内容，原题未提供完整页表映射，请补充后计算。</p>
+</blockquote>
+<p><strong>2. 第 0 个 PTE 的 PPN 与用户页表起始地址相同（2 分）</strong></p>
+<p>解释：操作系统通常将<strong>页表自身</strong>也视为一个普通页进行管理。第 0 个 PTE 指向的物理页就是页表所在的物理页，因此其 PPN 等于页表起始物理地址的物理页号。这是自映射（Self-mapping）或页表自引用机制，便于操作系统通过虚拟地址访问页表本身。</p>
+<p><strong>3. UPTB+4*(MA&gt;&gt;8) 含义（2 分）</strong></p>
+<ul>
+<li><code>MA&gt;&gt;8</code>：将物理地址右移 8 位，即除以 256，得到<strong>物理页号</strong>（页大小 256 B）。</li>
+<li><code>4*(MA&gt;&gt;8)</code>：每个页表项 4 字节，乘以页号得到页表内偏移。</li>
+<li><code>UPTB + ...</code>：用户页表基址 + 偏移 = <strong>某物理页对应的 PTE 地址</strong>。</li>
+</ul>
+<p><strong>4. 增加虚拟内存后的新 CPI（2 分）</strong></p>
+<ul>
+<li>原 CPI = 2</li>
+<li>每 1000 条指令：10 次指令 TLB 缺失 + 20 次数据 TLB 缺失 = 30 次 TLB 缺失</li>
+<li>每次 TLB 缺失惩罚 = 20 周期</li>
+</ul>
+<div class="arithmatex">\[
+\text{新 CPI} = 2 + \frac{30}{1000} \times 20 = 2 + 0.6 = \boxed{2.6}
+\]</div>
+<p><strong>5. 虚拟内存对性能的影响及原因（3 分）</strong></p>
+<ul>
+<li><strong>性能变化</strong>：CPI 从 2 增加到 2.6，<strong>性能下降</strong>。</li>
+<li><strong>原因</strong>：TLB 缺失引入了额外的 20 周期处理开销。</li>
+<li><strong>为什么要用虚拟内存</strong>：</li>
+<li><strong>隔离性</strong>：每个进程拥有独立地址空间，防止越界访问。</li>
+<li><strong>扩展性</strong>：程序可使用超过物理内存容量的地址空间。</li>
+<li><strong>灵活性</strong>：支持内存共享、按需调页（Demand Paging）、简化链接与加载。</li>
+<li><strong>安全性</strong>：操作系统通过页表控制内存访问权限。</li>
+</ul>
+<hr />
+<h3 id="_11">八、虚拟存储器<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p><strong>1. 地址位数与页号（2 分）</strong></p>
+<ul>
+<li>虚拟地址 4 GB = 2^32，共 <strong>32 位</strong>。低 12 位为页内偏移，<strong>高 20 位为虚拟页号</strong>。</li>
+<li>物理地址 1 MB = 2^20，共 <strong>20 位</strong>。低 12 位为页内偏移，<strong>高 8 位为物理页号</strong>。</li>
+</ul>
+<p><strong>2. Cache 地址划分（4 分）</strong></p>
+<p><strong>直接映射，16 行，块大小 32 B：</strong>
+- 块内偏移：5 位（log2(32)）
+- 行索引：4 位（log2(16)）
+- 标记：20 - 4 - 5 = <strong>11 位</strong>
+- 位置：高 11 位 | 中 4 位 | 低 5 位</p>
+<p><strong>8 路组相联，16 行，块大小 64 B：</strong>
+- 组数 = 16 / 8 = 2 组
+- 块内偏移：6 位（log2(64)）
+- 组索引：1 位（log2(2)）
+- 标记：20 - 1 - 6 = <strong>13 位</strong>
+- 位置：高 13 位 | 中 1 位 | 低 6 位</p>
+<p><strong>3. 虚拟地址 00C60H 分析（3 分）</strong></p>
+<p>00C60H = <code>0000 0000 1100 0110 0000</code>
+- 虚拟页号：高 20 位 = <code>0000 0000 1100 = 0x00C</code>
+- 页内偏移：<code>0110 0000 = 0x60</code></p>
+<blockquote>
+<p>注：该页是否在主存、物理地址及 Cache 命中情况需依赖页表和 Cache 内容，原题未提供完整页表/Cache 映射，请补充后判断。</p>
+</blockquote>
+<hr />
+<h2 id="_12">附录：关键公式速查<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AMAT = HitTime + MissRate * MissPenalty</td>
+<td>平均访存时间</td>
+</tr>
+<tr>
+<td>加速比 = 1 / (Sigma 优化后时间比例)</td>
+<td>Amdahl 定律</td>
+</tr>
+<tr>
+<td>MIPS = f / (CPI * 10^6)</td>
+<td>每秒百万指令数</td>
+</tr>
+<tr>
+<td>组数 = Cache容量 / (路数 * 块大小)</td>
+<td>Cache 组相联</td>
+</tr>
+<tr>
+<td>虚拟地址 = VPN</td>
+<td></td>
+</tr>
+<tr>
+<td>物理地址 = PPN</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>说明</strong>：本解答基于 PDF 中的文字内容完成。部分题目（如 2023-2024 学期第三题汇编代码、第五题数据通路图、第七/八题页表映射等）因原卷面信息缺失，无法给出唯一数值答案，已在对应位置标注并给出通用解法。如需完整解答，请补充缺失的图或表。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

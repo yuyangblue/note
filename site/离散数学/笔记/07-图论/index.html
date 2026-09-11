@@ -1,0 +1,1890 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="鱼汤的学习笔记仓库 —— 算法竞赛 · 离散数学 · 概率统计 · 计算机系统">
+      
+      
+        <meta name="author" content="鱼汤">
+      
+      
+        <link rel="canonical" href="https://yuyangblue.github.io/note/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/%E7%AC%94%E8%AE%B0/07-%E5%9B%BE%E8%AE%BA/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第7章 图论 - 学习笔记 - 鱼汤的笔记库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="鱼汤的笔记库" class="md-header__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            鱼汤的笔记库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第7章 图论 - 学习笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../ICPC/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ICPC 竞赛
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../离散数学/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  离散数学
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../概率论与数理统计/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  概率论与数理统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../计算机系统导论/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  计算机系统导论
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../一些讲座/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  一些讲座
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本项目
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="鱼汤的笔记库" class="md-nav__button md-logo" aria-label="鱼汤的笔记库" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.svg" alt="logo">
+
+    </a>
+    鱼汤的笔记库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ICPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICPC 竞赛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../离散数学/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散数学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../概率论与数理统计/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论与数理统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../计算机系统导论/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统导论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../一些讲座/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一些讲座
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 图的基本概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 图的基本概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 图论起源
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 无序积
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 图的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 有向边与无向边
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 图的表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 图的表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 三种表示法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 邻接矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 基本概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 图的分类
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 图的分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 按边的方向
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 按平行边
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 按权
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 综合分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 子图与补图
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 子图与补图">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 子图类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 完全图
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 补图
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 六人集会问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 握手定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 握手定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 度数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 最大度与最小度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 握手定理（图论基本定理）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 有向图的握手定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 度数序列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 邻接矩阵求度数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 图的同构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 图的同构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 同构的必要条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 判定方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 通路与回路
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 通路与回路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 通路分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 通路的简化表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 邻接矩阵幂定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 可达性与最短通路
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 可达性与最短通路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 可达性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 关键定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 可达性矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 最短通路（短程线）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 无向图的连通性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 无向图的连通性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 连通图
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 连通分支
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 图的删除操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 点割集与割点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 边割集与割边
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6 点连通度与边连通度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 有向图的连通性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 有向图的连通性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 三个层次
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 判定条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 可达性矩阵判定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 连通分支
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 本节重点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="7-">第7章 图论 - 学习笔记<a class="headerlink" href="#7-" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>整理自 B站《【电子科技大学】《离散数学》全63讲》（BV16Btc6VEpE，up主：哔哩大学-学生中心）P43-P52
+字幕来源：AI字幕，已核对数学逻辑</p>
+</blockquote>
+<h2 id="_1">目录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#1-图的基本概念">1. 图的基本概念</a></li>
+<li><a href="#2-图的表示">2. 图的表示</a></li>
+<li><a href="#3-图的分类">3. 图的分类</a></li>
+<li><a href="#4-子图与补图">4. 子图与补图</a></li>
+<li><a href="#5-握手定理">5. 握手定理</a></li>
+<li><a href="#6-图的同构">6. 图的同构</a></li>
+<li><a href="#7-通路与回路">7. 通路与回路</a></li>
+<li><a href="#8-可达性与最短通路">8. 可达性与最短通路</a></li>
+<li><a href="#9-无向图的连通性">9. 无向图的连通性</a></li>
+<li><a href="#10-有向图的连通性">10. 有向图的连通性</a></li>
+<li><a href="#11-本节重点">11. 本节重点</a></li>
+</ul>
+<hr />
+<h2 id="1">1. 图的基本概念<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 图论起源<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1736年欧拉发表《哥尼斯堡的七座桥》，标志图论诞生</li>
+<li>哥尼斯堡七桥问题：能否从任意位置出发，经过七座桥一次且仅一次回到原点？欧拉给出否定回答</li>
+<li>欧拉被公认为"图论之父"</li>
+</ul>
+<h3 id="12">1.2 无序积<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为集合，称 <span class="arithmatex">\(A \&amp; B = \{(a,b) \mid a \in A, b \in B\}\)</span> 为无序积（小括号表示无序对，<span class="arithmatex">\((a,b)=(b,a)\)</span>）。</p>
+<blockquote>
+<p>注意与笛卡尔积区分：笛卡尔积用尖括号 <span class="arithmatex">\(\langle a,b \rangle\)</span>（有序），无序积用小括号 <span class="arithmatex">\((a,b)\)</span>（无序）。</p>
+</blockquote>
+<h3 id="13">1.3 图的定义<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>一个<strong>图</strong>是一个序偶 <span class="arithmatex">\(G = \langle V, E \rangle\)</span>，其中：
+- <span class="arithmatex">\(V\)</span> 是有限非空集合，元素称为<strong>节点</strong>（顶点）
+- <span class="arithmatex">\(E\)</span> 是有限集合，元素称为<strong>边</strong>，每条边与两个节点相关联</p>
+<h3 id="14">1.4 有向边与无向边<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>表示</th>
+<th>端点名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无向边</td>
+<td><span class="arithmatex">\(e = (u, v)\)</span>（小括号）</td>
+<td><span class="arithmatex">\(u, v\)</span> 统称为端点</td>
+</tr>
+<tr>
+<td>有向边（弧）</td>
+<td><span class="arithmatex">\(e = \langle u, v \rangle\)</span>（尖括号）</td>
+<td><span class="arithmatex">\(u\)</span> 为始点（弧尾），<span class="arithmatex">\(v\)</span> 为终点（弧头）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2. 图的表示<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 三种表示法<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>表示法</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集合表示法 <span class="arithmatex">\(G=\langle V,E\rangle\)</span></td>
+<td>精确</td>
+<td>抽象不易理解</td>
+</tr>
+<tr>
+<td>图形表示法</td>
+<td>形象直观</td>
+<td>不适合大图</td>
+</tr>
+<tr>
+<td>矩阵表示法（邻接矩阵）</td>
+<td>便于计算机处理和代数运算</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22">2.2 邻接矩阵<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(G = \langle V, E \rangle\)</span>，<span class="arithmatex">\(V = \{v_1, v_2, \dots, v_n\}\)</span>，邻接矩阵 <span class="arithmatex">\(A_G = (a_{ij})_{n \times n}\)</span>：</p>
+<div class="arithmatex">\[a_{ij} = \begin{cases} 1, &amp; v_i \text{ 到 } v_j \text{ 有边} \\ 0, &amp; v_i \text{ 到 } v_j \text{ 无边} \end{cases}\]</div>
+<blockquote>
+<p>邻接矩阵定义基于<strong>线图</strong>（两节点间最多一条边）。节点排序不同，邻接矩阵不同，但描述的是同一个图。</p>
+</blockquote>
+<h3 id="23">2.3 基本概念<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>邻接点</strong>：一条边的两个端点互为邻接点</li>
+<li><strong>邻接边</strong>：具有公共节点的两条边</li>
+<li><strong>环（自回路）</strong>：两个端点相同的边 <span class="arithmatex">\((v, v)\)</span></li>
+<li><strong>孤立节点</strong>：不与任何节点相邻接的节点</li>
+<li><strong>零图</strong>：所有节点都是孤立节点的图（无边）</li>
+<li><strong>平凡图</strong>：只包含一个节点的图</li>
+<li><strong><span class="arithmatex">\((n, m)\)</span> 图</strong>：含有 <span class="arithmatex">\(n\)</span> 个节点、<span class="arithmatex">\(m\)</span> 条边的图</li>
+</ul>
+<hr />
+<h2 id="3">3. 图的分类<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p><img alt="图的分类" src="../figures/07-%E5%9B%BE%E7%9A%84%E5%88%86%E7%B1%BB.png" /></p>
+<blockquote>
+<p><strong>图1</strong> 图的分类树（自绘）：按边方向（无向/有向/混合）、按平行边（多重图/线图/简单图）、按权（赋权/无权）三个维度，可组合描述。</p>
+</blockquote>
+<h3 id="31">3.1 按边的方向<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无向图</td>
+<td>每条边都是无向边</td>
+</tr>
+<tr>
+<td>有向图</td>
+<td>每条边都是有向边</td>
+</tr>
+<tr>
+<td>混合图</td>
+<td>既有有向边又有无向边</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>混合图通常转换为有向图讨论（每条无向边替换为方向相反的两条有向边）。</p>
+</blockquote>
+<h3 id="32">3.2 按平行边<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>平行边</strong>：两节点间（包括节点自身）存在多条边（有向图要求同始点同终点）</li>
+<li><strong>重数</strong>：两节点间平行边的条数</li>
+<li><strong>多重图</strong>：含平行边的图</li>
+<li><strong>线图</strong>：不含平行边的图（可以有环）</li>
+<li><strong>简单图</strong>：不含平行边且不含环的图</li>
+</ul>
+<blockquote>
+<p>后续主要研究线图和简单图。</p>
+</blockquote>
+<h3 id="33">3.3 按权<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>赋权图</strong>：边或节点带有权值的图（三元组 <span class="arithmatex">\(\langle V, E, g \rangle\)</span> 或四元组 <span class="arithmatex">\(\langle V, E, f, g \rangle\)</span>）</li>
+<li><strong>无权图</strong>：节点和边都没有权值</li>
+</ul>
+<h3 id="34">3.4 综合分类<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>图可以综合描述，如"有向无权多重图"、"无向赋权简单图"。</p>
+<hr />
+<h2 id="4">4. 子图与补图<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 子图类型<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(G = \langle V, E \rangle\)</span>，<span class="arithmatex">\(G_1 = \langle V_1, E_1 \rangle\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>子图</td>
+<td><span class="arithmatex">\(V_1 \subseteq V\)</span> 且 <span class="arithmatex">\(E_1 \subseteq E\)</span></td>
+</tr>
+<tr>
+<td>真子图</td>
+<td><span class="arithmatex">\(G_1 \subseteq G\)</span> 且 <span class="arithmatex">\(G_1 \neq G\)</span></td>
+</tr>
+<tr>
+<td>生成子图</td>
+<td><span class="arithmatex">\(V_1 = V\)</span> 且 <span class="arithmatex">\(E_1 \subseteq E\)</span>（节点集相同，边是子集）</td>
+</tr>
+<tr>
+<td>导出子图</td>
+<td><span class="arithmatex">\(V_2 \subseteq V\)</span>，以 <span class="arithmatex">\(V_2\)</span> 为节点集，以两端点均在 <span class="arithmatex">\(V_2\)</span> 中的所有边为边集</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>任何图都是自身的子图、生成子图和导出子图。</p>
+</blockquote>
+<h3 id="42">4.2 完全图<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>无向完全图</strong> <span class="arithmatex">\(K_n\)</span>：<span class="arithmatex">\(n\)</span> 个节点的无向简单图中，任意两节点间都有边</li>
+<li>边数：<span class="arithmatex">\(C_n^2 = \frac{n(n-1)}{2}\)</span></li>
+<li><strong>有向完全图</strong>：任意两节点间都有方向相反的两条边</li>
+<li>边数：<span class="arithmatex">\(P_n^2 = n(n-1)\)</span></li>
+</ul>
+<h3 id="43">4.3 补图<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(G = \langle V, E \rangle\)</span> 是简单图，其补图 <span class="arithmatex">\(\overline{G} = \langle V, E' \rangle\)</span>，其中 <span class="arithmatex">\(E'\)</span> 是完全图中去掉 <span class="arithmatex">\(E\)</span> 后剩余的边。</p>
+<ul>
+<li>补图与原图节点集相同</li>
+<li>两节点在 <span class="arithmatex">\(G\)</span> 中相邻 <span class="arithmatex">\(\iff\)</span> 在 <span class="arithmatex">\(\overline{G}\)</span> 中不相邻</li>
+<li>邻接矩阵关系：<span class="arithmatex">\(\overline{a_{ij}} = 1 - a_{ij}\)</span>（<span class="arithmatex">\(i \neq j\)</span>），主对角线保持为0</li>
+</ul>
+<h3 id="44">4.4 六人集会问题<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<p><strong>定理</strong>：任意六个人的集会上，总有三个人相互认识或三个人互相不认识。</p>
+<p><strong>证明</strong>（鸽巢原理）：将人作为节点，认识关系连边得到图 <span class="arithmatex">\(G\)</span>，不认识关系为补图 <span class="arithmatex">\(\overline{G}\)</span>。任取节点 <span class="arithmatex">\(v_1\)</span>，与其余5个节点的5条边中，至少3条在 <span class="arithmatex">\(G\)</span> 或 <span class="arithmatex">\(\overline{G}\)</span> 中。若3条在 <span class="arithmatex">\(G\)</span> 中连接 <span class="arithmatex">\(v_2, v_3, v_4\)</span>：若这三者间有边则构成 <span class="arithmatex">\(K_3\)</span>（相互认识）；若无边则在 <span class="arithmatex">\(\overline{G}\)</span> 中构成 <span class="arithmatex">\(K_3\)</span>（互相不认识）。</p>
+<hr />
+<h2 id="5">5. 握手定理<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 度数<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>无向图</strong>：节点 <span class="arithmatex">\(v\)</span> 的度数 <span class="arithmatex">\(\deg(v)\)</span> = 以 <span class="arithmatex">\(v\)</span> 为端点的边数之和（<strong>环计算两次</strong>）</li>
+<li><strong>有向图</strong>：</li>
+<li>出度 <span class="arithmatex">\(\deg^+(v)\)</span> = 以 <span class="arithmatex">\(v\)</span> 为始点的边数</li>
+<li>入度 <span class="arithmatex">\(\deg^-(v)\)</span> = 以 <span class="arithmatex">\(v\)</span> 为终点的边数</li>
+<li>总度数 <span class="arithmatex">\(\deg(v) = \deg^+(v) + \deg^-(v)\)</span>（环贡献1出度+1入度）</li>
+<li><strong>悬挂节点</strong>：度数为1的节点；对应的边称为<strong>悬挂边</strong></li>
+</ul>
+<h3 id="52">5.2 最大度与最小度<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(\Delta(G)\)</span> = 所有节点的最大度数</li>
+<li><span class="arithmatex">\(\delta(G)\)</span> = 所有节点的最小度数</li>
+<li>有向图还区分最大出度/最小出度、最大入度/最小入度</li>
+</ul>
+<h3 id="53">5.3 握手定理（图论基本定理）<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p><strong>定理</strong>：图中所有节点度数之和等于边数的两倍。</p>
+<div class="arithmatex">\[\sum_{v \in V} \deg(v) = 2|E|\]</div>
+<p><img alt="握手定理" src="../figures/07-%E6%8F%A1%E6%89%8B%E5%AE%9A%E7%90%86.png" /></p>
+<blockquote>
+<p><strong>图2</strong> 握手定理的实例验证（自绘）：<span class="arithmatex">\(3+2+3+1+1=10=2\times5\)</span>；度数为奇数的节点（v1、v3、v4、v5）共 4 个，必为偶数。</p>
+</blockquote>
+<p><strong>推论</strong>：图中度数为奇数的节点个数为偶数。</p>
+<blockquote>
+<p>证明：总度数 = 奇度节点度数和 + 偶度节点度数和 = 偶数。偶度节点度数和为偶数，故奇度节点度数和也为偶数，因此奇度节点个数必为偶数。</p>
+</blockquote>
+<h3 id="54">5.4 有向图的握手定理<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
+<p>有向图中：所有节点的出度之和 = 所有节点的入度之和 = 边数。</p>
+<div class="arithmatex">\[\sum_{v \in V} \deg^+(v) = \sum_{v \in V} \deg^-(v) = |E|\]</div>
+<h3 id="55">5.5 度数序列<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
+<p>将图中所有节点的度数排成的序列称为度数序列（有向图还可分别定义出度序列和入度序列）。</p>
+<blockquote>
+<p>判定一个序列能否成为图的度数序列：奇度数的个数必须为偶数（必要条件）。</p>
+</blockquote>
+<h3 id="56">5.6 邻接矩阵求度数<a class="headerlink" href="#56" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>无向图</strong>：<span class="arithmatex">\(\deg(v_i) = \sum_{k=1}^{n} a_{ik} + a_{ii}\)</span>（第 <span class="arithmatex">\(i\)</span> 行之和 + 对角线元素，因为环要算两次）</li>
+<li><strong>有向图</strong>：<span class="arithmatex">\(\deg^+(v_i) = \sum_{k=1}^{n} a_{ik}\)</span>（第 <span class="arithmatex">\(i\)</span> 行之和），<span class="arithmatex">\(\deg^-(v_i) = \sum_{k=1}^{n} a_{ki}\)</span>（第 <span class="arithmatex">\(i\)</span> 列之和）</li>
+</ul>
+<hr />
+<h2 id="6">6. 图的同构<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 定义<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(G = \langle V, E \rangle\)</span> 和 <span class="arithmatex">\(G' = \langle V', E' \rangle\)</span>，若存在节点集之间的<strong>双射函数</strong> <span class="arithmatex">\(f: V \to V'\)</span>，使得对任意边 <span class="arithmatex">\(e = (v_i, v_j) \in E\)</span>，当且仅当 <span class="arithmatex">\(e' = (f(v_i), f(v_j)) \in E'\)</span>，且边的重数相同，则称 <span class="arithmatex">\(G\)</span> 与 <span class="arithmatex">\(G'\)</span> <strong>同构</strong>，记作 <span class="arithmatex">\(G \cong G'\)</span>。</p>
+<blockquote>
+<p>直观理解：节点可以任意挪动位置，边是完全弹性的，只要不拉断，一个图能变形为另一个图，则同构。</p>
+</blockquote>
+<p><img alt="图的同构" src="../figures/07-%E5%9B%BE%E7%9A%84%E5%90%8C%E6%9E%84.png" /></p>
+<blockquote>
+<p><strong>图3</strong> 同构示意（自绘）：两个图节点数、边数、度数分布都相同，按颜色一一对应（双射 <span class="arithmatex">\(f\)</span>）后边也一一对应，故 <span class="arithmatex">\(G \cong G'\)</span>。</p>
+</blockquote>
+<h3 id="62">6.2 同构的必要条件<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p>两图同构必须满足（但满足不一定同构）：
+1. 节点数目相同
+2. 边数目相同
+3. 度数相同的节点数相同（度数分布一致）</p>
+<blockquote>
+<p>必要条件可用于判定<strong>不同构</strong>，但不能用于判定同构。</p>
+</blockquote>
+<h3 id="63">6.3 判定方法<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<ul>
+<li>小规模图：根据度数建立节点对应关系，逐一验证边</li>
+<li>大规模图：图同构问题目前没有高效算法（属于NP问题，2015年Babai提出拟多项式算法）</li>
+<li>进一步判定：度数相同的节点，其邻接点的度数特征也应对应</li>
+</ul>
+<hr />
+<h2 id="7">7. 通路与回路<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 定义<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>给定图 <span class="arithmatex">\(G = \langle V, E \rangle\)</span>，节点和边相继交错出现的序列</p>
+<div class="arithmatex">\[\Gamma = v_0 e_1 v_1 e_2 v_2 \dots e_k v_k\]</div>
+<p>称为从 <span class="arithmatex">\(v_0\)</span> 到 <span class="arithmatex">\(v_k\)</span> 的<strong>通路</strong>，其中 <span class="arithmatex">\(e_i\)</span> 的端点为 <span class="arithmatex">\(v_{i-1}\)</span> 和 <span class="arithmatex">\(v_i\)</span>（有向图须按方向）。</p>
+<ul>
+<li><span class="arithmatex">\(v_0\)</span> 为始点，<span class="arithmatex">\(v_k\)</span> 为终点，统称为端点</li>
+<li>通路中边的数目 <span class="arithmatex">\(k\)</span> 称为通路的<strong>长度</strong></li>
+<li>若 <span class="arithmatex">\(v_0 = v_k\)</span>，则称为<strong>回路</strong></li>
+</ul>
+<h3 id="72">7.2 通路分类<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>简单通路</td>
+<td>经过的每条边互不相同</td>
+</tr>
+<tr>
+<td>复杂通路</td>
+<td>有边重复经过</td>
+</tr>
+<tr>
+<td>基本通路（初级通路）</td>
+<td>所有节点互不相同（边自然也不同）</td>
+</tr>
+<tr>
+<td>简单回路</td>
+<td>经过的每条边互不相同</td>
+</tr>
+<tr>
+<td>基本回路（初级回路）</td>
+<td>除始点=终点外，所有节点互不相同</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>基本通路一定是简单通路，但简单通路不一定是基本通路。</p>
+</blockquote>
+<h3 id="73">7.3 通路的简化表示<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<ul>
+<li>边序列表示：<span class="arithmatex">\(e_1 e_2 \dots e_n\)</span></li>
+<li>节点序列表示（简单图中）：<span class="arithmatex">\(v_0 v_1 \dots v_n\)</span></li>
+</ul>
+<h3 id="74">7.4 邻接矩阵幂定理<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(G\)</span> 是线图，<span class="arithmatex">\(A\)</span> 是邻接矩阵，则 <span class="arithmatex">\(A^m\)</span> 的元素 <span class="arithmatex">\(a_{ij}^{(m)}\)</span> 表示从 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> 长度为 <span class="arithmatex">\(m\)</span> 的通路数目。</p>
+<ul>
+<li><span class="arithmatex">\(a_{ii}^{(m)}\)</span> = 从 <span class="arithmatex">\(v_i\)</span> 到自身长度为 <span class="arithmatex">\(m\)</span> 的回路数</li>
+<li><span class="arithmatex">\(\sum_{i,j} a_{ij}^{(m)}\)</span> = 图中长度为 <span class="arithmatex">\(m\)</span> 的通路总数（含回路）</li>
+<li><span class="arithmatex">\(\sum_i a_{ii}^{(m)}\)</span> = 图中长度为 <span class="arithmatex">\(m\)</span> 的回路总数</li>
+</ul>
+<p><strong>推论</strong>：设 <span class="arithmatex">\(B_m = A + A^2 + \dots + A^m\)</span>，则 <span class="arithmatex">\(b_{ij}\)</span> 表示从 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> 长度不大于 <span class="arithmatex">\(m\)</span> 的通路数目。</p>
+<blockquote>
+<p>证明用数学归纳法：<span class="arithmatex">\(A^{k+1} = A \cdot A^k\)</span>，<span class="arithmatex">\(a_{ij}^{(k+1)} = \sum_p a_{ip} \cdot a_{pj}^{(k)}\)</span>，表示经过中间节点 <span class="arithmatex">\(v_p\)</span> 的长度为 <span class="arithmatex">\(k+1\)</span> 的通路数。</p>
+</blockquote>
+<hr />
+<h2 id="8">8. 可达性与最短通路<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="81">8.1 可达性<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<p>在图 <span class="arithmatex">\(G\)</span> 中，若从 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> 存在通路，则称 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> <strong>可达</strong>，否则称不可达。规定任何节点到自身可达。</p>
+<h3 id="82">8.2 关键定理<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<p><strong>定理</strong>：在 <span class="arithmatex">\(n\)</span> 个节点的图中，若 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span>（<span class="arithmatex">\(v_i \neq v_j\)</span>）存在通路，则存在一条长度不大于 <span class="arithmatex">\(n-1\)</span> 的通路。</p>
+<p><strong>证明</strong>（鸽巢原理）：若通路长度 <span class="arithmatex">\(k &gt; n-1\)</span>，则通路上有 <span class="arithmatex">\(k+1 &gt; n\)</span> 个节点，必有节点重复。去掉重复节点间的回路，得到更短的通路。重复此过程直到长度 <span class="arithmatex">\(\leq n-1\)</span>。</p>
+<p><strong>推论</strong>：存在通路则存在长度不大于 <span class="arithmatex">\(n-1\)</span> 的<strong>基本通路</strong>。</p>
+<p><strong>回路类似定理</strong>：若存在经过 <span class="arithmatex">\(v_i\)</span> 的回路，则存在长度不大于 <span class="arithmatex">\(n\)</span> 的基本回路。</p>
+<h3 id="83">8.3 可达性矩阵<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(G\)</span> 是 <span class="arithmatex">\(n\)</span> 阶线图，可达性矩阵 <span class="arithmatex">\(P = (p_{ij})_{n \times n}\)</span>：</p>
+<div class="arithmatex">\[p_{ij} = \begin{cases} 1, &amp; v_i \text{ 到 } v_j \text{ 可达} \\ 0, &amp; v_i \text{ 到 } v_j \text{ 不可达} \end{cases}\]</div>
+<ul>
+<li>无向图的可达性矩阵一定是对称的</li>
+<li>有向图的可达性矩阵不一定对称</li>
+</ul>
+<p><strong>求法</strong>：<span class="arithmatex">\(P = A^{(1)} \lor A^{(2)} \lor \dots \lor A^{(n)}\)</span>（布尔运算，只关心0/非0）</p>
+<h3 id="84">8.4 最短通路（短程线）<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<ul>
+<li>若 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> 可达，长度最短的通路称为<strong>短程线</strong></li>
+<li>短程线的长度称为 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> 的<strong>距离</strong>，记作 <span class="arithmatex">\(d\langle v_i, v_j \rangle\)</span></li>
+<li>不可达时距离为 <span class="arithmatex">\(\infty\)</span></li>
+<li>性质：<span class="arithmatex">\(d\langle v_i, v_j \rangle \geq 0\)</span>，<span class="arithmatex">\(d\langle v_i, v_i \rangle = 0\)</span>，三角不等式 <span class="arithmatex">\(d\langle v_i, v_k \rangle + d\langle v_k, v_j \rangle \geq d\langle v_i, v_j \rangle\)</span></li>
+<li>无向图中 <span class="arithmatex">\(d\langle v_i, v_j \rangle = d\langle v_j, v_i \rangle\)</span></li>
+</ul>
+<p><strong>求距离</strong>：在 <span class="arithmatex">\(A^1, A^2, \dots, A^n\)</span> 中找到第一个使 <span class="arithmatex">\(a_{ij}^{(m)} \neq 0\)</span> 的 <span class="arithmatex">\(m\)</span>，即为距离。</p>
+<hr />
+<h2 id="9">9. 无向图的连通性<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<h3 id="91">9.1 连通图<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
+<p>若无向图 <span class="arithmatex">\(G\)</span> 中任意两个节点都是可达的，则称 <span class="arithmatex">\(G\)</span> 为<strong>连通图</strong>，否则为非连通图（分离图）。</p>
+<ul>
+<li>无向完全图 <span class="arithmatex">\(K_n\)</span> 是连通图</li>
+<li>多于一个节点的零图是非连通图</li>
+<li>非平凡无向线图是连通图 <span class="arithmatex">\(\iff\)</span> 可达性矩阵所有元素均为1</li>
+</ul>
+<h3 id="92">9.2 连通分支<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
+<p>无向图中节点间的可达关系是<strong>等价关系</strong>（自反+对称+传递），其等价类导出的子图称为<strong>连通分支</strong>。连通分支数记作 <span class="arithmatex">\(p(G)\)</span>。</p>
+<p><img alt="连通性" src="../figures/07-%E8%BF%9E%E9%80%9A%E6%80%A7.png" /></p>
+<blockquote>
+<p><strong>图4</strong> 连通性与割点/割边示意（自绘）：图中 <span class="arithmatex">\(p(G)=2\)</span>；删除 v3（或 v4、或桥边 v3v4）都会使连通分支数增加。</p>
+</blockquote>
+<ul>
+<li>连通图的连通分支数为1</li>
+<li>非连通图有多个连通分支</li>
+</ul>
+<h3 id="93">9.3 图的删除操作<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(G - e\)</span>：删除边 <span class="arithmatex">\(e\)</span></li>
+<li><span class="arithmatex">\(G - E'\)</span>：删除边集 <span class="arithmatex">\(E'\)</span> 中所有边</li>
+<li><span class="arithmatex">\(G - v\)</span>：删除节点 <span class="arithmatex">\(v\)</span> 及其关联的所有边</li>
+<li><span class="arithmatex">\(G - V'\)</span>：删除节点集 <span class="arithmatex">\(V'\)</span> 中所有节点及其关联边</li>
+</ul>
+<h3 id="94">9.4 点割集与割点<a class="headerlink" href="#94" title="Permanent link">&para;</a></h3>
+<p>设无向图 <span class="arithmatex">\(G = \langle V, E \rangle\)</span>，若存在 <span class="arithmatex">\(V' \subset V\)</span> 使得：
+1. <span class="arithmatex">\(p(G - V') &gt; p(G)\)</span>（删除后连通分支数增加）
+2. 对任意 <span class="arithmatex">\(V'' \subset V'\)</span>，<span class="arithmatex">\(p(G - V'') = p(G)\)</span>（真子集不增加连通分支数，即极小性）</p>
+<p>则称 <span class="arithmatex">\(V'\)</span> 为<strong>点割集</strong>。若点割集中只有一个节点 <span class="arithmatex">\(v\)</span>，则称 <span class="arithmatex">\(v\)</span> 为<strong>割点</strong>。</p>
+<h3 id="95">9.5 边割集与割边<a class="headerlink" href="#95" title="Permanent link">&para;</a></h3>
+<p>类似地，若 <span class="arithmatex">\(E' \subset E\)</span> 满足删除后连通分支数增加且具有极小性，则称 <span class="arithmatex">\(E'\)</span> 为<strong>边割集</strong>。只有一条边时称为<strong>割边</strong>（桥）。</p>
+<h3 id="96">9.6 点连通度与边连通度<a class="headerlink" href="#96" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>点连通度</strong> <span class="arithmatex">\(\kappa(G)\)</span>：所有点割集中包含的最少元素个数（使图不连通或成为平凡图所需删除的最少节点数）</li>
+<li><strong>边连通度</strong> <span class="arithmatex">\(\lambda(G)\)</span>：所有边割集中包含的最少元素个数</li>
+<li>若 <span class="arithmatex">\(\kappa(G) \geq k\)</span>，称 <span class="arithmatex">\(G\)</span> 为 <strong><span class="arithmatex">\(k\)</span>-连通图</strong></li>
+<li>若 <span class="arithmatex">\(\lambda(G) \geq k\)</span>，称 <span class="arithmatex">\(G\)</span> 为 <strong><span class="arithmatex">\(k\)</span>-边连通图</strong></li>
+</ul>
+<p><strong>特殊图的连通度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>图</th>
+<th>点连通度 <span class="arithmatex">\(\kappa\)</span></th>
+<th>边连通度 <span class="arithmatex">\(\lambda\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平凡图</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>完全图 <span class="arithmatex">\(K_n\)</span></td>
+<td><span class="arithmatex">\(n-1\)</span></td>
+<td><span class="arithmatex">\(n-1\)</span></td>
+</tr>
+<tr>
+<td>有割点的连通图</td>
+<td>1</td>
+<td>—</td>
+</tr>
+<tr>
+<td>有割边的连通图</td>
+<td>—</td>
+<td>1</td>
+</tr>
+<tr>
+<td>非连通图</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10">10. 有向图的连通性<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<h3 id="101">10.1 三个层次<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
+<p>有向图的可达关系只有自反性和传递性，<strong>没有对称性</strong>，因此连通性分三个层次：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>强连通图</td>
+<td>任意两节点相互可达</td>
+<td>最强</td>
+</tr>
+<tr>
+<td>单向连通图</td>
+<td>任意两节点至少有一个方向可达</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>弱连通图</td>
+<td>略去所有边的方向后得到的无向图是连通的</td>
+<td>最弱</td>
+</tr>
+<tr>
+<td>非连通图</td>
+<td>略去方向后仍不连通</td>
+<td>不连通</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>强连通 <span class="arithmatex">\(\Rightarrow\)</span> 单向连通 <span class="arithmatex">\(\Rightarrow\)</span> 弱连通，反之不成立。</p>
+</blockquote>
+<p><img alt="有向图连通性" src="../figures/07-%E6%9C%89%E5%90%91%E5%9B%BE%E8%BF%9E%E9%80%9A%E6%80%A7.png" /></p>
+<blockquote>
+<p><strong>图5</strong> 有向图连通性三层次（自绘）：强连通=任意两点相互可达（有向环）；单向连通=任意两点至少一个方向可达；弱连通=去方向后连通。强连通 <span class="arithmatex">\(\supset\)</span> 单向连通 <span class="arithmatex">\(\supset\)</span> 弱连通。</p>
+</blockquote>
+<h3 id="102">10.2 判定条件<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>充分必要条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>强连通图</td>
+<td>存在一条经过所有节点至少一次的<strong>回路</strong></td>
+</tr>
+<tr>
+<td>单向连通图</td>
+<td>存在一条经过所有节点至少一次的<strong>通路</strong></td>
+</tr>
+<tr>
+<td>弱连通图</td>
+<td>邻接矩阵 <span class="arithmatex">\(A \lor A^T\)</span> 对应的无向图连通</td>
+</tr>
+</tbody>
+</table>
+<h3 id="103">10.3 可达性矩阵判定<a class="headerlink" href="#103" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>强连通</strong>：可达性矩阵 <span class="arithmatex">\(P\)</span> 所有元素均为1</li>
+<li><strong>单向连通</strong>：<span class="arithmatex">\(P \lor P^T\)</span> 除主对角线外所有元素均为1（<span class="arithmatex">\(p_{ij}\)</span> 和 <span class="arithmatex">\(p_{ji}\)</span> 至少一个为1）</li>
+<li><strong>弱连通</strong>：先求 <span class="arithmatex">\(A' = A \lor A^T\)</span>（忽略方向），再由 <span class="arithmatex">\(A'\)</span> 求可达性矩阵，所有元素为1</li>
+</ul>
+<h3 id="104">10.4 连通分支<a class="headerlink" href="#104" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>分支类型</th>
+<th>定义</th>
+<th>节点分布</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>强连通分支（强分图）</td>
+<td>满足强连通的极大子图</td>
+<td>每个节点位于且仅位于一个强分图中</td>
+</tr>
+<tr>
+<td>单向连通分支（单向分图）</td>
+<td>满足单向连通的极大子图</td>
+<td>每个节点至少位于一个单向分图中（可重复）</td>
+</tr>
+<tr>
+<td>弱连通分支（弱分图）</td>
+<td>满足弱连通的极大子图</td>
+<td>每个节点位于且仅位于一个弱分图中</td>
+</tr>
+</tbody>
+</table>
+<p><strong>寻找强连通分支的方法</strong>：
+1. 入度为0或出度为0的节点自成强分图
+2. 寻找极大回路（回路上的节点相互可达）
+3. 其余节点逐一判定</p>
+<blockquote>
+<p>边的分布：每条边至多在一个强分图中，至少在一个单向分图中，在且仅在一个弱分图中。</p>
+</blockquote>
+<hr />
+<h2 id="11_1">11. 本节重点<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>本节重点</strong>：
+- <strong>要点1</strong>：图 <span class="arithmatex">\(G=\langle V,E\rangle\)</span>，边分无向边 <span class="arithmatex">\((u,v)\)</span> 和有向边 <span class="arithmatex">\(\langle u,v \rangle\)</span>。无序积用小括号，笛卡尔积用尖括号
+- <strong>要点2</strong>：邻接矩阵 <span class="arithmatex">\(A\)</span> 中 <span class="arithmatex">\(a_{ij}=1\)</span> 表示 <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> 有边。无向图邻接矩阵对称，有向图不一定
+- <strong>要点3</strong>：简单图 = 无平行边 + 无环；线图 = 无平行边（可有环）；完全图 <span class="arithmatex">\(K_n\)</span> 边数 <span class="arithmatex">\(n(n-1)/2\)</span>
+- <strong>要点4</strong>：子图/生成子图（节点相同）/导出子图（取部分节点+其间所有边）。补图与原图节点相同、边互补
+- <strong>要点5</strong>：握手定理：<span class="arithmatex">\(\sum \deg(v) = 2|E|\)</span>；推论：奇度节点数为偶数。有向图：出度和=入度和=边数。环算2度（无向图）或1出度+1入度（有向图）
+- <strong>要点6</strong>：图同构的必要条件：节点数同、边数同、度数分布同。必要条件不充分，图同构判定无高效算法
+- <strong>要点7</strong>：邻接矩阵幂定理：<span class="arithmatex">\(A^m\)</span> 的 <span class="arithmatex">\(a_{ij}^{(m)}\)</span> = <span class="arithmatex">\(v_i\)</span> 到 <span class="arithmatex">\(v_j\)</span> 长度为 <span class="arithmatex">\(m\)</span> 的通路数。<span class="arithmatex">\(B_m = A+A^2+\dots+A^m\)</span> 给出长度不大于 <span class="arithmatex">\(m\)</span> 的通路数
+- <strong>要点8</strong>：<span class="arithmatex">\(n\)</span> 节点图中存在通路则有长度 <span class="arithmatex">\(\leq n-1\)</span> 的基本通路；存在回路则有长度 <span class="arithmatex">\(\leq n\)</span> 的基本回路（鸽巢原理去环）
+- <strong>要点9</strong>：无向图连通分支基于可达等价关系。点割集/割点、边割集/割边、点连通度 <span class="arithmatex">\(\kappa(G)\)</span>、边连通度 <span class="arithmatex">\(\lambda(G)\)</span>
+- <strong>要点10</strong>：有向图连通性三层次：强连通（相互可达）&gt; 单向连通（至少单向可达）&gt; 弱连通（去方向后连通）。强连通 <span class="arithmatex">\(\iff\)</span> 存在经过所有节点的回路
+- <strong>常见坑</strong>：无向图求度数时环算2次；邻接矩阵求无向图度数要加对角线元素 <span class="arithmatex">\(a_{ii}\)</span>；奇度节点数必为偶数（度数序列判定必要条件）；有向图可达关系不对称，不能直接用等价关系求连通分支</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 鱼汤 · Built with <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/yuyangblue" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
