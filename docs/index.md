@@ -1,14 +1,14 @@
 <div class="hero">
   <div class="hero-badge">📖 Obsidian 笔记 · MkDocs 构建 · GitHub Pages 发布</div>
   <h1>鱼汤的笔记库</h1>
-  <p class="hero-sub">算法竞赛、离散数学、概率统计与计算机系统的结构化学习笔记。<br>由 AI Agent 辅助整理，配有大量公式推导、代码示例与刷题路线。</p>
+  <p class="hero-sub">算法竞赛、数据结构、数学与计算机系统的结构化学习笔记。<br>由 AI Agent 辅助整理，配有大量公式推导、代码示例与刷题路线。</p>
   <div class="hero-actions">
     <a class="md-button md-button--primary" href="ICPC/">🚀 开始阅读</a>
     <a class="md-button" href="https://github.com/yuyangblue/note" target="_blank" rel="noopener">GitHub 仓库</a>
   </div>
   <div class="hero-stats">
-    <div class="stat"><span class="stat-num">5</span><span class="stat-label">课程专栏</span></div>
-    <div class="stat"><span class="stat-num">145</span><span class="stat-label">篇学习笔记</span></div>
+    <div class="stat"><span class="stat-num">10</span><span class="stat-label">课程专栏</span></div>
+    <div class="stat"><span class="stat-num">321</span><span class="stat-label">篇学习笔记</span></div>
     <div class="stat"><span class="stat-num">∞</span><span class="stat-label">持续更新中</span></div>
   </div>
 </div>
@@ -26,12 +26,39 @@
   </span>
 </a>
 
+<a class="course-card" href="数据结构/">
+  <span class="course-icon">🧱</span>
+  <span class="course-body">
+    <span class="course-name">数据结构</span>
+    <span class="course-desc">陈越《数据结构》课程笔记：线性结构、树、图、排序与散列查找十二讲，附 PTA 题目清单。</span>
+    <span class="course-meta">13 篇笔记</span>
+  </span>
+</a>
+
 <a class="course-card" href="概率论与数理统计/">
   <span class="course-icon">🎲</span>
   <span class="course-body">
     <span class="course-name">概率论与数理统计</span>
     <span class="course-desc">随机事件、随机变量、数字特征、大数定律、数理统计、参数估计与假设检验，逐章整理含详细公式推导。</span>
     <span class="course-meta">71 篇笔记</span>
+  </span>
+</a>
+
+<a class="course-card" href="离散数学/">
+  <span class="course-icon">🧩</span>
+  <span class="course-body">
+    <span class="course-name">离散数学</span>
+    <span class="course-desc">集合、命题与谓词逻辑、关系、次序关系、函数、图论基础，经典教材章节式学习笔记。</span>
+    <span class="course-meta">11 篇笔记</span>
+  </span>
+</a>
+
+<a class="course-card" href="计算方法与优化/">
+  <span class="course-icon">📐</span>
+  <span class="course-body">
+    <span class="course-name">计算方法与优化</span>
+    <span class="course-desc">数值计算方法系统笔记：误差分析、非线性方程求根、线性方程组、插值与拟合、数值积分、矩阵特征值与常微分方程。</span>
+    <span class="course-meta">11 篇笔记</span>
   </span>
 </a>
 
@@ -44,12 +71,30 @@
   </span>
 </a>
 
-<a class="course-card" href="离散数学/">
-  <span class="course-icon">🧩</span>
+<a class="course-card" href="C++学习/">
+  <span class="course-icon">💻</span>
   <span class="course-body">
-    <span class="course-name">离散数学</span>
-    <span class="course-desc">集合、命题与谓词逻辑、关系、次序关系、函数、图论基础，经典教材章节式学习笔记。</span>
-    <span class="course-meta">11 篇笔记</span>
+    <span class="course-name">C++ 学习</span>
+    <span class="course-desc">C++ 语言学习笔记：期末复习、二义性、线性群体、多对多实现与高级语言程序设计要点。</span>
+    <span class="course-meta">8 篇笔记</span>
+  </span>
+</a>
+
+<a class="course-card" href="深度学习/">
+  <span class="course-icon">🧠</span>
+  <span class="course-body">
+    <span class="course-name">深度学习</span>
+    <span class="course-desc">深度学习课程笔记：线性回归、神经网络、损失函数、模型训练、梯度与初始化、正则化与模型评价。</span>
+    <span class="course-meta">30 篇笔记</span>
+  </span>
+</a>
+
+<a class="course-card" href="大一下/">
+  <span class="course-icon">🎓</span>
+  <span class="course-body">
+    <span class="course-name">大一下</span>
+    <span class="course-desc">大一第二学期课程合集：工科数学分析、高等代数、机器学习、大数据解析与人工智能导引等。</span>
+    <span class="course-meta">114 篇笔记</span>
   </span>
 </a>
 
