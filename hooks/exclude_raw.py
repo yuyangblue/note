@@ -43,9 +43,6 @@ def on_files(files, config):
             config, f"{dirname}/index.md",
             content=build_course_index(dirname, fs),
         ))
-        if dirname == "ICPC":
-            print("===== DEBUG ICPC INDEX CONTENT =====")
-            print(build_course_index(dirname, fs))
 
     files._files = keep
     return files
@@ -61,22 +58,25 @@ def build_course_index(dirname: str, fs) -> str:
     subdirs, seen = [], set()
     topfiles = []
     for f in sorted(notes, key=file_sort_key):
-        rel = f.url[len(dirname) + 1:] if f.url.startswith(dirname + "/") else f.url
-        parts = rel.split("/")
-        if len(parts) == 1:
+        src = f.src_path.replace("\\", "/")
+        rel_src = src[len(dirname) + 1:]
+        url = f.url
+        rel_url = url[len(dirname) + 1:] if url.startswith(dirname + "/") else url
+        if "/" not in rel_src:
             title = f.name.replace("_", " ").replace("-", " ")
-            topfiles.append((title, rel))
+            topfiles.append((title, rel_url))
         else:
-            sub = parts[0]
+            sub = rel_src.split("/")[0]
             if sub in seen or sub == "原始材料":
                 continue
             seen.add(sub)
             first = None
             for sf in sorted(
-                (x for x in notes if x.url.startswith(dirname + "/" + sub + "/")),
+                (x for x in notes if x.src_path.replace("\\", "/").startswith(dirname + "/" + sub + "/")),
                 key=file_sort_key,
             ):
-                first = sf.url[len(dirname) + 1:] if sf.url.startswith(dirname + "/") else sf.url
+                sf_url = sf.url
+                first = sf_url[len(dirname) + 1:] if sf_url.startswith(dirname + "/") else sf_url
                 break
             subdirs.append((sub, first))
 
@@ -98,7 +98,7 @@ def build_course_index(dirname: str, fs) -> str:
         lines.append('<div class="course-list">')
         lines.append("")
         for title, rel in entries:
-            lines.append(f'- [{title}]({rel})')
+            lines.append(f'<p><a href="{rel}"><strong>{title}</strong></a></p>')
         lines.append("")
         lines.append("</div>")
         lines.append("")
