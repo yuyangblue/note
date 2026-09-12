@@ -182,10 +182,10 @@ typedef struct {
 linux> readelf -s main.o
 
 Symbol table '.symtab' contains 11 entries:
-  Num:  Value          Size Type    Bind   Vis      Ndx Name
+  Num:  Value              Size Type    Bind   Vis    Ndx Name
     8:  0000000000000000    24 FUNC   GLOBAL DEFAULT   1 main
     9:  0000000000000000     8 OBJECT GLOBAL DEFAULT   3 array
-   10:  0000000000000000     0 NOTYPE GLOBAL DEFAULT UND sum
+   10:  0000000000000000     0 NOTYPE GLOBAL DEFAULT   UND sum
 ```
 
 - `main`：24 字节函数，位于 .text 节（Ndx=1），偏移 0。
