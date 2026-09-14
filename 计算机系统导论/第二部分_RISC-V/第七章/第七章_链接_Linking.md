@@ -385,10 +385,17 @@ linux> gcc -static ./libvector.a main2.c               # 错误！
   - `gcc foo.c libx.a libz.a liby.a`（x、z 依赖 y）
   - 循环依赖时**重复列出库**：`gcc foo.c libx.a liby.a libx.a`；或合并成一个存档。
 
-**练习题 7.3 答案**（最小命令行）：
-- A. `p.o libx.a`
-- B. `p.o libx.a liby.a`
-- C. `p.o libx.a liby.a libx.a`
+**练习题 7.3**（书页 478）：`a` 和 `b` 表示当前目录中的目标模块或静态库，而 `a → b` 表示 a 依赖于 b，也就是说 b 定义了 a 被引用的符号。对于下面每种场景，请给出**最小的命令行**（即含有最少数量的目标文件和库参数的命令），使得静态链接器能解析所有的符号引用。
+
+- A. `p.o → libx.a`
+- B. `p.o → libx.a → liby.a`
+- C. `p.o → libx.a → liby.a` 且 `liby.a → libx.a → p.o`
+
+**答案**（最小命令行，依赖方在前、被依赖方在后）：
+
+- A. `gcc p.o libx.a`：p.o 引用 libx.a 中的符号，库须放在引用它的目标文件之后。
+- B. `gcc p.o libx.a liby.a`：libx.a 依赖 liby.a 的符号，被依赖的 liby.a 放后面。
+- C. `gcc p.o libx.a liby.a libx.a`：libx.a 与 liby.a **循环依赖**（liby.a 也依赖 libx.a），必须把 libx.a 重复列出一次；也可把两个库合并成一个存档。
 
 ---
 
