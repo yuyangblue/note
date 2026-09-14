@@ -338,6 +338,15 @@ linux> gcc -c addvec.c multvec.c
 linux> ar rcs libvector.a addvec.o multvec.o
 ```
 
+**命令拆解**：
+
+- `gcc -c addvec.c multvec.c`：`-c` = **只编译不链接**，两个 .c 各自生成一个可重定位目标文件 `.o`（addvec.o、multvec.o），里面是机器码但符号地址未定。
+- `ar rcs libvector.a addvec.o multvec.o`（归档器打包静态库）：
+  - `r`（replace）：把 .o 插入归档，同名成员已存在则替换；
+  - `c`（create）：库不存在时直接创建，不报警告；
+  - `s`（index）：生成**符号索引表**（记录"哪个符号定义在哪个成员里"）——链接器靠它实现"按需提取"（见 6.4）；
+  - `libvector.a`：静态库命名惯例为 `lib` 前缀 + `.a` 后缀，链接时用 `-lvector` 引用（等价于 `libvector.a`）。
+
 ![课件 p26：创建静态库（ar）](图片/06_创建静态库.png)
 
 - **ar**：创建静态库，插入/删除/列出/提取成员；支持增量更新（重编改动的函数，替换存档中的 .o）。
