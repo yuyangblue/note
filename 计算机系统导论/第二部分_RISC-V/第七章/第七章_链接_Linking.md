@@ -192,6 +192,13 @@ Symbol table '.symtab' contains 11 entries:
 - `array`：8 字节对象，位于 .data 节（Ndx=3），偏移 0。
 - `sum`：**UND**（未定义），本模块引用、定义在 sum.o。
 - 前 8 个条目是链接器内部使用的局部符号（含 FILE 节、SECTION 节等），无实际意义。
+- **Bind（绑定）列**分两类：
+  - `LOCAL`：本地符号——FILE、SECTION 及 static 变量，仅本文件可见，链接器内部使用，不会与其他模块冲突；
+  - `GLOBAL`：全局符号——非 static 的函数和全局变量，跨模块可见（与 5.1 的三种链接器符号对应）。
+- **Ndx（节编号）列**含义：
+  - 数字 = 节索引（1 → .text，3 → .data，…）；
+  - `UND` = 未定义（undefined），即 extern 外部符号，定义在别的目标文件（`sum` 即如此）；
+  - `ABS` = 绝对符号（absolute），不该被重定位的符号。
 - readelf 用整数索引标识节：Ndx=1 → .text，Ndx=3 → .data。
 
 ### 5.5 练习题 7.1（swap.o 符号表分析，重要例题）
@@ -217,6 +224,14 @@ int main() { swap();         int *bufp1;
 | `bufp1` | 是 | 全局 | swap.o | **COMMON**（未初始化全局 → COMMON） |
 | `swap` | 是 | 全局 | swap.o | .text |
 | `temp` | **否** | — | — | —（局部变量在栈中，无符号表条目） |
+
+**逐条解释**：
+
+- **buf**：swap.c 中只是 `extern int buf[]`（声明/引用）；真正定义在 m.o（已初始化 `{1,2}`，位于 .data）。所以 swap.o 符号表里类型是 **extern（外部）**，链接后引用解析到 m.o 的 .data。
+- **bufp0**：`int *bufp0 = &buf[0];` **已初始化**的全局指针 → 强符号，定义在 swap.o 的 **.data**。
+- **bufp1**：`int *bufp1;` **未初始化**的全局变量 → 弱符号，放 **COMMON**（等链接器合并/分配，规则见 5.3）。
+- **swap**：函数 → 代码进 **.text**，定义在 swap.o。
+- **temp**：函数内**局部变量**，运行时在栈中，**不进 .symtab**，链接器不关心。
 
 ---
 
@@ -778,6 +793,29 @@ linux> LD_PRELOAD="./mymalloc.so" ./intr
 - PC 相对重定位计算：`*refptr = ADDR(sym) + addend - (ADDR(s) + offset)`，注意 addend=-4 和 refaddr 含义。
 - 静态链接 vs 动态链接的优缺点：静态=简单高效但空间浪费、更新需重链接；动态=省内存省磁盘、可更新，第一次调用稍慢（延迟绑定）。
 - 打桩三种方式及各自需要的访问级别。
+
+### 考试版极简背诵版
+
+**A. 符号表题型速判**（练习题 7.1 型：给代码填符号表）
+
+判定三步：① 是不是函数内非 static 局部变量 → 是则**无条目**（temp）；② 定义在**本模块**还是**其他模块** → 决定 global / extern；③ 是函数、已初始化全局、还是未初始化全局 → 决定 .text / .data / **COMMON**。
+
+口诀：**函数进 .text，已初始化全局进 .data，未初始化全局进 COMMON，static 与初始化为 0 进 .bss，局部变量无符号**。
+
+**B. readelf -s 读表速记**
+
+- Bind：`LOCAL` = FILE/SECTION/static（内部）；`GLOBAL` = 函数与全局变量。
+- Ndx：数字 = 节编号（1=.text，3=.data）；`UND` = 外部引用（extern）；`ABS` = 绝对符号。
+- Type：`FUNC` 函数、`OBJECT` 数据对象、`NOTYPE`（UND 常配 NOTYPE）。
+
+**C. ELF 可执行文件内存布局（低地址 → 高地址）**
+
+1. 只读代码段：`.init`、`.text`、`.rodata`（0x400000 起，从磁盘文件直接加载）；
+2. 读写数据段：`.data`（已初始化全局）、`.bss`（未初始化，**磁盘上 0 字节**，运行时分配并清零）；
+3. 运行时堆 heap：malloc/free 管理，向上增长，`brk` 标记堆顶；
+4. 共享库内存映射区；
+5. 用户栈 stack：运行时创建，向下增长，`%rsp` 指向栈顶；
+6. 内核虚拟内存（用户代码不可访问，从 2^48 起）。
 
 ### 家庭作业 7.6 答案参考（带 static 的 swap.c 版本）
 
