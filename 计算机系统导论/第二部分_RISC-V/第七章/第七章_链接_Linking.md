@@ -433,6 +433,13 @@ typedef struct {
 } Elf64_Rela;
 ```
 
+**字段详解**：
+
+- `offset`：待修改的引用**相对所在节（.text/.data）起始位置的字节偏移**，不是绝对地址。如 main.o 中 `R_X86_64_32 array` 的 `offset=0xa`，指 .text 内偏移 0xa 处的 imm32 字段（`mov $0x0,%edi` 指令的第 2~5 字节）；`R_X86_64_PC32 sum-0x4` 的 `offset=0xf`，指 .text 内偏移 0xf 处的 rel32 字段（`call` 指令的位移字段）。链接器定位公式：`refptr = ADDR(s) + r.offset`（节基址 + 节内偏移 = 最终绝对地址）。
+- `type`：重定位类型，决定**如何计算**新值（PC 相对 / 绝对）。
+- `symbol`：符号表索引，指向被引用符号（array、sum）在 .symtab 中的条目——链接器由此取得该符号的最终地址 `ADDR(symbol)`。
+- `addend`：有符号常数，对引用值做额外偏移调整。如 sum 的 `addend=-4`：因为 x86-64 中 call 的位移以**下一条指令**为基准（PC = refaddr + 4），而 offset 指向的是当前指令内的字段地址，两者差 4 字节，故用 -4 抵消。
+
 - 代码的重定位条目放 `.rel.text`；已初始化数据的放 `.rel.data`。
 - 只关心两种基本类型：
   - **R_X86_64_PC32**：32 位 PC 相对地址引用（有效地址 = 指令中编码值 + PC 当前运行时值，PC 通常是**下一条指令**地址，如 call 的目标）。
