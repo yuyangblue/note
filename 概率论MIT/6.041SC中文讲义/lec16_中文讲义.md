@@ -10,7 +10,7 @@
 
 - 最小化（条件）均方误差 $E[(\Theta - \hat{\theta})^2 \mid X = x]$
   - 解：$\hat{\theta} = E[\Theta \mid X = x]$
-  - 通用的估计方法
+  - 通用估计方法
 - 数学性质
 - 示例
 
@@ -18,52 +18,53 @@
 
 ## 第 2 页
 
-**没有观测时的 LMS 估计**
+**无观测时的 LMS 估计**
 
 - 未知 $\Theta$；先验 $p_\Theta(\theta)$
-  - 关注点估计 $\hat{\theta}$
-  - 没有可用的观测
-- MAP 准则：
-- （条件）期望：
-- 准则：均方误差（MSE）：$E\left[(\Theta - \hat{\theta})^2\right]$
-  - 最小化均方误差
+  - 感兴趣的是点估计 $\hat{\theta}$
+  - 没有可用观测
+  - MAP 准则：（讲义留白）
+  - （条件）期望：（讲义留白）
 
-（图示：先验 $f_\Theta(\theta)$ 图，$[4, 10]$ 上均匀，密度值 $1/6$）
+（图示：右侧为 $f_\Theta(\theta)$ 图像：$\theta$ 在 $[4,10]$ 上均匀，密度值 $1/6$，坐标轴标注 4、10、$\theta$）
+
+- 准则：均方误差（MSE）：$E[(\Theta - \hat{\theta})^2]$
+- 最小化均方误差
 
 ---
 
 ## 第 3 页
 
-**没有观测时的 LMS 估计**
+**无观测时的 LMS 估计**
 
 - 最小均方表述：
-  - 最小化均方误差（MSE）$E[(\Theta - \hat{\theta})^2]$：$\hat{\theta} = E[\Theta]$
+  - 最小化均方误差（MSE），$E[(\Theta - \hat{\theta})^2]$：$\hat{\theta} = E[\Theta]$
 - 最优均方误差：$E[(\Theta - E[\Theta])^2] = \text{var}(\Theta)$
 
 ---
 
 ## 第 4 页
 
-**基于 $X$ 的 $\Theta$ 的 LMS 估计**
+**基于 $X$ 对 $\Theta$ 的 LMS 估计**
 
 - 未知 $\Theta$；先验 $p_\Theta(\theta)$
-  - 关注点估计 $\hat{\theta}$
+  - 感兴趣的是点估计 $\hat{\theta}$
 - 观测 $X$；模型 $p_{X \mid \Theta}(x \mid \theta)$
-  - 观测到 $X = x$
-- 最小化均方误差（MSE），$E[(\Theta - \hat{\theta})^2]$：$\hat{\theta} = E[\Theta]$
-- 最小化条件均方误差，$E[(\Theta - \hat{\theta})^2 \mid X = x]$：$\hat{\theta} = E[\Theta \mid X = x]$
-- LMS 估计值：$\hat{\theta} = E[\Theta \mid X = x]$
-  - 估计子：$\hat{\Theta} = E[\Theta \mid X]$
+  - 观察到 $X = x$
+- 最小化均方误差（MSE），$\mathbf{E}\left[(\Theta - \hat{\theta})^2\right]$：$\hat{\theta} = \mathbf{E}[\Theta]$
+- 最小化条件均方误差，$\mathbf{E}\left[(\Theta - \hat{\theta})^2 \mid X = x\right]$：$\hat{\theta} = \mathbf{E}[\Theta \mid X = x]$
+- LMS 估计：$\hat{\theta} = \mathbf{E}[\Theta \mid X = x]$
+  - 估计量：$\hat{\Theta} = \mathbf{E}[\Theta \mid X]$
 
 ---
 
 ## 第 5 页
 
-**基于 $X$ 的 $\Theta$ 的 LMS 估计**
+**基于 $X$ 对 $\Theta$ 的 LMS 估计**
 
 - $E[\Theta]$ 最小化 $E[(\Theta - \hat{\theta})^2]$
 - $E[\Theta \mid X = x]$ 最小化 $E[(\Theta - \hat{\theta})^2 \mid X = x]$
-- $\hat{\Theta}_{LMS} = E[\Theta \mid X]$ 在所有形如 $\hat{\Theta} = g(X)$ 的估计子中最小化 $E[(\Theta - g(X))^2]$
+- $\hat{\Theta}_{LMS} = E[\Theta \mid X]$ 在所有估计量 $\hat{\Theta} = g(X)$ 上最小化 $E[(\Theta - g(X))^2]$
 
 ---
 
@@ -71,22 +72,22 @@
 
 **LMS 性能评估**
 
-- LMS 估计值：$\hat{\theta} = E[\Theta \mid X = x]$
-  - 估计子：$\hat{\Theta} = E[\Theta \mid X]$
-- 一旦我们有了测量值后的期望性能：
-  - MSE $= E[(\Theta - E[\Theta \mid X = x])^2 \mid X = x] = \text{var}(\Theta \mid X = x)$
-- 该设计的期望性能：
-  - MSE $= E[(\Theta - E[\Theta \mid X])^2] = E[\text{var}(\Theta \mid X)]$
+- LMS 估计：$\hat{\theta} = \mathbb{E}[\Theta \mid X = x]$
+  - 估计量：$\widehat{\Theta} = \mathbb{E}[\Theta \mid X]$
+- 一旦获得测量后的期望性能：
+  - MSE = $\mathbb{E}\left[\left(\Theta - \mathbb{E}[\Theta \mid X = x]\right)^2 \mid X = x\right] = \text{var}(\Theta \mid X = x)$
+- 设计层面的期望性能：
+  - MSE = $\mathbb{E}\left[\left(\Theta - \mathbb{E}[\Theta \mid X]\right)^2\right] = \mathbb{E}[\text{var}(\Theta \mid X)]$
 
 ---
 
 ## 第 7 页
 
-**基于 $X$ 的 $\Theta$ 的 LMS 估计**
+**基于 $X$ 对 $\Theta$ 的 LMS 估计**
 
-- LMS 与估计相关（而非假设检验）
-- 若后验是单峰且关于均值对称，则与 MAP 相同
-  - 例：后验为正态时（"线性—正态"模型的情形）
+- LMS 与估计相关（与假设检验无关）
+- 若后验关于均值单峰且对称，则与 MAP 相同
+  - 例如后验为正态时（"线性-正态"模型的情形）
 
 ---
 
@@ -94,7 +95,9 @@
 
 **示例**
 
-（图示：上左为 $f_\Theta(\theta)$ 图，$[4, 10]$ 上均匀，密度 $1/6$；下左为 $f_{X \mid \Theta}(x \mid \theta)$ 图，$[\theta-1, \theta+1]$ 上均匀，密度 $1/2$；右为 $x$–$\theta$ 平面上的平行四边形联合取值区域，$x$ 轴刻度 $3, 5, 9, 11$，$\theta$ 轴刻度 $4, 10$）
+（图示：左上为 $f_\Theta(\theta)$ 直方图，$\theta$ 在 $[4,10]$ 上均匀，密度 $1/6$；左下为 $f_{X \mid \Theta}(x \mid \theta)$ 直方图，$x$ 在 $[\theta-1, \theta+1]$ 上均匀，密度 $1/2$；右侧为 $x$–$\theta$ 平面上的平行四边形区域，坐标轴刻度 x：3, 5, 9, 11；θ：4, 10）
+
+- 先验 $f_\Theta(\theta)$；条件分布 $f_{X \mid \Theta}(x \mid \theta)$；联合分布的区域（图示）
 
 ---
 
@@ -102,23 +105,23 @@
 
 **条件均方误差**
 
-（图示：上左为 $f_\Theta(\theta)$ 图，$[4, 10]$ 上均匀，密度 $1/6$；中左为 $f_{X \mid \Theta}(x \mid \theta)$ 图，$[\theta-1, \theta+1]$ 上均匀，密度 $1/2$；右上为 $x$–$\theta$ 平面上的平行四边形区域（斜向矩形，内部有蓝色线条，两端红色标记）；右下为 $\text{Var}(\Theta \mid X = x)$ 随 $x$ 变化的图，$x$ 轴刻度 $3, 5, 9, 11$）
+（图示：左侧为 $f_\Theta(\theta)$ 与 $f_{X \mid \Theta}(x \mid \theta)$ 直方图及 $x$–$\theta$ 平面斜向带状区域，蓝色为条件均值轨迹，红色端点标注区间极值；下方横轴 x 刻度 3, 5, 9, 11，标注 $\text{Var}(\Theta \mid X = x)$）
 
-- $E[(\Theta - E[\Theta \mid X = x])^2 \mid X = x]$
-  - 与 $\text{Var}(\Theta \mid X = x)$ 相同：即 $\Theta$ 的条件分布的方差
+- $\mathbb{E}\left[(\Theta - \mathbb{E}[\Theta \mid X = x])^2 \mid X = x\right]$
+- 与 $\text{Var}(\Theta \mid X = x)$ 相同：$\Theta$ 的条件分布的方差
 
 ---
 
 ## 第 10 页
 
-**多个观测或未知量的 LMS 估计**
+**多观测或未知量下的 LMS 估计**
 
 - 未知 $\Theta$；先验 $p_\Theta(\theta)$
-  - 关注点估计 $\hat{\theta}$
+  - 感兴趣的是点估计 $\hat{\theta}$
 - 观测 $X = (X_1, X_2, \dots, X_n)$；模型 $p_{X \mid \Theta}(x \mid \theta)$
-  - 观测到 $X = x$
-  - 新的宇宙：以 $X = x$ 为条件
-- LMS 估计值：$E[\Theta \mid X_1 = x_1, \dots, X_n = x_n]$
+  - 观察到 $X = x$
+  - 新世界：以 $X = x$ 为条件
+- LMS 估计：$E[\Theta \mid X_1 = x_1, \dots, X_n = x_n]$
 - 若 $\Theta$ 是向量，则对每个分量分别应用
 
 ---
@@ -128,7 +131,7 @@
 **LMS 估计中的一些挑战**
 
 - $f_{\Theta \mid X}(\theta \mid x) = \dfrac{f_\Theta(\theta) f_{X \mid \Theta}(x \mid \theta)}{f_X(x)}$
-- $f_X(x) = \int f_\Theta(\theta') f_{X \mid \Theta}(x \mid \theta') d\theta'$
+- $f_X(x) = \int f_\Theta(\theta') f_{X \mid \Theta}(x \mid \theta') \, d\theta'$
 - 完整正确的模型 $f_{X \mid \Theta}(x \mid \theta)$ 可能不可用
 - 可能难以计算/实现/分析
 
@@ -138,10 +141,11 @@
 
 **LMS 估计中估计误差的性质**
 
-- 估计子：$\hat{\Theta} = E[\Theta \mid X]$ ｜ 误差：$\tilde{\Theta} = \hat{\Theta} - \Theta$
-- $E[\tilde{\Theta} \mid X = x] = 0$
-- $\text{cov}(\tilde{\Theta}, \hat{\Theta}) = 0$
-- $\text{var}(\Theta) = \text{var}(\hat{\Theta}) + \text{var}(\tilde{\Theta})$
+- 估计量：$\widehat{\Theta} = \mathbb{E}[\Theta \mid X]$
+- 误差：$\widetilde{\Theta} = \widehat{\Theta} - \Theta$
+- $\mathbb{E}[\widetilde{\Theta} \mid X = x] = 0$
+- $\text{cov}(\widetilde{\Theta}, \widehat{\Theta}) = 0$
+- $\text{var}(\Theta) = \text{var}(\widehat{\Theta}) + \text{var}(\widetilde{\Theta})$
 
 ---
 
