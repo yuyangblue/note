@@ -1,0 +1,4169 @@
+[00:00] 广告素材下提供了以下内容
+The following content is
+provided under a Creative
+[00:02] 普通许可。 
+Commons license.
+[00:03] 您的支持将帮助MIT OpenCourseWare 
+Your support will help
+MIT OpenCourseWare
+[00:06] 继续免费提供高质量的教育资源。 
+continue to offer high quality
+educational resources for free.
+[00:10] 捐款或查看其他材料
+To make a donation or to
+view additional materials
+[00:12] 从数百门麻省理工学院课程中访问MIT OpenCourseWare 
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+[00:16] 在ocw.mit.edu。 
+at ocw.mit.edu.
+[00:19]  PHILIPPE RIGOLLET：我们继续交谈
+PHILIPPE RIGOLLET:
+We keep on talking
+[00:20] 关于主成分分析
+about principal component
+analysis, which we essentially
+[00:24] 作为处理大量数据的一种方式引入。 
+introduced as a way to
+work with a bunch of data.
+[00:27] 因此，当我们想要进行PCA时提供给我们的数据
+So the data that's given to
+us when we want to do PCA
+[00:31] 是一堆向量X1至Xn。 
+is a bunch of vectors X1 to Xn.
+[00:35] 因此，它们是随机向量。 
+So they are random vectors.
+[00:45] 在Rd。 
+in Rd.
+[00:46] 我们提到的是，我们
+And what we mentioned
+is that we're
+[00:48] 将要使用线性代数-特别是， 
+going to be using linear
+algebra-- in particular,
+[00:51] 谱定理-向我们保证，如果我看
+the spectral theorem-- that
+guarantees to us that if I look
+[00:54] 在这个家伙的便利矩阵中， 
+at the convenience
+matrix of this guy,
+[00:56] 或其经验协方差矩阵
+or its empirical
+covariance matrix,
+[00:57] 因为它们是对称实矩阵
+since they're
+symmetric real matrices
+[01:00] 他们是正半定号， 
+and they are positive
+semidefinite,
+[01:01] 存在对角化为非负特征值。 
+there exists a diagonalization
+into non-negative eigenvalues.
+[01:06] 所以在这里，这些东西都住在Rd 
+And so here, those
+things live in Rd,
+[01:09] 所以这是一个很大的空间。 
+so it's a really large space.
+[01:11] 我们要做的就是将其映射
+And what we want to
+do is to map it down
+[01:14] 进入我们可以想象的空间
+into a space that
+we can visualize,
+[01:16] 希望空间为2或3。 
+hopefully a space
+of size 2 or 3.
+[01:19] 否则，我们将花更多的钱开始寻找
+Or if not, then we're just going
+to take more and start looking
+[01:22] 在子空间中。 
+at subspaces altogether.
+[01:24] 因此，请考虑d大但不大于n的情况。 
+So think of the case where d
+is large but not larger than n.
+[01:33] 假设您有很多积分。 
+So let's say, you have a
+large number of points.
+[01:36] 问题是，是否有可能将这些东西投射到
+The question is, is it possible
+to project those things onto
+[01:40] 较低维度的空间d素数， 
+a lower dimensional
+space, d prime,
+[01:45] 比d小得多-因此想想d素数等于， 
+which is much less than d-- so
+think of d prime equals, say,
+[01:49]  2或3- 
+2 or 3--
+[01:52] 这样您就可以保留尽可能多的信息
+and so that you keep
+as much information
+[01:54] 关于您最初拥有的点云。 
+about the cloud of points
+that you had originally.
+[01:56] 再说一遍，我们可以有的例子
+So again, the example
+that we could have
+[01:58] 是X1到Xn（例如，Xi）用于患者i的记录
+is that X1 to Xn for, say,
+Xi for patient i's recording
+[02:04] 一堆身体测量结果，也许是血压， 
+a bunch of body measurements
+and maybe blood pressure,
+[02:08] 一些症状，等等。 
+some symptoms, et cetera.
+[02:10] 然后我们有n名患者组成的云。 
+And then we have a
+cloud of n patients.
+[02:12] 我们正在尝试可视化，看是否- 
+And we're trying to
+visualize maybe to see if--
+[02:15] 例如，如果我能看到
+If I could see, for
+example, that there's
+[02:16] 两组病人，也许我会
+two groups of
+patients, maybe I would
+[02:18] 知道我有两组不同的疾病
+know that I have two
+groups of different disease
+[02:21] 或两组不同的病人
+or maybe two groups
+of different patients
+[02:22] 对特定疾病的反应不同
+that respond differently
+to a particular disease
+[02:25] 或毒品等等。 
+or drug et cetera.
+[02:27] 所以可视化将给我们
+So visualizing is
+going to give us
+[02:28] 关于空间布置有很多见识
+quite a bit of insight about
+what the spatial arrangement
+[02:33] 这些向量是。 
+of those vectors are.
+[02:35]  PCA表示，当然，在这个问题上， 
+And so PCA says, well, here,
+of course, in this question,
+[02:40] 尚未定义的一件事是信息。 
+one thing that's not defined
+is what is information.
+[02:42] 我们说过一件事
+And we said that
+one thing we might
+[02:44] 我们想做的事是要点时不要
+want to do when we project
+is that points do not
+[02:46] 彼此碰撞。 
+collide with each other.
+[02:48] 因此，这意味着我们正在尝试寻找方向， 
+And so that means we're
+trying to find directions,
+[02:50] 在我投影之后，这些点仍然很分散
+where after I project, the
+points are still pretty spread
+[02:53] 出来。 
+out.
+[02:53] 这样我就可以看到发生了什么。 
+And so I can see
+what's going on.
+[02:55]  PCA说-好的，所以有很多方法
+And PCA says-- OK,
+so there's many ways
+[02:58] 回答这个问题。 
+to answer this question.
+[02:59]  PCA说，让我们找到一个维子空间
+And PCA says, let's just
+find a subspace of dimension
+[03:04]  d素数保持的协方差结构与
+d prime that keeps as much
+covariance structure as
+[03:08] 可能。 
+possible.
+[03:10] 原因是那些方向
+And the reason is
+that those directions
+[03:13] 是使方差最大化的那些
+are the ones that maximize
+the variance, which
+[03:15] 是价差的代理。 
+is a proxy for the spread.
+[03:17] 有很多很多方法可以做到这一点。 
+There's many, many
+ways to do this.
+[03:19] 实际上有一个Google视频
+There's actually a
+Google video that
+[03:22] 发布于上周，关于数据可视化
+was released maybe last week
+about the data visualization
+[03:26]  Google团队向您展示了一个名为
+team of Google that shows
+you something called
+[03:29]  t-SNE，本质上是
+t-SNE, which is
+essentially something
+[03:31] 试图做到这一点。 
+that tries to do that.
+[03:32] 它需要非常高的尺寸点
+It takes points in
+very high dimensions
+[03:34] 并尝试以较小的尺寸映射它们， 
+and tries to map them
+in lower dimensions,
+[03:36] 以便您可以实际地可视化它们。 
+so that you can
+actually visualize them.
+[03:38] 而t-SNE可以替代PCA 
+And t-SNE is some
+alternative to PCA
+[03:41] 给出了单词信息的另一种定义。 
+that gives an other definition
+for the word information.
+[03:46] 我将在最后谈论这个，你如何才能
+I'll talk about this towards
+the end, how you can actually
+[03:49] 有点自动扩展一切
+somewhat automatically
+extend everything
+[03:52] 对于PCA，我们已经说了无数的程序。 
+we've said for PCA to an
+infinite family of procedures.
+[03:58] 那么我们该怎么做呢？ 
+So how do we do this?
+[04:00] 好吧，我们这样做的方法如下。 
+Well, the way we do
+this is as follows.
+[04:02] 所以请记住，考虑到那些家伙，我们
+So remember, given
+those guys, we
+[04:05] 可以形成称为S的东西，这是样本， 
+can form something which is
+called S, which is the sample,
+[04:09] 或经验协方差矩阵。 
+or the empirical
+covariance matrix.
+[04:19] 从几张幻灯片开始， 
+And since from
+couple of slides ago,
+[04:22] 我们知道S有一个特征值分解， 
+we know that S has a
+eigenvalue decomposition,
+[04:25]  S等于PDP转置，其中P是正交的。 
+S is equal to PDP transpose,
+where P is orthogonal.
+[04:35] 这就是我们使用线性代数结果的地方。 
+So that's where we use our
+linear algebra results.
+[04:37] 因此，这意味着P转置P等于PP转置，其中
+So that means that P transpose P
+is equal to PP transpose, which
+[04:43] 是身份。 
+is the identity.
+[04:46] 因此请记住，S是d矩阵的ad。 
+So remember, S is
+a d by d matrix.
+[04:50] 因此P也是d的d。 
+And so P is also d by d.
+[04:53]  d是对角线。 
+And d is diagonal.
+[05:00] 实际上，我将不失一般性地接受
+And I'm actually going to take,
+without loss of generality,
+[05:02] 我将假设d-- 
+I'm going to assume that d--
+[05:04] 所以它将是对角线的-我是
+so it's going to be
+diagonal-- and I'm
+[05:06] 将具有看起来像lambda 1的东西
+going to have something
+that looks like lambda 1
+[05:10] 到d。 
+to lambda d.
+[05:10] 这些被称为S的特征值。 
+Those are called the
+eigenvalues of S.
+[05:14] 我们知道的是，λj是非负的。 
+What we know is that lambda
+j's are non-negative.
+[05:19] 实际上，我要承担的一切都不会丢失
+And actually, what I'm
+going to assume without loss
+[05:21] 一般而言，lambda 1大于lambda 2，后者
+of generalities is lambda 1
+is larger than lambda 2, which
+[05:24] 大于d。 
+is larger than lambda d.
+[05:30] 特别是因为这种分解
+Because in particular,
+this decomposition--
+[05:32] 频谱分解-并非完全独特。 
+the spectrum decomposition--
+is not entirely unique.
+[05:35] 我可以置换P的列
+I could permute
+the columns of P,
+[05:39] 而且我仍然会有一个正交矩阵。 
+and I would still have
+an orthogonal matrix.
+[05:42] 为了平衡这一点，我还可以
+And to balance that,
+I would also have
+[05:44] 置换d的条目。 
+to permute the entries of d.
+[05:46] 所以有很多分解
+So there's as many
+decompositions
+[05:49] 因为有排列。 
+as there are permutations.
+[05:51] 所以实际上有很多。 
+So there's actually quite a bit.
+[05:52] 但是特征值袋是唯一的。 
+But the bag of
+eigenvalues is unique.
+[05:56] 特征值集是唯一的。 
+The set of
+eigenvalues is unique.
+[05:58] 顺序当然不是唯一的。 
+The ordering is
+certainly not unique.
+[06:01] 所以在这里，我要选择- 
+So here, I'm just
+going to pick--
+[06:02] 我要确定一个特定的排列- 
+I'm going to nail down one
+particular permutation--
+[06:05] 实际上，如果我有平等的话，也许有两个。 
+actually, maybe two in
+case I have equalities.
+[06:08] 但是，可以说，我选择了一个可以满足此要求的产品。 
+But let's say, I pick
+one that satisfies this.
+[06:12] 我这样做的原因并不是很重要。 
+And the reason why I do this
+is really not very important.
+[06:15] 只是说，我要
+It's just to say,
+I'm going to want
+[06:18] 谈论最大的那些特征值。 
+to talk about the largest
+of those eigenvalues.
+[06:20] 所以这只会更容易
+So this is just
+going to be easier
+[06:22] 我说这个是lambda 1 
+for me to say that
+this one is lambda 1,
+[06:23] 而不是说它是lambda 7。 
+rather than say it's lambda 7.
+[06:26] 所以这只是说S的最大特征值
+So this is just to say that
+the largest eigenvalue of S
+[06:39] 是lambda 1。 
+is lambda 1.
+[06:42] 如果我不这样做，我可能会称其为lambda max， 
+If I didn't do that, I would
+just call it maybe lambda max,
+[06:45] 而且您只知道我在说哪个。 
+and you would just know
+which one I'm talking about.
+[06:52] 所以现在发生的是，如果我看一下d， 
+So what's happening now
+is that if I look at d,
+[07:01] 事实证明，如果我开始- 
+then it turns out
+that if I start--
+[07:04] 所以如果我用P换位Xi，我实际上是在投影我的Xi- 
+so if I do P transpose Xi, I am
+actually projecting my Xi's--
+[07:09] 我基本上正在改变Xi的基础。 
+I'm basically changing
+the basis for my Xi's.
+[07:12] 现在，D是经验协方差矩阵
+And now, D is the
+empirical covariance matrix
+[07:15] 那些家伙。 
+of those guys.
+[07:16] 因此，让我们检查一下。 
+So let's check that.
+[07:18] 所以意思是，如果我看着- 
+So what it means is
+that if I look at--
+[07:26] 所以我声称是P转置Xi- 
+so what I claim is
+that P transpose Xi--
+[07:29] 这是一个新向量，我们称其为Yi，它也在Rd中
+that's a new vector, let's
+call it Yi, it's also in Rd--
+[07:35] 我所声称的是这个人的协方差矩阵
+and what I claim is that the
+covariance matrix of this guy
+[07:37] 现在实际上是这个对角矩阵
+is actually now this
+diagonal matrix, which
+[07:41] 特别意味着如果他们是高斯人，那么
+means in particular that
+if they were Gaussian, then
+[07:45] 他们将是独立的。 
+they would be independent.
+[07:46] 但是我现在也知道没有相关性
+But I also know now that
+there's no correlation
+[07:48] 越过彝族的坐标。 
+across coordinates of Yi.
+[07:50] 为了证明这一点，让我假设X bar等于0。 
+So to prove this, let me assume
+that X bar is equal to 0.
+[08:00] 我之所以这样做，是因为
+And the reason why I do
+this is because it's just
+[08:02] 讨厌不断进行所有这些检查
+annoying to carry out all
+this censuring constantly
+[08:05] 我谈论S。所以当X bar等于0时， 
+and I talk about S. So
+when X bar is equal to 0,
+[08:09] 这意味着S具有非常简单的形式。 
+that implies that S
+has a very simple form.
+[08:11] 它的形式是我等于1 
+It's of the form
+sum from i equal 1
+[08:14] 到Xi Xi的n转置。 
+to n of Xi Xi transpose.
+[08:18] 这就是我的S。 
+So that's my S.
+[08:20] 但是我想要的是Y的S 
+But what I want is the S of Y--
+[08:24] 好吧，这也意味着P乘以X 
+So OK, that implies
+also that P times X
+[08:28]  bar，等于P乘以X bar也等于0。 
+bar, which is equal to P times
+X bar is also equal to 0.
+[08:34] 所以这意味着Y条
+So that means that Y bar--
+[08:37] 如果为0，则Y的平均值为0。 
+Y has mean 0, if this is 0.
+[08:40] 因此，如果我查看Y的样本协方差矩阵， 
+So if I look at the sample
+covariance matrix of Y,
+[08:43] 这将是
+it's just going to
+be something that
+[08:45] 看起来像外部产品的总和
+looks like the sum of the
+outer products or the Yi Yi
+[08:49] 转置。 
+transpose.
+[08:53] 再说一遍，我做出这个假设的原因
+And again, the reason why
+I make this assumption
+[08:56] 这样我就不必写负X bar X bar转置。 
+is so that I don't have to write
+minus X bar X bar transpose.
+[09:01] 但是你可以做到的。 
+But you can do it.
+[09:02] 它的工作原理完全相同。 
+And it's going to
+work exactly the same.
+[09:06] 所以现在，我看这个S素数。 
+So now, I look at this S prime.
+[09:08] 那么这个S素数是什么？ 
+And so what is this S prime?
+[09:11] 好吧，我要用PXi代替Yi。 
+Well, I'm just going
+to replace Yi with PXi.
+[09:14] 因此，这是从i等于PXi PXi转置的n到n的和， 
+So it's the sum from i equal
+1 to n of PXi PXi transpose,
+[09:22] 等于- 
+which is equal to the sum from--
+[09:26] 抱歉，有1 / n。 
+sorry there's a 1/n.
+[09:32] 所以等于i等于1 / n 
+So it's equal to 1/n
+sum from i equal 1
+[09:34]  PXi Xi的n转置P转置。 
+to n of PXi Xi
+transpose P transpose.
+[09:43] 同意？ 
+Agree?
+[09:45] 我只是说AB的转置就是B的转置
+I just said that the transpose
+of AB is the transpose of B
+[09:48] 乘以A的转置
+times the transpose of A.
+[09:53] 所以现在，我可以增加总和。 
+And so now, I can
+push the sum in.
+[09:55]  P不依赖于i。 
+P does not depend on i.
+[09:57] 所以这件事等于PS P转置
+So this thing here is
+equal to PS P transpose,
+[10:05] 因为Xi Xi转置的总和除以n是S。 
+because the sum of the Xi Xi
+transpose divided by n is S.
+[10:10] 但是，PS P转置是什么？ 
+But what is PS P transpose?
+[10:12] 好吧，我们知道S等于- 
+Well, we know that
+S is equal to--
+[10:17] 抱歉，这是P转置。 
+sorry that's P transpose.
+[10:19] 所以这是一个P转置。 
+So this was with a P transpose.
+[10:20] 抱歉，我在这里犯了一个重要错误。 
+I'm sorry, I made an
+important mistake here.
+[10:23] 因此，Y为P移置Xi。 
+So Yi is P transpose Xi.
+[10:25] 所以这是P转置和P转置
+So this is P transpose
+and P transpose
+[10:27] 在这里，这意味着这是P转置
+here, which means that
+this is P transpose
+[10:29] 这是双重转置，仅此而已
+and this is double transpose,
+which is just nothing
+[10:32] 那换位，什么也没有。 
+and that transpose and nothing.
+[10:36] 所以现在，我将S写为PD P转置。 
+So now, I write S
+as PD P transpose.
+[10:41] 那是光谱分解
+That's the spectral
+decomposition
+[10:43] 我以前有过
+that I had before.
+[10:44] 那是我的特征值分解
+That's my eigenvalue
+decomposition,
+[10:46] 这意味着现在，如果我看S素数， 
+which means that now,
+if I look at S prime,
+[10:49] 是P转置乘以PD P转置P。 
+it's P transpose times
+PD P transpose P.
+[10:56] 但是现在，P转置P是身份， 
+But now, P transpose
+P is the identity,
+[10:58]  P转置P是标识。 
+P transpose P is the identity.
+[11:00] 因此，这实际上等于D。 
+So this is actually
+just equal to D.
+[11:06] 再一次，您可以检查一下
+And again, you can
+check that this also
+[11:08] 如果您必须将所有这些人都放在中间，则可以使用。 
+works if you have to center
+all those guys as you go.
+[11:12] 但是如果您考虑一下，这是同一回事
+But if you think about
+it, this is the same thing
+[11:15] 就是说我只是用Xi减X代替了Xi。 
+as saying that I just
+replaced Xi by Xi minus X bar.
+[11:19] 那么Y栏也确实是P乘Xi减去X栏。 
+And then it's true that Y bar
+is also P times Xi minus X bar.
+[11:26] 所以现在我们有D是经验协方差
+So now, we have that D is
+the empirical covariance
+[11:29] 这些家伙的矩阵
+matrix of those guys--
+[11:30]  P的Yi换位Xi的。 
+the Yi's, which are
+P transpose Xi's.
+[11:33] 尤其是什么意思
+And so in particular,
+what it means
+[11:34] 如果我看Yj Yk的协方差
+is that if I look at the
+covariance of Yj Yk--
+[11:46] 这就是Y的第j个坐标的协方差
+So that's the covariance
+of the j-th coordinate of Y
+[11:48] 和Y的第k个坐标。我只是不放置索引。 
+and the k-th coordinate of Y.
+I'm just not putting an index.
+[11:51] 但也许，比如说第一个
+But maybe, let's say the
+first one or something
+[11:53] 这样-他们中的任何一个，他们的IID。 
+like this-- any of
+them, their IID.
+[11:56] 那么这个协方差是多少？ 
+Then what is this covariance?
+[11:57] 如果j与k不同，则实际上为0。 
+It's actually 0 if j
+is different from k.
+[12:01]  Yj和Yj之间的协方差
+And the covariance
+between Yj and Yj,
+[12:06] 只是Yj的方差，等于lambda j-- 
+which is just the variance
+of Yj, is equal to lambda j--
+[12:13] 第j个最大特征值。 
+the j-th largest eigenvalue.
+[12:17] 所以特征值捕捉了我观察的方差
+So the eigenvalues capture the
+variance of my observations
+[12:22] 在这个新的坐标系中。 
+in this new coordinate system.
+[12:25] 而且它们是完全正交的。 
+And they're
+completely orthogonal.
+[12:26] 那是什么意思呢？ 
+So what does that mean?
+[12:27] 好吧，再次记住，如果我砍了
+Well, again, remember,
+if I chop off
+[12:29] 我的高斯人的多维元首， 
+the head of my Gaussian
+in multi dimensions,
+[12:34] 我们说从什么开始
+we said that what
+we started from
+[12:35] 看起来像这样
+was something that
+looked like this.
+[12:39] 我们说，嗯，有一个重要的方向， 
+And we said, well, there's one
+direction that's important,
+[12:42] 那是那个家伙，一个重要的是那个家伙。 
+that's this guy, and one
+important that's this guy.
+[12:45] 当我应用转换P转置时，我在做什么
+When I applied a transformation
+P transpose, what I'm doing
+[12:48] 我正在用新的轴重新调整这个东西。 
+is that I'm realigning this
+thing with the new axes.
+[12:51] 或者说，公平地说，我是
+Or in a way, rather
+to be fair, I'm
+[12:53] 实际上没有将椭圆与轴重新对齐。 
+not actually realigning
+the ellipses with the axes.
+[12:59] 我实际上是用椭圆将轴重新对齐。 
+I'm really realigning the
+axes with the ellipses.
+[13:02] 所以说真的，我的意思是我申请P后
+So really, what I'm doing is
+I'm saying, after I apply P,
+[13:05] 我只是旋转这个坐标系。 
+I'm just rotating this
+coordinate system.
+[13:08] 所以现在，它变成了这个家伙。 
+So now, it becomes this guy.
+[13:19] 现在，我的椭圆实际上完全对齐。 
+And now, my ellipses
+actually completely align.
+[13:22] 而这里发生的是这个坐标是
+And what happens here is
+that this coordinate is
+[13:25] 独立于该坐标。 
+independent of that coordinate.
+[13:27] 如果他们是高斯人，那就是我们在这里写的。 
+And that's what we write
+here, if they are Gaussian.
+[13:31] 我没有真正告诉这个
+I didn't really tell this--
+[13:32] 我只发表关于协方差的陈述。 
+I'm only making statements
+about covariances.
+[13:34] 如果他们是高斯人，那么这些隐含的陈述
+If they are Gaussians,
+those implied statements
+[13:36] 关于独立。 
+about independence.
+[13:40] 因此，正如我所说，现在的变化量lambda 1 
+So as I said, the
+variance now, lambda 1,
+[13:44] 实际上是P转置Xi的方差。 
+is actually the variance
+of P transpose Xi.
+[13:57] 但是，如果我现在看-这是一个向量， 
+But if I look now at
+the-- so this is a vector,
+[14:00] 所以我需要看看这个家伙的第一个坐标。 
+so I need to look at the
+first coordinate of this guy.
+[14:08] 事实证明，这样做实际上是
+So it turns out that
+doing this is actually
+[14:11] 和看什么的方差一样？ 
+the same thing as looking
+at the variance of what?
+[14:15] 好吧，P列first的第一列。 
+Well, the first
+column of P times Xi.
+[14:21] 这就是- 
+So that's the variance of--
+[14:24] 我将其称为v1转置Xi，其中P-- 
+I'm going to call it v1
+transpose Xi, where P--
+[14:44] 因此Rd中的v1 vd是特征向量。 
+So the v1 vd in Rd
+are eigenvectors.
+[14:53] 每个vi都与lambda i相关。 
+And each vi is
+associated to lambda i.
+[14:57] 这就是我们谈论本征时所看到的
+So that's what we saw when
+we talked about this eigen
+[14:59] 分解几张幻灯片。 
+decomposition a
+couple of slides back.
+[15:02] 那就是这里。 
+That's the one here.
+[15:06] 因此，如果我将P v1的列称为vd， 
+So if I call the
+columns of P v1 to vd,
+[15:10] 这就是正在发生的事情。 
+this is what's happening.
+[15:13] 所以当我看lambda 1时，只是差异
+So when I look at lambda
+1, it's just the variance
+[15:16]  v1的Xi内部乘积。 
+of Xi inner product with v1.
+[15:19] 当我们说的时候，我们拍了这张照片， 
+And we made this picture
+when we said, well,
+[15:22] 假设v1在这里，然后x1在这里。 
+let's say v1 is here
+and then x1 is here.
+[15:25] 如果vi有唯一的范数，那么内积
+And if vi has a unique
+norm, then the inner product
+[15:31]  Xi和v1之间的距离只是这个家伙的长度。 
+between Xi and v1 is just
+the length of this guy here.
+[15:38] 这就是Xi的方差表示Xi的长度
+So that's the variance of the
+Xi says the length of Xi--
+[15:41] 所以它是0-这就是我投影时Xi的长度
+so this is 0-- that's the
+length of Xi when I project it
+[15:43] 到跨越v1的方向。 
+onto the direction
+that span by v1.
+[15:46] 如果v1的长度为2，则实际上只是该长度的两倍。 
+If v1 has length 2, this is
+really just twice this length.
+[15:52] 如果vi的长度为3，则为三倍。 
+If vi has length 3,
+it's three times this.
+[15:56] 但事实证明，既然P满足P转置
+But it turns out that since
+P satisfies P transpose
+[16:01]  P等于身分
+P is equal to the identity--
+[16:04] 那是一个正交矩阵，就在这里- 
+that's an orthogonal
+matrix, that's right here--
+[16:07] 那么这实际上是在说同一件事
+then this is actually
+saying the same thing
+[16:11] 如vj转置vj，这实际上是vj的平方， 
+as vj transpose vj, which is
+really the norm squared of vj,
+[16:18] 等于1。 
+is equal to 1.
+[16:20] 如果j与k不同，则vj转置vk等于0。 
+And vj transpose vk is equal
+to 0, if j is different from k.
+[16:29] 特征向量彼此正交。 
+The eigenvectors are
+orthogonal to each other.
+[16:31] 实际上，它们都是规范1。 
+And they're actually
+all of norm 1.
+[16:37] 所以现在，我知道这确实是一个方向。 
+So now, I know that this
+is indeed a direction.
+[16:39] 因此，当我查看v1换位Xi时， 
+And so when I look
+at v1 transpose Xi,
+[16:44] 我真的在测量这个长度。 
+I'm really measuring
+exactly this length.
+[16:46] 这个长度是多少？ 
+And what is this length?
+[16:47] 这是Xi的投影长度
+It's the length of
+the projection of Xi
+[16:49] 到这条线上。 
+onto this line.
+[16:51] 这就是v1所涵盖的行。 
+That's the line
+that's spanned by v1.
+[16:53] 所以如果我有一个很大的尺寸问题
+So if I had a very high
+dimensional problem
+[16:57] 我开始看v1的方向
+and I started to look
+at the direction v1--
+[17:01] 假设v1现在不是本征向量， 
+let's say v1 now is
+not a eigenvector,
+[17:03] 任何方向-然后，如果我想做得更低
+it's any direction-- then
+if I want to do this lower
+[17:08] 尺寸投影，那么我必须了解那些
+dimensional projection, then
+I have to understand how those
+[17:11]  Xi的项目在v1所跨越的行上， 
+Xi's project onto the
+line that's spanned by v1,
+[17:14] 因为这就是我要保留的所有内容
+because this is all that I'm
+going to be keeping at the end
+[17:16] 关于Xi的一天。 
+of the day about Xi's.
+[17:20] 所以我们想要找到方向
+So what we want is
+to find the direction
+[17:23] 那些Xi的，那些预测， 
+where those Xi's,
+those projections,
+[17:25] 有很大的差异。 
+have a lot of variance.
+[17:26] 我们知道Xi在这个方向上的方差
+And we know that the variance
+of Xi on this direction
+[17:28] 实际上由lambda 1给出。 
+is actually exactly
+given by lambda 1.
+[17:36] 抱歉，这是经验变量- 
+Sorry, that's the
+empirical var--
+[17:40] 是的，我应该叫方差帽子。 
+yeah, I should
+call variance hat.
+[17:42] 那就是经验上的差异。 
+That's the empirical variance.
+[17:43] 这里的一切都是经验性的。 
+Everything is in empirical here.
+[17:45] 我们正在谈论经验协方差矩阵。 
+We're talking about the
+empirical covariance matrix.
+[17:48] 所以我也有lambda 2是经验方差
+And so I also have that lambda
+2 is the empirical variance
+[17:54] 当我将Xi投影到v2（第二个）时
+of when I project Xi onto
+v2, which is the second one,
+[17:59] 正是因为这个原因。 
+just for exactly this reason.
+[18:07] 任何问题？ 
+Any question?
+[18:14] 因此，lambda j对于我们而言将很重要。 
+So lambda j's are going
+to be important for us.
+[18:16]  Lambda j衡量点差
+Lambda j measure the
+spread of the points
+[18:19] 当我将它们投影到一维线上时
+when I project them onto a
+line which is a one dimensional
+[18:22] 空间。 
+space.
+[18:23] 所以我要-假设我只选择一个， 
+And so I'm going to have-- let's
+say I want to pick only one,
+[18:25] 我将不得不找到一维空间
+I'm going to have to find the
+one dimensional space that
+[18:28] 差异最大。 
+carries the most variance.
+[18:29] 我声称v1是
+And I claim that
+v1 is the one that
+[18:32] 实际上使传播最大化。 
+actually maximizes the spread.
+[18:35] 因此，对于任何方向，Rd中的u 
+So the claim-- so for
+any direction, u in Rd--
+[18:55] 而按方向，我真的只是说你的规范
+and by direction, I really
+just mean that the norm of u
+[18:59] 等于1。 
+is equal to 1.
+[19:00] 我需要公平地比赛
+I need to play fair--
+[19:02] 我将自己与其他长篇大论进行比较， 
+I'm going to compare myself to
+other things of lengths one,
+[19:04] 所以我需要公平地看一下长度为1的方向。 
+so I need to play fair and
+look at directions of length 1.
+[19:07] 现在，如果我对经验方差感兴趣
+Now, if I'm interested
+in the empirical variance
+[19:16]  X1的转置
+of X1 transpose--
+[19:20] 抱歉，您换位X1您换位Xn，那么这件事
+sorry, u transpose X1 u
+transpose Xn, then this thing
+[19:29] 当u等于v1时最大化
+is maximized for
+u equals v1, where
+[19:37]  v1是与lambda 1相关的特征向量
+v1 is the eigenvector
+associated to lambda 1
+[19:40] 而lambda 1不是任何特征值， 
+and lambda 1 is not
+any eigenvalues,
+[19:42] 这是所有这些中最大的。 
+it's the largest of all those.
+[19:45] 因此，它是最大的特征值。 
+So it's the largest eigenvalue.
+[19:50] 那为什么是真的呢？ 
+So why is that true?
+[19:55] 好吧，也有人声称，对于任何方向， 
+Well, there's also a claim
+that for any direction u--
+[20:00] 所以是1和2 
+so that's 1 and 2--
+[20:03]  u转置X的方差-现在， 
+the variance of u
+transpose X-- now,
+[20:08] 这只是一个随机变量，我正在寻找真正的
+this is just a random variable,
+and I'm looking about the true
+[20:11] 方差 - 
+variance--
+[20:13] 对于u等于，这是最大化的，我们称它为w1， 
+this is maximized for u
+equals, let's call it w1,
+[20:27] 其中w1是sigma的特征向量- 
+where w1 is the
+eigenvector of sigma--
+[20:38] 现在，我在说真正的差异。 
+Now, I'm talking about
+the true variance.
+[20:40] 而在这里，我正在谈论经验方差。 
+Whereas, here, I was talking
+about the empirical variance.
+[20:42] 所以真正的方差是特征向量
+So the true variance
+is the eigenvectors
+[20:44] 与最大关联的真实sigma 
+of the true sigma
+associated to the largest
+[20:55]  sigma的特征值。 
+eigenvalue of sigma.
+[21:02] 所以我没有给它起个名字。 
+So I did not give it a name.
+[21:04] 在这里，那是经验值λ1。 
+Here, that was lambda 1
+for the empirical one.
+[21:06] 对于真正的，你可以给它
+For the true one,
+you can give it
+[21:07] 另一个名字，亩1。 
+another name, mu 1 if you want.
+[21:10] 但这是同一回事。 
+But that's just the same thing.
+[21:13] 它的意思是，无论我在哪里看到经验， 
+All it's saying is like,
+wherever I see empirical,
+[21:15] 我可以删除它。 
+I can remove it.
+[21:27] 那么为什么这个说法是正确的？ 
+So why is this claim true?
+[21:29] 好吧，让我们来看第二个例子。 
+Well, let's look at the
+second one, for example.
+[21:38] 那么u转置X的方差是多少？ 
+So what is the variance
+of u transpose X?
+[21:44] 这就是我想知道的。 
+So that's what I want to know.
+[21:47] 这就是期望值-假设X为0， 
+So that's the expectation--
+so let's assume that X is 0,
+[21:54] 同样，出于与以前相同的原因。 
+again, for same
+reasons as before.
+[21:56] 那么方差是多少？ 
+So what is the variance?
+[21:57] 只是对广场的期望？ 
+It's just the expectation
+of the square?
+[22:06] 我不需要删除期望。 
+I don't need to remove
+the expectation.
+[22:08] 而广场的探险只是
+And the expedition
+of the square is just
+[22:10] 你对X的期望
+the expectation
+of u transpose X.
+[22:12] 然后我要写另一个X转置u。 
+And then I'm going to write
+the other one X transpose u.
+[22:19] 我们知道这是确定性的。 
+And we know that this
+is deterministic.
+[22:22] 所以我只想这就是你转置
+So I'm just going to take
+that this is just u transpose
+[22:25]  XX的期望转置u。 
+expectation of X X transpose u.
+[22:31] 这个家伙是什么？ 
+And what is this guy?
+[22:39] 那就是协方差西格玛。 
+That's covariance sigma.
+[22:40] 那就是sigma。 
+That's just what sigma is.
+[22:44] 所以方差可以写成u转置σu。 
+So the variance I can write
+as u transpose sigma u.
+[22:48] 我们之前已经进行过此计算。 
+We've made this
+computation before.
+[22:51] 现在我想说的是，这件事实际上是
+And now what I want to claim
+is that this thing is actually
+[22:53] 小于最大特征值
+less than the largest
+eigenvalue, which I actually
+[22:57] 在这里称为lambda 1。 
+called lambda 1 here.
+[22:58] 我可能不应该。 
+I should probably not.
+[22:59]  P是-好吧，好的。 
+And the P is-- well, OK.
+[23:06] 让我们假装一切都不是经验性的。 
+Let's just pretend
+everything is not empirical.
+[23:11] 所以现在，我将西格玛写成P lambda 1 lambda n P 
+So now, I'm going to write
+sigma as P lambda 1 lambda n P
+[23:22] 转置。 
+transpose.
+[23:23] 那只是本征分解
+That's just the
+eigendecomposition,
+[23:25] 在这里，我承认重复使用了与S相同的符号。 
+where I admittedly reuse the
+same notation as I did for S.
+[23:32] 所以我真的应该在各处加一些素数， 
+So I should really put
+some primes everywhere,
+[23:34] 所以你知道那些实际上是
+so you know those are
+things that are actually
+[23:36] 在实践中有所不同。 
+different in practice.
+[23:38] 这就是sigma的分解。 
+So this is just that the
+decomposition of sigma.
+[23:43] 你似乎很困惑，海伦。 
+You seem confused, Helen.
+[23:44] 你有问题吗
+You have a question?
+[23:47] 是啊
+Yeah?
+[23:48] 听众：什么是当您谈论经验数据时
+AUDIENCE: What is-- when you
+talked about the empirical data
+[23:53] 和 - 
+and--
+[23:55]  PHILIPPE RIGOLLET：好的， 
+PHILIPPE RIGOLLET: So OK--
+[24:00] 所以我可以说的一切
+so I can make
+everything I'm saying,
+[24:02] 我可以谈一谈差异
+I can talk about
+either the variance
+[24:04] 或经验方差。 
+or the empirical variance.
+[24:05] 您可以在其前面添加经验一词
+And you can just add the
+word empirical in front of it
+[24:07] 无论你什么时候想要。 
+whenever you want.
+[24:08] 相同的东西起作用。 
+The same thing works.
+[24:09] 但是只是为了消除混乱， 
+But just for the sake of
+removing the confusion,
+[24:13] 让我们再用S做一次。 
+let's just do it again
+with S. So I'm just
+[24:20] 打算用S做所有事情。所以我
+going to do everything
+with S. So I'm
+[24:21] 假设X bar等于0。 
+going to assume that
+X bar is equal to 0.
+[24:24] 在这里，我将讨论经验方差， 
+And here, I'm going to talk
+about the empirical variance,
+[24:27] 这只是我等于1的1 / n之和
+which is just 1/n
+sum from i equal 1
+[24:31] 到u的n转置Xi平方。 
+to n of u transpose Xi squared.
+[24:35] 所以是同一回事。 
+So it's the same thing.
+[24:36] 到处都有期望， 
+Everywhere you see
+an expectation,
+[24:37] 你只是把平均值。 
+you just put in average.
+[24:45] 然后我从1等于1 / n 
+And then I get 1/n
+sum from i equal 1
+[24:50] 到Xi Xi的n转置。 
+to n of Xi Xi transpose.
+[24:53] 现在，我要称呼这个人
+And now, I'm going
+to call this guy
+[24:54]  S，因为那是事实。 
+S, because that's what it is.
+[24:58] 所以这是你移调苏。 
+So this is u transpose Su.
+[24:59] 但只要定义我就可以取代期望
+But just defined that I could
+just replace the expectation
+[25:02] 平均来看，你可以看出
+by averages everywhere,
+you can tell
+[25:03] 事情将为一个或另一个工作。 
+that the thing is going to work
+for either one or the other.
+[25:06] 所以现在，这件事实际上是-现在， 
+So now, this thing
+was actually-- so now,
+[25:08] 我的符号没有任何问题。 
+I don't have any problem
+with my notation.
+[25:10] 这实际上是S的分解。 
+This is actually the
+decomposition of S.
+[25:14] 那只是光谱分解
+That's just the
+spectral decomposition
+[25:16] 这是它的特征值。 
+and it's to its eigenvalues.
+[25:18] 所以现在，我所拥有的是，当我看着你移置Su时， 
+And so now, what I have is that
+when I look at u transpose Su,
+[25:27] 这实际上等于P u转置S Pu。 
+this is actually equal
+to P u transpose S Pu.
+[25:39] 好。 
+OK.
+[25:40] 某处有移调。 
+There's a transpose somewhere.
+[25:41] 那就是这个人。 
+That's this guy.
+[25:45] 那就是这个人。 
+And that's this guy.
+[25:57] 现在-对不起，那不是P，那是
+Now-- sorry, that's
+not P, that's
+[26:00]  D.那是D，那是对角矩阵。 
+D. That's D, that's
+this diagonal matrix.
+[26:10] 让我们看看这个东西。 
+Let's look at this thing.
+[26:11] 我们称P换位为u，叫b。 
+And let's call P transpose
+u, let's call it b.
+[26:15] 这也是Rd中的向量。 
+So that's also a vector in Rd.
+[26:18] 它是什么？ 
+What is it?
+[26:19] 就是，我取一个单位向量，然后
+It's just, I take a
+unit vector, and then
+[26:21] 我将P转置应用于它。 
+I apply P transpose to it.
+[26:23] 所以基本上就是单位向量发生的事情
+So that's basically what
+happens to a unit vector
+[26:25] 当我应用与我相同的基础更改时。 
+when I apply the same
+change of basis that I did.
+[26:29] 所以我只是以相同的方式改变我的正交系统
+So I'm just changing my
+orthogonal system the same way
+[26:34] 我为其他人做了。 
+I did for the other ones.
+[26:36] 那么当我写这篇文章的时候会发生什么呢？ 
+So what's happening
+when I write this?
+[26:38] 好吧，现在我有你转置Su为b转置Db。 
+Well, now I have that u
+transpose Su is b transpose Db.
+[26:46] 但是现在，当D是对角线时，进行b转置Db 
+But now, doing b transpose
+Db when D is diagonal
+[26:50]  b是向量是一件很简单的事情。 
+and b is a vector is
+a very simple thing.
+[26:52] 我可以扩大它。 
+I can expand it.
+[26:53] 这是什么？ 
+This is what?
+[26:54] 这只是j等于1的总和
+This is just the
+sum from j equal 1
+[26:57] 到λj的平方。 
+to d of lambda j bj squared.
+[27:05] 这就像矩阵向量乘法一样。 
+So that's just like matrix
+vector multiplication.
+[27:08] 特别是，我知道这些人中最大的
+And in particular, I know
+that the largest of those guys
+[27:11] 是lambda 1，而这些人都是非负数。 
+is lambda 1 and those
+guys are all non-negative.
+[27:14] 所以这个东西实际上是小于λ的1倍
+So this thing is actually
+less than lambda 1 times
+[27:16]  j等于1至λ的d的平方的平方- 
+the sum from j equal 1 to
+d of lambda j squared--
+[27:23] 对不起，bj开平方。 
+sorry, bj squared.
+[27:27] 这只是b平方的范数。 
+And this is just the
+norm of b squared.
+[27:34] 因此，如果我想证明幻灯片上的内容，我需要检查的所有内容
+So if I want to prove what's on
+the slide, all I need to check
+[27:38]  b是否具有范数，即
+is that b has norm, which is--
+[27:40] 听众：1。 
+AUDIENCE: 1.
+[27:41]  PHILIPPE RIGOLLET：最多1。 
+PHILIPPE RIGOLLET: At most, 1.
+[27:43] 最多为1。 
+It's going to be at most 1.
+[27:45] 为什么？ 
+Why?
+[27:45] 好吧，因为b实际上只是u的基数的变化。 
+Well, because b is really
+just a change of basis for u.
+[27:51] 因此，如果我采用向量，则只是在更改其基础。 
+And so if I take a vector,
+I'm just changing its basis.
+[27:55] 我当然不会改变它的长度
+I'm certainly not
+changing its length--
+[27:57] 想起旋转，我也可以翻转它， 
+think of a rotation,
+and I can also flip it,
+[27:59] 但是想想一个轮换- 
+but think of a rotation--
+[28:02] 好吧，实际上，对于矢量来说，只是旋转。 
+well, actually, for vector, it's
+just going to be a rotation.
+[28:05] 所以现在，我所拥有的
+And so now, what
+I have I just have
+[28:06] 检查b的平方的平方等于什么？ 
+to check that the norm of
+b squared is equal to what?
+[28:11] 好吧，这等于P转置u平方的范数， 
+Well, it's equal to the norm
+of P transpose u squared,
+[28:16] 等于u转置PP转置u。 
+which is equal to u
+transpose P P transpose u.
+[28:21] 但是P是正交的。 
+But P is orthogonal.
+[28:23] 所以这东西实际上只是身份。 
+So this thing is actually
+just the identity.
+[28:26] 那就是你换位
+So that's just u
+transpose u, which
+[28:28] 等于范数u平方，等于1 
+is equal to the norm u
+squared, which is equal to 1,
+[28:33] 因为我首先让您拥有范数1。 
+because I took u to have
+norm 1 in the first place.
+[28:37] 因此，这是正确的，实际上等于1。 
+And so this-- you're right--
+was actually of norm equal to 1.
+[28:39] 我只需要减少它，但这是平等的。 
+I just needed to have
+it less, but it's equal.
+[28:42] 所以我剩下的就是这件事实际上是
+And so what I'm left with is
+that this thing is actually
+[28:44] 等于lambda 1。 
+equal to lambda 1.
+[28:45] 所以我知道我选择的每个u 
+So I know that for
+every u that I pick--
+[28:50] 具有规范- 
+that has norm--
+[28:52] 所以我只是提醒你，你在这里
+So I'm just reminding
+you that u here
+[28:55] 范数平方等于1。 
+has norm squared equal to 1.
+[28:57] 对于我选择的每个u，此u转置
+For every u that I
+pick, this u transpose
+[29:00]  Su大多为lambda 1。 
+Su is at mostly lambda 1.
+[29:06] 因此，这就是u转置Su最多为lambda 1。 
+So that's the u transpose
+Su is at most lambda 1.
+[29:11] 我们知道那是差异，那是
+And we know that that's
+the variance, that's
+[29:13] 当我投影我的观点时，经验方差
+the empirical variance,
+when I project my points
+[29:15] 到您跨越的方向。 
+onto direction spanned by u.
+[29:20] 所以现在，我有一个经验差异
+So now, I have an
+empirical variance,
+[29:23] 最多为lambda 1。 
+which is at most lambda 1.
+[29:24] 但是我也知道，如果我把你说得很具体- 
+But I also know that if I take u
+to be something very specific--
+[29:28] 我的意思是，它在前一个董事会上
+I mean, it was on
+the previous board--
+[29:30] 如果我认为你等于v1，那么
+if I take u to be
+equal to v1, then
+[29:32] 这个东西实际上不是不平等， 
+this thing is actually
+not an inequality,
+[29:35] 这是平等。 
+this is an equality.
+[29:37] 原因是，当我实际将u设为v1时， 
+And the reason is, when I
+actually take u to be v1,
+[29:41] 所有这些bj都将为0，除了
+all of these bj's are going to
+be 0, except for the one that's
+[29:46]  b1，它本身等于1。 
+b1, which is itself equal to 1.
+[29:50] 所以我的意思是，我们可以简要检查一下。 
+So I mean, we can
+briefly check this.
+[29:52] 但是如果我取v-- 
+But if I take v--
+[29:59] 如果你等于v1，我所拥有的就是你转置
+if u is equal to v1, what
+I have is that u transpose
+[30:07]  Su等于P转置v1 DP转置v1。 
+Su is equal to P transpose
+v1 D P transpose v1.
+[30:24] 但是什么是P转置v1？ 
+But what is P transpose v1?
+[30:26] 好吧，记住P转置就是
+Well, remember P
+transpose is just
+[30:31] 向量在这里转置向量v1的矩阵
+the matrix that has
+vectors v1 transpose here,
+[30:34]  v2在这里转置，一直到vd在这里转置。 
+v2 transpose here, all the
+way to vd transpose here.
+[30:40] 而且我们知道当我用vj转置vk时，我得到0， 
+And we know that when I take
+vj transpose vk, I get 0,
+[30:45] 如果j与k不同。 
+if j is different from k.
+[30:46] 如果j等于k，我得到1。 
+And if j is equal to k, I get 1.
+[30:49] 那么P转置v1等于什么？ 
+So P transpose v1
+is equal to what?
+[31:05] 在这里取v1并乘以它。 
+Take v1 here and multiply it.
+[31:06] 所以第一个坐标将是
+So the first coordinate
+is going to be
+[31:08]  v1转置v1，即1。 
+v1 transpose v1, which is 1.
+[31:12] 第二个坐标将是
+The second coordinate
+is going to be
+[31:14]  v2转置v1，即0。 
+v2 transpose v1, which is 0.
+[31:19] 所以我一直得到0，对吧？ 
+And so I get 0's
+all the way, right?
+[31:22] 所以这意味着这件事真的
+So that means that this
+thing here is really
+[31:25] 只是向量1、0、0。 
+just the vector 1, 0, 0.
+[31:29] 在这里，这只是向量1、0、0。 
+And here, this is just
+the vector 1, 0, 0.
+[31:32] 所以当我和这个人相乘时
+So when I multiply
+it with this guy,
+[31:34] 我只拿起左上方的元素
+I am only picking up
+the top left element
+[31:37]  D的Lambda 1。 
+of D, which is lambda 1.
+[31:41] 因此，对于每个人来说，它的lambda值要少一些。 
+So for every one,
+it's less lambda 1.
+[31:44] 对于v1，等于lambda 1 
+And for v1, it's
+equal to lambda 1,
+[31:46] 这意味着它在等于v1时已最大化。 
+which means that it's
+maximized for a equals v1.
+[31:52] 那就是我说的
+And that's where
+I said that this
+[31:54] 是我们知道的最奇特的非凸问题。 
+is the fanciest non-convex
+problem we know how to solve.
+[31:57] 这是绝对不凸的问题。 
+This was a problem that
+was definitely non-convex.
+[31:59] 我们正在最大化球体上的凸函数。 
+We were maximizing a convex
+function over a sphere.
+[32:02] 但是我们知道v1，这是…… 
+But we know that v1,
+which is something--
+[32:06] 我的意思是，当然，您仍然
+I mean, of course,
+you still have
+[32:07] 相信我，你可以计算
+to believe me that
+you can compute
+[32:08] 有效地进行光谱分解- 
+the spectral decomposition
+efficiently--
+[32:11] 但是从本质上讲，如果您采用线性代数， 
+but essentially, if you've
+taken linear algebra,
+[32:14] 您知道可以对角矩阵。 
+you know that you can
+diagonalize a matrix.
+[32:17] 这样您就可以得出v1只是最大值。 
+And so you get that v1
+is just the maximum.
+[32:19] 因此，您只需查看以下内容即可找到最大值
+So you can find your
+maximum just by looking
+[32:21] 在光谱分解。 
+at the spectral decomposition.
+[32:24] 您无需进行任何优化
+You don't have to
+do any optimization
+[32:25] 或类似的东西。 
+or anything like this.
+[32:28] 因此，让我们回顾一下。 
+So let's recap.
+[32:29] 我们在哪？ 
+Where are we?
+[32:32] 我们已经确定，如果我开始
+We've established
+that if I start
+[32:34] 用我的经验协方差矩阵，我可以对角化它
+with my empirical covariance
+matrix, I can diagonalize it
+[32:37] 和PD P转置。 
+and PD P transpose.
+[32:42] 然后如果我把相关的特征向量
+And then if I take the
+eigenvector associated
+[32:44] 到最大特征值-所以如果我置换P的列
+to the largest eigenvalues-- so
+if I permute the columns of P
+[32:48] 和D的方式
+and of D's in such
+a way that they
+[32:50] 从大到小排列
+are ordered from the
+largest to the smallest when
+[32:53] 我看D的对角线元素
+I look at the diagonal
+elements of D,
+[32:56] 那么如果我选择P的第一列，则为v1。 
+then if I pick the first
+column of P, it's v1.
+[32:59]  v1是方向，如果我提出自己的观点， 
+And v1 is the direction on
+which, if I project my points,
+[33:04] 他们将承担最大的经验差异。 
+they are going to carry the
+most empirical variance.
+[33:08] 好吧，这是个好方法。 
+Well, that's a good way.
+[33:09] 如果我告诉你，请选择一个方向
+If I told you,
+pick one direction
+[33:13] 如果您要突出您的观点
+along which if you were
+to project your points
+[33:14] 他们将尽可能分散，这可能是
+they would be as spread out
+as possible, that's probably
+[33:17] 您会选择的那个。 
+the one you would pick.
+[33:19] 因此，这正是PCA为我们所做的。 
+And so that's exactly
+what PCA is doing for us.
+[33:22] 它说，好的，如果您要我取d素数等于1， 
+It says, OK, if you ask me
+to take d prime equal to 1,
+[33:28] 我将采用v1。 
+I will take v1.
+[33:31] 我将沿v1的方向发展。 
+I will just take the direction
+that's spanned by v1.
+[33:33] 那就是当我回到这张照片时
+And that's just when I come
+back to this picture that
+[33:36] 在此之前，这是v1。 
+was here before, this is v1.
+[33:43] 当然，在这里，我只有两个。 
+Of course, here, I
+only have two of them.
+[33:45] 所以v2必须是这个人，或者这个人， 
+So v2 has to be this
+guy, or this guy,
+[33:48] 或者我的意思是或者这个东西。 
+or I mean or this thing.
+[33:49] 我的意思是，我不认识他们。 
+I mean, I don't know
+them up to sine.
+[33:53] 但是如果我有三个- 
+But then if I have three--
+[33:55] 想像一个三维的橄榄
+think of like an olive
+in three dimensions--
+[33:58] 那么也许我的方向要稍微多一点
+then maybe I have one
+direction that's slightly more
+[34:00] 比另一个拉长。 
+elongated than the other one.
+[34:02] 因此，我将选择第二个。 
+And so I'm going to
+pick the second one.
+[34:04] 所以程序要说，首先，我是
+And so the procedure is
+to say, well, first, I'm
+[34:07] 首先选择v1的方式与选择v1相同。 
+going to pick v1 the same way
+I pick v1 in the first place.
+[34:11] 所以我要走的第一个方向
+So the first
+direction I am taking
+[34:12] 是领先的特征向量。 
+is the leading eigenvector.
+[34:14] 然后我正在寻找方向。 
+And then I'm looking
+for a direction.
+[34:18] 好吧，如果我找到了一个，我就是
+Well, if I found
+one-- the one I'm
+[34:20] 想要找到-如果您说可以使d等于2， 
+going to want to find-- if you
+say you can take d equal 2,
+[34:23] 您将需要这个家伙的基础。 
+you're going to need
+the basis for this guy.
+[34:24] 所以第二个必须与第一个正交
+So the second one has to be
+orthogonal to the first one
+[34:27] 您已经选择了。 
+you've already picked.
+[34:28] 因此，您选择的第二个是
+And so the second
+one you pick is
+[34:30] 只是其中的一个
+the one that's just,
+among all those that
+[34:31] 与v1正交，最大的经验方差
+are orthogonal to v1, maximized
+the empirical variance
+[34:36] 当您投影到它上时。 
+when you project onto it.
+[34:40] 事实证明，这实际上是v2。 
+And it turns out that this
+is actually exactly v2.
+[34:44] 您无需重做任何事情。 
+You don't have to
+redo anything again.
+[34:46] 你是本征分解，这是
+You're eigendecomposition,
+this is
+[34:47] 只是P的第二列。显然，v2 
+just the second column
+of P. Clearly, v2
+[34:54] 与v1正交。 
+is orthogonal to v1.
+[34:56] 我们只是在这里使用它。 
+We just used it here.
+[34:58] 这里的0仅表示此v2与v1正交。 
+This 0 here just says this
+v2 is orthogonal to v1.
+[35:03] 所以他们就是这样。 
+So they're like this.
+[35:05] 而现在，我说的是- 
+And now, what I said--
+[35:06] 这张幻灯片告诉您的更多信息- 
+what this slide
+tells you extra--
+[35:08] 是在所有这些方向中的v2 
+is that v2 among all
+those directions that are
+[35:10] 正交- 
+orthogonal--
+[35:11] 我的意思是，他们仍然有d减去1 
+I mean, there's still
+d minus 1 of them--
+[35:13] 这是一个最大化
+this is the one that
+maximizes the, say,
+[35:16] 剩余经验方差- 
+residual empirical
+variance-- the one that
+[35:18] 未被您选择的第一个方向解释。 
+was not explained by the first
+direction that you picked.
+[35:21] 您可以检查一下。 
+And you can check that.
+[35:22] 我的意思是，写下来变得越来越麻烦， 
+I mean, it's becoming a bit
+more cumbersome to write down,
+[35:27] 但您可以检查一下。 
+but you can check that.
+[35:28] 如果您不确定，请提出您的担忧。 
+If you're not convinced,
+please raise your concern.
+[35:32] 我的意思是，基本上，您查看此内容的一种方式是- 
+I mean, basically, one
+way you view this to--
+[35:38] 我的意思是，您并没有真正放弃坐标， 
+I mean, you're not really
+dropping a coordinate,
+[35:40] 因为v1不是坐标。 
+because v1 is not a coordinate.
+[35:42] 但是为了简单起见，我们实际上假设v1实际上是
+But let's assume actually for
+simplicity that v1 was actually
+[35:46] 等于e1，即方差最大的方向
+equal to e1, that the direction
+that carries the most variance
+[35:49] 就是说，只是看
+is the one that
+just says, just look
+[35:51] 在X的第一个坐标处。如果是这种情况，则
+at the first coordinate of X.
+So if that was the case, then
+[35:56] 显然，正交方向是
+clearly the orthogonal
+directions are
+[35:58] 仅包含坐标2到d的坐标。 
+the ones that comprise only
+of the coordinates 2 to d.
+[36:03] 所以你实际上可以放下第一个坐标
+So you could actually just
+drop the first coordinate
+[36:05] 并在稍短的向量上执行相同的操作
+and do the same thing on
+a slightly shorter vector
+[36:08] 长度d减去1。 
+of length d minus 1.
+[36:10] 然后，您只需看一下最大的特征向量
+And then you would just look
+at the largest eigenvector
+[36:12] 这些家伙，等等等等。 
+of these guys, et
+cetera, et cetera.
+[36:14] 所以从某种意义上讲，就是这样
+So in a way, that's
+what's happening,
+[36:16] 除了在实际执行此操作之前先旋转它。 
+except that you rotate it
+before you actually do this.
+[36:19] 而这正是正在发生的事情。 
+And that's exactly
+what's happening.
+[36:22] 因此，我们在这里汇总的内容基本上是三件事。 
+So what we put together here
+is essentially three things.
+[36:30] 一是统计。 
+One was statistics.
+[36:32] 统计数据表明，如果您不传播， 
+Statistics says, if
+you won't spread,
+[36:34] 如果您需要信息，则应查看差异。 
+if you want information, you
+should be looking at variance.
+[36:39] 第二个是优化。 
+The second one was optimization.
+[36:40] 优化说，好吧，如果您想最大化传播， 
+Optimization said, well, if you
+want to maximize spread, well,
+[36:44] 您必须在特定方向上最大化方差。 
+you have to maximize variance
+in a certain direction.
+[36:48] 这意味着在向量范围内最大化
+And that means maximizing
+over the sphere of vectors
+[36:51] 具有独特的规范。 
+that have unique norm.
+[36:54] 这是一个优化问题，实际上
+And that's an optimization
+problem, which actually
+[36:56] 原来很难。 
+turned out to be difficult.
+[36:58] 但是，我们用来解决这个问题的第三件事
+But then the third thing that
+we use to solve this problem
+[37:00] 是线性代数。 
+was linear algebra.
+[37:01] 线性代数说，好吧，看起来
+Linear algebra
+said, well, it looks
+[37:03] 就像这是一个困难的优化问题。 
+like it's a difficult
+optimization problem.
+[37:05] 但是事实证明，答案几乎是- 
+But it turns out that the
+answer comes in almost--
+[37:08] 我的意思是，这不是封闭形式，但是那些东西是如此用， 
+I mean, it's not a closed form,
+but those things are so used,
+[37:11] 几乎是封闭形式
+that it's almost a closed form--
+[37:12] 说，只需按顺序选择特征向量
+says, just pick the
+eigenvectors in order
+[37:17] 它们的相关特征值从最大到最小。 
+of their associated eigenvalues
+from largest to smallest.
+[37:23] 这就是为什么主成分分析
+And that's why principal
+component analysis
+[37:24] 如此受欢迎并获得了巨大的吸引力
+has been so popular and has
+gained huge amount of traction
+[37:29] 因为我们有允许计算特征值的计算机
+since we had computers that were
+allowed to compute eigenvalues
+[37:33] 和特征向量用于巨大尺寸的矩阵。 
+and eigenvectors for
+matrices of gigantic sizes.
+[37:37] 您实际上可以做到。 
+You can actually do that.
+[37:38] 如果我给你
+If I give you--
+[37:39] 我不知道，例如这部Google视频， 
+I don't know, this Google
+video, for example,
+[37:42] 在谈论单词。 
+is talking about words.
+[37:43] 他们只想做主要部分
+They want to do just the,
+say, principal component
+[37:45] 单词分析。 
+analysis of words.
+[37:47] 所以我给你字典中的所有单词。 
+So I give you all the
+words in the dictionary.
+[37:50] 而且-对不起，好吧，你会
+And-- sorry, well,
+you would have
+[37:53] 代表单词
+to have a representation
+for words,
+[37:55] 所以有点困难。但是我该怎么做呢？ 
+so it's a little more
+difficult. But how do I do this?
+[38:03] 例如，假设一本书的页面数。 
+Let's say, for example,
+pages of a book.
+[38:06] 我想了解一本书的页面。 
+I want to understand
+the pages of a book.
+[38:08] 我需要将其转换为数字。 
+And I need to turn
+it into a number.
+[38:10] 书的一页基本上就是字数统计。 
+And a page of a book is
+basically the word count.
+[38:13] 所以我只计算“ the”出现的次数， 
+So I just count the number
+of times "the" shows up,
+[38:15]  “和”出现的次数，“狗”出现的次数
+the number of times "and"
+shows up, number of times "dog"
+[38:18] 出现。 
+shows up.
+[38:19] 因此，这给了我一个向量。 
+And so that gives me a vector.
+[38:20] 它的尺寸很高。 
+It's in pretty high dimensions.
+[38:22] 维度与词典中的单词一样多。 
+It's as many dimensions as there
+are words in the dictionary.
+[38:25] 现在，我想想像一下这些页面如何组合在一起- 
+And now, I want to visualize
+how those pages get together--
+[38:28] 两个页面是否非常相似。 
+are two pages very
+similar or not.
+[38:30] 因此，您要做的基本上是
+And so what you would
+do is essentially
+[38:32] 只需计算此矩阵的最大特征向量- 
+just compute the largest
+eigenvector of this matrix--
+[38:35] 也许是最大的两个-然后将其投影到飞机上。 
+maybe the two largest-- and
+then project this into a plane.
+[38:38] 是的
+Yeah.
+[38:39] 听众：我们可以假设积分是多少
+AUDIENCE: Can we assume
+the number of points
+[38:41] 比尺寸大得多？ 
+was far larger
+than the dimension?
+[38:43]  PHILIPPE RIGOLLET：是的，但是有
+PHILIPPE RIGOLLET:
+Yeah, but there's
+[38:44] 世界上有很多页面。 
+many pages in the world.
+[38:46] 世界上可能有更多的页面
+There's probably more
+pages in the world
+[38:48] 比字典中的单词还多。 
+than there's words
+in the dictionary.
+[38:54] 是的，当然，如果您的尺寸较大
+Yeah, so of course, if
+you are in high dimensions
+[38:57] 而且您没有足够的积分， 
+and you don't have
+enough points,
+[38:58] 这显然将是一个问题。 
+it's going to be
+clearly an issue.
+[39:00] 如果您有两个点，那么前导特征向量
+If you have two points,
+then the leading eigenvector
+[39:03] 只会是
+is going to be
+just the line that
+[39:04] 经历了这两点，无论
+goes through those
+two points, regardless
+[39:06] 尺寸是多少
+of what the dimension is.
+[39:07] 显然，您没有学到任何东西。 
+And clearly, you're
+not learning anything.
+[39:13] 因此，您必须选择最大的k个。 
+So you have to pick,
+say, the k largest one.
+[39:16] 如果一路走下去，您只是在重新排序商品， 
+If you go all the way, you're
+just reordering your thing,
+[39:18] 而且您实际上并没有获得任何收益。 
+and you're not actually
+gaining anything.
+[39:20] 从d开始，也从d开始。 
+You start from d
+and you go too d.
+[39:22] 因此，在某个时候，此过程必须停止。 
+So at some point, this
+procedure has to stop.
+[39:26] 假设它在k处停止。 
+And let's say it stops at k.
+[39:28] 现在，您当然应该问我一个问题， 
+Now, of course, you
+should ask me a question,
+[39:31] 即，您如何选择k？ 
+which is, how do you choose k?
+[39:34] 所以，这当然是一个自然的问题。 
+So that's, of course,
+a natural question.
+[39:37] 基本答案可能就是选k等于3， 
+Probably the basic answer
+is just pick k equals 3,
+[39:41] 因为您实际上可以将其可视化。 
+because you can
+actually visualize it.
+[39:43] 但是，如果我取k等于4会怎样？ 
+But what happens if I
+take k is equal to 4?
+[39:47] 如果我等于4，我就不去
+If I take is equal
+to 4, I'm not going
+[39:51] 能够在四个维度上绘制点。 
+to be able to plot points
+in four dimensions.
+[39:54] 好吧，我可以，我可以添加颜色， 
+Well, I could, I
+could add color,
+[39:55] 或者我可以尝试对此稍加精明。 
+or I could try to be a
+little smart about it.
+[39:57] 但这实际上很困难。 
+But it's actually
+quite difficult.
+[40:00] 因此，如果您有四个维度，人们倾向于做什么？ 
+And so what people tend to do,
+if you have four dimensions,
+[40:04] 他们实际上是一堆二维图。 
+they actually do a bunch
+of two dimensional plots.
+[40:06] 那就是一台电脑-电脑不是很好- 
+And that's what a computer--
+a computer is not very good--
+[40:08] 我的意思是，默认情况下，它们不会吐出
+I mean, by default,
+they don't spit out
+[40:10] 三个三维图。 
+three dimensional plots.
+[40:12] 假设他们只想绘制二维物体。 
+So let's say they want to plot
+only two dimensional things.
+[40:15] 因此，他们将朝着v1的第一个方向发展， 
+So they're going to take the
+first directions of, say, v1,
+[40:17]  v2。 
+v2.
+[40:18] 假设您有三个，但您
+Let's say you have
+three, but you
+[40:19] 希望只有二维图。 
+want to have only two
+dimensional plots.
+[40:21] 然后要做v1，v3；然后是v2，v3 
+And then it's going to do
+v1, v3; and then v2, v3.
+[40:29] 所以说真的，您将全部三个都拿走了
+So really, you take
+all three of them,
+[40:31] 但这实际上只是向您显示所有选择
+but it's really just
+showing you all choices
+[40:35] 对的家伙。 
+of pairs of those guys.
+[40:37] 因此，如果要保持k等于5， 
+So if you were to
+keep k is equal to 5,
+[40:41] 您将有五个，选择两个不同的地块。 
+you would have five,
+choose two different plots.
+[40:48] 这是实际的主成分算法， 
+So this is the actual
+principal component algorithm,
+[40:51] 它是如何实现的。 
+how it's implemented.
+[40:53] 而且实际上很简单。 
+And it's actually fairly simple.
+[40:55] 我的意思是，看起来好像有很多步骤。 
+I mean, it looks like
+there's lots of steps.
+[40:56] 但实际上，只有一个重要。 
+But really, there's only
+one that's important.
+[40:58] 所以第一个是输入。 
+So the first one is the input.
+[40:59] 我给你一堆点，在d维度上为x1到xn。 
+I give you a bunch of points,
+x1 to xn in d dimensions.
+[41:04] 第二步是计算它们的经验协方差
+And step two is, well, compute
+their empirical covariance
+[41:07] 点本身，我们并不在乎。 
+matrix S. The points themselves,
+we don't really care.
+[41:10] 我们关心他们的经验协方差矩阵。 
+We care about their
+empirical covariance matrix.
+[41:12] 因此，它是d矩阵广告。 
+So it's a d by d matrix.
+[41:14] 现在，我要喂它。 
+Now, I'm going to feed that.
+[41:15] 这就是实际计算开始的地方。 
+And that's where the actual
+computation starts happening.
+[41:17] 我要把它喂给知道的东西
+I'm going to feed that
+to something that knows
+[41:19] 如何对角化这个矩阵。 
+how to diagonalize this matrix.
+[41:21] 如果我愿意，你必须相信我
+And you have to
+trust me, if I want
+[41:23] 计算k个最大特征值
+to compute the k
+largest eigenvalues
+[41:25] 我的矩阵是d乘d 
+and my matrix is
+d by d, it's going
+[41:27] 带我约k次d平方运算。 
+to take me about k times
+d squared operations.
+[41:32] 因此，如果我只想要三个，那是d平方的3倍， 
+So if I want only three,
+it's 3 times d squared,
+[41:34] 大约是- 
+which is about--
+[41:36]  d平方是我读甚至阅读的时间
+d squared is the time for me
+it takes to just even read
+[41:39] 矩阵sigma。 
+the matrix sigma.
+[41:41] 这样还不错。 
+So that's not too bad.
+[41:43] 所以，当然会吐出什么
+So what it's going to
+spit out, of course,
+[41:45] 是对角矩阵D。 
+is the diagonal matrix
+D. And those are nice,
+[41:48] 因为他们让我告诉我什么
+because they allow
+me to tell me what
+[41:53] 是我应采用P列的顺序。 
+is the order in which I should
+be taking the columns of P.
+[41:56] 但是对我来说真正重要的是v1到vd 
+But what's really important
+to me is v1 to vd,
+[41:58] 因为那些将成为我将要使用的
+because those are going to be
+the ones I'm going to be using
+[42:01] 绘制那些情节。 
+to draw those plots.
+[42:04] 现在，我要说的是，我需要
+And now, I'm going
+to say, OK, I need
+[42:05] 实际选择一些集合k。 
+to actually choose some set k.
+[42:09] 我将基本上截断并查看
+And I'm going to basically
+truncate and look
+[42:11] 仅在P的前k列。 
+only at the first
+k columns of P.
+[42:16] 一旦有了这些列，我将
+Once I have those
+columns, what I
+[42:18] 要做的是投影到线性跨度上
+want to do is to project
+onto the linear span
+[42:20] 这些列中。 
+of those columns.
+[42:21] 实际上有一个简单的方法
+And there's actually
+a simple way
+[42:23] 为此，只需取这个矩阵P 
+to do this, which is just take
+this matrix P, which is really
+[42:26] 投影到那些k的线性跨度上的矩阵
+the matrix of projection onto
+the linear span of those k
+[42:29] 列。 
+columns.
+[42:30] 然后您只需要进行Pk转置即可。 
+And you just take Pk transpose.
+[42:32] 然后，将其应用于您的每个观点。 
+And then you apply this to
+every single one of your points.
+[42:38] 现在Pk转置，矩阵Pk的大小是多少？ 
+Now Pk transpose, what is
+the size of the matrix Pk?
+[42:46] 是的，[听不清]？ 
+Yeah, [INAUDIBLE]?
+[42:47] 观众：[听不清] 
+AUDIENCE: [INAUDIBLE]
+[42:49]  PHILIPPE RIGOLLET：Pk就是这个矩阵。 
+PHILIPPE RIGOLLET: So
+Pk is just this matrix.
+[42:52] 我选择v1，然后停在vk上- 
+I take the v1 and I stop at vk--
+[42:54] 好 - 
+well--
+[42:55] 观众：[听不清] 
+AUDIENCE: [INAUDIBLE]
+[42:57]  PHILIPPE RIGOLLET：用k代替，对吧？ 
+PHILIPPE RIGOLLET:
+d by k, right?
+[42:59] 每个列都是一个特征向量。 
+Each of the column
+is an eigenvector.
+[43:01] 它的尺寸为d。 
+It's of dimension d.
+[43:02] 我的意思是，这是原始空间中的向量。 
+I mean, that's a vector
+in the original space.
+[43:05] 所以我有这个d×k矩阵。 
+So I have this d by k matrix.
+[43:07] 所以，只要我有- 
+So all it is is if I had my--
+[43:11] 好吧，我将在第二秒钟谈论Pk转置。 
+well, I'm going to talk in
+a second about Pk transpose.
+[43:13]  PK转置就是这个家伙， 
+Pk transpose is
+just this guy, where
+[43:17] 我停在第k个向量。 
+I stop at the k-th vector.
+[43:19] 因此，Pk转置为k x d。 
+So Pk transpose is k by d.
+[43:22] 所以现在，当我拿到Pk转置Xi的Yi时， 
+So now, when I take Yi,
+which is Pk transpose Xi,
+[43:26] 我最后得出的点是k个维度。 
+I end up with a point
+which is in k dimensions.
+[43:29] 我只有k个坐标。 
+I have only k coordinates.
+[43:30] 所以我把我的原始分数Xi的每一点都拿了， 
+So I took every single one
+of my original points Xi,
+[43:33] 它有d个坐标，我把它变成了一个点
+which had d coordinates, and
+I turned it into a point that
+[43:35] 只有k个坐标。 
+has only k coordinates.
+[43:37] 特别是，我可以让k等于2。 
+Particularly, I could
+have k is equal to 2.
+[43:40] 该矩阵正是要投影的矩阵。 
+This matrix is exactly
+the one that projects.
+[43:42] 如果想一秒钟
+If you think about
+it for one second,
+[43:44] 这只是说- 
+this is just the
+matrix that says--
+[43:46] 好吧，我们实际上做了几次。 
+well, we actually did
+that several times.
+[43:48] 矩阵，这就是这个P转置u 
+The matrix, so that
+was this P transpose u
+[43:51] 出现在某个地方。 
+that showed up somewhere.
+[43:53] 所以这只是矩阵
+And so that's just
+the matrix that
+[43:57] 将您的观点X分为三个维度， 
+take your point X in,
+say, three dimensions,
+[44:01] 然后将其投影到二维。 
+and then just project it
+down to two dimensions.
+[44:04] 这就是-它到达子空间中最接近的点。 
+And that's just-- it goes to the
+closest point in the subspace.
+[44:09] 现在，这里的地板是平坦的。 
+Now, here, the floor is flat.
+[44:12] 但是我们可以选择任何想要的子空间， 
+But we can pick any
+subspace we want,
+[44:16] 取决于lambda。 
+depending on what
+the lambdas are.
+[44:18] 所以lambda对我们很重要
+So the lambdas were
+important for us
+[44:19] 以确定要选择的列。 
+to be able to identify
+which columns to pick.
+[44:23] 我们假设他们被命令的事实
+The fact that we assumed
+that they were ordered
+[44:25] 告诉我们我们可以选择第一个。 
+tells us that we can
+pick the first ones.
+[44:27] 如果不下令，它将
+If they were not
+ordered, it would
+[44:28] 只是列的子集，具体取决于
+be just a subset of the
+columns, depending on what
+[44:30] 特征值的大小是。 
+the size of the eigenvalue is.
+[44:32] 因此，每一列都被标记。 
+So each column is labeled.
+[44:36] 因此，当然，我们仍然有这个问题， 
+And so then, of course, we
+still have this question of,
+[44:38] 我该如何选择k？ 
+how do I pick k?
+[44:40] 因此，绝对有方便的问题。 
+So there's definitely the
+matter of convenience.
+[44:42] 也许2很方便。 
+Maybe 2 is convenient.
+[44:44] 如果它适用于2，则您无需走得更远。 
+If it works for 2, you don't
+have to go any farther.
+[44:47] 但您可能想说，嗯- 
+But you might want
+to say, well--
+[44:50] 最初，我这样做是为了保持
+originally, I did
+that to actually keep
+[44:52] 尽可能多的信息。 
+as much information as possible.
+[44:54] 我知道最终的事情是
+I know that the
+ultimate thing is
+[44:56] 保持尽可能多的信息，这将是
+to keep as much information,
+which would be to k
+[44:58] 等于d-就是您想要的信息。 
+is equal d-- that's as much
+information as you want.
+[45:00] 但这基本上是相同的问题， 
+But it's essentially the
+same question about, well,
+[45:03] 如果我想压缩JPEG图像， 
+if I want to compress
+a JPEG image,
+[45:07] 我应该保留多少信息以便它仍然可见？ 
+how much information should
+I keep so it's still visible?
+[45:10] 因此，有一些规则。 
+And so there's some
+rules for that.
+[45:11] 但是它们实际上都不是一门科学。 
+But none of them is
+actually really a science.
+[45:14] 所以这真的取决于你
+So it's really a
+matter of what you
+[45:16] 认为实际上是可以忍受的。 
+think is actually tolerable.
+[45:18] 并且我们将开始通过也许替换此选择
+And we're just going to start
+replacing this choice by maybe
+[45:21] 另一个参数。 
+another parameter.
+[45:22] 所以在这里，我们将基本上用k替换k 
+So here, we're going to
+basically replace k by alpha,
+[45:26] 所以我们只是做一些事情。 
+and so we just do stuff.
+[45:29] 所以人们这样做的第一个可能是
+So the first one that
+people do that is probably
+[45:32] 最受欢迎的
+the most popular one--
+[45:33] 好吧，最受欢迎的肯定是
+OK, the most popular
+one is definitely
+[45:35] 取k等于2或3，因为它只是
+take k is equal to 2
+or 3, because it's just
+[45:39] 方便可视化。 
+convenient to visualize.
+[45:41] 第二受欢迎的是卵石图。 
+The second most popular
+one is the scree plot.
+[45:48] 所以碎石图
+So the scree plot--
+[45:49] 记住，我有我的价值观，lambda j。 
+remember, I have my
+values, lambda j's.
+[45:54] 而且我选择了λj来减小。 
+And I've chosen the
+lambda j's to decrease.
+[45:57] 因此以这种方式选择索引
+So the indices are
+chosen in such a way
+[45:59] 那λ是一个递减函数。 
+that lambda is a
+decreasing function.
+[46:01] 所以我有lambda 1，可以说是这个人。 
+So I have lambda 1, and
+let's say it's this guy here.
+[46:04] 然后我有lambda 2，可以说是这个人。 
+And then I have lambda 2, and
+let's say it's this guy here.
+[46:06] 然后我有lambda 3，可以说是这个人
+And then I have lambda 3, and
+let's say it's this guy here,
+[46:09]  lambda 4，lambda 5，lambda 6。 
+lambda 4, lambda 5, lambda 6.
+[46:12] 而我所关心的只是这件事减少了。 
+And all I care about is
+that this thing decreases.
+[46:16] 碎石图显示了这样的内容- 
+The scree plot says
+something like this--
+[46:19] 如果有拐点，这意味着您可以
+if there's an inflection point,
+meaning that you can sort of do
+[46:22] 这样的事情，然后这样的事情， 
+something like this and
+then something like this,
+[46:25] 您应该在3点停下。 
+you should stop at 3.
+[46:27] 这就是碎石图告诉您的。 
+That's what the
+scree plot tells you.
+[46:29] 在某种程度上说的是百分比
+What it's saying in a way
+is that the percentage
+[46:34] 边际增量的解释
+of the marginal
+increment of explained
+[46:39] 您获得的方差开始减少
+variance that you get
+starts to decrease after you
+[46:41] 通过这个拐点。 
+pass this inflection point.
+[46:43] 因此，让我们看看我为什么要这样做。 
+So let's see why I way this.
+[46:45] 好吧，这就是我所拥有的-所以这个比例
+Well, here, what I
+have-- so this ratio
+[46:52] 您看到的实际上是百分比
+that you see there is
+actually the percentage
+[46:54] 解释方差。 
+of explained variance.
+[46:56] 所以这意味着，如果我看一下lambda 1加lambda k， 
+So what it means is that, if I
+look at lambda 1 plus lambda k,
+[47:01] 然后我将lambda 1除以lambda d 
+and then I divide by lambda
+1 plus lambda d, well,
+[47:08] 这是什么？ 
+what is this?
+[47:08] 好吧，这个lambda 1加上lambda d 
+Well, this lambda
+1 plus lambda d
+[47:12] 是我得出的总方差量。 
+is the total amount of variance
+that I get in my points.
+[47:14] 那就是西格玛的踪影。 
+That's the trace of sigma.
+[47:18] 这就是第一方向的差异
+So that's the variance
+in the first direction
+[47:20] 加上第二方向的方差
+plus the variance in
+the second direction
+[47:22] 加上第三方向的方差。 
+plus the variance in
+the third direction.
+[47:24] 基本上，这就是我所有可能的差异。 
+That's basically all the
+variance that I have possible.
+[47:28] 现在，这就是我在第一个方向上保持的差异。 
+Now, this is the variance that
+I kept in the first direction.
+[47:32] 这是我在第二方向上保持的差异， 
+This is the variance that I
+kept in the second direction,
+[47:34] 一直到我在第k个方向上保持的方差
+all the way to the variance that
+I kept in the k-th direction.
+[47:37] 所以我知道这个数字总是小于或等于1。 
+So I know that this number is
+always less than or equal to 1.
+[47:41] 并且大于1。 
+And it's larger than 1.
+[47:43] 这只是比例，例如， 
+And this is just
+the proportion, say,
+[47:48] 由v1到vk解释的方差
+of variance explained
+by v1 to vk,
+[47:59] 或简单地说，我的PCA解释的差异的比例， 
+or simply, the proportion of
+explained variance by my PCA,
+[48:03] 说。 
+say.
+[48:05] 所以现在，这件事告诉我， 
+So now, what this
+thing is telling me,
+[48:07] 它说，好吧，如果我看这个东西
+its says, well, if
+I look at this thing
+[48:09] 我开始看到这个拐点，就是说
+and I start seeing this
+inflection point, it's saying,
+[48:13] 哦，在这里，您获得了很多差异。 
+oh, here, you're gaining
+a lot and lot of variance.
+[48:16] 然后在某个时候，您不再获得很多收益
+And then at some point,
+you stop gaining a lot
+[48:19] 在您解释的方差中所占的比例。 
+in your proportion of
+explained variance.
+[48:21] 所以这将转化为某种东西
+So this will
+translate in something
+[48:23] 当我看这个比率时，λ1加λk除
+where when I look at this ratio,
+lambda 1 plus lambda k divided
+[48:28] 通过lambda 1加上lambda d，这将
+by lambda 1 plus
+lambda d, this would
+[48:31] 转换为如下所示的函数。 
+translate into a function
+that would look like this.
+[48:34] 它告诉你的是，也许是你
+And what it's telling you,
+it says, well, maybe you
+[48:36] 应该在这里停止，因为每次您在此处添加一个时， 
+should stop here, because
+here every time you add one,
+[48:38] 你得到的比以前少。 
+you don't get as much
+as you did before.
+[48:40] 实际上，您获得的边际收益较小。 
+You actually get like
+smaller marginal returns.
+[48:50] 因此，解释方差是该比率的分子。 
+So explained variance is
+the numerator of this ratio.
+[48:56] 总方差是分母。 
+And the total variance
+is the denominator.
+[48:58] 这些是非常简单的术语
+Those are pretty
+straightforward terms
+[49:01] 您想要用于此目的。 
+that you would want
+to use for this.
+[49:03] 因此，如果您的目标是进行数据可视化- 
+So if your goal is to
+do data visualization--
+[49:06] 那为什么要选择大于2的k？ 
+so why would you
+take k larger than 2?
+[49:10] 假设，如果k大于6， 
+Let's say, if you
+take k larger than 6,
+[49:11] 你可以开始想象你在
+you can start to
+imagine that you're
+[49:12] 要有六个，选择两个，这会很烦人。 
+going to have six, choose two,
+which starts to be annoying.
+[49:15] 如果k等于10 
+And if you have k
+is equal to 10--
+[49:16] 因为您可以从50,000维开始- 
+because you could start
+in dimension 50,000--
+[49:19] 然后k等于10就是那个地方
+and then k equal to
+10 would be the place
+[49:21] 你有很多东西的地方
+where you have this thing
+that's a lot of plots
+[49:22] 您必须证明。 
+that you would have to show.
+[49:23] 因此，它并不总是用于数据可视化。 
+So it's not always for
+data visualization.
+[49:26] 实际完成此操作后， 
+Once I've actually
+done this, I've
+[49:29] 实际上有效地减少了我的问题的范围。 
+actually effectively reduced
+the dimension of my problem.
+[49:32] 我所能做的就是
+And what I could do
+with what I have is
+[49:34] 对那些家伙进行回归分析。 
+do a regression on those guys.
+[49:36]  v1-所以我忘了告诉你- 
+The v1-- so I
+forgot to tell you--
+[49:39] 为什么将其称为主成分分析？ 
+why is that called principal
+component analysis?
+[49:41] 好吧，我保留的vj是v1到vk 
+Well, the vj's that
+I keep, v1 to vk
+[49:46] 被称为主要成分。 
+are called principal components.
+[49:59] 它们有效地充当了我Xi的总结。 
+And they effectively act
+as the summary of my Xi's.
+[50:04] 当我提到图像压缩时
+When I mentioned
+image compression,
+[50:06] 我从x的点Xi开始- 
+I started with a point
+Xi that was d numbers--
+[50:10] 假设有50,000个数字。 
+let's say 50,000 numbers.
+[50:12] 现在，我是说，实际上，你
+And now, I'm saying,
+actually, you
+[50:14] 可以扔掉这50,000个数字。 
+can throw out those
+50,000 numbers.
+[50:16] 如果您实际上只知道所需的k个数字， 
+If you actually know only
+the k numbers that you need--
+[50:19] 您需要的6个数字- 
+the 6 numbers that you need--
+[50:20] 你会有一些东西
+you're going to
+have something that
+[50:22] 即将获得您所拥有的信息。 
+was pretty close to getting
+what information you had.
+[50:24] 所以在某种程度上，存在某种形式的压缩
+So in a way, there is
+some form of compression
+[50:26] 这是在这里。 
+that's going on here.
+[50:27] 而您可以做的就是这些主要组成部分， 
+And what you can do is that
+those principal components,
+[50:31] 您现在可以实际使用它进行回归了。 
+you can actually use
+now for regression.
+[50:34] 如果我想将Y回归到X 
+If I want to regress
+Y onto X that's
+[50:39] 非常高的尺寸，在我这样做之前， 
+very high dimensional,
+before I do this,
+[50:41] 如果我没有足够的分数，也许我实际上可以做什么
+if I don't have enough points,
+maybe what I can actually do
+[50:44] 要做主成分分析
+is to do principal
+component analysis
+[50:47] 在我整个运动中，请更换它们
+throughout my
+exercise, replace them
+[50:49] 那些压缩版本，并进行线性攻击
+by those compressed versions,
+and do linear aggression
+[50:52] 在那些家伙上。 
+on those guys.
+[50:53] 这就是所谓的主成分回归， 
+And that's called principal
+component regression,
+[50:55] 不出所料。 
+not surprisingly.
+[50:56] 那是很受欢迎的东西。 
+And that's something
+that's pretty popular.
+[50:57] 例如，您可以将k等于10。 
+And you can do with k is
+equal to 10, for example.
+[51:03] 因此，对于数据可视化，我没有找到感恩节主题
+So for data visualization, I did
+not find a Thanksgiving themed
+[51:07] 图片。 
+picture.
+[51:08] 但是我发现里面有火鸡。 
+But I found one that
+has turkey in it.
+[51:11] 得到它？ 
+Get it?
+[51:15] 所以这实际上是一个基因数据集
+So this is actually a
+gene data set that was--
+[51:21] 所以当你看到这样的东西时， 
+so when you see
+something like this,
+[51:24] 你可以想象有人在进行预处理
+you can imagine that someone
+has been preprocessing
+[51:27] 死于此事。 
+the hell out of this thing.
+[51:28] 这不是，哦，我在23andMe上收集数据
+This is not like, oh, I
+collect data on 23andMe
+[51:30] 我将在此上运行PCA。 
+and I'm just going
+to run PCA on this.
+[51:32] 只是不会那样。 
+It just doesn't
+happen like that.
+[51:34] 所以发生的是-所以我们假设这是
+And so what happened is that--
+so let's assume that this was
+[51:38] 一堆预处理数据，即基因表达
+a bunch of preprocessed data,
+which are gene expression
+[51:41] 水平
+levels--
+[51:42] 在1400个欧洲人中有500,000个基因。 
+so 500,000 genes
+among 1,400 Europeans.
+[51:47] 所以在这里，我实际上观察不到
+So here, I actually
+have less observations
+[51:50] 比我有样品。 
+than I have samples.
+[51:52] 那就是当您使用主成分回归
+And that's when you use
+principal component regression
+[51:54] 大多数情况下，它不会阻止您。 
+most of the time, so
+it doesn't stop you.
+[51:57] 然后你会说，好吧，拥有这500,000个基因
+And then what you do is you say,
+OK, have those 500,000 genes
+[52:01] 其中 - 
+among--
+[52:03] 所以在这里，这意味着这里有1,400点。 
+so here, that means that
+there's 1,400 points here.
+[52:06] 我实际上是走了500,000个方向。 
+And I actually take
+those 500,000 directions.
+[52:09] 因此，每个人都有一个500,000个基因的载体
+So each person has a vector
+of, say, 500,000 genes
+[52:13] 依附于他们。 
+that are attached to them.
+[52:14] 我将它们投影到两个维度上
+And I project them onto
+two dimensions, which
+[52:17] 应该是非常有损的。 
+should be extremely lossy.
+[52:19] 我失去了很多信息。 
+I lose a lot of information.
+[52:21] 确实，我愿意，因为我是其中之一。 
+And indeed, I do, because
+I'm one of these guys.
+[52:24] 我敢肯定，我和这个人有很大的不同， 
+And I'm pretty sure I'm very
+different from this guy,
+[52:27] 即使从美国的角度来看， 
+even though probably from
+an American perspective,
+[52:30] 我们都是一样的。 
+we're all the same.
+[52:31] 但是我认为我们喜欢略有不同的基因组。 
+But I think we have like
+slightly different genomes.
+[52:35] 所以现在我们有了这个
+And so the thing is
+now we have this--
+[52:39] 因此您会看到很多瑞士人参与其中。 
+so you see there's lots of
+Swiss that participate in this.
+[52:41] 但实际上，这两个主要组成部分
+But actually, those two
+principal components
+[52:43] 恢复某种欧洲地图。 
+recover sort of
+the map of Europe.
+[52:46] 我的意思是，再说一次，这实际上可能是细粒度的
+I mean, OK, again, this is
+actually maybe fine-grained
+[52:50] 给你们
+for you guys.
+[52:50] 但是在这里，有葡萄牙和西班牙， 
+But right here, there's
+Portugal and Spain,
+[52:52] 那是那些颜色。 
+which are those colors.
+[52:54] 所以这里是用颜色编码的。 
+So here is color-coded.
+[52:55] 这当然是土耳其，我们知道
+And here is Turkey, of
+course, which we know
+[52:58] 有非常不同的基因组。 
+has very different genomes.
+[53:02] 因此，土耳其人正处在边界。 
+So Turks are very
+at the boundary.
+[53:04] 这样您就可以看到所有的果岭。 
+So you can see all the greens.
+[53:06] 他们与其他一切相距甚远。 
+They stay very far apart
+from everything else.
+[53:08] 然后，这里的其余部分非常复杂。 
+And then the rest
+here is pretty mixed.
+[53:11] 但这有点恢复了-如果您查看颜色， 
+But it sort of recovers--
+if you look at the colors,
+[53:13] 它有点恢复。 
+it sort of recovers that.
+[53:14] 所以从某种意义上说，这两个主要组成部分
+So in a way, those two
+principal components
+[53:16] 只是地理特征。 
+are just the geographic feature.
+[53:18] 因此，如果您坚持要压缩所有基因组信息
+So if you insist to compress
+all the genomic information
+[53:25] 这些人分成两个数字，你实际上是
+of these people into two
+numbers, what you're actually
+[53:28] 要得到的是经度和纬度， 
+going to get is
+longitude and latitude,
+[53:31] 这有点令人惊讶，但不是
+which is somewhat
+surprising, but not
+[53:35] 如果您认为那是经过预处理的，那么那就多了。 
+so much if you think that's
+it's been preprocessed.
+[53:43] 那么，您在实践之外又做什么呢？ 
+So what do you do
+beyond practice?
+[53:47] 好吧，您可以尝试实际研究那些东西。 
+Well, you could try to
+actually study those things.
+[53:50] 如果再想一想
+If you think about
+it for a second,
+[53:52] 我们没有做任何统计。 
+we did not do any statistics.
+[53:54] 我跟您谈过有关IID的观察， 
+I talked to you about
+IID observations,
+[53:57] 但是我们从未使用过它们是独立的事实。 
+but we never used the fact
+that they were independent.
+[53:59] 我们通常使用独立性的方式
+The way we typically
+use independence
+[54:01] 也许有中心极限定理。 
+is to have central
+limit theorem, maybe.
+[54:04] 我提到了一个事实，即单词的协方差
+I mentioned the fact that
+the covariances of the word
+[54:06] 高斯实际上会给我一些独立的东西。 
+Gaussian would actually give me
+something which is independent.
+[54:09] 我们不在乎。 
+We didn't care.
+[54:10] 这是我们所做的数据分析，数据挖掘过程。 
+This was a data analysis, data
+mining process that we did.
+[54:16] 我给你要点，而你只是把它们放在曲柄上。 
+I give you points, and you just
+put them through the crank.
+[54:19] 有一个六步算法。 
+There was an algorithm
+in six steps.
+[54:21] 然后，您就完成了，这就是您所得到的。 
+And you just put it through
+and that's what you got.
+[54:23] 当然，现在有一些研究表明，好的， 
+Now, of course, there's some
+work which studies says, OK,
+[54:26] 如果我的数据实际上是通过某个过程生成的-也许， 
+if my data is actually generated
+from some process-- maybe,
+[54:30] 我的观点是具有某些结构的多元高斯
+my points are multivariate
+Gaussian with some structure
+[54:33] 在协方差上
+on the covariance--
+[54:34] 我如何恢复协方差结构？ 
+how well am I recovering
+the covariance structure?
+[54:37] 这就是统计数据的来源。 
+And that's where
+statistics kicks in.
+[54:38] 这就是我们停止的地方。 
+And that's where we stop.
+[54:41] 因此，这实际上很难研究。 
+So this is actually a bit
+more difficult to study.
+[54:44] 但是在某种程度上，这并不完全令人满意， 
+But in a way, it's not
+entirely satisfactory,
+[54:48] 因为我们可以为几个委员会工作
+because we could work
+for a couple of boards
+[54:50] 我基本上只是对它进行反向工程
+and I would just basically
+sort of reverse engineer this
+[54:53] 并找到一些最好的模型。 
+and find some models under which
+it's a good idea to do that.
+[54:57] 那些模型是什么？ 
+And what are those models?
+[54:58] 好吧，这些是可以为您提供的模型
+Well, those are the models
+that sort of give you
+[55:01] 您想要找到的突出方向。 
+sort of prominent directions
+that you want to find.
+[55:03] 它会说，是的，如果您有足够的观察力， 
+And it will say, yes, if you
+have enough observations,
+[55:06] 您会发现那些方向
+you will find those
+directions along which
+[55:08] 您的数据被拉长。 
+your data is elongated.
+[55:10] 因此，这基本上就是您想要做的。 
+So that's essentially
+what you want to do.
+[55:14] 这正是这件事告诉你的。 
+So that's exactly what
+this thing is telling you.
+[55:20] 那么统计数字从何而来？ 
+So where does the
+statistics lie from?
+[55:23] 好吧，请记住-其实这就是
+Well, everything, remember--
+so actually that's
+[55:26]  Alana感到困惑的地方–这个想法是说， 
+where Alana was confused--
+the idea was to say, well,
+[55:28] 如果我有一个真正的协方差矩阵西格玛
+if I have a true
+covariance matrix sigma
+[55:32] 我从来没有真正接触过它
+and I never really
+have access to it,
+[55:34] 我只是在经验协方差矩阵上运行PCA， 
+I'm just running PCA on the
+empirical covariance matrix,
+[55:38] 这些结果如何相关？ 
+how do those results relate?
+[55:41] 这是您可以学习的东西。 
+And this is something
+that you can study.
+[55:44] 例如，如果n变为无穷大
+So for example, if
+n goes to infinity
+[55:47] 点的数量（您的尺寸）是固定的， 
+and the number of points,
+your dimension, is fixed,
+[55:55] 然后S会以您想要的任何方式变为sigma。 
+then S goes to sigma
+in any sense you want.
+[56:00] 也许每个条目都将进入sigma的每个条目， 
+Maybe each entry is going
+to each entry of sigma,
+[56:02] 例如。 
+for example.
+[56:03] 因此，S是一个很好的估计器。 
+So S is a good estimator.
+[56:04] 我们知道经验协方差
+We know that the
+empirical covariance
+[56:06] 是一致的。 
+is a consistent as the mater.
+[56:07] 如果d是固定的，这实际上不是问题。 
+And if d is fixed, this
+is actually not an issue.
+[56:10] 因此，特别是如果您对样本协方差运行PCA 
+So in particular, if you run
+PCA on the sample covariance
+[56:14] 矩阵，例如，看v1，然后
+matrix, you look
+at, say, v1, then
+[56:16]  v1将收敛到sigma的最大特征向量
+v1 is going to converge to the
+largest eigenvector of sigma
+[56:20] 当n变为无穷大时，但对于d固定。 
+as n goes to infinity,
+but for d fixed.
+[56:23] 这是我们自60年代以来就知道的故事。 
+And that's a story that
+we know since the '60s.
+[56:27] 最近，人们开始挑战这一点。 
+More recently, people have
+started challenging this.
+[56:30] 因为修复尺寸后会发生什么
+Because what's happening
+when you fix the dimension
+[56:33] 然后让样本量达到无穷大
+and let the sample
+size go to infinity,
+[56:35] 您当然不允许这样做。 
+you're certainly not
+allowing for this.
+[56:38] 当然，这并没有向您解释任何事实
+It's certainly not explaining
+to you anything about the fact
+[56:41] 当d等于500,000且n等于1,400时。 
+when d is equal to 500,000
+and n is equal to 1,400.
+[56:44] 因为当d固定且n变为无穷大时， 
+Because when d is fixed
+and n goes to infinity,
+[56:46] 特别是n比d大很多
+in particular, n is
+much larger than d,
+[56:48] 这里不是这种情况。 
+which is not the case here.
+[56:50] 因此，当n远大于d时，一切进展顺利。 
+And so when n is much larger
+than d, things go well.
+[56:53] 但是，如果d小于n，则不清楚会发生什么。 
+But if d is less than n,
+it's not clear what happens.
+[56:57] 特别是，如果d为n的量级，那是怎么回事？ 
+And particularly, if d is of the
+order of n, what's happening?
+[57:01] 因此，在数学中有一个完整的理论
+So there's an entire theory
+in mathematics that's called
+[57:04] 研究随机行为的随机矩阵理论
+random matrix theory that
+studies the behavior of exactly
+[57:07] 这个问题-频谱的行为是什么- 
+this question-- what is the
+behavior of the spectrum--
+[57:10] 特征值和特征向量
+the eigenvalues
+and eigenvectors--
+[57:13] 我在其中放入随机数的矩阵，然后让- 
+of a matrix in which I put
+random numbers and I let--
+[57:16] 所以我在这里感兴趣的矩阵是X的矩阵
+so the matrix I'm interested
+in here is the matrix of X's.
+[57:19] 当我将所有X堆叠在一起时， 
+When I stack all my
+X's next to each other,
+[57:21] 所以这是大小的矩阵，例如d×n，所以每一列
+so that's a matrix of size,
+say, d by n, so each column
+[57:26] 大小为d，是一个人。 
+is of size d, it's one person.
+[57:28] 所以我把它们放了。 
+And so I put them.
+[57:29] 当我让矩阵达到无穷大时
+And when I let the
+matrix go to infinity,
+[57:31] 我让d和n都达到无穷大。 
+I let both d and n to infinity.
+[57:33] 但是我希望纵横比d / n保持恒定。 
+But I want the aspect ratio,
+d/n, to go to some constant.
+[57:37] 那就是他们的工作。 
+That's what they do.
+[57:38] 好在最后，您有了这个常数
+And what's nice is that in the
+end, you have this constant--
+[57:41] 我们称之为伽玛
+let's call it gamma--
+[57:42] 出现在所有的渐近中。 
+that shows up in
+all the asymptotics.
+[57:44] 然后您可以将其替换为d / n。 
+And then you can
+replace it by d/n.
+[57:46] 而且您知道仍然可以同时处理这两个维度
+And you know that you still have
+a handle of both the dimension
+[57:50] 和样本量。 
+and the sample size.
+[57:51] 而通常情况下，尺寸会消失，因为您让n 
+Whereas, usually the dimension
+goes away, as you let n
+[57:54] 达到无穷大而尺寸无穷大。 
+go to infinity without having
+dimension going to infinity.
+[57:57] 所以现在，当这种情况发生时， 
+And so now, when
+this happens, as soon
+[57:59] 随着d / n变为常数，您可以
+as d/n goes to a
+constant, you can
+[58:01] 表明最大的之间存在一个角度
+show that essentially there's
+an angle between the largest
+[58:07]  sigma的特征向量和S的最大特征向量，为n 
+eigenvector of sigma and the
+largest eigenvector of S, as n
+[58:14] 和d到无穷大。 
+and d go to infinity.
+[58:15] 总是有一个角度-您实际上可以
+There is always an
+angle-- you can actually
+[58:17] 明确地写出来。 
+write it explicitly.
+[58:18] 这个角度取决于这个比例
+And it's an angle that
+depends on this ratio, gamma--
+[58:22]  d / n的渐近比。 
+the asymptotic ratio of d/n.
+[58:24] 因此，人们对如何纠正有很多了解， 
+And so there's been a lot of
+understanding how to correct,
+[58:29] 如何注意这一点。 
+how to pay attention to this.
+[58:30] 这会产生一些以前被忽略的偏见。 
+This creates some biases that
+were sort of overlooked before.
+[58:34] 特别是当我这样做时
+In particular, when
+I do this, this
+[58:37] 不是解释方差的比例， 
+is not the proportion
+of explained variance,
+[58:40] 当n和d相似时。 
+when n and d are similar.
+[58:42] 这是根据S计算得出的估算数字。 
+This is an estimated
+number computed from S.
+[58:44] 这是从S计算得出的。所有这些人都是从S计算得出的。 
+This is computed from S. All
+these guys are computed from S.
+[58:48] 所以这些实际上并不完全是
+So those are
+actually not exactly
+[58:49] 您希望他们在哪里。 
+where you want them to be.
+[58:51] 有一些不错的工作可以让您重新校准
+And there's some nice work that
+allows you to recalibrate what
+[58:54] 这个比率应该是，如何计算这个比率， 
+this ratio should be, how
+this ratio should be computed,
+[58:57] 所以它更好地代表了什么
+so it's a better
+representative of what
+[58:59] 解释方差的比例实际上是。 
+the proportion of explained
+variance actually is.
+[59:04] 所以，当然，有一个问题
+So then, of course,
+there's the question
+[59:07] 的-因此d / n达到某个常数。 
+of-- so that's when d/n
+goes to some constant.
+[59:09] 所以最好的情况是60年代
+So the best case--
+so that was '60s--
+[59:12]  d是固定的，并且比d大得多。 
+d is fixed and it's
+much larger than d.
+[59:15] 然后随机矩阵理论告诉你d和n 
+And then random matrix theory
+tells you, well, d and n
+[59:18] 都是相同数量级的。 
+are sort of the same
+order of magnitude.
+[59:20] 当它们达到无穷大时，比率达到一定的常数。 
+When they go to infinity, the
+ratio goes to some constant.
+[59:23] 将其视为订单1。 
+Think of it as being order 1.
+[59:25] 公平地说，如果d比n大100倍，它仍然可以工作。 
+To be fair, if d is 100 times
+larger than n, it still works.
+[59:30] 这取决于您的想法
+And it depends on
+what you think what
+[59:32] 无限就在此时。 
+the infinity is at this point.
+[59:33] 但是我认为随机矩阵理论的结果非常有用。 
+But I think the random matrix
+theory results are very useful.
+[59:37] 但是即使在这种情况下，我告诉你
+But then even in
+this case, I told you
+[59:39]  S的前导特征向量
+that the leading
+eigenvector of S
+[59:42] 实际上是-的前导特征向量的角度
+is actually an angle of the
+leading eigenvector of--
+[59:48] 所以发生的是
+So what's happening is that--
+[59:56] 因此，假设d / n达到某个伽玛。 
+so let's say that d/n
+goes to some gamma.
+[60:01] 我声称的是，如果您看- 
+And what I claim is
+that, if you look at--
+[60:04] 这就是v1，那是S的v1。然后是- 
+so that's v1, that's the v1 of
+S. And then there's the v1 of--
+[60:09] 因此，该尺寸应为1。 
+so this should be of size 1.
+[60:11] 这就是sigma的v1。 
+So that's the v1 of sigma.
+[60:13] 然后这些东西将有一个角度， 
+Then those things are going
+to have an angle, which
+[60:15] 是伽玛的某些功能。 
+is some function of gamma.
+[60:16] 它很复杂，但是有伽马函数
+It's complicated, but
+there's a function of gamma
+[60:18] 你可以在那里看到。 
+that you can see there.
+[60:19] 还有一些模型。 
+And there's some models.
+[60:21] 当伽玛达到无穷大时， 
+When gamma goes
+to infinity, which
+[60:24] 表示d现在比n大得多， 
+means that d is now
+much larger than n,
+[60:27] 这个角度是90度
+this angle is 90
+degrees, which means
+[60:30] 你什么也没得到。 
+that you're getting nothing.
+[60:32] 是的
+Yeah.
+[60:33] 听众：如果d不在您的下飞机上， 
+AUDIENCE: If d is not
+on your lower plane,
+[60:37] 所以像伽玛是0，还有角度吗？ 
+so like gamma is 0,
+is there still angle?
+[60:40]  PHILIPPE RIGOLLET：不，但这是一致的- 
+PHILIPPE RIGOLLET: No,
+but that's consistent--
+[60:43] 在以下情况下保持一致的事实- 
+the fact that it's
+consistent when--
+[60:45] 所以角度是一个函数
+so the angle is a function--
+[60:46] 听众：d不是常数[音频不清晰]？ 
+AUDIENCE: d is not a
+constant [INAUDIBLE]??
+[60:52]  PHILIPPE RIGOLLET：d不是常数吗？ 
+PHILIPPE RIGOLLET:
+d is not a constant?
+[60:54] 那么，如果d小于n？ 
+So if d is little of n?
+[60:57] 然后，伽玛变为0，伽玛的f变为0。 
+Then gamma goes to 0 and
+f of gamma goes to 0.
+[60:59] 因此，γ的函数是- 
+So f of gamma is
+a function that--
+[61:02] 例如，如果g的f- 
+so for example, if f of gamma--
+[61:05] 这是角度的正弦，例如- 
+this is the sine of the
+angle, for example--
+[61:08] 那么它是一个从0开始的函数，就像这样。 
+then it's a function that starts
+at 0, and that goes like this.
+[61:15] 但是，只要伽玛为正，它就会从0消失。 
+But as soon as gamma is
+positive, it goes away from 0.
+[61:20] 所以现在当伽玛达到无穷大时
+So now when gamma
+goes to infinity,
+[61:24] 然后这东西成直角， 
+then this thing goes
+to a right angle, which
+[61:26] 表示我只是垃圾。 
+means I'm getting just junk.
+[61:27] 因此，这不是我的主要特征向量。 
+So this is not my
+leading eigenvector.
+[61:29] 那你怎么做呢？ 
+So how do you do this?
+[61:31] 就像统计中的所有地方一样， 
+Well, just like
+everywhere in statistics,
+[61:33] 您只需要做出更多假设即可。 
+you have to just make
+more assumptions.
+[61:35] 你必须假设你不是
+You have to assume
+that you're not
+[61:36] 寻找领先的特征向量或方向
+looking for the leading
+eigenvector or the direction
+[61:39] 差异最大。 
+that carries the most variance.
+[61:40] 但是，您可能正在寻找一个特殊的方向。 
+But you're looking, maybe,
+for a special direction.
+[61:42] 稀疏PCA就是这样做的。 
+And that's what
+sparse PCA is doing.
+[61:44] 稀疏PCA表示，我没有寻找新的方向
+Sparse PCA is saying, I'm not
+looking for any direction new
+[61:48] 差异最大。 
+that carries the most variance.
+[61:50] 我只是在寻找稀疏的新方向。 
+I'm only looking for a
+direction new that is sparse.
+[61:54] 例如，将其视为具有10个非零坐标。 
+Think of it, for example, as
+having 10 non-zero coordinates.
+[61:58] 因此，仍有很多方向需要寻找。 
+So that's a lot of
+directions still to look for.
+[62:02] 但是一旦您这样做，那么您实际上
+But once you do this,
+then you actually
+[62:05] 不仅-有几件事
+have not only--
+there's a few things
+[62:07] 你实际上是从这样做中得到的。 
+that actually you
+get from doing this.
+[62:08] 第一个是您实际上是在更换
+The first one is you
+actually essentially replace
+[62:12]  d by k，这意味着n现在- 
+d by k, which means
+that n now just--
+[62:15] 抱歉，我们说S个非零系数。 
+I'm sorry, let's say S
+non-zero coefficients.
+[62:18] 您用S替换d，这意味着仅n 
+You replace d by S,
+which means that n only
+[62:21] 它必须比S大得多，才能真正起作用。 
+has to be much larger than S
+for this thing to actually work.
+[62:24] 现在，当然，您已将目标设定为较弱。 
+Now, of course, you've
+set your goal weaker.
+[62:26] 您的目标不是找到任何方向，而只是
+Your goal is not to
+find any direction, only
+[62:28] 稀疏的方向。 
+a sparse direction.
+[62:30] 但是有一些非常有价值的东西
+But there's something
+very valuable
+[62:31] 关于稀疏的方向，是他们实际上
+about sparse directions,
+is that they actually
+[62:33] 是可以解释的。 
+are interpretable.
+[62:35] 当我找到v-- 
+When I found the v--
+[62:37] 假设我之前找到的v 
+let's say that the v
+that I found before
+[62:40] 是0.2，然后是0.9，然后是1.1减去3，等等。 
+was 0.2, and then 0.9, and
+then 1.1 minus 3, et cetera.
+[62:48] 这就是我主要特征向量的坐标
+So that was the coordinates
+of my leading eigenvector
+[62:51] 在原始坐标系中。 
+in the original
+coordinate system.
+[62:54] 这是什么意思？ 
+What does it mean?
+[62:55] 好吧，这意味着如果我看到很多， 
+Well, it means that if
+I see a large number,
+[62:57] 这意味着这个v非常接近
+that means that this
+v is very close--
+[63:01] 这就是我原来的坐标系
+so that's my original
+coordinate system.
+[63:03] 我们称其为e1和e2。 
+Let's call it e1 and e2.
+[63:05] 所以只有1，0;然后是0、1 
+So that's just 1,
+0; and then 0, 1.
+[63:09] 然后清楚地从v的坐标
+Then clearly, from
+the coordinates of v,
+[63:11] 我可以判断我的v是这样还是这样， 
+I can tell if my v is like
+this, or it's like this,
+[63:13] 或像这样。 
+or it's like this.
+[63:15] 好吧，我的意思是，它们的大小都应该相同。 
+Well, I mean, they should
+all be of the same size.
+[63:18] 所以我可以知道是在这里还是在这里
+So I can tell if
+it's here or here
+[63:20] 还是这里，取决于-就像这里， 
+or here, depending
+on-- like here,
+[63:24] 那意味着我要去看一些东西
+that means I'm going
+to see something
+[63:26]  Y坐标比X坐标大得多。 
+where the Y-coordinate it much
+larger than the X-coordinate.
+[63:29] 在这里，我将看到X坐标很大的地方
+Here, I'm going to see something
+where the X-coordinate is much
+[63:30] 大于Y坐标。 
+larger than the Y-coordinate.
+[63:32] 在这里，我会看到一些东西
+And here, I'm going
+to see something
+[63:33]  X坐标的大小大致相同
+where the X-coordinate
+is about the same size
+[63:35]  Y坐标的
+of the Y-coordinate.
+[63:38] 所以当事情开始变大时， 
+So when things
+starts to be bigger,
+[63:40] 您将不得不做出选择。 
+you're going to have
+to make choices.
+[63:42] 变大意味着什么- 
+What does it mean to be bigger--
+[63:43] 当d为100,000时，我的意思是总和
+when d is 100,000,
+I mean, the sum
+[63:48] 这些家伙的平方必须等于1。 
+of the squares of those
+guys have to be equal to 1.
+[63:51] 所以它们都是非常小的数字。 
+So they're all
+very small numbers.
+[63:52] 因此，您很难分辨哪个是很大的数字
+And so it's hard for you to
+tell which one is a big number
+[63:54] 哪一个是少数。 
+and which ones is
+a small number.
+[63:56] 你为什么想知道这个？ 
+Why would you want to know this?
+[63:57] 因为这实际上是在告诉你
+Because it's
+actually telling you
+[63:58] 如果v非常接近e1，则意味着e1- 
+that if v is very close to
+e1, then that means that e1--
+[64:03] 以基因为例， 
+in the case of the
+gene example, that
+[64:04] 意味着e1是非常重要的基因。 
+would mean that e1 is the
+gene that's very important.
+[64:08] 也许实际上只有两个基因
+Maybe there's actually
+just two genes
+[64:10] 解释了这两件事。 
+that explain those two things.
+[64:12] 这些就是已经被挑选出来的基因。 
+And those are the genes
+that have been picked up.
+[64:14] 我对地理位置编码的基因有两个， 
+There's two genes that I
+encode geographic location,
+[64:16] 就是这样。 
+and that's it.
+[64:18] 所以这对你很重要
+And so it's very
+important for you
+[64:19] 能够解释v的含义。 
+to be able to
+interpret what v means.
+[64:21] 如果价值很大，则意味着
+Where it has large
+values, it means
+[64:23] 可能对e1，e2和e3具有较大的值。 
+that maybe it has large
+values for e1, e2, and e3.
+[64:26] 这意味着它是e1，e2和e3的组合。 
+And it means that it's a
+combination of e1, e2, and e3.
+[64:28] 现在，您可以解释，因为您有
+And now, you can
+interpret, because you have
+[64:30] 仅找到三个变量。 
+only three variables to find.
+[64:33] 因此，稀疏的PCA可以实现这一点。 
+And so sparse PCA
+builds that in.
+[64:36] 稀疏PCA说，听着，我要走了
+Sparse PCA says,
+listen, I'm going
+[64:39] 最多要有10个非零系数。 
+to want to have at most
+10 non-zero coefficients.
+[64:42] 其余的我想设为0。 
+And the rest, I want to be 0.
+[64:44] 我希望最多可以合并10个
+I want to be able to be a
+combination of at most 10
+[64:47] 我原来的变量。 
+of my original variables.
+[64:50] 现在，我可以进行解释了。 
+And now, I can do
+interpretation.
+[64:52] 因此，稀疏PCA的问题是
+So the problem
+with sparse PCA is
+[64:54] 在数字上变得非常困难
+that it becomes very
+difficult numerically
+[64:57] 解决这个问题。 
+to solve this problem.
+[64:58] 我可以写
+I can write it.
+[64:59] 所以问题是简单地最大化方差u 
+So the problem is simply
+maximize the variance u
+[65:05] 换位，例如，苏服从-嗯， 
+transpose, say, Su
+subject to-- well,
+[65:09] 我想让u2等于1。 
+I wanted to have u2 equal to 1.
+[65:12] 这就是原始的PCA。 
+So that's the original PCA.
+[65:14] 但是现在，我也希望
+But now, I also
+want that the sum
+[65:16]  uj的不等于0的指标
+of the indicators of the
+uj that are not equal to 0
+[65:19] 最多是10。 
+is at most, say, 10.
+[65:23] 此约束是非常不凸的。 
+This constraint is
+very non-convex.
+[65:26] 所以我可以放松一下
+So I can relax it
+to a convex one
+[65:28] 就像我们对线性侵略所做的一样
+like we did for
+linear aggression.
+[65:31] 但是现在，我完全弄明白了事实
+But now, I've totally
+messed up with the fact
+[65:33] 我可以使用线性代数来解决这个问题。 
+that I could use linear
+algebra to solve this problem.
+[65:37] 所以现在，您必须经历更复杂的事情
+And so now, you have to go
+through much more complicated
+[65:40] 优化技术，称为
+optimization techniques,
+which are called
+[65:42] 半定程序，不
+semidefinite
+programs, which do not
+[65:44] 在高尺寸方面可以很好地缩放。 
+scale well in high dimensions.
+[65:46] 所以你必须做很多技巧
+And so you have to do
+a bunch of tricks--
+[65:48] 数字技巧。 
+numerical tricks.
+[65:49] 但是有些软件包实现了一些启发式
+But there are some packages
+that implements some heuristics
+[65:52] 或其他一些东西
+or some other things--
+[65:55] 各种迭代阈值
+iterative
+thresholding, all sorts
+[65:56] 您可以执行的各种数字技巧。 
+of various numerical
+tricks that you can do.
+[65:58] 但是他们正试图解决的问题正是此。 
+But the problem they are trying
+to solve is exactly this.
+[66:01] 在我拥有规范1的所有方向中， 
+Among all directions that
+I have norm 1, of course,
+[66:03] 因为这是最多的方向
+because it's the direction
+that have at most, say,
+[66:06]  10个非零坐标，我想找到一个最大化的坐标
+10 non-zero coordinates, I want
+to find the one that maximizes
+[66:09] 经验方差。 
+the empirical variance.
+[66:23] 其实，让我让我这样。 
+Actually, let me let
+me just so you this.
+[66:41] 我想向您展示PCA的输出
+I wanted to show
+you an output of PCA
+[66:47] 人们实际上在尝试直接做的事情- 
+where people are actually
+trying to do directly--
+[66:56] 也许-你去了。 
+maybe-- there you go.
+[67:20] 所以在这里，您会看到这是SPSS。 
+So right here, you
+see this is SPSS.
+[67:26] 那是一个统计软件。 
+That's a statistical software.
+[67:29] 这是经过预处理的输出
+And this is an output
+that was preprocessed
+[67:33] 由专业人士- 
+by a professional--
+[67:34] 不进行预处理，后处理。 
+not preprocessed,
+post-processed.
+[67:36] 这就是他们阅读PCA的地方。 
+So that's something
+where they read PCA.
+[67:38] 那么数据是什么呢？ 
+So what is the data?
+[67:39] 这是有关您询问医生的原始数据
+This is raw data
+about you ask doctors
+[67:43] 他们对特定销售行为的看法
+what they think of the
+behavior of a particular sales
+[67:47] 制药公司代表。 
+representative for
+pharmaceutical companies.
+[67:49] 所以制药公司正在尝试
+So pharmaceutical
+companies are trying
+[67:51] 改善他们的销售队伍。 
+to improve their sales force.
+[67:52] 他们问医生
+And they're asking
+doctors how would they
+[67:56] 率-他们对互动有何评价
+rate-- what do they value
+about their interaction
+[67:58] 与销售代表。 
+with a sales representative.
+[68:01] 所以基本上，有很多问题。 
+So basically, there's
+a bunch of questions.
+[68:04] 人们对某些趋势提出了可靠的看法， 
+One offers credible point
+of view on something trends,
+[68:10] 提供宝贵的交流机会。 
+provides valuable
+networking opportunities.
+[68:12] 这是一个问题。 
+This is one question.
+[68:13] 将此评分从1到5进行评分。 
+Rate this on a
+scale from 1 to 5.
+[68:15] 这就是问题。 
+That was the question.
+[68:16] 他们有很多这样的问题。 
+And they had a bunch
+of questions like this.
+[68:18] 然后，他们要求1,000名医生进行这些评分。 
+And then they asked 1,000
+doctors to make those ratings.
+[68:22] 他们想要什么-所以现在每个医生
+And what they want--
+so each doctor now
+[68:24] 是收视率的向量。 
+is a vector of ratings.
+[68:25] 他们想知道是否有不同的医生群体， 
+And they want to know if there's
+different groups of doctors,
+[68:28] 医生对此有何反应。 
+what do doctors respond to.
+[68:30] 如果有不同的群体，那么
+If there's different
+groups, then
+[68:31] 也许他们知道他们可以真正解决他们
+maybe they know that they
+can actually address them
+[68:33] 分别等等。 
+separately, et cetera.
+[68:35] 因此，这样做当然有很多问题。 
+And so to do that, of course,
+there's lots of questions.
+[68:37] 因此，您想要的只是第一个项目
+And so what you want is
+to just first project
+[68:39] 缩小尺寸，因此您实际上可以
+into lower dimensions,
+so you can actually
+[68:41] 可视化正在发生的事情。 
+visualize what's going on.
+[68:42] 这就是为此所做的。 
+And this is what
+was done for this.
+[68:44] 所以这是第三个主要成分
+So these are the three
+first principal component
+[68:47] 出来了。 
+that came out.
+[68:49] 即使我们订购了lambda的值， 
+And even though we ordered
+the values of the lambdas,
+[68:52] 没有理由应该对v的条目进行排序。 
+there's no reason why the
+entries of v should be ordered.
+[68:56] 如果您在这里查看v的值， 
+And if you look at
+the values of v here,
+[68:57] 他们看起来很有秩序。 
+they look like they're
+pretty much ordered.
+[68:59] 它始于0.784，然后您位于此处的0.3。 
+It starts at 0.784, and then
+you're at 0.3 around here.
+[69:04] 有些事情再次上升，然后又下降。 
+There's something that goes up
+again, and then you go down.
+[69:06] 实际上，每次再次上升时，它都会标记为红色。 
+Actually, it's marked in red
+every time it goes up again.
+[69:11] 所以现在，他们说的是， 
+And so now, what they
+did is they said,
+[69:13] 好，我需要解释那些家伙。 
+OK, I need to
+interpret those guys.
+[69:16] 我要告诉你这是什么。 
+I need to tell you what this is.
+[69:18] 如果您告诉我，我们发现了主要成分
+If you tell me, we found
+the principal component
+[69:21] 确实区分了两组医生
+that really discriminates
+the doctors in two groups,
+[69:24] 制药公司会再找你
+the drug company is
+going to come back to you
+[69:26] 然后说，好的，这是什么特征？ 
+and say, OK, what is
+this characteristic?
+[69:29] 你说，哦，这实际上是线性组合
+And you say, oh, it's
+actually a linear combination
+[69:31]  40个特征。 
+of 40 characteristics.
+[69:33] 他们说，很好，我们不需要您这样做。 
+And they say, well, we
+don't need you to do that.
+[69:35] 我的意思是，它不能是任何东西的线性组合
+I mean, it cannot be a linear
+combination of anything you
+[69:38] 没问。 
+didn't ask.
+[69:39] 因此，首先， 
+And so for that,
+first of all, there's
+[69:41]  PCA的后处理，说，好吧，一旦我实际执行了， 
+a post-processing of PCA, which
+says, OK, once I actually,
+[69:44] 例如，发现了三个主要成分， 
+say, found three
+principal components,
+[69:46] 这意味着我找到了三维空间
+that means that I found the
+dimension three space on which
+[69:51] 我想表达我的观点。 
+I want to project my points.
+[69:52] 在这个基础上，我可以选择任何方向。 
+In this base, I can pick
+any direction I want.
+[69:55] 所以第一件事就是你要做
+So the first thing
+is that you do
+[69:57] 某种本地安排，以便那些事情
+some sort of local arrangements,
+so that those things
+[69:59] 看起来它们先增加后减少。 
+look like they are increasing
+and then decreasing.
+[70:01] 因此，您只需更改，即可旋转坐标系
+So you just change, you
+rotate your coordinate system
+[70:06] 在您实际上孤立的这三维空间中。 
+in this three dimensional space
+that you've actually isolated.
+[70:09] 因此，一旦执行此操作，原因就是
+And so once you do
+this, the reason
+[70:11] 这样做是因为
+to do that is that
+it sort of makes
+[70:13] 它们之间的差异很大，差异很大
+them big, sharp differences
+between large and small values
+[70:16] 你所拥有的东西的坐标。 
+of the coordinates
+of the thing you had.
+[70:18] 为什么要这样？ 
+And why do you want this?
+[70:19] 因为现在你可以说，嗯，我
+Because now, you
+can say, well, I'm
+[70:21] 开始看那些具有较大价值的东西。 
+going to start looking at the
+ones that have large values.
+[70:23] 他们怎么说？ 
+And what do they say?
+[70:24] 他们说，深入的知识，深入的知识， 
+They say in-depth knowledge,
+in-depth knowledge,
+[70:26] 深入的知识，知识。 
+in-depth knowledge,
+knowledge about.
+[70:28] 这东西显然是
+This thing is clearly
+something that
+[70:30] 真正刻画了我的销售知识
+actually characterizes
+the knowledge of my sales
+[70:34] 代表。 
+representative.
+[70:35] 因此，医生对此很敏感。 
+And so that's something that
+doctors are sensitive to.
+[70:38] 那才是真正的区别
+That's something that
+really discriminates
+[70:40] 医生以某种方式。 
+the doctors in a way.
+[70:40] 这些方面有很多差异， 
+There's lots of variance
+along those things,
+[70:43] 或至少有很多差异- 
+or at least a lot of variance--
+[70:45] 我的意思是，医生的经验是分开的
+I mean, doctors are separate
+in terms of their experience
+[70:47] 关于这一点。 
+with respect to this.
+[70:49] 所以他们说，好吧， 
+And so what they
+did is said, OK,
+[70:51] 所有这些人，其中一些人具有很高的价值， 
+all these guys, some of
+those they have large values,
+[70:53] 但我不知道如何解释它们。 
+but I don't know how
+to interpret them.
+[70:55] 因此，我将把第一个步骤放在首位， 
+And so I'm just going
+to put the first block,
+[70:56] 我将其称为医学知识， 
+and I'm going to call
+it medical knowledge,
+[70:58] 因为所有这些都是关于医疗知识的。 
+because all those things are
+knowledge about medical stuff.
+[71:01] 然后在这里，我不知道该如何解释那些家伙。 
+Then here, I didn't know
+how to interpret those guys.
+[71:03] 但是那些家伙，一大堆大坐标， 
+But those guys, there's a big
+clump of large coordinates,
+[71:06] 他们尊重我的时间，倾听，友善
+and they're about respectful
+of my time, listens, friendly
+[71:10] 但礼貌。 
+but courteous.
+[71:12] 这一切都与互动的质量有关。 
+This is all about the
+quality of interaction.
+[71:14] 因此，该障碍实际上称为交互质量。 
+So this block was actually
+called quality of interaction.
+[71:17] 然后有第三个街区， 
+And then there
+was a third block,
+[71:18] 您可以看出开始有些稀疏。 
+which you can tell starts to
+be spreading a little thin.
+[71:21] 他们很少。 
+There's just much less of them.
+[71:22] 但是这个东西实际上叫做
+But this thing was
+actually called
+[71:24] 公正和批评的意见。 
+fair and critical opinion.
+[71:26] 因此，现在您有了三个不同的方向。 
+And so now, you have three
+discriminating directions.
+[71:30] 您实际上可以给他们起个名字。 
+And you can actually
+give them a name.
+[71:31] 如果灰色框中的所有数字都不会很漂亮
+Wouldn't it be beautiful if
+all the numbers in the gray box
+[71:34] 非零，其他所有数字
+came non-zero and
+all the other numbers
+[71:36] 归零-没有临时选择。 
+came zero-- there
+was no ad hoc choice.
+[71:38] 我的意思是，这可能是一个工作的下午
+I mean, this is probably
+an afternoon of work
+[71:40] 喜欢刮掉所有这些数字
+to like scratch out
+all these numbers
+[71:42] 并输入所有这些颜色代码，等等。 
+and put all these
+color codes, et cetera.
+[71:44] 鉴于您可能会告诉您， 
+Whereas, you could just have
+something that tells you,
+[71:47] 好的，这是非零值。 
+OK, here are the non-zeros.
+[71:49] 如果您实际上可以就为什么这件事做一个故事
+If you can actually make a story
+around why this group of thing
+[71:52] 实际上是有道理的，例如医学知识， 
+actually makes sense, such
+as it is medical knowledge,
+[71:54] 那对你有好处
+then good for you.
+[71:55] 否则，您可以说，我不能。 
+Otherwise, you could
+just say, I can't.
+[71:57] 这就是稀疏PCA为您所做的。 
+And that's what sparse
+PCA does for you.
+[71:59] 稀疏PCA输出所有这些数字将
+Sparse PCA outputs something
+where all those numbers would
+[72:02] 为零。 
+be zero.
+[72:03] 确切地说，将有10个非零坐标。 
+And there would be exactly,
+say, 10 non-zero coordinates.
+[72:06] 您可以关闭此旋钮10。 
+And you can turn
+this knob off 10.
+[72:08] 你可以做到9。 
+You can make it 9.
+[72:11] 根据你的专业，也许
+Depending on what
+your major is, maybe
+[72:13] 您实际上可以继续使用其中的20个
+you can actually go
+on with 20 of them
+[72:15] 并有能力讲20个故事
+and have the ability to
+tell the story about 20
+[72:18] 不同的变量以及它们如何适合同一组。 
+different variables and how
+they fit in the same group.
+[72:20] 根据您的感受， 
+And depending on
+how you feel, it's
+[72:22] 易于重新运行PCA，具体取决于值
+easy to rerun the PCA
+depending on the value
+[72:25] 你想在这里。 
+that you want here.
+[72:26] 因此，您实际上可以提出一个
+And so you could actually
+just come up with the one
+[72:28] 你比较喜欢。 
+you prefer.
+[72:30] 这就是PCA的稀疏之处
+And so that's the
+sparse PCA thing
+[72:32] 我正在尝试推广。 
+which I'm trying to promote.
+[72:33] 我的意思是，这不是超级普及。 
+I mean, this is not
+super well-spread.
+[72:35] 这是一个相当新的想法，可能最多10年了。 
+It's a fairly new idea,
+maybe at most 10 years old.
+[72:39] 而且它还没有完全普及
+And it's not
+completely well-spread
+[72:40] 在统计数据包中。 
+in statistical packages.
+[72:42] 但这显然是人
+But that's clearly
+what people are
+[72:44] 试图模拟当前。 
+trying to emulate currently.
+[72:46] 是？ 
+Yes?
+[72:47] 听众：那到底是什么
+AUDIENCE: So what
+exactly does it
+[72:48] 意味着医生差异很大
+mean that the doctors
+have a lot of variance
+[72:50] 在医学知识，互动质量， 
+in medical knowledge,
+quality of interaction,
+[72:53] 公正和批评的意见？ 
+and fair and critical opinion?
+[72:55] 就像是说这些都是主要的
+Like, it was saying that
+these are like the main things
+[73:00] 医生有所不同，有些医生在乎。 
+that doctors vary on,
+some doctors care.
+[73:02] 就像我们可以通过以下方式来描述医生的特征一样，哦， 
+Like we could sort of
+characterize a doctor by, oh,
+[73:05] 他非常关心医学知识，非常关心
+he cares this much about
+medical knowledge, this much
+[73:08] 关于互动的质量， 
+about the quality
+of interaction,
+[73:09] 这与批评意见有关。 
+and this much about
+critical opinion.
+[73:11] 这说明了这位医生想要的大部分故事
+And that says most of the story
+about what this doctor wants
+[73:14] 来自毒品代表？ 
+from a drug representative?
+[73:17]  PHILIPPE RIGOLLET：并非如此。 
+PHILIPPE RIGOLLET: Not really.
+[73:20] 我的意思是，好的，假设您选择了一个。 
+I mean, OK, let's say
+you pick only one.
+[73:22] 因此，这意味着您将带走所有医生， 
+So that means that you
+would take all your doctors,
+[73:31] 而你将有一个方向
+and you would have
+one direction, which
+[73:33] 是互动的质量。 
+is quality of interaction.
+[73:36] 而且这里只会分布点。 
+And there would be just
+spread out points here.
+[73:42] 因此，可能发生两件事。 
+So there are two
+things that can happen.
+[73:44] 第一个是这里有一个团块， 
+The first one is that
+there's a clump here,
+[73:46] 然后这里有一个团块。 
+and then there's a clump here.
+[73:49] 那仍然代表着很大的差异。 
+That still represents
+a lot of variance.
+[73:50] 如果发生这种情况，您可能
+And if this happens,
+you probably
+[73:52] 想返回您的数据并查看
+want to go back in
+your data and see
+[73:55] 这些人被其他人拜访过吗
+were these people visited
+by a different group
+[73:58] 比这些人，或者也许这些人
+than these people,
+or maybe these people
+[74:00] 有不同的专业
+have a different specialty.
+[74:05] 我的意思是，您必须回顾一下数据
+I mean, you have to
+look back at your data
+[74:07] 并尝试了解您为什么会有
+and try to understand
+why you would have
+[74:08] 不同的人。 
+different groups of people.
+[74:09] 如果它完全均匀地散开， 
+And if it's like completely
+evenly spread out,
+[74:13] 那就是说，如果你
+then all it's saying
+is that, if you
+[74:15] 希望有统一的互动质量， 
+want to have a uniform
+quality of interaction,
+[74:18] 您需要对此采取措施。 
+you need to take
+measures on this.
+[74:20] 您需要有这个才能不被歧视。 
+You need to have this to
+not be discrimination.
+[74:24] 但我认为，当它变得有趣时，并不是
+But I think really when it's
+becoming interesting it's not
+[74:26] 当它完全散开时。 
+when it's complete spread out.
+[74:27] 这是一个很大的团体。 
+It's when there's
+a big group here.
+[74:29] 然后这里几乎没有人
+And then there's
+almost no one here,
+[74:30] 然后这里有一大群人
+and then there's
+a big group here.
+[74:32] 然后也许您可以做些事情。 
+And then maybe there's
+something you can do.
+[74:34] 因此，这两件事实际上给了您很多差异。 
+And so those two things actually
+give you a lot of variance.
+[74:40] 所以实际上，也许我会谈论这个。 
+So actually, maybe
+I'll talk about this.
+[74:47] 在这里，这是一种混合。 
+Here, this is sort of a mixture.
+[74:49] 您混合了两种不同的人群
+You have a mixture of
+two different populations
+[74:51] 医生。 
+of doctors.
+[74:53] 结果发现主成分分析
+And it turns out that
+principal component analysis--
+[74:56] 所以混合是当你有不同的人口时
+so a mixture is when you
+have different populations--
+[74:59] 想像两个高斯人
+think of like two
+Gaussians that are just
+[75:02] 集中在两个不同的点
+centered at two
+different points,
+[75:03] 也许它们的尺寸很大。 
+and maybe they're
+in high dimensions.
+[75:05] 那是一群人， 
+And those are
+clusters of people,
+[75:07] 并且您希望能够区分这些家伙。 
+and you want to be able to
+differentiate those guys.
+[75:09] 如果尺寸很大， 
+If you're in very
+high dimensions,
+[75:10] 这将非常困难。但是一个
+it's going to be very
+difficult. But one
+[75:12] 人们首先使用的处理工具之一就是进行PCA。 
+of the first processing tools
+that people do is to do PCA.
+[75:14] 因为如果你有一个大团体和一个大团体
+Because if you have one big
+group here and one big group
+[75:18] 在这里，这意味着有很多差异
+here, it means that
+there's a lot of variance
+[75:19] 沿着穿过中心的方向
+along the direction that
+goes through the centers
+[75:21] 在这些群体中。 
+of those groups.
+[75:22] 这基本上就是这里发生的事情。 
+And that's essentially
+what happened here.
+[75:24] 您可能会认为这是高尺寸的两个斑点。 
+You could think of this as being
+two blobs in high dimensions.
+[75:27] 但是你真的只是在投射它们
+But you're really
+just projecting them
+[75:29] 一维。 
+into one dimension.
+[75:30] 希望这个尺寸穿过中心。 
+And this dimension, hopefully,
+goes through the center.
+[75:33] 因此，作为预处理-所以我将在这里停止。 
+And so as preprocessing--
+so I'm going to stop here.
+[75:37] 但是PCA不仅用于减小尺寸。 
+But PCA is not just made
+for dimension reduction.
+[75:42] 例如，它用于混合物。 
+It's used for
+mixtures, for example.
+[75:44] 当您拥有图形数据时，也会使用它。 
+It's also used when you
+have graphical data.
+[75:47]  PCA的想法是什么？ 
+What is the idea of PCA?
+[75:48] 只是说，如果您有一个矩阵，似乎矩阵很低
+It just says, if you have a
+matrix that seems to have low
+[75:53] 等级-意味着很多lambda我就是
+rank-- meaning that there's a
+lot of those lambda i's that
+[75:56] 很小- 
+are very small--
+[75:57] 然后我看到加上噪音，然后
+and then I see that
+plus noise, then
+[76:00] 对此做PCA是个好主意。 
+it's a good idea to
+do PCA on this thing.
+[76:02] 特别是人们在网络中经常使用它。 
+And in particular, people
+use that in networks a lot.
+[76:05] 因此，您采用了图的邻接矩阵- 
+So you take the adjacency
+matrix of a graph--
+[76:08] 好吧，您需要对其进行一点预处理，所以它看起来不错。 
+well, you sort of preprocess it
+a little bit, so it looks nice.
+[76:11] 然后，如果您有两个社区
+And then if you have, for
+example, two communities
+[76:13] 在那里看起来应该像
+in there, it should
+look like something that
+[76:15] 是低级加一些噪音。 
+is low rank plus some noise.
+[76:18] 低等级意味着只有极少数非零
+And low rank means that there's
+just very few non-zero--
+[76:22] 好吧，低等级意味着这个。 
+well, low rank means this.
+[76:24] 低等级表示如果您进行碎石图， 
+Low rank means that if
+you do the scree plot,
+[76:26] 您会看到类似这样的内容， 
+you will see
+something like this,
+[76:27] 这意味着如果您丢掉所有较小的， 
+which means that if you throw
+out all the smaller ones,
+[76:29] 它在整体结构中并不重要。 
+it should not really matter
+in the overall structure.
+[76:33] 因此，您可以使用所有- 
+And so you can use all--
+[76:35] 这些技术如今已无处不在
+these techniques are used
+everywhere these days, not
+[76:39] 仅在PCA中。 
+just in PCA.
+[76:39] 因此，我们称PCA为统计学家。 
+So we call it PCA
+as statisticians.
+[76:41] 但是人们称其为光谱方法或SVD。 
+But people call it the
+spectral methods or SVD.
+[76:46] 所以大家
+So everyone--

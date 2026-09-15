@@ -1,0 +1,4150 @@
+[00:00] 广告素材下提供了以下内容
+The following content is
+provided under a Creative
+[00:02] 普通许可。 
+Commons license.
+[00:03] 您的支持将帮助MIT OpenCourseWare 
+Your support will help
+MIT OpenCourseWare
+[00:06] 继续免费提供高质量的教育资源。 
+continue to offer high quality
+educational resources for free.
+[00:10] 捐款或查看其他材料
+To make a donation or to
+view additional materials
+[00:12] 从数百门麻省理工学院课程中访问MIT OpenCourseWare 
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+[00:16] 在ocw.mit.edu。 
+at ocw.mit.edu.
+[00:21]  PHILIPPE RIGOLLET：欢迎回来。 
+PHILIPPE RIGOLLET:
+So welcome back.
+[00:23] 我们将以最大可能性结束本章
+We're going to finish this
+chapter on maximum likelihood
+[00:27] 估计。 
+estimation.
+[00:28] 上次，我简短地提到了一些
+And last time, I briefly
+mentioned something that
+[00:30] 被称为费舍尔信息。 
+was called Fisher information.
+[00:33] 因此，一般来说，费舍尔信息
+So Fisher information,
+in general,
+[00:35] 当您具有多变量参数时，实际上是一个矩阵
+is actually a matrix when you
+have a multivariate parameter
+[00:40]  θ。 
+theta.
+[00:41] 因此，例如，如果theta的尺寸为d， 
+So if theta, for example,
+is of dimension d,
+[00:44] 然后是Fisher信息矩阵
+then the Fisher
+information matrix
+[00:46] 将按d矩阵进行广告。 
+is going to be a d by d matrix.
+[00:48] 您可以看到，因为它是外部产品。 
+You can see that, because
+it's the outer product.
+[00:51] 所以它的形式是梯度梯度转置。 
+So it's of the form
+gradient gradient transpose.
+[00:55] 所以如果是梯度梯度转置
+So if it's gradient
+gradient transpose,
+[00:57] 梯度是d维。 
+the gradient is
+the d dimensional.
+[00:59] 因此，梯度乘以梯度转置就是d矩阵。 
+And so gradient times gradient
+transpose is a d by d matrix.
+[01:03] 所以这个矩阵实际上包含
+And so this matrix
+actually contains--
+[01:07] 好吧，告诉您它被称为Fisher信息矩阵。 
+well, tells you it's called
+Fisher information matrix.
+[01:09] 所以这基本上是在告诉你多少
+So it's basically
+telling you how much
+[01:11] 有关theta的信息在您的模型中。 
+information about the
+theta is in your model.
+[01:14] 因此，例如，如果您的模型参数化得很好， 
+So for example, if your model
+is very well-parameterized,
+[01:17] 那么您将获得很多信息。 
+then you will have a
+lot of information.
+[01:20] 你会有更高的- 
+You will have a higher--
+[01:21] 因此，让我们将其视为标量数， 
+so let's think of it as
+being a scalar number,
+[01:23] 现在只有一个数字-所以您要去
+just one number
+now-- so you're going
+[01:25] 获得有关您的参数的更多信息
+to have a larger information
+about your parameter
+[01:27] 在相同的概率分布中。 
+in the same probability
+distribution.
+[01:30] 但是，如果开始有一种怪异的方式来参数化模型， 
+But if start having a weird
+way to parameterize your model,
+[01:35] 那么Fisher信息实际上将下降。 
+then the Fisher information
+is actually going to drop.
+[01:38] 因此，举一个具体的例子，例如
+So as a concrete example
+think of, for example,
+[01:40] 高斯模型中感兴趣的参数， 
+a parameter of interest
+in a Gaussian model,
+[01:44] 平均值为零的地方。 
+where the mean is
+known to be zero.
+[01:45] 但是您感兴趣的是方差，sigma平方。 
+But what you're interested in
+is the variance, sigma squared.
+[01:48] 如果我对西格玛广场感兴趣， 
+If I'm interested
+in sigma square,
+[01:50] 我可以通过sigma，sigma squared，sigma来参数化模型
+I could parameterize my model
+by sigma, sigma squared, sigma
+[01:53] 到第四，西格玛到24。 
+to the fourth, sigma to 24th.
+[01:55] 我可以根据自己的喜好将其参数化， 
+I could parameterize
+it by whatever I want,
+[01:57] 那么我将进行一个简单的转换。 
+then I would have a
+simple transformation.
+[01:59] 那你可以说其中一些
+Then you could say
+that some of them
+[02:01] 实际上或多或少是有益的， 
+are actually more
+or less informative,
+[02:02] 你将拥有不同的价值观
+and you're going to
+have different values
+[02:04] 供您的Fisher信息。 
+for your Fisher information.
+[02:06] 因此，让我们回顾一些著名的计算。 
+So let's just review a few
+well-known computations.
+[02:10] 因此，我将像往常一样主要关注一维案例。 
+So I will focus primarily on the
+one dimensional case as usual.
+[02:17] 我声称有两个定义。 
+And I claim that
+there's two definitions.
+[02:19] 因此，如果theta是实数值参数， 
+So if theta is a real
+valued parameter,
+[02:24] 那么基本上有两个定义
+then there's basically
+two definitions
+[02:26] 您可以想到的有关Fisher的信息。 
+that you can think of for
+your Fisher information.
+[02:28] 一个涉及一阶导数
+One involves the
+first derivative
+[02:30] 您的对数可能性。 
+of your log likelihood.
+[02:31] 第二个涉及二阶导数。 
+And the second one involves
+the second derivative.
+[02:34] 因此，这里的对数似然
+So the log likelihood
+here, we're
+[02:36] 实际上将其定义为theta的l。 
+actually going to
+define it as l of theta.
+[02:39] 还有，这是什么？ 
+And what is it?
+[02:40] 好吧，这只是一个观察的似然函数。 
+Well, it's simply the likelihood
+function for one observation.
+[02:43] 所以是l，我要写1只是为了确保
+So it's l-- and I'm going to
+write 1 just to make sure that
+[02:46] 我们都知道我们在谈论一个观察- 
+we all know what we're talking
+about one observation--
+[02:49] 的-这又是顺序，我认为是X和theta。 
+of-- which is the order again,
+I think it's X and theta.
+[02:55] 那是对数的可能性，还记得吗？ 
+So that's the log
+likelihood, remember?
+[03:05] 例如，如果我有密度， 
+So for example, if
+I have a density,
+[03:07] 那会是什么？ 
+what is it going to be?
+[03:08] 这将是X的f sub theta的对数。 
+It's going to be log
+of f sub theta of X.
+[03:12] 所以这个家伙是一个随机变量， 
+So this guy is a
+random variable,
+[03:15] 因为它是随机变量的函数
+because it's a function
+of a random variable.
+[03:17] 这就是您对这件事的期望。 
+And that's what you see
+expectations of this thing.
+[03:19] 这是θ的随机函数。 
+It's a random function of theta.
+[03:21] 如果我将其视为theta的函数， 
+If I view this as a
+function of theta,
+[03:23] 该函数变得随机，因为它
+the function becomes
+random, because it
+[03:25] 取决于这个随机X。 
+depends on this random X.
+[03:27] 所以theta的I实际上定义为方差
+And so I of theta is actually
+defined as the variance
+[03:35] 的theta素数中的- 
+of l prime of theta--
+[03:40] 因此此函数的导数的方差。 
+so the variance of the
+derivative of this function.
+[03:43] 我也声称这等于负期望
+And I also claim that it's equal
+to negative the expectation
+[03:50]  theta的二阶导数
+of the second
+derivative of theta.
+[03:57] 在这里，期望和方差
+And here, the expectation
+and the variance
+[04:00] 因为这个函数是随机的，所以要进行计算。 
+are computed, because this
+function, remember, is random.
+[04:03] 所以我要告诉你分布是什么
+So I need to tell you
+what is the distribution
+[04:05] 关于我的X 
+of the X with
+respect to which I'm
+[04:06] 计算期望值和方差。 
+computing the expectation
+and the variance.
+[04:08] 这就是theta本身。 
+And it's the theta itself.
+[04:13] 因此，通常情况下， 
+So typically, the
+theta we're going
+[04:15] 感兴趣-所以有一个费舍尔
+to be interested in--
+so there's a Fisher
+[04:18] 有关该参数所有值的信息， 
+information for all
+values of the parameter,
+[04:20] 但是我们通常感兴趣的是
+but the one typically
+we're interested in
+[04:22] 是真实参数theta star。 
+is the true
+parameter, theta star.
+[04:25] 但是现在将其视为theta的函数。 
+But view this as a function
+of theta right now.
+[04:29] 所以现在，我需要向您证明-这不是
+So now, I need to prove
+to you-- and this is not
+[04:31] 琐碎的陈述-导数的方差
+a trivial statement-- the
+variance of the derivative
+[04:34] 等于负期望
+is equal to negative
+the expectation
+[04:36] 二阶导数
+of the second derivative.
+[04:37] 我的意思是，这项权利确实涉及很多。 
+I mean, there's really quite a
+bit that comes into this right.
+[04:40] 它来自这样一个事实，那就是日志不算什么。 
+And it comes from the fact that
+this is a log not of anything.
+[04:44] 这是密度的对数。 
+It's the log of a density.
+[04:45] 因此，让我们证明一下， 
+So let's just prove
+that without having
+[04:48] 太麻烦自己了
+to bother too much
+ourselves with
+[04:51] 一些技术假设。 
+some technical assumptions.
+[04:54] 技术假设是假设
+And the technical assumptions
+are the assumptions
+[04:56] 允许我置换导数和积分。 
+that allow me to permute
+derivative and integral.
+[04:59] 因为当我计算差异和期望时， 
+Because when I compute the
+variances and expectations,
+[05:01] 我实际上是针对密度进行整合。 
+I'm actually integrating
+against the density.
+[05:04] 而我想做的就是确保我能永远做到这一点。 
+And what I want to do is to make
+sure that I can always do that.
+[05:09] 所以我的技术假设是我总是可以置换
+So my technical assumptions
+are I can always permute
+[05:13] 积分和导数。 
+integral and derivatives.
+[05:15] 因此，让我们证明一下。 
+So let's just prove this.
+[05:19] 所以我要做的就是假设
+So what I'm going to do
+is I'm going to assume
+[05:21]  X的密度为f theta。 
+that X has density f theta.
+[05:35] 我实际上只是要写-好吧，让
+And I'm actually just
+going to write-- well, let
+[05:37] 我现在就写它。 
+me write it f theta right now.
+[05:39] 让我尽量不要对写作感到懒惰。 
+Let me try to not be
+lazy about writing.
+[05:42] 所以我要用的东西
+And so the thing
+I'm going to use
+[05:43] 密度的积分等于什么的事实是什么？ 
+is the fact that the integral of
+this density is equal to what?
+[05:50]  1。 
+1.
+[05:51] 这就是我要开始做奇怪事情的地方。 
+And this is where I'm going
+to start doing weird things.
+[05:54] 这意味着如果我拿这个家伙的衍生品， 
+That means that if I take
+the derivative of this guy,
+[05:56] 等于0。 
+it's equal to 0.
+[05:59] 因此，这意味着如果我以
+So that means that if I look
+at the derivative with respect
+[06:03] 等于X dX的积分f theta的θ，等于0。 
+to theta of integral f theta
+of X dX, this is equal to 0.
+[06:11] 这就是我实际进行此切换的地方
+And this is where I'm
+actually making this switch,
+[06:14] 我要说这实际上是
+is that I'm going to say
+that this is actually
+[06:16] 等于导数的积分。 
+equal to the integral
+of the derivative.
+[06:27] 所以这将是我要使用的第一件事。 
+So that's going to be the
+first thing I'm going to use.
+[06:30] 当然，如果一阶导数是对的， 
+And of course, if it's true
+for the first derivative,
+[06:32] 对于二阶导数，这将是正确的。 
+it's going to be true for
+the second derivative.
+[06:34] 因此，我将第二次实际执行此操作。 
+So I'm going to actually
+do it a second time.
+[06:36] 我要使用的第二件事
+And the second thing
+I'm going to use
+[06:38] 是二阶导数的积分的事实
+is the fact the integral
+of the second derivative
+[06:46] 等于0。 
+is equal to 0.
+[06:50] 因此，让我们从这里开始。 
+So let's start from here.
+[06:59] 让我从期望开始
+And let me start from,
+say, the expectation
+[07:01] 素数θ的二阶导数。 
+of the second derivative
+of l prime theta.
+[07:06] 那我的素数θ是多少？ 
+So what is l prime prime theta?
+[07:08] 好吧，它是X的f theta的对数的二阶导数。 
+Well, it's the second derivative
+of log of f theta of X.
+[07:21] 我们知道对数的导数
+And we know that the
+derivative of the log--
+[07:24] 对不起-是的，因此对数的导数是1以上- 
+sorry-- yeah, so the derivative
+of the log is 1 over--
+[07:30] 好吧，它是f的导数除以f本身。 
+well, it's the derivative
+of f divided by f itself.
+[07:49] 大家都和我在一起吗？ 
+Everybody's with me?
+[07:53]  f素数的对数就是f素数对f的素数。 
+Just log of f prime
+is f prime over f.
+[07:58] 在这里，只是f，我认为这是theta的函数
+Here, it's just that f, I view
+this as a function of theta
+[08:01] 而不是X的函数。 
+and not as a function of X.
+[08:04] 所以现在，我需要对这个东西进行另一种衍生。 
+So now, I need to take another
+derivative of this thing.
+[08:08] 所以等于
+So that's going to be equal to--
+[08:09] 好，所以我们都知道导数的公式
+well, so we all know the
+formula for the derivative
+[08:13] 的比例。 
+of the ratio.
+[08:14] 所以我把二阶导数乘以theta 
+So I pick up the second
+derivative times f theta
+[08:22] 减去一阶导数平方
+minus the first
+derivative squared
+[08:30] 除以f theta平方- 
+divided by f theta squared--
+[08:38] 基本演算。 
+basic calculus.
+[08:40] 现在，我需要检查期望是否为负
+And now, I need to check
+that negative the expectation
+[08:43] 这个家伙的回馈给我我想要的。 
+of this guy is giving
+me back what I want.
+[08:47] 那么对l素数素数的期望是负面的
+Well what is negative the
+expectation of l prime prime
+[08:52] 的θ？ 
+of theta?
+[08:54] 好吧，我们要做的是做负积分
+Well, what we need to do
+is to do negative integral
+[08:56] 反对f theta的家伙。 
+of this guy against f theta.
+[08:59] 因此，它减去了- 
+So it's minus the integral of--
+[09:28] 那只是期望的定义。 
+That's just the definition
+of the expectation.
+[09:31] 我对f theta做积分。 
+I take an integral
+against f theta.
+[09:34] 但是在这里，我有一些不错的东西。 
+But here, I have something nice.
+[09:36] 发生的是那些家伙正在取消。 
+What's happening is that
+those guys are canceling.
+[09:41] 现在那些家伙正在取消， 
+And now that those
+guys are canceling,
+[09:43] 这些家伙也在取消。 
+those guys are canceling too.
+[09:51] 所以我有第一个词
+So what I have is
+that the first term--
+[09:53] 我要在这里打破这种差异。 
+I'm going to break
+this difference here.
+[09:56] 所以我要说一下这种差异的整体
+So I'm going to say that
+integral of this difference
+[09:58] 是积分的差。 
+is the difference
+of the integrals.
+[10:00] 所以第一项将是不可或缺的
+So the first term is
+going to be the integral
+[10:03]  d的d大于d的平方。 
+of d over d theta
+squared of f theta.
+[10:13] 第二个负面迹象将消除， 
+And the second one, the negative
+signs are going to cancel,
+[10:17] 我将剩下这个。 
+and I'm going to
+be left with this.
+[10:37] 大家都在关注吗？ 
+Everybody's following?
+[10:39] 有人发现错误了吗？ 
+Anybody found the mistake?
+[10:44] 另一个错误呢？ 
+How about the other mistake?
+[10:46] 我不知道是否有错误。 
+I don't know if
+there's a mistake.
+[10:48] 我只是想让您检查我在做什么。 
+I'm just trying to get you
+to check what I'm doing.
+[10:54] 到目前为止和我在一起？ 
+With me so far?
+[10:56] 所以这个家伙是第二个导数的积分
+So this guy here is the integral
+of the second the derivative
+[10:59]  X dX的f之。 
+of f of X dX.
+[11:02] 这是什么？ 
+What is this?
+[11:04] 听众：0。 
+AUDIENCE: It's 0.
+[11:06]  PHILIPPE RIGOLLET：是0。 
+PHILIPPE RIGOLLET: It's 0.
+[11:08] 那是因为有这个人，我称其为皱眉。 
+And that's because of this guy,
+which I will call frowny face.
+[11:16] 所以皱着脸告诉我这一点。 
+So frowny face tells me this.
+[11:20] 我们称这个隐藏他的眼睛的家伙猴子。 
+And let's call this guy
+monkey that hides his eyes.
+[11:26] 不，让我们做一些简单的事情。 
+No, let's just do
+something simpler.
+[11:28] 我们称它为星。 
+Let's call it star.
+[11:29] 这个家伙，我们以后会用。 
+And this guy, we
+will use later on.
+[11:35] 所以现在，我必须证明这个人， 
+So now, I have to prove
+that this guy, which
+[11:37] 我已经证明等于现在
+I have proved is
+equal to this, is now
+[11:40] 等于l素数θ的方差。 
+equal to the variance
+of l prime theta.
+[11:46] 现在，让我们回到另一种方式。 
+So now, let's go back
+to the other way.
+[11:48] 我们要中途见面。 
+We're going to meet halfway.
+[11:49] 我要一系列
+I'm going to have a series--
+[11:51] 我想证明这个家伙等于这个家伙。 
+I want to prove that this
+guy is equal to this guy.
+[11:56] 我将拥有一系列平等
+And I'm going to have
+a series of equalities
+[11:58] 我要中途见面。 
+that I'm going to meet halfway.
+[12:01] 因此，让我们从另一端开始。 
+So let's start
+from the other end.
+[12:03] 我们从负的l素数theta开始。 
+We started from the negative
+l prime prime theta.
+[12:05] 让我们从方差部分开始。 
+Let's start with
+the variance part.
+[12:10]  l the prime of theta的方差，这就是方差- 
+Variance of l prime of theta,
+so that's the variance--
+[12:22] 所以这是我素数的期望
+so that's the
+expectation of l prime
+[12:29]  θ的平方减去l的期望平方
+of theta squared minus the
+square of the expectation of l
+[12:35]  theta素数。 
+prime of theta.
+[12:41] 现在，期望的平方是多少
+Now, what is the square
+of the expectation
+[12:43] 我theta的素数？ 
+of l prime of theta?
+[12:44] 好吧，theta的l素数等于部分的
+Well, l prime of theta is equal
+to the partial with respect
+[12:50] 从X的对数f到theta的θ 
+to theta of log f theta of X,
+which we know from the first
+[12:57] 那边的线-那是第二个括号中的内容
+line over there-- that's what's
+in the bracket on the second
+[12:59] 在那儿- 
+line there--
+[13:01] 实际上等于f的部分theta 
+is actually equal to the
+partial over theta of f
+[13:05]  θX除以fθX。 
+theta X divided by
+f theta X. That's
+[13:09] 日志的导数。 
+the derivative of the log.
+[13:11] 所以当我看着这个人的期望时， 
+So when I look at the
+expectation of this guy,
+[13:16] 我将对f theta进行积分。 
+I'm going to have the integral
+of this against f theta.
+[13:18] 而且f thetas将再次取消， 
+And the f thetas are
+going to cancel again,
+[13:20] 就像我在这里一样
+just like I did here.
+[13:23] 所以这个东西实际上等于积分
+So this thing is actually
+equal to the integral
+[13:26]  X dX的f theta的部分θ的总和。 
+of partial over theta
+of f theta of X dX.
+[13:33] 这等于什么？ 
+And what does this equal to?
+[13:37]  0，被猴子躲藏的是眼睛。 
+0, by the monkey hiding is eyes.
+[13:42] 就是星号-告诉我等于0。 
+So that's star-- tells me
+that this is equal to 0.
+[13:50] 因此，基本上，当我计算方差时，该项不是。 
+So basically, when I compute
+the variance, this term is not.
+[13:52] 事关重大。 
+Going to matter.
+[13:53] 我只需要完成第一个。 
+I only have to
+complete the first one.
+[14:10] 那么第一个是什么？ 
+So what is the first one?
+[14:12] 好吧，第一个是l素平方的期望。 
+Well, the first one is the
+expectation of l prime squared.
+[14:24] 那个家伙是-我的素数是什么的整数？ 
+And so that guy is the integral
+of-- well, what is l prime?
+[14:29] 同样，它是部分theta的一部分
+Again, it's partial
+over partial theta
+[14:33]  X的f theta除以X的f theta。现在，这个家伙
+f theta of X divided by f theta
+of X. Now, this time, this guy
+[14:37] 与密度成平方。 
+is squared against the density.
+[14:44] 因此，thetas之一取消了。 
+So one of the f thetas cancel.
+[15:07] 但是现在，我又回到了这个家伙以前的工作。 
+But now, I'm back to what
+I had before for this guy.
+[15:16] 所以这个家伙现在等于这个家伙。 
+So this guy is now
+equal to this guy.
+[15:20] 有相同的公式。 
+There's just the same formula.
+[15:21] 所以他们是同一回事。 
+So they're the same thing.
+[15:23] 因此，我双向移动了。 
+And so I've moved both ways.
+[15:25] 从表达式开始
+Starting from the
+expression that
+[15:27] 涉及二阶导数的期望
+involves the expectation
+of the second derivative,
+[15:30] 我来找这个人。 
+I've come to this guy.
+[15:31] 从告诉我的表情开始
+And starting from the
+expression that tells me
+[15:34] 关于一阶导数的方差， 
+about the variance of
+the first derivative,
+[15:36] 我来过同一个家伙。 
+I've come to the same guy.
+[15:38] 这样就完成了我的证明。 
+So that completes my proof.
+[15:41] 关于证明有任何疑问吗？ 
+Are there any questions
+about the proof?
+[15:47] 我们还在路上为费舍尔找到了一个明确的公式
+We also have on our way found an
+explicit formula for the Fisher
+[15:53] 信息。 
+information as well.
+[15:55] 所以现在有了这个东西，我实际上可以
+So now that I have this
+thing, I could actually
+[15:57] 补充说，例如，如果X具有密度， 
+add that if X has a
+density, for example,
+[16:02] 这也等于- 
+this is also equal
+to the integral of--
+[16:09] 好吧，X的f theta的部分theta 
+well, the partial over
+theta of f theta of X
+[16:15] 平方除以X的f theta，因为我只是
+squared divided by f
+theta of X, because I just
+[16:24] 证明那两件事实际上是
+proved that those two
+things were actually
+[16:26] 等于同一件事，就是那个家伙。 
+equal to the same thing,
+which was this guy.
+[16:31] 现在在实践中，这确实将是有用的。 
+Now in practice, this is really
+going to be the useful one.
+[16:34] 其他两个将很有用，具体取决于
+The other two are going
+to be useful depending
+[16:35] 在什么情况下
+on what case you're in.
+[16:37] 因此，如果我要求您计算Fisher信息， 
+So if I ask you to compute
+the Fisher information,
+[16:40] 您现在可以选择三种方式。 
+you have now three
+ways to pick from.
+[16:43] 基本上，实践会告诉你
+And basically,
+practice will tell you
+[16:44] 如果要节省五分钟，可以选择哪一个
+which one to choose if you
+want to save five minutes when
+[16:47] 您正在进行计算。 
+you're doing your computations.
+[16:48] 也许您是喜欢衍生产品的人。 
+Maybe you're the guy who
+likes to take derivatives.
+[16:50] 然后，您将使用二阶导数。 
+And then you're going to go
+with the second derivative one.
+[16:52] 也许你是喜欢扩大正方形的人， 
+Maybe you're the guy who
+likes to extend squares,
+[16:55] 所以你要拿那个
+so you're going to
+take the one that
+[16:56] 涉及素数平方的平方。 
+involves the square
+of the squared prime.
+[16:59] 也许你只是一个普通人， 
+And maybe you're
+just a normal person,
+[17:01] 而你想使用那个家伙。 
+and you want to use that guy.
+[17:06] 我为什么要在乎？ 
+Why do I care?
+[17:07] 这是费舍尔信息。 
+This is the Fisher information.
+[17:09] 我可以定义[？ Hilbert？]信息
+And I could have defined the
+[? Hilbert ?] information
+[17:11] 通过这个家伙的平方根
+by taking the square
+root of this guy
+[17:13] 加上这件事的正弦，就变得超级幸福
+plus the sine of this thing
+and just be super happy
+[17:16] 并在教科书中写下我的名字
+and have my name in textbooks.
+[17:18] 但是这个东西有非常特殊的意义。 
+But this thing has a
+very particular meaning.
+[17:22] 当我们进行最大似然估计时
+When we're doing the maximum
+likelihood estimation--
+[17:28] 所以记住最大似然估计是
+so remember the maximum
+likelihood estimation is just
+[17:32] 尝试最小化KL差异的经验版本。 
+an empirical version of trying
+to minimize the KL divergence.
+[17:36] 因此，我们正在尝试做的事情，最大可能性是
+So what we're trying to
+do, maximum likelihood,
+[17:39] 确实是在尝试最小化KL差异。 
+is really trying to
+minimize the KL divergence.
+[17:54] 我们正在尝试最小化此功能，还记得吗？ 
+And we're trying to minimize
+this function, remember?
+[17:57] 所以现在我们要做的是
+So now what we're
+going to do is we're
+[18:01] 将要绘制此功能。 
+going to plot this function.
+[18:02] 我们说过，让我们放下自己
+We said that, let's
+place ourselves
+[18:04] 如果这个KL是凸的， 
+in cases where
+this KL is convex,
+[18:06] 这样反比是凹的
+so that the inverse is concave.
+[18:09] 所以它看起来像这样
+So it's going to
+look like this--
+[18:11]  U形，那是凸的。 
+U-shaped, that's convex.
+[18:13] 所以这就是我要尽量减少的事实。 
+So that's the truth thing
+I'm trying to minimize.
+[18:16] 我说的是，我将实际尝试
+And what I said is that
+I'm going to actually try
+[18:18] 估计这个家伙。 
+to estimate this guy.
+[18:19] 所以在实践中，我将拥有
+So in practice,
+I'm going to have
+[18:20] 看起来像这样的东西，但实际上并非如此。 
+something that looks like
+this, but it's not really this.
+[18:26] 而且我们不会这样做，但是您
+And we're not going
+to do this, but you
+[18:28] 可以表明您可以控制此
+can show that you
+can control this
+[18:30] 均匀地在整个空间上没有空间
+uniformly over the entire space,
+that there is no space where
+[18:33] 它变得巨大。 
+it just becomes huge.
+[18:35] 特别是这不是空间
+In particular, this
+is not the space
+[18:37] 它变得非常巨大
+where it just
+becomes super huge,
+[18:38] 和虚线的最小值
+and the minimum
+of the dotted line
+[18:39] 离这个家伙真的很远。 
+becomes really
+far from this guy.
+[18:42] 因此，如果这两个功能彼此接近， 
+So if those two functions
+are close to each other,
+[18:45] 那么这意味着虚线的最小值
+then this implies that the
+minimum here of the dotted line
+[18:48] 接近实线的最小值。 
+is close to the minimum
+of the solid line.
+[18:53] 因此，我们知道这是theta星。 
+So we know that
+this is theta star.
+[18:56] 这是我们的MLE估算器theta hat ml。 
+And this is our MLE,
+estimator, theta hat ml.
+[19:00] 所以这基本上就是原则
+So that's basically
+the principle--
+[19:01] 我们拥有的数据越多，虚线越接近
+the more data we have,
+the closer the dotted line
+[19:05] 是实线。 
+is to the solid line.
+[19:07] 因此最小值接近最小值。 
+And so the minimum is
+closer to the minimum.
+[19:10] 但是现在，这只是一个例子， 
+But now, this is
+just one example,
+[19:12] 我在这里为你画了一幅画。 
+where I drew a picture for you.
+[19:14] 但是可能会有一些非常讨厌的例子。 
+But there could be some
+really nasty examples.
+[19:17] 想想这个例子，我在哪里
+Think of this
+example, where I have
+[19:20] 一个函数，它是凸的，但看起来更像这样。 
+a function, which is convex,
+but it looks more like this.
+[19:30] 那是凸的，它是U形的。 
+That's convex, it's U-shaped.
+[19:31] 这只是一个专业的U。 
+It's just a professional U.
+[19:36] 现在，我将在其周围放置一条虚线
+Now, I'm going to put a dotted
+line around it that has pretty
+[19:41] 同样的波动。 
+much the same fluctuations.
+[19:42] 围绕它的弯头就是这个尺寸。 
+The bend around it
+is of this size.
+[19:52] 那么我们是否同意实线之间的距离
+So do we agree that the
+distance between the solid line
+[19:56] 虚线几乎一样
+and the dotted line is
+pretty much the same
+[19:58] 在这两张照片中？ 
+in those two pictures?
+[20:01] 现在，在这里，根据我如何倾斜这个家伙， 
+Now, here, depending
+on how I tilt this guy,
+[20:04] 基本上，我可以将最小theta星放在我想要的任何位置。 
+basically, I can put the minimum
+theta star wherever I want.
+[20:07] 假设在这里，我实际上把它放在这里。 
+And let's say that here,
+I actually put it here.
+[20:11] 这几乎是该行的最小值。 
+That's pretty much the
+minimum of this line.
+[20:13] 而现在，虚线的最小值是这个家伙。 
+And now, the minimum of the
+dotted line is this guy.
+[20:20] 所以他们很远。 
+So they're very far.
+[20:22] 我在底部很平坦的事实
+The fact that I'm very
+flat at the bottom
+[20:25] 让我要求亲密
+makes my requirements
+for being close
+[20:28] 到U形实线要严格得多， 
+to the U-shaped solid
+curve much more stringent,
+[20:31] 如果我想靠近。 
+if I want to stay close.
+[20:34] 这就是典型案例。 
+And so this is the
+canonical case.
+[20:38] 这是令人讨厌的情况。 
+This is the annoying case.
+[20:39] 当然，您的情况很棒- 
+And of course, you
+have the awesome case--
+[20:43] 看起来像这样。 
+looks like this.
+[20:45] 然后不管你是否偏离
+And then whether
+you deviate, you
+[20:47] 可以有一些可以移动的东西。 
+can have something
+that moves pretty far.
+[20:50] 没关系，它总是会保持紧密联系。 
+It doesn't matter, it's
+always going to stay close.
+[20:53] 现在，多少量度了
+Now, what is the quantity
+that measures how
+[20:57] 我在给定的点弯腰
+curved I am at a given point--
+[20:59] 函数在给定点的弯曲程度如何？ 
+how curved the function
+is at a given point?
+[21:03] 二阶导数。 
+The secondary derivative.
+[21:05] 因此Fisher信息的二阶导数为负。 
+And so the Fisher information is
+negative the second derivative.
+[21:11] 为什么是负面的？ 
+Why the negative?
+[21:17] 好吧-是的，我们正在寻找最低要求， 
+Well here-- Yeah, we're
+looking for a minimum,
+[21:18] 这个家伙真的是-您应该查看
+and this guy is really
+the-- you should view
+[21:20] 这是还原功能。 
+this as a reverted function.
+[21:23] 这是我们正在努力使可能性最大化， 
+This is we're trying to
+maximize the likelihood, which
+[21:26] 基本上是使负KL最大化。 
+is basically maximizing
+the negative KL.
+[21:28] 因此，我向您展示的图片试图将KL最小化。 
+So the picture I'm showing you
+is trying to minimize the KL.
+[21:31] 所以你应该为这个家伙看到的真相
+So the truth picture that
+you should see for this guy
+[21:33] 是一样的，只不过是翻转过来而已。 
+is the same, except that
+it's just flipped over.
+[21:37] 但是，无论我翻转与否，曲率都是相同的。 
+But the curvature is the same,
+whether I flip my sheet or not.
+[21:40] 所以是同一回事。 
+So it's the same thing.
+[21:42] 因此，除了这个负号， 
+So apart from this
+negative sign,
+[21:44] 这只是来自事实
+which is just
+coming from the fact
+[21:45] 我们正在最大化而不是最小化， 
+that we're maximizing
+instead of minimizing,
+[21:47] 这只是告诉我我的可能性有多弯曲
+this is just telling me
+how curved my likelihood is
+[21:50] 在最大附近。 
+around the maximum.
+[21:51] 因此，这实际上是在告诉我， 
+And therefore, it's actually
+telling me how good,
+[21:55] 我的最大似然估计量有多稳健。 
+how robust my maximum
+likelihood estimator is.
+[21:58] 它会告诉我实际上我的可能性有多近
+It's going to tell me how
+close, actually, my likelihood
+[22:01] 估算者将是
+estimator is going to be--
+[22:03] 最大可能性将是true参数。 
+maximum likelihood is going
+to be to the true parameter.
+[22:06] 所以我应该可以在某个地方看到它。 
+So I should be able
+to see that somewhere.
+[22:09] 应该有一些陈述告诉我
+There should be some
+statement that tells me
+[22:11] 该费舍尔信息将
+that this Fisher
+information will
+[22:13] 在评估此估计量的精度时发挥作用。 
+play a role when assessing the
+precision of this estimator.
+[22:17] 记住，我们如何表征一个好的估计量？ 
+And remember, how do we
+characterize a good estimator?
+[22:20] 好吧，我们看看它的偏差，或者我们看看它的方差。 
+Well, we look at its bias,
+or we look its variance.
+[22:24] 我们可以将两者结合起来，形成二次风险。 
+And we can combine the two
+and form the quadratic risk.
+[22:26] 所以从本质上讲，我们将要尝试说的是
+So essentially, what
+we're going to try to say
+[22:29] 是那个家伙之一-要么偏见
+is that one of those
+guys-- either the bias
+[22:31] 或方差或二次风险- 
+or the variance or
+the quadratic risk--
+[22:33] 如果我的功能变扁平，情况会变得更糟
+is going to be worse if
+my function is flatter,
+[22:35] 表示我的Fisher信息较小。 
+meaning that my Fisher
+information is smaller.
+[22:40] 这正是最后一个定理的重点。 
+And this is exactly the
+point of this last theorem.
+[22:44] 因此，让我们看几个条件。 
+So let's look at a
+couple of conditions.
+[22:46] 这是1950年代的典型统计数据
+So this is your typical
+1950s statistics
+[22:51] 具有一页假设的论文。 
+paper that has like one
+page of assumptions.
+[22:54] 就像在早期那样
+And this was like that
+in the early days,
+[22:56] 因为人们试图
+because people
+were trying to make
+[22:58] 对尽可能多的模型有效的理论。 
+theories that would be valid
+for as many models as possible.
+[23:01] 现在，人们正在滥用这一点， 
+And now, people are
+sort of abusing this,
+[23:03] 他们只是列出所有这些假设
+and they're just making all
+this lists of assumptions
+[23:05] 这样他们的特定方法才能起作用
+so that their
+particular method works
+[23:06] 他们的特殊问题，因为他们只是
+for their particular
+problem, because they just
+[23:08] 想要捷径。 
+want to take shortcuts.
+[23:10] 但实际上，最大似然估计
+But really, the maximum
+likelihood estimator
+[23:13] 基本上与现代统计资料一样古老。 
+is basically as old
+as modern statistics.
+[23:15] 因此，这确实是必要条件。 
+And so this was really
+necessary conditions.
+[23:18] 我们将解析它。 
+And we'll just parse that.
+[23:19] 识别模型。 
+The model is identified.
+[23:21] 好吧，更好，因为我正在尝试估算
+Well, better be, because
+I'm trying to estimate
+[23:24]  theta而不是P theta。 
+theta and not P theta.
+[23:25] 所以这个很好。 
+So this one is good.
+[23:26] 对于所有theta，P theta的支持不取决于theta。 
+For all theta, the support of P
+theta does not depend on theta.
+[23:32] 这就是我们所需要的。 
+So that's just something
+that we need to have.
+[23:34] 否则，事情就会变得非常混乱。 
+Otherwise, things
+become really messy.
+[23:36] 特别是，我不会
+And in particular,
+I'm not going to be
+[23:38] 能够定义可能性- 
+able to define likelihood--
+[23:40]  Kullback-Leibler分歧。 
+Kullback-Leibler divergences.
+[23:42] 那我为什么不能那样做呢？ 
+Then why can I not do that?
+[23:44] 好吧，因为Kullback-Leibler分歧
+Well, because the
+Kullback-Leibler divergence
+[23:46] 具有两个密度比的对数。 
+has a log of the ratio
+of two densities.
+[23:49] 如果支持之一随着theta而变化
+And if one of the support
+is changing with theta
+[23:51] 可能是因为他们有某事的日志
+is it might be they have
+the log of something that's
+[23:53]  0或不为0的东西。 
+0 or something that's not 0.
+[23:55] 对数0有点令人讨厌。 
+And the log of 0 is a slightly
+annoying quantity to play with.
+[23:59] 因此，我们只是删除该案例。 
+And so we're just
+removing that case.
+[24:01] 没有什么取决于theta- 
+Nothing depends on theta--
+[24:02] 认为它基本上是整个真实线
+think of it as being
+basically the entire real line
+[24:05] 例如，作为对高斯的支持。 
+as a support for
+Gaussian, for example.
+[24:08]  Theta星不在theta的边界上。 
+Theta star is not on
+the boundary of theta.
+[24:10] 谁能告诉我为什么这很重要？ 
+Can anybody tell me
+why this is important?
+[24:17] 我们正在谈论衍生品。 
+We're talking about derivatives.
+[24:19] 所以当我想谈谈衍生品时， 
+So when I want to talk
+about derivatives,
+[24:20] 我说的是围绕某个特定点的波动。 
+I'm talking about fluctuations
+around a certain point.
+[24:23] 如果我在边界，那真的很烦人。 
+And if I'm at the boundary,
+it's actually really annoying.
+[24:26] 我可能有衍生工具-请记住， 
+I might have the
+derivative-- remember,
+[24:27] 我举个例子
+I give you this example--
+[24:28] 在边界处获得最大似然的地方， 
+where the maximum likelihood is
+just obtained at the boundary,
+[24:31] 因为该函数无法在边界处增长。 
+because the function cannot
+grow anymore at the boundary.
+[24:34] 但这并不意味着一阶
+But it does not mean
+that the first order
+[24:36] 导数等于0。 
+derivative is equal to 0.
+[24:38] 没什么意思
+It does not mean anything.
+[24:39] 所以这里所有这些图片都是有效的
+So all this picture
+here is valid
+[24:42] 仅当我实际上达到最低要求时。 
+only if I'm actually
+achieving the minimum inside.
+[24:46] 因为如果我的theta空间在这里停下来而只有这个人， 
+Because if my theta space stops
+here and it's just this guy,
+[24:52] 我要去这里
+I'm going to be here.
+[24:53] 而且没有关于曲率之类的问题
+And there's no questions
+about curvature or anything
+[24:55] 发挥作用。 
+that comes into play.
+[24:56] 完全不同。 
+It's completely different.
+[24:58] 所以在这里，在里面。 
+So here, it's inside.
+[25:00] 同样，将theta视为整个实线。 
+Again, think of theta as
+being the entire real line.
+[25:02] 然后一切都在里面。 
+Then everything is inside.
+[25:05] 我是可逆的。 
+I is invertible.
+[25:08] 一个正数，一对一的矩阵是什么意思
+What does it mean for a
+positive number, a 1 by 1 matrix
+[25:11] 是可逆的？ 
+to be invertible?
+[25:16] 是的
+Yep.
+[25:17] 听众：等于[听不清] .. 
+AUDIENCE: It'd be equal
+to its [INAUDIBLE]..
+[25:20]  PHILIPPE RIGOLLET：一个1乘1的矩阵，是数字，对吗？ 
+PHILIPPE RIGOLLET: A 1 by 1
+matrix, that's a number, right?
+[25:24] 有什么特点-如果我给你一个数字矩阵
+What is a characteristic-- if I
+give you a matrix with numbers
+[25:26] 问你是否是可逆的
+and ask you if it's
+invertible, what
+[25:28] 你打算这样做吗？ 
+are you going to do with it?
+[25:31] 听众：检查行列式是否为0。 
+AUDIENCE: Check if
+the determinant is 0.
+[25:33]  PHILIPPE RIGOLLET：检查行列式是否为0。 
+PHILIPPE RIGOLLET: Check
+if the determinant is 0.
+[25:35]  1 x 1矩阵的行列式是什么？ 
+What is the determinant
+of the 1 by 1 matrix?
+[25:37] 这只是数字本身。 
+It's just the number itself.
+[25:38] 所以基本上，您想要检查此数字是否为0 
+So that's basically, you want
+to check if this number is 0
+[25:41] 或不。 
+or not.
+[25:42] 因此，我们将在这里针对一维案例进行思考。 
+So we're going to think in
+the one dimensional case here.
+[25:44] 在一维情况下， 
+And in the one dimensional
+case, that just
+[25:46] 表示曲率不为0。 
+means that the
+curvature is not 0.
+[25:51] 好吧，最好不要为0，因为那样我
+Well, it better be not
+0, because then I'm
+[25:53] 将没有任何保证。 
+going to have no guarantees.
+[25:54] 如果我完全平坦，如果没有弯曲， 
+If I'm totally flat,
+if I have no curvature,
+[25:56] 我基本上在底部完全平坦。 
+I'm basically totally
+flat at the bottom.
+[25:58] 然后我将得到讨厌的东西。 
+And then I'm going
+to get nasty things.
+[26:00] 现在，这不是真的。 
+Now, this is not true.
+[26:02] 我可能会有弯曲的样子，所以-在这里， 
+I could have the curvature
+which grows like-- so here, it's
+[26:05] 基本上-二阶导数告诉我- 
+basically-- the second
+derivative is telling me--
+[26:08] 如果我做泰勒展开，那是
+if I do the Taylor
+expansion, it's
+[26:09] 告诉我如何根据x平方来增长。 
+telling me how I grow as a
+function of, say, x squared.
+[26:13] 这是我要控制的二次项。 
+It's the quadratic term
+that I'm controlling.
+[26:15] 可能是这个人是0，然后是命令项， 
+It could be that this guy is
+0, and then the term of order,
+[26:19]  x到第四，正在回升。 
+x to the fourth, is picking up.
+[26:20] 那可能是第一个非零的数字。 
+That could be the first
+one that's non-zero.
+[26:23] 但这意味着我的收敛速度
+But that would mean that
+my rate of convergence
+[26:25] 不会是n的平方根。 
+would not be square root of n.
+[26:26] 当我实际上在玩中心极限定理时， 
+When I'm actually playing
+central limit theorem,
+[26:28] 它将变成n的1/4。 
+it would become n to the 1/4th.
+[26:30] 如果我在16阶之前都拥有0， 
+And if I have all a bunch
+of 0 until the 16th order,
+[26:33] 我将n设为1/16，因为那真的
+I would have n to the
+1/16th, because that's really
+[26:36] 告诉我我有多平坦。 
+telling me how flat I am.
+[26:39] 所以我们将专注于案例
+So we're going to
+focus on the case
+[26:41] 仅是二次项和利率
+where it's only quadratic
+terms, and the rates
+[26:43] 中心极限定理的一部分
+of the central limit
+theorems kick in.
+[26:46] 然后是其他一些技术条件- 
+And then a few other
+technical conditions--
+[26:48] 我们只使用了其中的几个。 
+we just used a couple of them.
+[26:49] 所以我置换了极限和积分。 
+So I permuted
+limit and integral.
+[26:52] 您可以检查您真正想要的
+And you can check that
+really what you want
+[26:54] 是微分的积分等于0。 
+is that the integral of a
+derivative is equal to 0.
+[26:58] 好吧，这只是意味着两端的值
+Well, it just means that
+the values at the two ends
+[27:00] 其实是一样的
+are actually the same.
+[27:01] 所以这些是稍微不同的事情。 
+So those are slightly
+different things.
+[27:05] 所以现在，我们有最大似然估计器
+So now, what we have is that
+the maximum likelihood estimator
+[27:08] 具有以下两个属性。 
+has the following
+two properties.
+[27:10] 第一个，如果我要用语言说，那会是什么
+The first one, if I were to
+say that in words, what would
+[27:13] 我说theta帽子是- 
+I say, that theta hat is--
+[27:18] 是什么？ 
+Is what?
+[27:20] 是的，那就是我会说的
+Yeah, that's what I
+would say when I--
+[27:22] 那是给数学家的。 
+that's for mathematicians.
+[27:23] 但是，如果我是统计学家，我要说什么？ 
+But if I'm a statistician,
+what am I going to say?
+[27:27] 这是一致的。 
+It's consistent.
+[27:28] 这是theta星的一致估计。 
+It's a consistent
+estimator of theta star.
+[27:30] 它收敛到theta星的概率。 
+It converges in
+probability to theta star.
+[27:33] 然后我们有了这种中心极限定理
+And then we have this sort
+of central limit theorem
+[27:35] 声明。 
+statement.
+[27:36] 中心极限定理定理告诉我，如果这
+The central limit theorem
+statement tells me that if this
+[27:39] 是一个平均值，我删除了对平均值的期望- 
+was an average and I remove the
+expectation of the average--
+[27:44] 假设它是0，例如- 
+let's say it's 0, for example--
+[27:45] 然后是平均等等的n的平方根
+then square root of n
+times the average blah
+[27:47] 经历一些正态分布。 
+goes through some
+normal distribution.
+[27:49] 这告诉我这是真的， 
+This is telling me that
+this is actually true,
+[27:52] 即使theta hat与平均值无关。 
+even if theta hat has nothing
+to do with an average.
+[27:55] 太好了
+That's remarkable.
+[27:56]  Theta帽子甚至可能没有封闭的形状， 
+Theta hat might not
+even have a closed form,
+[27:59] 而且我仍然拥有基本相同的属性
+and I'm still having
+basically the same properties
+[28:02] 作为平均给我的
+as an average that
+would be given to me
+[28:04] 由一个中心极限定理。 
+by a central limit theorem.
+[28:08] 渐近方差是多少？ 
+And what is the
+asymptotic variance?
+[28:10] 这就是n中的方差
+So that's the variance in the n.
+[28:12] 所以在这里，我正在考虑让那些人是多元的。 
+So here, I'm thinking of having
+those guys being multivariate.
+[28:15] 所以我有协方差矩阵的逆
+And so I have the inverse
+of the covariance matrix
+[28:18] 显示为方差-协方差矩阵
+that shows up as the
+variance-covariance matrix
+[28:21] 渐近地
+asymptotically.
+[28:22] 但是如果您想到的只是一维参数， 
+But if you think of just being
+a one dimensional parameter,
+[28:25] 这是有关Fisher的信息之一
+it's one over this
+Fisher information,
+[28:27] 一曲。 
+one over the curvature.
+[28:29] 所以曲率真的很平坦
+So the curvature is
+really flat, the variance
+[28:31] 变得很大。 
+becomes really big.
+[28:33] 如果函数真的很平坦，曲率很低， 
+If the function is really
+flat, curvature is low,
+[28:36] 差异很大。 
+variance is big.
+[28:37] 如果曲率非常高，则方差会变得非常小。 
+If the curvature is very high,
+the variance becomes very low.
+[28:41] 这样就说明了一切
+And so that
+illustrates everything
+[28:42] 这与我们拥有的图片有关。 
+that's happening with the
+pictures that we have.
+[28:45] 如果你看的话，这里有什么了不起的， 
+And if you look,
+what's amazing here,
+[28:48] 没有平方根2 pi，没有软糖因素
+there is no square root 2
+pi, there's no fudge factors
+[28:51] 继续在这里。 
+going on here.
+[28:52] 这是渐近方差，仅此而已。 
+This is the asymptotic
+variance, nothing else.
+[28:56] 全部都在那儿，都在曲折中。 
+It's all in there,
+all in the curvature.
+[29:03] 对此有任何疑问吗？ 
+Are there any
+questions about this?
+[29:07] 因此，您可以在此处看到theta star是真正的参数。 
+So you can see here that theta
+star is the true parameter.
+[29:11] 信息矩阵在theta星上进行评估。 
+And the information matrix
+is evaluated at theta star.
+[29:17] 这才是关键。 
+That's the point that matters.
+[29:18] 当我画这张照片时，重点是
+When I drew this
+picture, the point
+[29:20] 最底端总是theta星。 
+that was at the very bottom
+was always theta star.
+[29:22] 这是最小化KL差异的一种， 
+It's the one that minimizes
+the KL divergence,
+[29:26] 只要我被确定。 
+am as long as I'm identified.
+[29:32] 是。 
+Yes.
+[29:33] 观众：曲率越高， 
+AUDIENCE: So the
+higher the curvature,
+[29:35]  Fisher信息的倒数越高？ 
+the higher the inverse of
+the Fisher information?
+[29:38]  PHILIPPE RIGOLLET：不，较高
+PHILIPPE RIGOLLET:
+No, the higher
+[29:39]  Fisher信息本身。 
+the Fisher information itself.
+[29:42] 因此，反函数会更小。 
+So the inverse is
+going to be smaller.
+[29:46] 因此，小的差异是好的。 
+So small variance is good.
+[29:48] 所以现在，实际上，如果我
+So now what it
+means, actually, if I
+[29:50] 看什么是二次风险
+look at what is
+the quadratic risk
+[29:51] 渐渐地，这个家伙
+of this guy,
+asymptotically-- what
+[29:54] 渐进二次风险？ 
+is asymptotic quadratic risk?
+[29:56] 好吧，实际上是0。 
+Well, it's 0 actually.
+[29:57] 但是如果我认为这是真的， 
+But if I assume that
+this thing is true,
+[30:01] 这个东西几乎是高斯的， 
+that this thing is
+pretty much Gaussian,
+[30:03] 如果我看二次风险，那是
+if I look at the
+quadratic risk, well, it's
+[30:05] 对这个东西的平方的期望。 
+the expectation of the
+square of this thing.
+[30:08] 因此它将像方差除以n一样缩放。 
+And so it's going to scale
+like the variance divided by n.
+[30:14] 恰好这样，偏差变为0。 
+The bias goes to
+0, just by this.
+[30:18] 然后二次风险就在
+And then the quadratic
+risk is going
+[30:20] 像Fisher信息除以n一样缩放。 
+to scale like one over Fisher
+information divided by n.
+[30:28] 因此，在这里-我没有提到常量。 
+So here, the-- I'm not
+mentioning the constants.
+[30:30] 必须有常量，因为一切都是渐近的。 
+There must be constants, because
+everything is asymptotic.
+[30:32] 所以对于每个有限的n，我将拥有
+So for each finite
+n, I'm going to have
+[30:33] 一些常数出现。 
+some constants that show up.
+[30:39] 每个人都被这个惊人的定理打动了？ 
+Everybody just got their mind
+blown by this amazing theorem?
+[30:43] 所以我的意思是，如果您考虑一下，MLE可以是任何东西。 
+So I mean, if you think about
+it, the MLE can be anything.
+[30:48] 很抱歉在很多情况下对您说， 
+I'm sorry to say to
+you, in many instances,
+[30:50]  MLE只是一个平均值， 
+the MLE is just going to be
+an average, which is just
+[30:52] 会有点烦人。 
+going to be slightly annoying.
+[30:54] 但是在某些情况下并非如此。 
+But there are some
+cases where it's not.
+[30:57] 我们必须求助于这个定理
+And we have to resort
+to this theorem
+[30:59] 而不是求助于中心极限定理
+rather than actually resorting
+to the central limit theorem
+[31:01] 证明这件事。 
+to prove this thing.
+[31:03] 更重要的是，即使这是一个平均值， 
+And more importantly, even
+if this was an average,
+[31:05] 您甚至不需要知道如何计算
+you don't have to even
+know how to compute
+[31:07] 协方差矩阵
+the covariance matrix--
+[31:09] 对不起，这件事的变化
+sorry, the variance
+of this thing
+[31:11] 将其插入中心极限定理。 
+to plug it into the
+central limit theorem.
+[31:14] 我告诉你，实际上是费舍尔提供的信息
+I'm telling you, it's actually
+given by the Fisher information
+[31:17] 矩阵。 
+matrix.
+[31:18] 因此，如果这是您和我之间的平均值， 
+So if it's an average,
+between you and me,
+[31:22] 您可能想走中心极限定理路线
+you probably want to go the
+central limit theorem route
+[31:24] 如果您想证明这种东西。 
+if you want to prove
+this kind of stuff.
+[31:26] 但是，如果不是这样，那将是您的最佳选择。 
+But if it's not, then
+that's your best shot.
+[31:28] 但是您必须检查这些条件。 
+But you have to check
+those conditions.
+[31:31] 我会理所当然地给你0.5。 
+I will give you for
+granted the 0.5.
+[31:38] 准备？ 
+Ready?
+[31:39] 任何问题？ 
+Any questions?
+[31:40] 我们将结束第四章。 
+We're going to wrap
+up this chapter four.
+[31:41] 所以，如果您有问题，那就是时候了。 
+So if you have questions,
+that's the time.
+[31:43] 是。 
+Yes.
+[31:43] 观众：那里的二次风险是多少？ 
+AUDIENCE: What was the
+quadratic risk up there?
+[31:45]  PHILIPPE RIGOLLET：您的意思是？ 
+PHILIPPE RIGOLLET: You
+mean the definition?
+[31:47] 听众：不，这是什么意思。 
+AUDIENCE: No, the--
+what is was for this.
+[31:49]  PHILIPPE RIGOLLET：嗯，您看到了二次风险， 
+PHILIPPE RIGOLLET: Well,
+you see the quadratic risk,
+[31:51] 如果我认为它是一维的
+if I think of it as
+being one dimensional,
+[31:53] 二次风险是期望
+the quadratic risk
+is the expectation
+[31:55]  theta hat和theta之差的平方的平方
+of the square of the difference
+between theta hat and theta
+[31:57] 星。 
+star.
+[32:01] 因此，这意味着，如果我认为这是正常的0、1， 
+So that means that if I think
+of this as having a normal 0, 1,
+[32:05] 这基本上是在计算平方的期望
+that's basically computing
+the expectation of the square
+[32:09] 该高斯除以n。 
+of this Gaussian divided by n.
+[32:13] 我只是将n的平方根除以两边。 
+I just divided by square
+root of n on both sides.
+[32:15] 因此，这是对高斯平方的期望。 
+So it's the expectation of
+the square of this Gaussian.
+[32:18] 高斯均值为0，因此平方的期望
+The Gaussian is mean 0, so
+the expectation of the square
+[32:20] 只是一个变化而已。 
+is just a variance.
+[32:23] 所以我剩下的费舍尔信息除以1 
+And so I'm left with 1 over
+the Fisher information divided
+[32:25] 由n。 
+by n.
+[32:26] 听众：我明白了。 
+AUDIENCE: I see.
+[32:26] 好。 
+OK.
+[32:34]  PHILIPPE RIGOLLET：现在让我们继续第四章。 
+PHILIPPE RIGOLLET: So let's
+move on to chapter four.
+[32:36] 这就是瞬间的方法。 
+And this is the
+method of moments.
+[32:38] 所以片刻的方法实际上可能更老了
+So the method of moments is
+actually maybe a bit older
+[32:42] 比最大可能性。 
+than maximum likelihood.
+[32:44] 而最大的可能性可以追溯到20世纪初， 
+And maximum likelihood is
+dated, say, early 20th century,
+[32:48] 我的意思是系统性的，因为正如我所说， 
+I mean as a systematic
+thing, because as I said,
+[32:50] 这些家伙中有很多将是平均水平。 
+many of those guys are
+going to be averages.
+[32:52] 因此，找到平均值可能要老一些。 
+So finding an average is
+probably a little older.
+[32:56] 瞬间的方法，有一些很好的用途。 
+The method of moments,
+there's some really nice uses.
+[32:58] 我相信，也许是1894年，皮尔逊有一篇论文。 
+There's a paper by Pearson in
+1904, I believe, or maybe 1894.
+[33:03] 我不知道。 
+I don't know.
+[33:06] 而他实际上是在研究某些物种
+And this paper, he was
+actually studying some species
+[33:10] 岛上的螃蟹，他正在尝试
+of crab in an island,
+and he was trying
+[33:12] 做一些测量。 
+to make some measurements.
+[33:13] 他就是这样想出这种高斯混合模型的， 
+That's how he came up with this
+model of mixtures of Gaussians,
+[33:16] 因为实际上有两个不同的人群
+because there was actually
+two different populations
+[33:18] 在这批螃蟹中
+in this populations of crab.
+[33:20] 他实际拟合参数的方式
+And the way he actually
+fitted the parameters
+[33:23] 是通过做瞬间的方法， 
+was by doing the
+method of moments,
+[33:25] 因为有很多参数， 
+except that since there
+were a lot of parameters,
+[33:27] 他实际上必须用六个基本解决六个方程
+he actually had to basically
+solve six equations with six
+[33:33] 未知数。 
+unknowns.
+[33:34] 那简直就是一场噩梦。 
+And that was a
+complete nightmare.
+[33:35] 那家伙是手工做的。 
+And the guy did it by hand.
+[33:36] 而且我们不知道他实际上是如何做到的。 
+And we don't know how
+he did it actually.
+[33:40] 但这确实令人印象深刻。 
+But that is pretty impressive.
+[33:43] 所以我想开始
+So I want to start--
+[33:44] 这第一部分有些残酷。 
+and this first part
+is a little brutal.
+[33:48] 但这是课程18的课程，我不想给您- 
+But this is a Course 18 class,
+and I do not want to give you--
+[33:52] 因此，让我们所有人都同意，本课程可能会稍微多一点
+So let's all agree that this
+course might be slightly more
+[33:54] 比AP统计数据更具挑战性。 
+challenging than AP statistics.
+[33:56] 这意味着它将具有挑战性
+And that means that it's
+going to be challenging just
+[34:00] 在上课时。 
+during class.
+[34:01] 我不会问您有关Weierstrass逼近的问题
+I'm not going to ask you about
+the Weierstrass Approximation
+[34:04] 考试中的定理。 
+Theorem during the exams.
+[34:05] 但是我想要给你数学动机
+But what I want is to give
+you mathematical motivations
+[34:08] 对于我们正在做的事情。 
+for what we're doing.
+[34:10] 我可以向你保证，也许你
+And I can promise
+you that maybe you
+[34:12] 演讲期间体温会略高， 
+will have a slightly higher body
+temperature during the lecture,
+[34:17] 但是您会比这个班聪明一些。 
+but you will come out
+smarter of this class.
+[34:20] 我正在尝试激励您使用数学工具
+And I'm trying to motivate to
+you for using mathematical tool
+[34:24] 告诉你有趣的数学东西在哪里
+and show you where interesting
+mathematical things that you
+[34:27] 可能在其他地方发现干燥实际上效果非常好
+might find dry elsewhere
+actually work very beautifully
+[34:31] 在统计资料中。 
+in the stats literature.
+[34:33] 我们看到的是利用Kullback-Leibler散度
+And one that we saw was using
+Kullback-Leibler divergence out
+[34:35] 最大似然估计的动机
+of motivation for maximum
+likelihood estimation,
+[34:38] 例如。 
+for example.
+[34:39] 所以Weierstrass逼近定理
+So the Weierstrass
+Approximation Theorem
+[34:42] 是纯分析得出的。 
+is something that comes
+from pure analysis.
+[34:45] 所以也许-我的意思是，我花了一段时间才看到它。 
+So maybe-- I mean, it took
+me a while before I saw that.
+[34:49] 本质上，这是在告诉你
+And essentially,
+what it's telling you
+[34:51] 如果你看一个函数
+is that if you look
+at a function that
+[34:52] 在间隔a，b上连续- 
+is continuous on
+an interval a, b--
+[34:55] 在段a，b上- 
+on a segment a, b--
+[34:57] 那么你实际上可以近似
+then you can actually
+approximate it
+[35:02] 只要多项式一致好
+uniformly well by
+polynomials as long
+[35:05] 因为你愿意拿学位
+as you're willing
+to take the degree
+[35:06] 这个多项式足够大。 
+of this polynomials
+large enough.
+[35:09] 所以正式声明是，对于任何epsilon， 
+So the formal statement
+is, for any epsilon,
+[35:11] 存在依赖于a1中的epsil的d- 
+there exists the d that depends
+on epsilon in a1 to ad--
+[35:16] 因此，如果您坚持要求精度为1 / 10,000， 
+so if you insist on having an
+accuracy which is 1/10,000,
+[35:20] 也许您将需要100,000度的多项式， 
+maybe you're going to need a
+polynomial of degree 100,000,
+[35:23] 谁知道。 
+who knows.
+[35:24] 它没有告诉您任何有关此的信息。 
+It doesn't tell you
+anything about this.
+[35:26] 但这告诉你至少你
+But it's telling you
+that at least you
+[35:28] 只有有限数量的参数
+have only a finite
+number of parameters
+[35:29] 近似那些通常
+to approximate those
+functions that typically
+[35:31] 要求描述的参数数量无限。 
+require an infinite number of
+parameters to be described.
+[35:35] 因此，这实际上非常好。 
+So that's actually quite nice.
+[35:36] 这就是很多事情的基础
+And that's the basis
+for many things
+[35:39] 和许多多项式方法。 
+and many polynomial
+methods typically.
+[35:43] 所以这里是统一的，所以
+And so here, it's
+uniform, so there's
+[35:45] 这个超过x的最大值实际上也很好。 
+this max over x that shows up
+that's actually nice as well.
+[35:50] 那就是Weierstrass逼近定理。 
+That's Weierstrass
+Approximation Theorem.
+[35:52] 为什么这对我们有用？ 
+Why is that useful to us?
+[35:54] 好吧，在统计数据中，我有一个X1到Xn的样本。 
+Well, in statistics, I
+have a sample of X1 to Xn.
+[35:58] 我有一个统一的统计模型。 
+I have, say, a unified
+statistical model.
+[36:00] 我不会总是提醒你
+I'm not always
+going to remind you
+[36:01] 被识别-不统一-被识别
+that it's identified--
+not unified-- identified
+[36:04] 统计模型。 
+statistical model.
+[36:05] 我将假设它具有密度。 
+And I'm going to assume
+that it has a density.
+[36:08] 您可以将其视为拥有PMF， 
+You could think of
+it as having a PMF,
+[36:10] 但可以认为它具有一秒钟的密度。 
+but think of it as having
+a density for one second.
+[36:13] 现在，我想要找到分布。 
+Now, what I want is to
+find the distribution.
+[36:16] 我想找到theta。 
+I want to find theta.
+[36:18] 并找到theta，因为它已被识别
+And finding theta,
+since it's identified
+[36:20] 等于找到P theta， 
+as equivalent to
+finding P theta, which
+[36:22] 等于找到f theta并知道一个函数
+is equivalent to finding f
+theta, and knowing a function
+[36:26] 一样- 
+is the same--
+[36:28] 知道密度与知道密度相同
+knowing a density is the
+same as knowing a density
+[36:30] 针对任何测试功能h。 
+against any test function h.
+[36:33] 因此，这意味着如果我要确保我知道密度- 
+So that means that if I want
+to make sure I know a density--
+[36:38] 如果我要检查两个密度是否相同， 
+if I want to check if two
+densities are the same,
+[36:40] 我要做的就是计算它们的积分
+all I have to do is to
+compute their integral
+[36:42] 反对所有有界的连续函数。 
+against all bounded
+continuous functions.
+[36:46] 您已经知道这将是真的
+You already know
+that it would be true
+[36:48] 如果我检查了所有功能h。 
+if I checked for
+all functions h.
+[36:50] 但是由于f是密度，我实际上可以
+But since f is a
+density, I can actually
+[36:53] 只看有界的函数h 
+look only at functions
+h that are bounded,
+[36:56] 例如，在负1到1之间，并且是连续的。 
+say, between minus 1 and
+1, and that are continuous.
+[37:04] 够了
+That's enough.
+[37:06] 同意吗
+Agreed?
+[37:06] 好吧，请相信我。 
+Well, just trust me on this.
+[37:08] 是的，您有问题吗？ 
+Yes, you have a question?
+[37:11] 听众：这是为什么-就像，为什么你不应该
+AUDIENCE: Why is this--
+like, why shouldn't you
+[37:14] 只是说[听不清]？ 
+just say that [INAUDIBLE]?
+[37:20]  PHILIPPE RIGOLLET：是的，我可以做到。 
+PHILIPPE RIGOLLET:
+Yeah, I can do that.
+[37:21] 我只是找到一个特征
+I'm just finding
+a characterization
+[37:23] 以后对我有用。 
+that's going to be
+useful for me later on.
+[37:25] 我可以找到一堆。 
+I can find a bunch of them.
+[37:26] 但是在这里，这将是有用的。 
+But here, this one is
+going to be useful.
+[37:28] 所以我只想说f theta星与
+So all I need to say is that f
+theta star integrated against
+[37:32]  X-x的h-因此这意味着f- 
+X, h of x-- so this
+implies that f--
+[37:35] 如果theta并非在所有地方都等于f theta星， 
+if theta is equal to f
+theta star not everywhere,
+[37:38] 但几乎无处不在
+but almost everywhere.
+[37:41] 只有当我向您保证
+And that's only true if I
+guarantee to you that f theta
+[37:44]  f theta星是密度。 
+and f theta stars are densities.
+[37:46] 这对任何功能都不正确。 
+This is not true
+for any function.
+[37:49] 所以现在，这意味着，如果我想估算θ 
+So now, that means that, well,
+if I wanted to estimate theta
+[37:53] 帽子，我要做的就是计算平均值，对- 
+hat, all I would have to do is
+to compute the average, right--
+[37:56] 所以这个家伙，不可或缺的
+so this guy here, the integral--
+[38:01] 让我整理一下我的木板。 
+let me clean up a bit my board.
+[38:22] 所以我的目标是找到这样的θ，如果我看着f theta 
+So my goal is to find theta
+such that, if I look at f theta
+[38:30] 现在我将它与x的h进行积分，然后
+and now I integrate it
+against h of x, then
+[38:34] 这给了我同样的感觉
+this gives me the same
+thing as if I were
+[38:36] 对付f theta星。 
+to do it against f theta star.
+[38:42] 我想要这个连续且有界的h。 
+And I want this for any h,
+which is continuous and bounded.
+[38:48] 因此，我当然不知道这个数量是多少。 
+So of course, I don't know
+what this quantity is.
+[38:51] 这取决于我未知的theta星。 
+It depends on my
+unknown theta star.
+[38:53] 但是我有这个看法。 
+But I have theta from this.
+[38:54] 我要照常做
+And I'm going to do the usual--
+[38:56] 古老的统计技巧，那就是
+the good old statistical
+trick, which is,
+[38:57] 好吧，我可以这样写作为对期望的期望
+well, this I can write as
+the expectation with respect
+[39:01] 到x的h theta的P theta星。 
+to P theta star of h theta of x.
+[39:06] 那只是功能对某些事物的整体。 
+That's just the integral of
+a function against something.
+[39:08] 所以我能做的就是说，好吧，现在我
+And so what I can do
+is say, well, now I
+[39:11] 不认识这个家伙。 
+don't know this guy.
+[39:12] 但是我从书中得到的好老技巧
+But my good old
+trick from the book
+[39:14] 用平均值代替期望值。 
+is replace expectations
+by averages.
+[39:15] 而我得到的- 
+And what I get--
+[39:23] 这大约是根据大数定律。 
+And that's approximately by
+the law of large numbers.
+[39:29] 所以如果我真的可以找到这样的函数
+So if I can actually find
+a function f theta such
+[39:33] 当我将其与h集成时
+that when I integrate
+it against h
+[39:36] 它几乎给了我平均评价
+it gives me pretty much the
+average of the evaluations
+[39:39] 在整个h的数据点中，有h个
+of h over my data
+points for all h,
+[39:42] 那应该是一个很好的候选人。 
+then that should be
+a good candidate.
+[39:47] 问题是要尝试许多功能。 
+The problem is that's a
+lot of functions to try.
+[39:52] 即使我们减少了所有可能的功能
+Even if we reduced that
+from all possible functions
+[39:54] 到有边界的和连续的
+to bounded and
+continuous ones, that's
+[39:56] 仍然是无穷无尽的
+still a pretty large
+infinite number of them.
+[40:01] 所以我们可以做的就是使用我们的Weierstrass近似
+And so what we can do is to use
+our Weierstrass Approximation
+[40:05] 定理。 
+Theorem.
+[40:06] 它说，嗯，也许我不需要针对所有h进行测试。 
+And it says, well, maybe I don't
+need to test it against all h.
+[40:09] 也许多项式对我来说就足够了。 
+Maybe the polynomials
+are enough for me.
+[40:11] 所以我要做的是只看功能
+So what I'm going to do is I'm
+going to look only at functions
+[40:14] 形式为ak的h- 
+h that are of the
+form sum of ak--
+[40:20] 所以x的h是ak X到k的第k的和
+so h of x is sum of
+ak X to the k-th for k
+[40:29] 等于0到d-仅是次数为d的多项式。 
+equals 0 to d-- only
+polynomials of degree d.
+[40:34] 因此，当我查看我的h的平均值时， 
+So when I look at the
+average of my h's, I'm
+[40:37] 会得到第一个这样的名词。 
+going to get a term
+like the first one.
+[40:40] 所以这里的第一个人，这个家伙，从我等于1开始变成1 / n 
+So the first one here, this guy,
+becomes 1/n sum from i equal 1
+[40:47] 从k等于0到ak Xi的d到n的n个和。 
+to n sum from k equal 0
+to d of ak Xi to the k-th.
+[40:54] 那只是Xi的h值的平均值。 
+That's just the average
+of the values of h of Xi.
+[40:58] 现在，我需要做的是检查
+And now, what I need
+to do is to check
+[41:00] 当我整合时是同一件事
+that it's the same
+thing when I integrate
+[41:03] 这种形式的h也是。 
+h of this form as well.
+[41:06] 我希望这适用于所有d级多项式。 
+I want this to hold for all
+polynomials of degree d.
+[41:10] 仍然很多。 
+That's still a lot of them.
+[41:12] 仍然有无数个多项式， 
+There's still an infinite
+number of polynomials,
+[41:14] 因为广告中有无数个数字a0 
+because there's an infinite
+number of numbers a0 to ad
+[41:17] 描述这些多项式。 
+that describe those polynomials.
+[41:21] 但是既然这些家伙都是多项式， 
+But since those guys
+are polynomials,
+[41:23] 实际上，仅查看条款就足够了
+it's actually enough for me
+to look only at the terms
+[41:26]  X到第k的形式
+of the form X to the k-th--
+[41:28] 没有线性组合，什么也没有。 
+no linear combination,
+no nothing.
+[41:30] 所以实际上，只看就足够了
+So actually, it's
+enough to look only
+[41:32] 在x的h处，对于k等于0到d，它等于X到第k个。 
+at h of x, which is equal to X
+to the k-th for k equal 0 to d.
+[41:43] 现在，那里有几个人？ 
+And now, how many of
+those guys are there?
+[41:46] 只是d加1，0到d。 
+Just d plus 1, 0 to d.
+[41:49] 因此，对于我来说，这实际上是一件容易得多的事情。 
+So that's actually a much
+easier thing for me to solve.
+[41:54] 现在，这个量是f theta对X的积分
+Now, this quantity, which is the
+integral of f theta against X
+[42:01] 到第k个-使得X的期望值为第k个
+to the k-th-- so that the
+expectation of X to the k-th
+[42:05] 这里 - 
+here--
+[42:06] 这称为k阶矩或P theta的第k阶矩。 
+it's called moment of order
+k, or k-th moment of P theta.
+[42:12] 那是片刻。 
+That's a moment.
+[42:13] 片刻只是对权力的期望。 
+A moment is just the
+expectation of the power.
+[42:16] 意思是哪一刻？ 
+The mean is which moment?
+[42:19] 第一刻。 
+The first moment.
+[42:21] 差异并不是第二时刻。 
+And variance is not
+exactly the second moment.
+[42:24] 这是第二刻减去第一刻的平方。 
+It's the second moment minus
+the first moment squared.
+[42:29] 那就是差异。 
+That's the variance.
+[42:30] 它是X平方的E减去X平方的E。 
+It's E of X squared
+minus E of X squared.
+[42:34] 这些就是您已经知道的事情。 
+So those are things
+that you already know.
+[42:36] 然后您可以更高。 
+And then you can go higher.
+[42:37] 您可以转到X立方体的E，X等等，等等。 
+You can go to E of X
+cube, E of X blah, blah.
+[42:40] 在这里，我说去X的E到第d。 
+Here, I say go to
+E of X to the d-th.
+[42:43] 现在，如您所见，这已不是问题
+Now, as you can see,
+this is not something
+[42:44] 您现在可以立即采取行动， 
+you can really put
+in action right now,
+[42:47] 因为Weierstrass逼近定理不
+because the Weierstrass
+Approximation Theorem does not
+[42:50] 告诉你d应该是什么。 
+tell you what d should be.
+[42:52] 实际上，我们完全不了解epsilon 
+Actually, we totally
+lost track of the epsilon
+[42:54] 我什至在寻找。 
+I was even looking for.
+[42:54] 我只是说近似相等，近似相等。 
+I just said approximately
+equal, approximately equal.
+[42:57] 因此，所有这一切实际上只是动机。 
+And so all this thing is
+really just motivation.
+[42:59] 但这实际上是在告诉您，如果您
+But it's essentially
+telling you that if you
+[43:02] 从技术上讲足够大
+go to d large
+enough, technically
+[43:05] 您应该能够准确识别出您的分布
+you should be able to identify
+exactly your distribution up
+[43:08] 到epsilon。 
+to epsilon.
+[43:11] 因此，如果我足够大，我应该会很不错。 
+So I should be pretty good,
+if I go to d large enough.
+[43:16] 现在在实践中，实际上应该有很多
+Now in practice, actually
+there should be much
+[43:19] 小于任意大d。 
+less than arbitrarily large d.
+[43:23] 通常，我们将需要d为1或2。 
+Typically, we are going
+to need d which is 1 or 2.
+[43:28] 因此，Weierstrass逼近有一些限制
+So there are some limitations
+to the Weierstrass Approximation
+[43:31] 定理。 
+Theorem.
+[43:32] 还有一些。 
+And there's a few.
+[43:33] 第一个是它只能工作
+The first one is
+that it only works
+[43:35] 对于连续功能，这并不是什么大问题。 
+for continuous functions, which
+is not so much of a problem.
+[43:39] 可以解决。 
+That can be fixed.
+[43:42] 好吧，我们需要有界的连续函数。 
+Well, we need bounded
+continuous functions.
+[43:44] 它仅按间隔工作。 
+It works only on intervals.
+[43:45] 那很烦人，因为我们要
+That's annoying,
+because we're going
+[43:47] 具有超出间隔定义的随机变量。 
+to have random variables that
+are defined beyond intervals.
+[43:51] 因此，我们需要一些超越间隔的东西。 
+So we need something that just
+goes beyond the intervals.
+[43:53] 您可以想象，如果让您的功能变得庞大， 
+And you can imagine that if
+you let your functions be huge,
+[43:55] 对你来说很难
+it's going to be
+very hard for you
+[43:57] 具有大约[听不清]的多项式。 
+to have a polynomial
+approximately [INAUDIBLE] well.
+[44:00] 事情将在边界开始起伏， 
+Things are going to start going
+up and down at the boundary,
+[44:02] 这将非常困难。 
+and it's going to be very hard.
+[44:05] 再一次，正如我多次说过的， 
+And again, as I
+said several times,
+[44:07] 它没有告诉我们d应该是什么。 
+it doesn't tell us
+what d should be.
+[44:09] 作为统计学家，我们正在寻找方法，而不是
+And as statisticians, we're
+looking for methods, not
+[44:11] 就像存在方法的存在原理一样。 
+like principles of existence
+of a method that exists.
+[44:15] 所以如果E是离散的，我实际上可以
+So if E is discrete,
+I can actually
+[44:21] 掌握这一点d。 
+get a handle on this d.
+[44:23] 如果E是离散的且实际上是有限的- 
+If E is discrete and
+actually finite--
+[44:26] 我实际上要看一个有限的E 
+I'm going to actually
+look at a finite E,
+[44:29] 表示我在例如r个可能值x1上有一个PMF 
+meaning that I have a PMF on,
+say, r possible values, x1
+[44:33] 和xr。 
+and xr.
+[44:34] 我的随机变量大写X可以
+My random variable,
+capital X, can
+[44:35] 仅取r个可能的值。 
+take only r possible values.
+[44:37] 让我们将它们视为1到r的整数。 
+Let's think of them as being
+the integer numbers 1 to r.
+[44:41] 那是r试验的成功次数
+That's the number of
+success out of r trials
+[44:44] 例如，我得到的。 
+that I get, for example.
+[44:46] 二项式rp，就是这样。 
+Binomial rp, that's exactly
+something like this.
+[44:51] 所以现在，很明显，整个分布
+So now, clearly this
+entire distribution
+[44:55] 是由PMF定义的，它给了我确切的r数。 
+is defined by the PMF, which
+gives me exactly r numbers.
+[45:00] 因此可以完全描述这种分布
+So it can completely
+describe this distribution
+[45:02] 带有r数字。 
+with r numbers.
+[45:03] 问题是，我是否有大量的冗余
+The question is, do I have an
+enormous amount of redundancy
+[45:08] 如果我尝试用矩来描述这种分布？ 
+if I try to describe this
+distribution using moments?
+[45:12] 我可能需要-比如说r等于10， 
+It might be that I need--
+say, r is equal to 10,
+[45:14] 也许我只有10个数字来描述这个东西， 
+maybe I have only 10 numbers
+to describe this thing,
+[45:18] 但我实际上需要计算的力矩最大为100 
+but I actually need to compute
+moments up to the order of 100
+[45:20] 在我完全恢复分布之前。 
+before I actually recover
+entirely the distribution.
+[45:23] 也许我需要无限前进。 
+Maybe I need to go infinite.
+[45:25] 也许Weierstrass定理是唯一的事情
+Maybe the Weierstrass
+Theorem is the only thing
+[45:27] 这实际上在这里救了我。 
+that actually saves me here.
+[45:28] 我只是无法完全恢复它。 
+And I just cannot
+recover it exactly.
+[45:30] 如果我愿意升到更高的水平我可以去epsilon 
+I can go to epsilon if I'm
+willing to go to higher
+[45:33] 和更高的多项式。 
+and higher polynomials.
+[45:34] 哦，顺便说一下，在Weierstrass近似中
+Oh, by the way, in the
+Weierstrass Approximation
+[45:36] 定理，我可以向你保证，随着epsilon变为0， 
+Theorem, I can promise you
+that as epsilon goes to 0,
+[45:39]  d达到无穷大。 
+d goes to infinity.
+[45:41] 所以现在，实际上我什至没有r参数。 
+So now, really I don't even
+have actually r parameters.
+[45:46] 我只有r减参数，因为最后一个- 
+I have only r minus parameter,
+because the last one--
+[45:50] 因为它们总计为1。 
+because they sum up to 1.
+[45:51] 所以我总是可以做到的最后一个
+So the last one I can
+always get by doing
+[45:53]  1减去第一个r的总和减去1个第一个。 
+1 minus the sum of the
+first r minus 1 first.
+[45:56] 同意吗
+Agreed?
+[45:58] 因此描述了每个分布r的编号
+So each distribution
+r numbers is described
+[46:01] 由r减去1个参数。 
+by r minus 1 parameters.
+[46:04] 问题是，我可以只使用r减矩吗
+The question is, can I
+use only r minus moments
+[46:07] 描述这个家伙？ 
+to describe this guy?
+[46:12] 这就是所谓的高斯正交。 
+This is something called
+Gaussian quadrature.
+[46:16] 高斯正交告诉你，是的，时刻
+The Gaussian quadrature
+tells you, yes, moments
+[46:18] 实际上是重新分配分布的好方法
+are actually a good way to
+reparametrize your distribution
+[46:22] 从某种意义上说，如果我给你的时刻
+in the sense that if
+I give you the moments
+[46:24] 或者如果我给你概率质量函数， 
+or if I give you the
+probability mass function,
+[46:27] 我基本上是给您完全相同的信息。 
+I'm basically giving you
+exactly the same information.
+[46:29] 您可以从那里恢复所有概率。 
+You can recover all the
+probabilities from there.
+[46:32] 所以在这里，我将用以下方式表示
+So here, I'm going
+to denote by--
+[46:34] 我将把表示法放在theta中。 
+I'm going to drop the
+notation in theta.
+[46:37] 我没有theta。 
+I don't have theta.
+[46:38] 在这里，我说的是任何通用发行版。 
+Here, I'm talking about
+any generic distribution.
+[46:41] 因此，我将第k个矩称为mk。 
+And so I'm going to
+call mk the k-th moment.
+[46:49] 我有一个PMF，这实际上是j的总和
+And I have a PMF, this
+is really the sum for j
+[46:54] 等于xj的r到xj的第k次乘以x。 
+equals 1 to r of xj to
+the k-th times p of xj.
+[47:06] 这就是PMF。 
+And this is the PMF.
+[47:10] 这就是我的第k个时刻。 
+So that's my k-th moment.
+[47:12] 所以第k个矩是数字的线性组合
+So the k-th moment is a linear
+combination of the numbers
+[47:15] 我感兴趣的
+that I am interested in.
+[47:19] 这是一个方程式。 
+So that's one equation.
+[47:25] 我有尽可能多的方程式
+And I have as many
+equations as I'm actually
+[47:27] 愿意看片刻。 
+willing to look at moments.
+[47:28] 因此，如果我看25分钟，则有25个方程式。 
+So if I'm looking at 25
+moments, I have 25 equations.
+[47:34]  m1等于等于1的幂
+m1 equals blah with
+this to the power of 1,
+[47:36]  m2等于2的幂等等。 
+m2 equals blah with this to
+the power of 2, et cetera.
+[47:40] 然后我也有等式
+And then I also
+have the equation
+[47:41]  1等于xj的p之和。 
+that 1 is equal to the
+sum of the p of xj.
+[47:51] 那只是PMF的定义。 
+That's just the
+definition of PMF.
+[47:55] 所以这是r。 
+So this is r's.
+[47:56] 它们很丑，但是它们是r。 
+They're ugly, but those are r's.
+[48:00] 所以现在，这是p中的线性方程组
+So now, this is a system
+of linear equations in p,
+[48:04] 我实际上可以将其以规范形式编写
+and I can actually write it
+in its canonical form, which
+[48:07] 是那些家伙的矩阵
+is of the form a
+matrix of those guys
+[48:11] 倍我感兴趣的参数等于右手边。 
+times my parameters of interest
+is equal to a right hand side.
+[48:15] 右边是瞬间。 
+The right hand side
+is the moments.
+[48:17] 就是说，如果我一刻都在做你， 
+That means, if I
+did you the moments,
+[48:20] 你可以回来找一下PMF， 
+can you come back and
+find what the PMF,
+[48:22] 因为我们已经从概率中知道
+because we know already
+from probability
+[48:24] 我需要了解PMF才能充分描述
+that the PMF is all I need
+to know to fully describe
+[48:27] 我的分布。 
+my distribution.
+[48:29] 鉴于目前情况，目前尚不清楚。 
+Given the moments,
+that's unclear.
+[48:32] 现在，在这里，我实际上要花r减去1分钟
+Now, here, I'm going to actually
+take exactly r minus 1 moment
+[48:37] 这个额外的条件是那些家伙的总和
+and this extra condition
+that the sum of those guys
+[48:39] 应该是1。 
+should be 1.
+[48:41] 这样就给了我基于r减去1时刻的r方程。 
+So that gives me r equations
+based on r minus 1 moments.
+[48:45] 我有多少个未知数？ 
+And how many unknowns do I have?
+[48:47] 好吧，我有我未知的参数
+Well, I have my r
+unknown parameters
+[48:54] 对于PMF，PMF的r值。 
+for the PMF, the r
+values of the PMF.
+[48:59] 现在，当然，这将发挥巨大作用
+Now, of course, this is
+going to play a huge role
+[49:02] 是否有很多p给我相同的。 
+in whether the are many
+p's that give me the same.
+[49:06] 目的是找出是否有几个p可以给我
+The goal is to find if there
+are several p's that can give me
+[49:09] 相同的时刻。 
+the same moments.
+[49:10] 但是如果只有一个p可以给我一些时间， 
+But if there's only one p that
+can give me a set of moment,
+[49:13] 这意味着我有一对一的对应关系
+that means that I have a
+one-to-one correspondence
+[49:15] 在PMF和瞬间之间。 
+between PMF and moments.
+[49:17] 所以如果你给我一些时间
+And so if you give
+me the moments,
+[49:18] 我可以回到PMF。 
+I can just go back to the PMF.
+[49:23] 现在，我该如何返回？ 
+Now, how do I go back?
+[49:23] 好吧，通过反转这个矩阵。 
+Well, by inverting this matrix.
+[49:26] 如果我将此矩阵乘以其逆， 
+If I multiply this
+matrix by its inverse,
+[49:28] 我要得到身份乘以p等于的向量
+I'm going to get the identity
+times the vector of p's equal
+[49:32] 矩阵的逆乘以m。 
+the inverse of the
+matrix times the m's.
+[49:36] 所以我们要做的就是说p 
+So what we want to
+do is to say that p
+[49:41] 等于这个大矩阵的逆乘以矩
+is equal to the inverse of this
+big matrix times the moments
+[49:45] 你给我的
+that you give me.
+[49:47] 如果我真的可以谈论逆， 
+And if I can actually
+talk about the inverse,
+[49:49] 然后我基本上是一对一的映射
+then I have basically
+a one-to-one mapping
+[49:52] 在m，矩和矩阵之间
+between the m's, the
+moments, and the matrix.
+[49:55] 因此，我需要证明的是该矩阵是可逆的。 
+So what I need to show is that
+this matrix is invertible.
+[49:58] 我们只是决定了检查的方式
+And we just decided
+that the way to check
+[50:01] 如果矩阵是可逆的，则通过计算其行列式。 
+if a matrix is invertible is
+by computing its determinant.
+[50:05] 谁曾计算过行列式？ 
+Who has computed a
+determinant before?
+[50:10] 谁应该至少计算行列式
+Who was supposed to compute a
+determinant at least than just
+[50:12] 说，不，你知道怎么做。 
+to say, no, you
+know how to do it.
+[50:15] 因此，您知道如何计算行列式。 
+So you know how to
+compute determinants.
+[50:16] 如果您在课堂上看到过任何决定因素， 
+And if you've seen any
+determinant in class,
+[50:19] 教授们喜欢的练习中出现了一种。 
+there's one that shows up in the
+exercises that professors love.
+[50:22] 这就是范德蒙德行列式。 
+And it's called the
+Vandermonde determinant.
+[50:25] 这是矩阵的行列式
+And it's the
+determinant of a matrix
+[50:26] 具有非常特殊的形式。 
+that have a very specific form.
+[50:28] 看起来-所以基本上只有r参数
+It looks like-- so there's
+basically only r parameters
+[50:31] 到这个r x r矩阵。 
+to this r by r matrix.
+[50:33] 第一行或第一列-有时， 
+The first row, or the
+first column-- sometimes,
+[50:36] 这样呈现- 
+it's presented like that--
+[50:37] 是每个入口均为1的幂的向量。 
+is this vector where each
+entry is to the power of 1.
+[50:41] 第二个是每个项都是2的幂
+And the second one is each
+entry is to the power of 2,
+[50:43] 并乘以3的幂，再乘以4的幂，等等。 
+and to the power of 3, and
+to the power 4, et cetera.
+[50:46] 这就是我们所拥有的-x1到第一个x2 
+So that's exactly what we
+have-- x1 to the first, x2
+[50:49] 到第一个，一直到xr到第一个， 
+to the first, all the
+way to xr to the first,
+[50:51] 然后是2的幂
+and then same thing
+to the power of 2,
+[50:53] 一直到最后一个
+all the way to the last one.
+[50:54] 我还需要添加全1的行
+And I also need to add
+the row of all 1's, which
+[50:58] 如果您愿意的话，您可以想到那些家伙都是0的幂。 
+you can think of those guys are
+to the power of 0, if you want.
+[51:01] 所以我真的应该放在最上面
+So I should really
+put it on top,
+[51:02] 如果我想订购一个不错的东西。 
+if I wanted to have
+a nice ordering.
+[51:05] 这就是我所拥有的矩阵。 
+So that was the
+matrix that I had.
+[51:07] 我不是要您检查它。 
+And I'm not asking
+you to check it.
+[51:09] 您可以通过归纳证明， 
+You can prove that by
+induction actually,
+[51:10] 通常通过做平时让我们消除
+typically by doing the
+usual let's eliminate
+[51:14] 一些行和列类型的技巧
+some rows and columns
+type of tricks
+[51:15] 你为矩阵做的
+that you do for matrices.
+[51:17] 因此，您基本上是从整个矩阵开始的。 
+So you basically start
+from the whole matrix.
+[51:19] 然后转到只有一个1的矩阵，然后
+And then you move onto a matrix
+that has only one 1's and then
+[51:21] 这里是0。 
+0's here.
+[51:22] 然后，您的Vandermonde略小。 
+And then you have Vandermonde
+that's just slightly smaller.
+[51:25] 然后，您只需进行迭代。 
+And then you just iterate.
+[51:26] 是的
+Yeah.
+[51:27] 听众：我觉得超指数都在亏损， 
+AUDIENCE: I feel like there's a
+loss to either the supra index,
+[51:31] 或子索引应该在[音频不清晰]的某处带有ak。 
+or the sub index should have
+a k somewhere [INAUDIBLE]..
+[51:38]  [听不清]我正在谈论的那个？ 
+[INAUDIBLE] the one
+I'm talking about?
+[51:39]  PHILIPPE RIGOLLET：是的，我知道，但是我
+PHILIPPE RIGOLLET:
+Yeah, I know, but I
+[51:41] 不要以为您的问题的答案是肯定的。 
+don't think the answer
+to your question is yes.
+[51:45] 那么k是总索引，对吧？ 
+So k is the general
+index, right?
+[51:48] 因此没有k。 k不存在。 k只是在这里给我
+So there's no k. k does not
+exist. k just is here for me
+[51:51] 告诉我k等于1等于r。 
+to tell me for k equals 1 to r.
+[51:53] 因此，这是一个r by r矩阵。 
+So this is an r by r matrix.
+[51:56] 因此，那里没有k。 
+And so there is no k there.
+[51:58] 因此，如果您想要通用术语， 
+So if you wanted
+the generic term,
+[52:00] 如果我想在第j行和第k行的中间放置1 
+if I wanted to put 1 in the
+middle on the j-th row and k-th
+[52:03] 列，即x-- 
+column, that would be x--
+[52:07] 因此，第j行将是j的幂的x子k。 
+so j-th row would be x
+sub k to the power of j.
+[52:13] 那将是- 
+That would be the--
+[52:15] 所以现在，这基本上是总和- 
+And so now, this is
+basically the sum--
+[52:19] 好吧，这不应该严格地是- 
+well, that should
+not be strictly--
+[52:20] 因此对于j和k在1和r之间。 
+So that would be for j
+and k between 1 and r.
+[52:25] 所以这是当
+So this is the
+formula that get when
+[52:26] 您尝试扩展此Vandermonde行列式。 
+you try to expand this
+Vandermonde determinant.
+[52:29] 通常，您在大二时只需要做一次。 
+You have to do it only once when
+you're a sophomore typically.
+[52:32] 然后，您可以进入Wikipedia进行操作。 
+And then you can just go
+on Wikipedia to do it.
+[52:34] 那就是我所做的。 
+That's what I did.
+[52:34] 我实际上在复制时出错。 
+I actually made a
+mistake copying it.
+[52:36] 第一个应小于或等于j的1。 
+The first one should be 1
+less than or equal to j.
+[52:39] 最后一个应为k小于或等于r。 
+And the last one should be
+k less than or equal to r.
+[52:42] 现在您拥有的是产品
+And now what you
+have is the product
+[52:43]  xj和xk的差异
+of the differences of xj and xk.
+[52:47] 为了使这个东西不为零， 
+And for this thing
+to be non-zero,
+[52:48] 您需要所有条件都为非零。 
+you need all the
+terms to be non-zero.
+[52:51] 对于所有非零项， 
+And for all the
+terms to be non-zero,
+[52:52] 您无需具有相同的xi，xj和xj，xk。 
+you need to have no xi, xj, and
+no xj, xk that are identical.
+[52:58] 如果这些数字都不一样， 
+If all those are
+different numbers,
+[52:59] 那么此乘积将不同于0。 
+then this product is going
+to be different from 0.
+[53:03] 这些是不同的数字，因为
+And those are different
+numbers, because those
+[53:05] 是您的随机言语可能取的值。 
+are r possible values that
+your random verbal takes.
+[53:09] 你不会说这需要两个
+You're not going to
+say that it takes two
+[53:11] 概率为1.5-- 
+with probability 1.5--
+[53:14] 抱歉，两个概率为0.5，两个概率为0.25。 
+sorry, two with probability 0.5
+and two with probability 0.25.
+[53:18] 您要说的是，这需要两个概率为0.75的直接。 
+You're going to say it takes two
+with probability 0.75 directly.
+[53:22] 因此，这些xj是不同的。 
+So those xj's are different.
+[53:24] 这些是您的随机变量的不同值
+These are the different values
+that your random variable
+[53:27] 可以采取。 
+can take.
+[53:32] 请记住，xj，xk只是x1到xr的不同值- 
+Remember, xj, xk was just the
+different values x1 to xr--
+[53:37] 抱歉-您的随机变量使用的是不同的值
+sorry-- was the different
+values that your random variable
+[53:39] 可以采取。 
+can take.
+[53:41] 在他们的头脑中没有人会写两次相同的价值
+Nobody in their right mind
+would write twice the same value
+[53:43] 在此列表中。 
+in this list.
+[53:47] 所以我的范德蒙德非零。 
+So my Vandermonde is non-zero.
+[53:49] 所以我可以将其反转。 
+So I can invert it.
+[53:49] 我有一对一的对应关系
+And I have a one-to-one
+correspondence
+[53:51] 在我整个PMF​​和第一个r减去1的时刻之间
+between my entire PMF and
+the first r minus 1's moments
+[53:55] 我在上面加上数字1，实际上是
+to which I append the
+number 1, which is really
+[54:00] 再次从零开始。 
+the moment of order 0 again.
+[54:02]  X的E到0的整数，即1。 
+It's E of X to the
+0-th, which is 1.
+[54:05] 好消息，我只需要r减去1个参数
+So good news, I only
+need r minus 1 parameters
+[54:10] 描述r减去1的参数。 
+to describe r
+minus 1 parameters.
+[54:12] 而且我可以选择我的PMF的值。 
+And I can choose either
+the values of my PMF.
+[54:14] 或者，我可以选择r减去1的第一刻。 
+Or I can choose the r
+minus 1 first moments.
+[54:20] 所以片刻告诉我一些事情。 
+So the moments
+tell me something.
+[54:22] 在这里，它告诉我，如果我有离散分布
+Here, it tells me that if I
+have a discrete distribution
+[54:26] 有r个可能的值，我只需要
+with r possible
+values, I only need
+[54:28] 计算r减去1矩。 
+to compute r minus 1 moments.
+[54:30] 因此，这比Weierstrass逼近更好
+So this is better than
+Weierstrass Approximation
+[54:34] 定理。 
+Theorem.
+[54:34] 这准确地告诉我我需要考虑多少时间。 
+This tells me exactly how many
+moments I need to consider.
+[54:37] 这是任何发行版。 
+And this is for
+any distribution.
+[54:39] 这不是一个发行版
+This is not a
+distribution that's
+[54:41] 由一个参数参数化，例如泊松
+parametrized by one
+parameter, like the Poisson
+[54:43] 或二项式或所有这些东西。 
+or the binomial
+or all this stuff.
+[54:47] 这适用于有限数量下的任何分布。 
+This is for any distribution
+under a finite number.
+[54:50] 所以希望，如果我减少PMF的家庭
+So hopefully, if I
+reduce the family of PMFs
+[54:53] 我正在寻找一个单参数家庭， 
+that I'm looking at to
+a one-parameter family,
+[54:55] 我实际上需要计算的量比r小得多
+I'm actually going to need
+to compute much less than r
+[54:58] 负1值。 
+minus 1 values.
+[55:01] 但这实际上是充满希望的。 
+But this is actually hopeful.
+[55:02] 它告诉你片刻的方法
+It tells you that
+the method of moments
+[55:04] 适用于任何发行版。 
+is going to work for
+any distribution.
+[55:06] 您只需要反转Vandermonde矩阵。 
+You just have to invert
+a Vandermonde matrix.
+[55:13] 所以只是结论-统计结论- 
+So just the conclusion--
+the statistical conclusion--
+[55:17] 时刻包含重要信息
+is that moments contain
+important information
+[55:20] 关于PMF和PDF。 
+about the PMF and the PDF.
+[55:24] 如果我们可以准确估算这些时刻， 
+If we can estimate these
+moments accurately,
+[55:26] 我们可以求解分布的参数
+we can solve for the
+parameters of the distribution
+[55:30] 并恢复分配。 
+and recover the distribution.
+[55:32] 在参数设置中， 
+And in a parametric
+setting, where
+[55:34] 知道P theta等于知道theta， 
+knowing P theta amounts
+to knowing theta, which
+[55:36] 是可识别性-这不是无害的- 
+is identifiability--
+this is not innocuous--
+[55:41] 通常情况下，需要的时间更少。 
+it is often the case that
+even less moments are needed.
+[55:44] 毕竟，如果theta是一维参数， 
+After all, if theta is a
+one dimensional parameter,
+[55:46] 我有一个参数可以估算。 
+I have one parameter
+to estimate.
+[55:48] 我为什么要走25分钟
+Why would I go
+and get 25 moments
+[55:51] 得到这个参数。 
+to get this one parameter.
+[55:52] 通常，实际上-我们
+Typically, there
+is actually-- we
+[55:54] 会看到片刻的方法
+will see that the
+method of moments
+[55:55] 只是说如果您有d维参数， 
+just says if you have a
+d dimensional parameter,
+[55:58] 只需计算d矩即可，仅此而已。 
+just compute d
+moments, and that's it.
+[56:02] 但这只是在个案的基础上。 
+But this is only on
+a case-by-case basis.
+[56:04] 我的意思是，也许您的模型会完全搞乱其参数
+I mean, maybe your model will
+totally screw up its parameters
+[56:07] 而您实际上需要获取它们。 
+and you actually
+need to get them.
+[56:09] 我的意思是，考虑一下，如果函数只是参数化的
+I mean, think about it, if the
+function is parameterized just
+[56:16] 到第27时， 
+by its 27th moment--
+[56:19] 就像，这是此发行版中唯一重要的事情， 
+like, that's the only thing that
+matters in this distribution,
+[56:21] 我只是描述函数，它只是一个密度， 
+I just describe the function,
+it's just a density,
+[56:24] 唯一可以从一个发行版更改的内容
+and the only thing that can
+change from one distribution
+[56:26] 另一个是第二十七分钟
+to another is this 27th moment--
+[56:28] 好吧，那么您将必须获得第27个时刻。 
+well, then you're going to
+have to go get the 27th moment.
+[56:30] 这可能意味着您的建模步骤实际上是
+And that probably means that
+your modeling step was actually
+[56:33] 很糟糕。 
+pretty bad.
+[56:37] 因此，根据经验法则，如果theta位于Rd中，则需要d个矩。 
+So the rule of thumb, if theta
+is in Rd, we need d moments.
+[56:46] 那么，瞬间的方法是什么？ 
+So what is the
+method of moments?
+[56:52] 那只是一个很好的老把戏。 
+That's just a good old trick.
+[56:55] 用平均值代替期望值。 
+Replace the expectation
+by averages.
+[56:58] 那就是美丽。 
+That's the beauty.
+[56:59] 时刻是期望。 
+The moments are expectations.
+[57:02] 因此，让我们用平均值代替期望值
+So let's just replace the
+expectations by averages
+[57:04] 然后使用普通版本
+and then do it with
+the average version,
+[57:07] 好像那是真的。 
+as if it was the true one.
+[57:10] 例如，我要谈论人口时刻， 
+So for example, I'm going to
+talk about population moments,
+[57:14] 当我用真实分布计算它们时， 
+when I'm computing them
+with the true distribution,
+[57:16] 我将谈论它们的经验性时刻
+and I'm going to talk about
+them empirical moments, when
+[57:18] 我说的是平均值。 
+I talk about averages.
+[57:22] 这就是我的两个数量。 
+So those are the two
+quantities that I have.
+[57:24] 而现在，我希望有。 
+And now, what I hope
+is that there is.
+[57:28] 所以这基本上是- 
+So this is basically--
+[57:30] 一切都在这里。 
+everything is here.
+[57:32] 那就是所有钱的来源。 
+That's where all the money is.
+[57:33] 我将假设有一个映射的函数psi 
+I'm going to assume there's
+a function psi that maps
+[57:36] 我的参数-假设它们在Rd中- 
+my parameters-- let's
+say they're in Rd--
+[57:40] 到前d个时刻的集合。 
+to the set of the
+first d moments.
+[57:45] 好吧，我想做的就是来自这个人
+Well, what I want to do
+is to come from this guy
+[57:48] 回到θ。 
+back to theta.
+[57:49] 所以最好是这个功能是- 
+So it better be that
+this function is--
+[57:54] 可逆的。 
+invertible.
+[57:55] 我希望此函数是可逆的。 
+I want this function
+to be invertible.
+[57:57] 在范德蒙德案中，此功能
+In the Vandermonde
+case, this function
+[57:59] 只需一个线性函数-将矩阵乘以theta。 
+with just a linear function--
+multiply a matrix by theta.
+[58:03] 然后，对线性函数求逆就是对矩阵求逆。 
+Then inverting a linear function
+is inverting the matrix.
+[58:06] 那是同一回事。 
+Then this is the same thing.
+[58:08] 所以现在我要假设的是
+So now what I'm
+going to assume--
+[58:09] 这是该方法起作用的关键-是theta- 
+and that's key for this method
+to work-- is that this theta--
+[58:14] 因此此功能psi是一对一的。 
+so this function
+psi is one to one.
+[58:16] 只有一个theta只能得到一组时刻。 
+There's only one theta that
+gets only one set of moments.
+[58:24] 因此，如果它是一对一的，我可以谈谈它的反函数。 
+And so if it's one to one, I
+can talk about its inverse.
+[58:26] 所以现在，我将能够定义theta 
+And so now, I'm going to
+be able to define theta
+[58:28] 作为瞬间的倒数
+as the inverse of the moments--
+[58:32] 瞬间的倒数。 
+the reciprocal of the moments.
+[58:33] 所以现在，我得到的是矩估计器只是
+And so now, what I get is that
+the moment estimator is just
+[58:37] 而不是把真正的家伙带到那里， 
+the thing where rather than
+taking the true guys in there,
+[58:42] 我实际上将在其中进行一些经验性的探讨。 
+I'm actually going to take the
+empirical moments in there.
+[58:48] 在我们进一步之前，我想
+Before we go any
+further, I'd like
+[58:50] 只是回去告诉你这不是
+to just go back and tell
+you that this is not
+[58:53] 完全免费。 
+completely free.
+[58:56] 您的psi功能表现如何
+How well-behaved
+your function psi
+[58:58] 将发挥巨大作用。 
+is going to play a huge role.
+[59:02] 有人能告诉我典型的距离是多少吗？ 
+Can somebody tell me what
+the typical distance--
+[59:05] 如果我有一个大小为n的样本，那
+if I have a sample
+of size n, what
+[59:06] 平均值与期望值之间的典型距离是多少？ 
+is the typical distance between
+an average and the expectation?
+[59:12] 典型的距离是多少？ 
+What is the typical distance?
+[59:14]  xn之间的数量级是n的函数
+What is the order of magnitude
+as a function of n between xn
+[59:18] 酒吧及其期望。 
+bar and its expectation.
+[59:23] 听众：n的平方根上的1。 
+AUDIENCE: 1 over
+square root of n.
+[59:25]  PHILIPPE RIGOLLET：1在平方根n上。 
+PHILIPPE RIGOLLET: 1
+over square root n.
+[59:25] 这就是中心极限定理告诉我们的，对吗？ 
+That's what the central limit
+theorem tells us, right?
+[59:28] 中心极限定理告诉我们
+The central limit
+theorem tells us
+[59:29] 这些东西基本上是高斯的， 
+that those things are
+basically a Gaussian, which
+[59:31] 是1的阶数除以n的平方。 
+is of order of 1 divided
+by its square of n.
+[59:34] 所以基本上，我从一些事情开始
+And so basically, I
+start with something
+[59:37] 它是n的平方根，比真实的事物大1。 
+which is 1 over square root
+of n away from the true thing.
+[59:41] 现在，如果我的函数psi逆像这样陡峭- 
+Now, if my function psi inverse
+is super steep like this--
+[59:49] 就是psi的倒数-只是很小的波动，甚至
+that's psi inverse-- then
+just small fluctuations, even
+[59:54] 如果它们的阶数为n的1平方根， 
+if they're of order
+1 square root of n,
+[59:57] 可以转化为y轴的巨大波动。 
+can translate into giant
+fluctuations in the y-axis.
+[60:04] 这将得到控制
+And that's going
+to be controlled
+[60:06]  psi逆数有多陡，这是相同的
+by how steep psi inverse
+is, which is the same
+[60:09] 就像说psi平坦- 
+as saying how flat psi is--
+[60:14]  psi有多平坦。 
+how flat is psi.
+[60:15] 所以，如果您回到范德蒙德逆矩阵， 
+So if you go back to
+this Vandermonde inverse,
+[60:20] 告诉你的是，如果逆矩阵爆炸
+what it's telling you is that
+if this inverse matrix blows up
+[60:26] 这个家伙很多
+this guy a lot--
+[60:29] 所以如果我从这个东西的一点波动开始
+so if I start from a small
+fluctuation of this thing
+[60:32] 然后他们被应用炸掉了
+and then they're
+blowing up by applying
+[60:34] 这个矩阵的逆，事物
+the inverse of
+this matrix, things
+[60:36] 不会进展顺利。 
+are not going to go well.
+[60:37] 有人知道我应该找什么电话吗？ 
+Anybody knows what is the number
+that I should be looking for?
+[60:41] 这就是说，数值线性代数
+So that's from, say,
+numerical linear algebra
+[60:45] 数值方法。 
+numerical methods.
+[60:47] 当我有线性方程组时
+When I have a system
+of linear equations,
+[60:49] 我应该实际多少钱
+what is the actual
+number I should
+[60:50] 看着知道我有多少
+be looking at to
+know how much I'm
+[60:53] 吹起波动？ 
+blowing up the fluctuations?
+[60:54] 是的
+Yeah.
+[60:55] 听众：条件编号？ 
+AUDIENCE: Condition number?
+[60:55]  PHILIPPE RIGOLLET：条件编号，正确。 
+PHILIPPE RIGOLLET: The
+condition number, right.
+[60:57] 所以这里重要的是条件编号
+So what's important here
+is the condition number
+[60:59] 这个矩阵
+of this matrix.
+[61:00] 如果此矩阵的条件数较小， 
+If the condition number
+of this matrix is small,
+[61:03] 那很好
+then it's good.
+[61:04] 它不会炸得太多。 
+It's not going to blow up much.
+[61:05] 但是如果条件数很大， 
+But if the condition
+number is very large,
+[61:07] 它只会炸毁很多。 
+it's just going
+to blow up a lot.
+[61:08] 条件数是比率
+And the condition
+number is the ratio
+[61:10] 特征值的最大和最小。 
+of the largest and the
+smallest eigenvalues.
+[61:13] 因此，您必须知道它是什么。 
+So you'll have to
+know what it is.
+[61:14] 但这就是所有这些东西融合在一起的方式。 
+But this is how all these
+things get together.
+[61:17] 因此，数值稳定性转化为
+So the numerical
+stability translates
+[61:21] 统计稳定。 
+into statistical stability here.
+[61:24] 而数值意味着
+And numerical
+means just if I had
+[61:26] 测量右侧的错误， 
+errors in measuring
+the right hand side,
+[61:28] 他们将多少转化为左手的错误
+how much would they translate
+into errors on the left hand
+[61:30] 侧。 
+side.
+[61:31] 因此，这里的错误是统计问题所固有的。 
+So the error here is intrinsic
+to statistical questions.
+[61:38] 所以这是我的估计，只要它存在。 
+So that's my estimator,
+provided that it exists.
+[61:42] 我说这是一对一的，所以应该存在， 
+And I said it's a one to
+one, so it should exist,
+[61:45] 如果我假设psi是可逆的。 
+if I assume that
+psi is invertible.
+[61:48] 那这个人有多好？ 
+So how good is this guy?
+[61:51] 这绝对是我们的问题- 
+That's going to be
+definitely our question--
+[61:53] 这东西有多好。 
+how good is this thing.
+[61:54] 正如我所说，如果psi确实很陡， 
+And as I said, there's chances
+that if psi is really steep,
+[62:00] 那应该不是很好- 
+then it should be
+not very good--
+[62:02] 如果psi倒数非常陡峭，那应该不是很好， 
+if psi inverse is very steep,
+it should not be very good,
+[62:06] 这意味着- 
+which means that it's--
+[62:07] 好吧，让我们就这样吧。 
+well, let's just
+leave it to that.
+[62:11] 所以这意味着我应该
+So that means that
+I should probably
+[62:13] 看到psi的导数出现在某个地方。 
+see the derivative of
+psi showing up somewhere.
+[62:16] 假设psi逆的导数非常大， 
+If the derivative of psi
+inverse, say, is very large,
+[62:19] 那么我实际上应该有更大的方差
+then I should actually
+have a larger variance
+[62:21] 在我的估算器中。 
+in my estimator.
+[62:22] 希望如此，就像我们有一个定理告诉我们一样
+So hopefully, just like we
+had a theorem that told us
+[62:26]  Fisher信息是方差的关键
+that the Fisher information
+was key in the variance
+[62:29] 最大似然估计的
+of the maximum
+likelihood estimator,
+[62:30] 我们应该有一个定理告诉我们
+we should have a
+theorem that tells us
+[62:32]  psi逆的导数
+that the derivative
+of psi inverse
+[62:33] 在时刻方法中将发挥关键作用。 
+is going to have a key role
+in the method of moments.
+[62:37] 所以做吧。 
+So let's do it.
+[62:57] 因此，我将与您讨论矩阵。 
+So I'm going to talk
+to you about matrices.
+[63:01] 所以现在，我有- 
+So now, I have--
+[63:10] 因此，由于我必须在任何给定时间操纵d数字， 
+So since I have to manipulate
+d numbers at any given time,
+[63:15] 我将把它们连接成一个向量。 
+I'm just going to concatenate
+them into a vector.
+[63:17] 所以我要称大写M theta 
+So I'm going to call
+capital M theta--
+[63:19] 所以基本上就是人口时刻。 
+so that's basically
+the population moment.
+[63:24] 我有M帽子，也就是m帽子1至m帽子d。 
+And I have M hat, which is
+just m hat 1 to m hat d.
+[63:31] 这就是我的经验。 
+And that's my empirical moment.
+[63:39] 将会起作用的是
+And what's going
+to play a role is
+[63:41] 随机向量的方差-协方差是多少？ 
+what is the variance-covariance
+of the random vector.
+[63:45] 所以我有这个向量1 
+So I have this vector 1--
+[63:49] 我有1吗？ 
+do I have 1?
+[63:50] 不，我没有1。 
+No, I don't have 1.
+[63:59] 这就是广告维向量。 
+So that's a d
+dimensional vector.
+[64:02] 在这里，我接连接任。 
+And here, I take the
+successive powers.
+[64:04] 请记住，这看起来非常像我的范德蒙德专栏
+Remember, that looks very much
+like a column of my Vandermonde
+[64:08] 矩阵。 
+matrix.
+[64:10] 所以现在，我有了这个随机向量。 
+So now, I have
+this random vector.
+[64:12] 这只是一些随机变量X的连续幂。 
+It's just the successive powers
+of some random variable X.
+[64:15] 方差-协方差矩阵是期望值
+And the variance-covariance
+matrix is the expectation--
+[64:19] 所以西格玛
+so sigma--
+[64:20] 的
+of theta.
+[64:21]  Theta只是意味着我要抱有期望
+The theta just means I'm
+going to take expectations
+[64:23] 关于θ。 
+with respect to theta.
+[64:26] 这是尊重的期望
+That's the expectation
+with respect
+[64:28] 这个家伙的θ角乘以这个家伙
+to theta of this
+guy times this guy
+[64:31] 转置减去同一件事，但有期望
+transpose minus the same
+thing but with the expectation
+[64:40] 内。 
+inside.
+[64:45] 为什么我做X，X1。 
+Why do I do X, X1.
+[64:46] 我有X，X2，X3。 
+I have X, X2, X3.
+[64:50]  X，X2，Xd乘以X，X2，Xd的期望值。 
+X, X2, Xd times the
+expectation of X, X2, Xd.
+[65:04] 大家都知道这是什么吗？ 
+Everybody sees what this is?
+[65:05] 所以这是一个矩阵，如果我看一下这个
+So this is a matrix where if I
+look at the ij-th term of this
+[65:11] 矩阵 - 
+matrix--
+[65:13] 或者说第jk个词，所以在第j行和第k列， 
+or let's say, jk-th term,
+so on row j and column k,
+[65:20] 我有theta的sigma jk。 
+I have sigma jk of theta.
+[65:26] 这只是X对j的期望
+And it's simply the
+expectation of X to the j
+[65:30] 加k-好吧，Xj Xk减去Xj期望值
+plus k-- well, Xj Xk minus
+expectation of Xj expectation
+[65:40]  Xk。 
+of Xk.
+[65:45] 所以我可以写成mj加theta的k减去theta的mj 
+So I can write this as m j plus
+k of theta minus mj of theta
+[65:53]  theta的mk倍。 
+times mk of theta.
+[66:00] 这就是这个向量的协方差矩阵
+So that's my covariance matrix
+of this particular vector
+[66:04] 我定义的
+that I define.
+[66:06] 现在，我要假设psi逆
+And now, I'm going to
+assume that psi inverse--
+[66:09] 好吧，如果我想谈谈坡度
+well, if I want to
+talk about the slope
+[66:11] 以分析的方式，我必须假设
+in an analytic fashion,
+I have to assume
+[66:14]  psi是可区分的。 
+that psi is differentiable.
+[66:16] 我将谈论渐变
+And I will talk
+about the gradient
+[66:18]  psi，如果是一维， 
+of psi, which is, if
+it's one dimensional,
+[66:20] 这只是衍生产品。 
+it's just the derivative.
+[66:22] 在这里，符号变得令人讨厌。 
+And here, that's where
+notation becomes annoying.
+[66:24] 我实际上只是假设
+And I'm going to
+actually just assume
+[66:26] 所以现在我有一个向量
+that so now I have a vector.
+[66:28] 但这是功能的载体，而我
+But it's a vector
+of functions and I
+[66:30] 想要以特定值计算这些函数。 
+want to compute those functions
+at a particular value.
+[66:32] 我真正感兴趣的价值
+And the value I'm
+actually interested in
+[66:34] 在theta参数的m处。 
+is at the m of theta parameter.
+[66:37] 所以psi逆是从一组力矩开始的
+So psi inverse goes
+from the set of moments
+[66:41] 到参数集。 
+to the set of parameters.
+[66:43] 所以当我看这个人的梯度时， 
+So when I look at the
+gradient of this guy,
+[66:45] 它应该是一个以输入力矩为输入的函数。 
+it should be a function that
+takes as inputs moments.
+[66:48] 我希望在哪里评估此功能？ 
+And where do I want this
+function to be evaluated at?
+[66:51] 在真实的时刻
+At the true moment--
+[66:54] 在人口时刻向量。 
+at the population moment vector.
+[66:58] 就像我计算我的Fisher信息一样， 
+Just like when I computed
+my Fisher information,
+[67:00] 我正在按真实参数进行计算。 
+I was computing it at
+the true parameter.
+[67:04] 所以现在，一旦他们计算出这个人
+So now, once they
+compute this guy--
+[67:08] 那么现在，为什么这是一个d×d的梯度矩阵？ 
+so now, why is this a
+d by d gradient matrix?
+[67:15] 所以当我有一个从rd到r的函数时，我就有一个梯度向量。 
+So I have a gradient vector when
+I have a function from rd to r.
+[67:19] 这是偏导数。 
+This is the partial derivatives.
+[67:22] 但是现在，我有一个从rd到rd的函数。 
+But now, I have a
+function from rd to rd.
+[67:25] 所以我必须尊重派生
+So I have to take the
+derivative with respect
+[67:28] 到到达坐标和离开坐标。 
+to the arrival coordinate
+and the departure coordinate.
+[67:35] 这就是梯度矩阵。 
+And so that's the
+gradient matrix.
+[67:39] 现在，我具有以下属性。 
+And now, I have the
+following properties.
+[67:41] 第一个是大数定律
+The first one is that
+the law of large numbers
+[67:46] 告诉我theta帽子是弱或强一致的
+tells me that theta hat is a
+weakly or strongly consistent
+[67:52] 估算器。 
+estimator.
+[67:54] 所以我要么使用大量的强定律
+So either I use the strong
+law of large numbers
+[67:56] 或大量的弱定律， 
+or the weak law
+of large numbers,
+[67:57] 我会变得很强或很弱。 
+and I get strong or
+weak consistency.
+[68:01] 那是什么意思呢？ 
+So what does that mean?
+[68:02] 为什么会这样呢？ 
+Why is that true?
+[68:03] 好吧，因为现在我真的有功能了
+Well, because now so I
+really have the function--
+[68:12] 那我的估算器是什么？ 
+so what is my estimator?
+[68:13]  The psi从m hat 1到m hat k的psi逆。 
+Theta hat this psi inverse
+of m hat 1 to m hat k.
+[68:23] 现在，根据大量定律， 
+Now, by the law
+of large numbers,
+[68:26] 让我们只看一看弱者。 
+let's look only at the weak one.
+[68:28] 大数定律告诉我每个mj帽子
+Law of large numbers tells
+me that each of the mj hat
+[68:35] 会收敛为n 
+is going to converge
+in probability as n
+[68:38] 到无穷无尽的经验时刻
+to infinity to the-- so
+the empirical moments
+[68:40] 融合到人口瞬间。 
+converge to the
+population moments.
+[68:44] 那就是好的老把戏所使用的
+That's what the good
+old trick is using,
+[68:48] 经验时刻
+the fact that the
+empirical moments
+[68:49] 随着n变大，它们接近真实时刻。 
+are close to the true
+moments as n becomes larger.
+[68:52] 那是因为，好吧，只是因为m帽子j 
+And that's because, well,
+just because the m hat j's
+[68:55] 是平均值，以及大量定律
+are averages, and the
+law of large numbers
+[68:57] 适用于平均值。 
+works for averages.
+[68:59] 所以现在，再加上我的连续映射定理， 
+So now, plus if I look at my
+continuous mapping theorem,
+[69:04] 那么我就知道psi逆是连续可微的。 
+then I have that psi inverse
+is continuously differentiable.
+[69:10] 因此，它肯定是连续的。 
+So it's definitely continuous.
+[69:12] 所以我所拥有的是m hat的psi逆
+And so what I have is
+that psi inverse of m hat
+[69:16]  1 m hat d收敛到psi逆m1到md， 
+1 m hat d converges to psi
+inverse m1 to md, which
+[69:28] 等于theta星的
+is equal to of theta star.
+[69:33] 那就是theta星。 
+So that's theta star.
+[69:35] 根据定义，我们认为那是唯一的
+By definition, we assumed that
+that was the unique one that
+[69:37] 实际上是这样做的。 
+was actually doing this.
+[69:40] 同样，这是一个非常有力的假设。 
+Again, this is a very
+strong assumption.
+[69:43] 我的意思是，基本上是说，如果采用矩量法， 
+I mean, it's basically saying,
+if the method of moment works,
+[69:46] 有用。 
+it works.
+[69:47] 所以psi一对一反比的事实
+So the fact that psi
+inverse one to one
+[69:51] 确实是使这个人工作的关键。 
+is really the key to
+making this guy work.
+[69:55] 然后，我还有一个中心极限定理。 
+And then I also have a
+central limit theorem.
+[69:57] 中心极限定理基本上是
+And the central limit
+theorem is basically
+[70:00] 告诉我M hat正在收敛到M 
+telling me that M hat
+is converging to M even
+[70:04] 在多元意义上。 
+in the multivariate sense.
+[70:06] 因此，如果我查看M hat的向量和M的真实向量， 
+So if I look at the vector of
+M hat and the true vector of M,
+[70:09] 然后我实际上让他们走了
+then I actually make them go--
+[70:11] 我看按n平方根表示的比例差。 
+I look at the difference for
+scale by square root of n.
+[70:14] 它涉及到一些高斯。 
+It goes to some Gaussian.
+[70:15] 通常，我们会看到-如果它是一维的， 
+And usually, we would see--
+if it was one dimensional,
+[70:18] 我们会看到差异。 
+we would see the variance.
+[70:19] 然后我们看到方差-协方差矩阵。 
+Then we see the
+variance-covariance matrix.
+[70:22] 谁从未见过-嗯，没人回答这个问题。 
+Who has never seen the-- well,
+nobody answers this question.
+[70:25] 谁已经看过多元中心极限
+Who has already seen the
+multivariate central limit
+[70:28] 定理？ 
+theorem?
+[70:31] 谁从未见过多元中心极限
+Who was never seen the
+multivariate central limit
+[70:33] 定理？ 
+theorem?
+[70:35] 所以多元中心极限定理
+So the multivariate
+central limit theorem
+[70:37] 基本上只是轻微的扩展
+is basically just
+the slight extension
+[70:41] 单变量之一。 
+of the univariate one.
+[70:43] 它只是说，如果我想
+It just says that
+if I want to think--
+[70:48] 所以单变量会告诉我这样的事情- 
+so the univariate one would
+tell me something like this--
+[71:05] 和0。 
+and 0.
+[71:06] 然后，我将基本上得到X与第j个的方差。 
+And then I would have basically
+the variance of X to the j-th.
+[71:18] 这就是中心极限定理告诉我的。 
+So that's what the central
+limit theorem tells me.
+[71:22] 这是一个平均值。 
+This is an average.
+[71:29] 因此，这仅是平均值。 
+So this is just for averages.
+[71:31] 中心极限定理告诉我这一点。 
+The central limit
+theorem tells me this.
+[71:33] 只需将第j的X视为y。 
+Just think of X to
+the j-th as being y.
+[71:36] 那是真的。 
+And that would be true.
+[71:37] 每个人都同意我吗？ 
+Everybody agrees with me?
+[71:40] 所以现在，这实际上是在告诉我
+So now, this is
+actually telling me
+[71:41] 所有这些家伙分别发生了什么。 
+what's happening for all
+these guys individually.
+[71:45] 但是，当这些家伙开始相互关联时会发生什么？ 
+But what happens when those guys
+start to correlate together?
+[71:48] 我想知道它们是否真的相关
+I'd like to know if
+they actually correlate
+[71:51] 渐近地也一样。 
+the same way asymptotically.
+[71:53] 因此，如果我实际查看协方差矩阵
+And so if I actually looked
+at the covariance matrix
+[71:56] 这个向量
+of this vector--
+[72:03] 所以现在，我需要查看一个d乘d的矩阵
+so now, I need to look at
+a matrix which is d by d--
+[72:07] 那么那些单变量中心极限定理
+then would those univariate
+central limit theorems
+[72:10] 告诉我 - 
+tell me--
+[72:12] 所以让我这样吧，双杠。 
+so let me right like
+this, double bar.
+[72:16] 这就是协方差矩阵。 
+So that's just the
+covariance matrix.
+[72:19] 这个符号V double bar是方差-协方差矩阵。 
+This notation, V double bar is
+the variance-covariance matrix.
+[72:23] 所以这件事告诉我-所以我知道这件事
+So what this thing tells
+me-- so I know this thing
+[72:26] 是一个矩阵，用d乘d表示。 
+is a matrix, d by d.
+[72:30] 仅那些单变量中心极限定理
+Those univariate central
+limit theorems only
+[72:31] 给我有关对角线项的信息。 
+give me information
+about the diagonal terms.
+[72:36] 但是在这里，我不知道协方差矩阵在哪里。 
+But here, I have no idea where
+the covariance matrix is.
+[72:40] 例如，这个人告诉我，这件事是
+This guy is telling me, for
+example, that this thing is
+[72:46] 像X到第j的方差。 
+like variance of X to the j-th.
+[72:49] 但是如果我想找到非对角线元素怎么办
+But what if I want to
+find off-diagonal elements
+[72:51] 这个矩阵的？ 
+of this matrix?
+[72:53] 好吧，我需要使用多元中心极限
+Well, I need to use a
+multivariate central limit
+[72:55] 定理。 
+theorem.
+[72:56] 真正告诉我的是，您实际上可以
+And really what it's telling
+me is that you can actually
+[72:58] 在这里替换这个人
+replace this guy here--
+[73:10] 因此，分布再次达到一些正常均值0。 
+so that goes in distribution
+to some normal mean 0, again.
+[73:14] 而现在，我所拥有的只是西格玛
+And now, what I
+have is just sigma
+[73:17] 的θ，它只是协方差矩阵
+of theta, which is just
+the covariance matrix
+[73:22] 向量X，X2，X3，X4一直到Xd。 
+of this vector X, X2, X3,
+X4, all the way to Xd.
+[73:26] 就是这样。 
+And that's it.
+[73:27] 这就是多元高斯。 
+So that's a
+multivariate Gaussian.
+[73:28] 谁从未见过多元高斯？ 
+Who has never seen a
+multivariate Gaussian?
+[73:33] 拜托，只要去维基百科之类的。 
+Please, just go on
+Wikipedia or something.
+[73:35] 对此了解不多。 
+There's not much
+to know about it.
+[73:37] 但是我没有时间在这里重做概率。 
+But I don't have time to
+redo probability here.
+[73:40] 因此，我们将不得不忍受它。 
+So we're going to
+have to live with it.
+[73:43] 现在，公平地说，如果您的目标不是
+Now, to be fair,
+if your goal is not
+[73:46] 成为统计专家，我们
+to become a
+statistical savant, we
+[73:48] 将坚持单变量问题
+will stick to
+univariate questions
+[73:52] 在家庭作业和考试范围内。 
+in the scope of
+homework and exams.
+[74:01] 那么现在，增量法告诉我什么呢？ 
+So now, what was the
+delta method telling me?
+[74:09] 告诉我，如果我有一个中心极限定理， 
+It was telling me that if I had
+a central limit theorem that
+[74:13] 告诉我theta帽子要去theta， 
+told me that theta hat
+was going to theta,
+[74:16] 或n theta hat减去theta的平方根
+or square root of n
+theta hat minus theta
+[74:17] 要去高斯，然后我
+was going to some
+Gaussian, then I
+[74:19] 可以看到theta帽子的Mg的平方根减去theta的g的平方根。 
+could look at square root of Mg
+of theta hat minus g of theta.
+[74:23] 而且这件事也将用于高斯。 
+And this thing was also
+going to a Gaussian.
+[74:25] 但是必须是正方形
+But what it had to
+be is the square
+[74:27]  g在方差中的导数
+of the derivative of
+g in the variance.
+[74:32] 因此，增量法只是一种方法
+So the delta method,
+it was just a way
+[74:35] 从n theta的平方根开始
+to go from square
+root of n theta
+[74:38] 帽子n减去theta到某个N，例如0，sigma平方，- 
+hat n minus theta goes to some
+N, say 0, sigma squared, to--
+[74:46] 所以增量法告诉我这是平方根
+so delta method was telling
+me that this was square root
+[74:50]  Ntheta帽N N减去g theta 
+Ng of theta hat N
+minus g of theta
+[74:56] 正向N0 sigma平方分布
+was going in distribution
+to N0 sigma squared
+[75:01]  g theta的平方平方。 
+g prime squared of theta.
+[75:07] 那就是增量法。 
+That was the delta method.
+[75:09] 现在，在这里，我们具有这些人的职能。 
+Now, here, we have a
+function of those guys.
+[75:12] 中心极限定理，甚至是多元极限定理， 
+The central limit theorem,
+even the multivariate one,
+[75:15] 只是为我保证某些时刻。 
+is only guaranteeing something
+for me regarding the moments.
+[75:20] 但是现在，我需要将这些时刻映射回一些θ 
+But now, I need to map the
+moments back into some theta,
+[75:23] 所以我具有当下的功能。 
+so I have a function
+of the moments.
+[75:26] 还有一个叫做多元变量的东西
+And there is something
+called the multivariate delta
+[75:31] 方法，其中用梯度替换导数。 
+method, where derivatives
+are replaced by gradients.
+[75:35] 就像，它们总是处于多元演算中。 
+Like, they always are in
+multivariate calculus.
+[75:39] 而且，由于事物无法计算，因此与其相乘， 
+And rather than multiplying,
+since things do not compute,
+[75:43] 而不是选择我要放置正方形的那一边， 
+rather than choosing which
+side I want to put the square,
+[75:46] 我实际上只是要在一侧占据一半的正方形
+I'm actually just going to take
+half of the square on one side
+[75:49] 正方形的另一半在另一边。 
+and the other half of the
+square on the other side.
+[75:51] 因此，您应该以这种方式查看
+So the way you
+should view this, you
+[75:53] 应该想到sigma平方乘以g素平方
+should think of sigma
+squared times g prime squared
+[75:59] 作为theta乘以sigma的素数
+as being g prime of
+theta times sigma
+[76:02] 平方乘以theta的质数g。 
+squared times g prime of theta.
+[76:06] 而现在，这是完全对称的。 
+And now, this is
+completely symmetric.
+[76:08] 以及多元delta方法
+And the multivariate
+delta method
+[76:14] 基本上是告诉您在这里得到渐变。 
+is basically telling you that
+you get the gradient here.
+[76:20] 所以你从一些
+So you start from
+something that's
+[76:21] 像那边的西格玛
+like that over there, a sigma--
+[76:24] 所以这就是我的sigma平方，想到sigma平方。 
+so that's my sigma squared,
+think of sigma squared.
+[76:26] 然后我先乘以梯度再乘以
+And then I premultiply by
+the gradient and postmultiply
+[76:29] 通过渐变。 
+by the gradient.
+[76:30] 第一个被换位。 
+The first one is transposed.
+[76:31] 第二个不是。 
+The second one is not.
+[76:33] 但这是非常简单的扩展。 
+But that's very
+straightforward extension.
+[76:36] 您甚至不必了解它。 
+You don't even have
+to understand it.
+[76:37] 试想一下自然归纳法。 
+Just think of what would be
+the natural generalization.
+[76:41] 顺便说一下，在这里，我明确地写了
+Here, by the way,
+I wrote explicitly
+[76:44] 多元函数的梯度是多少。 
+what the gradient of a
+multivariate function is.
+[76:48] 这就是从Rd到Rk的函数。 
+So that's a function
+that goes from Rd to Rk.
+[76:53] 所以现在，梯度是逐个k矩阵的
+So now, the gradient
+is a d by k matrix.
+[76:58] 所以现在，对于这个人，我们可以做到
+And so now, for this
+guy, we can do it
+[77:00] 对于方法或时刻。 
+for the method or moments.
+[77:01] 我们可以看到基本上我们是
+And we can see that
+basically we're
+[77:03] 将有这种缩放取决于
+going to have this
+scaling that depends
+[77:04] 在psi倒数的梯度上
+on the gradient of the
+reciprocal of psi, which
+[77:08] 是正常的。 
+is normal.
+[77:08] 因为如果psi超陡，如果psi逆超陡， 
+Because if psi is super steep,
+if psi inverse is super steep,
+[77:13] 那么梯度会很大， 
+then the gradient
+is going to be huge,
+[77:14] 这将转化为巨大的差异
+which is going to translate
+into having a huge variance
+[77:17] 对于瞬间的方法。 
+for the method of moments.
+[77:21] 所以这实际上是结局。 
+So this is actually the end.
+[77:24] 我想鼓励您-我们可能会做到的
+I would like to encourage
+you-- and we'll probably do it
+[77:26] 在星期四刚刚开始。 
+on Thursday just to start.
+[77:27] 但我鼓励您从一个维度去做， 
+But I encourage you do
+it in one dimension,
+[77:30] 让您知道如何使用瞬间法
+so that you know how to
+use the method of moments,
+[77:35] 你知道如何做一堆事情。 
+you know how to do
+a bunch of things.
+[77:37] 一维操作，看看如何检查这些内容。 
+Do it in one dimension and see
+how you can check those things.
+[77:40] 因此，就二次风险而言， 
+So just as a quick comparison,
+in terms of the quadratic risk,
+[77:43] 最大似然估计量通常为
+the maximum likelihood
+estimator is typically
+[77:46] 比瞬间法更准确。 
+more accurate than
+the method of moments.
+[77:50] 很好的是，什么时候
+What is pretty
+good to do is, when
+[77:51] 你有不凹的可能性
+you have a
+non-concave likelihood
+[77:54] 功能，人们喜欢做的是
+function, what
+people like to do is
+[77:56] 从瞬间方法开始
+to start with the method of
+moments as an initialization
+[77:58] 然后运行一些局部优化的算法
+and then run some algorithm
+that optimizes locally
+[78:01] 从这一点开始的可能性， 
+the likelihood starting
+from this point,
+[78:03] 因为它实际上可能更接近。 
+because it's actually
+likely to be closer.
+[78:05] 然后，MLE将对其进行改进
+And then the MLE is
+going to improve it
+[78:07] 稍微提高一点可能性。 
+a little bit by pushing the
+likelihood a little better.
+[78:12] 因此，当然，最大可能性
+So of course, the
+maximum likelihood
+[78:13] 有时很难。 
+is sometimes intractable.
+[78:14] 而计算矩是相当可行的。 
+Whereas, computing
+moments is fairly doable.
+[78:18] 如我所说，如果可能性是凹的， 
+If the likelihood is
+concave, as I said,
+[78:20] 我们可以使用优化算法， 
+we can use optimization
+algorithms,
+[78:21] 例如内点法或梯度下降法
+such as interior-point
+methods or gradient descent,
+[78:24] 我想最大化它。 
+I guess, to maximize it.
+[78:25] 如果可能性不大， 
+And if the likelihood
+is non-concave,
+[78:26] 我们只有本地启发法。 
+we only have local heuristics.
+[78:28] 风险这就是我的意思- 
+Risk And that's what I meant--
+[78:29] 您只有局部最大值。 
+you have only local maxima.
+[78:31] 您可以做的一招- 
+And one trick you can do--
+[78:32] 所以你的可能性看起来像这样， 
+so your likelihood
+looks like this,
+[78:37] 可能是这样，如果您有很多这样的高峰， 
+and it might be the case that if
+you have a lot of those peaks,
+[78:42] 您基本上必须在每个
+you basically have to start
+your algorithm in each
+[78:44] 那些山峰中。 
+of those peaks.
+[78:46] 但是瞬间的方法实际上可以
+But the method of
+moments can actually
+[78:48] 从正确的山峰开始，然后
+start you in the right
+peak, and then you
+[78:50] 只是通过执行一些局部算法而向上移动
+just move up by doing
+some local algorithm
+[78:53] 以获得最大可能性。 
+for maximum likelihood.
+[78:55] 所以这不是关键。 
+So that's not key.
+[78:56] 但这只是您想从算法上考虑
+But that's just if you want
+to think about algorithmically
+[78:59] 我最终将如何做以及如何将两者结合起来。 
+how I would end up doing this
+and how can I combine the two.
+[79:03] 所以我星期四见。 
+So I'll see you on Thursday.
+[79:04] 谢谢。 
+Thank you.

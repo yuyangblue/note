@@ -1,0 +1,4343 @@
+[00:00] 教授：以下内容是在广告素材下提供的
+PROFESSOR: The following content
+is provided under a Creative
+[00:02] 普通许可。 
+Commons license.
+[00:03] 您的支持将帮助MIT OpenCourseWare 
+Your support will help
+MIT OpenCourseWare
+[00:06] 继续免费提供高质量的教育资源。 
+continue to offer high quality
+educational resources for free.
+[00:10] 捐款或查看其他材料
+To make a donation or to
+view additional materials
+[00:12] 从数百门麻省理工学院课程中访问MIT OpenCourseWare 
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+[00:16] 在ocw.mit.edu。 
+at ocw.mit.edu.
+[00:21] 欢迎回来。 
+So welcome back.
+[00:23] 因此，我们现在进入新的篇章， 
+So we are now moving
+to a new chapter, which
+[00:26] 会有更多的统计意义
+is going to have a little
+more of a statistical flavor
+[00:30] 在设计方法时，可以吗？ 
+when it comes to designing
+methods, all right?
+[00:32] 因为如果您考虑一下，好的- 
+Because if you
+think about it, OK--
+[00:35] 你们中有些人可能尝试过第二个问题
+some of you have probably
+attempted problem number two
+[00:39] 在问题集中。 
+in the problem set.
+[00:39] 而且您意识到最大似然估计器并没有
+And you realize that maximum
+likelihood estimators does not
+[00:44] 给您超级平凡的估算器，对吗？ 
+give you super trivial
+estimators, right?
+[00:48] 我的意思是，当您有n theta theta时，您得到的东西
+I mean, when you have an n theta
+theta, then the thing you get
+[00:50] 其实不是你可能猜到的
+is not something you could have
+guessed before you actually
+[00:53] 试图解决这个问题。 
+attempted to solve that problem.
+[00:55] 因此，在某种程度上，我们已经看到了已经很复杂的方法。 
+And so, in a way, we've seen
+already sophisticated methods.
+[00:59] 但是，在许多情况下，最大似然估计器
+However, in many instances, the
+maximum likelihood estimator
+[01:02] 只是一个平均值。 
+was just an average.
+[01:03] 从某种意义上说，即使我们得到了确认
+And in a way, even if
+we had this confirmation
+[01:07] 确实有最大的可能性是估计量
+for maximum likelihood that
+indeed that was the estimator
+[01:09] 最大的可能性会吐出来
+that maximum likelihood
+would spit out,
+[01:11] 因此，我们的直觉非常好， 
+and that our intuition
+was therefore pretty good,
+[01:15] 大部分统计分析或使用中心极限
+most of the statistical analysis
+or use of the central limit
+[01:18] 定理，所有这些东西实际上
+theorems, all these
+things actually
+[01:20] 没有进入估算器大楼， 
+did not come in the
+building of estimator,
+[01:23] 在估算器的设计中，但实际上
+in the design of the
+estimator, but really
+[01:25] 在估算器的分析中。 
+in the analysis
+of the estimator.
+[01:27] 你可以说，好吧，如果我已经知道
+And you could say,
+well, if I know already
+[01:29] 最好的估算器是平均值， 
+that the best estimator
+is the average,
+[01:31] 我将使用平均值。 
+I'm just going to
+use the average.
+[01:33] 基本上，我不必量化它的质量。 
+I don't have to, basically,
+quantify how good it is.
+[01:35] 我只知道这是我能做的最好的。 
+I just know it's
+the best I can do.
+[01:37] 我们将讨论测试。 
+We're going to talk about tests.
+[01:39] 我们将讨论参数假设检验。 
+And we're going to talk about
+parametric hypothesis testing.
+[01:44] 因此，您应将其视为-参数化方法， 
+So you should view this
+as-- parametric means,
+[01:46] 好吧，它是关于参数的，就像我们之前所做的那样。 
+well, it's about a parameter,
+like we did before.
+[01:49] 假设检验与估计处于同一水平。 
+And hypothesis testing is on
+the same level as estimation.
+[01:54] 与估算器处于同一水平
+And on the same
+level as estimator
+[01:56] 将是“测试”一词，好吗？ 
+will be the word "test," OK?
+[01:58] 当我们要设计一个测试时， 
+And when we're going
+to devise a test,
+[02:01] 我们实际上需要了解
+we're going to actually
+need to understand
+[02:03] 由中心极限定理引起的随机波动
+random fluctuations that arise
+from the central limit theorem
+[02:06] 好一点好不好
+better, OK?
+[02:06] 这不仅仅是要进行分析。 
+It's not just going
+to be in the analysis.
+[02:08] 它也将在设计中。 
+It's also going to
+be in the design.
+[02:10] 而我们在了解之前所做的一切
+And everything we've been
+doing before in understanding
+[02:12] 估算器的行为实际上是
+the behavior of an
+estimator is actually
+[02:14] 会变得非常极端
+going to come in
+and be extremely
+[02:16] 在实际的测试设计中有用吗？ 
+useful in the actual
+design of tests, OK?
+[02:21] 因此，举例来说，我想和您谈谈一些真实的数据。 
+So as an example, I want to talk
+to you about some real data.
+[02:28] 我不会研究这些数据。 
+I will not study this data.
+[02:29] 但是这些数据实际上存在。 
+But this data actually exist.
+[02:31] 您可以在R上找到它。 
+You can find it
+on R. And so, it's
+[02:34] 所谓的信用合作社Cherry Blossom的数据
+the data from the so-called
+credit union Cherry Blossom
+[02:37] 奔跑，这是一场10英里的比赛。 
+Run, which is a 10 mile race.
+[02:38] 它每年在DC中进行
+It takes place
+every year in D.C.
+[02:40] 似乎有些年份还不错。 
+It seems that some of the
+years are pretty nice.
+[02:42]  2009年，大约有15,000名参与者。 
+In 2009, there were about
+15,000 participants.
+[02:45] 相当大的比赛。 
+Pretty big race.
+[02:47] 平均运行时间为103.5分钟，好吗？ 
+And the average running time
+was 103.5 minutes, all right?
+[02:52] 所以大约一个半小时或一点点以上。 
+So about an hour and a
+half or a little bit more.
+[02:57] 因此，您可以问以下问题，对吗？ 
+And so, you can ask the
+following question, right?
+[03:01] 这是实际数据，对不对？ 
+This is actual data, right?
+[03:02]  103.5实际上平均所有15,000的运行时间。 
+103.5 actually averaged the
+running time for all of 15,000.
+[03:07] 现在，在实践中，这可能不是很合适。 
+Now, this in practice, may not
+be something very suitable.
+[03:10] 您可能只想样本一些跑步者
+And you might want to
+just sample a few runners
+[03:13] 并尝试了解他们的状况
+and try to understand
+how they're
+[03:15] 每年表现而不必
+behaving every
+year without having
+[03:16] 收集整个数据集。 
+to collect the entire data set.
+[03:18] 所以，你可以问这个问题， 
+And so, you could ask
+the question, well,
+[03:20] 假设我的预算是要请10个跑步者
+let's say my budget is to
+ask for maybe 10 runners
+[03:24] 他们的跑步时间是多少。 
+what their running time was.
+[03:25] 我仍然希望能够确定
+I still want to be
+able to determine
+[03:27] 他们在2012年的运行速度是否比2009年更快。 
+whether they were running
+faster in 2012 than in 2009.
+[03:31] 为什么我放2012年而不是2016年？ 
+Why do I put 2012, and not 2016?
+[03:34] 好吧，因为还提供了2012年的数据集。 
+Well, because the data set
+for 2012 is also available.
+[03:38] 因此，如果您有兴趣并且知道如何使用R， 
+So if you are interested
+and you know how to use R,
+[03:41] 只是去玩吧。 
+just go and have fun with it.
+[03:44] 所以要回答这个问题，我们要做的是选择n个跑步者， 
+So to answer this question, what
+we do is we select n runners,
+[03:47] 对？ 
+right?
+[03:47] 所以n是一个中位数，比15,000更易于管理。 
+So n is a moderate number that's
+more manageable than 15,000.
+[03:51] 从2012年随机比赛开始。 
+From the 2012 race at random.
+[03:53] 那是随机变量的来源，对不对？ 
+That's where the random variable
+is going to come from, right?
+[03:56] 那就是我们实际上在问题中注入随机性的地方。 
+That's where we actually inject
+randomness in our problem.
+[04:02] 因此，请记住这是一种体验。 
+So remember this
+is an experience.
+[04:04] 所以从某种意义上说，跑步者就是欧米茄。 
+So really in a way, the
+runners are the omegas.
+[04:06] 我对这些人的测量很感兴趣。 
+And I'm interested in
+measurements on those guys.
+[04:10] 这就是我有一个随机变量的方式。 
+So this is how I have
+a random variable.
+[04:11] 而这里的随机言语正在衡量其运行时间。 
+And this random verbal here is
+measuring their running time.
+[04:15] 好。 
+OK.
+[04:16] 如果看一下数据集，您会发现各种各样
+If you look at the data
+set, you have all sorts
+[04:18] 您可以测量的随机变量
+of random variables
+you could measure
+[04:19] 关于那些随机的跑步者。 
+about those random runners.
+[04:21] 出生国家。 
+Country of origin.
+[04:22] 我不知道，身高，年龄，一堆东西。 
+I don't know, height,
+age, a bunch of things.
+[04:25] 好。 
+OK.
+[04:25] 在这里，感兴趣的随机变量
+Here, the random
+variable of interest
+[04:27] 是运行时间。 
+being the running time.
+[04:29] 好。 
+OK.
+[04:30] 每个人都知道过程是什么？ 
+Everybody understand
+what the process is?
+[04:32] 好。 
+OK.
+[04:33] 所以现在我将不得不做出一些建模假设。 
+So now I'm going to have to
+make some modeling assumptions.
+[04:36] 在这里，我实际上很幸运。 
+And here, I'm
+actually pretty lucky.
+[04:37] 实际上，我拥有过去一年的所有数据。 
+I actually have all the
+data from a past year.
+[04:41] 我的意思是，这不是我也有的2012年的数据， 
+I mean, this is not the data
+from 2012, which I also have,
+[04:44] 但我不使用
+but I don't use.
+[04:45] 但是我实际上可以使用过去的数据来尝试了解什么
+But I can actually use past
+data to try to understand what
+[04:47] 我有分布吗？ 
+distribution do I have, right?
+[04:49] 我的意思是说，毕竟运行时间已经过去了
+I mean, after all,
+running time is going
+[04:51] 四舍五入。 
+to be rounded to something.
+[04:52] 也许我可以将其视为离散的随机变量。 
+Maybe I can think of it as
+a discrete random variable.
+[04:55] 也许我可以将其视为指数随机变量。 
+Maybe I can think of it as the
+exponential random variable.
+[04:58] 这些是正数。 
+Those are positive numbers.
+[05:00] 我的意思是，跑步时间很多
+I mean, there's many
+kind of running times
+[05:01] 那可能浮现在脑海。 
+that could come up to mind.
+[05:03] 我能想到的许多分布
+Many kind of distributions
+I could think
+[05:04] 对于此建模部分。 
+of for this modeling part.
+[05:06] 但事实证明，如果您实际上
+But it turns out
+that if you actually
+[05:08] 插入所有15,000个运行时间的直方图
+plug the histogram of those
+running times for all 15,000
+[05:11]  2009年的跑步者，您实际上是
+runners in 2009,
+you actually are
+[05:14] 很高兴看到它真的
+pretty happy to
+see that it really
+[05:16] 看起来像钟形曲线，这表明
+looks like a bell-shaped
+curve, which suggest
+[05:18] 应该是高斯型的
+that this should be a Gaussian.
+[05:19] 因此，您要做的是估算均值
+So what you go on to do
+is you estimate the mean
+[05:25] 就像我们说的，过去的观察结果实际上是103.5。 
+from past observations, which
+was actually 103.5, as we said.
+[05:29] 您提交的差异为373。 
+You submit the
+variance, which was 373.
+[05:34] 而你只是尝试叠加曲线
+And you just try to
+superimpose the curve
+[05:37] 这是平均数为103.5的高斯PDF 
+with this one, which is a
+Gaussian PDF with mean 103.5
+[05:43] 和373。 
+and variants 373.
+[05:45] 您会发现它们实际上看起来非常相似。 
+And you see that they
+actually look very much alike.
+[05:48] 所以在这里，您很舒服地说
+And so here, you're
+pretty comfortable to say
+[05:50] 运行时间实际上是高斯分布。 
+that the running time actually
+is Gaussian distribution.
+[05:53] 行？ 
+All right?
+[05:54] 所以现在我知道从x1到xn 
+So now I know that
+the x1 to xn, I'm
+[05:56] 会说他们是高斯人，好吗？ 
+going to say they're
+Gaussian, OK?
+[05:58] 我仍然需要指定两个参数。 
+I still need to
+specify two parameters.
+[06:01] 所以我想知道的是分布是否相同
+So what I want to know is,
+is the distribution the same
+[06:05] 过去几年吧？ 
+from past years, right?
+[06:06] 所以我想知道我正在寻找的随机变量
+So I want to know if the random
+variable that I'm looking
+[06:08] 因为-如果我说选一个。 
+for-- if I, say, pick one.
+[06:09] 说，x1。 
+Say, x1.
+[06:10]  2012年的发行量是否相同
+Does it have the same
+distribution in 2012
+[06:12] 在2009年
+that it did in 2009?
+[06:15] 好。 
+OK.
+[06:16] 因此，问题是x1是否具有
+And so, the question
+is, is x1 has
+[06:19] 高斯分布，平均值为103.5，方差为373？ 
+a Gaussian distribution with
+mean 103.5 and variance 373?
+[06:23] 明白了吗？ 
+Is that clear?
+[06:24] 好。 
+OK.
+[06:25] 所以这个问题要求是或否的答案
+So this question that calls
+for a yes or no answer
+[06:30] 是假设检验问题。 
+is a hypothesis testing problem.
+[06:31] 我正在检验一个假设。 
+I am testing a hypothesis.
+[06:34] 这是基本上所有的基础
+And this is the basis
+of basically all
+[06:36] 数据驱动的科学查询。 
+of data-driven
+scientific inquiry.
+[06:39] 您只问问题。 
+You just ask questions.
+[06:40] 您提出科学的假设。 
+You formulate a
+scientific hypothesis.
+[06:43] 敲掉这个基因将治愈黑色素瘤，这是真的吗？ 
+Knocking down this gene is going
+to cure melanoma, is this true?
+[06:48] 我要收集。 
+I'm going to collect.
+[06:49] 我要尝试。 
+I'm going to try.
+[06:50] 我正在观察一些我敲除该基因的患者。 
+I'm to observe some patients on
+which I knock down this gene.
+[06:52] 我将收集一些测量值。 
+I'm going to collect
+some measurements.
+[06:54] 我将尝试回答是/否的问题，好吗？ 
+And I'm going to try to answer
+this yes/no question, OK?
+[07:00] 与问题不同， 
+It's different
+from the question,
+[07:02] 今年的平均运行时间是多少？ 
+what is the mean running
+time for this year?
+[07:08] 好。 
+OK.
+[07:10] 所以这个假设检验就是检验
+So this hypothesis
+testing is testing
+[07:12] 如果这个假设是正确的。 
+if this hypothesis is true.
+[07:13] 我们刚才说的普通英语假设
+The hypothesis in common
+English we just said,
+[07:20] 跑步者跑得更快吗？ 
+were runners running faster?
+[07:22] 行？ 
+All right?
+[07:22] 任何人都可以提出这一假设。 
+Anybody could formulate
+this hypothesis.
+[07:24] 现在，您去找统计学家。 
+Now, you go to a statistician.
+[07:25] 他就像，哦，你到底是什么
+And he's like, oh,
+what you're really
+[07:27] 问我x1具有均值的高斯分布
+asking me is x1 has a Gaussian
+distribution with mean
+[07:32] 小于103.5，方差373，对吗？ 
+less than 103.5 and
+variance 373, right?
+[07:35] 这实际上是您用统计术语提出的问题。 
+That's really the question that
+you ask in statistical terms.
+[07:38] 因此，如果您要问这是否和以前一样， 
+And so, if you're asking if
+this was the same as before,
+[07:42] 有很多方法可能与以前不同。 
+there's many ways it could
+not be the same as before.
+[07:44] 基本上有三种方法不能
+There's basically
+three ways it could not
+[07:46] 和以前一样。 
+be the same as before.
+[07:47] 可能是x1预期为103.5 
+It could be the case that x1
+is in expectation to 103.5
+[07:54] 因此，期望已经改变。 
+So the expectation has changed.
+[07:56] 或方差已更改。 
+Or the variance has changed.
+[07:58] 或分布已更改。 
+Or the distribution has changed.
+[08:00] 我的意思是，谁知道？ 
+I mean, who knows?
+[08:01] 也许现在跑步者都在牵着手奔跑。 
+Maybe runners are now just all
+running holding their hands.
+[08:05] 就像现在在1个给定点的点质量。 
+And it's like now a point
+mass at 1 given point.
+[08:08] 好。 
+OK.
+[08:08] 所以你永远不知道[听不清]。 
+So you never know what
+could [INAUDIBLE]..
+[08:11] 当然，如果您允许任何更改， 
+Now of course, if you
+allow for any change,
+[08:14] 你会发现改变。 
+you will find change.
+[08:16] 因此，您要做的就是考虑尽可能多的知识
+And so what you have to do is
+to factor in as much knowledge
+[08:18] 尽你所能。 
+as you can.
+[08:19] 进行尽可能多的建模假设， 
+Make as many
+modeling assumptions,
+[08:20] 这样你就可以让数据说话
+so that you can
+let the data speak
+[08:22] 关于您的特定问题。 
+about your particular question.
+[08:23] 在这里，您的特定问题是，它们运行得更快吗？ 
+Here, your particular question
+is, are they running faster?
+[08:27] 因此，您实际上只是在问有关期望的问题。 
+So you're only really asking a
+question about the expectation.
+[08:30] 您真的想知道期望是否已改变。 
+You really want to know if
+the expectation has changed.
+[08:33] 因此，就您而言， 
+So as far as you're
+concerned, you're
+[08:35] 很高兴做出其余的假设
+happy to make the
+assumption that the rest has
+[08:37] 保持不变。 
+been unchanged.
+[08:38] 好。 
+OK.
+[08:39] 因此，这就是我们要问的问题。 
+And so, this is the
+question we're asking.
+[08:42] 现在的期望值是否低于103.5？ 
+Is the expectation
+now less than 103.5?
+[08:45] 因为您特别询问跑步者是否
+Because you specifically
+asked whether runners were
+[08:48] 今年要快一点吧？ 
+going faster this year, right?
+[08:50] 他们倾向于走得更快而不是走慢，好吗？ 
+They tend to go faster rather
+than slower, all right?
+[08:55] 好。 
+OK.
+[08:56] 所以这是我们用数学术语提出的问题。 
+So this is the question we're
+asking in mathematical terms.
+[09:00] 所以首先，当我这样做时，我需要基本上修复其余的部分。 
+So first, when I did that, I
+need to basically fix the rest.
+[09:03] 而修复其余部分实际上是一部分
+And fixing the rest
+is actually part
+[09:05] 建模假设。 
+of the modeling assumptions.
+[09:07] 因此我将方差固定为373。 
+So I fixed my
+variance to be 373.
+[09:10] 好？ 
+OK?
+[09:11] 我认为方差没有
+I assume that the
+variance has not
+[09:13] 在2009年至2012年之间发生了变化。 
+changed between 2009 and 2012.
+[09:17] 现在，这是一个假设。 
+Now, this is an assumption.
+[09:18] 事实证明这是错误的。 
+It turns out it's wrong.
+[09:21] 因此，如果您查看2012年的数据， 
+So if you look at
+the data from 2012,
+[09:22] 这不是正确的假设。 
+this is not the
+correct assumption.
+[09:24] 但我现在要做到
+But I'm just going
+to make it right now
+[09:26] 为了辩论，好吗？ 
+for the sake of argument, OK?
+[09:29] 还有一个事实，那就是高斯。 
+And also the fact
+that it's Gaussian.
+[09:31] 现在，这将很难违反，对吗？ 
+Now, this is going to be
+hard to violate, right?
+[09:34] 我的意思是，这种钟形曲线从何而来？ 
+I mean, where did this
+bell-shaped curve come from?
+[09:37] 好吧，当您测量一堆东西时，这很自然。 
+Well, it's just natural when you
+just measure a bunch of things.
+[09:42] 出现中心极限定理
+The central limit
+theorem appears
+[09:44] 在大自然的小事物中。 
+in the small things of nature.
+[09:45] 我的意思是，这就是关于睡前极限的睡前故事
+I mean, that's the bedtime story
+you get about the central limit
+[09:48] 定理。 
+theorem.
+[09:48] 这就是为什么钟形曲线无处不在的原因。 
+And that's why the bell-shaped
+curve is everywhere in nature.
+[09:50] 这是一些独立事物的总和
+It's the sum of little
+independent things
+[09:52] 正在进行中。 
+that are going on.
+[09:53] 这个高斯假设，即使我想放宽它， 
+And this Gaussian assumption,
+even if I wanted to relax it,
+[09:57] 我无能为力了。 
+there's not much else I can do.
+[09:58] 这些年来，它非常强大。 
+It is pretty robust
+across the years.
+[10:02] 行。 
+All right.
+[10:02] 因此，我们唯一没有解决的问题
+So the only thing
+that we did not fix
+[10:04] 是x1的期望值，现在我想知道它是什么。 
+is the expectation of x1, which
+now I want to know what it is.
+[10:08] 而且由于我不知道它是什么，我将其称为亩。 
+And since I don't know what it
+is, I'm going to call it mu.
+[10:11] 这将是一个有趣的变量，好吗？ 
+And it's going to be a variable
+of interest, all right?
+[10:13] 所以这只是一个数字亩。 
+So it's just a number mu.
+[10:14] 无论这是什么我都可以尝试估计，也许使用
+Whatever this is I can try
+to estimate it, maybe using
+[10:17] 最大似然估计。 
+maximum likelihood estimation.
+[10:19] 可能使用平均值，因为这是高斯。 
+Probably using the average,
+because this is Gaussian.
+[10:21] 而且我们知道最大可能性
+And we know that the
+maximum likelihood
+[10:23] 高斯的估计量只是平均值。 
+estimator for a Gaussian
+is just the average.
+[10:26] 现在我们只想测试mu是否等于103.5， 
+And now we only want to test
+if mu is equal to 103.5,
+[10:30] 就像2009年一样。 
+like it was in 2009.
+[10:34] 或相反，如果mu不等于103.5。 
+Or on the contrary, if
+mu is not equal to 103.5.
+[10:37] 更具体地说，如果mu实际上是
+And more specifically,
+if mu is actually
+[10:39] 严格小于103.5。 
+strictly less than 103.5.
+[10:41] 那就是你问的问题。 
+That's the question you ask.
+[10:42] 现在，我为什么写亩等于103.5还是
+Now, why am I in writing
+mu equal to 103.5 or is
+[10:49] 小于103.5等于103.5 
+less than 103.5
+and equal to 103.5
+[10:53] 与不等于103.5？ 
+versus not equal to 103.5?
+[10:55] 这是因为既然您问了我一个更精确的问题， 
+It's because since you asked
+me a more precise question,
+[10:58] 我将能够为您提供更准确的答案。 
+I'm going to be able to give
+you a more precise answer.
+[11:01] 因此，如果您的问题非常具体， 
+And so, if your question
+is very specific--
+[11:03] 他们跑得更快吗？ 
+are they running faster?
+[11:05] 我将在我写的内容中考虑这一点。 
+I'm going to factor
+that in what I write.
+[11:08] 如果您只是问我，是否一样？ 
+If you just ask
+me, is it the same?
+[11:10] 我将不得不写，或者它不同于103.5？ 
+I'm going to have to write,
+or is it different than 103.5?
+[11:13] 而且那是关于什么的较少信息
+And that's less
+information about what
+[11:15] 您在找，好吗？ 
+you're looking for, OK?
+[11:19] 因此，通过做出所有这些建模假设， 
+So by making all these
+modeling assumptions--
+[11:23] 差异不变的事实， 
+the fact that the
+variance doesn't change,
+[11:25] 它仍然是高斯的事实
+the fact that it's
+still Gaussian--
+[11:26] 我实际上减少了数量。 
+I've actually reduced
+the number of.
+[11:31] 我将数字放在引号中，因为这仍然
+And I put numbers in quotes,
+because this is still
+[11:34] 他们无限。 
+an infinite of them.
+[11:35] 但是我限制了方式的数量
+But I'm limiting
+the number of ways
+[11:38] 该假设可以被违反。 
+the hypothesis can be violated.
+[11:43] 可能的替代现实的数量
+The number of possible
+alternative realities
+[11:46] 对于这个假设，好吗？ 
+for this hypothesis, all right?
+[11:48] 例如，我说没有办法
+For example, I'm
+saying there's no way
+[11:50] 可以大于103.5。 
+mu can be larger than 103.5.
+[11:53] 我已经考虑到了，好吗？ 
+I've already
+factored that in, OK?
+[11:55] 它可能是。 
+It could be.
+[11:56] 但我实际上只是要说，如果它更大， 
+But I'm actually just going
+to say that if it's larger,
+[11:59] 我要告诉你的是它并不小。 
+all I'm going to be able to tell
+you is that it's not smaller.
+[12:02] 我不会告诉你
+I'm not going to
+be able to tell you
+[12:06] 它实际上更大，好吗？ 
+that it's actually larger, OK?
+[12:12] 而且现在唯一可以拒绝的方式。 
+And the only way it
+can be rejected now.
+[12:15] 我可以拒绝我的假设的唯一方法
+The only way I can
+reject my hypothesis
+[12:17] 是x是否属于非常特定的分布族。 
+is if x belongs to very specific
+family of distributions.
+[12:22] 如果它的分布是高斯分布
+If it has a distribution
+which is Gaussian
+[12:24] 平均亩，亩的方差为373，小于103.5。 
+with mean mu and variance of
+373 for mu, which is less 103.5.
+[12:29] 行？ 
+All right?
+[12:30] 所以我们开始基本上是x1-- 
+So we started with
+basically was x1--
+[12:40] 这就是现实。 
+so that's the reality.
+[12:41]  x1跟随n 103.5 373，好吗？ 
+x1 follows n 103.5 373, OK?
+[12:49] 这就是一切，对吗？ 
+And this is everything
+else, right?
+[12:53] 例如，这是x 
+So for example,
+here is x follows
+[12:55] 一些指数，0.1，好吗？ 
+some exponential, 0.1, OK?
+[13:02] 这只是这里的另一种分布。 
+This is just another
+distribution here.
+[13:04] 这些都是可能的分布。 
+Those are all the
+possible distributions.
+[13:06] 我们说的是，我们说，好吧，首先， 
+What we said is we said,
+OK, first of all, let's just
+[13:09] 只保留那些高斯分布，对不对？ 
+keep only those Gaussian
+distributions, right?
+[13:13] 其次，我们说，在这些高斯分布中， 
+And second, we said, well, among
+those Gaussian distributions,
+[13:18] 让我们只看一下那些- 
+let's only look at
+those that have-- well,
+[13:20] 也许这应该在边界上
+maybe this one should
+be at the boundary--
+[13:24] 让我们只看这里的高斯人。 
+let's only look at
+the Gaussians here.
+[13:26] 所以这家伙都是高斯人
+So this guy here are
+all the Gaussians
+[13:33] 平均亩数和方差373小于103.5，好吗？ 
+with mean mu and variance 373
+for mu less than 103.5, OK?
+[13:43] 因此，当您要给我数据时， 
+So when you're going
+to give me data,
+[13:45] 我可以说，好吧，我是这个人吗？ 
+I'm going to be able to
+say, well, am I this guy?
+[13:48] 还是我是其中之一？ 
+Or am I one of those guys?
+[13:49] 而不是搜索所有内容。 
+Rather than searching
+through everything.
+[13:51] 搜索次数越多，您越轻松
+And the more you search
+the easier for you
+[13:53] 寻找更适合数据的东西，对吗？ 
+to find something that fits
+better the data, right?
+[13:56] 所以，如果我允许一切可能， 
+And so, if I allow
+everything possible,
+[14:00] 然后会有一些东西
+then there's going
+to be something
+[14:01] 仅仅凭纯粹的随机性实际上看起来会更好
+that just by pure randomness is
+actually going to look better
+[14:04] 数据，好吗？ 
+for the data, OK?
+[14:09] 例如，如果我绘制10个随机变量，对吗？ 
+So for example, if I draw
+10 random variables, right?
+[14:12] 如果n等于10。 
+If n is equal to 10.
+[14:15] 假设他们采用10个不同的值。 
+And let's say they take
+10 different values.
+[14:18] 那实际上是那些家伙
+Then it's actually more
+likely that those guys
+[14:20] 来自离散分布
+come from a discrete
+distribution that
+[14:23] 以10以上的概率1取每个值， 
+takes each of these values
+with probability 1 over 10,
+[14:27] 比实际上是一些高斯随机变量，对吗？ 
+than actually some Gaussian
+random variable, right?
+[14:30] 那将是完美的。 
+That would be perfect.
+[14:31] 我实际上可以解释它。 
+I can actually explain it.
+[14:32] 如果说我得到的10个数字是- 
+If the 10 numbers
+I got were say--
+[14:36] 假设我收集了3、90、95和102。 
+let's say I collect
+3, 90, 95, and 102.
+[14:41] 然后那些家伙最有可能的发行
+Then the most likely
+distribution for those guys
+[14:44] 是离散分布
+is the discrete
+distribution that
+[14:46] 取三个值，概率为1/3的91，95 
+takes three values, 91
+with probability 1/3, 95
+[14:51] 的概率是1/3，而102的概率是1/3，对吧？ 
+with probability 1/3, and
+102 with probably 1/3, right?
+[14:57] 这绝对是最可能的分发方式。 
+That's definitely the most
+likely distribution for this.
+[14:59] 因此，如果我允许，我会说，哦，不。 
+So if I allowed this,
+I would say, oh no.
+[15:02] 这不是根据此分配的。 
+This is not distributed
+according to that.
+[15:04] 它根据这个非常具体的分布
+It's distributed according
+to this very specific
+[15:06] 分布，它在领域中
+distribution, which is
+somewhere in the realm
+[15:09] 在所有可能的发行版中，好吗？ 
+of all possible
+distributions, OK?
+[15:12] 所以现在我们要尝试将所有这些东西分解出来
+So now we're just going to try
+to carve out all this stuff
+[15:15] 通过做我们的假设。 
+by making our assumptions.
+[15:18] 好。 
+OK.
+[15:19] 因此，在此特定示例中， 
+So here in this
+particular example,
+[15:20] 只要记下我们在做什么
+just make a mental note
+that what we're doing
+[15:23] 是我实际上- 
+is that I actually--
+[15:25] 一位小鸟儿告诉我，参考号是103.5，好吗？ 
+a little birdie told me that the
+reference number is 103.5, OK?
+[15:31] 那就是我真正想要的东西。 
+That was the thing I'm
+actually looking for.
+[15:34] 实际上，这种情况很少
+In practice, it's
+actually seldom the case
+[15:36] 您有这个参考供自己考虑，对吗？ 
+that you have this reference
+for yourself to think of, right?
+[15:40] 也许在这里，我碰巧有一个完整的数据
+Maybe here, I just happen
+to have a full data
+[15:43]  2009年所有跑步者的一套。 
+set of all the runners of 2009.
+[15:46] 但是如果我真的只是问你，我说， 
+But if I really just
+asked you, I said,
+[15:50]  2012年的跑步者比2009年更快吗？ 
+were runners faster
+in 2012 than in 2009?
+[15:55] 这是进行统计分析的10美元。 
+Here's $10 to perform
+your statistical analysis.
+[15:59] 您可能要做的可能是10名跑步者
+What you're probably going to
+do is called maybe 10 runners
+[16:01] 从2012年开始，可能有15位来自2009年， 
+from 2012, maybe 15
+runners from 2009,
+[16:05] 问他们，并尝试比较他们的平均值。 
+ask them and try to
+compare their mean.
+[16:07] 没有标准参考。 
+There's no standard reference.
+[16:09] 您将无法提出这个103.5， 
+You would not be able to
+come up with this 103.5,
+[16:11] 因为获取这些数据可能很昂贵。 
+because these data maybe is
+expensive to get or something.
+[16:14] 好。 
+OK.
+[16:15] 因此，这确实是标准案例，对吗？ 
+So this is really more of
+the standard case, all right?
+[16:18] 当您真正将两件事相互比较时， 
+Where you really compare
+two things with each other,
+[16:21] 但没有实际的地面真实数字
+but there's no actual
+ground truth number
+[16:23] 与之比较。 
+that you're comparing it to.
+[16:26] 好。 
+OK.
+[16:26] 所以我们稍后再讲。 
+So we'll come back
+to that in a second.
+[16:28] 我将告诉您另一个示例的外观。 
+I'll tell you what the
+other example looks like.
+[16:32] 因此，让我们坚持这个例子。 
+So let's just stick
+to this example.
+[16:34] 我告诉你是103.5，好吗？ 
+I tell you it's 103.5, OK?
+[16:36] 让我们尝试以相同的方式使直觉起作用。 
+Let's try to have our
+intuition work the same way.
+[16:39] 我们说过，平均水平很好。 
+We said, well,
+averages worked well.
+[16:42] 告诉我，这10个人的平均水平
+The average, tell me,
+of over these 10 guys
+[16:46] 应该告诉我意思是什么。 
+should tell me what
+the mean should be.
+[16:49] 所以我只能说，x栏正在运行
+So I can just say,
+well x bar is going
+[16:52] 接近大量定律的真实均值。 
+to be close to the true mean
+by the law of large number.
+[16:55] 因此，我将决定x bar是否小于103.5。 
+So I'm going to decide whether
+x bar is less than 103.5.
+[17:00] 并得出结论，在这种情况下，实际上mu小于103.5， 
+And conclude that in this case,
+indeed mu is less than 103.5,
+[17:04] 因为这两个数量接近，对吗？ 
+because those two
+quantities are close, right?
+[17:06] 我可以做到。 
+I could do that.
+[17:08] 问题在于这可能会出错。 
+The problem is that this
+could go pretty wrong.
+[17:10] 因为如果n小，那我知道
+Because if n is
+small, then I know
+[17:13]  xn bar不等于mu 
+that xn bar is not equal to mu.
+[17:17] 我知道xn bar接近mu。 
+I know that xn bar
+is close to mu.
+[17:19] 但是我也知道很有可能
+But I also know that
+there's pretty high chance
+[17:21] 不等于亩
+that it's not equal to mu.
+[17:23] 特别是，我知道它会比根目录高1 
+In particular, I know it's going
+to be somewhere at 1 over root
+[17:26]  n远离亩，对吗？ 
+n away from mu, right?
+[17:28] 根n之上的1是来自什么的根？ 
+1 over root n being the
+root coming from what?
+[17:34]  CLT，对吧？ 
+CLT, right?
+[17:35] 这就是CLT的根n。用直言不讳的话
+That's the root n that comes
+from CLT. In blunt words,
+[17:40]  CLT告诉我平均值在远处
+CLT tells me the
+mean is at distance
+[17:44] 从期望值来看，比根n大1。 
+1 over root n from the
+expectation, pretty much.
+[17:47] 这就是说的。 
+That's what it's telling.
+[17:48] 因此，根n超过1。 
+So 1 over root n.
+[17:52] 如果我那里有10个人，则根10上有1个人
+If I have 10 people in
+there, 1 over root 10
+[17:55] 不是很大的数目吧？ 
+is not a huge number, right?
+[17:57] 差不多是1/3。 
+It's like 1/3 pretty much.
+[18:00] 所以1/3 103.5 
+So 1/3 103.5.
+[18:02] 如果真正的平均值实际上是103.4， 
+If the true mean
+was actually 103.4,
+[18:07] 但我的平均值告诉我这是103.4加1/3， 
+but my average was telling
+me it's 103.4 plus 1/3,
+[18:12] 我实际上会得出两个不同的结论，对吗？ 
+I would actually come to two
+different conclusions, right?
+[18:22] 假设mu等于103.4，好吗？ 
+So let's say that mu
+is equal to 103.4, OK?
+[18:29] 因此，您不应该知道这一点，对吗？ 
+So you're not supposed
+to know this, right?
+[18:32] 那是隐藏的真相。 
+That's the hidden truth.
+[18:37] 好。 
+OK.
+[18:38] 现在我有n等于10。 
+Now I have n is equal to 10.
+[18:40] 所以我知道x bar n减103.4 
+So I know that x
+bar n minus 103.4
+[18:49] 在10的平方根上大约是1， 
+is something of the order of
+1 over the square root of 10,
+[18:52] 大约是0.3。 
+which is of the
+order of, say, 0.3.
+[18:57] 好。 
+OK.
+[18:58] 所以在这里，这都是波浪形的，好吗？ 
+So here, this is
+all hand wavy, OK?
+[19:01] 但这就是中心极限定理告诉我的。 
+But that's what the central
+limit theorem tells me.
+[19:05] 这意味着有可能
+What it means is
+that it is possible
+[19:13]  x bar n实际上等于
+that x bar n is actually
+equal to is actually
+[19:20] 等于103.4加0.3，等于103.7。 
+equal to 103.4 plus 0.3,
+which is equal to 103.7.
+[19:30] 这意味着，虽然事实是mu小于103.5， 
+Which means that while the truth
+is that mu is less than 103.5,
+[19:40] 那么我会得出结论，亩大于103.5，好吗？ 
+then I would conclude that
+mu is larger than 103.5, OK?
+[19:47] 那是因为我不是很谨慎，好吗？ 
+And that's because I have
+not been very cautious, OK?
+[19:52] 所以我们要做的是有一点缓冲
+So what we want to do is
+to have a little buffer
+[19:56] 考虑到xn bar不是
+to account for the
+fact that xn bar is not
+[19:58] 真实亩的精确值。 
+a precise value for the true mu.
+[20:01] 这是离您1根n的东西。 
+It's something that's 1
+over root n away from you.
+[20:05] 因此，我们想要的是更好的启发式
+And so, what we want is
+the better heuristic that
+[20:07] 说，好吧，如果我想得出结论，我是
+says, well, if I want
+to conclude that I'm
+[20:09] 小于103.5，也许我需要小于103.5 
+less than 103.5, maybe I
+need to be less than 103.5
+[20:14] 减去一个小缓冲区，随着我的样本量的增加，缓冲区变为0 
+minus a little buffer that goes
+to 0 as my sample size goes
+[20:17] 到无穷远。 
+to infinity.
+[20:19] 实际上，这就是大量定律告诉我的。 
+And actually, that's what the
+law of large number tells me.
+[20:22] 中心极限定理实际上
+The central limit
+theorem actually
+[20:23] 告诉我这应该是真的， 
+tells me that this
+should be true,
+[20:26] 随n变为无穷大而变为0 
+something that goes to
+0 as n goes to infinity
+[20:30] 比率1超过根n，对吗？ 
+and the rate 1
+over root n, right?
+[20:32] 这基本上就是中心极限定理告诉我的。 
+That's basically what the
+central limit theorem tells me.
+[20:36] 因此，为了使这种直觉更加精确， 
+So to make this
+intuition more precise,
+[20:39] 我们需要了解这些波动。 
+we need to understand
+those fluctuations.
+[20:41] 我们需要实际投入一些
+We need to actually
+put in something
+[20:43] 比这里的这些小摆动更精确，好吗？ 
+that's more precise than
+these little wiggles here, OK?
+[20:47] 我们实际上需要引入中心极限定理。 
+We need to actually have the
+central limit theorem come in.
+[20:53] 因此，这里是比较两组的示例。 
+So here is the example
+of comparing two groups.
+[20:57] 因此制药公司使用假设
+So pharmaceutical
+companies use hypothesis
+[21:00] 测试以测试药物是否有效，对吗？ 
+testing to test if a
+drug is efficient, right?
+[21:03] 那就是他们的工作。 
+That's what they do.
+[21:04] 他们想知道，我的新药有效吗？ 
+They want to know,
+does my new drug work?
+[21:06] 那就是联邦药品管理局办公室
+And that's what the Federal
+Drug Administration office
+[21:09] 每天都在做。 
+is doing on a daily basis.
+[21:11] 他们要求进行严格规范的临床试验
+They ask for extremely well
+regulated clinical trials
+[21:18] 对一千人进行检查
+on a thousand people,
+and check, does this drug
+[21:22] 做出改变？ 
+make a difference?
+[21:23] 每个人都死了吗？ 
+Did everybody die?
+[21:24] 没有区别吗？ 
+Does it make no difference?
+[21:27] 人们是否应该为一粒糖花200美元，对吗？ 
+Should people pay $200 for
+a pill of sugar, right?
+[21:30] 这就是人们实际上要问的问题。 
+So that's what people
+are actually asking.
+[21:33] 因此，这样做当然没有以下事实： 
+So to do so, of course, there
+is no ground truth about--
+[21:36] 因此实际上有安慰剂作用。 
+so there's actually
+a placebo effect.
+[21:38] 因此，这并不像实际服用不起作用的药物
+So it's not like actually
+giving a drug that does not work
+[21:41] 对患者没有影响。 
+is going to have no
+effect on patients.
+[21:44] 它将产生很小的影响，但是很难量化。 
+It will have a small effect,
+but it's very hard to quantify.
+[21:47] 我们知道它在那里，但是我们不知道它是什么。 
+We know that it's there, but
+we don't know what it is.
+[21:50] 因此，与其说是事实，不如说
+And so rather than saying,
+oh the ground truth
+[21:52] 没有改善，事实基础就是安慰剂作用。 
+is no improvement, the ground
+truth is the placebo effect.
+[21:56] 而且我们需要测量安慰剂的作用。 
+And we need to measure
+what the placebo effect is.
+[22:00] 所以我们要做的是
+So what we're going
+to do is we're
+[22:01] 将我们的患者分为两组。 
+going to split our
+patients into two groups.
+[22:04] 这就是所谓的测试
+And there's going to
+be what's called a test
+[22:06] 组和对照组。 
+group and a control group.
+[22:10] 所以这里的测试一词以不同的方式使用
+So the word test here is
+used in a different way
+[22:13] 比假设检验。 
+than hypothesis testing.
+[22:14] 因此，我们通常将其称为毒品组。 
+So we'll just call it
+typically the drug group.
+[22:17] 因此，我将为这个人指称mu毒品，好吗？ 
+And so, I will refer to
+mu drug for this guy, OK?
+[22:22] 现在，这可以说是一种止咳糖浆，好吗？ 
+Now, this let's say this
+is a cough syrup, OK?
+[22:26] 当你有止咳糖浆时， 
+And when you have a
+cough syrup, the way
+[22:29] 你测量咳嗽糖浆的功效
+you measure the efficacy
+of a cough syrup
+[22:34] 是衡量每分钟咳嗽多少次，好吗？ 
+is to measure how many times
+you cough per minute, OK?
+[22:40] 因此，如果我定义mu control the number 
+And so, if I define
+mu control the number
+[22:42] 每小时的排痰量。 
+of expectoration per hour.
+[22:48] 所以只是预期的数字，对不对？ 
+So just the expected
+number, right?
+[22:50] 这是我不知道的号码，因为我没有访问权限
+This is the number I don't know,
+because I don't have access
+[22:53] 到整个人口中
+to the entire population
+of people that will ever
+[22:55] 服用这种止咳糖浆。 
+take this cough syrup.
+[22:57] 因此，我将其称为对照组的mu control。 
+And so, I will call it mu
+control for the control group.
+[23:00] 这些人实际上就是
+So those are the people who
+have been actually given just
+[23:02] 像糖一样，像枫糖浆。 
+like sugar, like maple syrup.
+[23:05] 那些被给予真正糖浆的人可以吗？ 
+And mu drug are those people who
+are given the actual syrup, OK?
+[23:09] 你可以想象枫糖浆会产生作用
+And you can imagine that maybe
+maple syrup will have an effect
+[23:12] 每小时的期望值，只是因为它很甜
+on expectorations per hour just
+because, well, it's just sweet
+[23:18] 会有所帮助，好吗？ 
+and it helps, OK?
+[23:19] 因此，我们不知道这种影响将是什么。 
+And so, we don't know what
+this effect is going to be.
+[23:21] 我们只想测量药物是否真的
+We just want to measure
+if the drug is actually
+[23:24] 对期望产生更好的影响
+having just a better
+impact on expectorations
+[23:28] 每小时比只是纯枫糖浆好吗？ 
+per hour than the just
+pure maple syrup, OK?
+[23:34] 因此，我们想知道的是mu药物是否少于mu对照。 
+So what we want to know is if
+mu drug is less than mu control.
+[23:38] 这样就足够了。 
+That would be enough.
+[23:39] 如果我们能够接触到所有人口
+If we had access to
+all the populations
+[23:41] 这种糖浆将永远受到人们的青睐， 
+that will ever take
+the syrup for all ages,
+[23:44] 那么我们就可以衡量一下，这会产生影响吗？ 
+then we would just measure,
+did this have an impact?
+[23:46] 即使影响很小
+And even if it's a slightly
+ever so small impact,
+[23:49] 那么放开这种止咳糖浆， 
+then it's good to
+release this cough syrup,
+[23:52] 假设它没有副作用或类似的东西， 
+assuming that it has no side
+effects or anything like this,
+[23:55] 因为它比枫糖浆好，好吗？ 
+because it's just better
+than maple syrup, OK?
+[23:58] 问题在于我们无权使用此功能。 
+The problem is that we
+don't have access to this.
+[24:00] 我们将不得不根据样本做出此决定
+And we're going to have to make
+this decision based on samples
+[24:03] 这使我对亩药物和亩控制的认识不准确。 
+that give me imprecise knowledge
+about mu drug and mu control.
+[24:09] 所以在这种情况下，与第一种情况不同
+So in this case,
+unlike the first case
+[24:10] 我们比较了一个未知的期望值
+where we compared an
+unknown expected value
+[24:13] 有一个固定的数字，这是103.5之一，在这里， 
+to have a fixed number, which
+was one of the 103.5, here,
+[24:17] 我们只是互相比较两个未知数，好吗？ 
+we're just comparing two unknown
+numbers with each other, OK?
+[24:20] 因此，有两个随机性来源。 
+So there's two
+sources of randomness.
+[24:22] 试图估计第一个。 
+Trying to estimate
+the first one.
+[24:23] 并尝试估计第二个。 
+And trying to estimate
+the second one.
+[24:29] 在继续之前，我只想告诉您我很抱歉。 
+Before I move on, I just
+wanted to tell you I apologize.
+[24:31] 一位评分员无法完成对他的问题的评分
+One of the graders was not able
+to finish grading his problem
+[24:34] 今天开始。 
+sets for today.
+[24:35] 因此，对于那些来这里做作业的人， 
+So for those of you who are here
+just to pick up their homework,
+[24:39] 随时离开。 
+feel free to leave now.
+[24:41] 即使您有名称标签，我也会假装我没有看过。 
+Even if you have a name tag, I
+will pretend I did not read it.
+[24:45] 好。 
+OK.
+[24:45] 所以我很抱歉。 
+So I'm sorry.
+[24:47] 你会在星期二得到它。 
+You'll get it on Tuesday.
+[24:49] 而且不会再发生这种情况。 
+And this will not happen again.
+[24:53] 好。 
+OK.
+[24:54] 所以对于临床试验，我现在
+So for the clinical
+trials, now I'm
+[24:56] 要收集信息。 
+going to collect information.
+[24:57] 我将从对照组中收集数据。 
+I'm going to collect the
+data from the control group.
+[25:00] 我将从测试组中收集数据，好吗？ 
+And I'm going to collect data
+from the test group, all right?
+[25:03] 所以我的对照组在这里。 
+So my control group here.
+[25:05] 我不必在控件中收集相同数量的人
+I don't have to collect the same
+number of people in the control
+[25:08] 组比在药物组。 
+group than in the drug group.
+[25:09] 实际上，对于止咳糖浆来说，可能并不那么重要。 
+Actually, for cough syrup,
+maybe it's not that important.
+[25:12] 但是你可以想象，如果你想
+But you can imagine
+that if you think
+[25:14] 您可以治愈一种非常烦人的疾病， 
+you have the cure to a
+really annoying disease,
+[25:20] 实际上很难告诉一半的人
+it's actually hard to tell
+half of the people you
+[25:23] 会什么也不会得到的，好吗？ 
+will get a pill of nothing, OK?
+[25:26] 人们往往想尝试这种药物。 
+People tend to want
+to try the drug.
+[25:28] 他们很绝望。 
+They're desperate.
+[25:28] 因此，您必须有这种不平衡
+And so, you have to have
+this sort of imbalance
+[25:30] 谁在吸毒与谁不吸毒之间。 
+between who is getting the drug
+and who's not getting the drug.
+[25:35] 人们必须具备进行临床试验的资格。 
+And people have to qualify
+for the clinical trials.
+[25:37] 有很多波动
+There's lots of
+fluctuations that
+[25:39] 影响最终的实际人数
+affect what the final numbers
+of people who are actually
+[25:42] 将要获得药物并获得控制权
+going to get the drug and
+are going to get the control
+[25:44] 将是。 
+is going to be.
+[25:45] 因此，要使这两个数字相等并不容易。 
+And so, it's not easy for you
+to make those two numbers equal.
+[25:49] 如果可以的话，您希望这些数字相等， 
+You'd like to have those
+numbers equal if you can,
+[25:51] 但不一定。 
+but not necessarily.
+[25:55] 顺便说一句，这是一些称为
+And by the way, this is all part
+of some mystical science called
+[25:59]  “实验设计”。 
+"design of experiments."
+[26:00] 特别是，您可以想象
+And in particular,
+you can imagine
+[26:02] 如果其中一个系列具有更高的变体， 
+that if one of the series
+had higher variants,
+[26:04] 您想在这个组中想更多的人
+you would want to like
+more people in this group
+[26:07] 比其他组
+than the other group.
+[26:08] 是啊
+Yeah?
+[26:10] 学生：所以当我们减去[听不清] 
+STUDENT: So when we're
+subtracting [INAUDIBLE]
+[26:13]  [听不清] 0 [听不清]要满足的东西。 
+something that [INAUDIBLE] 0
+[INAUDIBLE] to be satisfied.
+[26:20] 所以这是故意的[听不清]。 
+So that's on
+purpose [INAUDIBLE]..
+[26:22] 教授：是的，这是故意的。 
+PROFESSOR: Yeah,
+that's on purpose.
+[26:23] 那我马上讲，好吗？ 
+And I'll come to that
+in a second, all right?
+[26:25] 所以基本上，我们要做到
+So basically, we're
+going to make it
+[26:31] 如果您的答案是，这是真的吗？ 
+if your answer is, is this true?
+[26:34] 我们将使它尽可能的难，但不要更难
+We're going to make it as hard
+as possible, but no harder
+[26:39] 让您对这个答案说是。 
+for you to say yes
+to this answer.
+[26:41] 因为，好吧，我们拭目以待。 
+Because, well, we'll see why.
+[26:45] 好的，所以现在我们有两组数据，x和y。 
+OK, so now we have two set
+of data, the x's and the y's.
+[26:50]  x是用于药物的。 
+The x's are the
+ones for the drug.
+[26:51]  y是我从人们那里收集的数据
+And the y's are the data that I
+collected from the people, who
+[26:55] 刚服用安慰剂，好吗？ 
+were just given a placebo, OK?
+[26:57] 因此，它们都是IID随机变量。 
+And so, they're all
+IID random variables.
+[26:59] 在这里，因为这是期望的数量， 
+And here, since it's the
+number of expectorations,
+[27:02] 我正在做一个过时的建模假设。 
+I'm making a blunt
+modeling assumption.
+[27:07] 我只想说是泊松。 
+I'm just going to
+say it's Poisson.
+[27:08] 它的特征仅在于平均亩数药物或平均亩数
+And it's characterized only by
+the mean mu drug or the mean mu
+[27:11] 控制，好吗？ 
+control, OK?
+[27:13] 我在这里做了一个假设。 
+I've just made an
+assumption here.
+[27:15] 可能会有所不同。 
+It could be something different.
+[27:16] 但是，可以说这是泊松分布。 
+But let's say it's a
+Poisson distribution.
+[27:19] 所以现在我想知道的是测试mu药物是否
+So now what I want to know
+is to test whether mu drug is
+[27:21] 不到亩控制。 
+less than mu control.
+[27:22] 我们已经说过了。 
+We said that already.
+[27:23] 但是我们之前所说的方式并不算数学
+But the way we said it before
+was not as mathematical
+[27:26] 现在是这样。 
+as it is now.
+[27:27] 现在我们实际上是在测试参数
+Now we're actually making
+a test on the parameters
+[27:29] 泊松分布。 
+of Poisson distribution.
+[27:30] 以前我们只是在做测试
+Whereas before, we
+were just making test
+[27:32] 根据预期的数字，好吗？ 
+on expected numbers, OK?
+[27:36] 因此，试探法-如果我们现在尝试应用试探法。 
+So the heuristic-- again, if we
+try to apply the heuristic now.
+[27:39] 与其将mu x bar毒品与某个固定数字进行比较， 
+Rather than comparing mu x
+bar drug to some fixed number,
+[27:42] 我实际上是将x bar药物与某些对照进行比较。 
+I'm actually comparing x
+bar drug to some control.
+[27:46] 但现在在这里，我需要说明一些问题， 
+But now here, I need to have
+something that accounts for,
+[27:48] 不仅x毒品的波动， 
+not only the fluctuations
+of x bar drug,
+[27:51] 还要针对x条控制的波动，好吗？ 
+but also for the fluctuations
+of x bar control, OK?
+[27:55] 所以，现在我需要一些东西
+And so, now I need
+something that
+[27:56] 当所有这两个东西都变为无穷大时，它变为0。 
+goes to 0 when all those
+two things go to infinity.
+[27:59] 通常，它应为零，且n药物的根数为1 
+And typically, it should go to
+zero with 1 over root of n drug
+[28:02] 和n控制的平方根上的1，好吗？ 
+and 1 over square
+root of n control, OK?
+[28:06] 这就是两个x条的中心极限定理
+That's what the central
+limit theorem for both x bar
+[28:08] 药物和x条控制。 
+drug and x bar control.
+[28:11] 实际上有两个中心极限定理。 
+Two central limit theorems
+are actually telling.
+[28:15] 好。 
+OK.
+[28:15] 然后我们可以得出结论，这发生了。 
+And then we can conclude
+that this happens.
+[28:17] 正如您所说，我们正在努力做到这一点
+And as you said, we're
+trying to make it
+[28:19] 很难得出这个结论。 
+a bit harder to conclude this.
+[28:21] 因为我们面对现实。 
+Because let's face it.
+[28:23] 如果我们实际上是在使用两个简单的启发式方法，对吗？ 
+If we were actually using
+two simple heuristic, right?
+[28:30] 为了简单起见，对不对？ 
+For simplicity, right?
+[28:35] 所以我可以重写少于x bar控制的x bar药物
+So I can rewrite x bar drug
+less than x bar control
+[28:43] 减去这等于0。 
+minus this something
+that goes to 0.
+[28:46] 我可以将其写为x bar药物减去x bar控制量
+I can write it as x bar drug
+minus x bar control less
+[28:54] 比负面的东西好吗？ 
+than something negative, OK?
+[28:57] 这个小东西好不好
+This little something, OK?
+[29:00] 现在让我们看看那些家伙。 
+So now let's look at those guys.
+[29:02] 这是两个随机变量的差。 
+This is the difference
+of two random variables.
+[29:06] 从中心极限定理，他们
+From the central
+limit theorem, they
+[29:08] 每个应近似为高斯。 
+should be approximately
+Gaussian each.
+[29:12] 实际上，我们将考虑
+And actually, we're
+going to think
+[29:14] 他们是独立的。 
+of them as being independent.
+[29:15] 没有理由为什么对照组的人
+There's no reason why the
+people in the control group
+[29:18] 应该对正在发生的事情有任何影响
+should have any effect
+on what's happening
+[29:20] 给测试组中的人。 
+to the people in the test group.
+[29:21] 那些人甚至可能根本不认识。 
+Those people probably
+don't even know each other.
+[29:23] 因此，当我看这个时，它看起来应该像n 0 
+And so, when I look at this,
+this should look like n 0
+[29:27] 有一些平均值和一些变体， 
+with some mean
+and some variants,
+[29:28] 假设我不知道是什么，好吗？ 
+let's say I don't
+know what it is, OK?
+[29:30] 我实际上知道这个意思。 
+The mean I actually know.
+[29:31] 这是亩毒品减去亩控制，好吗？ 
+It's mu drug minus
+mu control, OK?
+[29:37] 因此，如果他们要绘制此人的PDF， 
+So if they were to plot
+the PDF of this guy,
+[29:39] 它看起来像这样。 
+it would look like this.
+[29:41] 我会有一些居中的东西
+I would have something
+which is centered
+[29:42] 在亩药物减去亩控制。 
+at mu drug minus mu control.
+[29:48] 看起来像这样，好吗？ 
+And it would look like this, OK?
+[29:51] 现在，我们说mu药物实际上等于mu控制。 
+Now let's say that mu drug is
+actually equal to mu control.
+[29:55] 这家制药公司是一个巨大的骗局。 
+That this pharmaceutical
+company is a huge scam.
+[29:59] 他们真的在试图出售瓶装玉米
+And they really are trying
+to sell bottled corn
+[30:04] 糖浆只要$ 200美元，好吗？ 
+syrup for $200 a pop, OK?
+[30:07] 因此，这是一个巨大的骗局。 
+So this is a huge scam.
+[30:08] 真实的东西实际上等于0。 
+And the true things are
+actually equal to 0.
+[30:12] 所以这个东西真的以0为中心，好吗？ 
+So this thing is really
+centered about 0, OK?
+[30:15] 现在，如果不这样做，那么基本上一半
+Now, if were not to do
+this, then basically, half
+[30:18] 我实际上会来的时候
+of the time I would
+actually come up
+[30:20] 分布高于此值。 
+with a distribution
+that's above this value.
+[30:22] 而且有一半的时间我会得到
+And half of the time I
+would have something that's
+[30:24] 低于此值，这意味着一半的骗局
+below this value, which would
+mean that half of the scams
+[30:27] 如果我不这样做的话，实际上将通过FDA。 
+would actually go through
+FDA if I did not do this.
+[30:31] 所以我想说的是，好的。 
+So what I'm trying to
+do is to say, well, OK.
+[30:33] 您必须在这里，以便实际上有
+You have to be here, so
+that there is actually
+[30:35] 偶然的可能性很小
+a very low probability
+that just by chance
+[30:37] 你最终在这里。 
+you end up being here.
+[30:40] 我们将使所有陈述都非常精确
+And we'll make all the
+statements extremely precise
+[30:42] 稍后的。 
+later on.
+[30:43] 但是我认为毒品是成功的
+But I think the
+drug thing makes it
+[30:46] 有趣的是，为什么要加倍努力
+interesting to see why
+you're making it hard,
+[30:49] 因为你不想让别人
+because You don't
+want to allow people
+[30:51] 卖这样的东西。 
+to sell a thing like that.
+[30:55] 在我们深入探讨相关的统计思维之前
+Before we go more into the
+statistical thinking associated
+[30:58] 测试，让我们看看如何
+to tests, let's just
+see how we would
+[31:01] 这样量化吧？ 
+do this quantification, right?
+[31:02] 我的意思是，毕竟这可能是我们
+I mean after all, this
+is what we probably
+[31:04] 在这一点上最舒服。 
+are the most comfortable
+with at this point.
+[31:07] 因此，让我们尝试理解这一点。 
+So let's just try
+to understand this.
+[31:10] 我将做统计学家最喜欢的测试， 
+And I'm going to make the
+statisticians favorite test,
+[31:16] 这显然是您在家中要做的所有事情
+which is the thing that
+obviously you do at home all
+[31:19] 每次获得新季度的时间， 
+the time every time
+you get a new quarter,
+[31:21] 正在测试它是否是一个公平的硬币。 
+is testing whether it's
+a fair coin or not.
+[31:23] 行？ 
+All right?
+[31:24] 因此，该测试当然仅存在于教科书中。 
+So this test, of course,
+exists only in textbooks.
+[31:27] 我实际上没有写这张幻灯片。 
+And I actually did
+not write this slide.
+[31:30] 我懒得只更换所有这些东西
+I was lazy to just
+replace all this stuff
+[31:32] 由樱花运行。 
+by the Cherry Blossom Run.
+[31:37] 所以你有一枚硬币。 
+So you have a coin.
+[31:38] 现在您有80个观测值，从x1到x80。 
+Now you have 80
+observations, x1 to x80.
+[31:42] 所以n等于80 
+So n is equal to 80.
+[31:45] 我有x1，xn，IID，Bernoulli p。 
+I have x1, xn, IID, Bernoulli p.
+[31:53] 我想知道我是否有枚硬币。 
+And I want to know if
+I have a fair coin.
+[31:55] 所以我想用数学语言
+So in mathematical
+language, I want
+[31:57] 知道p是否等于1/2。 
+to know if p is equal to 1/2.
+[32:04] 假设这只是团长，好吗？ 
+Let's say this is
+just the heads, OK?
+[32:07] 还有偏见的硬币？ 
+And a biased coin?
+[32:09] 好吧，也许您可​​能
+Well, maybe you
+would potentially
+[32:10] 感兴趣是否有偏见
+be interested
+whether it's biased
+[32:11] 一个方向或另一个方向。 
+one direction or the other.
+[32:13] 但是不是一个公平的硬币已经有点
+But not being a fair
+coin is already somewhat
+[32:15] 发现，好吗？ 
+of a discovery, OK?
+[32:17] 因此，您只想知道p是否等于1/2 
+And so, you just want to know
+whether p is equal to 1/2
+[32:20] 或p不等于1/2可以吗？ 
+or p is not equal to 1/2, OK?
+[32:25] 现在，如果我要应用非常幼稚的第一个示例
+Now, if I were to apply the
+very naive first example
+[32:29] 不拒绝这个假设。 
+to not reject this hypothesis.
+[32:32] 如果我将这个东西运行80次，我需要
+If I run this thing
+80 times, I need
+[32:35] 看正好有40个头和40个故事。 
+to see exactly 40
+heads and 40 tales.
+[32:40] 现在，这种情况不太可能完全发生。 
+Now this is very unlikely
+to happen exactly.
+[32:43] 您将拥有近40个头和近40个头， 
+You're going to have close to
+40 heads and close to 40 tails,
+[32:47] 但是这些东西应该有多近？ 
+but how close should
+those things be?
+[32:49] 好？ 
+OK?
+[32:50] 所以，一点点的事情正在发生
+And so, the little
+something is going
+[32:52] 完全由这个来量化，好吗？ 
+to be quantified by
+exactly this, OK?
+[32:55] 所以现在在这里，比方说我的实验给了我54个头。 
+So now here, let's say that my
+experiment gave me 54 heads.
+[33:06] 是54？ 
+That's 54?
+[33:07] 是的
+Yeah.
+[33:10] 这意味着我的xn条在80上是54，即0.68。 
+Which means that my xn bar
+is 54 over 80, which is 0.68.
+[33:21] 行？ 
+All right?
+[33:21] 所以我有这个估算器。 
+So I have this estimator.
+[33:24] 看起来很大，对吧？ 
+Looks pretty large, right?
+[33:26] 它远大于0.5，所以看起来确实像
+It's much larger than
+0.5, so it does look like,
+[33:29] 我妈妈一定会得出结论， 
+and my mom would
+certainly conclude,
+[33:32] 这肯定是有偏见的硬币， 
+that this is a
+biased coin for sure,
+[33:34] 因为她认为我很棘手。 
+because she thinks I'm tricky.
+[33:35] 行。 
+All right.
+[33:36] 所以问题是，这可能是偶然的吗？ 
+So the question is, can
+this be due to chance?
+[33:40] 难道这只能是偶然的缘故吗？ 
+Can this be due to chance alone?
+[33:42] 就像一个公平的硬币实际上会发生什么可能性
+Like what is the likelihood
+that a fair coin would actually
+[33:45] 最终是54次而不是40次？ 
+end up being 54 times
+on heads rather than 40?
+[33:51] 好？ 
+OK?
+[33:52] 因此，我们要做的是说，好的，我
+And so, what we do
+is we say, OK, I
+[33:55] 需要了解，数字的分布是什么
+need to understand, what is
+the distribution of the number
+[33:58] 有时会浮现？ 
+of times it comes on heads?
+[33:59] 这将是一个二项式
+And this is going
+to be a binomial,
+[34:01] 但是玩起来有点烦人。 
+but it's a little
+annoying to play with.
+[34:02] 因此，我们将使用中心极限定理
+So we're going to use the
+central limit theorem that
+[34:05] 告诉我xn bar减去p除
+tells me that xn
+bar minus p divided
+[34:10] 由p1的平方根减去p的近似分布
+by square root of p1 minus p
+is approximately distributed
+[34:15] 作为n01。 
+as an n01.
+[34:17] 在这里，由于n等于80， 
+And here, since
+n is equal to 80,
+[34:18] 我很确定这实际上是可行的。 
+I'm pretty safe that this
+is actually going to work.
+[34:28] 我实际上可以使用[音频不清晰]， 
+And I can actually
+use [INAUDIBLE],,
+[34:33] 然后把xn bar放在这里
+and put xn bar here.
+[34:38]  [听不清]告诉我可以这样做。 
+[INAUDIBLE] tells me
+that this is OK to do.
+[34:40] 行。 
+All right.
+[34:41] 所以现在我实际上要计算这个。 
+So now I'm actually
+going to compute this.
+[34:43] 所以在这里，我知道这一点。 
+So here, I know this.
+[34:44] 这是80的平方根。 
+This is square root of 80.
+[34:46] 这是0.68。 
+This is a 0.68.
+[34:48] 这个值是多少？ 
+What is this value here?
+[34:50] 我们将讨论它。 
+We'll talk about it.
+[34:51] 好吧，我们试图了解会发生什么
+Well, we're trying to
+understand what happens
+[34:53] 如果它是一个公平的硬币，对吗？ 
+if it is a fair coin, right?
+[34:55] 因此，如果公平，则p等于0.5，对吧？ 
+So if fair, then p is
+equal to 0.5, right?
+[35:02] 所以我想知道的是，可能性是多少
+So what I want to know
+is, what is the likelihood
+[35:05] 一个公平的硬币会给我0.68？ 
+that a fair coin
+would give me 0.68?
+[35:09] 让我完成。 
+Let me finish.
+[35:10] 行。 
+All right.
+[35:11] 代币将出现的可能性是多少
+What is the likelihood
+that a fair coin will
+[35:14] 允许我这样做，所以实际上允许我插入p 
+allow me to do this, so I'm
+actually allowed to plug-in p
+[35:17] 在这里是0.5？ 
+to be 0.5 here?
+[35:19] 现在，您的问题是，为什么我不将p设为0.5？ 
+Now, your question is, why
+do I not plug-in p to be 0.5?
+[35:25] 但是你可以。 
+But you can.
+[35:25] 行。 
+All right.
+[35:26] 我只想让您在特定位置插入p， 
+I just want to make you plug-in
+p at one specific point,
+[35:29] 但是你绝对正确
+but you're absolutely right.
+[35:34] 好。 
+OK.
+[35:34] 让我们忘记您的问题一秒钟。 
+Let's forget about your
+question for one second.
+[35:37] 所以现在我将不得不看xn bar减去0.5除
+So now I'm going to have to
+look at xn bar minus 0.5 divided
+[35:41]  xn bar 1减去xn bar。 
+by xn bar 1 minus xn bar.
+[35:45] 那么这个东西大约是高斯和0.1 
+Then this thing is
+approximately Gaussian and 0,1
+[35:51] 如果硬币是公平的。 
+if the coin is fair.
+[35:56] 否则，我的平均值将不为零。 
+Otherwise, I'm going to have
+a mean which is not zero here.
+[36:01] 如果还有其他硬币，无论我得到什么，对不对？ 
+If the coin is something else,
+whatever I get here, right?
+[36:07] 让我们写一秒钟。 
+Let's just write
+it for one second.
+[36:23] 我们开始做吧。 
+Let's do it.
+[36:25] 那么如果p-- 
+So what is the
+distribution of this if p--
+[36:27] 所以p等于0.5 
+so that's p is equal to 0.5.
+[36:33] 好？ 
+OK?
+[36:33] 现在如果p等于0.6，那么这个东西就好了， 
+Now if p is equal to 0.6,
+then this thing is just, well,
+[36:39] 我知道这等于n xn的平方根
+I know that this is equal
+to square root of n xn
+[36:43]  bar减去0.6，除以xn bar 1 
+bar minus 0.6,
+divided by xn bar 1
+[36:52] 直方根减去xn，再加上- 
+minus xn in the bar
+squared root, plus--
+[36:55] 好吧，现在有所不同。 
+well, now the difference.
+[36:57] 所以n的平方根是0.6减去
+Is So square root
+of n, 0.6 minus
+[37:00]  0.5，除以xn bar的平方根减去xn bar，对吗？ 
+0.5, divided by square root of
+xn bar 1 minus xn bar, right?
+[37:07] 现在如果p等于0.6，那么这个人是n 0,1， 
+Now if p is equal to 0.6,
+then this guy is n 0,1,
+[37:13] 但是这个家伙是不同的。 
+but this guy is
+something different.
+[37:17] 这只是一个取决于n的平方根的数字。 
+This is just a number that
+depends on square root of n.
+[37:22] 它实际上很大。 
+It's actually pretty large.
+[37:24] 所以，如果我想使用这个人有
+So if I want to use the
+fact that this guy has
+[37:28] 正态分布，我需要在此处插入真实值。 
+a normal distribution, I need
+to plug-in the true value here.
+[37:33] 现在，我所隐含的问题如下。 
+Now, the implicit question
+that I got was the following.
+[37:38] 它说，嗯，如果您知道p是什么，那是什么
+It says, well, if you know
+what p is, then what's
+[37:43] 其实也是这样。 
+actually true is also this.
+[37:46] 如果p等于0.5，那么由于我
+If p is equal to
+0.5, then since I
+[37:51] 知道根n xn bar减去p除以p 1的平方根
+know that root n xn bar minus
+p divided by square root of p 1
+[37:57] 负p是n 0、1，也是如此
+minus p is some n
+0, 1, it's also true
+[38:01]  n xn bar的平方根减去0.5 
+that square root of
+n xn bar minus 0.5
+[38:06] 除以0.5 1的平方根减去0.5是n 0,1，对吧？ 
+divided by square root of 0.5
+1 minus 0.5 is n 0,1, right?
+[38:14] 我知道p是什么。 
+I know what p is.
+[38:15] 我只是要使其出现。 
+I'm just going to
+make it appear.
+[38:18] 好。 
+OK.
+[38:19] 因此，此特定功能实际上有什么好处
+And so, what's actually
+nice about this particular
+[38:22]  [音频不清晰]实验是我可以检查我的假设是否
+[INAUDIBLE] experiment is that
+I can check if my assumption is
+[38:27] 通过检查我是否确实有效- 
+valid by checking
+whether I'm actually--
+[38:31] 所以我现在要做的是
+so what I'm going
+to do right now
+[38:32] 检查这是否可能是高斯的，对吗？ 
+is check whether this is likely
+to be a Gaussian or not, right?
+[38:36] 我有两种方式可以违反它。 
+And there's two ways
+I can violate it.
+[38:38] 通过违反均值，也通过违反方差。 
+By violating mean, but also
+by violating the variance.
+[38:42] 在这里，我在第一种情况下所做的
+And here, what I did
+in the first case,
+[38:44] 我说，好吧，我不允许您检查您是否
+I said, well I'm not allowing
+you to check whether you've
+[38:46] 违反了差异。 
+violated the variance.
+[38:47] 我只是塞住您得到的任何差异。 
+I'm just plugging whatever
+variance you're getting.
+[38:49] 而在这里，我是说，嗯， 
+Whereas here, I'm
+saying, well, there's
+[38:51] 有两种方式可以违反它。 
+two ways you can violate it.
+[38:52] 我将考虑所有因素。 
+And I'm just going to
+factor everything in.
+[38:55] 现在，我可以插入该号码。 
+So now I can
+plug-in this number.
+[38:58] 所以这是80。 
+So this is 80.
+[39:00] 这是0.68。 
+This is 0.68.
+[39:02] 所以我可以计算所有这些东西。 
+So I can compute all this stuff.
+[39:04] 我也可以在这里计算所有这些东西。 
+I can compute all this
+stuff here as well.
+[39:06] 在这种情况下，我得到的是xn条1， 
+And what I get in this
+case, if I put the xn bar 1,
+[39:10] 我得到3.45，好吗？ 
+I get 3.45, OK?
+[39:15] 现在我声称这可以做到
+And now I claim
+that this makes it
+[39:17] 合理拒绝p的假设
+reasonable to reject
+the hypothesis that p
+[39:19] 等于0.5。 
+is equal to 0.5.
+[39:21] 有人可以告诉我为什么吗？ 
+Can somebody tell me why?
+[39:27] 学生：很大。 
+STUDENT: It's pretty big.
+[39:28] 教授：是的，3个很大。 
+PROFESSOR: Yeah,
+3 is pretty big.
+[39:30] 因此，可能性很小。 
+So it's very unlikely.
+[39:31] 所以我应该看到的这个数字
+So this number that
+I should see should
+[39:33] 看起来如果我问一台电脑来画我会得到的数字
+look like the number I would get
+if I asked a computer to draw
+[39:39] 一个随机的高斯对我来说。 
+one random Gaussian for me.
+[39:42] 这个数字，当我画一个随机的高斯时， 
+This number, when I draw
+one random Gaussian,
+[39:45] 实际上是一个具有99.9％的数字
+is actually a number with
+99.9% this number will
+[39:49] 介于3到3之间。 
+be between negative 3 and 3.
+[39:52] 有了78％，它将介于2到2之间。 
+With 78% it's going to be
+between negative 2 and 2.
+[40:01]  68％在负1到1之间。 
+68% is between minus 1 and 1.
+[40:04] 大约有90％的比例介于负2到2之间。 
+And with like 90% it's
+between minus 2 and 2.
+[40:07] 所以当你这样做时得到3.45 
+So getting a 3.45
+when you do this
+[40:10] 极不可能发生， 
+is extremely unlikely
+to happen, which
+[40:13] 意味着您将为此非常不幸
+means that you would have to
+be extremely unlucky for this
+[40:17] 永远发生。 
+to ever happen.
+[40:17] 现在，它会发生，对吗？ 
+Now, it can happen, right?
+[40:19] 可能是您掷了80个硬币和其中80个硬币
+It could be the case that you
+flip 80 coins and 80 of them
+[40:25] 是元首。 
+are heads.
+[40:27] 这有什么可能性发生？ 
+With what probability
+does this happen?
+[40:32]  1比2到80，对吗？ 
+1 over 2 to the 80, right?
+[40:34] 玩彩票可能更好
+Which is probably better
+off playing the lottery
+[40:39] 有这样的几率吧？ 
+with this kind of odds, right?
+[40:41] 我的意思是，这只是不会发生，但可能会发生。 
+I mean, this is just not going
+to happen, but it might happen.
+[40:43] 所以我们不能完全消除不确定性，对吗？ 
+So we cannot remove completely
+the uncertainty, right?
+[40:48] 这仍然有可能是由于噪音造成的。 
+It's still possible that
+this is due to noise.
+[40:53] 但是，我们只是试图使所有情况
+But we're just trying to
+make all the cases that
+[40:55] 不太可能消失，好吗？ 
+are very unlikely go away, OK?
+[40:58] 因此，现在我声称对高斯而言，3.45的可能性很小。 
+And so, now I claim that 3.45
+is very unlikely for a Gaussian.
+[41:03] 因此，如果我要绘制标准高斯的PDF，对吗？ 
+So if I were to draw the PDF
+of a standard Gaussian, right?
+[41:07] 那么n 0，1，对吗？ 
+So n 0, 1, right?
+[41:09] 因此，PDF为n 0、1。 
+So that's PDF of n 0, 1.
+[41:16]  3.73基本上在这里，好吗？ 
+3.73 is basically here, OK?
+[41:21] 因此，它的尾巴太远了。 
+So it's just too
+far in the tails.
+[41:25] 明白了吗
+Understood?
+[41:26] 现在我不能说高斯概率
+Now I cannot say that the
+probability that the Gaussian
+[41:30] 等于373小吧？ 
+is equal to 373 is small, right?
+[41:33] 我不能这么说，因为它是0。 
+I just cannot say
+that, because it's 0.
+[41:35] 而且它也是0的可能性是0， 
+And it's also 0 for the
+probability that it's 0,
+[41:37] 即使最可能的值在0左右。 
+even though the most
+likely values are around 0.
+[41:41] 这是连续随机变量。 
+It's the continuous
+random variable.
+[41:44] 你给我的任何价值都会
+Any value you give
+me, it's going
+[41:45] 发生的可能性为零。 
+to happen with probability zero.
+[41:47] 所以我们要说的是波动
+So what we're going to say
+is, well, the fluctuations
+[41:51] 大于此数字。 
+are larger than this number.
+[41:52] 我变得更糟的可能性
+The probability that
+I get anything worse
+[41:55] 比这实际上是很小的，对吗？ 
+than this is actually
+extremely small, right?
+[41:57] 任何比这更糟糕的事情都远超过3.73。 
+Anything worse than this is
+just like farther than 3.73.
+[42:00] 这将是我们所控制的。 
+And this is going to
+be what we control.
+[42:03] 行？ 
+All right?
+[42:04] 所以在这种情况下，我声称这是非常合理的
+So in this case, I claim
+that it's quite reasonable
+[42:06] 拒绝该假设。 
+to reject the hypothesis.
+[42:07] 大家都可以吗？ 
+Is everybody OK with this?
+[42:10] 每个人都觉得这令人震惊吗？ 
+Everybody find this shocking?
+[42:12] 还是每个人都不知道发生了什么？ 
+Or everybody has no
+idea what's going on?
+[42:14] 你有任何问题吗？ 
+Do you have any questions?
+[42:16] 是啊
+Yeah?
+[42:17] 学生：关于p的情况， 
+STUDENT: Regarding
+the case of p, where
+[42:19] 负p并不接近xn。 
+minus p isn't close to xn.
+[42:21] 如果您使用1减去p作为0.5，那么您就是
+If you use 1 minus p
+as 0.5, then you're
+[42:24] 除以比使用xn更大的数字。 
+dividing by a larger number
+than you would if you used xn.
+[42:28] 因此，好像我们的真实数字不是3.45。 
+So it feels like our
+true number is not 3.45.
+[42:32] 有点小
+It's something a
+little bit smaller
+[42:34] 比3.45的分布实际上要像1/2。 
+than 3.45 for the distribution
+to actually be like 1/2.
+[42:39] 因为好像我们要添加
+Because it seems
+like we're adding
+[42:40] 通过使用xn条不必要的额外错误。 
+an unnecessary extra
+error by using xn bar.
+[42:43] 而且我们添加了一个错误
+And we're adding
+an error that makes
+[42:45] 看来我们的结果比实际可能性要小。 
+it seem that our result was less
+likely than it actually was.
+[43:00] 教授：是的。 
+PROFESSOR: That's correct.
+[43:03] 而且你是对的。 
+And you're right.
+[43:05] 我不想在任何地方插入p， 
+I didn't want to plug-in
+the p everywhere,
+[43:07] 但您应尽可能将其插入。 
+but you should plug it
+in everywhere you can.
+[43:09] 可以，可以吗？ 
+That's for sure, OK?
+[43:11] 因此，让我们对此表示同意。 
+So let's agree on that.
+[43:12] 的确，它使数字增加了一点。 
+And that's true that it makes
+the number a little bigger.
+[43:15] 你计算你会得到多少， 
+You compute how
+much you would get,
+[43:16] 如果我们在那里0.5，我们将得到。 
+we would get if we 0.5 there.
+[43:20] 好吧，我不知道80的平方根是多少。 
+Well, I don't know what
+the square root of 80 is.
+[43:23] 有人可以快速计算吗？ 
+Can somebody compute quickly?
+[43:26] 我不是要你做。 
+I'm not asking you to do it.
+[43:27] 但是我想要的是80乘以0.18的两倍平方根。 
+But what I want is two times
+square root of 80 times 0.18.
+[43:46]  3.22 
+3.22
+[43:48] 好。 
+OK.
+[43:49] 我可以使用3.22制作相同的卡通图片。 
+I can make the same
+cartoon picture with 3.22.
+[43:55] 但是你是对的。 
+But you're right.
+[43:56] 这绝对是更准确的。 
+This is definitely
+more accurate.
+[43:57] 我应该做的。 
+And I should have done this.
+[43:58] 我不想收到混乱的消息，好吗？ 
+I didn't want to get the
+confused message, OK?
+[44:02] 行。 
+All right.
+[44:02] 因此，现在这是您可以想到的第二个示例。 
+So now here's a second
+example that you can think of.
+[44:07] 所以现在我扔了30次。 
+So now I toss it 30 times.
+[44:11] 仍然在中心极限定理的范围内。 
+Still in the realm of the
+central limit theorem.
+[44:17] 我得到13个头，而不是15个。 
+I get 13 heads rather than 15.
+[44:23] 所以我实际上更接近一半。 
+So I'm actually much closer
+to being exactly at half.
+[44:27] 让我们看看这是否真的
+So let's see if this
+is actually going
+[44:28] 给我一个合理的价值。 
+to give me a plausible value.
+[44:32] 所以我平均得到0.33。 
+So I get 0.33 in average.
+[44:34] 如果真值是0.5，我将得到0.77。 
+If the truth was 0.5, I would
+get something like 0.77.
+[44:40] 现在我声称0.77是一个合理的实现
+And now I claim that 0.77
+is a plausible realization
+[44:44] 对于一些标准的高斯，好吗？ 
+for some standard Gaussian, OK?
+[44:46] 现在，0.77看起来就在这里。 
+Now, 0.77 is going to
+look like it's here.
+[44:55] 所以这很可能只是
+So that could very well
+be something that just
+[44:57] 之所以来是因为随机性。 
+comes because of randomness.
+[44:59] 再说一次，如果您考虑一下。 
+And again, if you
+think about it.
+[45:01] 如果我告诉你，你期望15，你看到了13， 
+If I told you, you were
+expecting 15, you saw 13,
+[45:06] 您很乐意将其归因于随机性。 
+you're happy to put that on
+the account of randomness.
+[45:09] 当然，现在的问题是， 
+Now of course, the
+question is going to be,
+[45:11] 我在哪里画线？ 
+where do I draw the line?
+[45:12] 对？ 
+Right?
+[45:13]  12是正确的数字吗？ 
+Is 12 the right number?
+[45:15] 是11岁吗？ 
+Is 11?
+[45:16] 是10吗？ 
+Is 10?
+[45:17] 它是什么？ 
+What is it?
+[45:21] 因此，基本上，答案就是您想成为的任何人。 
+So basically, the answer is
+it's whatever you want to be.
+[45:24] 问题很难在规模上思考，对吗？ 
+The problem it's hard to
+think on the scale, right?
+[45:28] 进行规模思考意味着什么？ 
+What does it mean to
+think on the scale?
+[45:30] 如果我不能以这样的规模思考，我就是
+If I can't think
+in this scale, I'm
+[45:31] 将不得不考虑其中80个的规模。 
+going to have to think on
+the scale of 80 of them.
+[45:33] 我将不得不考虑运行100个硬币的规模
+I'm going to have to think on
+the scale of running 100 coin
+[45:38] 翻转。 
+flips.
+[45:39] 因此，这种规模一直是一个移动的目标。 
+And so, this scale is a
+moving target all the time.
+[45:43] 每次遇到新问题时， 
+Every time you
+have a new problem,
+[45:44] 你必须要有新技能。 
+you have to have a
+new skill in mind.
+[45:45] 这是非常困难的。 
+And it's very difficult.
+[45:47] 统计分析的目的， 
+The purpose of
+statistical analysis,
+[45:50] 特别是这个过程的内容
+and in particular this
+process that content
+[45:53] 用你的x杆把它转动
+that takes your x
+bar and turns it
+[45:55] 变成应该是标准高斯的东西， 
+into something that should
+be standard Gaussian,
+[45:58] 允许您映射x条的值
+allows you to map
+the value of x bar
+[46:01] 成为高斯标准比例的比例。 
+into a scale that is the
+standard scale of the Gaussian.
+[46:06] 行？ 
+All right?
+[46:07] 现在，您需要记住的一切
+Now, all you need
+to have in mind
+[46:09] 是，是大数还是异常大数
+is, what is a large number
+or an unusually large number
+[46:13] 高斯？ 
+for a Gaussian?
+[46:14] 这就是您需要知道的一切。 
+That's all you need to know.
+[46:18] 顺便说一下，这里不是0.77， 
+So here, by the way,
+0.77 is not this one,
+[46:21] 因为它实际上是负0.77。 
+because it was
+actually negative 0.77.
+[46:26] 所以这一个。 
+So this one.
+[46:28] 好。 
+OK.
+[46:29] 所以我可以在零的右边，也可以在零的左边。 
+So I can be on the right or
+I can be on the left of zero.
+[46:34] 但是它们仍然是合理的。 
+But they are still plausible.
+[46:36] 因此，了解您可能真正想到的是
+So understand you could
+actually have in mind
+[46:40] 所有对于高斯似然的值
+all the values that are
+plausible for a Gaussian
+[46:42] 那些不合理的
+and those that
+are not plausible,
+[46:43] 并根据您认为正确的数字画线。 
+and draw the line based on what
+you think is the right number.
+[46:46] 因此，高斯的正值应变为多大
+So how large should a positive
+value of a Gaussian to become
+[46:49] 对你不合理？ 
+unreasonable for you?
+[46:52] 是1吗？ 
+Is it 1?
+[46:54] 是1.5吗？ 
+Is it 1.5?
+[46:56] 是2吗？ 
+Is it 2?
+[46:56] 当我到达那时阻止我。 
+Stop me when I get there.
+[46:57] 是2.5吗？ 
+Is it 2.5?
+[46:59] 是3吗？ 
+Is it 3?
+[47:00] 学生：我认为2.5绝对太大。 
+STUDENT: I think 2.5
+is definitely too big.
+[47:02] 教授：什么？ 
+PROFESSOR: What?
+[47:03] 学生：这不取决于我们以前的经历吗？ 
+STUDENT: Doesn't it
+depend on our prior?
+[47:04] 假设我们已经有很好的证据
+Let's say we already
+have really good evidence
+[47:06] 在这一点上[听不清] 
+at this point [INAUDIBLE]
+[47:09] 教授：是的，所以这不是贝叶斯统计。 
+PROFESSOR: Yeah, so this
+is not Bayesian statistics.
+[47:12] 因此，现在没有像以前这样的事情。 
+So there's no such thing
+as a prior right now.
+[47:14] 我们到达那里。 
+We'll get there.
+[47:15] 在短短的一章中，您会有所收获。 
+You'll have your moment
+during one short chapter.
+[47:23] 所以这里没有事前吧？ 
+So there's no prior here, right?
+[47:25] 这真的取决于您是否认为
+It's really a matter
+of whether you think
+[47:27] 是否为高斯大小。 
+is a Gaussian large or not.
+[47:28] 这不是硬币问题。 
+It's not a matter of coins.
+[47:30] 没关系。 
+It's not a matter of anything.
+[47:31] 现在，我仅将其简化为一个问题。 
+Now I've just reduced
+it to just one question.
+[47:33] 因此，忘记我们刚才所说的一切。 
+So forget about
+everything we just said.
+[47:36] 我问你，你什么时候决定
+And I'm asking you,
+when do you decide
+[47:38] 这个数字太大而无法合理绘制
+that a number is too large
+to be reasonably drawn
+[47:43] 来自高斯？ 
+from a Gaussian?
+[47:44] 这个数字是2或1.96。 
+And this number is 2 or 1.96.
+[47:50] 这基本上就是您从该quintel获得的电话号码。 
+And that's basically the number
+that you get from this quintel.
+[47:53] 我们之前看过1.96，对吧？ 
+We've seen the
+1.96 before, right?
+[47:55] 它实际上是2的q alpha，其中alpha等于5％。 
+It's actually q alpha over 2,
+where alpha is equal to 5%.
+[47:59] 那是高斯人的五头琴。 
+That's a quintel of a Gaussian.
+[48:01] 所以实际上，我们要做的是再次映射它。 
+So actually, what we
+do is we map it again.
+[48:05] 现在在高斯人也是如此。 
+So are now at the Gaussians.
+[48:06] 然后我们再次将其映射为一些概率， 
+And then we map it again
+into some probabilities,
+[48:08] 这是比这件事更远的可能性。 
+which is the probability of
+being farther than this thing.
+[48:10] 现在我们可以考虑概率了。 
+And now probabilities,
+we can think.
+[48:12] 概率可以量化我的错误。 
+Probability is something
+that quantifies my error.
+[48:15] 问题是错误的百分比
+And the question is
+what percentage of error
+[48:17] 我愿意容忍吗？ 
+am I willing to tolerate.
+[48:18] 如果我告诉你5％，那就是
+And if I tell you
+5%, that's something
+[48:20] 你真的可以想象。 
+you can really envision.
+[48:21] 这意味着如果我要进行一百万次测试
+What it means is that if I
+were to do this test a million
+[48:24]  5％的时间我会暴露自己
+times, 5% of the time
+I would expose myself
+[48:28] 犯错误。 
+to making a mistake.
+[48:30] 行。 
+All right.
+[48:30] 仅此而已。 
+That's all it would say.
+[48:31] 如果您说的是，我不想占5％， 
+If you said, well, I don't
+want to account for 5%,
+[48:36] 也许我想要1％，那么您必须从1.94升至2.5。 
+maybe I want 1%, then you
+have to move from 1.94 to 2.5.
+[48:42] 然后，如果您说我要0.01％， 
+And then if you say
+at I want 0.01%,
+[48:44] 那么您必须移至更大的数字。 
+then you have to move to
+an even larger number.
+[48:47] 因此，这取决于。 
+So it depends.
+[48:48] 但是说这个数字1％，5％，10％ 
+But stating this
+number 1%, 5%, 10%
+[48:51] 比看到这些数字1.96、2.5等容易得多。 
+is much easier than seeing those
+numbers 1.96, 2.5, et cetera.
+[48:57] 因此，我们只是将一切放回了规模。 
+So we're just putting
+everything back on the scale.
+[49:00] 行。 
+All right.
+[49:01] 总而言之，正如我们所说， 
+To conclude, this,
+again, as we said,
+[49:03] 并不表示该代币不公平。 
+does not suggest that
+the coin is unfair.
+[49:05] 现在，可能是硬币不公平。 
+Now, it might be that
+the coin is unfair.
+[49:08] 我们只是没有足够的证据可以这么说。 
+We just don't have enough
+evidence to say that.
+[49:10] 这可以回溯到您的问题， 
+And that goes back to
+your question about,
+[49:12] 我们为什么要坚持这样的事实
+why are we siding with
+the fact that we're
+[49:17] 更难得出跑步者更快的结论？ 
+making it harder to conclude
+that the runners were faster?
+[49:22] 这是同一回事。 
+And this is the same thing.
+[49:23] 我们很难下结论
+We're making it
+harder to conclude
+[49:24] 硬币有偏见。 
+that the coin is biased.
+[49:26] 因为有一种现状。 
+Because there is a status quo.
+[49:28] 我们正在尝试看看我们是否有证据
+And we're trying to
+see if we have evidence
+[49:30] 反对现状。 
+against the status quo.
+[49:31] 跑步者的现状是他们以相同的速度跑步。 
+The status quo for the runners
+is they ran the same speed.
+[49:35] 硬币的现状，我们可能都同意
+The status quo for the coin,
+we can probably all agree
+[49:37] 硬币是公平的。 
+is that the coin is fair.
+[49:39] 药物的现状？ 
+The status quo for a drug?
+[49:41] 我的意思是，除非你证明我
+I mean, again,
+unless you prove me
+[49:43] 你实际上不是骗子
+that you're actually
+not a scammer
+[49:45] 是因为现状是枫糖浆。 
+is that the status quo is
+that this is maple syrup.
+[49:48] 那里什么都没有。 
+There's nothing in there.
+[49:50] 你怎么会
+Why would you?
+[49:51] 我的意思是，如果我让你摆脱它， 
+I mean, if I let you
+get away with it,
+[49:53] 你会放玉米糖浆。 
+you would put corn syrup.
+[49:55] 这个更便宜。 
+It's cheaper.
+[49:58] 好。 
+OK.
+[49:59] 现在让我们继续数学。 
+So now let's move on to math.
+[50:01] 行。 
+All right.
+[50:01] 所以当我开始做数学时
+So when I started
+doing mathematics,
+[50:04] 我将不得不谈论随机变量
+I'm going to have to talk
+about random variables
+[50:06] 和统计模型。 
+and statistical models.
+[50:08] 在这里，实际上有一件非常简单的事情， 
+And here, there is actually
+a very simple thing,
+[50:13] 实际上回到了这张照片。 
+which actually goes
+back to this picture.
+[50:18] 测试真的在问我我的参数是否
+A test is really asking
+me if my parameter
+[50:27] 在参数集的某些区域中
+is in some region
+of the parameter set
+[50:28] 还是参数集的另一个区域，对吗？ 
+or another region of the
+parameter set, right?
+[50:30] 是/否。 
+Yes/no.
+[50:32] 因此，我将给出一个样本x1，xn。 
+And so, what I'm going to be
+given is a sample, x1, xn.
+[50:37] 我有一个模特。 
+I have a model.
+[50:41] 同样，这些可能会视具体情况而定。 
+And again, those can be
+braces depending on the day.
+[50:46] 所以，现在我要给自己theta 0和theta 1 
+And so, now I'm going to give
+myself theta 0 and theta 1
+[50:54] 到这个联合子集。 
+to this joint subset.
+[50:58] 好。 
+OK.
+[51:01] 所以这里的资本theta是空间
+So capital theta
+here is the space
+[51:02] 我的参数可以存在的地方
+in which my parameter can live.
+[51:05] 要制作两个不相交的子集，我可以
+To make two disjoint
+subsets, I could just
+[51:06] 把这个人分成两半吧？ 
+split this guy in half, right?
+[51:11] 我要说的是，也许是这个人和这个人。 
+I'm going to say, well, maybe
+it's this guy and this guy.
+[51:13] 好。 
+OK.
+[51:14] 所以这是theta 0。 
+So this is theta 0.
+[51:16] 这是theta 1。 
+And this is theta 1.
+[51:18] 当我在测试中拆分这两个家伙时，这意味着什么
+What it means when I split
+those two guys, in test,
+[51:22] 我实际上只专注于theta 0或theta 1。 
+I'm actually going to focus
+only on theta 0 or theta 1.
+[51:25] 所以，这意味着我已经有了先验
+And so, it means that
+a priori I've already
+[51:28] 删除了theta在该区域的所有可能性。 
+removed all the possibilities
+of theta being in this region.
+[51:32] 这是什么意思？ 
+What does it mean?
+[51:33] 回到跑步者的例子。 
+Go back to the
+example of runners.
+[51:37] 此区域为樱花盛开
+This region here for
+the Cherry Blossom Run
+[51:41] 是参数集，其中mu较大
+is the set of parameters,
+where mu was larger
+[51:44] 比103.5好吗？ 
+than 103.5, right?
+[51:47] 我们删除了。 
+We removed that.
+[51:48] 我们甚至都没有考虑过这种可能性。 
+We didn't even consider
+this possibility.
+[51:49] 我们说要么少了- 
+We said either it's less--
+[51:52] 抱歉。 
+sorry.
+[51:53] 等于103.5。 
+That's mu equal to 103.5.
+[51:55] 这个亩数小于103.5，好吗？ 
+And this was mu
+less than 103.5, OK?
+[51:59] 但是这些家伙就像，如果它发生了，它就会发生。 
+But these guys were like
+if it happens, it happens.
+[52:03] 我没有对此事发表任何声明。 
+I'm not making any
+statement about that case.
+[52:06] 行？ 
+All right?
+[52:07] 所以现在我将这两个子集作为对象。 
+So now I take those two subsets.
+[52:09] 现在我要给他们两个不同的名字， 
+And now I'm going to give
+them two different names,
+[52:11] 因为他们将扮演不对称的角色。 
+because they're going to
+have an asymmetric role.
+[52:15]  h0是原假设。 
+h0 is the null hypothesis.
+[52:18]  h1是替代假设。 
+And h1 is the
+alternative hypothesis.
+[52:23]  h0是现状。 
+h0 is the status quo.
+[52:27]  h1通常被认为
+h1 is what is
+considered typically
+[52:29] 作为科学发现。 
+as scientific discovery.
+[52:32] 因此，如果您是监管者，您将朝着h0迈进。 
+So if you're a regulator,
+you're going to push towards h0.
+[52:36] 如果您是一名科学家，那么您将朝着h1迈进。 
+If you're a scientist, you're
+going to push towards h1.
+[52:39] 如果您是制药公司， 
+If you're a
+pharmaceutical company,
+[52:41] 您将朝着h1迈进。 
+you're going to push towards h1.
+[52:42] 好？ 
+OK?
+[52:43] 因此，取决于您是否要保守一点-哦， 
+And so, depending on whether you
+want to be conservative-- oh,
+[52:47] 我可以从大量数据中找到证据。 
+I can find evidence
+in a lot of data.
+[52:49] 一旦给我三个数据点， 
+As soon as you give
+me three data points,
+[52:50] 我将能够找到证据。 
+I'm going to be able
+to find evidence.
+[52:52] 这意味着我倾向于说，哦，是h1。 
+That means I'm going to
+tend to say, oh, it's h1.
+[52:55] 但是如果你说你需要很多数据
+But if you say you
+need a lot of data
+[52:58] 在您真正摆脱现状之前， 
+before you can actually move
+away from the status quo,
+[53:00] 那是h0岁，好吗？ 
+that's age h0, OK?
+[53:01] 因此，将h0视为现状， 
+So think of h0 as
+being status quo,
+[53:03]  h1是一些与现状背道而驰的发现。 
+h1 being some discovery that
+goes against the status quo.
+[53:08] 行？ 
+All right?
+[53:08] 因此，如果我们相信真相theta是
+So if we believe that
+the truth theta is either
+[53:12] 在其中之一中，我们要说的是要针对h1测试h0。 
+in one of those, what we say is
+we want to test h0 against h1.
+[53:17] 好。 
+OK.
+[53:17] 这实际上是措辞。 
+This is actually wording.
+[53:19] 所以请记住，因为这是您的问题所在
+So remember, because this
+is how your questions are
+[53:22] 将要制定。 
+going to be formulated.
+[53:23] 这就是您可能想要交流的方式
+And this is how you want
+to probably communicate
+[53:26] 作为统计学家。 
+as a statistician.
+[53:27] 所以你要说我有空
+So you're going to
+say I have the null
+[53:29] 我有另一种选择。 
+and I have an alternative.
+[53:30] 我想针对h1测试h0。 
+I want to test h0 against h1.
+[53:32] 我想检验原假设
+I want to test the
+null hypothesis
+[53:34] 反对替代假设，好吗？ 
+against the alternative
+hypothesis, OK?
+[53:39] 现在，我忘记说的两个假设实际上就是这个。 
+Now, the two hypotheses I
+forgot to say are actually this.
+[53:42]  h0是theta属于theta 0。 
+h0 is that the theta
+belongs to theta 0.
+[53:46]  h1是它属于theta 1。 
+And h1 is that it theta
+belongs to theta 1.
+[53:50] 好。 
+OK.
+[53:51] 因此，例如，theta是mu。 
+So here, for example,
+theta was mu.
+[53:53] 亩等于103.5。 
+And that was mu equal to 103.5.
+[53:57] 亩数不到103.5。 
+And this was mu less than 103.5.
+[54:01] 好？ 
+OK?
+[54:02] 因此，通常情况下，它们看起来不会像theta和事物
+So typically, they're not going
+to look like thetas and things
+[54:06] 像那样。 
+like that.
+[54:06] 它们看起来像很简单的东西， 
+They're going to look like very
+simple things, where you take
+[54:09] 您常用参数的常用符号
+your usual notation for
+your usual parameter
+[54:11] 你只是用数学术语说这是什么关系
+and you just say in mathematical
+terms what relationship this
+[54:15] 应该令人满意吧？ 
+should be satisfying, right?
+[54:16] 例如，在药物示例中， 
+For example, in
+the drug example,
+[54:18] 那将是亩药物等于亩控制。 
+that would be mu drug
+is equal to mu control.
+[54:25] 在这里，这将比亩控制的亩药物少。 
+And here, that would be mu
+drug less than mu control.
+[54:30] 人们的期望数
+The number of
+expectorations for people
+[54:34] 服用止咳糖浆的人
+who take the drug
+for the cough syrup
+[54:35] 少于期望的人数
+is less than the number
+of expectoration of people
+[54:38] 谁吃玉米糖浆好吗？ 
+who take the corn syrup, OK?
+[54:42] 所以现在我们要做什么。 
+So now what we want to do.
+[54:47] 我们已经设置了假设检验问题。 
+We've set up our
+hypothesis testing problem.
+[54:51] 你是科学家
+You're a scientist.
+[54:52] 您已经设置好问题了。 
+You've set up your problem.
+[54:55] 现在，您要做的就是收集数据。 
+Now what you're going
+to do is collect data.
+[54:58] 而您将尝试在此数据上查找的内容
+And what you're going to
+try to find on this data
+[55:00] 是反对h0的证据。 
+is evidence against h0.
+[55:04] 替代方案将指导您
+And the alternative
+is going to guide you
+[55:06] 您应该朝哪个方向看
+into which direction
+you should be looking
+[55:08] 为反对这个家伙的证据。 
+for evidence against this guy.
+[55:10] 行？ 
+All right?
+[55:11] 因此，当然，选择范围越窄， 
+And so, of course, the
+narrower the alternative,
+[55:13] 对您来说越容易，因为您只是
+the easier it is for
+you, because you just
+[55:15] 必须看一个可能的候选人，对不对？ 
+have to look at the one
+possible candidate, right?
+[55:19] 但通常，h1是一个大集团，比少。 
+But typically, h1 is a
+big group, like less than.
+[55:22] 没人告诉你它是103.5和103。 
+Nobody tells you it's
+either it's 103.5 and 103.
+[55:27] 人们告诉您它是103.5或小于103.5。 
+People tell you it's either
+103.5 or less than 103.5.
+[55:32] 好。 
+OK.
+[55:33] 因此，我们要做的就是确定是否拒绝h0。 
+And so, what we want to do is
+to decide whether we reject h0.
+[55:37] 所以我们在数据中寻找反对h0的证据，好吗？ 
+So we look for evidence
+against h0 in the data, OK?
+[55:44] 因此，正如我所说，h0和h1不扮演对称角色。 
+So as I said, h0 and h1 do
+not play a symmetric role.
+[55:48] 知道您是哪个人非常重要
+It's very important to
+know which one you're
+[55:51] 将放置为h0，而您是哪一个
+going to place as h0
+and which one you're
+[55:53] 要放在h1。 
+going to place at h1.
+[55:59] 如果是近距离通话，您总是
+If it's a close
+call, you're always
+[56:01] 和h0一起去，好吗？ 
+going to side with h0, OK?
+[56:04] 因此，您必须注意这些。 
+So you have to be
+careful about those.
+[56:05] 您必须记住，如果
+You have to keep that
+in mind that if it's
+[56:07] 密谈，如果数据没有很多证据， 
+a close call, if data does
+not carry a lot of evidence,
+[56:10] 您将站在h0一边。 
+you're going to side with h0.
+[56:12] 因此，您实际上从未说过h0为真。 
+And so, you're actually
+never saying that h0 is true.
+[56:15] 您只是在说我没有找到反对h0的证据。 
+You're just saying I did not
+find evidence against h0.
+[56:18] 你不是说我接受h0。 
+You don't say I accept that h0.
+[56:21] 您说我没有拒绝h0。 
+You say I failed to reject h0.
+[56:25] 好。 
+OK.
+[56:26] 所以你要做的一件事
+And so one of the
+things that you
+[56:28] 在执行此操作时要牢记
+want to keep in mind
+when you're doing this
+[56:29] 在证明有罪之前是无辜的
+is this innocent
+until proven guilty.
+[56:32] 因此，如果您来自美国这样的国家， 
+So if you come from a
+country, like America,
+[56:37] 有这样的事情。 
+there's such a thing.
+[56:38] 特别是缺乏证据
+And in particular,
+lack of evidence
+[56:41] 并不意味着您无罪，可以吗？ 
+does not mean that you
+are not guilty, all right?
+[56:45]  OJ Simpson被判无罪。 
+OJ Simpson was found not guilty.
+[56:47] 没有被发现是清白的，好吗？ 
+It was not found innocent, OK?
+[56:50] 因此，这基本上就是发生的情况
+And so, this is
+basically what happens
+[56:52] 就像检察官带来他们的证据一样。 
+is like the prosecutor
+brings their evidence.
+[56:55] 然后陪审团必须决定他们是否
+And then the jury has
+to decide whether they
+[56:58] 坚信此人有罪。 
+were convinced that this
+person was guilty of anything.
+[57:07] 问题是，您是否有足够的证据？ 
+And the question is, do
+you have enough evidence?
+[57:11] 但是，如果您没有证据，那就是
+But if you don't
+have evidence, it's
+[57:13] 不是捍卫者负担证明自己是无辜的。 
+not the burden of the defender
+to prove that they're innocent.
+[57:17] 没有人证明他们的无辜。 
+Nobody's proving their innocent.
+[57:18] 我的意思是，有时会有所帮助。 
+I mean, sometimes it helps.
+[57:20] 但是您只需要确保没有
+But you just have to make
+sure that there's not
+[57:22] 有足够的证据反对你，好吗？ 
+enough evidence against you, OK?
+[57:24] 这基本上就是它的工作。 
+And that's basically
+what it's doing.
+[57:26] 您一直是h0，直到证明h1。 
+You're h0 until proven h1.
+[57:31] 那么我们该怎么做呢？ 
+So how are we going to do this?
+[57:32] 就像我说的，估算器的作用
+Well, as I said, the
+role of estimators
+[57:37] 在假设中，测试是通过称为测试的东西进行的。 
+in hypothesis testing is played
+by something called tests.
+[57:40] 测试是一种统计。 
+And a test is a statistic.
+[57:42] 有人可以提醒我什么是统计量吗？ 
+Can somebody remind me
+what a statistic is?
+[57:47] 是的
+Yep?
+[57:48] 学生：措施[听不清] 
+STUDENT: The measure [INAUDIBLE]
+[57:50] 教授：是的，实际上只差了一步。 
+PROFESSOR: Yeah, that's
+actually just one step more.
+[57:53] 因此，这是观察结果的函数。 
+So it's a function
+of the observations.
+[57:54] 我们要求它是可测量的。 
+And we require it
+to be measurable.
+[57:56] 根据经验，可以衡量
+And as a rule of
+thumb, measurable
+[57:58] 表示如果我给您数据，您实际上可以计算出来，好吗？ 
+means if I give you data, you
+can actually compute it, OK?
+[58:00] 如果您没有看到[听不清]或[听不清]， 
+If you don't see a
+[INAUDIBLE] or an [INAUDIBLE],,
+[58:02] 您无需考虑。 
+you don't have to
+think about it.
+[58:04] 行。 
+All right.
+[58:08] 因此，我们要做的就是测试。 
+And so, what we do is
+we just have this test.
+[58:11] 但是现在我实际上只是从这个测试中询问
+But now I'm actually
+asking only from this test
+[58:14] 是/否答案，我可以将其编码为0、1，对吗？ 
+a yes/no answer, which I
+can code as 0, 1, right?
+[58:18] 因此，根据经验，您会说测试
+So as a rule of thumb, you
+say that, well, the test
+[58:21] 等于0，然后等于h0。 
+is equal to 0 then h0.
+[58:23] 该测试在h1等于1。 
+The test is equal to 1 at h1.
+[58:25] 正如我们所说，如果检验等于0， 
+And as we said, is that
+if the test is equal to 0,
+[58:27] 这并不意味着0为真。 
+it doesn't mean
+that a 0 is truth.
+[58:29] 这意味着我感到拒绝h0。 
+It means that I
+feel to rejected h0.
+[58:31] 如果检验等于1，则我拒绝h0。 
+And if the test is
+equal to 1, I reject h0.
+[58:36] 所以我有两种可能性。 
+So I have two possibilities.
+[58:38] 我查看我的数据。 
+I look at my data.
+[58:39] 我把它变成是/否答案。 
+I turn it into a yes/no answer.
+[58:41] 是/否答案实际上是h0或h1，好吗？ 
+And yes/no answer is
+really h0 or h1, OK?
+[58:45] 基本上最可能是哪一个。 
+Which one is the most
+likely basically.
+[58:49] 行。 
+All right.
+[58:50] 所以在掷硬币的例子中，我们的测试统计
+So in the coin flip
+example, our test statistic
+[58:57] 实际上是取值为0、1的值。 
+is actually something
+that takes value 0, 1.
+[59:00] 任何东西，任何取值为0的函数， 
+And anything, any function
+that takes value at 0,
+[59:04]  1是指示器功能，可以吗？ 
+1 is an indicator function, OK?
+[59:07] 因此，指标功能仅仅是一个功能。 
+So an indicator function
+is just a function.
+[59:11] 因此，有很多方法可以编写它。 
+So there's many ways
+you can write it.
+[59:18] 因此它是带有双杠的1。 
+So it's a 1 with a double bar.
+[59:20] 如果您对此不满意， 
+If you aren't
+comfortable with this,
+[59:21] 给我写一些东西，就像我写一个。 
+it's totally OK to write i
+of something, like i of a.
+[59:27] 好。 
+OK.
+[59:28] 那是什么？ 
+And that's what?
+[59:29] 因此，这里是一个陈述，例如不平等，等式， 
+So a, here, is a statement,
+like an inequality, an equality,
+[59:34] 一些数学陈述，好吗？ 
+some mathematical statement, OK?
+[59:38] 还是不算数学。 
+Or not mathematical.
+[59:39] 我的意思是，“ a”可以是，我的祖母今年20岁，好吗？ 
+I mean, "a" can be, you know,
+my grandma is 20 years old, OK?
+[59:43] 因此，如果a为true，则基本上为1，如果a为false，则为0。 
+And so, this is basically 1 if
+a is true, and 0 if a is false.
+[59:54] 这就是您要考虑的方式。 
+That's the way you
+want to think about it.
+[60:02] 该函数仅接受两个值，仅此而已。 
+This function takes only
+two values, and that's it.
+[60:10] 这就是我们的例子。 
+So here's the
+example that we had.
+[60:12] 我们看了是否标准化的xn 
+We looked at whether
+the standardized xn
+[60:17]  bar，实际上约为n 0,1 
+bar, the one that actually
+is approximately n 0,1
+[60:20] 比绝对价值要大， 
+was larger than something
+in absolute value,
+[60:22] 很大或很小，但都是负数。 
+either very large or
+very small, but negative.
+[60:27] 我要回到这张照片。 
+I'm going back to this picture.
+[60:29] 我们想知道这个家伙是否
+We wanted to know
+if this guy was
+[60:31] 在某物左侧或某物右侧， 
+either to the left of something
+or to the right of something,
+[60:35] 对？ 
+right?
+[60:36] 在这些地区吗？ 
+Was it in these regions?
+[60:42] 现在，我可以将其视为x条的函数。 
+Now this indicator, I can view
+this as a function of x bar.
+[60:49] 它的作用是，它实际上分割了可能的值
+What it does, it really
+splits the possible values
+[60:52]  x bar的值，它只是一个实数，对不对？ 
+of x bar, which is just
+a real number, right?
+[60:54] 分为两组。 
+In two groups.
+[60:56] 它们导致的值是1的组。 
+The groups on which they
+lead to a value, which is 1.
+[60:59] 和他们领导的小组
+And the groups on
+which they lead
+[61:00] 值是0，对吧？ 
+to value, which is 0, right?
+[61:02] 所以我实际上可以想到
+So what it does is that
+I can actually think
+[61:05] 它是实线，x条。 
+of it as the real line, x bar.
+[61:09] 这里基本上有一些价值， 
+And there's basically
+some values here,
+[61:13] 我将获得1。 
+where I'm going to get a 1.
+[61:14] 也许我要在这里得到0。 
+Maybe I'm going to get a 0 here.
+[61:16] 也许我将得到0。 
+Maybe I'm going to get a 0.
+[61:17] 也许我会得到1。 
+Maybe I'm going to get a 1.
+[61:18] 我只是拆分x bar的所有可能值。 
+I'm just splitting all
+possible values of x bar.
+[61:22] 我看是否要吐出0边
+And I see whether to spit
+out the side which is 0
+[61:25] 或为1。 
+or which is 1.
+[61:26] 在这种情况下，还不清楚，对吧？ 
+In this case, it's
+not clear, right?
+[61:29] 我的意思是，该函数是非常非线性的。 
+I mean, the function
+is very nonlinear.
+[61:31]  x bar减去0.5除以x bar 1的平方根
+It's x bar minus 0.5 divided
+by the square root of x bar 1
+[61:34] 负x条。 
+minus x bar.
+[61:35] 如果我们把p放在分母中， 
+If we put the p in
+the denominator,
+[61:36] 这将是清楚的。 
+that would be clear.
+[61:38] 那就是看起来像这样的东西。 
+That would just be exactly
+something that looks like this.
+[61:45] 该功能将是这样的。 
+The function would be like this.
+[61:46] 如果小于某个值，则为1。 
+It would be 1 if it's
+smaller than some value.
+[61:49] 如果介于两个值之间，则小于0。 
+Less than 0 if it's
+in between two values.
+[61:52] 然后再1。 
+And then 1 again.
+[61:54] 那是psi，好吗？ 
+So that's psi, OK?
+[62:00] 所以这是1，对吗？ 
+So this is 1, right?
+[62:02] 这是1 
+This is 1.
+[62:03] 这是0。 
+And this is 0.
+[62:04] 因此，如果x bar太小或x bar过大， 
+So if x bar is too small
+or if x bar is too large,
+[62:07] 然后我得到一个值1。 
+then I'm getting a value 1.
+[62:09] 但是，如果介于两者之间，我将获得0值。 
+But if it's somewhere in
+between, I'm getting a value 0.
+[62:12] 现在，如果我有这个奇怪的功能， 
+Now, if I have this
+weird function,
+[62:14] 目前尚不清楚这是怎么发生的。 
+it's not clear
+how this happened.
+[62:18] 所以我得到的图片是
+So the picture
+here that I get is
+[62:20] 我有一个奇怪的非线性函数，对吗？ 
+that I have a weird
+non-linear function, right?
+[62:27] 这就是x条。 
+So that's x bar.
+[62:28] 那是nx bar n 0.5的平方根
+That's square root
+of n x bar n 0.5
+[62:32] 除以x bar n 1减去x bar n的平方根吧？ 
+divided by the square root of
+x bar n 1 minus x bar n, right?
+[62:36] 那就是这个功能。 
+That's this function.
+[62:38] 先验的，我不知道这个功能是什么样子。 
+A priori, I have no idea what
+this function looks like.
+[62:43] 我们可能可以分析此功能， 
+We can probably
+analyze this function,
+[62:45] 但让我们假装我们不知道。 
+but let's pretend we don't know.
+[62:46] 所以这就像一些疯狂的东西。 
+So it's like some
+crazy stuff like this.
+[62:49] 我要问的是绝对价值
+And all I'm asking is
+whether in absolute value
+[62:56] 它大于c，这意味着此函数较大
+it's larger than c, which means
+that is this function larger
+[62:59] 大于c或小于负c？ 
+than c or less than minus c?
+[63:05] 我要说的间隔1 
+The intervals on which
+I'm going to say 1
+[63:07] 这个家伙，这个家伙，这个家伙，这个家伙。 
+are this guy, this guy,
+this guy, and this guy.
+[63:17] 好。 
+OK.
+[63:18] 在其他任何地方，我都看到0。 
+And everywhere
+else, I'm seeing 0.
+[63:20] 大家都同意吗？ 
+Everybody agree with this?
+[63:21] 这就是我在做什么。 
+This is what I'm doing.
+[63:24] 现在，当然，这对您来说更容易
+Now of course, it's
+probably easier for you
+[63:27] 打包成这个好东西
+to just package it into
+this nice thing that's
+[63:29] 只是比c大一个绝对值， 
+just either larger than
+c, an absolute value,
+[63:31] 或少于C。我要绘制此函数。 
+or less Than C. I want to
+have to plot this function.
+[63:33] 在实践中，您不必这样做。 
+In practice, you don't have to.
+[63:36] 现在，这是我真正要求保护的地方。 
+Now, this is where I
+am actually claiming.
+[63:40] 所以在这里，我实际上为您定义了一个测试。 
+So here, I actually
+defined to you a test.
+[63:42] 我答应在开始讲课时说， 
+And I promised, starting
+this lecture, by saying,
+[63:44] 哦，现在我们要做得更好
+oh, now we're going
+to do something better
+[63:46] 而不是计算平均值。 
+than computing the averages.
+[63:47] 现在，我告诉您这只是计算平均值。 
+Now I'm telling you it's
+just computing an average.
+[63:50] 事情是测试不只是
+And the thing is
+the test is not just
+[63:52] 该x条的规格。 
+the specification of this x bar.
+[63:54] 这也是该常数c的规范。 
+It's also the specification
+of this constant c.
+[63:57] 行？ 
+All right?
+[63:58] 而常数c正是
+And the constant c
+was exactly where
+[64:02] 我们相信高斯的巨大价值。 
+our belief about what a large
+value for a Gaussian is.
+[64:07] 那正是它的来历。 
+That's exactly where it came in.
+[64:09] 因此，对c的选择基本上是一个阈值
+So this choice of c is
+basically a threshold
+[64:12] 我们决定在这个阈值以上不是
+at which we decide above
+this threshold this isn't
+[64:15] 可能来自高斯人。 
+likely to come from a Gaussian.
+[64:17] 低于此阈值，我们认为
+Below this threshold
+we decide that it's
+[64:18] 可能来自高斯人。 
+likely to come from a Gaussian.
+[64:20] 所以我们必须选择这个阈值是基于什么
+So we have to choose what
+this threshold is based
+[64:24] 我们认为可能意味着什么。 
+on what we think likely means.
+[64:34] 这些东西多一点。 
+Just a little bit
+more of those things.
+[64:37] 所以现在我们必须表征
+So now we're going to
+have to characterize
+[64:39] 什么可以做一个好的测试，对不对？ 
+what makes a good test, right?
+[64:43] 好吧，我稍后再讲。 
+Well, I'll come back
+to it in a second.
+[64:44] 但是您可以进行一次测试，表明始终拒绝。 
+But you could have a test
+that says reject all the time.
+[64:48] 那将是一个糟糕的考验，对吗？ 
+And that's going to
+be bad test, right?
+[64:50]  FDA未实施测试
+The FDA is not
+implementing a test
+[64:52] 那就是说，是的，所有毒品都起作用，现在让我们去阿鲁巴，好吗？ 
+that says, yes all drugs work,
+now let's just go to Aruba, OK?
+[64:56] 所以人们试图拥有一些
+So people are trying
+to have something that
+[64:59] 尝试一直工作。 
+tries to work all the time.
+[65:01] 现在FDA都没有说，我们只是
+Now FDA's not either
+saying, let's just
+[65:03] 说没有毒品，我们去阿鲁巴，好吗？ 
+say that no drugs work, and
+let's go to Aruba, all right?
+[65:07] 他们只是在说正确的话
+They're just trying
+to say the right thing
+[65:09] 尽可能经常地。 
+as often as possible.
+[65:11] 因此，我们将不得不对此进行衡量。 
+And so, we're going to
+have to measure this.
+[65:13] 因此，与测试相关的事物
+So the things that are
+associated to a test
+[65:15] 是拒绝区域。 
+are the rejection region.
+[65:17] 如果您在en中看到这个x，例如psi 
+And if you look at this
+x in en, such that psi
+[65:21]  x等于1，这正是我画的那个家伙。 
+of x is equal to 1, this is
+exactly this guy that I drew.
+[65:29] 所以在这里，我总结了样本的值
+So here, I summarized
+the values of the sample
+[65:30] 进入平均水平。 
+into their average.
+[65:32] 但是我收集的样本的价值
+But the values of the
+sample that I collect
+[65:35] 将导致测试结果为1。 
+will lead to a test that says 1.
+[65:38] 行？ 
+All right?
+[65:39] 因此，这是拒绝区域。 
+So this is the rejection region.
+[65:40] 如果我收集一个数据点，从技术上讲，我有- 
+If I collect a data point,
+technically I have--
+[65:43] 所以我有e到n，这是一个很大的空间。 
+so I have e to the n, which
+is a big space like this.
+[65:51] 那就是e到n。 
+So that's e to the n.
+[65:52] 将其视为xn条的空间。 
+Think of it as being
+the space of xn bars.
+[65:55] 我有一个仅取值0、1的函数。 
+And I have a function that
+takes only value 0, 1.
+[65:59] 所以我可以分解成这部分
+So I can decompose
+it into this part
+[66:01] 取值为0的部分和取值为1的部分。 
+where it takes value 0 and the
+part where it takes value 1.
+[66:04] 这些可能会非常复杂，对吧？ 
+And those can be super
+complicated, right?
+[66:06] 可以有这样的事情。 
+Can have a thing like this.
+[66:07] 可以有一些怪异的小岛，值一。 
+Can have some weird little
+islands where it takes value 1.
+[66:11] 我可以在某些岛上将其值设为0。 
+I can have some islands
+where it's takes value 0.
+[66:14] 我可以发生一些奇怪的事情。 
+I can have some
+weird stuff going on.
+[66:16] 但我总是可以将其划分为价值
+But I can always partition
+it into the value
+[66:18] 取值为0的值和取值为1的值。 
+where it takes value 0 and the
+value where it takes value 1.
+[66:20] 如果psi等于1，则取1的值
+And the value where it takes
+1, if psi is equal to 1,
+[66:25] 这就是情节的拒绝区域，好吗？ 
+this is called the rejection
+region of the plot, OK?
+[66:32] 因此，只有那些样本会让我拒绝。 
+So just the samples that
+would lead me to rejecting.
+[66:37] 并注意这是拒绝的指标
+And notice that this is the
+indicator of the rejection
+[66:42] 地区。 
+region.
+[66:44] 测试是剔除区域的指标。 
+The test is the indicator
+of the rejection region.
+[66:48] 因此，有两种方法可以使您在进行测试时出错。 
+So there's two ways you can make
+an error when there's a test.
+[66:52] 事实要么在h1中，要么实际上是在h1中。 
+Either the truth is in h1, and
+you're saying actually it's h1.
+[66:56] 或事实是h1，而您说的是h0。 
+Or the truth is in h1,
+and you say it's h0.
+[66:59] 这就是我们建立h0和h1之间不对称性的方式。 
+And that's how we build-in the
+asymmetry between h0 and h1.
+[67:04] 我们仅控制两个错误之一。 
+We control only one
+of the two errors.
+[67:06] 我们希望为第二个最好。 
+And we hope for the
+best for the second one.
+[67:09] 所以类型1错误就是这样说的， 
+So the type 1 error is
+the one that says, well,
+[67:13] 如果实际上是现状，但是主张
+if it is actually the
+status quo, but a claim
+[67:16] 有发现-如果实际上是h0， 
+that there is a discovery--
+if it's actually h0,
+[67:19] 但我声称我在h1，然后我
+but I claim that
+I'm in h1, then I
+[67:21] 承认我犯了我的类型错误。 
+admit I commit a type I error.
+[67:25] 因此，I型错误的可能性
+And so the probability
+of type I error
+[67:27] 此函数的psi为alpha，其中
+is this function
+alpha of psi, which
+[67:29] 是说psi等于1的概率
+is the probability of saying
+that psi is equal to 1
+[67:34] 当theta在h0中时。 
+when theta is in h0.
+[67:36] 现在的问题是，这不仅是数字， 
+Now, the problem is that
+this is not just number,
+[67:38] 因为theta就像在整个h0上移动一样，对不对？ 
+because theta is just like
+moving all over h0, right?
+[67:41]  theta可以有很多价值，对不对？ 
+There's many values that
+theta can be, right?
+[67:45] 所以Theta在这里。 
+So theta is somewhere here.
+[67:52] 我删除了，好。 
+I erased it, OK.
+[67:59] 行。 
+All right.
+[68:00] 为了简单起见，我们将考虑theta 
+For simplicity, we're
+going to think of theta
+[68:02] 如亩和103.5，好吗？ 
+as being mu and 103.5, OK?
+[68:07] 因此，我知道这是θ1。 
+And so, I know that
+this is theta 1.
+[68:11] 这一点是θ0，好吗？ 
+And just this point
+here was theta 0, OK?
+[68:18] 同意吗
+Agreed?
+[68:19] 这是与樱花赛跑。 
+This is with the
+Cherry Blossom Run.
+[68:22] 现在，在这种情况下，这实际上很容易。 
+Now, here in this case,
+it's actually easy.
+[68:25] 我需要计算此函数alpha 
+I need to compute
+this function alpha
+[68:27] 的psi，将theta 0中的theta映射到psi的p theta 
+of psi, which maps theta in
+theta 0 to p theta of psi
+[68:37] 等于1。 
+equals 1.
+[68:37] 因此，当theta处于h0时，这就是我拒绝的可能性。 
+So that's the probability that
+I reject when theta is in h0.
+[68:40] 然后只有一个要计算
+Then there's only one
+of them to compute,
+[68:42] 因为theta只能取这个值。 
+because theta can only
+take this one value.
+[68:44] 所以这确实是103.5。 
+So this is really 103.5.
+[68:46] 好。 
+OK.
+[68:47] 所以这就是我拒绝的可能性
+So that's the
+probability that I reject
+[68:48] 真正的平均值是103.5。 
+when the true mean was 103.5.
+[68:52] 现在，如果我正在测试是否- 
+Now, if I was testing whether--
+[68:54] 如果h0是这里的整个人， 
+if h0 was this entire
+guy here, all the
+[68:57] 值大于103.5，那么我会
+values larger than
+103.5, then I would
+[69:00] 必须为所有可能的值计算此函数
+have to compute this function
+for all possible values
+[69:03] 那里的theta 
+of the theta in there.
+[69:06] 你猜怎么着？ 
+And guess what?
+[69:07] 最坏的情况是它会在这里。 
+The worst case is when
+it's going to be here.
+[69:09] 因为它非常接近替代品
+Because it's so close
+to the alternative
+[69:11] 那是我犯最大错误的地方。 
+that that's where I'm making
+the most error possible.
+[69:15] 然后是第二类错误
+And then there's
+the type 2 error,
+[69:17] 它基本上是以对称方式定义的。 
+which is defined basically
+in the symmetric ways.
+[69:22] 将theta映射到概率的函数。 
+The function that maps
+theta to the probability.
+[69:25] 这就是类型2错误的可能性。 
+So that's the probability
+of type 2 errors.
+[69:26] 我无法拒绝h0的概率，对吗？ 
+The probability that I
+fail to reject h0, right?
+[69:30] 如果psi等于0，则我无法拒绝h0。 
+If psi is equal to 0,
+I fail to reject h0.
+[69:34] 但这实际上来自h1，好吗？ 
+But that actually
+came from h1, OK?
+[69:39] 因此，在此示例中，让我们清除。 
+So in this example, let's clear.
+[69:41] 如果我在这里，例如真实的平均值是100， 
+If I'm here, like if
+the true mean was 100,
+[69:45] 我正在寻找真正的均值实际上是
+I'm looking at the probability
+that the true mean is actually
+[69:48]  100，实际上是103.5。 
+100, and I'm actually
+saying it was 103.5.
+[69:51] 或者不小于103.5。 
+Or it's not less than 103.5.
+[69:53] 是啊
+Yeah?
+[69:54] 学生：我仍然对这种表达感到困惑。 
+STUDENT: I'm just still
+confused by the notation.
+[69:56] 当您说[音频不清晰] theta sub 1箭头r时， 
+When you say that [INAUDIBLE]
+theta sub 1 arrow r,
+[69:59] 我不确定该表示法的含义。 
+I'm not sure what
+that notation means.
+[70:02] 教授：好吧，这就是说它是一个功能
+PROFESSOR: Well, this
+just means it's a function
+[70:04] 将theta 0映射到r。 
+that maps theta 0 to r.
+[70:08] 您看过功能吧？ 
+You've seen functions, right?
+[70:09] 好。 
+OK.
+[70:10] 这就是您写作的方式。 
+So that's just
+the way you write.
+[70:14] 所以这意味着函数f来自rr 
+So that means that's a function
+f that goes from, say, r r,
+[70:20] 然后将x映射到x平方。 
+and that maps x to x squared.
+[70:25] 好。 
+OK.
+[70:25] 所以在这里，我只是说我不必考虑
+So here, I'm just saying
+I don't have to consider
+[70:27] 所有可能的值。 
+all possible values.
+[70:29] 我只考虑theta 0上的值。 
+I'm only considering
+the values on theta 0.
+[70:32] 我实际上放了r。 
+I put r actually.
+[70:33] 我可以将自己限制为0、1 
+I could restrict myself
+to the interval 0, 1,
+[70:36] 因为那些是概率。 
+because those are probabilities.
+[70:38] 所以这只是告诉我我的功能来自哪里
+So it's just telling me
+where my function comes from
+[70:41] 以及我的职责所在。 
+and where my function goes to.
+[70:44]  Beta是一个功能，对吗？ 
+And beta is a function, right?
+[70:47] 所以theta的beta psi只是概率
+So beta psi of theta
+is just the probability
+[70:52]  θ等于1 
+that theta is equal to 1.
+[70:55] 我可以为所有theta定义- 
+And I could define
+that for all thetas--
+[70:57] 抱歉。 
+sorry.
+[70:58] 如果在这种情况下psi等于0。 
+If psi is equal
+to 0 in this case.
+[71:00] 这可以为所有theta定义。 
+And that could define
+that for all thetas.
+[71:02] 但是唯一导致错误的
+But the only ones
+that lead to an error
+[71:05] 是h1中的theta。 
+are the thetas that are in h1.
+[71:06] 我的意思是，我可以定义此功能。 
+I mean, I can define
+this function.
+[71:08] 只是不会与错误相对应，好吗？ 
+It's just not going to
+correspond to an error, OK?
+[71:13] 测试的力量是最小的
+And the power of a
+test is the smallest--
+[71:18] 因此功效基本上是1减去误差。 
+so the power is basically
+1 minus an error.
+[71:22]  1减去出错的可能性。 
+1 minus the probability
+of an error.
+[71:23] 因此，这是做出正确决定的可能性，好吗？ 
+So it's the probability of
+making a correct decision, OK?
+[71:27] 所以这是做出正确决定的可能性
+So it's the probability of
+making a correct decision
+[71:29] 在h1下，这就是力量。 
+under h1, that's
+what the power is.
+[71:31] 但这又是一个功能。 
+But again, this
+could be a function.
+[71:34] 因为H1有很多方法
+Because there's many
+ways that can be in h1
+[71:36] 如果h1是一整套数字。 
+if h1 is an entire
+set of numbers.
+[71:39] 例如，所有数字均小于103.5。 
+For example, all the numbers
+there are less than 103.5.
+[71:42] 因此，当我定义测试的力量时，我在这里所做的事情， 
+And so, what I'm doing here when
+I define the power of a test,
+[71:45] 我正在寻找这些值中最小的值，好吗？ 
+I'm looking at the smallest
+possible of those values, OK?
+[71:50] 所以我在看这个功能。 
+So I'm looking at this function.
+[71:54] 也许我实际上应该对此进行更多扩展。 
+Maybe I should actually
+expand a little more on this.
+[72:02] 好。 
+OK.
+[72:03] 所以theta的beta psi是在theta下的概率
+So beta psi of theta is
+the probability under theta
+[72:10]  psi等于0，对吗？ 
+that psi is equal to 0, right?
+[72:12] 那就是θ1的概率
+That's the probability
+in theta 1,
+[72:18] 那就意味着替代方案
+which means then the
+alternative, that they
+[72:21] 感到拒绝。 
+feel to reject.
+[72:21] 我真的应该，因为theta 
+And I really should,
+because theta
+[72:23] 真的在θ1，好吗？ 
+was actually in theta 1, OK?
+[72:25] 因此，这就是类型2错误的可能性。 
+So this thing here is the
+probability of type 2 error.
+[72:29] 现在，这是1减去我拒绝的概率
+Now, this is 1 minus the
+probability that I did reject
+[72:34] 我应该拒绝的
+and I should have rejected.
+[72:36] 这只是补充。 
+That's just a little
+off the complement.
+[72:39] 因为如果psi不等于0，则等于1。 
+Because if psi is not equal
+to 0, then it's equal to 1.
+[72:42] 所以现在如果我重新安排它，它告诉我
+So now if I rearrange
+this, it tells me
+[72:44]  psi等于1的概率- 
+that the probability
+that psi is equal to 1--
+[72:48] 这实际上是1减去theta的beta psi。 
+this is actually 1
+minus beta psi of theta.
+[72:54] 因此，theta 1中的所有theta都是如此。 
+So that's true for
+all thetas in theta 1.
+[72:57] 我的意思是
+And what I'm saying
+is, well, this
+[72:58] 现在是好事吧？ 
+is now a good thing, right?
+[73:00] 这个数字很大是一件好事。 
+This number being
+large is a good thing.
+[73:02] 这意味着我应该已经拒绝，我也拒绝了。 
+It means I should have
+rejected, and I rejected.
+[73:05] 我希望这种情况很有可能发生。 
+I want this to happen
+with large probability.
+[73:07] 所以，我要看的是
+And so, what I'm
+going to look at
+[73:09] 这个数字最保守的选择，对吧？ 
+is the most conservative
+choice of this number, right?
+[73:11] 而不是过于乐观
+Rather than being
+super optimistic
+[73:13] 并说，哦，但是的确，如果theta实际上等于零， 
+and say, oh, but indeed if theta
+was actually equal to zero,
+[73:16] 那么我总会得出以下结论： 
+then I'm always going
+to conclude that--
+[73:19] 我的意思是，如果mu等于0，每个人都将在0秒内运行， 
+I mean, if mu is equal to 0,
+everybody runs in 0 seconds,
+[73:22] 那么我很有可能是
+then I with high
+probability I'm actually
+[73:25] 不会出错。 
+going to make no mistake.
+[73:27] 但是，实际上，我应该看看最坏的情况，好吗？ 
+But really, I should look at
+the worst possible case, OK?
+[73:30] 所以我要看的基本上是
+So what I'm looking
+at is basically
+[73:32] 它可以在theta one上取的最小值
+the smallest value it
+can take on theta one
+[73:45] 称为psi的幂。 
+is called power of psi.
+[73:53] 测试psi的功率，好吗？ 
+Power of the test psi, OK?
+[73:55] 因此，这是可以采取的最小可能值。 
+So that's the smallest
+possible value it can take.
+[74:01] 行。 
+All right.
+[74:02] 所以我很抱歉。 
+So I'm sorry.
+[74:02] 您必须要考虑很多定义。 
+This is a lot of definitions
+that you have to sink in.
+[74:05] 这不是超级愉快。 
+And it's not super pleasant.
+[74:06] 但这就是测试。 
+But that's what testing is.
+[74:09] 有很多行话。 
+There's a lot of jargon.
+[74:10] 这些实际上是相当简单的事情。 
+Those are actually
+fairly simple things.
+[74:12] 也许您应该自己准备一张纸。 
+Just maybe you should
+get a sheet for yourself.
+[74:14] 并说，这些是我学到的新术语。 
+And say, these are the
+new terms that I learned.
+[74:17] 他们的测试是什么，拒绝区域？ 
+What is their test,
+rejection region?
+[74:19] 可能是I型错误，可能是
+Probably of type
+I error, probably
+[74:21] 类型2错误和电源。 
+of type 2 error, and power.
+[74:22] 只要确保您知道那些家伙是什么。 
+Just make sure you know
+what those guys are.
+[74:23] 哦。 
+Oh.
+[74:24] 零假设和替代假设好吗？ 
+And null and alternative
+hypothesis, OK?
+[74:27] 一旦知道了所有这些事情， 
+And once you know
+all these things,
+[74:28] 你懂我在说什么。 
+you know what I'm talking about.
+[74:29] 你知道我在说什么。 
+You know what I'm referring to.
+[74:31] 这只是行话。 
+And this is just jargon.
+[74:33] 但是最后，这些仅仅是概率。 
+But in the end, those
+are just probabilities.
+[74:35] 我的意思是，这些是自然数量。 
+I mean, these a
+natural quantities.
+[74:38] 出于某种原因，人们已经习惯了
+Just for some reason,
+people have been used
+[74:40] 使用不同的术语。 
+to using different terminology.
+[74:43] 所以只是为了说明。 
+So just to illustrate.
+[74:46] 什么时候出现错字1错误？ 
+When do I make a typo 1 error?
+[74:48] 而且什么时候我不犯1类错误？ 
+And when do I not
+make a type 1 error?
+[74:51] 因此，如果h0为true并拒绝h0，我会犯类型1错误，对吗？ 
+So I make a type 1 error if h0
+is true and I reject h0, right?
+[74:56] 因此，对角线块是我犯错的时候。 
+So the off diagonal blocks
+are when I make an error.
+[74:59] 当我用对角线项时，h1为真
+When I'm on the diagonal
+terms, h1 is true
+[75:02] 我拒绝h0，这是一个正确的决定。 
+and I reject h0, that's
+a correct decision.
+[75:05] 当h0为真且我无法拒绝h0时， 
+When h0 is true and
+I fail to reject h0,
+[75:08] 这也是正确的决定。 
+that's also the correct
+decision to make.
+[75:11] 因此，只有在出现红色方框之一时，我才会出错。 
+So I only make errors when
+I'm in one of the red blocks.
+[75:17] 一个块是类型1错误，另一个块是
+And one block is the type
+1 error and the other block
+[75:20] 是类型2错误。 
+is the type 2 error.
+[75:21] 这就是全部，好吗？ 
+That's all it means, OK?
+[75:24] 因此，您只需要知道我们称为哪一个即可。 
+So you just have to know
+which one we called one.
+[75:32] 我的意思是，这是以非常特别的方式选择的。 
+I mean, this was chosen
+in a pretty ad hoc way.
+[75:36] 因此，结束本讲座，让我问你几个问题。 
+So to conclude this lecture,
+let me ask you a few questions.
+[75:40] 如果在美国法院找到被告，要么说， 
+If in a US court, the
+defendant is found either say,
+[75:46] 为了讨论起见，我们是无辜的还是有罪的。 
+let's just say for the sake of
+discussion, innocent or guilty.
+[75:49] 行？ 
+All right?
+[75:50] 不认罪真的很内not 
+It's really guilty
+for not guilty,
+[75:51] 但说无辜或有罪。 
+but let's say
+innocent or guilty.
+[75:53] 陪审团什么时候犯1型错误？ 
+When does the jury
+make a type 1 error?
+[76:03] 是的
+Yep?
+[76:07] 他有罪吗？ 
+And he's guilty?
+[76:10] 而且他是无辜的，对吗？ 
+And he's innocent, right?
+[76:11] 现状，在证明有罪之前，每个人都是无辜的。 
+The status quo, everybody is
+innocent until proven guilty.
+[76:14] 那就是我们的h0是那个人是无辜的。 
+So that's our h0 is that
+the person is innocent.
+[76:18] 因此，这意味着h0是无辜的。 
+And so, that means
+that h0 is innocent.
+[76:21] 因此，我们正在研究可能的类型1错误， 
+And so, we're looking at the
+probably of type 1 error,
+[76:23] 因此我们拒绝了它是无辜的事实。 
+so that's when we reject
+the fact that it's innocent.
+[76:25] 因此得出结论，这个人有罪，好吗？ 
+So conclude that this
+person is guilty, OK?
+[76:27] 所以类型1错误就是这个人是无辜的
+So type 1 error is when
+this person is innocent
+[76:29] 我们认为这是有罪的。 
+and we conclude it's guilty.
+[76:31] 什么是2型错误？ 
+What is the type 2 error?
+[76:36] 让有罪的人逍遥法外
+Letting a guilty
+person go free, which
+[76:38] 实际上根据宪法， 
+actually according
+to the constitution,
+[76:40] 是两者中最好的。 
+is the better of the two.
+[76:42] 行？ 
+All right?
+[76:42] 所以我们要做的是控制第一个， 
+So what we're going to try to
+do is to control the first one,
+[76:45] 并希望为第二个最好。 
+and hope for the best
+for the second one.
+[76:47] 陪审团如何确保他们不犯任何类型1 
+How could the jury make sure
+that they make no type 1
+[76:51] 有过错误吗？ 
+error ever?
+[76:57] 总是让那个家伙自由，对吧？ 
+Always let the guy
+go free, right?
+[77:01] 对2型错误有什么影响？ 
+What is the effect
+on the type 2 error?
+[77:06] 是的，这是最糟糕的可能，对吧？ 
+Yeah, it's the worst
+possible, right?
+[77:08] 我的意思是，基本上，对于每个有罪的人，您都应让他们离开。 
+I mean, basically, for every guy
+that's guilty, you let them go.
+[77:12] 那是最糟糕的事情。 
+That's the worst you can do.
+[77:14] 同样，对吧？ 
+And same thing, right?
+[77:15] 陪审团如何确保没有第二类错误？ 
+How can the jury make sure
+that there's no type 2 error?
+[77:20] 始终定罪。 
+Always convict.
+[77:21] 对美国预算有什么影响？ 
+What is the effect on
+the American budget?
+[77:22] 对类型1错误有什么影响？ 
+What is the effect
+on the type 1 error?
+[77:28] 对。 
+Right.
+[77:28] 因此，效果是基本上使类型1错误最大化。 
+So the effect is that basically
+the type 1 error is maximized.
+[77:31] 因此，在类型1之间需要权衡取舍
+So there's this trade
+off between type 1
+[77:33] 和固有的2型错误。 
+and type 2 error
+that's inherent.
+[77:35] 这就是为什么我们有这种多目标的东西。 
+And that's why we have this
+sort of multi objective thing.
+[77:39] 我们正在尝试同时最小化两件事。 
+We're trying to minimize
+two things at the same time.
+[77:41] 而且我找不到许多临时方法，对吗？ 
+And I can't find many
+ad hoc ways, right?
+[77:44] 因此，如果您进行了任何优化， 
+So if you've taken
+any optimization,
+[77:46] 试图优化一件事情的两件事
+trying to optimize two
+things when one is going up
+[77:49] 当另一个倒下时，您唯一可以做的
+while the other one is going
+down, the only thing you can do
+[77:51] 是临时启发式。 
+is make ad hoc heuristics.
+[77:53] 也许您尝试最小化这两个家伙的总和。 
+Maybe you try to minimize
+the sum of those two guys.
+[77:55] 也许您尝试最小化第一个人的1/3 
+Maybe you try to minimize
+1/3 of the first guy
+[77:59] 再加上第二个人的2/3。 
+plus 2/3 of the second guy.
+[78:00] 也许您尝试最小化第一个人加平方
+Maybe you try to minimize
+the first guy plus the square
+[78:03] 第二个人。 
+of the second guy.
+[78:04] 您可以想到很多方法，但是没有一个
+You can think of many
+ways, but none of them
+[78:05] 比另一个更合理。 
+is more justified
+than the other.
+[78:07] 但是，对于统计假设检验， 
+However, for statistical
+hypothesis testing,
+[78:10] 有一个非常合理的理由，那就是
+there's one that's very well
+justified, which is just
+[78:12] 将类型1的错误限制为最小， 
+constrain your type 1
+error to be the smallest,
+[78:15] 达到您认为可以接受的水平。 
+to be at a level that
+you deem acceptable.
+[78:18]  5％。 
+5%.
+[78:24] 我想对最多无辜的人定罪5％。 
+I want to convict at most
+5% of innocent people.
+[78:27] 我认为这是合理的。 
+That's what I deem reasonable.
+[78:29] 基于此，我将尝试定罪尽可能多的人
+And based on that, I'm going to
+try to convict as many people
+[78:33] 尽他们所能，好吗？ 
+as they can, all right?
+[78:37] 这就是所谓的尼曼·皮尔森（Nieman Pearson）范式， 
+So that's called the
+Nieman Pearson paradigm,
+[78:39] 我们下次再讨论。 
+and we'll talk
+about it next time.
+[78:42] 行。 
+All right.
+[78:43] 谢谢。 
+Thank you.

@@ -1,0 +1,2634 @@
+[00:00] The following content is
+provided under a Creative
+[00:02] Commons license.
+[00:03] Your support will help
+MIT OpenCourseWare
+[00:06] continue to offer high quality
+educational resources for free.
+[00:10] To make a donation or to
+view additional materials
+[00:12] from hundreds of MIT courses,
+visit MIT OpenCourseWare
+[00:16] and ocw.mit.edu.
+[00:19] PHILIPPE RIGOLLET: The
+chapter is a natural capstone
+[00:22] chapter for this entire course.
+[00:24] We'll see some of
+the things we've
+[00:26] seen during maximum likelihood
+and some of the things
+[00:29] we've seen during linear
+regression, some of the things
+[00:34] we've seen in terms of the basic
+modeling that we've had before.
+[00:37] We're not going to go back
+to much inference questions.
+[00:39] It's really going to
+be about modeling.
+[00:41] And in a way, generalized
+linear models, as the word says,
+[00:44] are just a generalization
+of linear models.
+[00:47] And they're actually
+extremely useful.
+[00:49] They're often forgotten
+about and people just
+[00:51] jump onto machine learning
+and sophisticated techniques.
+[00:54] But those things do
+the job quite well.
+[00:57] So let's see in what sense
+they are a generalization
+[00:59] of the linear models.
+[01:02] So remember, the linear
+model looked like this.
+[01:05] We said that y was equal to x
+transpose beta plus epsilon,
+[01:13] right?
+[01:13] That was our linear
+regression model.
+[01:15] And it's-- another way
+to say this is that if--
+[01:19] and let's assume
+that those were, say,
+[01:20] Gaussian with mean 0 and
+identity covariance matrix.
+[01:25] Then another way
+to say this is that
+[01:26] the conditional distribution
+of y given x is equal to--
+[01:32] sorry, I a Gaussian with mean
+x transpose beta and variance--
+[01:39] well, we had a sigma squared,
+which I will forget as usual--
+[01:43] x transpose beta and
+then sigma squared.
+[01:46] OK, so here, we just assumed
+that-- so what is regression
+[01:50] is just saying I'm trying to
+explain why as a function of x.
+[01:54] Given x, I'm assuming a
+distribution for the y.
+[01:57] And this x is just
+going to be here
+[01:59] to help me model what the mean
+of this Gaussian is, right?
+[02:05] I mean, I could have
+something crazy.
+[02:07] I could have something
+that looks like y given
+[02:13] x is n0 x transpose beta.
+[02:17] And then this could
+be some other thing
+[02:19] which looks like, I don't
+know, some x transpose
+[02:22] gamma squared
+times, I don't know,
+[02:26] x, x transpose plus identity--
+[02:30] some crazy thing that
+depends on x here, right?
+[02:33] And we deliberately assumed that
+all the thing that depends on x
+[02:37] shows up in the mean, OK?
+[02:39] And so what I have
+here is that y
+[02:42] given x is a Gaussian
+with a mean that
+[02:45] depends on x and covariance
+matrix sigma square identity.
+[02:51] Now the linear model
+assumed a very specific form
+[02:54] for the mean.
+[02:55] It said I want the
+mean to be equal to x
+[02:59] transpose beta
+which, remember, was
+[03:01] the sum from, say, j equals
+1 to p of beta j xj, right?
+[03:10] It's where the xj's are
+the coordinates of x.
+[03:13] But I could do something
+also more complicated, right?
+[03:16] I could have something
+that looks like instead ,
+[03:19] replace this by, I don't know,
+sum of beta j log of x to the j
+[03:28] divided by x to the j squared
+or something like this, right?
+[03:34] I could do this as well.
+[03:37] So there's two things
+that we have assumed.
+[03:39] The first one is
+that when I look
+[03:41] at the conditional
+distribution of y given x,
+[03:43] x affects only the mean.
+[03:45] I also assume that
+it was Gaussian
+[03:47] and that it affects
+only the mean.
+[03:48] And the mean is affected
+in a very specific way,
+[03:51] which is linear in x, right?
+[03:53] So this is
+essentially the things
+[03:56] we're going to try to relax.
+[03:58] So the first thing
+that we assume,
+[03:59] the fact that y was Gaussian and
+had only its mean [INAUDIBLE]
+[04:03] dependant no x is what's
+called the random component.
+[04:07] It just says that the
+response variables, you know,
+[04:09] it sort of makes sense to
+assume that they're Gaussian.
+[04:13] And everything was
+essentially captured, right?
+[04:17] So there's this
+property of Gaussians
+[04:18] that if you tell me-- if
+the variance is known,
+[04:22] all you need to tell
+me to understand
+[04:23] exactly what the distribution
+of a Gaussian is,
+[04:25] all you need to tell me
+is its expected value.
+[04:29] All right, so
+that's this mu of x.
+[04:31] And the second thing is that
+we have this link that says,
+[04:35] well, I need to find a way
+to use my x's to explain
+[04:38] this mu you and the
+link was exactly
+[04:40] mu of x was equal
+to x transpose beta.
+[04:45] Now we are talking about
+generalized linear models.
+[04:51] So this part here where mu
+of x is of the form-- the way
+[04:56] I want my beta, my x,
+to show up is linear,
+[05:00] this will never be a question.
+[05:03] In principle, I could
+add a third point,
+[05:06] which is just question this
+part, the fact that mu of x
+[05:10] is x transpose beta.
+[05:11] I could have some more
+complicated, nonlinear function
+[05:13] of x.
+[05:14] And then we'll never do
+that because we're talking
+[05:15] about generalized linear model.
+[05:17] The only thing with generalize
+are the random component,
+[05:20] the conditional
+distribution of y given x,
+[05:23] and the link that just says,
+well, once you actually tell me
+[05:26] that the only thing I need
+to figure out is the mean,
+[05:29] I'm just going to slap it
+exactly these x transpose beta
+[05:32] thing without any transformation
+of x transpose beta.
+[05:36] So those are the two things.
+[05:40] It will become
+clear what I mean.
+[05:42] This sounds like a
+tautology, but let's just
+[05:44] see how we could extend that.
+[05:46] So what we're going to do in
+generalized linear models--
+[05:50] right, so when I
+talk about GLNs,
+[05:55] the first thing I'm
+going to do with my x
+[05:57] is turn it into some
+x transpose beta.
+[05:59] And that's just
+the l part, right?
+[06:02] I'm not going to
+be able to change.
+[06:03] That's the way it works.
+[06:05] I'm not going to do
+anything non-linear.
+[06:07] But the two things
+I'm going to change
+[06:09] is this random
+component, which is
+[06:16] that y, which used to be some
+Gaussian with mean mu of x
+[06:21] here in sigma squared--
+[06:24] so y given x, sorry--
+[06:26] this is going to become y given
+x follows some distribution.
+[06:35] And I'm not going to
+allow any distribution.
+[06:37] I want something that comes
+from the exponential family.
+[06:49] Who knows what the exponential
+family of distribution is?
+[06:52] This is not the same thing as
+the exponential distribution.
+[06:55] It's a family of distributions.
+[06:58] All right, so we'll see that.
+[07:00] It's-- wow.
+[07:04] What can that be?
+[07:06] Oh yeah, that's
+actually [INAUDIBLE]..
+[07:11] So-- I'm sorry?
+[07:17] AUDIENCE: [INAUDIBLE]
+[07:19] PHILIPPE RIGOLLET: I'm
+in presentation mode.
+[07:21] That should not happen.
+[07:23] OK, so hopefully, this is muted.
+[07:29] So essentially, this is going
+to be a family of distributions.
+[07:32] And what makes them
+exponential typically
+[07:34] is that there's an
+exponential that
+[07:35] shows up in the definition
+of the density, all right?
+[07:39] We'll see that the
+Gaussian belongs
+[07:41] to the exponential family.
+[07:42] But they're slightly
+less expected ones
+[07:44] because there's this crazy
+thing that a to the x
+[07:48] is exponential x log a, which
+makes the potential show up
+[07:52] without being there.
+[07:53] So if there's an
+exponential of some power,
+[07:54] it's going to show up.
+[07:55] But it's more than that.
+[07:56] So we'll actually come
+to this particular family
+[07:58] of distribution.
+[07:59] Why this particular family?
+[08:00] Because in a way,
+everything we've
+[08:02] done for the linear
+model with Gaussian
+[08:04] is going to extend fairly
+naturally to this family.
+[08:08] All right, and it actually
+also, because it encompasses
+[08:11] pretty much everything,
+all the distributions
+[08:13] we've discussed before.
+[08:15] All right, so the second thing
+that I want to question--
+[08:19] right, so before,
+we just said, well,
+[08:22] mu of x was directly
+equal to this thing.
+[08:31] Mu of x was directly
+x transpose beta.
+[08:34] So I knew I was going to
+have an x transpose beta
+[08:36] and I said, well, I could do
+something with this x transpose
+[08:39] beta before I used it to
+explain the expected value.
+[08:42] But I'm actually
+taking it like that.
+[08:44] Here, we're going to say, let's
+extend this to some function
+[08:52] is equal to this thing.
+[08:54] Now admittedly, this is
+not the most natural way
+[08:56] to think about it.
+[08:57] What you would probably
+feel more comfortable doing
+[08:59] is write something like
+mu of x is a function.
+[09:03] Let's call it f of
+x transpose beta.
+[09:08] But here, I decide
+to call f g inverse.
+[09:12] OK, let's just my g inverse.
+[09:14] Yes.
+[09:15] AUDIENCE: Is this different
+then just [INAUDIBLE]
+[09:18] PHILIPPE RIGOLLET: Yeah.
+[09:22] I mean, what transformation
+you want to put on your x's?
+[09:26] AUDIENCE: [INAUDIBLE]
+[09:35] PHILIPPE RIGOLLET: Oh
+no, certainly not, right?
+[09:37] I mean, if I give you-- if I
+force you to work with x1 plus
+[09:40] x2, you cannot work with
+any function of x1 plus any
+[09:44] function of x2, right?
+[09:46] So this is different.
+[09:51] All right, so-- yeah.
+[09:55] The transformation would
+be just the simple part
+[09:57] of your linear
+regression problem
+[09:59] where you would take your
+exes, transform them,
+[10:01] and then just apply
+another linear regression.
+[10:03] This is genuinely new.
+[10:07] Any other question?
+[10:11] All right, so this
+function g and the reason
+[10:13] why I sort of have to, like,
+stick to this slightly less
+[10:16] natural way of defining
+it is because that's
+[10:18] g that gets a name, not g
+inverse that gets a name.
+[10:21] And the name of g is
+the link function.
+[10:29] So if I want to give you a
+generalized linear model,
+[10:33] I need to give you
+two ingredients.
+[10:35] The first one is the
+random component,
+[10:37] which is the distribution
+of y given x.
+[10:40] And it can be anything in what's
+called the exponential family
+[10:44] of distributions.
+[10:45] So for example, I
+could say, y given
+[10:47] x is Gaussian with mean
+mu x sigma identity.
+[10:50] But I can also
+tell you y given x
+[10:53] is gamma with shared parameter
+equal to alpha of x, OK?
+[10:57] I could do some weird
+things like this.
+[11:00] And the second thing is I need
+to give you a link function.
+[11:03] And the link function is
+going to become very clear
+[11:08] how you pick a link function.
+[11:09] And the only reason that you
+actually pick a link function
+[11:12] is because of compatibility.
+[11:15] This mu of x, I call
+it mu because mu of x
+[11:18] is always the conditional
+expectation of y given x,
+[11:21] always, which means
+that let's think
+[11:25] of y as being a Bernoulli
+random variable.
+[11:31] Where does mu of x live?
+[11:37] AUDIENCE: [INAUDIBLE]
+[11:38] PHILIPPE RIGOLLET: 0, 1, right?
+[11:39] That's the expectation
+of a Bernoulli.
+[11:40] It's just the probability
+that my coin flip gives me 1.
+[11:43] So it's a number
+between 0 and 1.
+[11:45] But this guy right here, if
+my x's are anything, right--
+[11:49] think of any body
+measurements plus [INAUDIBLE]
+[11:52] linear combinations with
+arbitrarily large coefficients.
+[11:55] This thing can be
+any real number.
+[11:57] So the link function, what
+it's effectively going to do
+[12:01] is make those two
+things compatible.
+[12:03] It's going to take
+my number which,
+[12:04] for example, is constrained
+to be between 0 and 1
+[12:07] and map it into the
+entire real line.
+[12:11] If I have mu which is forced
+to be positive, for example,
+[12:13] in an exponential distribution,
+the mean is positive, right?
+[12:16] That's the, say, don't
+know, inter-arrival time
+[12:20] for Poisson process.
+[12:22] This thing is known to be
+positive for an exponential.
+[12:25] I need to map something
+that's exponential
+[12:27] to the entire real line.
+[12:28] I need a function that
+takes something positive
+[12:30] and [INAUDIBLE] everywhere.
+[12:31] So we'll see.
+[12:32] By the end of this
+chapter, you will
+[12:34] have 100 ways of doing this, but
+there are some more traditional
+[12:36] ones [INAUDIBLE].
+[12:38] So before we go any further,
+I gave you the example
+[12:41] of a Bernoulli random variable.
+[12:46] Let's see a few examples
+that actually fit there.
+[12:48] Yes.
+[12:51] AUDIENCE: Will it come up
+later [INAUDIBLE] already know
+[12:53] why do we need the
+transformer [INAUDIBLE] why
+[12:56] don't [INAUDIBLE]
+[12:59] PHILIPPE RIGOLLET:
+Well actually, this
+[13:01] will not come up later.
+[13:02] It should be very
+clear from here
+[13:04] because if I actually
+have a model,
+[13:06] I just want it to
+be plausible, right?
+[13:08] I mean, what happens if I
+suddenly decide that my--
+[13:11] so this is what's
+going to happen.
+[13:12] You're going to have only
+data to fit this model.
+[13:14] Let's say you actually
+forget about this thing here.
+[13:17] You can always do this, right?
+[13:19] You can always say I'm
+going to pretend my y's just
+[13:23] happen to be the realizations
+of said Gaussians that
+[13:26] happen to be 0 or 1 only.
+[13:28] You can always, like, stuff that
+in some linear model, right?
+[13:32] You will have some least
+squares estimated for beta.
+[13:35] And it's going to be fine.
+[13:36] For all the points
+that you see, it
+[13:38] will definitely put
+some number that's
+[13:40] actually between 0 and 1.
+[13:42] So this is what your picture
+is going to look like.
+[13:44] You're going to have a
+bunch of values for x.
+[13:48] This is your y.
+[13:50] And for different-- so
+these are the values
+[13:51] of x that you will get.
+[13:53] And for a y, you will see
+either a 0 or a 1, right?
+[13:59] Right, that's what your
+Bernoulli dataset would look
+[14:02] like with a one dimensional x.
+[14:05] Now if you do least squares
+on this, you will find this.
+[14:09] And for this guy,
+this line certainly
+[14:11] takes values between 0 and 1.
+[14:14] But let's say now
+you get an x here.
+[14:16] You're going to actually
+start pretending
+[14:17] that the probability it spits
+out one conditionally in x
+[14:20] is like 1.2, and that's
+going to be weird.
+[14:28] Any other questions?
+[14:31] All right, so let's
+start with some examples.
+[14:34] Right, I mean, you get so used
+to them through this course.
+[14:38] So the first one is--
+[14:41] so all these things are taken.
+[14:42] So there's a few
+books on generalizing,
+[14:44] your models, generalize
+[INAUDIBLE] models.
+[14:45] And there's tons of
+applications that you can see.
+[14:48] Those are extremely
+versatile, and as soon
+[14:50] as you want to do modeling
+to explain some y given x,
+[14:53] you sort of need to
+do that if you want
+[14:55] to go beyond linear models.
+[14:58] So this was in the
+disease occurring rate.
+[15:00] So you have a disease
+epidemic and you
+[15:04] want to basically model
+the expected number
+[15:08] of new cases given--
+[15:11] at a certain time, OK?
+[15:13] So you have time that progresses
+for each of your reservation.
+[15:16] Each of your reservation
+is a time stamp--
+[15:18] say, I don't know, 20th day.
+[15:21] And your response is
+the number of new cases.
+[15:26] And you're going to actually
+put your model directly
+[15:28] on mu, right?
+[15:29] When I looked at
+this, everything here
+[15:31] was on mu itself, on
+the expected, right?
+[15:34] Mu of x is always the expected--
+[15:39] the conditional
+expectation of y given x.
+[15:45] right?
+[15:45] So all I need to model
+is this expected value.
+[15:51] So this mu I'm going
+to actually say--
+[15:54] so I look at some parameters,
+and it says, well,
+[15:57] it increases exponentially.
+[16:00] So I want to say I have some
+sort of exponential trend.
+[16:02] I can parametrize
+that in several ways.
+[16:04] And the two parameters
+I want to slap in
+[16:06] is, like, some sort of gamma,
+which is just the coefficient.
+[16:10] And then there's some rate
+delta that's in the exponential.
+[16:13] So if I tell you
+it's exponential,
+[16:15] that's a nice family
+of functions you
+[16:17] might want to think about, OK?
+[16:18] So here, mu of x, if I want
+to keep the notation, x
+[16:24] is gamma exponential
+delta x, right?
+[16:30] Except that here, my x
+are t1, t2, t3, et cetera.
+[16:34] And I want to find what the
+parameters gamma and delta are
+[16:37] because I want to be
+able to maybe compare
+[16:40] different epidemics and see if
+they have the same parameter
+[16:42] or maybe just do some
+prediction based on the data
+[16:46] that I have without-- to
+extrapolate in the future.
+[16:52] So here, clearly mu of
+x is not of the form
+[16:58] x transpose beta, right?
+[17:01] That's not x
+transpose beta at all.
+[17:04] And it's actually not even a
+function of x transpose data,
+[17:07] right?
+[17:08] There's two parameters,
+gamma and delta,
+[17:09] and it's not of the form.
+[17:11] So here we have x,
+which is 1 and x, right?
+[17:14] I have two parameters.
+[17:16] So what I do here
+is that I say, well,
+[17:17] first, let me transform
+mu in such a way
+[17:20] that I can hope to see
+something that's linear.
+[17:23] So if I transform mu, I'm
+going to have log of mu, which
+[17:26] is log of this thing, right?
+[17:28] So log of mu of
+x is equal, well,
+[17:33] to log of gamma plus
+log of exponential delta
+[17:36] x, which is delta x.
+[17:42] And now this thing is
+actually linear in x.
+[17:46] So I have that this
+guy is my first beta 1.
+[17:49] And so that's beta 1 finds 1.
+[17:50] And this guy is beta 2--
+[17:53] times, sorry that said beta
+0-- times 1, and this guy
+[17:55] is beta 1 times x.
+[17:58] OK, so that looks
+like a linear model.
+[18:00] I just have to change
+my parameters--
+[18:02] my parameters beta 1 becomes
+the log of gamma and beta 2
+[18:05] becomes delta itself.
+[18:08] And the reason why we do this
+is because, well, the way
+[18:11] we put those gamma and those
+delta was just so that we
+[18:13] have some parametrization.
+[18:14] It just so happens that if
+we want this to be linear,
+[18:17] we need to just change the
+parametrization itself.
+[18:20] This is going to
+have some effects.
+[18:21] We know that it's going
+to have some effect
+[18:23] in the fissure information.
+[18:24] It's going to have a bunch of
+effect to change those things.
+[18:27] But that's what needs
+to be done to have
+[18:29] a generalized linear model.
+[18:32] Now here, the
+function that I took
+[18:35] to turn it into something
+that's linear is simple.
+[18:37] It came directly from some
+natural thing I would do here,
+[18:41] which is taking the log.
+[18:42] And so the function g,
+the link that I take,
+[18:44] is called the log
+link very creatively.
+[18:47] And it's just the
+function that I
+[18:49] apply to mu so that I see
+something that's linear
+[18:52] and that looks like this.
+[18:59] So now this only tells me how
+to deal with the link function.
+[19:03] But I still have
+to deal with 0.1.
+[19:06] And this, again, is
+just some modeling.
+[19:08] Given some data,
+some random data,
+[19:11] what distribution do you choose
+to explain the randomness?
+[19:14] And this-- I mean,
+unless there's no choice,
+[19:17] you know, it's just a
+matter of practice, right?
+[19:19] I mean, why would it be
+Gaussian and not, you know,
+[19:22] doubly exponential?
+[19:23] This is-- there's matters
+of convenience that
+[19:25] come into this, and there's
+just matter of experience
+[19:27] that come into this.
+[19:29] You know, I remember when
+you chat with engineers,
+[19:32] they have a very
+good notion of what
+[19:34] the distribution should be.
+[19:35] They have y bold distributions.
+[19:37] You know, they do optics
+and things like this.
+[19:39] So there's some distributions
+that just come up but sometimes
+[19:42] just have to work.
+[19:43] Now here what do we have?
+[19:45] The thing we're
+trying to measure, y--
+[19:47] as we said, so mu
+is the expectation,
+[19:49] the conditional
+expectation, of y given x.
+[19:52] But y is the number
+of new cases, right?
+[19:56] Well it's a number of.
+[19:57] And the first thing
+you should think
+[19:59] of when you think
+about number of,
+[20:00] if it were bounded above, you
+would think binomial, baby.
+[20:03] But here, it's just a number.
+[20:05] So you think Poisson.
+[20:06] That's how insurers think.
+[20:08] I have a number of, you
+know, claims per year.
+[20:13] This is a Poisson distribution.
+[20:15] And hopefully they can model
+the conditional distribution
+[20:18] of the number of claims given
+everything that they actually
+[20:20] ask you in the
+surveys that I hear
+[20:24] you now fail in 15 minutes.
+[20:26] All right, so now you have
+this Poisson distribution.
+[20:31] And that's just the
+modeling assumption.
+[20:33] There's no particular
+reason why you
+[20:34] should do this except
+that, you know,
+[20:36] that might be a good idea.
+[20:38] And the expected
+value of your Poisson
+[20:39] has to be this mu i, OK?
+[20:42] At time i.
+[20:46] Any question about this slide?
+[20:48] OK, so let's switch
+to another example.
+[20:51] Another example is the
+so-called pray capture rate.
+[20:54] So here, what
+you're interested in
+[20:58] is the rate capture of
+preys yi for a given prey.
+[21:05] And you have xy, which
+is your explanation.
+[21:10] And this is just
+the density of pray.
+[21:12] So you're trying to explain the
+rate of captures of preys given
+[21:17] the density of the prey, OK?
+[21:20] And so you need to find
+some sort of relationship
+[21:22] between the two.
+[21:23] And here again,
+you talk to experts
+[21:25] and what they tell you
+is that, well, it's
+[21:27] going to be increasing, right?
+[21:28] I mean, animals like predators
+are going to just eat more
+[21:32] if there's more preys.
+[21:34] But at some point,
+they're just going
+[21:35] to level off because they're
+going to be [INAUDIBLE] full
+[21:38] and they're going to stop
+capturing those prays.
+[21:42] And you're just going to
+have some phenomenon that
+[21:44] looks like this.
+[21:45] So here is a curve that
+sort of makes sense, right?
+[21:47] As your capture rate goes from
+0 to 1, you're increasing,
+[21:52] and then you see you have
+this like [INAUDIBLE] function
+[21:54] that says, you know, at
+some point it levels up.
+[21:57] OK, so here, one way I could--
+[21:59] I mean, there's again
+many ways I could just
+[22:01] model a function
+that looks like this.
+[22:03] But a simple one that
+has only two parameters
+[22:05] is this one, where mu i is
+this a function of xi where
+[22:09] I have some parameter alpha
+here and some parameter h here.
+[22:13] OK, so there's clearly--
+[22:15] so this function, there's one
+that essentially tells you--
+[22:21] so this thing starts
+at 0 for sure.
+[22:23] And essentially,
+alpha tells you how
+[22:25] sharp this thing
+is, and h tells you
+[22:28] at which points you end here.
+[22:30] Well, it's not exactly what
+those values are equal to,
+[22:32] but that tells you this.
+[22:35] OK, so, you know-- simple, and--
+[22:41] well, no, OK.
+[22:41] Sorry, that's actually alpha,
+which is the maximum capture.
+[22:44] The rate and h represent
+the pre-density
+[22:46] at which the capture weight is.
+[22:47] So that's the half time.
+[22:49] OK, so there's actual
+value [INAUDIBLE]..
+[22:52] All right, so now I
+have this function.
+[22:54] It's certainly not a function.
+[22:56] There's no-- I don't see
+it as a function of x.
+[22:59] So I need to find something that
+looks like a function of x, OK?
+[23:06] So then here, there's no log.
+[23:08] There's no-- well, I could
+actually take a log here.
+[23:13] But I would have log of
+x and log of x plus h.
+[23:15] So that would be weird.
+[23:17] So what we propose to
+do here is to look,
+[23:19] rather than looking at mu
+i, we look 1 over mu i.
+[23:23] Right, and so
+since your function
+[23:24] was mu i, when you
+take 1 over mu i,
+[23:37] you get h plus xi divided
+by alpha xi, which
+[23:42] is h over alpha times one
+over xi plus 1 over alpha.
+[23:49] And now if I'm willing to
+make this transformation
+[23:52] of variables and say,
+actually, I don't--
+[23:54] my x, whether it's
+the density of prey
+[23:57] or the inverse density of
+prey, it really doesn't matter.
+[24:00] I can always make
+this transformation
+[24:02] when the data comes.
+[24:03] Then I'm actually just
+going to think of this
+[24:06] as being some linear
+function beta 0 plus beta 1,
+[24:11] which is this guy,
+times 1 over xi.
+[24:17] And now my new variable
+becomes 1 over xi.
+[24:20] And now it's linear.
+[24:21] And the transformation
+I had to take
+[24:23] was this 1 over x, which is
+called the reciprocal link, OK?
+[24:34] You can probably guess what the
+exponential link is going to be
+[24:37] and things like this, all right?
+[24:38] So we'll talk about other
+links that have slightly less
+[24:41] obvious names.
+[24:43] Now again, modeling, right?
+[24:45] So this was the
+random component.
+[24:46] This was the easy part.
+[24:47] Now I need to just poor
+in some domain knowledge
+[24:50] about how do I think this
+function, this y, which
+[24:55] is which is the rate
+of capture of praise,
+[25:01] I want to understand how
+this thing is actually
+[25:05] changing what is the randomness
+of the thing around its mean.
+[25:09] And you know, something
+that-- so that
+[25:11] comes from this textbook.
+[25:12] The standing deviation
+of capture rate
+[25:14] might be approximately
+proportional to the mean rate.
+[25:16] You need to find a
+distribution that
+[25:18] actually has this property.
+[25:19] And it turns out
+that this happens
+[25:21] for gamma distributions, right?
+[25:23] In gamma distributions,
+just like say,
+[25:26] for Poisson distribution, the--
+[25:29] well, for Poisson, the variance
+and mean are of the same order.
+[25:32] Here is the standard
+deviation that's
+[25:34] of the same order as the
+[INAUDIBLE] for gammas.
+[25:39] And it's a positive
+distribution as well.
+[25:42] So here is a candidate.
+[25:43] Now since we're
+sort of constrained
+[25:45] to work under the exponential
+family of distributions,
+[25:48] then you can just
+go through your list
+[25:50] and just decide which
+one works best for you.
+[25:55] All right, third example--
+[25:56] so here we have binary response.
+[25:59] Here, essentially the
+binary response variable
+[26:01] indicates the
+presence or absence
+[26:02] of postoperative deforming
+for kyphosis on children.
+[26:07] And here, rather than having
+one covariance which was before,
+[26:10] in the first example, was
+time, in the second example
+[26:12] was the density, here
+there's three ways
+[26:15] that you measure on children.
+[26:17] The first one is
+age of the child
+[26:19] and the second one is
+the number of vertebrae
+[26:21] involved in the operation.
+[26:23] And the third one is
+the start of the range,
+[26:25] right-- so where
+it is on the spine.
+[26:29] OK, so the response
+variable here is, you know,
+[26:35] did it work or not, right?
+[26:36] I mean, that's very simple.
+[26:37] And so here, it's nice
+because the random component
+[26:41] is the easiest one.
+[26:42] As I said, any random variable
+that takes only two outcomes
+[26:45] must be a Bernoulli, right?
+[26:49] So that's nice there's no
+modeling going on here.
+[26:52] So you know that y given x
+is going to be Bernoulli,
+[26:54] but of course, all
+your efforts are
+[26:55] going to try to understand
+what the conditional mean
+[26:58] of your Bernoulli, what
+the conditional probability
+[27:00] of being 1 is going to be, OK?
+[27:02] And so in particular--
+so I'm just-- here,
+[27:05] I'm spelling it out before
+we close those examples.
+[27:08] I cannot say that mu of x is x
+transpose data for exactly this
+[27:12] picture that I drew
+for you here, right?
+[27:15] There's just no
+way here-- the goal
+[27:17] of doing this is certainly
+to be able to extrapolate
+[27:20] for yet unseen children
+whether this is something
+[27:23] that we should be doing.
+[27:24] And maybe the range
+of x is actually
+[27:27] going to be slightly out.
+[27:28] And so, OK I don't
+want to see that have
+[27:30] a negative probability of
+outcome or a positive one--
+[27:34] sorry, or one that's
+lower than one.
+[27:38] So I need to make
+this transformation.
+[27:40] So what I need to do is
+to transform mu, which
+[27:43] is, we know only a number.
+[27:44] All we know is a
+number between 0 and 1.
+[27:46] And we need to transform
+it in such a way
+[27:48] that it maps the
+entire real line
+[27:50] or reciprocally to say that--
+[27:57] or inversely, I should say--
+[27:58] that f of x
+transpose beta should
+[28:00] be a number between 0 and 1.
+[28:02] I need to find a function
+that takes any real number
+[28:05] and maps it into 0 and 1.
+[28:06] And we'll see that
+again, but you
+[28:10] have an army of functions
+that do that for you.
+[28:12] What are those functions?
+[28:16] AUDIENCE: [INAUDIBLE]
+[28:17] PHILIPPE RIGOLLET: I'm sorry?
+[28:19] AUDIENCE: [INAUDIBLE]
+[28:20] PHILIPPE RIGOLLET: Trait?
+[28:21] AUDIENCE: [INAUDIBLE]
+[28:22] PHILIPPE RIGOLLET: Oh.
+[28:23] AUDIENCE: [INAUDIBLE]
+[28:25] PHILIPPE RIGOLLET: Yeah, I want
+them to be invertible, right?
+[28:28] AUDIENCE: [INAUDIBLE]
+[28:34] PHILIPPE RIGOLLET: I
+have an army of function.
+[28:35] I'm not asking for one
+soldier in this army.
+[28:39] I want the name of this army.
+[28:41] AUDIENCE: [INAUDIBLE]
+[28:44] PHILIPPE RIGOLLET: Well, they're
+not really invertible either,
+[28:46] right?
+[28:48] So they're actually in
+[INAUDIBLE] textbook.
+[28:53] Because remember,
+statisticians don't
+[28:55] know how to integrate
+functions, but they
+[28:56] know how to turn a function
+into a Gaussian integral.
+[28:59] So we know it integrates
+to 1 and things like this.
+[29:01] Same thing here--
+we don't know how
+[29:03] to build functions that
+are invertible and map
+[29:06] the entire real line
+to 0, 1, but there's
+[29:08] all the cumulative distribution
+functions that do that for us.
+[29:11] So I can you any of
+those guys, and that's
+[29:13] what I'm going to
+be doing, actually.
+[29:16] All right, so just
+to recap what I just
+[29:19] said as we were speaking, so
+normal linear model is not
+[29:23] appropriate for these examples
+if only because the response
+[29:30] variable is not
+necessarily Gaussian
+[29:34] and also because the
+linear model has to be--
+[29:37] the mean has to be transformed
+before I can actually
+[29:39] apply a linear model for all
+these plausible nonlinear
+[29:42] models that I
+actually came up with.
+[29:44] OK, so the family
+we're going to go for
+[29:48] is the exponential
+family of distributions.
+[29:50] And we're going to
+be able to show--
+[29:54] so one of the nice
+part of this is
+[29:56] to actually compute
+maximum likelihood
+[29:58] estimaters for those right?
+[29:59] In the linear model,
+maximum-- like, in the Gauss
+[30:02] linear model, maximum likelihood
+was as nice as it gets, right?
+[30:05] This actually was the
+least squares estimator.
+[30:08] We had a close form.
+[30:10] x transpose x inverse
+x transpose y,
+[30:12] and that was it, OK?
+[30:14] We had to just take
+one derivative.
+[30:15] Here, we're going to have a
+generally concave likelihood.
+[30:19] We're not going to
+be able to actually
+[30:21] solve this thing
+directly in close form
+[30:23] unless it's Gaussian,
+but we will have--
+[30:26] we'll see actually
+how this is not just
+[30:30] a black box optimization
+of a concave function.
+[30:32] We have a lot of properties
+of this concave function,
+[30:35] and we will be able to show
+some iterative algorithms.
+[30:38] We'll basically see how, when
+you opened the box of convex
+[30:42] optimization, you will actually
+be able to see how things work
+[30:46] and actually implement
+it using least squares.
+[30:49] So each iteration of
+this iterative algorithm
+[30:51] will essentially
+be a least squares,
+[30:52] and that's actually
+quite [INAUDIBLE]..
+[30:54] So, very demonstrative
+of statisticians
+[30:56] being pretty
+ingenious so that they
+[30:59] don't have to call in
+some statistical software
+[31:01] but just can repeatedly
+call their least squares
+[31:06] Oracle within a
+statistical software.
+[31:09] OK, so what is the
+exponential family, right?
+[31:12] I promised to do the
+exponential family.
+[31:14] Before we go into
+this, let me just
+[31:17] tell you something about
+exponential families,
+[31:19] and what's the only
+thing to differentiate
+[31:22] an exponential family from
+all possible distributions?
+[31:25] An exponential family has
+two parameters, right?
+[31:28] And those are not
+really parameters,
+[31:30] but there's this theta parameter
+of my distribution, OK?
+[31:33] So it's going to be
+indexed by some parameter.
+[31:35] Here, I'm only talking
+about the distribution
+[31:37] of, say, some random variable
+or some random vector, OK?
+[31:40] So here in this slide, you see
+that the parameter theta that
+[31:44] indexed those distribution
+is k dimensional
+[31:48] and the space of the x's
+that I'm looking at-- so
+[31:53] that should really be y, right?
+[31:55] What I'm going to
+plug in here is
+[31:57] the conditional distribution
+of y given x and theta is
+[31:59] going to depend on x.
+[32:00] But this really is the y.
+[32:02] That's their distribution
+of the response variable.
+[32:04] And so this is on q, right?
+[32:06] So I'm going to
+assume that y takes--
+[32:09] q dimensional--
+is q dimensional.
+[32:12] Clearly soon, q is
+going to be equal to 1,
+[32:14] but I can define those
+things generally.
+[32:16] OK, so I have this.
+[32:17] I have to tell you
+what this looks like.
+[32:19] And let's assume that this is
+a probability density function.
+[32:23] So this, right this notation,
+the fact that I just
+[32:26] put my theta in
+subscript, is just
+[32:28] for me to remember that
+this is the variable that
+[32:31] indicates the random variable,
+and this is just the parameter.
+[32:34] But I could just write it as a
+function of theta and x, right?
+[32:37] This is just going to be--
+right, if you were in calc,
+[32:39] in multivariable
+calc, you would have
+[32:41] two parameter of theta
+and x and you would
+[32:43] need to give me a function.
+[32:45] Now think of all--
+[32:46] think of x and theta as being
+one dimensional at this point.
+[32:50] Think of all the
+functions that can
+[32:51] be depending on theta and x.
+[32:54] There's many of them.
+[32:56] And in particular, there's many
+ways theta and x can interact.
+[33:01] What the exponential
+family does for you
+[33:03] is that it restricts
+the way these things
+[33:05] can actually interact
+with each other.
+[33:07] It's essentially
+saying the following.
+[33:09] It's saying this is going to
+be of the form exponential--
+[33:15] so this exponential is
+really not much because I
+[33:18] could put a log next to it.
+[33:20] But what I want is that
+the way theta and x
+[33:24] interact has to be of
+the form theta times x
+[33:30] in an exponential, OK?
+[33:32] So that's the
+simplest-- that's one
+[33:34] of the ways you can think of
+them interacting is you just
+[33:36] the product of the two.
+[33:37] Now clearly, this is
+not a very rich family.
+[33:40] So what I'm allowing
+myself is to just slap
+[33:43] on some terms that depend only
+on theta and depend only on x.
+[33:46] So let's just call this thing, I
+don't know, f of x, g of theta.
+[33:52] OK, so here, I've restricted the
+way theta and x can interact.
+[33:56] So I have something
+that depends only
+[33:58] on x, something that
+depends only on theta.
+[33:59] And here, I have this
+very specific interaction.
+[34:02] And that's all that exponential
+families are doing for you, OK?
+[34:06] So if we go back to this slide,
+this is much more general,
+[34:09] right? if I want to go from
+theta and x in r to theta
+[34:14] and x theta in r--
+[34:19] to theta in r k and x in rq,
+I cannot take the product
+[34:26] of theta and x.
+[34:27] I cannot even take the inner
+product between theta and x
+[34:29] because they're not even
+of compatible dimensions.
+[34:32] But what I can do is to first
+map my theta into something
+[34:37] and map my x into something
+so that I actually end up
+[34:40] having the same dimensions.
+[34:42] And then I can take
+the inner product.
+[34:43] That's the natural
+generalization
+[34:44] of this simple product.
+[34:59] OK, so what I have is--
+[35:03] right, so if I want
+to go from theta
+[35:05] to x, when I'm going to first
+do is I'm going to take theta,
+[35:10] eta of theta--
+[35:11] so let's say eta1 of
+theta to eta k of theta.
+[35:20] And then I'm going
+to actually take
+[35:22] x becomes t1 of x all
+the way to tk of x.
+[35:29] And what I'm going to do
+is take the inner product--
+[35:32] so let's call this eta
+and let's call this t.
+[35:35] And I'm going to take the inner
+product of eta and t, which
+[35:39] is just the sum from j equal
+1 to k of eta j of theta times
+[35:49] tj of x.
+[35:52] OK, so that's just a way to say
+I want this simple interaction
+[35:57] but in higher dimension.
+[35:58] The simplest way I can actually
+make those things happen
+[36:00] is just by taking inner product.
+[36:05] OK, and so now what
+it's telling me
+[36:07] is that the distribution-- so
+I want the exponential times
+[36:09] something that depends only
+on theta and something that
+[36:11] depends only on x.
+[36:12] And so what it tells
+me is that when
+[36:14] I'm going to take
+p of theta x, it's
+[36:16] just going to be something
+which is exponential
+[36:19] times the sum from j equal 1
+to k of eta j theta tj of x.
+[36:30] And then I'm going to have a
+function that depends only--
+[36:32] so let me read it for now
+like c of theta and then
+[36:36] a function that
+depends only on x.
+[36:37] Let me call it h of x.
+[36:39] And for convenience,
+there's no particular reason
+[36:42] why I do that.
+[36:43] I'm taking this
+function c of theta
+[36:45] and I'm just actually
+pushing it in there.
+[36:47] So I can write c of theta as
+exponential minus log of 1
+[36:57] over c of theta, right?
+[37:01] And now I have exponential
+times exponential.
+[37:03] So I push it in, and
+this thing actually
+[37:04] looks like exponential sum
+from j equal 1 to k of eta
+[37:10] j theta tj of x minus log 1
+over c of theta times h of x.
+[37:22] And this thing here, log 1 over
+c of theta, I call actually
+[37:26] b of theta Because
+c, I called it c.
+[37:32] But I can actually
+directly call this guy b,
+[37:35] and I don't actually
+care about c itself.
+[37:38] Now why don't I put back
+also h of x in there?
+[37:43] Because h of x is
+really here to just--
+[37:48] how to put it--
+[37:54] OK, h of x and b of theta
+don't play the same role.
+[38:00] B of theta in many ways is a
+normalizing constant, right?
+[38:03] I want this density
+to integrate to 1.
+[38:06] If I did not have
+this guy, I'm not
+[38:09] guaranteed that this
+thing integrates to 1.
+[38:11] But by tweaking this function
+b of theta or c of theta--
+[38:14] they're equivalent--
+[38:16] I can actually ensure that
+this thing integrates to 1.
+[38:18] So b of theta is just
+a normalizing constant.
+[38:22] H of x is something that's
+going to be funny for us.
+[38:25] It's going to be
+something that allows
+[38:26] us to be able to treat both
+discrete and continuous
+[38:29] variables within the framework
+of exponential families.
+[38:38] So for those that are
+familiar with this,
+[38:40] this is essentially
+saying that that h of x
+[38:41] is really just a
+change of measure.
+[38:44] When I actually look at
+the density of p of theta--
+[38:48] this is with respect
+to some measure--
+[38:50] the fact that I just multiplied
+by a function of x just
+[38:52] means that I'm not looking--
+[38:53] that this guy here
+without h of theta
+[38:56] is not the density with respect
+to the original measure,
+[38:59] but it's the density with
+respect to the distribution
+[39:01] that has h as a density.
+[39:04] That's all I'm saying, right?
+[39:05] So I can first transform my
+x's and then take the density
+[39:08] with respect to that.
+[39:10] If you don't want to think
+about densities or measures,
+[39:12] you don't have to.
+[39:13] This is just the way--
+[39:14] this is just the definition.
+[39:16] Is there any question
+about this definition?
+[39:19] All right, so it
+looks complicated,
+[39:21] but it's actually
+essentially the simplest
+[39:23] way you could think about it.
+[39:25] You want to be able to
+have x and theta interact
+[39:29] and you just say, I
+want the interaction
+[39:30] to be of the form
+exponential x times theta.
+[39:34] And if they're
+higher dimensions,
+[39:35] I'm going to take
+the exponential
+[39:36] of the function
+of x inner product
+[39:38] with a function of theta.
+[39:43] All right, so I claimed
+since the beginning
+[39:45] that the Gaussian
+was such an example.
+[39:47] So let's just do it.
+[39:48] So is the Gaussian of the-- is
+the interaction between theta
+[39:51] and x in a Gaussian of
+the form in the product?
+[39:55] And the answer is yes.
+[39:58] Actually, whether I know or
+not what the variance is, OK?
+[40:03] So let's start for the case
+where I actually do not
+[40:06] know what the variance is.
+[40:07] So here, I have x is
+n mu sigma squared.
+[40:13] This is all one dimensional.
+[40:14] And here, I'm going to assume
+that my parameter is both mu
+[40:17] and sigma square.
+[40:19] OK, so what I need to do is
+to have some function of mu,
+[40:22] some function of stigma square,
+and take an inner product
+[40:24] of some function of x and
+some other function of x.
+[40:26] So I want to show that--
+[40:29] so p theta of x is what?
+[40:32] Well, it's one over
+square root sigma 2 pi
+[40:36] exponential minus x minus mu
+squared over 2 sigma squared,
+[40:42] right?
+[40:44] So that's just my
+Gaussian density.
+[40:45] And I want to say that
+this thing here-- so
+[40:49] clearly, the exponential
+shows up already.
+[40:51] I want to show that this
+is something that looks
+[40:53] like, you know, eta 1 of--
+[41:01] sorry, so that was-- yeah, eta
+1 of, say, mu sigma squared.
+[41:08] So I have only
+two of those guys,
+[41:09] so I'm going to need
+only two etas, right?
+[41:11] So I want it to be eta 1
+of mu and sigma times t1
+[41:16] of x plus eta 2 mu 1 mu sigma
+squared times t2 of x, right?
+[41:22] So I want to have something
+like that that shows up,
+[41:26] and the only things
+that are left,
+[41:27] I want them to depend either
+only on theta or only on x.
+[41:32] So to find that out,
+we just need to expand.
+[41:37] OK, so I'm going to first put
+everything into my exponential
+[41:42] and expand this guy.
+[41:43] So the first term here
+is going to be minus x
+[41:46] squared over 2 sigma square.
+[41:47] The second term is
+going to be minus mu
+[41:49] squared over two sigma squared.
+[41:51] And then the cross term is
+going to be plus x mu divided
+[41:55] by sigma squared.
+[41:57] And then I'm going
+to put this guy here.
+[41:58] So I have a minus log
+sigma over 2 pi, OK?
+[42:09] OK, is this-- so this term
+here contains an interaction
+[42:13] between X and the parameters.
+[42:15] This term here
+contains an interaction
+[42:17] between X and the parameters.
+[42:18] So let me try to write
+them in a way that I want.
+[42:21] This guy only depends
+on the parameters,
+[42:22] this guy only depends
+on the parameter.
+[42:25] So I'm going to
+rearrange things.
+[42:28] And so I claim that this
+is of the form x squared.
+[42:34] Well, let's say-- do--
+[42:43] who's getting the minus?
+[42:44] Eta, OK.
+[42:46] So it's x squared times
+minus 1 over 2 sigma
+[42:52] squared plus x times mu
+over sigma squared, right?
+[42:58] So that's this term here.
+[42:59] That's this term here.
+[43:01] Now I need to get this guy
+here, and that's minus.
+[43:04] So I'm going to write
+it like this-- minus,
+[43:05] and now I have mu
+squared over 2 sigma
+[43:09] squared plus log sigma
+square root 2 pi.
+[43:22] And now this thing is definitely
+of the form t of x times--
+[43:31] did I call them the
+right way or not?
+[43:34] Of course not.
+[43:36] OK, so that's going to
+be t2 of x times eta
+[43:39] 2 of x eta 2 of theta.
+[43:41] This guy is going to be t1
+of x times eta 1 of theta.
+[43:48] All right, so just a function
+of theta times a function of x--
+[43:50] just a function of theta
+times a function of x.
+[43:52] And the way combined is
+just by sending them.
+[43:55] And this is going
+to be my d of theta.
+[44:01] What is h of x?
+[44:04] AUDIENCE: 1.
+[44:06] PHILIPPE RIGOLLET: 1.
+[44:07] There's one thing I
+can actually play with,
+[44:09] and this is something you're
+going to have some three
+[44:13] choices, right?
+[44:14] This is not actually completely
+determined here is that--
+[44:19] for example, so when I write
+the log sigma square root 2 pi,
+[44:27] this is just log of sigma
+plus log square root 2 pi.
+[44:32] So I have two choices here.
+[44:34] Either my b becomes
+this guy, or--
+[44:37] so either I have
+b of theta, which
+[44:41] is mu squared over 2 sigma
+squared plus log sigma
+[44:45] square root 2 pi and h of
+x is equal to 1, or I have
+[44:51] that b of theta is mu
+square over 2 sigma squared
+[44:56] plus log sigma.
+[44:58] And h of x is equal to what?
+[45:08] Well, I can just push
+this guy out, right?
+[45:10] I can push it out
+of the exponential.
+[45:12] And so it's just square
+root of 2 pi, which is
+[45:15] a function of x, technically.
+[45:16] I mean, it's a constant function
+of x, but it's a function.
+[45:19] So you can see that it's
+not completely clear
+[45:22] how you're going to do
+the trade off, right?
+[45:25] So the constant terms can
+go either in b or in h.
+[45:28] But you know, why bother with
+tracking down b and h when
+[45:33] you can actually stuff
+everything into one
+[45:35] and just call h one
+and call it a day?
+[45:38] Right, so you can
+just forget about h.
+[45:40] You know it's one and
+think about the right.
+[45:43] H won't matter actually for
+estimation purposes or anything
+[45:46] like this.
+[45:48] All right, so that's basically
+everything that's written.
+[45:50] When stigma square
+is known, what's
+[45:55] happening is that this
+guy here is no longer
+[46:00] a function of theta, right?
+[46:03] Agreed?
+[46:05] This is no longer a parameter.
+[46:06] When sigma square is known,
+then theta is equal to mu only.
+[46:14] There's no sigma
+square going on.
+[46:17] So this-- everything
+depends on sigma square
+[46:19] can be thought of as a constant.
+[46:20] Think one.
+[46:23] So in particular, this
+term here does not
+[46:26] belong in the interaction
+between x and theta.
+[46:30] It belongs to h, right?
+[46:37] So if sigma is known, then this
+guy is only a function of h--
+[46:49] of x.
+[46:50] So h of x becomes exponential
+x squared minus x squared
+[47:01] over 2 sigma squared, right?
+[47:05] That's just a function of x.
+[47:11] Is that clear?
+[47:16] So if you complete this
+computation, what you're
+[47:18] going to get is that your new
+one parameter thing is that p
+[47:28] theta x is not equal to
+exponential x times mu
+[47:35] over sigma squared minus--
+[47:39] well, it's still the same thing.
+[47:49] And then you have your
+h of x that comes out--
+[47:54] x squared over 2 sigma squared.
+[47:58] OK, so that's my h of x.
+[48:02] That's still my b of theta.
+[48:05] And this is my t1 of x.
+[48:11] And this is my eta one of theta.
+[48:15] And remember, theta is just
+equal to mu in this case.
+[48:22] So if I ask you prove that
+this distribution belongs
+[48:26] to an exponential family,
+you just have to work it out.
+[48:29] Typically, it's expanding what's
+in the exponential and see
+[48:32] what's--
+[48:33] and just write it in
+this term and identify
+[48:35] all the components, right?
+[48:36] So here, notice those guys
+don't even get an index anymore
+[48:39] because there's
+just one of them.
+[48:40] So I wrote eta 1 and t1, but
+it's really just eta and t.
+[48:50] Oh sorry, this guy also goes.
+[48:54] This is also a constant, right?
+[48:56] So it can actually
+just put sigma divided
+[49:01] by sigma square root 2 pi.
+[49:03] So h of x is what, actually?
+[49:08] Is it the density of--
+[49:12] AUDIENCE: Standard [INAUDIBLE].
+[49:13] PHILIPPE RIGOLLET:
+It's not standard.
+[49:14] It's centered.
+[49:15] It has mean 0.
+[49:16] But it variance
+sigma squared, right?
+[49:18] But it's the density
+of a Gaussian.
+[49:21] And this is what I
+meant when I said
+[49:23] h of x is really just telling
+you with respect to which
+[49:27] distribution, which measure
+you're taking the density.
+[49:30] And so this thing here
+is really telling you
+[49:33] the density of my
+Gaussian with mean mu
+[49:37] is equal to-- is this with
+respect to a centered Gaussian
+[49:41] is this guy, right?
+[49:43] That's what it means.
+[49:44] If this thing ends
+up being a density,
+[49:46] it just means that now you
+just have a new measure, which
+[49:49] is this density.
+[49:51] So it's just saying
+that the density
+[49:53] of the Gaussian with
+mean mu with respect
+[49:57] to the Gaussian with mean 0
+is just this [INAUDIBLE] here.
+[50:05] All right, so let's move on.
+[50:07] So here, as I said,
+you could actually
+[50:11] do all these computations
+and forget about the fact
+[50:13] that x is continuous.
+[50:16] You can actually do it with PMFs
+and do it for x is discrete.
+[50:20] This actually also tells
+you if you can actually
+[50:23] get the same form for
+your density, which
+[50:26] is of the form exponential
+times the product
+[50:29] of the the interaction
+between theta
+[50:32] and x is just
+taking this product,
+[50:34] then a function only of theta
+and of function only of x,
+[50:36] for the PMF, it also works.
+[50:40] OK, so I claim
+that the Bernoulli
+[50:42] belongs to this family.
+[50:44] So the PMF of a Bernoulli--
+[50:49] we say parameter p is p to the
+x 1 minus p to the 1 minus x,
+[50:54] right?
+[50:55] Because we know so that's
+only for x equals 0 or 1.
+[51:00] And the reason is because
+when x is equal to 0,
+[51:03] this is 1 minus p.
+[51:04] When x is equal to
+1, this is minus 0.
+[51:06] OK, we've seen that
+when we're looking
+[51:08] at likelihoods for Bernoullis.
+[51:11] OK, this is not clear this is
+going to look like this at all.
+[51:16] But let's do it.
+[51:19] OK, so what does
+this thing look like?
+[51:21] Well, the first
+thing I want to do
+[51:23] is to make an
+exponential show up.
+[51:24] So what I'm going
+to write is I'm
+[51:26] going to write p to the x as
+exponential x log p, right?
+[51:33] And so I'm going to do
+that for the other one.
+[51:35] So this thing here--
+[51:37] so I'm going to get
+exponential x log
+[51:43] p plus 1 minus x log 1 minus p.
+[51:51] So what I need to do is
+to collect my terms in x
+[51:54] and my terms in whatever
+parameters I have,
+[51:56] see here if theta is equal to p.
+[52:03] So if I do this,
+what I end up having
+[52:05] is equal to exponential--
+[52:08] so determine x is log
+p minus log 1 minus p.
+[52:12] So that's x times
+log p over 1 minus p.
+[52:18] And then the term
+that rest is just--
+[52:20] that stays is just 1
+times log 1 minus p.
+[52:23] But I want to see this as
+a minus something, right?
+[52:25] It was minus b of theta.
+[52:27] So I'm going to
+write it as minus--
+[52:32] well, I can just keep the
+plus, and I'm going to do--
+[52:41] and that's all [INAUDIBLE].
+[52:44] A-ha!
+[52:46] Well, this is of the
+form exponential--
+[52:48] something that depends only on
+x times something that depends
+[52:50] only on theta--
+[52:52] minus a function that
+depends only on theta.
+[52:56] And then h of x is
+equal to 1 again.
+[52:59] OK, so let's see.
+[53:00] So I have t1 of x is equal to x.
+[53:03] That's this guy.
+[53:04] Eta 1 of theta is equal
+to log p1 minus p.
+[53:11] And b of theta is equal to
+log 1 over 1 minus p, OK?
+[53:20] And h of x is equal
+to 1, all right?
+[53:29] You guys want to do
+Poisson, or do you
+[53:31] want to have any homework?
+[53:35] It's a dilemma because that's
+an easy homework versus
+[53:37] no homework at all but maybe
+something more difficult. OK,
+[53:41] who wants to do it now?
+[53:43] Who does not want to
+raise their hand now?
+[53:46] Who wants to raise
+their hand now?
+[53:47] All right, so let's move on.
+[53:57] I'll just do-- do you want
+to do the gammas instead
+[53:59] in the homework?
+[54:00] That's going to be fun.
+[54:02] I'm not even going to
+propose to do the gammas.
+[54:04] And so this is the
+gamma distribution.
+[54:08] It's brilliantly
+called gamma because it
+[54:10] has the gamma function just
+like the beta distribution had
+[54:14] the beta function in there.
+[54:16] They look very similar.
+[54:17] One is defined over r plus,
+the positive real line.
+[54:20] And remember, the beta was
+defined over the interval 0, 1.
+[54:24] And it's of the form x to
+some power times exponential
+[54:28] of minus x to some--
+[54:30] times something, right?
+[54:32] So there's a function of
+polynomial [INAUDIBLE]
+[54:34] x where the exponent
+depends on the parameter.
+[54:38] And then there's the exponential
+minus x times something depends
+[54:40] on the parameters.
+[54:41] So this is going to also look
+like some function of x--
+[54:47] sorry, like some
+exponential distribution.
+[54:49] Can somebody guess what
+is going to be t2 of x?
+[54:58] Oh, those are the functions of
+x that show up in this product,
+[55:01] right?
+[55:01] Remember when we have this--
+[55:03] we just need to take
+some transformations
+[55:05] of x so it looks linear in those
+things and not in x itself.
+[55:08] Remember, we had x squared
+and x, for example,
+[55:11] in the Gaussian case.
+[55:12] I don't know if
+it's still there.
+[55:14] Yeah, it's still there, right?
+[55:15] t2 was x squared.
+[55:17] What do you think x is
+going-- t2 of x here.
+[55:20] So here's a hint.
+t1 is going to be x.
+[55:23] AUDIENCE: [INAUDIBLE]
+[55:24] PHILIPPE RIGOLLET:
+Yeah, [INAUDIBLE],,
+[55:25] what is going to be t1?
+[55:26] Yeah, you can--
+this one is taken.
+[55:27] This one is taken.
+[55:31] What?
+[55:32] Log x, right?
+[55:33] Because this x to
+the a minus 1, I'm
+[55:35] going to write that as
+exponential a minus 1 log x.
+[55:39] So basically, eta 1 is
+going to be a minus 1.
+[55:43] Eta 2 is going to
+be minus 1 over b--
+[55:47] well, actually the opposite.
+[55:48] And then you're going to have--
+[55:50] but this is actually
+not too complicated.
+[55:52] All right, then those
+parameters get names.
+[55:55] a is the shape parameter,
+b is the scale parameter.
+[55:58] It doesn't really matter.
+[56:00] You have other things that
+are called the inverse gamma
+[56:02] distribution, which
+has this form.
+[56:05] The difference is that
+the parameter alpha
+[56:09] shows negatively there and
+then the inverse Gaussian
+[56:14] distribution.
+[56:18] You know, just densities
+you can come up with
+[56:20] and they just happened
+to fall in this family.
+[56:23] And there's other ones that
+you can actually put in there
+[56:25] that we've seen before.
+[56:26] The chi-square is actually
+part of this family.
+[56:28] The beta distribution
+is part of this family.
+[56:30] The binomial distribution
+is part of this family.
+[56:32] Well, that's easy because
+the Bernoulli was.
+[56:35] The negative binomial, which
+is some stopping time--
+[56:39] the first time you hit a
+certain number of successes
+[56:42] when you flip some
+Bernoulli coins.
+[56:46] So you can check
+for all of those,
+[56:47] and you will see that you can
+actually write them as part
+[56:50] of the exponential family.
+[56:51] So the main goal
+of this slide is
+[56:53] to convince you that
+this is actually
+[56:54] a pretty broad range
+of distributions
+[56:56] because it basically includes
+everything we've seen
+[57:00] but not anything there--
+[57:03] sorry, plus more, OK?
+[57:06] Yeah.
+[57:07] AUDIENCE: Is there any
+example of a distribution
+[57:09] that comes up
+pretty often that's
+[57:10] not in the exponential family?
+[57:11] PHILIPPE RIGOLLET:
+Yeah, like uniform.
+[57:13] AUDIENCE: Oh, OK, so maybe
+a bit more complicated than
+[57:16] [INAUDIBLE].
+[57:17] Anything Anything that
+has a support that
+[57:19] depends on the parameter
+is not going to fall--
+[57:21] is not going to fit in there.
+[57:24] Right, and you can
+actually convince yourself
+[57:26] why anything that
+has the support that
+[57:31] does not-- that depends
+on the parameter
+[57:33] is not going to be
+part of this guy.
+[57:35] It's kind of a hard thing to--
+[57:37] in fact, you proved that it's
+not and you prove this rule.
+[57:42] That's kind of a
+little difficult,
+[57:43] but the way you can convince
+yourself is that remember,
+[57:46] the only interaction between
+x and theta that I allowed
+[57:49] was taking the
+product of those guys
+[57:51] and then the exponential, right?
+[57:54] If you have something that
+depends on some parameter--
+[57:56] let's say you're going to see
+something that looks like this.
+[57:59] Right, for uniform,
+it looks like this.
+[58:04] Well, this is not of the form
+exponential x times theta.
+[58:08] There's an interaction
+between x and theta here,
+[58:10] but it's actually
+certainly not of the form
+[58:12] x exponential x times theta.
+[58:14] So this is definitely
+not going to be
+[58:16] part of the exponential family.
+[58:18] And every time you start
+doing things like that,
+[58:20] it's just not going to happen.
+[58:25] Actually, to be fair,
+I'm not even sure
+[58:28] that all these
+guys, when you allow
+[58:30] them to have all
+their parameters free,
+[58:32] are actually going
+to be part of this.
+[58:34] For example-- the
+beta probably is,
+[58:36] but I'm not actually
+entirely convinced.
+[58:43] There's books on
+experiential families.
+[58:47] All right, so let's go back.
+[58:48] So here, we've put a lot
+of effort understanding
+[58:52] how big, how much wider than
+the Gaussian distribution
+[58:57] can we think of for the
+conditional distribution
+[59:01] of our response y given x.
+[59:04] So let's go back to the
+generalized linear models,
+[59:06] right?
+[59:07] So [INAUDIBLE] said, OK,
+the random component?
+[59:09] y has to be part of
+some exponential family
+[59:11] distribution-- check.
+[59:13] We know what this means.
+[59:14] So now I have to
+understand two things.
+[59:16] I have to understand what
+is the expectation, right?
+[59:20] Because that's actually
+what I model, right?
+[59:21] I take the expectation, the
+conditional expectation,
+[59:24] of y given x.
+[59:24] So I need to understand
+given this guy,
+[59:27] it would be nice if you had some
+simple rules that would tell me
+[59:30] exactly what the expectation
+is rather than having to do it
+[59:32] over and over again, right?
+[59:34] If I told you,
+here's a Gaussian,
+[59:36] compute the
+expectation, every time
+[59:37] you had to use that would
+be slightly painful.
+[59:40] So hopefully, this thing
+being simple enough--
+[59:43] we've actually
+selected a class that's
+[59:45] simple enough so that
+we can have rules.
+[59:47] Whereas as soon as they give you
+those parameters t1, t2, eta 1,
+[59:52] eta 2, b and h, you can
+actually have some simple rules
+[59:55] to compute the mean and
+variance and all those things.
+[60:00] And so in particular, I'm
+interested in the mean,
+[60:03] and I'm going to have to
+actually say, well, you know,
+[60:05] this mean has to be mapped
+into the whole real line.
+[60:09] So I can actually talk
+about modeling this function
+[60:12] of the mean as x transpose beta.
+[60:14] And we saw that for
+the [INAUDIBLE] dataset
+[60:17] or whatever other data sets.
+[60:21] You actually can-- you can
+actually do this using the log
+[60:24] of the reciprocal or for the--
+[60:27] oh, actually, we didn't
+do it for the Bernoulli.
+[60:30] We'll come to this.
+[60:30] This is the most important
+one, and that's called
+[60:32] a logit it or a logistic link.
+[60:37] But before we go there,
+this was actually
+[60:39] a very broad family, right?
+[60:42] When I wrote this thing on the
+bottom board-- it's gone now,
+[60:44] but when I wrote it
+in the first place,
+[60:46] the only thing that I wrote
+is I wanted x times theta.
+[60:48] Wouldn't it be nice if you
+have some distribution that
+[60:51] was just x times theta,
+not some function of x
+[60:53] times some function of theta?
+[60:54] The functions seem to be
+here so that they actually
+[60:58] make things a little--
+[61:02] so the functions were here
+so that I can actually
+[61:05] put a lot of functions there.
+[61:06] But first of all,
+if I actually decide
+[61:08] to re-parametrize my
+problem, I can always
+[61:10] assume-- if I'm
+one dimensional, I
+[61:12] can always assume
+that eta 1 of theta
+[61:14] becomes my new theta, right?
+[61:17] So this thing--
+here for example,
+[61:20] I could say, well,
+this is actually
+[61:22] the parameter of my Bernoulli.
+[61:23] Let me call this
+guy theta, right?
+[61:25] I could do that.
+[61:28] Then I could say, well, here
+I have x that shows up here.
+[61:31] And here since I'm talking
+about the response,
+[61:33] I cannot really make
+any transformations.
+[61:35] So here, I'm going to actually
+talk about a specific family
+[61:38] for which this guy is not x
+square or square root of x
+[61:41] or log of x or anything I want.
+[61:43] I'm just going to actually
+look at distributions
+[61:45] for which this is x.
+[61:46] This exponential
+families are called
+[61:48] a canonical exponential family.
+[61:51] So in the canonical
+exponential family, what I have
+[61:55] is that I have my x times theta.
+[61:57] I'm going to allow myself
+some normalization factor phi,
+[61:59] and we'll see, for
+example, that it's
+[62:01] very convenient when I talk
+about the Gaussian, right?
+[62:05] Because even if I know--
+[62:11] yeah, even if I know this guy,
+which I actually pull into my--
+[62:15] oh, that's over here, right?
+[62:20] Right, I know sigma squared.
+[62:23] But I don't want to
+change my parameter
+[62:24] to be mu over sigma squared.
+[62:26] It's kind of painful.
+[62:27] So I just take mu, and
+I'm going to keep this guy
+[62:30] as being this phi over there.
+[62:31] And it's called the
+dispersion parameter
+[62:34] from a clear analogy
+with the Gaussian, right?
+[62:38] That's the variance and
+that's measuring dispersion.
+[62:41] OK, so here, what
+I want is I'm going
+[62:45] to think throughout this class--
+so phi may be known or not.
+[62:49] And depending--
+when it's not known,
+[62:51] this actually might turn
+into some exponential family
+[62:54] or it might not.
+[62:55] And the main reason is because
+this b of theta over phi
+[63:01] is not necessarily a function
+of theta over phi, right?
+[63:04] If I actually have phi
+unknown, then y theta over phi
+[63:09] has to be--
+[63:10] this guy has to be
+my new parameter.
+[63:13] And b might not be a function
+of this new parameter.
+[63:17] OK, so in a way,
+it may or may not,
+[63:21] but this is not really a
+concern that we're going to have
+[63:24] because throughout
+this class, we're
+[63:26] going to assume that
+phi is known, OK?
+[63:29] Phi is going to be known all the
+time, which means that this is
+[63:31] always an exponential family.
+[63:34] And it's just the
+simplest one you
+[63:35] could think of-- one
+dimensional parameter, one
+[63:38] dimensional response, and I just
+have-- the product is just y
+[63:42] times or, we used to call it x.
+[63:45] Now I've switched to y, but y
+times theta divided by phi, OK?
+[63:52] Should I write this or this is
+clear to everyone what this is?
+[63:56] Let me write it somewhere so
+we actually keep track of it
+[63:58] toward the [INAUDIBLE].
+[64:05] OK, so this is--
+[64:07] remember, we had all
+the distributions.
+[64:11] And then here we had
+the exponential family.
+[64:15] And now we have the
+canonical exponential family.
+[64:21] It's actually
+much, much smaller.
+[64:24] Well, actually, it's probably
+sort of a good picture.
+[64:26] And what I have is that
+my density or my PMF
+[64:32] is just exponential
+y times theta minus b
+[64:37] of theta divided by phi.
+[64:41] And I have plus phi of--
+[64:46] oh, yeah, plus phi
+of y phi, which
+[64:53] means that this is really--
+if phi is known, h of y
+[64:58] is just exponential
+c of y phi, agreed?
+[65:05] Actually, this is the reason
+why it's not necessarily
+[65:07] a canonical family.
+[65:10] It might not be that
+this depends only on y.
+[65:12] It could depend on y and
+phi in some annoying way
+[65:15] and I may not be
+able to break it.
+[65:18] OK, but if phi is known,
+this is just a function
+[65:21] that depends on y, agreed?
+[65:28] In particular, I
+think you need--
+[65:29] I hope you can convince
+yourself that this is just
+[65:31] a subcase of everything
+we've seen before.
+[65:41] So for example, the Gaussian
+when the variance is known
+[65:44] is indeed of this form, right?
+[65:47] So we still have
+it on the board.
+[65:49] So here is my y, right?
+[65:51] So then let me write
+this as f theta of y.
+[65:53] So every x is replaceable
+with y, blah, blah, blah.
+[65:59] This is this guy.
+[66:01] And now what I have is that
+this is going to be my phi.
+[66:07] This is my parameter of theta.
+[66:10] So I'm definitely of the form
+y times theta divided by phi.
+[66:14] And then here I
+have a function b
+[66:16] that depends only on
+theta over phi again.
+[66:20] So b of theta is mu
+squared divided by 2.
+[66:31] OK, then it's divided
+by 6 sigma square.
+[66:33] And then I have
+this extra stuff.
+[66:35] But I really don't care
+what it is for now.
+[66:37] It's just something that depends
+only on y and known stuff.
+[66:42] So it was just a function
+of y just like my h.
+[66:44] I stuff everything in there.
+[66:47] The b, though, this
+thing here, this
+[66:50] is actually what's
+important because
+[66:52] in the canonical
+family, if you think
+[66:53] about it, when you know phi--
+[66:57] sorry-- right, this
+is just y times theta
+[67:03] scaled by a known
+constant-- sorry, y times
+[67:05] theta scaled by a known
+constant is the first term.
+[67:08] The second term is b of theta
+scaled by some known constant.
+[67:12] But b of theta is
+what's going to make
+[67:13] the difference between the
+Gaussian and Bernoullis
+[67:17] and gammas and betas--
+[67:19] this is all in this b
+of theta. b of theta
+[67:21] contains everything
+that's idiosyncratic to
+[67:25] this particular distribution.
+[67:27] And so this is going
+to be important.
+[67:29] And we will see that b of theta
+is going to capture information
+[67:32] about the mean,
+about the variance,
+[67:34] about likelihood,
+about everything.
+[67:44] Should I go through
+this computation?
+[67:46] I mean, it's the same.
+[67:47] We've just done it, right?
+[67:48] So maybe it's probably better
+if you can redo it on your own.
+[67:53] All right, so the canonical
+exponential family also
+[67:56] has other distributions, right?
+[67:58] So there's the Gaussian
+and there's the Poisson
+[68:00] and there's the Bernoulli.
+[68:02] But the other ones may not
+be part of this, right?
+[68:05] In particular, think about
+the gamma distribution.
+[68:07] We had this-- log x was one
+of the things that showed up.
+[68:13] I mean, I cannot get
+rid of this log x.
+[68:15] I mean, that's part of it
+except if a is equal to 1
+[68:18] and I know it for sure, right?
+[68:20] So if a is equal to 1, then
+I'm going to have a minus 1,
+[68:23] which is equal to 0.
+[68:25] So I'm going to have
+a minus 1 times log
+[68:27] x, which is going to be just 0.
+[68:28] So log x is going
+to vanish from here.
+[68:30] But if a is equal to 1,
+then this distribution
+[68:33] is actually much nicer, and
+it actually does not even
+[68:36] deserve the name gamma.
+[68:37] What is it if a is equal to 1?
+[68:42] It's an exponential, right?
+[68:43] Gamma 1 is equal to 1. x to
+the a minus 1 is equal to 1.
+[68:47] b-- so I have exponential
+x over b divided by b.
+[68:51] So 1 over b-- call it lambda.
+[68:53] And this is just an
+exponential distribution.
+[68:56] And so every time you're
+going to see something--
+[68:58] so all these guys that
+don't make it to this table,
+[69:02] they could be part of those
+guys, but they're just more--
+[69:06] they're just to--
+[69:09] they just have another
+name in this thing.
+[69:10] All right, so you could
+compute the value of theta
+[69:13] for different values, right?
+[69:15] So again, you still have some
+continuous or discrete ones.
+[69:18] This is my b of theta.
+[69:19] And I said this is actually
+really what captures my theta.
+[69:22] This b is actually called
+cumulant generating function,
+[69:26] OK?
+[69:27] I don't have time.
+[69:28] I could write five
+slides to explain to you,
+[69:30] but it would just only
+tell you why it's called
+[69:32] cumulant generating function.
+[69:34] It's also known as the log of
+the moment generating function.
+[69:38] And the way it's called
+cumulant generating function
+[69:42] is because if I start taking
+successive derivatives
+[69:44] and evaluating them at 0, I
+get the successive cumulance
+[69:47] of this distribution, which
+are some transformation
+[69:50] of the moments.
+[69:51] AUDIENCE: What are you
+talking about again?
+[69:53] PHILIPPE RIGOLLET:
+The function b.
+[69:55] AUDIENCE: [INAUDIBLE]
+[69:55] PHILIPPE RIGOLLET: So this
+is just normalization.
+[69:57] So this is just to tell
+you I can compute this,
+[70:00] but I really don't care.
+[70:01] And obviously I don't care
+about stuff that's complicated.
+[70:04] This is actually cute, and this
+is what completes everything.
+[70:07] And the rest is just like
+some general description.
+[70:09] You only need to tell
+you that the range of y
+[70:11] is 0 to infinity, right?
+[70:14] And that is
+essentially telling me
+[70:16] this is going to give me some
+hints as to which link function
+[70:19] I should be using, right?
+[70:20] Because the range
+of y tells me what
+[70:21] the range of expectation
+of y is going to be.
+[70:23] All right, so here, it
+tells me that the range of y
+[70:25] is between 0 and 1.
+[70:28] OK, so what I want
+to show you is
+[70:30] that this captures a
+variety of different ranges
+[70:33] that you can have.
+[70:40] OK, so I'm going to want
+to go into the likelihood.
+[70:46] And the likelihood
+I'm actually going
+[70:48] to use to compute
+the expectations.
+[70:50] But since I actually
+don't have time
+[70:52] to do this now, let's just
+go quickly through this
+[70:55] and give you spoiler alert to
+make sure that you all wake up
+[70:59] on Thursday and
+really, really want
+[71:01] to think about coming
+here immediately.
+[71:03] All right, so the thing
+I'm going to want to do,
+[71:05] as I said, is it would
+be nice if, at least
+[71:07] for this canonical
+family, when I give you b,
+[71:11] you would be able
+to say, oh, here
+[71:12] is a simple computation of b
+that would actually give me
+[71:16] the mean and the variance.
+[71:17] The mean and the variance
+are also known as moments.
+[71:20] b is called cumulant
+generating function.
+[71:22] So it sounds like
+moments being related
+[71:24] to cumulance, I might have a
+path to finding those, right?
+[71:28] And it might involve taking
+derivatives of b, as we'll see.
+[71:31] The way we're
+going to prove this
+[71:33] by using this thing that
+we've used several times.
+[71:36] So this property we use
+when we're computing,
+[71:39] remember, the fisher
+information, right?
+[71:41] We had two formulas for
+the fisher information.
+[71:43] One was the expectation of the
+second derivative of the log
+[71:49] likelihood, and one was negative
+expectation of the square--
+[71:53] sorry, expectation of the
+square, and the other one
+[71:55] was negative the expectation of
+the second derivative, right?
+[71:57] The log likelihood is concave,
+so this number is negative,
+[72:00] this number is positive.
+[72:02] And the way we did this is by
+just permuting some derivative
+[72:04] and integral here.
+[72:06] And there was just-- we
+used the fact that something
+[72:08] that looked like this, right?
+[72:09] The log likelihood
+is log of f theta.
+[72:13] And when I take the derivative
+of this guy with respect
+[72:20] to theta, then I
+have something that
+[72:24] looks like the derivative
+divided by f theta.
+[72:30] And if I start taking the
+integral against f theta
+[72:34] of this thing, so the
+expectation of this thing,
+[72:39] those things would cancel.
+[72:42] And then I had just the
+integral of a derivative, which
+[72:45] I would make a leap of faith
+and say that it's actually
+[72:48] the derivative of the integral.
+[72:53] But this was equal to 1.
+[72:56] So this derivative was
+actually equal to 0.
+[72:58] And so that's how you
+got that the expectation
+[73:00] of the derivative of the log
+likelihood is equal to 0.
+[73:02] And you do it once again
+and you get this guy.
+[73:04] It's just some nice
+things that happen
+[73:06] with the [INAUDIBLE] taking
+derivative of the log.
+[73:08] We've done that,
+we'll do that again.
+[73:10] But once you do this, you
+can actually apply it.
+[73:13] And-- missing a
+parenthesis over there.
+[73:17] So when you write
+the log likelihood,
+[73:19] it's just log of an exponential.
+[73:21] Huh, that's actually
+pretty nice.
+[73:22] Just like the least squares
+came naturally, the least
+[73:25] squares [INAUDIBLE]
+came naturally
+[73:26] when we took the log
+likelihood of the Gaussians,
+[73:29] we're going to have the
+same thing that happens when
+[73:31] I take the log of the density.
+[73:33] The exponential is
+going to go away,
+[73:35] and then I'm going
+to use this formula.
+[73:36] But this formula is
+going to actually give me
+[73:39] an equation directly--
+oh, that's where it was.
+[73:43] So that's the one
+that's missing up there.
+[73:44] And so the expectation
+minus this thing
+[73:49] is going to be equal
+to 0, which tells me
+[73:50] that the expectation
+is just the derivative.
+[73:53] Right, so it's still
+a function of theta,
+[73:55] but it's just a derivative of b.
+[73:57] And the variance
+is just going to be
+[73:59] the second derivative of b.
+[74:01] But remember, this was some
+sort of a scaling, right?
+[74:03] It's called the
+dispersion parameter.
+[74:05] So if I had a Gaussian and
+the variance of the Gaussian
+[74:09] did not depend on
+the sigma squared
+[74:12] which I stuffed in this phi,
+that would be certainly weird.
+[74:15] And it cannot depend only
+on mu, and so this will--
+[74:17] for the Gaussian, this is
+definitely going to be equal
+[74:19] to 1.
+[74:20] And this is just going to
+be equal to my variance.
+[74:24] So this is just by taking
+the second derivative.
+[74:28] So basically, the take-home
+message is that this function b
+[74:33] captures--
+[74:35] by taking one derivative
+of the expectation
+[74:37] and by taking two derivatives
+captures the variance.
+[74:39] Another thing
+that's actually cool
+[74:41] and we'll come
+back to this and I
+[74:42] want to think about is if
+this second derivative is
+[74:45] the variance, what can
+I say about this thing?
+[74:52] What do I know about a variance?
+[74:53] AUDIENCE: [INAUDIBLE]
+[74:54] PHILIPPE RIGOLLET:
+Yeah, that's positive.
+[74:56] So I know that this is positive.
+[74:58] So what does that tell me?
+[75:00] Positive?
+[75:03] That's convex, right?
+[75:03] A function that has positive
+second derivative is convex.
+[75:07] So we're going to use
+that as well, all right?
+[75:09] So yeah, I'll see
+you on Thursday.

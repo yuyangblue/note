@@ -1,0 +1,2380 @@
+[00:00] The following content is
+provided under a Creative
+[00:02] Commons license.
+[00:03] Your support will help
+MIT OpenCourseWare
+[00:06] continue to offer high quality
+educational resources for free.
+[00:10] To make a donation or to
+view additional materials
+[00:12] from hundreds of
+MIT courses, visit
+[00:15] MITOpenCourseWare@OCW.MIT.edu.
+[00:20] PHILIPPE RIGOLLET: It's
+because if I was not,
+[00:22] this would be basically the
+last topic we would ever see.
+[00:25] And this is arguably, probably
+the most important topic
+[00:29] in statistics, or at
+least that's probably
+[00:30] the reason why most of
+you are taking this class.
+[00:33] Because regression
+implies prediction,
+[00:36] and prediction is what people
+are after to now, right?
+[00:39] You don't need to
+understand what
+[00:40] the model for the
+financial market
+[00:41] is if you actually
+have a formula
+[00:43] to predict what the stock
+prices are going to be tomorrow.
+[00:47] And regression, in a way,
+allows us to do that.
+[00:49] And we'll start with a very
+simple version of regression,
+[00:52] which is linear regression,
+which is the most standard one.
+[00:55] And then we'll move on to
+slightly more advanced notions
+[00:58] such as nonparametric
+regression.
+[00:59] At least, we're going to see
+the principles behind it.
+[01:02] And I'll touch upon a little bit
+of high dimensional regression,
+[01:06] which is what people
+are doing today.
+[01:09] So the goal of
+regression is to try
+[01:12] to predict one variable
+based on another variable.
+[01:16] All right, so here the
+notation is very important.
+[01:19] It's extremely standard.
+[01:22] It goes everywhere essentially,
+and essentially you're
+[01:25] trying to explain why
+as a function of x,
+[01:29] which is the usual y
+equals f of x question--
+[01:33] except that, you know, if
+you look at a calculus class,
+[01:36] people tell you y equals
+f of x, and they give you
+[01:39] a specific form for f,
+and then you do something.
+[01:42] Here, we're just going
+to try to estimate
+[01:43] what this length function is.
+[01:46] And this is why we often
+call y the explained variable
+[01:49] and x the explanatory variable.
+[01:52] All right, so we're
+statisticians,
+[01:55] so we start with data.
+[01:56] All right, then what
+does our data look like?
+[01:58] Well, it looks like a
+bunch of input, output
+[02:01] to this relationship.
+[02:03] All right, so we have
+a bunch of xi, yi.
+[02:05] Those are pairs, and I can do
+a scatterplot of those guys.
+[02:09] So each point here has a
+x-coordinate, which is xi,
+[02:14] and a y-coordinate,
+which is yi, and here, I
+[02:16] have a bunch of endpoints.
+[02:17] And I just draw them like that.
+[02:19] Now, the functions we're
+going to be interested in
+[02:23] are often function of the form
+y equals a plus b times x, OK.
+[02:30] And that means that this
+function looks like this.
+[02:36] So if I do x and
+y, this function
+[02:38] looks exactly like a line,
+and clearly those points
+[02:41] are not on the line.
+[02:42] And it will basically
+never happen
+[02:44] that those points are on a line.
+[02:45] There's a famous
+T-shirt from, I think,
+[02:48] U.C. Berkeley's
+staff department,
+[02:50] that shows this picture
+and put a line between them
+[02:52] like we're going to see it.
+[02:53] And it says, oh,
+statisticians, so many points,
+[02:56] and you still managed
+to miss all of them.
+[02:59] And so essentially, we don't
+believe that this relationship
+[03:04] y is equal to a plus bx is true,
+but maybe up to some noise.
+[03:08] And that's where the statistics
+is going to come into play.
+[03:11] There's going to be some random
+noise that's going to play out,
+[03:14] and hopefully the noise is
+going to be spread out evenly,
+[03:17] so that we can average it
+if we have enough points.
+[03:20] Average it out, OK.
+[03:22] And so this epsilon here is not
+necessarily due to randomness.
+[03:26] But again, just like we did
+modeling in the first place,
+[03:29] it essentially
+accounts for everything
+[03:30] we don't understand
+about this relationship.
+[03:33] All right, so for example--
+[03:36] so here, I'm not going to be--
+[03:37] give me one second, so we'll
+see an example in a second.
+[03:41] But the idea here is
+that if you have data,
+[03:44] and if you believe
+that it's of the form,
+[03:45] a plus b x plus
+some noise, you're
+[03:47] trying to find the line
+that will explain your data
+[03:50] the best, right?
+[03:51] In the terminology
+we've been using before,
+[03:54] this would be the most likely
+line that explains the data.
+[03:58] So we can see that
+it's slightly--
+[03:59] we've just added
+another dimension
+[04:01] to our statistical problem.
+[04:02] We don't have just x's,
+but we have y's, and we're
+[04:04] trying to find the most likely
+explanation of the relationship
+[04:07] between y and x.
+[04:09] All right, and so
+in practice, the way
+[04:12] it's going to look like is that
+we're going to have basically
+[04:14] two parameters to
+find the slope b
+[04:17] and the intercept
+a, and given data,
+[04:20] the goal is going to be to try
+to find the best possible line.
+[04:23] All right?
+[04:24] So what we're going
+to find is not
+[04:25] exactly a and b, the ones that
+actually generate the data,
+[04:29] but some estimators of those
+parameters, a hat and b hat
+[04:33] constructed from the data.
+[04:35] All right, so we'll see
+that more generally,
+[04:38] but we're not going to go too
+much in the details of this.
+[04:40] There's actually
+quite a bit that you
+[04:42] can understand if
+you do what's called
+[04:43] univariate regression
+when x is actually
+[04:47] a real valued random variable.
+[04:49] So when this happens, this is
+called univariate regression.
+[04:59] And when x is in rp for p
+larger than or equal to 2,
+[05:05] this is called
+multivariate regression.
+[05:16] OK, and so here we're
+just trying to explain y
+[05:20] is a plus bx plus epsilon.
+[05:23] And here we're going to have
+something more complicated.
+[05:26] We're going to have y, which is
+equal to a plus b1, x1 plus b2,
+[05:33] x2 plus bp, xp plus epsilon--
+[05:39] where x is equal to--
+[05:42] the coordinates of x are
+given by x1, 2xp, rp.
+[05:46] OK, so it's still linear.
+[05:49] Right, they still add
+all the coordinates
+[05:51] of x with a coefficient
+in front of them,
+[05:53] but it's a bit more complicated
+than just one coefficient
+[05:56] for one coordinate of x, OK?
+[05:58] So we'll come back to
+multivariate regression.
+[06:03] Of course, you can write
+this as x transpose b, right?
+[06:08] So this entire thing here,
+this linear combination
+[06:14] is of the form x
+transpose b, where
+[06:17] b is the vector that has
+coordinates b1 to bp.
+[06:23] OK?
+[06:25] Sorry, here, it's in [? rd, ?]
+p is the natural notation.
+[06:31] All right, so our goal
+here, in the univariate one,
+[06:35] is to try to write
+the model, make sense
+[06:38] of this little twiddle here--
+[06:40] essentially, from a
+statistical modeling question,
+[06:44] the question is going to be,
+what distributional assumptions
+[06:47] do you want to put on epsilon?
+[06:48] Are you going to say
+they're Gaussian?
+[06:50] Are you going to say
+they're binomial?
+[07:00] OK, are you going to
+say they're binomial?
+[07:03] Are you going to say
+they're Bernoulli?
+[07:05] So that's going to be what we
+we're going to make sense of,
+[07:07] and then we're going
+to try to find a method
+[07:10] to estimate a and b.
+[07:11] And then maybe we're
+going to try to do
+[07:13] some inference about a and b--
+[07:15] maybe test if a and b take
+certain values, if they're
+[07:18] less than something,
+maybe find some confidence
+[07:20] regions for a and b, all right?
+[07:24] So why would you
+want to do this?
+[07:25] Well, I'm sure all of you have
+an application, if I give you
+[07:29] some x, you're trying
+to predict what y is.
+[07:32] Machine learning is all
+about doing this, right?
+[07:34] Without maybe trying
+to even understand
+[07:36] the physics behind
+this, they're saying,
+[07:38] well, you give me
+a bag of words,
+[07:40] I want to understand whether
+it's going to be a spam or not.
+[07:43] You give me a bunch of
+economic indicators,
+[07:47] I want you to tell me how much
+I should be selling my car for.
+[07:51] You give me a bunch of
+measurements on some patient,
+[07:55] I want you to predict
+how this person is
+[07:57] going to respond to my
+drug-- and things like this.
+[08:00] All right, and often we actually
+don't have much modeling
+[08:04] intuition about what the
+relationship between x and y
+[08:07] is, and this linear thing is
+basically the simplest function
+[08:10] we can think of.
+[08:11] Arguably, linear functions
+are the simplest functions
+[08:15] that are not trivial.
+[08:16] Otherwise, we would just say,
+well, let's just predict x of y
+[08:19] to be a constant, meaning
+it does not depend on x.
+[08:21] But if you want it
+to depend on x, then
+[08:23] your functions are basically
+as simple as it gets.
+[08:25] It turns out, amazingly, this
+does the trick quite often.
+[08:30] So for example, if
+you look at economics,
+[08:33] you might want to assume
+that the demand is
+[08:35] a linear function of the price.
+[08:38] So if your price
+is zero, there's
+[08:40] going to be a certain demand.
+[08:41] And as the price increases,
+the demand is going to move.
+[08:45] Do you think b is going to
+be positive or negative here?
+[08:51] What?
+[08:52] Typically, it's
+negative unless we're
+[08:53] talking about
+maybe luxury goods,
+[08:56] where you know,
+the more expensive,
+[08:57] the more people
+actually want it.
+[09:00] I mean, if we're talking
+about actual economic demand,
+[09:02] that's probably
+definitely negative.
+[09:06] It doesn't have to be,
+you know, clearly linear,
+[09:11] so that you can actually
+make it linear, transform it
+[09:13] into something linear.
+[09:14] So for example, you have
+this like multiplicative
+[09:17] relationship, PV equals nRT,
+which is the Ideal gas law.
+[09:24] If you want to actually
+write this relationship,
+[09:26] if you want to predict
+what the pressure is
+[09:28] going to be as a function of
+the volume and the temperature--
+[09:33] and well, let's assume that
+n is the Avogadro constant,
+[09:37] and let's assume that the
+radius is actually fixed.
+[09:42] Then you take the log on each
+side, so you get PV equals nRT.
+[10:03] So what that means is that
+log PV is equal to log nRT.
+[10:10] So that means log P plus log V
+is equal to the log nR plus log
+[10:23] T. So we said that R is
+constant, so this is actually
+[10:28] your constant.
+[10:29] I'm going to call it a.
+[10:31] And then that
+means that log P is
+[10:35] equal to minus log V. That
+log P is equal to a minus log
+[10:49] V plus log T. OK?
+[10:55] And so in particular, if I
+write b equal to negative 1
+[11:01] and c equal to plus 1,
+this gives me the formula
+[11:04] that I have here.
+[11:06] Now again, it might be the case
+that this is the ideal gas law.
+[11:10] So in practice, if I
+start recording pressure,
+[11:12] and temperature, and volume, I
+might make measurement errors,
+[11:16] there might be slightly
+different conditions
+[11:18] in such a way that I'm not
+going to get exactly those.
+[11:21] And I'm just going to
+put this little twiddle
+[11:23] to account for the fact
+that the points that I'm
+[11:25] going to be recording
+for log pressure,
+[11:28] log volume, and log
+temperature are not going
+[11:30] to be exactly on one line.
+[11:32] OK, they're going to be close.
+[11:33] Actually, in those
+physics experiments,
+[11:36] usually, they're very close
+because the conditions
+[11:39] are controlled under
+lab experiments.
+[11:41] So it means that the
+noise is very small.
+[11:44] But for other cases,
+like demand and prices,
+[11:47] it's not a law of physics,
+and so this must change.
+[11:50] Even the linear structure is
+probably not clear, right.
+[11:53] At some points,
+there's probably going
+[11:54] to be some weird
+curvature happening.
+[11:57] All right, so this slide is
+just to tell you maybe you
+[12:00] don't have, obviously,
+a linear relationship,
+[12:03] but maybe you do
+if you start taking
+[12:04] logs exponentials, squares.
+[12:08] You can sometimes take the
+product of two variables,
+[12:10] things like this, right.
+[12:12] So this is variable
+transformation,
+[12:13] and it's mostly
+domain-specific, so we're not
+[12:15] going to go into
+more details of this.
+[12:18] Any questions?
+[12:22] All right, so now I'm
+going to be giving--
+[12:27] so if we start thinking
+a little more about what
+[12:29] these coefficients
+should be, well,
+[12:32] remember-- so
+everybody's clear why
+[12:34] I don't put the little i here?
+[12:41] Right, I don't put the
+little i because I'm just
+[12:43] talking about a generic
+x and a generic y,
+[12:47] but the observations
+are x1, y1, right.
+[12:49] So typically, on
+the blackboard I'm
+[12:53] often going to write only xy,
+but the data really is x1,
+[13:02] y1, all the way to xn, yn.
+[13:07] So those are those points in
+this two dimensional plot.
+[13:10] But I think of those as being
+independent copies of the pair
+[13:21] xy.
+[13:24] They have to have--
+[13:26] to contain their relationship.
+[13:27] And so when I talk
+about distribution
+[13:29] of those random variables, I
+talk about the distribution
+[13:32] of xy, and that's the same.
+[13:34] All right, so the first
+thing you might want to ask
+[13:36] is, well, if I have an
+infinite amount of data,
+[13:41] what can I hope to
+get for a and b?
+[13:44] If my simple size
+goes to infinity,
+[13:46] then I should actually
+know exactly what
+[13:48] the distribution of xy is.
+[13:50] And so there should
+be an a and a b
+[13:52] that captures this linear
+relationship between y and x.
+[13:57] And so in particular,
+we're going
+[13:59] to try to ask the population,
+or theoretic, values of a and b,
+[14:02] and you can see that
+you can actually
+[14:04] compute them explicitly.
+[14:05] So let's just try to find how.
+[14:08] So as I said, we have
+a bunch of points
+[14:10] on this line close
+to a line, and I'm
+[14:16] trying to find the best fit.
+[14:20] All right, so this
+guy is not a good fit.
+[14:23] This guy is not a good fit.
+[14:24] And we know that this guy
+is a good fit somehow.
+[14:27] So we need to mathematically
+formulate the fact
+[14:30] that this line here is
+better than this line here
+[14:35] or better than this line here.
+[14:37] So what we're trying to do
+is to create a function that
+[14:41] has values that are
+smaller for this curve
+[14:43] and larger for these two curves.
+[14:45] And the way we do it is
+by measuring the fit,
+[14:47] and the fit is essentially
+the aggregate distance
+[14:51] of all the points to the curve.
+[14:55] And there's many
+ways I can measure
+[14:56] the distance to a curve.
+[14:58] So if I want to find so--
+let's just open a parenthesis.
+[15:01] If I have a point
+here-- so we're
+[15:03] going to do it for
+one point at a time.
+[15:05] So if I have a point,
+there's many ways
+[15:07] I can measure its distance
+to the curve, right?
+[15:09] I can measure it like that.
+[15:12] That is one distance
+to the curve.
+[15:14] I can measure it like that by
+having a right angle here that
+[15:19] is one distance to the curve.
+[15:20] Or I can measure it like that.
+[15:23] That is another distance
+to the curve, right.
+[15:27] There's many ways
+I can go for it.
+[15:29] It turns out that
+one is actually
+[15:31] going to be fairly
+convenient for us,
+[15:33] and that's the one that says,
+let's look at the square
+[15:36] of the value of x on the curve.
+[15:38] So if this is the curve,
+y is equal to a plus bx.
+[15:51] Now, I'm going to think of
+this point as a random point,
+[15:54] capital X, capital
+Y, so that means
+[15:57] that it's going to be x1,
+y1 or x2, y2, et cetera.
+[16:02] Now, I want to
+measure the distance.
+[16:04] Can somebody tell me
+which of the three--
+[16:06] the first one, the second
+one, or the third one--
+[16:08] this formula, expectation of y
+minus a minus bx squared is--
+[16:13] which of the three
+is it representing?
+[16:18] AUDIENCE: The second one.
+[16:20] PHILIPPE RIGOLLET:
+The second one
+[16:21] where I have the right angle?
+[16:22] OK, everybody agrees with this?
+[16:26] Anybody wants to vote
+for something else?
+[16:28] Yeah?
+[16:29] AUDIENCE: The third one?
+[16:30] PHILIPPE RIGOLLET:
+The third one?
+[16:31] Everybody agrees
+with the third one?
+[16:34] So by default, everybody's
+on the first one?
+[16:38] Yeah, it is the vertical
+distance actually.
+[16:42] And the reason is if it was the
+one with the straight angle,
+[16:44] with the right angle,
+it would actually
+[16:46] be a very complicated
+mathematical formula,
+[16:48] so let's just see y, right?
+[16:51] And by y, I mean y.
+[16:53] OK, so this means that this
+is my x, and this is my y.
+[17:02] All right, so that means
+that this point is xy.
+[17:05] So what I'm measuring
+is the difference
+[17:07] between y minus
+a plus b times x.
+[17:15] This is the thing I'm going
+to take the expectation off--
+[17:18] the square and then
+the expectation-- so a
+[17:20] plus b times x, if this is
+this line, this is this point.
+[17:24] So that's this value here.
+[17:27] This value here is
+a plus bx, right?
+[17:33] So what I'm really
+measuring is the difference
+[17:35] between y and N plus bx,
+which is this distance here.
+[17:42] And since I like things
+like Pythagoras theorem,
+[17:45] I'm actually going
+to put a square here
+[17:47] before I take the expectation.
+[17:51] So now this is a
+random variable.
+[17:53] This is this random variable.
+[17:55] And so I want a number,
+so I'm going to turn it
+[17:58] into a deterministic number.
+[18:00] And the way I do this is
+by taking expectation.
+[18:03] And if you think expectations
+should be close to average,
+[18:07] this is the same
+thing as saying,
+[18:09] I want that in
+average, the y's are
+[18:12] close to the a plus bx, right?
+[18:14] So we're doing it
+in expectation,
+[18:16] but that's going to
+translate into doing it
+[18:18] in average for all the points.
+[18:20] All right, so this is the
+thing I want to measure.
+[18:22] So that's this
+vertical distance.
+[18:24] Yeah?
+[18:26] OK.
+[18:32] This is my fault actually.
+[18:36] Maybe we should
+close those shades.
+[18:50] OK, I cannot do just
+one at a time, sorry.
+[19:11] All right, so now that I do
+those vertical distances,
+[19:15] I can ask-- well, now,
+I have this function,
+[19:18] right-- to have a function that
+takes two parameters a and b,
+[19:22] maps it to the expectation
+of y minus a plus bx squared.
+[19:30] Sorry, the square is here.
+[19:32] And I could ask, well,
+this is a function that
+[19:35] measures the fit of the
+parameters a and b, right?
+[19:38] This function should be small.
+[19:40] The value of this
+function here, function
+[19:45] of a and b that measures
+how close the point xy is
+[20:07] to the line a plus
+b times x while y
+[20:14] is equal to a plus b
+times x in expectation.
+[20:23] OK, agreed?
+[20:24] This is what we just said.
+[20:27] Again, if you're not
+comfortable with the reason why
+[20:29] you get expectations, just
+think about having data points
+[20:32] and taking the average
+value for this guy.
+[20:34] So it's basically an
+aggregate distance
+[20:36] of the points to their line.
+[20:41] OK, everybody agrees this
+is a legitimate measure?
+[20:44] If all my points were on the
+line-- if my distribution--
+[20:48] if y was actually equal
+to a plus bx for some a
+[20:51] and b then this function
+would be equal to 0
+[20:54] for the correct a and b, right?
+[20:57] If they are far--
+well, it's going
+[20:59] to depend on how much
+noise I'm getting,
+[21:01] but it's still going to be
+minimized for the best one.
+[21:04] So let's minimize this thing.
+[21:06] So here, I don't make any--
+[21:11] again, sorry.
+[21:12] I don't make an assumption on
+the distribution of x or y.
+[21:21] Here, I assume, somehow,
+that the variance of x
+[21:27] is not equal to 0.
+[21:28] Can somebody tell me why?
+[21:29] Yeah?
+[21:30] AUDIENCE: Not really a
+question-- the slides,
+[21:33] you have y minus a minus bx
+quantity squared expectation
+[21:38] of that, and here you've written
+square of the expectation.
+[21:41] PHILIPPE RIGOLLET:
+No, here I'm actually
+[21:42] in the expectation
+of the square.
+[21:46] If I wanted to write the
+square of the expectation,
+[21:49] I would just do this.
+[21:52] So let's just make it clear.
+[22:00] Right?
+[22:01] Do you want me to put an
+extra set of parenthesis?
+[22:03] That's what you want me to do?
+[22:06] AUDIENCE: Yeah, it's just
+confusing with the [INAUDIBLE]
+[22:11] PHILIPPE RIGOLLET: OK, that's
+the one that makes sense, so
+[22:13] the square of the expectation?
+[22:14] AUDIENCE: Yeah.
+[22:15] PHILIPPE RIGOLLET: Oh, the
+expectation of the square,
+[22:17] sorry.
+[22:20] Yeah, dyslexia.
+[22:22] All right, any question?
+[22:25] Yeah?
+[22:25] AUDIENCE: Does this assume
+that the error is Gaussian?
+[22:28] PHILIPPE RIGOLLET: No.
+[22:32] AUDIENCE: I mean, in
+the sense that like,
+[22:34] if we knew that the
+error was, like,
+[22:36] even the minus followed
+like-- so even the minus x
+[22:40] to the fourth distribution,
+would we want to minimise
+[22:44] the expectation of what
+the fourth power of y minus
+[22:48] a equals bx in order to get
+[? what the ?] [? best is? ?]
+[22:52] PHILIPPE RIGOLLET: Why?
+[22:57] So you know the answers
+to your question,
+[22:59] so I just want you to
+use the words that--
+[23:01] right, so why would you want
+to use the fourth power?
+[23:04] AUDIENCE: Well,
+because, like, we
+[23:06] want to more strongly
+penalize deviations
+[23:08] because we'd expect very
+large deviations to be
+[23:11] very rare, or more
+rare, than it would
+[23:15] with the Gaussian
+[INAUDIBLE] power.
+[23:18] PHILIPPE RIGOLLET: Yeah so,
+that would be the maximum likely
+[23:19] estimator that you're
+describing to me, right?
+[23:21] I can actually
+write the likelihood
+[23:22] of a pair of numbers ab.
+[23:25] And if I know this,
+that's actually
+[23:26] what's going to come
+into it because I
+[23:28] know that the density is
+going to come into play when
+[23:31] I talk about there.
+[23:32] But here, I'm just
+talking about--
+[23:34] this is a mechanical tool.
+[23:36] I'm just saying, let's minimize
+the distance to the curve.
+[23:39] Another thing I could have
+done is take the absolute value
+[23:42] of this thing, for example.
+[23:43] I just decided to take the
+square root before I did it.
+[23:46] OK, so regardless
+of what I'm doing,
+[23:48] I'm just taking the
+squares because that's just
+[23:50] going to be convenient for me
+to do my computations for now.
+[23:53] But we don't have
+any statistical model
+[23:55] at this point.
+[23:56] I didn't say anything--
+that y follows this.
+[23:59] X follows this.
+[24:00] I'm just doing
+minimal assumptions
+[24:01] as we go, all right?
+[24:04] So the variance of
+x is not equal to 0?
+[24:06] Could somebody tell me why?
+[24:11] What would my cloud point
+look like if the variance of x
+[24:14] was equal to 0?
+[24:16] Yeah, they would all
+be at the same point.
+[24:18] So it's going to be hard for
+me to start fitting in a line,
+[24:20] right?
+[24:21] I mean, best case
+scenario, I have this x.
+[24:24] It has variance, zero, so
+this is the expectation of x.
+[24:26] And all my points have
+the same expectation,
+[24:31] and so, yes, I could
+probably fit that line.
+[24:33] But that wouldn't help
+very much for other x's.
+[24:38] So I need a bit of variance
+so that things spread out
+[24:41] a little bit.
+[24:47] OK, I'm going to
+have to do this.
+[24:51] I think it's just my--
+[25:10] All right, so I'm going to
+put a little bit of variance.
+[25:13] And the other thing is here,
+I don't want to do much more,
+[25:15] but I'm actually going to think
+of x as having means zero.
+[25:22] And the way I do
+this is as follows.
+[25:24] Let's define x tilde, which is
+x minus the expectation of x.
+[25:30] OK, so definitely the
+expectation of x tilde is what?
+[25:36] Zero, OK.
+[25:38] And so now I want to
+minimize in ab, expectation
+[25:43] of y minus a plus b, x squared.
+[25:53] And the way I'm going to do this
+is by turning x into x tilde
+[26:03] and stuffing the extra--
+[26:07] and putting the extra
+expectation of x into the a.
+[26:12] So I'm going to write this as
+an expectation of y minus a plus
+[26:19] b expectation of x--
+[26:25] which I'm going to a tilde--
+[26:27] and plus b x tilde.
+[26:33] OK?
+[26:35] And everybody agrees with this?
+[26:38] So now I have two
+parameters, a tilde and b,
+[26:41] and I'm going to pretend
+that now x tilde--
+[26:44] so now the role of x is played
+by x tilde, which is now
+[26:50] a centered random variable.
+[26:53] OK, so I'm going to
+call this guy a tilde,
+[26:55] but for my computations
+I'm going to call it a.
+[26:58] So how do I find the
+minimum of this thing?
+[27:05] Derivative equal to zero, right?
+[27:06] So here it's a quadratic thing.
+[27:08] It's going to be like that.
+[27:09] I take the derivative,
+set it to zero.
+[27:10] So I'm first going to take
+the derivative with respect
+[27:13] to a and set it equal to zero,
+so that's equivalent to saying
+[27:16] that the expectation of--
+[27:18] well, here, I'm going
+to pick up a 2--
+[27:21] y minus a plus bx
+tilde is equal to zero.
+[27:33] And then I also have that the
+derivative with respect to b is
+[27:36] equal to zero, which is
+equivalent to the expectation
+[27:40] of-- well, I have a
+negative sign somewhere,
+[27:42] so let me put it here--
+[27:43] minus 2x tilde, y
+minus a plus bx tilde.
+[27:55] OK, see that's why I don't want
+to put too many parenthesis.
+[28:03] OK.
+[28:05] So I just took the
+derivative with respect
+[28:07] to a, which is just
+basically the square,
+[28:09] and then I have a negative 1
+that comes out from inside.
+[28:12] And then I take the
+derivative with respect
+[28:14] to b, and since b has x tilde.
+[28:17] In [? factor, ?] it
+comes out as well.
+[28:19] All right, so the minus 2's
+really won't matter for me.
+[28:24] And so now I have two equations.
+[28:26] The first equation,
+while it's pretty simple,
+[28:28] it's just telling me that
+the expectation of y minus a
+[28:31] is equal to zero.
+[28:33] So what I know is that a is
+equal to the expectation of y.
+[28:41] And really that
+was a tilde, which
+[28:44] implies that the a
+I want is actually
+[28:47] equal to the
+expectation of y minus b
+[29:00] times the expectation of x.
+[29:05] OK?
+[29:10] Just because a tilde is a plus
+b times the expectation of x.
+[29:16] So that's for my a.
+[29:19] And then for my b, I
+use the second one.
+[29:22] So the second one tells me that
+the expectation of x tilde of y
+[29:27] is equal to a plus b times
+the expectation of x tilde
+[29:32] which is zero, right?
+[29:38] OK?
+[29:39] But this a is actually
+a tilde in this problem,
+[29:41] so it's actually a plus
+b expectation of x.
+[29:51] Now, this is the
+expectation of the product
+[29:53] of two random variables, but
+x tilde is centered, right?
+[29:57] It's x minus expectation of
+x, so this thing is actually
+[30:00] equal to the covariance
+between x and y
+[30:03] by definition of covariance.
+[30:09] So now I have everything
+I need, right.
+[30:11] How do I just--
+[30:14] I'm sorry about that.
+[30:16] So I have everything I need.
+[30:18] Now, I now have two
+equations with two unknowns,
+[30:22] and all I have to do is
+to basically plug it in.
+[30:25] So it's essentially telling
+me that the covariance of xy--
+[30:29] so the first equation tells
+me that the covariance of xy
+[30:31] is equal to a plus b expectation
+of x, but a is expectation of y
+[30:36] minus b expectation of x.
+[30:39] So it's-- well, actually,
+maybe I should start with b.
+[30:54] Oh, sorry.
+[30:56] OK, I forgot one thing.
+[30:59] This is not true, right.
+[31:00] I forgot this term.
+[31:02] x tilde multiplies x
+tilde here, so what
+[31:05] I'm left with is x tilde--
+[31:07] it's minus b times the
+expectation of x tilde squared.
+[31:11] So that's actually minus
+b times the variance of x
+[31:14] tilde because x tilde
+is already centered,
+[31:17] which is actually
+the variance of x.
+[31:23] So now I have that this thing
+is actually a plus b expectation
+[31:29] of x minus b variance of x.
+[31:36] And I also have that a
+is equal to expectation
+[31:42] of y minus b expectation of x.
+[31:53] So if I sum the two, those
+guys are going to cancel.
+[31:58] Those guys are going to cancel.
+[32:00] And so what I'm going to be
+left with is covariance of xy
+[32:05] is equal to expectation
+of x, expectation of y,
+[32:10] and then I'm left with
+this term here, minus
+[32:12] b times the variance of x.
+[32:17] And so that tells me that b--
+[32:20] why do I still have
+the variance there?
+[32:34] AUDIENCE: So is the
+covariance really
+[32:37] the expectation of x tilde
+times y minus expectation of y?
+[32:43] Because y is not
+centered, correct?
+[32:46] PHILIPPE RIGOLLET: Yeah.
+[32:47] AUDIENCE: OK, but x
+is still the center.
+[32:48] PHILIPPE RIGOLLET: But x
+is still the center, right.
+[32:50] So you just need
+to have one that's
+[32:52] centered for this to work.
+[32:57] Right, I mean, you can check it.
+[32:58] But basically when
+you're going to have
+[33:00] the product of the expectations,
+you only need one of the two
+[33:02] in the product to be zero.
+[33:03] So the product is zero.
+[33:09] OK, why do I keep my--
+[33:11] so I get a, a, and
+then the b expectation.
+[33:14] OK, so that's probably
+earlier that I made a mistake.
+[33:25] So I get-- so this was a tilde.
+[33:29] Let's just be clear about the--
+[33:40] So that tells me that a tilde--
+[33:43] maybe it's not super
+fair of me to--
+[33:48] yeah, OK, I think I know
+where I made a mistake.
+[33:50] I should not have centered.
+[33:51] I wanted to make my life
+easier, and I should not
+[33:54] have done that.
+[33:55] And the reason is a
+tilde depends on b,
+[33:59] so when I take the
+derivative with respect
+[34:01] to b, what I'm left with here--
+[34:04] since a tilde
+depends on b, when I
+[34:06] take the derivative of
+this guy, I actually
+[34:09] don't get a tilde here,
+but I really get--
+[34:17] so again, this was not--
+[34:20] so that's the first one.
+[34:30] This is actually x here--
+[34:33] because when I take the
+derivative with respect to b.
+[34:38] And so now, what I'm left with
+is that the expectation-- so
+[34:40] yeah, I'm basically left
+with nothing that helps.
+[34:43] So I'm sorry about.
+[34:46] Let's start from the
+beginning because this is not
+[34:49] getting us anywhere, and a
+fix is not going to help.
+[34:53] So let's just do it again.
+[34:55] Sorry about that.
+[34:56] So let's not center anything
+and just do brute force
+[34:59] because we're going to--
+[35:01] b x squared.
+[35:04] All right.
+[35:07] Partial, with respect
+to a, is giving
+[35:09] equal zero is
+equivalent, so my minus 2
+[35:11] is going to cancel, right.
+[35:13] So I'm going to actually
+forget about this.
+[35:14] So it's actually telling
+me that the expectation
+[35:17] of y minus a plus bx
+is equal to zero, which
+[35:25] is equivalent to a plus
+b expectation of x, is
+[35:31] equal to the expectation of y.
+[35:33] Now, if I take the
+derivative with respect to
+[35:35] b and set it equal to
+zero, this is telling me
+[35:38] that the expectation of--
+[35:41] well, it's the same thing
+except that this time I'm
+[35:43] going to pull out an x.
+[35:52] This guy is equal to zero--
+[35:54] this guy is not here--
+[35:56] and so that implies that
+the expectation of xy
+[36:03] is equal to a times
+the expectation of x,
+[36:09] plus b times the
+expectation of x square.
+[36:16] OK?
+[36:21] All right, so the first one is
+actually not giving me much,
+[36:26] so I need to actually work
+with the two of those guys.
+[36:29] So I'm going to take the first--
+[36:31] so let me rewrite those two
+inequalities that I have.
+[36:33] I have a plus b, e of
+x is equal to e of y.
+[36:40] And then I have e of xy.
+[36:50] OK, and now what I do is
+that I multiply this guy.
+[37:01] So I want to cancel one
+of those things, right?
+[37:03] So what I'm going to--
+[37:12] so I'm going to take
+this guy, and I'm
+[37:13] going to multiply it by e of
+x and take the difference.
+[37:19] So I do times e of x, and then
+I take the sum of those two,
+[37:26] and then those two terms
+are going to cancel.
+[37:28] So then that tells
+me that b times e
+[37:33] of x squared, plus the
+expectation of xy is equal to--
+[37:45] so this guy is the
+one that cancelled.
+[37:53] Then I get this guy
+here, expectation
+[37:56] of x times the expectation
+of y, plus the guy that
+[38:02] remains here--
+[38:04] which is b times the
+expectation of x square.
+[38:11] So here I have b expectation
+of x, the whole thing squared.
+[38:16] And here I have b
+expectation of x square.
+[38:18] So if I pull this guy
+here, what do I get?
+[38:22] b times the variance of x, OK?
+[38:26] So I'm going to move here.
+[38:28] And this guy here, when
+I move this guy here,
+[38:31] I get the expectation
+of x times y,
+[38:32] minus the expectation of x
+times the expectation of y.
+[38:35] So this is actually telling me
+that the covariance of x and y
+[38:40] is equal to b times
+the variance of x.
+[38:45] And so then that
+tells me that b is
+[38:48] equal to covariance of xy
+divided by the variance of x.
+[38:55] And that's why I actually
+need the variance
+[38:57] of x to be non-zero because
+I couldn't do that otherwise.
+[39:01] And because if it
+was, it would mean
+[39:03] that b should be
+plus infinity, which
+[39:04] is what the limit of this
+guy is when the variance goes
+[39:08] to zero or negative infinity.
+[39:11] I can not sort them out.
+[39:14] All right, so I'm
+sorry about the mess,
+[39:16] but that should be more clear.
+[39:19] Then a, of course,
+you can write it
+[39:21] by plugging in the
+value of b, so you
+[39:23] know it's only a function
+of your distribution, right?
+[39:27] So what are the characteristics
+of the distribution--
+[39:29] so distribution can
+have a bunch of things.
+[39:31] It can have movements
+of order 4, of order 26.
+[39:34] It can have heavy
+tails or light tails.
+[39:36] But when you compute
+least squares,
+[39:39] the only thing that
+matters are the variance
+[39:41] of x, the expectation
+of the individual ones--
+[39:45] and really what captures how
+y changes when you change x,
+[39:50] is captured in the covariance.
+[39:51] The rest is really
+just normalization.
+[39:54] It's just telling you, I want
+things to cross the y-axis
+[39:58] at the right place.
+[39:59] I want things to cross the
+x-axis at the right place.
+[40:02] But the slope is really captured
+by how much more covariance
+[40:05] you have relative to
+the variance of x.
+[40:08] So this is essentially setting
+the scale for the x-axis,
+[40:12] and this is telling
+you for a unit scale,
+[40:15] this is the unit of y
+that you're changing.
+[40:20] OK, so we have explicit forms.
+[40:23] And what I could do, if I
+wanted to estimate those things,
+[40:26] is just say, well again, we
+have expectations, right?
+[40:32] The expectation of xy minus the
+product of the expectations,
+[40:36] I could replace
+expectations by averages
+[40:38] and get an empirical
+covariance just
+[40:40] like we can replace the
+expectations for the variance
+[40:42] and get a sample covariance.
+[40:44] And this is basically what
+we're going to be doing.
+[40:47] All right, this is
+essentially what you want.
+[40:49] The problem is that if
+you view it that way,
+[40:51] you sort of prevent yourself
+from being able to solve
+[40:54] the multivariate problem.
+[40:56] Because it's only in
+the univariate problem
+[40:58] that you have closed form
+solutions for your problem.
+[41:00] But if you actually
+go to multivariate,
+[41:03] this is not where you want
+to replace expectations
+[41:05] by averages.
+[41:06] You actually want to replace
+expectation by averages here.
+[41:12] And once you do
+it here, then you
+[41:14] can actually just solve
+the minimisation problem.
+[41:23] OK, so one thing that
+arises from this guy
+[41:29] is that this is an
+interesting formula.
+[41:40] All right, think about it.
+[41:43] If I have that y is a
+plus bx plus some noise.
+[42:00] Things are no
+longer on something.
+[42:02] I have that y is equal to
+a bx plus some noise, which
+[42:08] is usually denoted by epsilon.
+[42:11] So that's the
+distribution, right?
+[42:12] If I tell you the
+distribution of x, and I
+[42:15] say y is a plus b epsilon--
+[42:17] I tell you the
+distribution of y,
+[42:18] and if [? they mean ?] that
+those two are independent,
+[42:21] you have a distribution on y.
+[42:23] So what happens is that I can
+actually always say-- well, you
+[42:27] know, this is
+equivalent to saying
+[42:28] that epsilon is equal to
+y minus a plus bx, right?
+[42:35] I can always write
+this as just--
+[42:37] I mean, as tautology.
+[42:40] But here, for those guys--
+[42:42] this is not for any guy, right.
+[42:43] This is really for
+the best fit, a
+[42:45] and b, those ones that
+satisfy this gradient is
+[42:50] equal to zero thing.
+[42:51] Then what we had is that
+the expectation of epsilon
+[42:55] was equal to expectation
+of y minus a plus
+[42:59] b expectation of x by linearity
+of the expectation, which
+[43:03] was equal to zero.
+[43:05] So for this best
+fit we have zero.
+[43:10] Now, the covariance
+between x and y--
+[43:17] Between, sorry, x
+and epsilon, is what?
+[43:20] Well, it's the
+covariance between x--
+[43:23] and well, epsilon was
+y minus a plus bx.
+[43:30] Now, the covariance is
+bilinear, so what I have
+[43:33] is that the
+covariance of this is
+[43:35] the covariance of xn times y--
+[43:38] sorry, of x and y, minus
+the variance-- well,
+[43:41] minus a plus b,
+covariance of x and x,
+[43:50] which is the variance of x?
+[43:59] Covariance of xy minus
+a plus b variance of x.
+[44:12] OK, I didn't write it.
+[44:13] So here I have
+covariance of xy is
+[44:16] equal to b variance of x, right?
+[44:34] Covariance of xy.
+[44:35] Yeah, that's because they cannot
+do that with the covariance.
+[44:44] Yeah, I have those
+averages again.
+[44:46] No, because this
+is centered, right?
+[44:48] Sorry, this is centered,
+so this is actually
+[44:51] equal to the expectation of
+x times y minus a plus bx.
+[45:01] The covariance is
+equal to the product
+[45:03] just because this insight
+is actually centered.
+[45:05] So this is the
+expectation of x times y
+[45:09] minus the expectation of a times
+the expectation of x, plus b
+[45:20] minus b times the
+expectation of x squared.
+[45:32] Well, actually maybe I
+should not really go too far.
+[45:38] So this is actually
+the one that I need.
+[45:40] But if I stop here, this is
+actually equal to zero, right.
+[45:47] Those are the same equations.
+[45:52] OK?
+[45:53] Yeah?
+[45:53] AUDIENCE: What are
+we doing right now?
+[45:55] PHILIPPE RIGOLLET:
+So we're just saying
+[45:57] that if I actually believe that
+this best fit was the one that
+[46:01] gave me the right
+parameters, what would
+[46:02] that imply on the noise
+itself, on this epsilon?
+[46:05] So here we're
+actually just trying
+[46:07] to find some necessary condition
+for the noise to hold--
+[46:10] for the noise.
+[46:11] And so those conditions are,
+that first, the expectation
+[46:14] is zero.
+[46:15] That's what we've got here.
+[46:17] And then, that the covariance
+between the noise and x
+[46:20] has to be zero as well.
+[46:22] OK, so those are
+actually conditions
+[46:24] that the noise must satisfy.
+[46:26] But the noise was just not
+really defined as noise itself.
+[46:29] We were just
+saying, OK, if we're
+[46:31] going to put some assumptions
+on the epsilon, what
+[46:35] do we better have?
+[46:36] So the first one is that
+it's centered, which is good,
+[46:38] because otherwise, the noise
+would shift everything.
+[46:41] So now when you look at a
+linear regression model--
+[46:45] typically, if you open a book,
+it doesn't start by saying,
+[46:48] let the noise be the
+difference between y
+[46:50] and what I actually
+want y to be.
+[46:52] It says let y be a
+plus bx plus epsilon.
+[46:57] So conversely, if we assume that
+this is the model that we have,
+[47:02] then we're going to have
+to assume that epsilon--
+[47:04] we're going to assume
+that epsilon is centered,
+[47:06] and that the covariance
+between x and epsilon is zero.
+[47:10] Actually, often, we're
+going to assume much more.
+[47:13] And one way to ensure that
+those two things are satisfied
+[47:17] is to assume that x is
+independent of epsilon,
+[47:19] for example.
+[47:21] If you assume that x is
+independent of epsilon,
+[47:23] of course the covariance
+is going to be zero.
+[47:28] Or we might assume that
+the conditional expectation
+[47:30] of epsilon, given x, is equal
+to zero, then that implies that.
+[47:35] OK, now the fact that it's
+centered is one thing.
+[47:38] So if we make this assumption,
+the only thing it's telling us
+[47:43] is that those ab's that come--
+right, we started from there.
+[47:47] y is equal to a plus bx plus
+some epsilon for some a,
+[47:51] for some b.
+[47:51] What it turns out is that
+those a's and b's are actually
+[47:55] the ones that you would get
+by solving this expectation
+[47:58] of square thing.
+[48:00] All right, so when you asked--
+[48:02] back when you were following--
+[48:04] so when you asked,
+you know, why don't we
+[48:07] take the square, for
+example, or the power
+[48:10] 4, or something like this--
+[48:12] then here, I'm saying, well, if
+I have y is equal to a plus bx,
+[48:15] I don't actually need to put
+too much assumptions on epsilon.
+[48:19] If epsilon is actually
+satisfying those two things,
+[48:22] expectation is equal to
+zero and the covariance
+[48:25] with x is equal to zero,
+then the right a and b
+[48:28] that I'm looking for are
+actually the ones that
+[48:30] come with the square--
+[48:32] not with power 4 or power 25.
+[48:36] So those are actually
+pretty weak assumptions.
+[48:39] If we want to do
+inference, we're
+[48:41] going to have to
+assume slightly more.
+[48:43] If we want to use
+T-distributions at some point,
+[48:45] for example, and we
+will, we're going
+[48:47] to have to assume that epsilon
+has a Gaussian distribution.
+[48:50] So if you want to start doing
+more statistics beyond just
+[48:53] like doing this least square
+thing, which is minimizing
+[48:56] the square of criterion,
+you're actually
+[48:58] going to have to put
+more assumptions.
+[48:59] But right now, we
+did not need them.
+[49:01] We only need that epsilon
+as mean zero and covariant
+[49:04] zero with x.
+[49:08] OK, so that was basically
+probabilistic, right.
+[49:13] If I were to do
+probability and I
+[49:14] were trying to model the
+relationship between two
+[49:17] random variables, x
+and y, in the form
+[49:20] y is a plus bx plus some noise,
+this is what would come out.
+[49:24] Everything was expectations.
+[49:25] There was no data involved.
+[49:27] So now let's go to the
+data problem, which is now,
+[49:33] I do not know what
+those expectations are.
+[49:35] In particular, I don't know what
+the covariance of x and y is,
+[49:38] and I don't know with
+the expectation of x
+[49:40] and the expectation of y r.
+[49:42] So I have data to do that.
+[49:44] So how am I going to do this?
+[49:49] Well, I'm just
+going to say, well,
+[49:50] if I want x1, y1,
+xn, yn, and I'm going
+[49:57] to assume that
+they're [? iid. ?]
+[49:59] And I'm actually going
+to assume that they
+[50:01] have some model, right.
+[50:02] So I'm going to assume
+that I have that a--
+[50:06] so that Yi follows
+the same model.
+[50:14] So epsilon i
+[? rad, ?] and I won't
+[50:17] say that expectation of epsilon
+i is zero and covariance of xi,
+[50:23] epsilon i is equal to zero.
+[50:25] So I'm going to put the
+same model on all the data.
+[50:28] So you can see that a is
+not ai, and b is not bi.
+[50:31] It's the same.
+[50:32] So as my data
+increases, I should
+[50:34] be able to recover
+the correct things--
+[50:36] as the size of my
+data increases.
+[50:39] OK, so this is what the
+statistical problem look like.
+[50:43] You're given the points.
+[50:45] There is a true line
+from which this point
+[50:47] was generated, right.
+[50:48] There was this line.
+[50:49] There was a true ab that
+I use to draw this plot,
+[50:54] and that was the line.
+[50:55] So first I picked an
+x, say uniformly at
+[50:59] on this intervals, 0 to 2.
+[51:02] I said that was this one.
+[51:03] Then I said well, I
+want y to be a plus bx,
+[51:06] so it should be
+here, but then I'm
+[51:08] going to add some noise
+epsilon to go away again
+[51:10] back from this line.
+[51:13] And that's actually me, here, we
+actually got two points correct
+[51:16] on this line.
+[51:18] So there's basically
+two epsilons
+[51:20] that were small enough
+that the dots actually
+[51:22] look like they're on the line.
+[51:24] Everybody's clear
+about what I'm drawing?
+[51:27] So now of course if
+you're a statistician,
+[51:28] you don't see this.
+[51:29] You only see this.
+[51:30] And you have to
+recover this guy,
+[51:32] and it's going to
+look like this.
+[51:34] You're going to have an
+estimated line, which
+[51:36] is the red one.
+[51:37] And the blue line, which is
+the true one, the one that
+[51:42] actually generated the data.
+[51:44] And your question is,
+while this line corresponds
+[51:46] to some parameters
+a hat and b hat,
+[51:48] how could I make sure that those
+two lines-- how far those two
+[51:51] lines are?
+[51:52] And one to address
+this question is
+[51:53] to say how far is a from a hat,
+and how far is b from b hat?
+[51:57] OK?
+[51:58] Another question, of
+course, that you may ask
+[52:00] is, how do you find
+a hat and b hat?
+[52:04] And as you can see, it's
+basically the same thing.
+[52:07] Remember, what was a-- so b
+was the covariance between x
+[52:15] and y divided by the
+variance of x, right?
+[52:21] We check and rewrite this.
+[52:22] The expectation of
+xy minus expectation
+[52:26] of x times the
+expectation of y, divided
+[52:30] by expectation of x squared
+minus expectation of x.
+[52:35] The whole thing's--
+[52:37] OK?
+[52:39] If you look at the
+expression for b hat,
+[52:42] I basically replaced all
+the expectations by bars.
+[52:47] So I said, well,
+this guy I'm going
+[52:49] to estimate by an average.
+[52:53] So that's the xy
+bar, and is 1 over n,
+[52:59] [? sum ?] from [? i co ?]
+1, to n of Xi, times Yi.
+[53:05] x bar, of course, is just
+the one that we're used to.
+[53:12] And same for y bar.
+[53:14] X squared bar, the
+one that's here,
+[53:20] is the average of the squares.
+[53:22] And x bar square is the
+square of the average.
+[53:39] OK, so you just basically
+replace this guy by x bar,
+[53:44] this guy by y bar, this
+guy by x square bar,
+[53:47] and this guy by x
+bar and no square.
+[53:52] OK, so that's basically
+one way to do it.
+[53:54] Everywhere you see
+an expectation,
+[53:56] you replace it by an average.
+[53:58] That's the usual
+statistical hammer.
+[54:02] You can actually be slightly
+more subtle about this.
+[54:09] And as an exercise,
+I invite you--
+[54:12] just to make sure that you know
+how to do this competition,
+[54:14] it's going to be exactly the
+same kind of competitions
+[54:17] that we've done.
+[54:18] But as an exercise,
+you can check
+[54:20] that if you actually
+look at say, well,
+[54:23] what I wanted to minimize here,
+I had an expectation, right?
+[54:32] And I said, let's
+minimize this thing.
+[54:35] Well, let's replace this
+by an average first.
+[54:51] And now minimize.
+[54:54] OK, so if I do
+this, it turns out
+[54:57] I'm going to actually
+get the same result.
+[55:00] The minimum of the
+average is basically--
+[55:03] when I replace the
+average by-- sorry,
+[55:06] when I replace the
+expectation by the average
+[55:09] and then minimize,
+it's the same thing
+[55:11] as first minimizing and
+then replacing expectation
+[55:13] by averages in this case.
+[55:17] Again, this is a much
+more general principle
+[55:21] because if you
+don't have a closed
+[55:23] form for the minimum like for
+some, say, likelihood problems,
+[55:27] well, you might not
+actually have a possibility
+[55:30] to just look at what the
+formula looks like-- see where
+[55:32] the expectations show up-- and
+then just plug in the averages
+[55:35] instead.
+[55:36] So this is the one you
+want to keep in mind.
+[55:39] And again, as an exercise.
+[55:47] OK, so here, and then
+you do expectation
+[55:48] replaced by averages.
+[55:52] And then that's the same
+answer, and I encourage
+[55:57] you to solve the exercise.
+[56:00] OK, everybody's clear that this
+is actually the same expression
+[56:03] for a hat and b hat that we had
+before that we had for a and b
+[56:07] when we replaced the
+expectations by averages?
+[56:12] Here, by the way, I minimize
+the sum rather than the average.
+[56:16] It's clear to everyone that
+this is the same thing, right?
+[56:22] Yep?
+[56:23] AUDIENCE: [INAUDIBLE] sum
+replacing it [INAUDIBLE]
+[56:27] minimize the
+expectation, I'm assuming
+[56:29] it's switched with
+the derivative
+[56:31] on the expectation [INAUDIBLE].
+[56:37] PHILIPPE RIGOLLET:
+So we did switch
+[56:39] the derivative and the
+expectation before you came,
+[56:43] I think.
+[56:47] All right, so
+indeed, the picture
+[56:49] was the one that we
+said, so visually, this
+[56:52] is what we're doing.
+[56:53] We're looking among
+all the lines.
+[56:55] For each line, we
+compute this distance.
+[56:58] So if I give you
+another line there
+[57:00] would be another set of arrows.
+[57:01] You look at their length.
+[57:02] You square it.
+[57:03] And then you sum it
+all, and you find
+[57:05] the line that has the minimum
+sum of squared lengths
+[57:08] of the arrows.
+[57:09] All right, and those are the
+arrows that we're looking at.
+[57:11] But again, you could actually
+think of other distances,
+[57:14] and you would actually
+get different--
+[57:17] you could actually get
+different solutions, right.
+[57:19] So there's something called,
+mean absolute deviation,
+[57:22] which rather than
+minimizing this thing,
+[57:24] is actually minimizing the
+sum from i to co 1 to n
+[57:27] of the absolute value
+of y minus a plus bXi.
+[57:33] And that's not
+something for which
+[57:36] you're going to have a closed
+form, as you can imagine.
+[57:39] You might have something
+that's sort of implicit,
+[57:42] but you can actually still
+solve it numerically.
+[57:44] And this is something
+that people also
+[57:46] like to use but way, way less
+than the least squares one.
+[57:50] AUDIENCE: [INAUDIBLE]
+[57:52] PHILIPPE RIGOLLET:
+What did I just what?
+[57:53] AUDIENCE: [INAUDIBLE]
+[57:56] The sum of the absolute
+values of Yi minus a plus bXi.
+[58:02] So it's the same except
+I don't square here.
+[58:07] OK?
+[58:11] So arguably, you know,
+predicting a demand
+[58:18] based on price is a
+fairly naive problem.
+[58:21] Typically, what we
+have is a bunch of data
+[58:23] that we've collected,
+and we're hoping that,
+[58:25] together, they can help
+us do a better prediction.
+[58:29] All right, so maybe I
+don't have only the price,
+[58:31] but maybe I have a bunch
+of other social indicators.
+[58:35] Maybe I know the competition,
+the price of the competition.
+[58:40] And maybe I know a
+bunch of other things
+[58:42] that are actually relevant.
+[58:43] And so I'm trying to find a way
+to combine a bunch of points,
+[58:48] a bunch of measures.
+[58:50] There's a nice
+example that I like,
+[58:52] which is people were
+trying to measure something
+[58:56] related to your body
+mass index, so basically
+[59:00] the volume of your-- the
+density of your body.
+[59:04] And the way you can do
+this is by just, really,
+[59:07] weighing someone and
+also putting them
+[59:10] in some cubic meter of water
+and see how much overflows.
+[59:13] And then you have
+both the volume
+[59:15] and the mass of
+this person, and you
+[59:20] can start computing density.
+[59:23] But as you can
+imagine, you know,
+[59:25] I would not personally
+like to go to a gym
+[59:27] when the first thing
+they ask me is to just go
+[59:29] in a bucket of
+water, and so people
+[59:33] try to find ways to measure this
+based on other indicators that
+[59:36] are much easier to measure.
+[59:38] For example, I don't know,
+the length of my forearm,
+[59:41] and the circumference of
+my head, and maybe my belly
+[59:45] would probably be
+more appropriate here.
+[59:46] And so you know, they
+just try to find something
+[59:48] that actually makes sense.
+[59:50] And so there's
+actually a nice example
+[59:52] where you can show
+that if you measure--
+[59:53] I think one of the
+most significant
+[59:55] was with the circumference
+of your wrist.
+[59:56] This is actually a very good
+indicator of your body density.
+[60:02] And it turns out that if you
+stuff all the bunch of things
+[60:06] together, you might actually
+get a very good formula that
+[60:09] explains things.
+[60:10] All right, so what
+we're going to do
+[60:12] is rather than saying
+we have only one x
+[60:14] to explain y's,
+let's say we have
+[60:15] 20 x's that we're trying
+to combine to explain y.
+[60:19] And again, just like assuming
+something of the form,
+[60:22] y is a plus b times x was the
+simplest thing we could do,
+[60:26] here we're just going to
+assume that we have y is a plus
+[60:28] b1, x1 plus b2, x2, plus b3, x3.
+[60:31] And we can write
+it in a vector form
+[60:33] by writing that Yi is
+Xi transposed b, which
+[60:39] is now a vector plus epsilon i.
+[60:42] OK, and here, on
+the board, I'm going
+[60:44] to have a hard time
+doing boldface,
+[60:46] but all these things are
+vectors except for y,
+[60:52] which is a number.
+[60:53] Yi is a number.
+[60:54] It's always the
+value of my y-axis.
+[60:57] So even if my x-axis lives on--
+[60:59] this is x1, and this is x2, y
+is really just the real valued
+[61:04] function.
+[61:05] And so I'm going to get
+a bunch of points, x1,y1,
+[61:07] and I'm going to see
+how much they respond.
+[61:10] So for example, my
+body density is y,
+[61:13] and then all the x's are
+a bunch of other things.
+[61:16] Agreed with that?
+[61:17] So this is an equation that
+holds on the real line,
+[61:20] but this guy here is an r
+p, and this guy's an rp.
+[61:30] It's actually common to
+talk to call b, beta,
+[61:33] when it's a vector, and that's
+the usual linear regression
+[61:38] notation.
+[61:39] Y is x beta plus epsilon.
+[61:42] So x's are called
+explanatory variables.
+[61:45] y is called explained variable,
+or dependent variable,
+[61:50] or response variable.
+[61:52] It has a bunch of names.
+[61:53] You can use whatever you
+feel more comfortable with.
+[61:55] It should actually
+be explicit, right,
+[61:57] so that's all you care about.
+[62:01] Now, what we typically do
+is that rather-- so you
+[62:05] notice here, that there's
+actually no intercept.
+[62:07] If I actually fold that
+back down to one dimension,
+[62:10] there's actually a is
+equal to zero, right?
+[62:13] If I go back to p
+is equal to 1, that
+[62:18] would imply that Yi is,
+well, say, beta times
+[62:22] x plus epsilon i.
+[62:24] And that's not good, I
+want to have an intercept.
+[62:27] And the way I do this,
+rather than writing
+[62:29] a plus this, and
+you know, just have
+[62:31] like an overload of notation,
+what I am actually doing
+[62:35] is that I fold back.
+[62:37] I fold my intercept
+back into my x.
+[62:43] And so if I measure
+20 variables,
+[62:46] I'm going to create a
+21st variable, which
+[62:48] is always equal to 1.
+[62:49] OK, so you should need
+to think of x as being 1.
+[62:52] And then x1 xp.
+[62:58] And sorry, xp minus 1, I guess.
+[63:00] OK, and now this is an rp.
+[63:05] I'm always going to assume
+that the first one is 1.
+[63:07] I can always do that.
+[63:09] If I have a table of data--
+[63:11] if my data is given to me
+in an Excel spreadsheet--
+[63:15] and here I have the density
+that I measured on my data,
+[63:19] and then maybe here
+I have the height,
+[63:22] and here I have the
+wrist circumference.
+[63:25] And I have all these things.
+[63:26] All I have to do is to create
+another column here of ones,
+[63:31] and I just put 1-1-1-1-1.
+[63:34] OK, that's all I have to
+do to create this guy.
+[63:37] Agreed?
+[63:39] And now my x is going to
+be just one of those rows.
+[63:43] So that's this is
+Xi, this entire row.
+[63:46] And this entry here is Yi.
+[63:54] So now, for my
+noise coefficients,
+[63:56] I'm still going to
+ask for the same thing
+[63:59] except that here, the
+covariance is not between x--
+[64:04] between one random variable
+and another random variable.
+[64:07] It's between a random vector
+and a random variable.
+[64:10] OK, how do I measure the
+covariance between a vector
+[64:13] and a random variable?
+[64:23] AUDIENCE: [INAUDIBLE]
+[64:25] PHILIPPE RIGOLLET:
+Yeah, so basically--
+[64:29] AUDIENCE: [INAUDIBLE]
+[64:31] PHILIPPE RIGOLLET: Yeah, I
+mean, the covariance vector
+[64:33] is equal to 0 is the same thing
+as [INAUDIBLE] equal to zero,
+[64:36] but yeah, this is basically
+thought of entry-wise.
+[64:39] For each coordinate of x,
+I want that the covariance
+[64:41] between epsilon and this
+coordinate of x is equal to 0.
+[64:47] So I'm just asking this
+for all coordinates.
+[64:50] Again, in most
+instances, we're going
+[64:52] to think that epsilon
+is independent
+[64:53] of x, and that's something we
+can understand without thinking
+[64:56] about coordinates.
+[64:59] Yep?
+[65:00] AUDIENCE: [INAUDIBLE] like
+what if beta equals alpha
+[65:03] [INAUDIBLE]?
+[65:06] PHILIPPE RIGOLLET: I'm sorry,
+can you repeat the question?
+[65:09] I didn't hear.
+[65:09] AUDIENCE: Is this the
+parameter of beta, a parameter?
+[65:12] PHILIPPE RIGOLLET: Yeah,
+beta is the parameter
+[65:13] we're looking for, right.
+[65:14] Just like it was the pair ab has
+become the whole vector of beta
+[65:18] now.
+[65:19] AUDIENCE: And
+what's [INAUDIBLE]??
+[65:22] PHILIPPE RIGOLLET: Well, can
+you think of an intercept
+[65:25] of a function that take--
+[65:26] I mean, there is one actually.
+[65:28] There's the one
+for which betas--
+[65:30] all the betas that
+don't correspond
+[65:31] to the vector of all
+ones, so the intercept
+[65:35] is really the weight
+that I put on this guy.
+[65:38] That's the beta that's
+going to come to this guy,
+[65:40] but we don't really
+talk about intercept.
+[65:44] So if x lives in two
+dimensions, the way
+[65:49] you want to think
+about this is you
+[65:50] take a sheet of paper
+like that, so now I
+[65:54] have points that live
+in three dimensions.
+[65:57] So let's say one
+direction here is x1.
+[65:59] This direction is x2,
+and this direction is y.
+[66:02] And so what's going
+to happen is that I'm
+[66:04] going to have my points
+that live in this three
+[66:07] dimensional space.
+[66:08] And what I'm trying
+to do when I'm
+[66:10] trying to do a linear
+model for those guys--
+[66:12] when I assume a linear model.
+[66:13] What I assume is that there's
+a plane in those three
+[66:17] dimensions.
+[66:17] So think of this guy
+as going everywhere,
+[66:20] and there's a plane close to
+which all my points should be.
+[66:23] That's what's happening
+in two dimensional.
+[66:26] If you see higher dimensions
+then congratulations to you,
+[66:29] but I can't.
+[66:33] But you know, you can definitely
+formalize that fairly easily
+[66:36] mathematically and just
+talk about vectors.
+[66:40] So now here, if I talk about the
+least square error estimator,
+[66:44] or just the least squares
+estimator of beta,
+[66:47] it's simply the same
+thing as before.
+[66:49] Just like we said--
+[66:52] so remember, you
+should think of as beta
+[66:56] as being both the
+pair a b generalized.
+[66:59] So we said, oh, we wanted to
+minimize the expectation of y
+[67:05] minus a plus bx squared, right?
+[67:13] Now, so that's in--
+for p is equal to 1.
+[67:16] Now for p lower
+than or equal to 2,
+[67:19] we're just going to write it
+as y minus x transpose beta
+[67:28] squared.
+[67:34] OK, so I'm just trying to
+minimize this quantity.
+[67:37] Of course, I don't
+have access to this,
+[67:40] so what I'm going to do
+with them going to replace
+[67:42] my expectation by an average.
+[67:51] So here I'm using the notation
+t because beta is the true one,
+[67:54] and I don't want you to just--
+[67:56] so here, I have a variable
+t that's just moving around.
+[67:59] And so now I'm going to take
+the square of this thing.
+[68:02] And when I minimize this over
+all t in rp, the arc min,
+[68:08] the minimum is attained at beta
+hat, which is my estimator.
+[68:19] OK?
+[68:25] So if I want to
+actually compute--
+[68:29] yeah?
+[68:29] AUDIENCE: I'm sorry,
+on the last slide
+[68:31] did we require the expectation
+of [INAUDIBLE] to be zero?
+[68:36] PHILIPPE RIGOLLET: You
+mean the previous slide?
+[68:38] AUDIENCE: Yes.
+[68:38] [INAUDIBLE]
+[68:40] PHILIPPE RIGOLLET: So again,
+I'm just defining an estimator
+[68:42] just like I would tell you,
+just take the estimator that
+[68:45] has coordinates for everywhere.
+[68:46] AUDIENCE: So I'm saying like
+[? in that sign, ?] we'll say
+[68:48] the noise [? terms ?] we want to
+satisfy the covariance of that
+[68:51] [? side. ?] We also want them
+to satisfy expectation of each
+[68:55] [? noise turn ?] zero?
+[69:07] PHILIPPE RIGOLLET: And
+so the answer is yes.
+[69:09] I was just trying to think
+if this was captured.
+[69:13] So it is not
+captured in this guy
+[69:15] because this is just telling
+me that the expectation
+[69:17] of epsilon i minus expectation
+of some i is equal to zero.
+[69:23] OK, so yes I need to have
+that epsilon has mean zero--
+[69:27] let's assume that
+expectation of epsilon
+[69:29] is zero for this problem.
+[69:43] And we're going
+to need something
+[69:45] about some sort of question
+about the variance being
+[69:47] not equal to zero, right, but
+this is going to come up later.
+[69:51] So let's think for one second
+about doing the same approach
+[69:54] as we did before.
+[69:55] Take the partial
+derivative with respect
+[69:57] to the first coordinate
+of t, with respect
+[69:59] to the second coordinate
+of t, with respect
+[70:01] to the third coordinate
+of t, et cetera.
+[70:03] So that's what we did before.
+[70:04] We had two equations,
+and we reconciled them
+[70:07] because it was fairly
+easy to solve, right?
+[70:10] But in general,
+what's going to happen
+[70:11] is we're going to have
+a system of equations.
+[70:13] We're going to have a system
+of p equations, one for each
+[70:17] of the coordinates of t.
+[70:19] And we're going to have p
+unknowns, each coordinate of t.
+[70:23] And so we're going to
+have the system to solve--
+[70:26] actually, i turns out it's
+going to be a linear system.
+[70:28] But it's not going
+to be something
+[70:29] that we're going to be able to
+solve coordinate by coordinate.
+[70:32] It's going to be
+annoying to solve.
+[70:34] You know, you can guess that
+what's going to happen, right.
+[70:36] Here, it involved the covariance
+between x and epsilon, right.
+[70:40] That's what it involved
+to understand--
+[70:43] sorry, the correlation
+between x and y
+[70:47] to understand how the
+solution of this problem was.
+[70:50] In this case,
+there's going to be
+[70:52] only the covariance between
+x1 and y, x2 and y, x3, et
+[70:57] cetera, all the way to xp and y.
+[70:59] There's also going to be all
+the cross covariances between xj
+[71:02] and xk.
+[71:04] And so this is going
+to be a nightmare
+[71:05] to solve, like, in this system.
+[71:08] And what we do is that we go
+on to using a matrix notation,
+[71:12] so that when we
+take derivatives,
+[71:14] we talk about
+gradients, and then we
+[71:16] can invert matrices and solve
+linear systems in a somewhat
+[71:20] formal manner by just saying
+that, if I want to solve
+[71:23] the system ax equals b--
+[71:27] rather than actually
+solving this
+[71:28] for each coordinate
+of x individually,
+[71:30] I just say that x is
+equal to a inverse times.
+[71:33] So that's really why we're
+going to the equation one,
+[71:37] because we have a
+formalism to write that x
+[71:40] is the solution of the system.
+[71:42] I'm not telling you
+that this is going
+[71:43] to be easy to solve numerically,
+but at least I can write it.
+[71:48] And so here's how it goes.
+[71:51] I have a bunch of vectors.
+[71:55] So what are my vectors, right?
+[71:56] So I have x1--
+[71:57] oh, by the way,
+I didn't actually
+[71:59] mention that when I
+put the lowercase, when
+[72:01] I put the subscript, I'm
+talking about the observation.
+[72:03] And when I put the
+superscript, I'm
+[72:05] talking about the
+coordinates, right?
+[72:07] So I have x1, which is
+equal to x1, x1 [? 1, ?]
+[72:13] x 1p, x2, which is 1.
+[72:19] x2, 1, x2 p, all the way to
+xn, which is 1, xn 1, x np.
+[72:32] All right, so those are n
+observed x's, and then I
+[72:35] have another y1, y2, yn, that
+comes paired with those guys.
+[72:40] OK?
+[72:42] So the first thing
+is that I'm going
+[72:44] to stack those guys
+into some vector
+[72:46] that I'm going to call y.
+[72:47] So maybe I should put
+an arrow for the purpose
+[72:49] of the blackboard, and
+it's just y1 to yn.
+[72:53] OK, so this is a vector in rn.
+[72:56] Now, if I want to stack
+those guys together,
+[72:59] I can either create a long
+vector of size n times p,
+[73:03] but the problem is that I lose
+the role of who's a coordinate
+[73:05] and who's an observation.
+[73:08] And so it's actually
+nicer for me
+[73:10] to just put those guys
+next to each other
+[73:12] and create one new variable.
+[73:15] And so the way I'm going to do
+this is-- rather than actually
+[73:18] stacking those guys like that,
+I'm getting their transpose
+[73:22] and stack them as
+rows of a matrix.
+[73:24] OK, so I'm going to
+create a matrix, which
+[73:26] here is denoted typically by--
+[73:28] I'm going to write x double bar.
+[73:31] And here, I'm going to
+actually just-- so since I'm
+[73:33] taking those guys like
+this, the first column
+[73:35] is going to be only ones.
+[73:40] And then I'm going to have--
+[73:41] well, x1, 1, [? 1, ?] x1, p.
+[73:47] And here, I'm going
+to have x n1, x np.
+[73:52] OK, so here the number of rows
+is n, and the number of columns
+[73:57] is p.
+[73:58] One row per observation,
+one column per coordinate.
+[74:05] And again, I make your life
+miserable because this really
+[74:10] should be p minus 1
+because I already used
+[74:13] the first one for this guy.
+[74:15] I'm sorry about that.
+[74:16] It's a bit painful.
+[74:18] So usually we don't even
+write what's in there.
+[74:20] So we don't have
+to think about it.
+[74:21] Those are just
+vectors of size p.
+[74:23] OK?
+[74:25] So now that I
+created this thing,
+[74:27] I can actually just basically
+stack up all my models.
+[74:31] So Yi equals Xi transpose
+beta plus epsilon i for all i
+[74:39] equal 1 to n.
+[74:41] This transforms into-- this
+is equivalent to saying
+[74:44] that the vector y is
+equal to the matrix x
+[74:47] times beta plus a matrix,
+plus a vector epsilon,
+[74:51] where epsilon is just epsilon
+1 to epsilon n, right.
+[74:57] So I have just
+this system, which
+[74:59] I write as a matrix,
+which really just consists
+[75:02] in stacking up all these
+equations next to each other.
+[75:10] So now that I have this model--
+this is the usual least squares
+[75:12] model.
+[75:13] And here, when I want to write
+my least squares criterion
+[75:16] in terms of matrices, right?
+[75:17] My least squares
+criterion, remember,
+[75:19] was sum from i equal 1 to n
+of Yi minus Xi transposed beta
+[75:27] squared.
+[75:28] Well, here it's
+really just the sum
+[75:31] of the square of the
+coefficients of the vector
+[75:35] y minus x beta.
+[75:37] So this is actually
+equal to the norm squared
+[75:40] of y minus x beta square.
+[75:46] That's just the square.
+[75:47] Norm is, by definition,
+the sum of the square
+[75:49] of the coordinates.
+[75:51] And so now I can actually
+talk about minimizing
+[75:53] a norm squared,
+and here it's going
+[75:56] to be easier for me
+to take derivatives.

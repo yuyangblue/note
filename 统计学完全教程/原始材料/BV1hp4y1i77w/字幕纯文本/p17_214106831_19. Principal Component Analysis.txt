@@ -1,0 +1,3715 @@
+[00:00] 广告素材下提供了以下内容
+The following content is
+provided under a Creative
+[00:02] 普通许可。 
+Commons license.
+[00:03] 您的支持将帮助MIT OpenCourseWare 
+Your support will help
+MIT OpenCourseWare
+[00:06] 继续免费提供高质量的教育资源。 
+continue to offer high quality
+educational resources for free.
+[00:10] 捐款或查看其他材料
+To make a donation or to
+view additional materials
+[00:12] 从数百门麻省理工学院课程中访问MIT OpenCourseWare 
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+[00:16] 在ocw.mit.edu。 
+at ocw.mit.edu.
+[01:14]  PHILIPPE RIGOLLET：-一堆x和一堆y。 
+PHILIPPE RIGOLLET: --bunch
+of x's and a bunch of y's.
+[01:17]  y是单变量的，只有一个实数
+The y's were univariate,
+just one real
+[01:20] 值随机变量。 
+valued random variable.
+[01:21]  x是描述一堆属性的向量
+And the x's were vectors that
+described a bunch of attributes
+[01:24] 对于我们每个人或我们的每个观察。 
+for each of our individuals
+or each of our observations.
+[01:27] 现在假设基本上只给定x。 
+Let's assume now that we're
+given essentially only the x's.
+[01:30] 有时称为无监督学习。 
+This is sometimes referred
+to as unsupervised learning.
+[01:33] 只有x。 
+There is just the x's.
+[01:35] 通常，监督是由y来完成的。 
+Usually, supervision
+is done by the y's.
+[01:38] 因此，您想要做的就是弄清楚这些数据。 
+And so what you're trying to do
+is to make sense of this data.
+[01:41] 您将尝试了解这些数据， 
+You're going to try to
+understand this data,
+[01:43] 代表这些数据，可视化这些数据， 
+represent this data,
+visualize this data,
+[01:47] 尝试了解一些东西，对不对？ 
+try to understand
+something, right?
+[01:48] 因此，如果我给您一个d维随机向量， 
+So, if I give you a
+d-dimensional random vectors,
+[01:52] 并且您将拥有n个独立副本
+and you're going to have
+n independent copies
+[01:54] 这个人的这个随机向量，好吗？ 
+of this individual-- of
+this random vector, OK?
+[01:57] 所以您会看到我将要- 
+So you will see that
+I'm going to have--
+[01:59] 我很快就会遇到一些限制
+I'm going to very quickly
+run into some limitations
+[02:02] 关于我实际上可以在黑板上画些什么
+about what I can actually
+draw on the board
+[02:04] 因为我正在使用[？粗体字？]在这里。 
+because I'm using
+[? boldface ?] here.
+[02:05] 我也要用黑板[？粗体字。 ？] 
+I'm also going to use the
+blackboard [? boldface. ?]
+[02:08] 所以这将有点困难。 
+So it's going to
+be a bit difficult.
+[02:09] 所以告诉我你是否真的对什么感到困惑
+So tell me if you're actually
+a little confused by what
+[02:15] 是一个向量，什么是数字，什么是矩阵。 
+is a vector, what is a
+number, and what is a matrix.
+[02:17] 但是我们会到达那里。 
+But we'll get there.
+[02:19] 所以我在Rd中有X，这是一个随机向量。 
+So I have X in Rd, and
+that's a random vector.
+[02:26] 我有X1到Xn是IID。 
+And I have X1 to
+Xn that are IID.
+[02:30] 它们是X的独立副本。好吧， 
+They're independent
+copies of X. OK,
+[02:37] 因此您可以将它们视为- 
+so you can think
+of those as being--
+[02:40] 这些家伙的实现是
+the realization
+of these guys are
+[02:41]  R将是d中n点的n个云。 
+going to be a cloud of
+n points in R to the d.
+[02:51] 我们将认为d相当大。 
+And we're going to think
+of d as being fairly large.
+[02:54] 为了这个变得有意义， 
+And for this to
+start to make sense,
+[02:55] 我们将认为d至少为4，好吗？ 
+we're going to think of d
+as being at least 4, OK?
+[02:59] 这意味着你将很难过
+And meaning that you're
+going to have a hard time
+[03:01] 可视化那些东西。 
+visualizing those things.
+[03:03] 如果是3或2，则可以得出这些点。 
+If it was 3 or 2, you would
+be able to draw these points.
+[03:06] 这几乎是有道理的
+And that's pretty
+much as much sense
+[03:08] 你将要和那些家伙在一起， 
+you're going to be
+making about those guys,
+[03:09] 只是看着[听不清] 
+just looking at the [INAUDIBLE]
+[03:12] 好吧，所以我要写每个X，对不对？ 
+All right, so I'm going to
+write each of those X's, right?
+[03:16] 因此，此向量X具有d坐标。 
+So this vector, X,
+has d coordinate.
+[03:20] 我将把它们写为X1到Xd。 
+And I'm going to write
+them as X1, to Xd.
+[03:30] 我将它们堆叠成矩阵，好吗？ 
+And I'm going to stack
+them into a matrix, OK?
+[03:34] 因此，一旦有了这些人，我将拥有一个矩阵。 
+So once I have those guys,
+I'm going to have a matrix.
+[03:38] 但是在这里，我将使用双杠。 
+But here, I'm going
+to use the double bar.
+[03:40] 它是X1转置，Xn转置。 
+And it's X1 transpose,
+Xn transpose.
+[03:47] 所以这意味着那个家伙的坐标， 
+So what it means is that
+the coordinates of this guy,
+[03:51] 当然是X1,1。 
+of course, are X1,1.
+[03:53] 在这里，我有- 
+Here, I have--
+[03:54] 我的身材是d，所以我有X1d。 
+I'm of size d, so I have X1d.
+[03:57] 在这里，我有Xn1。 
+And here, I have Xn1.
+[04:01]  Xnd。 
+Xnd.
+[04:02] 所以第i，第j 
+And so the i-th, j-th--
+[04:06] 第i行和第j列是矩阵Xij，右- 
+i-th row and j-th column
+is the matrix, Xij, right--
+[04:10] 是项，Xi要-对不起。 
+is the entry, Xi to-- sorry.
+[04:23] 好的，所以每个-所以这里的行是观察值。 
+OK, so each-- so the rows
+here are the observations.
+[04:28] 列是属性的协方差。 
+And the columns are the
+covariance over attributes.
+[04:32] 好？ 
+OK?
+[04:32] 因此，这是一个n×d矩阵。 
+So this is an n by d matrix.
+[04:39] 好吧，这实际上只是一些簿记。 
+All right, this is really
+just some bookkeeping.
+[04:41] 我们如何以某种方式存储此数据？ 
+How do we store
+this data somehow?
+[04:43] 我们使用矩阵就像进行回归一样
+And the fact that we use a
+matrix just like for regression
+[04:46] 将很方便，因为我们将能够
+is going to be convenient
+because we're going to able
+[04:48] 谈论预测- 
+to talk about projections--
+[04:50] 能够谈论这样的事情。 
+going to be able to talk
+about things like this.
+[04:53] 好吧，所以我现在要说的一切
+All right, so everything
+I'm going to say now
+[04:56] 关于方差或协方差
+is about variances
+or covariances
+[04:59] 这些东西，这意味着我需要两分钟，好吗？ 
+of those things, which means
+that I need two moments, OK?
+[05:01] 如果差异不存在，则存在
+If the variance does
+not exist, there's
+[05:03] 关于这个问题，我无话可说。 
+nothing I can say
+about this problem.
+[05:05] 因此，我将假设存在差异。 
+So I'm going to assume
+that the variance exists.
+[05:07] 一种表达方式
+And one way to
+just put it to say
+[05:09] 那些家伙的两个准则是
+that the two norm
+of those guys is
+[05:12] 有限，这是说他们每个人的另一种方式
+finite, which is another
+way to say that each of them
+[05:15] 是有限的。 
+is finite.
+[05:15] 我的意思是，您可以按照自己的方式考虑。 
+I mean, you can think
+of it the way you want.
+[05:18] 好吧，现在是X的均值，对吧？ 
+All right, so now,
+the mean of X, right?
+[05:21] 所以我有一个随机向量。 
+So I have a random vector.
+[05:22] 所以我可以谈谈对X的期望。 
+So I can talk about
+the expectation of X.
+[05:26] 那是在Rd中的向量。 
+That's a vector that's in Rd.
+[05:29] 而这只是入门的期望。 
+And that's just taking
+the expectation entrywise.
+[05:33] 抱歉。 
+Sorry.
+[05:42]  X1，Xd。 
+X1, Xd.
+[05:45] 好，所以我应该大声说出来。 
+OK, so I should say it out loud.
+[05:49] 为此，本课的目的是
+For this, the purpose
+of this class,
+[05:51] 我将用下标表示
+I will denote by
+subscripts the indices that
+[05:55] 对应于观察。 
+corresponds to observations.
+[05:57] 和上标，对应于
+And superscripts, the
+indices that correspond to
+[06:02] 变量的坐标。 
+coordinates of a variable.
+[06:04] 我认为这与我们的惯例相同
+And I think that's the
+same convention that we
+[06:07] 为回归案例。 
+took for the regression case.
+[06:10] 当然，您可以使用任何您想要的东西。 
+Of course, you could
+use whatever you want.
+[06:12] 如果您想输入逗号等
+If you want to put
+commas, et cetera,
+[06:13] 它变得更加复杂。 
+it becomes just a
+bit more complicated.
+[06:16] 好吧，所以现在，一旦我有了这个， 
+All right, and so
+now, once I have this,
+[06:18] 所以这告诉我我的点云在哪里，对吗？ 
+so this tells me where my cloud
+of point is centered, right?
+[06:21] 所以，如果我有很多观点， 
+So if I have a bunch of points--
+[06:24] 好，现在我在Rd上有一个发行版， 
+OK, so now I have a
+distribution on Rd,
+[06:27] 所以也许我应该谈论这个- 
+so maybe I should
+talk about this--
+[06:29] 我聊的时候再说
+I'll talk about
+this when we talk
+[06:31] 关于经验版本。 
+about the empirical version.
+[06:32] 但是，如果您认为自己拥有， 
+But if you think
+that you have, say,
+[06:34] 二维高斯随机变量， 
+a two-dimensional
+Gaussian random variable,
+[06:36] 那么你有一个二维的中心
+then you have a center
+in two dimension, which
+[06:38] 基本上是高峰。 
+is where it peaks, basically.
+[06:41] 这就是我们在这里所说的。 
+And that's what we're
+talking about here.
+[06:43] 但是我们想知道的另一件事
+But the other thing
+we want to know
+[06:44] 它在各个方向上传播了多少，对吗？ 
+is how much does it spread
+in every direction, right?
+[06:47] 因此，在二维事物的各个方向上， 
+So in every direction of
+the two dimensional thing,
+[06:49] 然后，我可以尝试了解我得到了多少传播。 
+I can then try to understand
+how much spread I'm getting.
+[06:52] 您使用协方差来衡量这一点的方法对吗？ 
+And the way you measure this
+is by using covariance, right?
+[06:54] 所以协方差矩阵sigma 
+So the covariance
+matrix, sigma--
+[07:02] 那是一个被d乘以d的矩阵。 
+that's a matrix which is d by d.
+[07:05] 并在第j，k个条目中记录
+And it records-- in
+the j, k-th entry,
+[07:08] 它记录了第j个坐标之间的协方差
+it records the covariance
+between the j-th coordinate
+[07:10]  X和X的第k个坐标，好吗？ 
+of X and the k-th
+coordinate of X, OK?
+[07:13] 所以输入
+So with entries--
+[07:21] 好的，我有sigma，即sigma 1,1，sigma dd，sigma 1d， 
+OK, so I have sigma, which is
+sigma 1,1, sigma dd, sigma 1d,
+[07:30] 西格玛d1。 
+sigma d1.
+[07:34] 好，这里有sigma jk和sigma jk 
+OK, and here I have
+sigma jk And sigma jk
+[07:39] 只是Xj（第j个坐标）之间的协方差
+is just the covariance between
+Xj, the j-th coordinate
+[07:48] 和第k个坐标。 
+and the k-th coordinate.
+[07:52] 好？ 
+OK?
+[07:52] 尤其是对称的，因为协方差
+So in particular, it's
+symmetric because the covariance
+[07:55]  Xj和Xk之间的协方差与Xk之间的协方差相同
+between Xj and Xk is the same
+as the covariance between Xk
+[07:57] 和Xj。 
+and Xj.
+[07:58] 我不应该在这里加上这些括号。 
+I should not put those
+parentheses here.
+[08:01] 我不在此使用它们，好吗？ 
+I do not use them in this, OK?
+[08:05] 只是协方差矩阵。 
+Just the covariance matrix.
+[08:06] 这就是记录所有内容的东西。 
+So that's just something
+that records everything.
+[08:09] 那么协方差矩阵有什么好处
+And so what's nice about
+the covariance matrix
+[08:10] 就是如果我实际上给你X作为向量， 
+is that if I actually
+give you X as a vector,
+[08:13] 你实际上可以建立矩阵
+you actually can
+build the matrix just
+[08:15] 通过查看向量乘以向量转置， 
+by looking at vectors
+times vectors transpose,
+[08:18] 而不是真正考虑建筑
+rather than actually
+thinking about building
+[08:20] 它一个个地协调。 
+it coordinate by coordinate.
+[08:21] 因此，例如，如果您习惯使用MATLAB， 
+So for example, if you're
+used to using MATLAB,
+[08:23] 这就是您要建立协方差矩阵的方式
+that's the way you want to
+build a covariance matrix
+[08:26] 因为MATLAB擅长处理向量
+because MATLAB is good
+at manipulating vectors
+[08:29] 和矩阵，而不是逐项输入。 
+and matrices rather than just
+entering it entry by entry.
+[08:33] 好吧，对吧？ 
+OK, so, right?
+[08:34] 那么，Xj和Xk之间的协方差是多少？ 
+So, what is the covariance
+between Xj and Xk?
+[08:42] 根据定义，这是对Xj和Xk的期望
+Well by definition, it's
+the expectation of Xj and Xk
+[08:51] 减去Xj的期望值乘以Xk的期望值， 
+minus the expectation of Xj
+times the expectation of Xk,
+[09:01] 对？ 
+right?
+[09:01] 那就是协方差的定义。 
+That's the definition
+of the covariance.
+[09:03] 我希望每个人都能看到。 
+I hope everybody's seeing that.
+[09:05] 因此，特别是，我可以
+And so, in particular,
+I can actually
+[09:08] 看到这东西可以写成- 
+see that this thing
+can be written as--
+[09:10]  sigma现在可以写成期望值
+sigma can now be written
+as the expectation
+[09:14]  XX的转置减去X的期望
+of XX transpose minus
+the expectation of X
+[09:21] 乘以X转置的期望。 
+times the expectation
+of X transpose.
+[09:25] 为什么？ 
+Why?
+[09:26] 好吧，让我们看看这个家伙的第jk个系数，对吗？ 
+Well, let's look at the jk-th
+coefficient of this guy, right?
+[09:29] 所以在这里，如果我看第jk个系数，我会看到什么？ 
+So here, if I look at the
+jk-th coefficient, I see what?
+[09:35] 好吧，我看到这是期望
+Well, I see that
+it's the expectation
+[09:38]  XX的转置jk，等于XX的期望
+of XX transpose jk, which is
+equal to the expectation of XX
+[09:50] 转置jk。 
+transpose jk.
+[09:53]  XX转置的条目是什么？ 
+And what are the
+entries of XX transpose?
+[09:56] 好吧，它们的形式是Xj乘以Xk。 
+Well, they're of the
+form, Xj times Xk exactly.
+[10:00] 因此，这实际上等于Xj乘以Xk的期望。 
+So this is actually equal to
+the expectation of Xj times Xk.
+[10:09] 这实际上不是我想要编写的方式。 
+And this is actually not
+the way I want to write it.
+[10:11] 我想写
+I want to write it--
+[10:15] 好？ 
+OK?
+[10:16] 明白了吗？ 
+Is that clear?
+[10:17] 当我拥有这种形式的1级矩阵时，XX转置， 
+That when I have a rank 1 matrix
+of this form, XX transpose,
+[10:20] 条目是这种形式的，对不对？ 
+the entries are of
+this form, right?
+[10:21] 因为如果我拿- 
+Because if I take--
+[10:23] 例如，考虑x，y，z，然后
+for example, think
+about x, y, z, and then
+[10:28] 我乘以x，y，z。 
+I multiply by x, y, z.
+[10:32] 我要来的是x-- 
+What I'm getting here is x--
+[10:36] 也许我应该在这里实际使用索引。 
+maybe I should actually
+use indices here.
+[10:40]  x1，x2，x3 
+x1, x2, x3.
+[10:42]  x1，x2，x3 
+x1, x2, x3.
+[10:44] 条目是x1x1，x1x2，x1x3; x2x1，x2x2，x2x3; x3x1， 
+The entries are x1x1, x1x2,
+x1x3; x2x1, x2x2, x2x3; x3x1,
+[10:57]  x3x2，x3x3好吗？ 
+x3x2, x3x3, OK?
+[11:04] 所以的确，如果您看看jk，这就是形式， 
+So indeed, this is exactly of
+the form if you look at jk,
+[11:08] 你得到Xj乘以Xk，好吗？ 
+you get exactly Xj times Xk, OK?
+[11:12] 这就是这些矩阵的美。 
+So that's the beauty
+of those matrices.
+[11:15] 所以现在有了这个，我可以做完全一样的事情， 
+So now, once I have this, I
+can do exactly the same thing,
+[11:19] 除了这里，如果我参加第jk个条目， 
+except that here, if I
+take the jk-th entry,
+[11:23] 我会得到完全一样的东西， 
+I will get exactly
+the same thing,
+[11:25] 除了不会成为产品的期望之外， 
+except that it's not going to be
+the expectation of the product,
+[11:27] 但是期望的产物，对吧？ 
+but the product of the
+expectation, right?
+[11:29] 所以我得到X的E的第jk个条目，X的E进行转置， 
+So I get that the jk-th entry
+of E of X, E of X transpose,
+[11:36] 是X的E的第j个条目乘以X的E的第k个条目。 
+is just the j-th entry of E of X
+times the k-th entry of E of X.
+[11:48] 所以如果我把这两个放在一起，实际上是在告诉我
+So if I put those two together,
+it's actually telling me
+[11:52] 如果我看西格玛的第j，k个条目， 
+that if I look at the
+j, k-th entry of sigma,
+[11:56] 我叫小西格玛jk 
+which I called
+little sigma jk, then
+[11:59] 这实际上等于什么？ 
+this is actually equal to what?
+[12:01] 它等于第一项减去第二项。 
+It's equal to the first
+term minus the second term.
+[12:04] 第一项是对Xj，Xk的期望
+The first term is the
+expectation of Xj, Xk
+[12:11] 减去Xj的期望值，Xk的期望值， 
+minus the expectation of Xj,
+expectation of Xk, which--
+[12:18] 哦，对了，我忘了说这实际上是
+oh, by the way, I forgot
+to say this is actually
+[12:20] 等于Xj的期望值乘以Xk的期望值
+equal to the expectation of
+Xj times the expectation of Xk
+[12:26] 因为那只是期望的定义
+because that's just the
+definition of the expectation
+[12:28] 向量集。 
+of random vectors.
+[12:28] 所以我的j和我的k现在在里面。 
+So my j and my k are now inside.
+[12:31] 根据定义，这就是Xj和Xk之间的协方差， 
+And that's by definition the
+covariance between Xj and Xk,
+[12:37] 好？ 
+OK?
+[12:39] 因此，即使您已经看到向量之间的操作， 
+So just if you've seen those
+manipulations between vectors,
+[12:43] 希望你无聊了。 
+hopefully you're bored
+out of your mind.
+[12:45] 如果您还没有，那就是
+And if you have not,
+then that's something
+[12:47] 您只需要适应，对吗？ 
+you just need to get
+comfortable with, right?
+[12:51] 所以一件事很有用
+So one thing that's
+going to be useful
+[12:52] 很快知道什么叫
+is to know very
+quickly what's called
+[12:55] 向量与自身的外部乘积
+the outer product of a
+vector with itself, which
+[12:57] 是向量转置的时间向量， 
+is the vector of times
+the vector transpose, what
+[13:00] 这些东西的条目是。 
+the entries of these things are.
+[13:01] 这就是我们在第二套板上所使用的。 
+And that's what we've been using
+on this second set of boards.
+[13:06] 好，现在大家都同意
+OK, so everybody
+agrees now that we've
+[13:08] 表明协方差矩阵可以
+sort of showed that the
+covariance matrix can
+[13:11] 以此向量形式编写。 
+be written in this vector form.
+[13:14] 所以XX的期望转置减去期望
+So expectation of XX
+transpose minus expectation
+[13:17]  X，期望X转置。 
+of X, expectation
+of X transpose.
+[13:22] 好的，就像可以用两种方式写协方差一样， 
+OK, just like the covariance
+can be written in two ways,
+[13:28] 对，我们知道协方差也可以
+right we know that the
+covariance can also
+[13:30] 写为Xj的期望值减去Xj的期望值
+be written as the expectation
+of Xj minus expectation of Xj
+[13:39]  Xk乘以Xk的期望值，对吧？ 
+times Xk minus
+expectation of Xk, right?
+[13:45] 那是-有时这是原始定义
+That's the-- sometimes, this
+is the original definition
+[13:50] 协方差
+of covariance.
+[13:50] 这是协方差的第二个定义。 
+This is the second
+definition of covariance.
+[13:52] 就像你有差异
+Just like you have
+the variance which
+[13:54] 是X的平方减去X的c的期望， 
+is the expectation of the
+square of X minus c of X,
+[13:57] 或期望值X的平方减去期望值X 
+or the expectation X squared
+minus the expectation of X
+[14:00] 平方。 
+squared.
+[14:01] 协方差是相同的。 
+It's the same thing
+for covariance.
+[14:03] 您实际上可以从向量上看到这一点，对吗？ 
+And you can actually see this
+in terms of vectors, right?
+[14:11] 所以这实际上意味着您也可以重写sigma 
+So this actually implies that
+you can also rewrite sigma
+[14:14]  X的期望值减去X的期望值
+as the expectation of X
+minus expectation of X
+[14:21] 同样的事情转置。 
+times the same thing transpose.
+[14:32] 对？ 
+Right?
+[14:32] 原因是因为如果您只分发这些人， 
+And the reason is because if
+you just distribute those guys,
+[14:35] 这只是XX转置的期望
+this is just the
+expectation of XX transpose
+[14:43] 减X，X转置的期望减期望
+minus X, expectation of X
+transpose minus expectation
+[14:54]  XX个转置。 
+of XX transpose.
+[14:59] 然后我有X的期望值， 
+And then I have plus
+expectation of X,
+[15:03]  X转置的期望。 
+expectation of X transpose.
+[15:09] 现在，事情可能会出错，因为主要区别
+Now, things could go wrong
+because the main difference
+[15:13] 矩阵斜线向量和数字之间的距离为
+between matrices slash
+vectors and numbers is
+[15:18] 乘法不会上下班，对不对？ 
+that multiplication
+does not commute, right?
+[15:21] 因此，特别是这两件事不是同一件事。 
+So in particular, those two
+things are not the same thing.
+[15:25] 这就是我们以前的主要区别， 
+And so that's the main
+difference that we have before,
+[15:27] 但这实际上与我们的问题无关。 
+but it actually does not
+matter for our problem.
+[15:30] 这是因为发生的情况是
+It's because what's
+happening is that if when
+[15:32] 我期待这个家伙的期待
+I take the expectation
+of this guy, then
+[15:34] 其实和这个家伙的期望一样，好吗？ 
+it's actually the same as the
+expectation of this guy, OK?
+[15:38] 正因为期望是线性的， 
+And so just because the
+expectation is linear--
+[15:48] 所以我们现在有那个西格玛
+so what we have
+is that sigma now
+[15:50] 变得等于XX转置的期望
+becomes equal to the
+expectation of XX transpose
+[15:55] 减去X的期望
+minus the expectation
+of X, expectation
+[15:59]  X的转置减去X的期望， 
+of X transpose minus
+expectation of X,
+[16:03]  X转置的期望。 
+expectation of X transpose.
+[16:07] 然后我有- 
+And then I have--
+[16:10] 好吧，真的，我有这个家伙。 
+well, really, what
+I have is this guy.
+[16:14] 然后我有期望
+And then I have
+plus the expectation
+[16:15]  X，期望X转置。 
+of X, expectation
+of X transpose.
+[16:23] 现在，这三件事实际上彼此相等
+And now, those three things are
+actually equal to each other
+[16:28] 只是因为X的期望转置
+just because the
+expectation of X transpose
+[16:30] 与X转置的期望相同。 
+is the same as the
+expectation of X transpose.
+[16:34] 所以我剩下的就是
+And so what I'm
+left with is just
+[16:35]  XX的期望转置减去X的期望， 
+the expectation of XX transpose
+minus the expectation of X,
+[16:44] 期待X转置，好吗？ 
+expectation of X transpose, OK?
+[16:49] 所以当发生同样的事情
+So same thing that's
+happening when
+[16:51] 你想证明你可以写
+you want to prove
+that you can write
+[16:53] 这样或那样的协方差。 
+the covariance either
+this way or that way.
+[16:57] 矩阵或向量也会发生相同的情况
+The same thing happens for
+matrices, or for vectors,
+[17:00] 或协方差矩阵
+right, or a covariance matrix.
+[17:02] 他们一起去。 
+They go together.
+[17:04] 到目前为止还有什么问题吗？ 
+Is there any questions so far?
+[17:05] 如果有的话，请告诉我，因为我想- 
+And if you have some, please
+tell me, because I want to--
+[17:09] 我不知道你们在多大程度上对此感到满意
+I don't know to which extent you
+guys are comfortable with this
+[17:12] 根本没有。 
+at all or not.
+[17:16] 好的，让我们继续。 
+OK, so let's move on.
+[17:19] 好吧，当然，这就是
+All right, so of
+course, this is what
+[17:23] 我在这里用分布来描述。 
+I'm describing in terms of
+the distribution right here.
+[17:26] 我抱有期望。 
+I took expectations.
+[17:28] 协方差也是期望。 
+Covariances are
+also expectations.
+[17:30] 因此，这些取决于X的某种分布，对吗？ 
+So those depend on some
+distribution of X, right?
+[17:32] 如果我想计算，基本上
+If I wanted to compute
+that, I would basically
+[17:34] 需要知道X的分布是什么。 
+need to know what the
+distribution of X is.
+[17:36] 现在，我们正在进行统计，所以我
+Now, we're doing
+statistics, so I
+[17:37] 需要[听不清]我的问题是要说，嗯， 
+need to [INAUDIBLE] my question
+is going to be to say, well,
+[17:41] 我如何估计协方差矩阵本身， 
+how well can I estimate the
+covariance matrix itself,
+[17:44] 或此协方差矩阵的某些属性
+or some properties of
+this covariance matrix
+[17:47] 根据数据？ 
+based on data?
+[17:48] 好的，如果我想了解
+All right, so if I
+want to understand
+[17:50] 根据数据我的协方差矩阵是什么样的， 
+what my covariance matrix
+looks like based on data,
+[17:52] 我将必须基本上形成
+I'm going to have
+to basically form
+[17:54] 它的经验对应物
+its empirical
+counterparts, which
+[17:57] 我可以做一些古老的统计技巧， 
+I can do by doing the age-old
+statistical trick, which
+[18:02] 是平均代替您的期望，好吗？ 
+is replace your expectation
+by an average, all right?
+[18:04] 所以，让我们-董事会的一切， 
+So let's just-- everything
+that's on the board,
+[18:06] 您会看到期望，只需将其平均替换即可。 
+you see expectation, just
+replace it by an average.
+[18:09] 好的，现在我将得到X1，Xn。 
+OK, so, now I'm going
+to be given X1, Xn.
+[18:14] 因此，我将定义经验均值。 
+So, I'm going to define
+the empirical mean.
+[18:19] 好吧，真的，这个主意就是您的期望
+OK so, really, the idea
+is take your expectation
+[18:22] 并用n加1代替它，对吗？ 
+and replace it by 1
+over n sum, right?
+[18:24] 因此，经验均值只是n上的1。 
+And so the empirical
+mean is just 1 over n.
+[18:28] 某些Xi- 
+Some of the Xi's--
+[18:31] 我猜每个人都知道如何平均向量。 
+I'm guessing everybody knows
+how to average vectors.
+[18:34] 这只是坐标的平均值。 
+It's just the average
+of the coordinates.
+[18:36] 所以我将其写为X条。 
+So I will write this as X bar.
+[18:39] 和经验协方差矩阵，通常称为
+And the empirical covariance
+matrix, often called
+[18:51] 样本协方差矩阵，因此表示为S。 
+sample covariance matrix,
+hence the notation, S.
+[18:57] 好吧，这是我的协方差矩阵，对吗？ 
+Well, this is my
+covariance matrix, right?
+[18:59] 让我们用平均值代替期望值。 
+Let's just replace the
+expectations by averages.
+[19:02]  n上的1个，i的i从1到n的和，xi转置，减去- 
+1 over n, sum from i equal 1 to
+n, of Xi, Xi transpose, minus--
+[19:12] 这是X的期望。我将替换它
+this is the expectation
+of X. I will replace it
+[19:14] 平均而言，我只是称其为X bar，X bar转置， 
+by the average, which I just
+called X bar, X bar transpose,
+[19:21] 好？ 
+OK?
+[19:22] 那就是我想使用- 
+And that's when I
+want to use the--
+[19:25] 那就是我想使用符号的时候
+that's when I want
+to use the notation--
+[19:28] 第二个定义，但我实际上可以
+the second definition,
+but I could actually
+[19:30] 在这里使用此定义做完全相同的事情。 
+do exactly the same thing
+using this definition here.
+[19:35] 抱歉，在这里使用此定义。 
+Sorry, using this
+definition right here.
+[19:38] 所以这实际上是n上的1 
+So this is actually
+1 over n, sum from i
+[19:42] 等于X减去X条的1到n，X减去X条的转置。 
+equal 1 to n, of Xi minus X
+bar, Xi minus X bar transpose.
+[19:55] 这些实际上是- 
+And those are actually--
+[19:56] 我的意思是某种程度上
+I mean, in a way,
+it looks like I
+[19:58] 可以定义两个不同的估算器
+could define two
+different estimators,
+[19:59] 但您实际上可以检查。 
+but you can actually check.
+[20:01] 我确实鼓励您这样做。 
+And I do encourage
+you to do this.
+[20:03] 如果您不习惯进行这些操作， 
+If you're not comfortable
+making those manipulations,
+[20:05] 您实际上可以检查这两件事是否确实
+you can actually check that
+those two things are actually
+[20:08] 完全一样，好吗？ 
+exactly the same, OK?
+[20:20] 所以现在，我要谈谈矩阵，好吗？ 
+So now, I'm going to want
+to talk about matrices, OK?
+[20:25] 记住，我们定义了这个大矩阵X 
+And remember, we defined
+this big matrix, X,
+[20:27] 与双杠。 
+with the double bar.
+[20:28] 问题是，我可以表达
+And the question
+is, can I express
+[20:31]  X条和样本协方差矩阵
+both X bar and the
+sample covariance matrix
+[20:35] 就这个大矩阵而言，X？ 
+in terms of this big matrix, X?
+[20:37] 因为现在，它仍然在表达
+Because right now,
+it's still expressed
+[20:39] 在向量方面。 
+in terms of the vectors.
+[20:40] 我总结了这些向量，向量转置。 
+I'm summing those vectors,
+vectors transpose.
+[20:43] 问题是，我能以一种非常紧凑的方式做到这一点吗？ 
+The question is, can I just
+do that in a very compact way,
+[20:46] 以某种方式我可以删除这个总和项
+in a way that I can actually
+remove this sum term,
+[20:50] 行？ 
+all right?
+[20:50] 这将是目标。 
+That's going to be the goal.
+[20:52] 我的意思是，这不是目标。 
+I mean, that's not
+a notational goal.
+[20:54] 这确实是我们想要的- 
+That's really something
+that we want--
+[20:58] 这对我们来说很方便
+that's going to be
+convenient for us
+[20:59] 就像在什么时候谈论矩阵很方便
+just like it was convenient
+to talk about matrices when
+[21:02] 我们做了线性回归。 
+we did linear regression.
+[21:23] 好的，X条。 
+OK, X bar.
+[21:26] 我们刚刚说过1比n大，我的总和等于1到n 
+We just said it's 1 over
+n, sum from I equal 1 to n
+[21:30] 习的对吧？ 
+of Xi, right?
+[21:32] 现在记住，这个矩阵是什么样的？ 
+Now remember, what does
+this matrix look like?
+[21:35] 我们说X酒吧
+We said that X bar--
+[21:39]  X是这个人。 
+X is this guy.
+[21:40] 所以，如果我看一下X转置，这个家伙的专栏
+So if I look at X transpose,
+the columns of this guy
+[21:45] 变成X1，我的第一个观察结果X2， 
+becomes X1, my first
+observation, X2,
+[21:51] 我的第二个观察，一直到Xn，最后一个观察， 
+my second observation, all the
+way to Xn, my last observation,
+[21:54] 对？ 
+right?
+[21:56] 同意吗
+Agreed?
+[21:56] 这就是X转置的意思。 
+That's what X transpose is.
+[21:58] 所以，如果我想总结那些家伙，我
+So if I want to
+sum those guys, I
+[22:00] 可以乘以全1向量。 
+can multiply by the
+all-ones vector.
+[22:06] 好吧，这就是全1的定义
+All right, so that's what the
+definition of the all-ones 1
+[22:08] 向量是。 
+vector is.
+[22:11] 好吧，在这种情况下，Rn中只有一堆1。 
+Well, it's just a bunch of
+1's in Rn, in this case.
+[22:19] 因此，当我进行X转置1时，我得到的仅仅是
+And so when I do X transpose 1,
+what I get is just the sum from
+[22:23] 我等于Xi的1到n。 
+i equal 1 to n of the Xi's.
+[22:27] 所以，如果我除以n，我得到的是平均值，好吗？ 
+So if I divide by n,
+I get my average, OK?
+[22:36] 所以在这里，我绝对删除了总和项。 
+So here, I definitely
+removed the sum term.
+[22:43] 让我们看看是否可以使用协方差矩阵进行相同的操作。 
+Let's see if with the covariance
+matrix, we can do the same.
+[22:47] 好吧，这实际上很难看， 
+Well, and that's actually a
+little more difficult to see,
+[22:53] 我猜。 
+I guess.
+[22:55] 但是让我们对S使用此定义，好吗？ 
+But let's use this
+definition for S, OK?
+[23:05] 实际上，一件事是- 
+And one thing that's
+actually going to be--
+[23:07] 所以，让我们看一秒钟- 
+so, let's see for
+one second, what--
+[23:10] 所以将涉及到X 
+so it's going to be
+something that involves X,
+[23:12]  X与自身相乘，好吗？ 
+multiplying X with itself, OK?
+[23:14] 问题是，它将是
+And the question is,
+is it going to be
+[23:15]  X与X转置相乘，还是X与X转置？ 
+multiplying X with X transpose,
+or X tranpose with X?
+[23:19] 要回答这个问题，您可以
+To answer this
+question, you can go
+[23:20] 简单的路线，这就是说，我的协方差矩阵是
+the easy route, which says,
+well, my covariance matrix is
+[23:23] 大小，什么？ 
+of size, what?
+[23:24]  S的大小是多少？ 
+What is the size of S?
+[23:27] 听众：d by d。 
+AUDIENCE: d by d.
+[23:28]  PHILIPPE RIGOLLET：d by d，好吗？ 
+PHILIPPE RIGOLLET: d by d, OK?
+[23:30]  X的大小为n乘d。 
+X is of size n by d.
+[23:34] 所以如果我做X次X转置，我就是
+So if I do X times
+X transpose, I'm
+[23:35] 将具有n×n大小的东西。 
+going to have something
+which is of size n by n.
+[23:37] 如果我做X转位X，我将有
+If I do X transpose
+X, I'm going to have
+[23:39] 是d的东西。 
+something which is d by d.
+[23:40] 那是简单的路线。 
+That's the easy route.
+[23:41] 而且基本上是两个家伙之一。 
+And there's basically
+one of the two guys.
+[23:44] 你可以稍微打开盒子
+You can actually open
+the box a little bit
+[23:46] 看看那里发生了什么。 
+and see what's
+going on in there.
+[23:48] 如果您进行X移置，我们知道d会给您x， 
+If you do X transpose X, which
+we know gives you a d by d,
+[23:52] 您会看到X将具有向量
+you'll see that X is
+going to have vectors that
+[23:54] 的形式是Xi和X转置
+are of the form,
+Xi, and X transpose
+[23:57] 将具有Xi换位形式的向量
+is going to have vectors that
+are of the form, Xi transpose,
+[24:02] 对？ 
+right?
+[24:03] 因此，这实际上可能是正确的方法。 
+And so, this is actually
+probably the right way to go.
+[24:06] 因此，让我们看一下X换位X给我们的结果。 
+So let's look at what's X
+transpose X is giving us.
+[24:11] 所以我声称这实际上是要给我们我们想要的， 
+So I claim that it's actually
+going to give us what we want,
+[24:16] 但与其实际去那里，不如让我们- 
+but rather than actually
+going there, let's--
+[24:19] 实际上-我的意思是，我们可以逐项检查它， 
+to actually-- I mean, we
+could check it entry by entry,
+[24:22] 但实际上我们可以做的很好。 
+but there's actually a
+nice thing we can do.
+[24:25] 在去那里之前，让我们写X转置
+Before we go there,
+let's write X transpose
+[24:28] 作为以下变量的总和，X1然后
+as the following sum of
+variables, X1 and then
+[24:33] 到处都是零。 
+just a bunch of 0's
+everywhere else.
+[24:36] 所以它仍然是n。 
+So it's still d by n.
+[24:39] 因此，此处的n减1列等于0。 
+So n minus 1 of the columns
+are equal to 0 here.
+[24:42] 然后我要输入0，然后输入X2。 
+Then I'm going to put
+a 0 and then put X2.
+[24:45] 然后只有一堆0，对吧？ 
+And then just a
+bunch of 0's, right?
+[24:48] 那就是0，0加0，0一直到Xn，好吗？ 
+So that's just 0, 0 plus 0,
+0, all the way to Xn, OK?
+[24:59] 每个人都同意吗？ 
+Everybody agrees with it?
+[25:01] 看看我在这里做什么？ 
+See what I'm doing here?
+[25:03] 我只是将其拆分为矩阵的总和
+I'm just splitting it into
+a sum of matrices that
+[25:06] 只有一个非零列。 
+only have one nonzero columns.
+[25:08] 但显然，这是真的。 
+But clearly, that's true.
+[25:11] 现在，让我们看看这个家伙本身的产品。 
+Now let's look at the product
+of this guy with itself.
+[25:15] 因此，我们将这些矩阵称为M1，M2，Mn。 
+So, let's call these
+matrices M1, M2, Mn.
+[25:26] 所以当我X换位X时，我
+So when I do X
+transpose X, what I
+[25:30]  do是i等于1到n的Mi的总和， 
+do is the sum of the
+Mi's for i equal 1 to n,
+[25:37] 乘以Mi转置之和，对不对？ 
+times the sum of the
+Mi transpose, right?
+[25:48] 现在，Mi的移调之和
+Now, the sum of
+the Mi's transpose
+[25:50] 只是Mi的每个移调之和，好吗？ 
+is just the sum of each
+of the Mi's transpose, OK?
+[25:58] 所以现在我得到的是两个和的乘积
+So now I just have this
+product of two sums,
+[26:00] 所以我只是用j重新索引第二个索引。 
+so I'm just going to
+re-index the second one by j.
+[26:03] 所以这是i等于1等于n，j等于1等于n的总和
+So this is sum for i equal
+1 to n, j equal 1 to n of Mi
+[26:12]  Mj转置。 
+Mj transpose.
+[26:15] 好？ 
+OK?
+[26:19] 现在我们要注意的是
+And now what we
+want to notice is
+[26:20] 如果我与j不同，那是怎么回事？ 
+that if i is different
+from j, what's happening?
+[26:26] 好吧，如果我与j不同，那么让我们看一下，M1乘以XM2 
+Well if i is different from j,
+let's look at say, M1 times XM2
+[26:34] 转置。 
+transpose.
+[26:54] 那么这两个矩阵的乘积是多少？ 
+So what is the product
+between those two matrices?
+[27:04] 听众：这是一个新条目，[听不清] 
+AUDIENCE: It's a new
+entry and [INAUDIBLE]
+[27:09]  PHILIPPE RIGOLLET：有条目吗？ 
+PHILIPPE RIGOLLET:
+There's an entry?
+[27:11] 听众：嗯，这是一个条目。 
+AUDIENCE: Well, it's an entry.
+[27:12] 就像[]旁边的那个形式的点积。转置。 ？] 
+It's like a dot product in that
+form next to [? transpose. ?]
+[27:17]  PHILIPPE RIGOLLET：您的意思是说点状产品正越来越
+PHILIPPE RIGOLLET: You mean
+a dot product is just getting
+[27:19]  [音频不清晰]数字，对不对？ 
+[INAUDIBLE] number, right?
+[27:20] 所以我想-这将是一个矩阵。 
+So I want-- this is
+going to be a matrix.
+[27:22] 这是两个矩阵的乘积，对吗？ 
+It's the product of
+two matrices, right?
+[27:24] 这是一个矩阵乘以一个矩阵。 
+This is a matrix times a matrix.
+[27:27] 因此，这应该是大小为d乘以d的矩阵。 
+So this should be a matrix,
+right, of size d by d.
+[27:35] 是的，我应该看到很多手
+Yeah, I should
+see a lot of hands
+[27:37] 看起来像这样吧？ 
+that look like this, right?
+[27:39] 因为看这个。 
+Because look at this.
+[27:40] 因此，让我们乘以第一个
+So let's multiply the first--
+[27:42] 让我们看看这里第一列的情况。 
+let's look at what's going
+on in the first column here.
+[27:45] 我将此列乘以每行。 
+I'm multiplying this column
+with each of those rows.
+[27:48] 唯一的非零系数在这里， 
+The only nonzero
+coefficient is here,
+[27:50] 并且只会触及0的这一列。 
+and it only hits
+this column of 0's.
+[27:54] 因此，每次都会为您提供0，0，0，0。 
+So every time, this is going
+to give you 0, 0, 0, 0.
+[27:57] 每个人中的每个人都是一样的。 
+And it's going to be the same
+for every single one of them.
+[28:00] 所以这个矩阵充满了0，对吧？ 
+So this matrix is just
+full of 0's, right?
+[28:04] 我做的时候他们从来没有碰到对方
+They never hit each
+other when I do
+[28:06] 矩阵矩阵乘法。 
+the matrix-matrix
+multiplication.
+[28:08] 没有-每个非零都命中0。 
+There's no-- every
+non-zero hits a 0.
+[28:11] 所以这意味着-当然， 
+So what it means is--
+and this, of course,
+[28:13] 您可以检查每个与j不同的i。 
+you can check for every
+i different from j.
+[28:16] 所以这意味着Mi次Mj转置实际上
+So this means that Mi times
+Mj transpose is actually
+[28:22] 当我不同于j时等于0，对吗？ 
+equal to 0 when i is
+different from j, Right?
+[28:27] 大家都可以吗？ 
+Everybody is OK with this?
+[28:29] 所以这意味着当我做这个两倍的总和时， 
+So what that means is that when
+I do this double sum, really,
+[28:32] 这是一个简单的数字。 
+it's a simple sum.
+[28:33] 只有我的总和等于1 
+There's only just the
+sum from i equal 1
+[28:37] 到Mi Mi转置的n。 
+to n of Mi Mi transpose.
+[28:41] 因为这是这双和中的唯一条件
+Because this is the only
+terms in this double sum
+[28:44] 当[音频不清晰] [？ M1？]和M1 
+that are not going to be 0 when
+[INAUDIBLE] [? M1 ?] with M1
+[28:48] 本身。 
+itself.
+[28:50] 现在，让我们看看发生了什么事
+Now, let's see
+what's going on when
+[28:51] 我做M1次M1转置。 
+I do M1 times M1 transpose.
+[28:53] 好吧，现在，如果我做Mi次而Mi转置， 
+Well, now, if I do Mi
+times and Mi transpose,
+[28:57] 现在，这个家伙成为[？ X1吗？] [听不清]它在这里。 
+now this guy becomes [? X1 ?]
+[INAUDIBLE] it's here.
+[29:00] 所以现在，我真的有X1倍X1转置。 
+And so now, I really have
+X1 times X1 transpose.
+[29:03] 所以这实际上只是我的总和
+So this is really
+just the sum from i
+[29:06] 等于Xi Xi转置的n等于1，仅因为Mi Mi转置
+equal 1 to n of Xi Xi transpose,
+just because Mi Mi transpose
+[29:20] 是夕夕换位。 
+is Xi Xi transpose.
+[29:21] 那里没有别的了。 
+There's nothing else there.
+[29:26] 那是个好消息，对吗？ 
+So that's the good news, right?
+[29:28] 这里的这个术语实际上只是X转置X除以n。 
+This term here is really just
+X transpose X divided by n.
+[29:43] 好吧，我猜我可以再使用那个家伙。 
+OK, I can use that
+guy again, I guess.
+[29:45] 好吧，不。 
+Well, no.
+[29:46] 好吧，让我重写S。 
+Let's just-- OK, so
+let me rewrite S.
+[30:08] 好吧，这就是我们的定义。 
+All right, that's the
+definition we have.
+[30:10] 而且我们知道这个人已经等于n X上的1 
+And we know that this guy
+already is equal to 1 over n X
+[30:14] 转置X. x bar x bar转置- 
+transpose X. x bar
+x bar transpose--
+[30:20] 我们知道x条-我们只是证明了x条- 
+we know that x bar-- we
+just proved that x bar--
+[30:25] 对不起，x线小等于1 
+sorry, little x
+bar was equal to 1
+[30:31] 超过n X条转置乘以全一向量。 
+over n X bar transpose
+times the all-ones vector.
+[30:36] 所以我要去做。 
+So I'm just going to do that.
+[30:37] 所以这将是减号。 
+So that's just
+going to be minus.
+[30:39] 我要把我的两个1比n大
+I'm going to pull
+my two 1 over n's--
+[30:41] 一个来自这个人，一个来自这个人。 
+one from this guy,
+one from this guy.
+[30:42] 所以我将得到n平方的1。 
+So I'm going to get
+1 over n squared.
+[30:44] 然后我要得到X bar 
+And then I'm going
+to get X bar--
+[30:47] 抱歉，这里没有X条。 
+sorry, there's no X bar here.
+[30:48] 就是X。是的。 
+It's just X. Yeah.
+[30:50]  X换位所有X换位所有位
+X transpose all ones times X
+transpose all ones transpose,
+[30:59] 对？ 
+right?
+[31:04]  X换位所有换位- 
+And X transpose all
+ones transpose--
+[31:11] 是的，规则-如果我有A次B次换位， 
+right, the rule-- if I
+have A times B transpose,
+[31:14] 是B换位乘以A换位，对吗？ 
+it's B transpose times
+A transpose, right?
+[31:23] 那只是换位的规则。 
+That's just the rule
+of transposition.
+[31:25] 所以这是1个转置X个转置。 
+So this is 1
+transpose X transpose.
+[31:31] 所以当我把所有这些家伙放在一起时， 
+And so when I put all
+these guys together,
+[31:34] 实际上等于n X转置X减1的1 
+this is actually equal to 1
+over n X transpose X minus one
+[31:38] 超过n个平方的X转置1，1转置X。因为X 
+over n squared X transpose
+1, 1 transpose X. Because X
+[31:47] 转置X，好吗？ 
+transpose transposes X, OK?
+[31:53] 所以现在，我可以- 
+So now, I can actually--
+[31:55] 我有某种形式的东西，X转置X-- 
+I have something which is
+of the form, X transpose X--
+[31:59]  [音频不清晰]在左侧，X转置；在右边，X。 
+[INAUDIBLE] to the left, X
+transpose; to the right, X.
+[32:01] 在这里，我有X移到左边，X移到右边。 
+Here, I have X transpose to
+the left, X to the right.
+[32:04] 因此，它可以排除其中的任何内容。 
+So it can factor out
+whatever's in there.
+[32:07] 所以我可以将S写成n上的1 
+So I can write S as 1 over n--
+[32:11] 抱歉，X转置1倍于n乘以Rd的标识。 
+sorry, X transpose times 1 over
+n times the identity of Rd.
+[32:21] 然后我在n上有负1，有1个转置X。 
+And then I have minus 1
+over n, 1, 1 transpose X.
+[32:33] 好吧，因为如果您- 
+OK, because if you--
+[32:34] 我的意思是，您可以将其分发回来，对吗？ 
+I mean, you can
+distribute it back, right?
+[32:36] 所以在这里，我要得到什么？ 
+So here, I'm going to get what?
+[32:38]  X将同一性乘以X，将整个事物除以n。 
+X transpose identity times X,
+the whole thing divided by n.
+[32:41] 就是这个学期
+That's this term.
+[32:42] 然后第二个是-抱歉，n分之一
+And then the second one is
+going to be-- sorry, 1 over n
+[32:45] 平方。 
+squared.
+[32:46] 然后我将在n平方乘以X转置得到1， 
+And then I'm going to get 1 over
+n squared times X transpose 1,
+[32:50]  1个换位是这个家伙，乘以X， 
+1 transpose which is
+this guy, times X,
+[32:53] 那是[？对 ？] [？东西，？]好吗？ 
+and that's the [? right ?]
+[? thing, ?] OK?
+[32:58] 所以，按照我写的方式，我排除了1个
+So, the way it's written, I
+factored out one of the 1 over
+[33:01]  n的。 
+n's.
+[33:02] 因此，我将要做与此幻灯片相同的操作。 
+So I'm just going to do the
+same thing as on this slide.
+[33:05] 所以我只是在这里排除n上的1。 
+So I'm just factoring
+out this 1 over n here.
+[33:08] 所以它是N倍X转置身份的1 
+So it's 1 over n times
+X transpose identity
+[33:16] 这次我们的d除以n除以1 
+of our d divided by n
+divided by 1 this time,
+[33:21] 在n 1上减去1，将X换位乘以1，好吗？ 
+minus 1 over n 1, 1
+transpose times X, OK?
+[33:26] 这就是幻灯片上的内容。 
+So that's just
+what's on the slides.
+[33:31]  1、1转置的矩阵是什么样的？ 
+What does the matrix, 1,
+1 transpose, look like?
+[33:35] 听众：全1。 
+AUDIENCE: All 1's.
+[33:36]  PHILIPPE RIGOLLET：都是1，对吧？ 
+PHILIPPE RIGOLLET: It's
+just all 1's, right?
+[33:38] 因为条目是万能的产物- 
+Because the entries are the
+products of the all-ones--
+[33:41] 的全一向量的坐标
+of the coordinates of
+the all-ones vectors with
+[33:42] 全1向量的坐标，所以我只得到1。 
+the coordinates of the all-ones
+vectors, so I only get 1's.
+[33:45] 因此，它是只有1的d矩阵广告。 
+So it's a d by d
+matrix with only 1's.
+[33:49] 所以这个矩阵，我实际上可以准确地写出来，对吧？ 
+So this matrix, I can
+actually write exactly, right?
+[33:52]  H，我称之为H的矩阵
+H, this matrix that
+I called H which
+[33:55] 是在此X转置和X之间夹着的东西。 
+is what's sandwiched in-between
+this X transpose and X.
+[33:59] 根据定义，我说的是H的定义。 
+By definition, I said this
+is the definition of H. Then
+[34:02] 这个东西，我可以准确地写出它的坐标。 
+this thing, I can write
+its coordinates exactly.
+[34:18] 我们知道它的身份除以n减去- 
+We know it's identity
+divided by n minus--
+[34:23] 抱歉，我不知道为什么要保持[音频不清晰]。 
+sorry, I don't know
+why I keep [INAUDIBLE]..
+[34:25] 在n 1，-1处减-1-转置
+Minus 1 over n 1, 1 transpose--
+[34:29] 所以这个矩阵只有1 
+so it's this matrix
+with the only 1's
+[34:30] 在对角线和0以及其他位置上-减去一个矩阵
+on the diagonals and 0's and
+elsewhere-- minus a matrix that
+[34:34] 到处只有n的1分。 
+only has 1 over n everywhere.
+[34:41] 好，所以整个对角线上的n是1减去1 
+OK, so the whole thing is 1
+minus 1 over n on the diagonals
+[34:49] 然后在n上减去1，好吗？ 
+and then minus 1
+over n here, OK?
+[34:57] 现在我声称这个矩阵是正交投影仪。 
+And now I claim that this matrix
+is an orthogonal projector.
+[35:01] 现在，我正在编写此代码，但它完全没有用。 
+Now, I'm writing this, but
+it's completely useless.
+[35:05] 这只是让您看到它实际上非常
+This is just a way for you to
+see that it's actually very
+[35:08] 现在方便考虑这个问题
+convenient now to think
+about this problem
+[35:11] 作为矩阵问题，因为事物
+as being a matrix
+problem, because things
+[35:14] 当您考虑实际形式时会更好
+are much nicer when you
+think about the actual form
+[35:17] 您的矩阵，对吗？ 
+of your matrices, right?
+[35:18] 他们可以告诉你，这是矩阵。 
+They could tell you,
+here is the matrix.
+[35:21] 我的意思是，假设您正坐在期中， 
+I mean, imagine you're
+sitting at a midterm,
+[35:23] 我说这是1减1的矩阵
+and I say, here's the
+matrix that has 1 minus 1
+[35:25] 在对角线上超过n，在n上减去1 
+over n on the diagonals
+and minus 1 over n
+[35:28] 在[音频不清晰]对角线上。 
+on the [INAUDIBLE] diagonal.
+[35:30] 向我证明这是一个投影仪矩阵。 
+Prove to me that it's
+a projector matrix.
+[35:32] 您将基本上必须
+You're going to
+have to basically
+[35:34] 把这个家伙带给自己。 
+take this guy times itself.
+[35:35] 这真的很复杂，对吧？ 
+It's going to be really
+complicated, right?
+[35:37] 因此，我们知道它是对称的。 
+So we know it's symmetric.
+[35:38] 这是肯定的。 
+That's for sure.
+[35:39] 但事实是它具有这种特殊的方式
+But the fact that it
+has this particular way
+[35:42] 写作将使我的生活
+of writing it is
+going to make my life
+[35:44] 超级容易检查这一点。 
+super easy to check this.
+[35:45] 那就是投影仪的定义。 
+That's the definition
+of a projector.
+[35:47] 它必须是对称的，并且必须
+It has to be
+symmetric and it has
+[35:48] 摆正自己，因为我们只是
+to square to itself
+because we just
+[35:51] 在线性回归一章中说过
+said in the chapter
+on linear regression
+[35:54] 一旦投影，如果再次应用投影， 
+that once you project, if you
+apply the projection again,
+[35:57] 您不动，因为您已经在那。 
+you're not moving because
+you're already there.
+[35:59] 好的，为什么H平方等于H？ 
+OK, so why is H
+squared equal to H?
+[36:04] 好吧，我们只写H平方。 
+Well let's just write H square.
+[36:05] 这是身份减去n 1、1的1 
+It's the identity
+minus 1 over n 1, 1
+[36:09] 转置乘以身份减去n到1的1 
+transpose times the
+identity minus 1 over n 1, 1
+[36:16] 转置，对不对？ 
+transpose, right?
+[36:19] 现在让我们扩展一下。 
+Let's just expand this now.
+[36:22] 这等于身份减去- 
+This is equal to
+the identity minus--
+[36:25] 好吧，身份乘以1、1转置就是身份。 
+well, the identity times 1, 1
+transpose is just the identity.
+[36:29] 所以是1、1转置，对不起。 
+So it's 1, 1 transpose, sorry.
+[36:31] 所以n 1，1换位减去1 n 1，1换位。 
+So 1 over n 1, 1 transpose
+minus 1 over n 1, 1 transpose.
+[36:38] 然后会有什么
+And then there's
+going to be what
+[36:40] 达成协议的是，我在n上得到1 
+makes the deal is that
+I get this 1 over n
+[36:42] 这次平方。 
+squared this time.
+[36:44] 然后我得到n上n的1的乘积
+And then I get the product
+of 1 over n trans--
+[36:46] 哦，让我们完整地写。 
+oh, let's write it completely.
+[36:48] 我得到1、1转置时间1、1转置好吗？ 
+I get 1, 1 transpose
+times 1, 1 transpose, OK?
+[36:58] 但是这里的东西
+But this thing here--
+[37:01] 这是什么？ 
+what is this?
+[37:03]  n，对，是全一向量的最终乘积
+n, right, is the end product
+of the all-ones vector
+[37:06] 与全民矢量。 
+with the all-ones vector.
+[37:07] 所以我只是将n乘以1的平方，即n。 
+So I'm just summing n times
+1 squared, which is n.
+[37:10] 因此，这等于n。 
+So this is equal to n.
+[37:11] 所以我把它拔出来，取消其中一个， 
+So I pull it out,
+cancel one of the ends,
+[37:13] 我回到了以前。 
+and I'm back to
+what I had before.
+[37:15] 所以我在n 1上的身份减去2，1转置加1 
+So I had identity minus 2
+over n 1, 1 transpose plus 1
+[37:21] 在n 1，1的转置上等于H. 
+over n 1, 1 transpose
+which is equal to H.
+[37:27] 因为n上的1之一取消，好吗？ 
+Because one of the 1
+over n's cancel, OK?
+[37:36] 因此，这是一个投影矩阵。 
+So it's a projection matrix.
+[37:37] 它投射到一些线性空间上，对吗？ 
+It's projecting onto
+some linear space, right?
+[37:41] 它需要一个矩阵。 
+It's taking a matrix.
+[37:42] 抱歉，正在接受向量， 
+Sorry, it's taking
+a vector and it's
+[37:44] 投射到向量的特定空间上。 
+projecting onto a
+certain space of vectors.
+[37:49] 这个空间是什么？ 
+What is this space?
+[37:53] 是的，那你好吗-所以我只是
+Right, so, how do
+you-- so I'm only
+[37:54] 用语言问这个问题的答案，对吗？ 
+asking the answer to this
+question in words, right?
+[37:57] 那你怎么形容向量
+So how would you
+describe the vectors
+[37:59] 此矩阵投射到哪个矩阵上？ 
+onto which this
+matrix is projecting?
+[38:02] 好吧，如果您想回答这个问题， 
+Well, if you want to
+answer this question,
+[38:05] 首先，您会说，好吧， 
+the way you would tackle
+it is first by saying, OK,
+[38:07] 向量的形式是H乘以什么， 
+what does a vector which is of
+the form, H times something,
+[38:13] 看起来像吧？ 
+look like, right?
+[38:14] 关于这个向量，我能说什么
+What can I say about
+this vector that's
+[38:16] 肯定会给我一些东西
+going to be definitely
+giving me something
+[38:19] 关于它投影的空间？ 
+about the space on
+which it projects?
+[38:21] 我需要更多地了解它的确切投影
+I need to know a little more to
+know that it projects exactly
+[38:24] 到此。 
+onto this.
+[38:25] 但是我们可以做到这一点的一种方法就是
+But one way we can
+do this is just
+[38:29] 看看它如何作用于向量。 
+see how it acts on a vector.
+[38:30] 对向量应用H有什么作用，对吗？ 
+What does it do to a
+vector to apply H, right?
+[38:32] 所以我取v。让我们看看用v加上H 
+So I take v. And let's see what
+taking v and applying H to it
+[38:44] 好像。 
+looks like.
+[38:46] 好吧，这是身份减去某些东西。 
+Well, it's the identity
+minus something.
+[38:48] 所以它需要v并删除一些东西
+So it takes v and
+it removes something
+[38:50] 从v。中删除什么？ 
+from v. What does it remove?
+[38:54] 好吧，这是n倍于1倍，v换位1倍
+Well, it's 1 over n
+times v transpose 1 times
+[39:00] 全矢量，对吧？ 
+the all-ones vector, right?
+[39:03] 同意吗
+Agreed?
+[39:04] 我只是写了v转置1而不是1转置v， 
+I just wrote v transpose 1
+instead of 1 transpose v,
+[39:13] 这是同一回事。 
+which are the same thing.
+[39:16] 这是什么？ 
+What is this thing?
+[39:25] 我应该用数学符号来称呼它吗？ 
+What should I call it in
+mathematical notation?
+[39:30]  v吧，对吧？ 
+v bar, right?
+[39:31] 我应该全部吧吧，因为这恰好是平均值
+I should all it v bar because
+this is exactly the average
+[39:35]  v的条目中，同意吗？ 
+of the entries of v, agreed?
+[39:38] 这是对v的项求和，这是除法
+This is summing the entries
+of v's, and this is dividing
+[39:41] 通过那些v的数量。 
+by the number of those v's.
+[39:43] 抱歉，现在v在我们的- 
+Sorry, now v is in our--
+[39:49] 抱歉，我为什么除以- 
+sorry, why do I divide by--
+[39:53] 我只是-好，我需要检查一下我现在的尺寸。 
+I'm just-- OK, I need to check
+what my dimensions are now.
+[39:59] 不，在Rd，对吧？ 
+No, it's in Rd, right?
+[40:00] 那么为什么要除以n？ 
+So why do I divide by n?
+[40:05] 所以这不是真正的v bar。 
+So it's not really v bar.
+[40:07] 这是v的总和除以- 
+It's the sum of the
+v's divided by--
+[40:13] 对，所以是v形
+right, so it's v bar.
+[40:24] 观众：[听不清] 
+AUDIENCE: [INAUDIBLE]
+[40:25]  [插入语音] 
+[INTERPOSING VOICES]
+[40:26] 听众：是的，v必须为[听不清] 
+AUDIENCE: Yeah, v
+has to be [INAUDIBLE]
+[40:27]  PHILIPPE RIGOLLET：哦，是的。 
+PHILIPPE RIGOLLET: Oh, yeah.
+[40:29] 好的谢谢。 
+OK, thank you.
+[40:31] 所以我写Hd的每个地方实际上都是Hn。 
+So everywhere I wrote
+Hd, that was actually Hn.
+[40:34] 天啊。 
+Oh, man.
+[40:35] 我希望我现在有一台电脑。 
+I wish I had a computer now.
+[40:37] 行。 
+All right.
+[40:37] 所以-是的，因为- 
+So-- yeah, because the--
+[40:43] 是的，对吗？ 
+yeah, right?
+[40:43] 所以为什么不- 
+So why it's not--
+[40:45] 好吧，为什么我以为这是因为我在想
+well, why I thought it was
+this is because I was thinking
+[40:48] 关于X的外部尺寸，真的
+about the outer
+dimension of X, really
+[40:49]  X转置，实际上是内部尺寸
+of X transpose, which is
+really the inner dimension,
+[40:51] 对我来说没关系吧？ 
+didn't matter to me, right?
+[40:52] 所以我可以夹在X转置之间的东西
+So the thing that I can
+sandwich between X transpose
+[40:55]  X必须是n乘n。 
+and X has to be n by n.
+[40:56] 所以这实际上是n乘n。 
+So this was actually n by n.
+[40:58] 因此，实际上是n乘n。 
+And so that's actually n by n.
+[41:00] 一切都是n乘n。 
+Everything is n by n.
+[41:03] 对于那个很抱歉。 
+Sorry about that.
+[41:08] 所以这是n。 
+So this is n.
+[41:09] 这是n。 
+This is n.
+[41:10] 这是-好吧，我真的没有告诉你
+This is-- well, I
+didn't really tell you
+[41:12] 什么是全矢量，但它也在我们的n中。 
+what the all-ones vector
+was, but it's also in our n.
+[41:16] 是的，好的
+Yeah, OK.
+[41:22] 谢谢。 
+Thank you.
+[41:23]  n-实际上，我使用的事实是它的大小为n 
+And n-- actually, I used the
+fact that this was of size n
+[41:27] 在这里。 
+here already.
+[41:31] 好的，这确实是v bar。 
+OK, and so that's indeed v bar.
+[41:39] 那么这个投影对向量有什么作用？ 
+So what is this projection
+doing to a vector?
+[41:47] 它正在删除每个坐标上的平均值，对吗？ 
+It's removing its average
+on each coordinate, right?
+[41:51] 这样做的结果是v是一个向量。 
+And the effect of this
+is that v is a vector.
+[41:54]  Hv的平均值是多少？ 
+What is the average of Hv?
+[41:58] 听众：0。 
+AUDIENCE: 0.
+[41:59]  PHILIPPE RIGOLLET：对，所以它是0。 
+PHILIPPE RIGOLLET:
+Right, so it's 0.
+[42:00] 这是v的平均值，即v bar减去平均值
+It's the average of v, which
+is v bar, minus the average
+[42:04] 只有v bar条目的东西，即v bar。 
+of something that only has v
+bar's entry, which is v bar.
+[42:07] 所以这个东西实际上是0。 
+So this thing is actually 0.
+[42:11] 因此，让我重复我的问题。 
+So let me repeat my question.
+[42:12]  H投射到哪个子空间上？ 
+Onto what subspace
+does H project?
+[42:22] 进入均值为0的向量的子空间。 
+Onto the subspace of
+vectors that have mean 0.
+[42:26] 均值为0的向量是向量。 
+A vector that has
+mean 0 is a vector.
+[42:30] 因此，如果您想讨论更多线性代数，请使用v bar-- 
+So if you want to talk more
+linear algebra, v bar--
+[42:34] 对于向量，您的意思是0，这意味着
+for a vector you
+have mean 0, it means
+[42:36]  v与全一向量的跨度正交。 
+that v is orthogonal to the
+span of the all-ones vector.
+[42:43] 而已。 
+That's it.
+[42:44] 它投射到这个空间。 
+It projects to this space.
+[42:46] 换句话说，它投射到空间上
+So in words, it
+projects onto the space
+[42:47] 均值为0的向量。 
+of vectors that have 0 mean.
+[42:49] 在线性代数中，它表示
+In linear algebra,
+it says it projects
+[42:52] 到正交的超平面上
+onto the hyperplane
+which is orthogonal
+[42:55] 到全矢量，好吗？ 
+to the all-ones vector, OK?
+[42:58] 就是这样。 
+So that's all.
+[43:01] 你们还能看到屏幕吗？ 
+Can you guys still
+see the screen?
+[43:04] 你那边好吗？ 
+Are you good over there?
+[43:05] 好。 
+OK.
+[43:07] 好吧，现在，这意味着，好吧，我
+All right, so now, what it
+means is that, well, I'm
+[43:12] 做这个奇怪的事情，对不对？ 
+doing this weird thing, right?
+[43:13] 我正在服用内在产品
+I'm taking the inner product--
+[43:15] 所以S取X。然后删除每个均值
+so S is taking X. And then
+it's removing its mean of each
+[43:20]  X列中的对吧？ 
+of the columns of X, right?
+[43:21] 当我乘H乘以X时，我基本上就是在应用
+When I take H times X, I'm
+basically applying this
+[43:24] 预测包括消除所有均值
+projection which consists
+in removing the mean of all
+[43:26]  X。 
+the X's.
+[43:28] 然后我乘以H转置。 
+And then I multiply
+by H transpose.
+[43:31] 但实际上是，记住
+But what's actually
+nice is that, remember,
+[43:33]  H是投影仪。 
+H is a projector.
+[43:35] 抱歉，我不想保留那个。 
+Sorry, I don't
+want to keep that.
+[43:38] 这意味着当我查看X转置HX时， 
+Which means that when I
+look at X transpose HX,
+[43:47] 这与查看X转置H平方X相同。 
+it's the same as looking
+at X transpose H squared X.
+[43:52] 但是由于H等于其转置， 
+But since H is equal
+to its transpose,
+[43:54] 这实际上与查看X转置H相同
+this is actually the same
+as looking at X transpose H
+[43:58] 转置HX，与查看HX转置相同
+transpose HX, which is the
+same as looking at HX transpose
+[44:07]  HX，好吗？ 
+HX, OK?
+[44:11] 所以它在做什么，首先要应用此投影
+So what it's doing, it's
+first applying this projection
+[44:14] 矩阵H，它去除了每一列的均值， 
+matrix, H, which removes the
+mean of each of your columns,
+[44:18] 然后看看这些家伙之间的内在产品， 
+and then looks at the inner
+products between those guys,
+[44:23] 对？ 
+right?
+[44:23] 这个家伙的每一项只是协方差
+Each entry of this guy
+is just the covariance
+[44:25] 在那些中心的事物之间。 
+between those centered things.
+[44:27] 这就是它所做的一切。 
+That's all it's doing.
+[44:28] 好吧，所以这些实际上将成为关键声明。 
+All right, so those are actually
+going to be the key statements.
+[44:35] 所以到目前为止我们所做的一切都是
+So everything we've
+done so far is really
+[44:37] 主要是线性代数，对吗？ 
+mainly linear algebra, right?
+[44:38] 我的意思是，查看期望和协方差只是- 
+I mean, looking at expectations
+and covariances was just--
+[44:41] 我们只是使用期望是线性的事实。 
+we just used the fact that
+the expectation was linear.
+[44:44] 我们没有做太多。 
+We didn't do much.
+[44:45] 但是现在发生了一件好事。 
+But now there's a nice
+thing that's happening.
+[44:47] 这就是为什么我们要切换
+And that's why we're
+going to switch
+[44:50] 从线性代数的语言
+from the language
+of linear algebra
+[44:51] 进行更多统计，因为发生了什么事
+to more statistical,
+because what's happening
+[44:53] 如果我看一下这种二次形式，对吗？ 
+is that if I look at this
+quadratic form, right?
+[44:57] 所以我采取西格玛。 
+So I take sigma.
+[44:59] 所以我取一个向量
+So I take a vector, u.
+[45:03] 我要看你-假设是在Rd 
+And I'm going to look at
+u-- so let's say, in Rd.
+[45:09] 我将看一下您转置sigma u。 
+And I'm going to look
+at u transpose sigma u.
+[45:14] 好？ 
+OK?
+[45:18] 这是在做什么
+What is this doing?
+[45:19] 好吧，我们知道u转置Sigma u等于什么？ 
+Well, we know that u transpose
+sigma u is equal to what?
+[45:24] 好吧，sigma是XX转置的期望
+Well, sigma is the
+expectation of XX transpose
+[45:31] 减去X的期望X的期望转置， 
+minus the expectation of X
+expectation of X transpose,
+[45:35] 对？ 
+right?
+[45:39] 所以我只是在那里代替。 
+So I just substitute in there.
+[45:46] 现在，您是确定性的。 
+Now, u is deterministic.
+[45:49] 因此，特别是，我可以将其推入期望中
+So in particular, I can push
+it inside the expectation
+[45:52] 在这里，同意吗？ 
+here, agreed?
+[45:55] 我可以从右边做同样的事情。 
+And I can do the
+same from the right.
+[45:57] 所以在这里，当我推动你在这里转置，而你在这里， 
+So here, when I push u
+transpose here, and u here,
+[46:00] 我剩下的是你对X转置的期望
+what I'm left with is the
+expectation of u transpose X
+[46:06]  X换位u。 
+times X transpose u.
+[46:09] 好？ 
+OK?
+[46:11] 现在，我可以为这个人做同样的事情。 
+And now, I can do the
+same thing for this guy.
+[46:14] 这告诉我这是你转置的期望
+And this tells me that this is
+the expectation of u transpose
+[46:17]  X乘以X转置u的期望。 
+X times the expectation
+of X transpose u.
+[46:24] 当然，u转置X等于X转置u。 
+Of course, u transpose X
+is equal to X transpose u.
+[46:29] 你-是的。 
+And u-- yeah.
+[46:31] 所以这意味着这实际上是
+So what it means is
+that this is actually
+[46:33] 等于u的期望转置X平方
+equal to the expectation
+of u transpose X squared
+[46:43] 减去u转置X的期望， 
+minus the expectation
+of u transpose X,
+[46:48] 整个事情平方。 
+the whole thing squared.
+[46:56] 但这应该看起来很熟悉。 
+But this is something
+that should look familiar.
+[46:58] 这实际上只是该特定随机变量的方差
+This is really just the variance
+of this particular random
+[47:01] 形式为u的变量转置X， 
+variable which is of
+the form, u transpose X,
+[47:03] 对？ u转置X是一个数字。 
+right? u transpose
+X is a number.
+[47:06] 它涉及一个随机向量，因此它是一个随机变量。 
+It involves a random vector,
+so it's a random variable.
+[47:10] 因此，它具有差异。 
+And so it has a variance.
+[47:11] 这个方差正是由这个公式给出的。 
+And this variance is exactly
+given by this formula.
+[47:15] 因此，这只是u转置X的方差。 
+So this is just the
+variance of u transpose X.
+[47:19] 所以我们证明的是，如果我看着这个家伙， 
+So what we've proved is
+that if I look at this guy,
+[47:21] 这真的只是u转置X的方差，好吗？ 
+this is really just the
+variance of u transpose X, OK?
+[47:37] 对于样本差异，我可以做同样的事情。 
+I can do the same thing
+for the sample variance.
+[47:40] 因此，让我们这样做。 
+So let's do this.
+[47:48] 如您所见，扰流板警报
+And as you can
+see, spoiler alert,
+[47:52] 这将是样本方差。 
+this is going to be
+the sample variance.
+[47:59] 好吧，所以请记住，S是n的1，Xi Xi的总和减去X 
+OK, so remember, S is 1 over n,
+sum of Xi Xi transpose minus X
+[48:09]  bar X bar转置。 
+bar X bar transpose.
+[48:12] 所以当我换位时Su 
+So when I do u
+transpose, Su, what
+[48:16] 从我等于1到n等于1 
+it gives me is 1 over
+n sum from i equal 1
+[48:19] 到u的n个换位Xi换个u可以吗
+to n of u transpose Xi times
+Xi transpose u, all right?
+[48:25] 那是两个相乘的数字
+So those are two numbers
+that multiply each other
+[48:27] 碰巧彼此相等， 
+and that happen to be
+equal to each other,
+[48:30] 减去u转置X条X条转置u， 
+minus u transpose X
+bar X bar transpose u,
+[48:36] 这也是两个数字的乘积
+which is also the product
+of two numbers that happen
+[48:38] 彼此平等。 
+to be equal to each other.
+[48:40] 所以我可以用正方形重写它。 
+So I can rewrite
+this with squares.
+[48:55] 所以我们快到了。 
+So we're almost there.
+[48:57] 我需要知道的是，这个东西实际上是
+All I need to know to check
+is that this thing is actually
+[49:00] 这些家伙的平均水平，对吧？ 
+the average of
+those guys, right?
+[49:02] 因此，您转置了X条。 
+So u transpose X bar.
+[49:04] 它是什么？ 
+What is it?
+[49:05] 从i等于u转置Xi的n到n的n为1。 
+It's 1 over n sum from i equal
+1 to n of u transpose Xi.
+[49:10] 因此，当您转置X条时，我确实可以写这些东西， 
+So it's really something that I
+can write as u transpose X bar,
+[49:17] 对？ 
+right?
+[49:17] 那是那些随机变量的平均值
+That's the average of
+those random variables
+[49:19] 形式，你换位习。 
+of the form, u transpose Xi.
+[49:23] 所以这意味着你换位Su，我可以写成1 
+So what it means is that u
+transpose Su, I can write as 1
+[49:29] 从i等于u的n到n的n个和转置Xi平方
+over n sum from i equal 1 to
+n of u transpose Xi squared
+[49:38] 减去u转置X条平方，即
+minus u transpose X
+bar squared, which
+[49:46] 是我们需要用小数表示的经验方差
+is the empirical variance
+that we need noted by small
+[49:51] 平方，对不对？ 
+s squared, right?
+[49:54] 这就是u一直移置X1的经验方差
+So that's the empirical variance
+of u transpose X1 all the way
+[50:06] 你转置Xn。 
+to u transpose Xn.
+[50:12] 好，这里，也是一样。 
+OK, and here, same thing.
+[50:13] 我使用完全相同的东西。 
+I use exactly the same thing.
+[50:15] 我只是用一个事实，在这里，我唯一使用的是
+I just use the fact that here,
+the only thing I use is really
+[50:17] 这个家伙的线性度，大于1等于n 
+the linearity of this
+guy, of 1 over n sum
+[50:20] 或期望的线性，我可以推动事情
+or the linearity of expectation,
+that I can push things
+[50:24] 在那好吗
+in there, OK?
+[50:30] 听众：所以你写了什么
+AUDIENCE: So what
+you have written
+[50:31] 在那笔钱的末尾是Su？ 
+at the end of that
+sum for uT Su?
+[50:33]  PHILIPPE RIGOLLET：这个吗？ 
+PHILIPPE RIGOLLET: This one?
+[50:35] 听众：是的。 
+AUDIENCE: Yeah.
+[50:35]  PHILIPPE RIGOLLET：是的，我说那等于小号， 
+PHILIPPE RIGOLLET: Yeah, I
+said it's equal to small s,
+[50:37] 我想在大S上有所作为
+and I want to make a
+difference between the big S
+[50:39] 我在这里使用。 
+that I'm using here.
+[50:40] 所以这等于小- 
+So this is equal to small--
+[50:42] 我不知道，我正在尝试使其外观
+I don't know, I'm
+trying to make it look
+[50:45] 像书法的平方。 
+like a calligraphic s squared.
+[50:56] 好，这很好，对吗？ 
+OK, so this is nice, right?
+[51:00] 这个协方差矩阵-让我们看一下资本总和
+This covariance matrix-- so
+let's look at capital sigma
+[51:04] 现在本身。 
+itself right now.
+[51:05] 这个协方差矩阵，我们知道如果
+This covariance matrix,
+we know that if we
+[51:07] 阅读其条目，我们得到的是协方差
+read its entries, what
+we get is the covariance
+[51:11] 在X的坐标之间，对， 
+between the coordinates
+of the X's, right,
+[51:15] 向量X的坐标。 
+of the random vector, X.
+And the coordinates, well,
+[51:19] 根据定义，附加到坐标系。 
+by definition, are attached
+to a coordinate system.
+[51:22] 所以我只知道什么是协方差
+So I only know
+what the covariance
+[51:25] 这两个事物中X的X是或这两个事物的协方差
+of X in of those two things are,
+or the covariance of those two
+[51:30] 事情是。 
+things are.
+[51:31] 但是如果我想找到线性之间的坐标
+But what if I want to find
+coordinates between linear
+[51:33]  X的组合？ 
+combination of the X's?
+[51:35] 抱歉，如果我想找到线性之间的协方差
+Sorry, if I want to find
+covariances between linear
+[51:37] 这些X的组合。 
+combination of those X's.
+[51:38] 这正是我所能做的。 
+And that's exactly what
+this allows me to do.
+[51:40] 它说，好吧，如果我乘以u， 
+It says, well, if I pre-
+and post-multiply by u,
+[51:44] 这实际上是在告诉我差异
+this is actually telling
+me what the variance
+[51:47]  X沿u方向的坐标是，可以吗？ 
+of X along direction u is, OK?
+[51:51] 所以里面有很多信息， 
+So there's a lot of
+information in there,
+[51:53] 这真的是在利用事实
+and it's just really
+exploiting the fact
+[51:55] 协方差存在线性关系
+that there is some linearity
+going on in the covariance.
+[52:00] 那么，为什么会有差异呢？ 
+So, why variance?
+[52:02] 为什么差异对我们很有趣，对吗？ 
+Why is variance
+interesting for us, right?
+[52:03] 为什么？ 
+Why?
+[52:04] 我首先说，我们要去
+I started by saying,
+here, we're going
+[52:05] 对有东西感兴趣
+to be interested
+in having something
+[52:07] 进行尺寸缩小。 
+to do dimension reduction.
+[52:08] 我们有-认为您的观点是[？处于？]维度
+We have-- think of your points
+as [? being in a ?] dimension
+[52:10] 大于4，我们将尝试减小尺寸。 
+larger than 4, and we're going
+to try to reduce the dimension.
+[52:13] 因此，让我们思考一秒钟， 
+So let's just think
+for one second,
+[52:15] 我们想要什么尺寸缩减程序？ 
+what do we want about a
+dimension reduction procedure?
+[52:19] 如果我将所有观点都存在于三个维度中， 
+If I have all my points that
+live in, say, three dimensions,
+[52:23] 我在这里有一点，在这里有一点
+and I have one point
+here and one point here
+[52:25] 一分，一分，一分， 
+and one point here and one
+point here and one point here,
+[52:28] 我决定将它们投射到某个平面上
+and I decide to project
+them onto some plane--
+[52:30] 我坐这样的飞机是什么
+that I take a plane that's
+just like this, what's
+[52:32] 即将发生的是这些点都将被投影
+going to happen is that those
+points are all going to project
+[52:34] 在同一点上，对不对？ 
+to the same point, right?
+[52:36] 我只是什么也看不到。 
+I'm just going to
+not see anything.
+[52:38] 但是，如果我坐这样的飞机， 
+However, if I take a
+plane which is like this,
+[52:40] 他们都将计划成一条不错的路线。 
+they're all going to
+project into some nice line.
+[52:42] 也许我什至可以将它们投影到一条线上
+Maybe I can even
+project them onto a line
+[52:44] 他们仍然会彼此分开。 
+and they will still be
+far apart from each other.
+[52:47] 这就是您想要的。 
+So that's what you want.
+[52:48] 你想说的，当我讲我的观点时
+You want to be able to
+say, when I take my points
+[52:51] 我说我将它们投影到较小的尺寸上
+and I say I project them
+onto lower dimensions,
+[52:54] 我不希望他们陷入单一问题。 
+I do not want them to collapse
+into one single point.
+[52:57] 我希望它们尽可能地向
+I want them to be spread as
+possible in the direction
+[53:00] 我在上面投影。 
+on which I project.
+[53:02] 这就是我们要尝试做的。 
+And this is what we're
+going to try to do.
+[53:04] 当然，测量点之间的传播
+And of course, measuring
+spread between points
+[53:06] 可以用很多方法完成，对不对？ 
+can be done in many ways, right?
+[53:08] 我的意思是，您可以看看，我不知道， 
+I mean, you could
+look at, I don't know,
+[53:09] 这些家伙之间的成对距离之和。 
+sum of pairwise distances
+between those guys.
+[53:12] 您可以看看某种能量。 
+You could look at
+some sort of energy.
+[53:14] 您可以查看多种测量方法
+You can look at
+many ways to measure
+[53:16] 方向扩散。 
+of spread in a direction.
+[53:18] 但是方差是衡量的好方法
+But variance is a
+good way to measure
+[53:19] 点之间的传播。 
+of spread between points.
+[53:21] 如果您的观点之间存在很大差异， 
+If you have a lot of
+variance between your points,
+[53:23] 那么它们很可能会传播开来。 
+then chances are they're
+going to be spread.
+[53:25] 现在，并非总是如此，对吗？ 
+Now, this is not
+always the case, right?
+[53:27] 如果我有一个方向，使我的所有观点都集中在一起
+If I have a direction in which
+all my points are clumped
+[53:30] 到一个要点，再到另一个要点， 
+onto one big point and
+one other big point,
+[53:33] 它会选择这个，因为那是
+it's going to choose
+this because that's
+[53:34] 方向差异很大。 
+the direction that
+has a lot of variance.
+[53:37] 但希望，变化会继续
+But hopefully, the
+variance is going
+[53:39] 很好地散布东西
+to spread things out nicely.
+[53:41] 所以主成分分析的想法
+So the idea of principal
+component analysis
+[53:47] 将试图找出那些差异- 
+is going to try to
+identify those variances--
+[53:51] 这些方向之间存在很大差异。 
+those directions along which
+we have a lot of variance.
+[53:55] 相应地，我们将尝试消除
+Reciprocally, we're
+going to try to eliminate
+[53:57] 我们所沿的方向差异不大，好吗？ 
+the directions along which we do
+not have a lot of variance, OK?
+[54:01] 让我们看看为什么。 
+And let's see why.
+[54:02] 好吧，如果-因此，这是第一个要求。 
+Well, if-- so here's
+the first claim.
+[54:08] 如果将Su换位等于0，这是怎么回事？ 
+If you transpose Su is equal
+to 0, what's happening?
+[54:14] 好吧，我知道经验方差等于0。 
+Well, I know that an empirical
+variance is equal to 0.
+[54:17] 对经验方差意味着什么
+What does it mean for
+an empirical variance
+[54:18] 等于0？ 
+to be equal to 0?
+[54:22] 所以我给你很多点吧？ 
+So I give you a bunch
+of points, right?
+[54:23] 这些点就是那些点-你转置
+So those points are those
+points-- u transpose
+[54:26]  X1，u转置-这些是一堆数字。 
+X1, u transpose-- those
+are a bunch of numbers.
+[54:29] 具有经验方差是什么意思
+What does it mean to have
+the empirical variance
+[54:31] 这些点中等于0？ 
+of those points
+being equal to 0?
+[54:33] 听众：他们都是一样的。 
+AUDIENCE: They're all the same.
+[54:34]  PHILIPPE RIGOLLET：都是一样的。 
+PHILIPPE RIGOLLET:
+They're all the same.
+[54:36] 所以，这就是说我有观点的时候对吗？ 
+So what it means is that
+when I have my points, right?
+[54:43] 因此，您能找到这些点的方向吗？ 
+So, can you find a direction
+for those points in which they
+[54:46] 项目都指向同一点？ 
+project to all the same point?
+[54:51] 无权利？ 
+No, right?
+[54:52] 没有这样的事情。 
+There's no such thing.
+[54:53] 为了做到这一点，您必须要说明
+For this to happen, you have
+to have your points which
+[54:55] 完全对齐。 
+are perfectly aligned.
+[54:57] 然后当您要进行投影时
+And then when you're
+going to project
+[54:59] 在这个家伙的正交线上，他们是
+onto the orthogonal
+of this guy, they're
+[55:01] 去所有项目到同一点
+going to all project
+to the same point
+[55:03] 在这里，这意味着经验方差为
+here, which means that
+the empirical variance is
+[55:06] 将为0。 
+going to be 0.
+[55:08] 现在，这是一个极端的情况。 
+Now, this is an extreme case.
+[55:10] 这在实践中永远不会发生， 
+This will never
+happen in practice,
+[55:11] 因为如果发生这种情况，我是说， 
+because if that
+happens, well, I mean,
+[55:13] 您基本上可以很快找到答案。 
+you can basically figure
+that out very quickly.
+[55:16] 所以以同样的方式，这是不太可能的
+So in the same way,
+it's very unlikely
+[55:21] 您将要让您转置sigma u， 
+that you're going to have
+u transpose sigma u, which
+[55:23] 等于0，这意味着基本上所有
+is equal to 0, which means
+that, essentially, all
+[55:26] 您的观点是[听不清]，或者说全部
+your points are [INAUDIBLE]
+or let's say all of them
+[55:28] 与你正交吗？ 
+are orthogonal to u, right?
+[55:30] 所以这是完全一样的。 
+So it's exactly the same thing.
+[55:31] 它只是说在人口方面， 
+It just says that in
+the population case,
+[55:33] 你的观点不可能偏离这个人
+there's no probability that your
+points deviate from this guy
+[55:36] 这里。 
+here.
+[55:37] 这发生的可能性为零，好吗？ 
+This happens with
+zero probability, OK?
+[55:41] 那只是因为如果你看
+And that's just
+because if you look
+[55:42] 这个人的差异将是0。 
+at the variance of this
+guy, it's going to be 0.
+[55:46] 然后，这意味着没有偏差。 
+And then that means that
+there's no deviation.
+[55:48] 顺便说一句，我正在使用名称投影
+By the way, I'm using
+the name projection
+[55:51] 当我谈论u转置X时，对不对？ 
+when I talk about u
+transpose X, right?
+[55:55] 因此，让我们澄清一下。 
+So let's just be
+clear about this.
+[55:59] 如果您-假设我有很多观点， 
+If you-- so let's say I
+have a bunch of points,
+[56:04]  u是这个方向上的向量。 
+and u is a vector
+in this direction.
+[56:06] 假设您有- 
+And let's say that u has the--
+[56:08] 所以是0 
+so this is 0.
+[56:10] 这就是你。 
+This is u.
+[56:10] 假设您有规范，1，好吗？ 
+And let's say that
+u has norm, 1, OK?
+[56:17] 当我看时，投影的坐标是什么？ 
+When I look, what is the
+coordinate of the projection?
+[56:21] 那么这个人的长度是多少？ 
+So what is the length
+of this guy here?
+[56:23] 我们称其为X1。 
+Let's call this guy X1.
+[56:25] 这个人的长度是多少？ 
+What is the length of this guy?
+[56:31] 在内部产品方面？ 
+In terms of inner products?
+[56:35] 正是您转置X1。 
+This is exactly u transpose X1.
+[56:39] 这个长度在这里，如果是X2，这个
+This length here,
+if this is X2, this
+[56:42] 你是换位X2的，好吗？ 
+is exactly u transpose X2, OK?
+[56:46] 所以那些-你换位X可以精确测量距离
+So those-- u transpose X
+measure exactly the distance
+[56:52] 从这些人的起源
+to the origin of those--
+[56:55] 我的意思是，真的- 
+I mean, it's really--
+[56:58] 认为它只是x轴的东西。 
+think of it as being
+just an x-axis thing.
+[57:00] 您只有几点。 
+You just have a bunch of points.
+[57:02] 您有出身。 
+You have an origin.
+[57:02] 它实际上只是在告诉你什么
+And it's really just
+telling you what
+[57:04] 这个轴上的坐标会是吧？ 
+the coordinate on this
+axis is going to be, right?
+[57:07] 因此，特别是如果经验方差为0， 
+So in particular, if the
+empirical variance is 0,
+[57:10] 这意味着所有这些要点
+it means that all
+these points project
+[57:12] 到同一点，这意味着他们有
+to the same point, which
+means that they have
+[57:14] 与这个人正交
+to be orthogonal to this guy.
+[57:16] 你可以认为它也可能是整个飞机
+And you can think of it as
+being also maybe an entire plane
+[57:19] 与这条线正交，好吗？ 
+that's orthogonal
+to this line, OK?
+[57:23] 这就是为什么我谈论投影， 
+So that's why I talk
+about projection,
+[57:26] 因为内积u换位X 
+because the inner
+products, u transpose X,
+[57:29] 确实在测量X的坐标
+is really measuring
+the coordinates of X
+[57:36] 当u成为x轴时。 
+when u becomes the x-axis.
+[57:39] 现在，如果您没有标准1，那么您就可以
+Now, if u does not have
+norm 1, then you just
+[57:42] 在这里改变规模。 
+have a change of scale here.
+[57:44] 您只是换了个单位，对不对？ 
+You just have a
+change of unit, right?
+[57:46] 所以这实际上是X的u倍。 
+So this is really u times X1.
+[57:51] 坐标确实应除以u的范数。 
+The coordinates should really
+be divided by the norm of u.
+[57:59] 好，现在，以同样的方式-所以
+OK, so now, just in
+the same way-- so
+[58:04] 我们永远不会精确到0。 
+we're never going
+to have exactly 0.
+[58:07] 但是如果我们[听不清]另一端， 
+But if we [INAUDIBLE]
+the other end,
+[58:08] 如果你换位Su大，那是什么意思？ 
+if u transpose Su is
+large, what does it mean?
+[58:14] 这意味着当我看我的观点时
+It means that when
+I look at my points
+[58:17] 投影到u产生的轴上
+as projected onto the
+axis generated by u,
+[58:22] 他们将有很多差异。 
+they're going to have
+a lot of variance.
+[58:23] 他们之间的平均距离会很远， 
+They're going to be far away
+from each other in average,
+[58:25] 对？ 
+right?
+[58:26] 那就是大方差的意思，或者至少
+That's what large variance
+means, or at least
+[58:28] 大的经验方差均值。 
+large empirical variance means.
+[58:31] 和你一样。 
+And same thing for u.
+[58:34] 所以我们将尝试找到
+So what we're going
+to try to find
+[58:36] 是使这一点最大化的au。 
+is a u that maximizes this.
+[58:39] 如果我能找到使这个最大化的非盟
+If I can find a u
+that maximizes this
+[58:42] 所以我可以朝各个方向看
+so I can look in
+every direction,
+[58:44] 突然间，我发现一个方向，蔓延是巨大的， 
+and suddenly I find a direction
+in which the spread is massive,
+[58:48] 那基本上就是我要说的
+then that's a point
+on which I'm basically
+[58:50] 我的观点越少
+the less likely
+to have my points
+[58:52] 互相投射并碰撞，对吗？ 
+project onto each other
+and collide, right?
+[58:54] 至少我知道他们要去设计
+At least I know they're
+going to project
+[58:56] 至少有两点。 
+at least onto two points.
+[58:59] 所以现在的想法是说，好的，让我们尝试
+So the idea now is
+to say, OK, let's try
+[59:02] 最大化传播，对吗？ 
+to maximize this spread, right?
+[59:04] 因此，我们将尝试找到所有u的最大值
+So we're going to try to
+find the maximum over all u's
+[59:09] 你的移置苏。 
+of u transpose Su.
+[59:12] 这将是最大化的方向
+And that's going to be the
+direction that maximizes
+[59:15] 经验方差。 
+the empirical variance.
+[59:15] 现在，当然，如果我对Rd中所有的人都这样阅读， 
+Now of course, if I read it
+like that for all u's in Rd,
+[59:22] 这个最大值的值是多少？ 
+what is the value
+of this maximum?
+[59:28] 它是无限的，对不对？ 
+It's infinity, right?
+[59:29] 因为我总是可以将u乘以10， 
+Because I can always
+multiply u by 10,
+[59:32] 整件事要乘以100。 
+and this entire thing is
+going to multiplied by 100.
+[59:34] 所以我要把你的大小尽可能的大
+So I'm just going to take
+u as large as I want,
+[59:36] 这个东西会像我想要的那样大， 
+and this thing is going
+to be as large as I want,
+[59:38] 所以我需要约束你。 
+and so I need to constrain u.
+[59:40] 就像我说的，我需要你的尺码为1 
+And as I said, I need
+to have u of size 1
+[59:42] 说说系统中生成的坐标
+to talk about coordinates
+in the system generated
+[59:45] 通过你这样。 
+by u like this.
+[59:47] 所以我要约束你
+So I'm just going to
+constrain u to have
+[59:50] 欧几里德范数等于1，可以吗？ 
+Euclidean norm equal to 1, OK?
+[59:55] 所以这将是我的目标-尝试
+So that's going to
+be my goal-- trying
+[59:57] 找到你最大可能转置的Su 
+to find the largest
+possible u transpose Su,
+[60:01] 换句话说，就是这些点的经验方差
+or in other words, empirical
+variance of the points
+[60:03] 当u符合标准1时，投影到u的方向上
+projected onto the direction
+u when u is of norm 1,
+[60:07] 有理由使用“方向”一词
+which justifies to use
+the word, "direction,"
+[60:11] 而且因为这个u没有什么意义。 
+and because there's no
+magnitude to this u.
+[60:17] 好，那我该怎么做？ 
+OK, so how am I
+going to do this?
+[60:22] 我可以折叠说，让我们优化一下
+I could just fold and
+say, let's just optimize
+[60:25] 这个东西吧？ 
+this thing, right?
+[60:26] 让我们来解决这个问题。 
+Let's just take this problem.
+[60:28] 它说在某些约束条件下最大化功能。 
+It says maximize a function
+onto some constraints.
+[60:32] 立即，约束有点令人讨厌。 
+Immediately, the constraint
+is sort of nasty.
+[60:34] 我在一个球体上，并且试图在球体上移动点。 
+I'm on a sphere, and I'm trying
+to move points on the sphere.
+[60:37] 我正在最大化这件事
+And I'm maximizing
+this thing which
+[60:38] 实际上恰好是凸的。 
+actually happens to be convex.
+[60:40] 而且我们知道如何最小化凸函数， 
+And we know we know how to
+minimize convex functions,
+[60:42] 但是最大化它们是另一个问题。 
+but maximize them is
+a different question.
+[60:45] 因此，这个问题可能会非常困难。 
+And so this problem
+might be super hard.
+[60:47] 我可以说，好的，这就是
+So I can just say,
+OK, here's what
+[60:49] 我想这样做，然后让我将其提供给优化程序
+I want to do, and let me
+give that to an optimizer
+[60:52] 并希望优化器可以为我解决这个问题。 
+and just hope that the optimizer
+can solve this problem for me.
+[60:56] 那是我们可以做的一件事。 
+That's one thing we can do.
+[60:57] 现在，您可以想象，PCA的普及程度很高，对吗？ 
+Now as you can imagine, PCA
+is so well spread, right?
+[61:00] 主成分分析是
+Principal component
+analysis is something
+[61:01] 人们不断地做。 
+that people do constantly.
+[61:03] 因此，这意味着我们知道如何快速执行此操作。 
+And so that means that we
+know how to do this fast.
+[61:06] 这是一回事。 
+So that's one thing.
+[61:07] 您可能应该质疑的另一件事- 
+The other thing that you should
+probably question about why--
+[61:10] 如果这件事真的很难，为什么在世界上
+if this thing is actually
+difficult, why in the world
+[61:13] 您是否会选择方差来衡量点差
+would you even choose the
+variance as a measure of spread
+[61:16] 如果有很多传播手段，对吗？ 
+if there's so many
+measures of spread, right?
+[61:19] 方差是价差的一种度量。 
+The variance is one
+measure of spread.
+[61:21] 不能保证一切
+It's not guaranteed
+that everything
+[61:22] 彼此之间的投影效果很好。 
+is going to project nicely
+far apart from each other.
+[61:26] 所以我们可以选择方差，但是我们
+So we could choose
+the variance, but we
+[61:27] 可以选择其他东西。 
+could choose something else.
+[61:28] 如果方差没有帮助，为什么选择它？ 
+If the variance does
+not help, why choose it?
+[61:30] 事实证明方差有帮助。 
+Turns out the variance helps.
+[61:32] 因此，这确实是一个非凸问题。 
+So this is indeed a
+non-convex problem.
+[61:35] 我正在最大化，所以实际上是相同的。 
+I'm maximizing, so
+it's actually the same.
+[61:38] 我可以使这个约束凸出
+I can make this
+constraint convex
+[61:41] 因为我要最大化凸函数， 
+because I'm maximizing
+a convex function,
+[61:43] 所以很明显最大值正在
+so it's clear that
+the maximum is going
+[61:45] 在边界处达到。 
+to be attained at the boundary.
+[61:47] 所以我实际上可以将这个球填充到一些凸球中。 
+So I can actually just fill
+this ball into some convex ball.
+[61:51] 但是，我仍在最大化，所以这
+However, I'm still
+maximizing, so this
+[61:53] 是一个非凸问题。 
+is a non-convex problem.
+[61:55] 事实证明这是最奇特的非凸问题
+And this turns out to be the
+fanciest non-convex problem
+[61:57] 我们知道如何解决。 
+we know how to solve.
+[61:59] 以及我们知道如何解决的原因
+And the reason why we
+know how to solve it
+[62:00] 不是因为优化或使用渐变类型的东西
+is not because of optimization
+or using gradient-type things
+[62:04] 或我提到的任何算法
+or anything of the
+algorithms that I mentioned
+[62:06] 在最大可能性期间。 
+during the maximum likelihood.
+[62:09] 这是因为线性代数。 
+It's because of linear algebra.
+[62:11] 线性代数保证我们知道如何解决这个问题。 
+Linear algebra guarantees that
+we know how to solve this.
+[62:13] 要了解这一点，我们需要更深入一点
+And to understand this, we
+need to go a little deeper
+[62:17] 在线性代数中，我们需要了解这个概念
+in linear algebra, and we
+need to understand the concept
+[62:22] 对角化矩阵
+of diagonalization of a matrix.
+[62:24] 那么，谁曾见过特征值的概念呢？ 
+So who has ever seen the
+concept of an eigenvalue?
+[62:29] 哦，真漂亮。 
+Oh, that's beautiful.
+[62:30] 如果你不举手， 
+And if you're not
+raising your hand,
+[62:31] 您只是在玩“ Candy Crush”，对吗？ 
+you're just playing
+"Candy Crush," right?
+[62:33] 好吧好吧
+All right, so, OK.
+[62:44] 这很棒。 
+This is great.
+[62:46] 每个人都看到了。 
+Everybody's seen it.
+[62:48] 对于我的数百万现场观众来说，也许您还没有， 
+For my live audience of
+millions, maybe you have not,
+[62:51] 所以我仍然会经历它。 
+so I will still go through it.
+[62:53] 好吧，所以基本事实之一是
+All right, so one
+of the basic facts--
+[62:58] 我还记得当我在
+and I remember when
+I learned this in--
+[63:02] 我的意思是，当我是本科生时，我
+I mean, when I was
+an undergrad, I
+[63:04] 了解光谱分解
+learned about the
+spectral decomposition
+[63:05] 矩阵的对角化
+and this diagonalization
+of matrices.
+[63:07] 对我来说，这只是结构性的属性
+And for me, it was just
+a structural property
+[63:09] 矩阵，但事实证明它非常有用， 
+of matrices, but it turns out
+that it's extremely useful,
+[63:11] 并且对于算法目的很有用。 
+and it's useful for
+algorithmic purposes.
+[63:13] 所以这个定理告诉你
+And so what this
+theorem tells you
+[63:14] 是如果你采用对称矩阵
+is that if you take
+a symmetric matrix--
+[63:22] 好，有真实的条目，但是
+well, with real
+entries, but that
+[63:24] 真的没那么重要。 
+really does not matter so much.
+[63:28] 在这里，我实际上要- 
+And here, I'm
+going to actually--
+[63:30] 所以我取一个对称矩阵，实际上是S和sigma 
+so I take a symmetric matrix,
+and actually S and sigma
+[63:33] 这样的两个对称矩阵对吗？ 
+are two such symmetric
+matrices, right?
+[63:36] 然后存在P和D，它们都是- 
+Then there exists P
+and D, which are both--
+[63:44] 所以让我们说d。 
+so let's say d by d.
+[63:47] 两者都乘以d，使得P正交。 
+Which are both d by d
+such that P is orthogonal.
+[63:58] 这意味着P转置P等于PP转置
+That means that P transpose
+P is equal to PP transpose
+[64:02] 等于身份。 
+is equal to the identity.
+[64:06]  D是对角线的。 
+And D is diagonal.
+[64:11] 可以说，sigma等于PDP转置，好吗？ 
+And sigma, let's say, is
+equal to PDP transpose, OK?
+[64:20] 所以这是对角线化，因为
+So it's a diagonalization
+because it's
+[64:22] 找到一个不错的转变。 
+finding a nice transformation.
+[64:23]  P有一些不错的性质。 
+P has some nice properties.
+[64:25] 实际上只是坐标的改变
+It's really just the change
+of coordinates in which
+[64:28] 你的矩阵是对角线的，对吗？ 
+your matrix is diagonal, right?
+[64:31] 而您想要看到的方式- 
+And the way you
+want to see this--
+[64:32] 我认为思考这个问题会有所帮助
+and I think it sort of helps
+to think about this problem
+[64:35] 作为- 
+as being--
+[64:36]  sigma是协方差矩阵。 
+sigma being a covariance matrix.
+[64:38] 协方差矩阵告诉您什么？ 
+What does a covariance
+matrix tell you?
+[64:39] 想一想多元高斯。 
+Think of a
+multivariate Gaussian.
+[64:41] 每个人都可以想象三维高斯吗
+Can everybody visualize a
+three-dimensional Gaussian
+[64:43] 密度？ 
+density?
+[64:45] 是的，所以它将是某种钟形曲线， 
+Right, so it's going to be some
+sort of a bell-shaped curve,
+[64:48] 但它可能在一个方向上比另一个方向上更长。 
+but it might be more elongated
+in one direction than another.
+[64:51] 然后像这样切碎，好吗？ 
+And then going to chop
+it like that, all right?
+[64:54] 所以我要砍掉它。 
+So I'm going to chop it off.
+[64:56] 我将看看它如何流血，好吗？ 
+And I'm going to look at
+how it bleeds, all right?
+[65:00] 所以我只看血液在哪里。 
+So I'm just going to look
+at where the blood is.
+[65:02] 它将要看的是- 
+And what it's going to look at--
+[65:03] 它看起来像椭圆形，对不对？ 
+it's going to look like some
+sort of ellipsoid, right?
+[65:08] 在高维度上，它只是一颗橄榄。 
+In high dimension, it's
+just going to be an olive.
+[65:11] 而且这将越来越大。 
+And that is just going
+to be bigger and bigger.
+[65:13] 然后我把它切下一点
+And then I chop it
+off a little lower,
+[65:16] 这样我得到的东西会更大一些。 
+and I get something a
+little bigger like this.
+[65:20] 因此，事实证明sigma恰恰捕获了这一点， 
+And so it turns out that sigma
+is capturing exactly this,
+[65:23] 对？ 
+right?
+[65:23] 矩阵sigma-所以协方差矩阵的中心
+The matrix sigma-- so the
+center of your covariance matrix
+[65:27] 您的高斯人将成为这件事。 
+of your Gaussian is
+going to be this thing.
+[65:29]  Sigma会告诉您拉长的方向。 
+And sigma is going to tell you
+which direction it's elongated.
+[65:33] 尤其是，如果您看一下，如果您知道一个椭圆， 
+And so in particular, if you
+look, if you knew an ellipse,
+[65:36] 你知道有一个叫做主轴的东西吧？ 
+you know there's something
+called principal axis, right?
+[65:38] 所以你实际上可以定义一些东西
+So you could actually
+define something
+[65:39] 看起来像是这个轴
+that looks like this, which is
+this axis, the one along which
+[65:43] 它是拉长的。 
+it's the most elongated.
+[65:44] 然后是与之正交的轴
+Then the axis along which
+is orthogonal to it,
+[65:47] 沿它的拉长程度略微降低， 
+along which it's
+slightly less elongated,
+[65:49] 然后沿着正交的方向一次又一次地走。 
+and you go again and again
+along the orthogonal ones.
+[65:52] 原来那些东西在这里
+It turns out that
+those things here
+[65:56] 是新的坐标系，其中此变换P 
+is the new coordinate system
+in which this transformation, P
+[65:59] 和P转置，让您投入。 
+and P transpose, is
+putting you into.
+[66:03]  D在对角线上有条目
+And D has entries
+on the diagonal
+[66:06] 正是这个长度和这个长度，对不对？ 
+which are exactly this length
+and this length, right?
+[66:09] 这就是它所做的。 
+So that's just what it's doing.
+[66:11] 只是告诉你，如果你
+It's just telling
+you, well, if you
+[66:12] 考虑拥有高斯或高维
+think of having this Gaussian
+or this high-dimensional
+[66:16] 椭圆形，沿某些方向拉长。 
+ellipsoid, it's elongated
+along certain directions.
+[66:19] 这些方向实际上可能没有很好地对齐
+And these directions are
+actually maybe not well aligned
+[66:23] 使用原始坐标系，可能只是
+with your original coordinate
+system, which might just
+[66:25] 像往常一样吧- 
+be the usual one, right--
+[66:27] 北，南和东，西。 
+north, south, and east, west.
+[66:29] 也许我需要打开它。 
+Maybe I need to turn it.
+[66:30] 这正是这种正交变换
+And that's exactly what this
+orthogonal transformation is
+[66:33] 为你做，好吗？ 
+doing for you, all right?
+[66:36] 因此，从某种意义上讲，这实际上在告诉您更多信息。 
+So, in a way, this is actually
+telling you even more.
+[66:39] 告诉您任何对称矩阵
+It's telling you that any
+matrix that's symmetric,
+[66:41] 您实际上可以将其转到某个地方。 
+you can actually
+turn it somewhere.
+[66:45] 这将开始扩大方向
+And that'll start to dilate
+things in the directions
+[66:47] 你拥有的，然后将其转回
+that you have, and
+then turn it back
+[66:49] 达到您原来的水平。 
+to what you originally had.
+[66:50] 这实际上就是效果
+And that's actually
+exactly the effect
+[66:53] 通过向量应用对称矩阵的方法，对吗？ 
+of applying a symmetric matrix
+through a vector, right?
+[66:57] 这确实令人印象深刻。 
+And it's pretty impressive.
+[66:58] 它说如果我将sigma乘以v。 
+It says if I take sigma
+times v. Any sigma that's
+[67:04] 这种形式，我正在做的是对称的。 
+of this form, what I'm
+doing is-- that's symmetric.
+[67:07] 我真正对v所做的是
+What I'm really
+doing to v is I'm
+[67:09] 改变它的坐标系，所以我旋转它。 
+changing its coordinate
+system, so I'm rotating it.
+[67:12] 然后我要更改-我要乘以其坐标， 
+Then I'm changing-- I'm
+multiplying its coordinates,
+[67:14] 然后我将其旋转回去。 
+and then I'm rotating it back.
+[67:16] 这就是它所做的全部，而那是
+That's all it's
+doing, and that's
+[67:18] 所有对称矩阵的作用是什么
+what all symmetric
+matrices do, which
+[67:21] 意味着这可以做很多事情。 
+means that this is doing a lot.
+[67:24] 好的，好的。 
+All right, so OK.
+[67:27] 那么，我知道什么？ 
+So, what do I know?
+[67:29] 所以我不会证明这是
+So I'm not going to
+prove that this is
+[67:30] 所谓谱定理。 
+the so-called spectral theorem.
+[67:39]  D的对角线条目的形式为lambda 1 
+And the diagonal entries of
+D is of the form, lambda 1,
+[67:45]  lambda 2，lambda d，0，0。 
+lambda 2, lambda d, 0, 0.
+[67:49]  λj称为D的特征值。 
+And the lambda j's are
+called eigenvalues of D.
+[68:01] 现在，这些数字通常可以是正数，负数， 
+Now in general, those numbers
+can be positive, negative,
+[68:05] 或等于0。 
+or equal to 0.
+[68:06] 但是在这里，我知道sigma和S是- 
+But here, I know that
+sigma and S are--
+[68:12] 好吧，他们肯定是对称的， 
+well, they're
+symmetric for sure,
+[68:15] 但它们是正半定的。 
+but they are positive
+semidefinite.
+[68:23] 这是什么意思？ 
+What does it mean?
+[68:25] 这意味着当我以u换位sigma例如， 
+It means that when I take u
+transpose sigma u for example,
+[68:30] 此数字始终为非负数。 
+this number is
+always non-negative.
+[68:35] 为什么会这样呢？ 
+Why is this true?
+[68:42] 这个数字是多少
+What is this number?
+[68:47] 这是-实际上，我什至没有
+It's the variance of--
+and actually, I don't even
+[68:49] 需要完成这句话。 
+need to finish this sentence.
+[68:51] 我一说这是一种差异， 
+As soon as I say that
+this is a variance, well,
+[68:53] 它必须是非负的。 
+it has to be non-negative.
+[68:55] 我们知道方差不是负数。 
+We know that a variance
+is not negative.
+[68:57] 因此，这也是使用它的一种好方法。 
+And so, that's also a
+nice way you can use that.
+[69:00] 所以这只是说，好吧，这件事
+So it's just to say,
+well, OK, this thing
+[69:02] 是正半定的，因为它是协方差矩阵。 
+is positive semidefinite because
+it's a covariance matrix.
+[69:04] 所以我知道这是一个差异，好吗？ 
+So I know it's a variance, OK?
+[69:06] 所以我明白了。 
+So I get this.
+[69:08] 现在，如果我有一些负数- 
+Now, if I had some
+negative numbers--
+[69:10] 这样的效果是当我绘制这张图片时
+so the effect of that is that
+when I draw this picture,
+[69:15] 这些轴总是正的，这很奇怪
+those axes are always positive,
+which is kind of a weird thing
+[69:19] 说。 
+to say.
+[69:19] 但这意味着当我取向量v时，我将其旋转， 
+But what it means is that when
+I take a vector, v, I rotate it,
+[69:23] 然后在坐标方向上拉伸它
+and then I stretch it in the
+directions of the coordinate,
+[69:28] 我不能翻转它。 
+I cannot flip it.
+[69:30] 我只能拉伸或收缩，但不能翻转它的手势， 
+I can only stretch or shrink,
+but I cannot flip its sign,
+[69:34] 行？ 
+all right?
+[69:34] 但总的来说，对于任何对称矩阵， 
+But in general, for
+any symmetric matrices,
+[69:37] 我可以做到的。 
+I could do this.
+[69:38] 但是当它是正对称定数时
+But when it's positive
+symmetric definite,
+[69:40] 实际上结果是所有的lambda 
+actually what turns out
+is that all the lambda
+[69:43]  j为非负数。 
+j's are non-negative.
+[69:48] 我不能翻转它，好吗？ 
+I cannot flip it, OK?
+[69:51] 因此，所有特征值都是非负的。 
+So all the eigenvalues
+are non-negative.
+[69:56] 这是正Semidef的属性。 
+That's a property
+of positive semidef.
+[69:58] 因此，当它是对称的时，就具有特征值。 
+So when it's symmetric,
+you have the eigenvalues.
+[70:00] 它们可以是任何数字。 
+They can be any number.
+[70:01] 当它是正半定的时候
+And when it's positive
+semidefinite, in particular
+[70:03] 协方差矩阵就是这种情况
+that's the case of
+the covariance matrix
+[70:05] 和经验协方差矩阵，对吗？ 
+and the empirical
+covariance matrix, right?
+[70:07] 因为经验协方差矩阵
+Because the empirical
+covariance matrix
+[70:08] 是一个经验方差，它本身是非负的。 
+is an empirical variance,
+which itself is non-negative.
+[70:12] 因此，我知道特征值是非负的。 
+And so I get that the
+eigenvalues are non-negative.
+[70:17] 好吧，所以主成分分析说
+All right, so principal
+component analysis is saying,
+[70:23] 好，我想找到方向，你， 
+OK, I want to find
+the direction, u,
+[70:32] 最大限度地调换Su，好吗？ 
+that maximizes u
+transpose Su, all right?
+[70:38] 我刚刚介绍了一张幻灯片
+I've just introduced
+in one slide
+[70:40] 关于特征值
+something about eigenvalues.
+[70:41] 因此，希望他们应该有所帮助。 
+So hopefully, they should help.
+[70:44] 那我要得到什么呢？ 
+So what is it that I'm
+going to be getting?
+[70:47] 好吧，让我们看看会发生什么。 
+Well, let's just
+see what happens.
+[70:51] 哦，我忘了提-我会用它。 
+Oh, I forgot to mention
+that-- and I will use this.
+[70:53] 因此，λj称为特征向量。 
+So the lambda j's are
+called eigenvectors.
+[70:56] 然后矩阵P有第v1至vd列，好吗？ 
+And then the matrix, P,
+has columns v1 to vd, OK?
+[71:08] 它是正交的-P转置P等于
+The fact that it's orthogonal--
+that P transpose P is equal
+[71:13] 身份- 
+to the identity--
+[71:15] 表示那些家伙对vi转置感到满意
+means that those guys
+satisfied that vi transpose
+[71:20] 如果i与j不同，则vj等于0。 
+vj is equal to 0 if i
+is different from j.
+[71:27]  vi换位vi实际上等于1 
+And vi transpose vi is
+actually equal to 1,
+[71:31] 是的，因为PP的条目会转置
+right, because the
+entries of PP transpose
+[71:33] 完全是形式，vi转置vj，好吗？ 
+are exactly going to be of
+the form, vi transpose vj, OK?
+[71:38] 因此，这些v称为特征向量。 
+So those v's are
+called eigenvectors.
+[71:46]  v1附加到lambda 1，v2附加到lambda 2， 
+And v1 is attached to lambda 1,
+and v2 is attached to lambda 2,
+[71:52] 好？ 
+OK?
+[71:53] 因此，让我们看看这些事情正在发生什么。 
+So let's see what's
+happening with those things.
+[71:56] 如果我接受sigma，会怎样？ 
+What happens if I take sigma--
+[71:58] 因此，如果您知道特征值，那么您确切地知道是什么
+so if you know eigenvalues,
+you know exactly what's
+[72:00] 将要发生。 
+going to happen.
+[72:01] 如果我看西格玛乘以v1，那么，西格玛是什么？ 
+If I look at, say, sigma
+times v1, well, what is sigma?
+[72:06] 我们知道sigma是PDP转置v1。 
+We know that sigma
+is PDP transpose v1.
+[72:15]  P转置时间v1是多少？ 
+What is P transpose times v1?
+[72:17] 好吧，P转置有v1行转置， 
+Well, P transpose has
+rows v1 transpose,
+[72:21]  v2转置，一直到vd转置。 
+v2 transpose, all the
+way to vd transpose.
+[72:26] 所以当我乘以v1时， 
+So when I multiply
+this by v1, what
+[72:30] 我剩下的是第一个坐标
+I'm left with is
+the first coordinate
+[72:32] 将等于1，第二个坐标是
+is going to be equal to 1
+and the second coordinate is
+[72:38] 等于0，对不对？ 
+going to be equal to 0, right?
+[72:40] 因为它们彼此正交- 
+Because they're
+orthogonal to each other--
+[72:42]  0一直到结尾。 
+0 all the way to the end.
+[72:45] 这就是我进行P转置v1的时间。 
+So that's when I
+do P transpose v1.
+[72:48] 现在我乘以D。好吧，我只是
+Now I multiply by
+D. Well, I'm just
+[72:55] 这个家伙乘以lambda 1，这个家伙乘以lambda 2， 
+multiplying this guy by lambda
+1, this guy by lambda 2,
+[72:58] 这个人是lambda d，所以这实际上只是lambda 1。 
+and this guy by lambda d, so
+this is really just lambda 1.
+[73:04] 现在我需要乘以P。 
+And now I need to
+post-multiply by P.
+[73:12] 那么这个人的P倍是多少？ 
+So what is P times this guy?
+[73:14] 好吧，P一直到vd都是v1。 
+Well, P is v1 all the way to vd.
+[73:19] 现在我乘以一个向量
+And now I multiply
+by a vector that
+[73:21] 除了第一个家伙的lambda 1之外，只有0。 
+only has 0's except
+lambda 1 on the first guy.
+[73:24] 因此，这只是1乘以v1的λ。 
+So this is just
+lambda 1 times v1.
+[73:29] 因此，我们证明了西格玛乘以v1是lambda 1 v1， 
+So what we've proved is that
+sigma times v1 is lambda 1 v1,
+[73:34] 这可能就是您所拥有的特征值的概念
+and that's probably the
+notion of eigenvalue you're
+[73:37] 最舒服吧？ 
+most comfortable with, right?
+[73:39] 因此，当我乘以v1时，我得到
+So just when I
+multiply by v1, I get
+[73:41]  v1返回乘以某值，即特征值。 
+v1 back multiplied by something,
+which is the eigenvalue.
+[73:45] 所以特别地，如果我看v1，转置sigma v1， 
+So in particular, if I look
+at v1, transpose sigma v1,
+[73:54] 我能得到什么？ 
+what do I get?
+[73:55] 好吧，我得到了lambda 1 v1转置v1， 
+Well, I get lambda
+1 v1 transpose v1,
+[73:58] 是1，对吗？ 
+which is 1, right?
+[74:00] 所以这实际上是lambda 1 v1转置v1， 
+So this is actually
+lambda 1 v1 transpose v1,
+[74:04] 哪个是lambda 1，好吗？ 
+which is lambda 1, OK?
+[74:08] 如果我对v2做同样的事情，很明显
+And if I do the same
+with v2, clearly I'm
+[74:10] 将获得v2转置sigma。 
+going to get v2 transpose sigma.
+[74:13]  v2等于lambda 2。 
+v2 is equal to lambda 2.
+[74:16] 所以对于每个vj，我知道如果我
+So for each of the
+vj's, I know that if I
+[74:19] 看沿vj的方差， 
+look at the variance
+along the vj,
+[74:21] 实际上是由这些特征值给出的，好吗？ 
+it's actually exactly given by
+those eigenvalues, all right?
+[74:27] 这证明了这一点，因为沿着特征向量的方差
+Which proves this, because the
+variance along the eigenvectors
+[74:38] 实际上等于特征值
+is actually equal
+to the eigenvalues.
+[74:40] 因此，由于它们是方差，因此必须为非负数。 
+So since they're variances,
+they have to be non-negative.
+[74:43] 所以现在，我正在寻找一个方向
+So now, I'm looking for
+the one direction that
+[74:47] 差异最大，对吗？ 
+has the most variance, right?
+[74:50] 但这不仅在特征向量中。 
+But that's not only
+among the eigenvectors.
+[74:53] 这也是其他方向之一
+That's also among
+the other directions
+[74:55] 在特征向量之间。 
+that are in-between
+the eigenvectors.
+[74:57] 如果我只看特征向量， 
+If I were to look only
+at the eigenvectors,
+[74:59] 它会告诉我，好吧，只要选择特征向量vj 
+it would just tell me, well,
+just pick the eigenvector, vj,
+[75:02] 这与最大的lambda j关联。 
+that's associated to the
+largest of the lambda j's.
+[75:05] 但是事实证明，对于任何向量来说，也是如此- 
+But it turns out that that's
+also true for any vector--
+[75:09] 最大方向实际上是一个方向
+that the maximum direction is
+actually one direction which
+[75:11] 在特征向量中。 
+is among the eigenvectors.
+[75:13] 在特征向量中，我们知道
+And among the eigenvectors,
+we know that the one that's
+[75:16] 最大的 - 
+the largest--
+[75:17] 差异最大的是
+that carries the
+largest variance is
+[75:18] 与最大特征值相关的那个，好吗？ 
+the one that's associated to the
+largest eigenvalue, all right?
+[75:23] 这就是PCA将为我做的事情。 
+And so this is what PCA is
+going to try to do for me.
+[75:26] 所以在实践中，这就是我已经提到的，对吗？ 
+So in practice, that's what
+I mentioned already, right?
+[75:29] 我们正在尝试投影点云
+We're trying to
+project the point cloud
+[75:31] 在低维空间D素数上
+onto a low-dimensional
+space, D prime,
+[75:34] 通过保留尽可能多的信息。 
+by keeping as much
+information as possible.
+[75:36]  “尽可能多的信息”是指我们不
+And by "as much information,"
+I mean we do not
+[75:39] 希望点碰撞。 
+want points to collide.
+[75:41] 因此，PCA要做的只是
+And so what PCA is
+going to do is just
+[75:45] 打算尝试[在两个[]方向上。 
+going to try to project
+[? on two ?] directions.
+[75:48] 所以会有au，然后
+So there's going
+to be a u, and then
+[75:49] 将会有一个正交于u的东西，然后
+there's going to be something
+orthogonal to u, and then
+[75:52] 第三，等等，所以一旦我们对它们进行投影， 
+the third one, et cetera, so
+that once we project on those,
+[75:55] 我们保持尽可能多的协方差，好吗？ 
+we're keeping as much of the
+covariance as possible, OK?
+[75:59] 特别是那些方向
+And in particular,
+those directions
+[76:02] 我们要选择的实际上是
+that we're going to
+pick are actually
+[76:04] 与最大关联的vj的子集
+a subset of the vj's that
+are associated to the largest
+[76:06] 特征值。 
+eigenvalues.
+[76:08] 所以我今天要在这里停止。 
+So I'm going to
+stop here for today.
+[76:11] 我们将在星期二完成此操作。 
+We'll finish this on Tuesday.
+[76:15] 但基本上，想法只是以下内容。 
+But basically, the idea is
+it's just the following.
+[76:18] 您将要-好吧，让我再跳过一遍。 
+You're just going to--
+well, let me skip one more.
+[76:22] 是的，这就是主意。 
+Yeah, this is the idea.
+[76:24] 您首先要选择关联的特征向量
+You're first going to pick
+the eigenvector associated
+[76:27] 到最大特征值
+to the largest eigenvalue.
+[76:30] 然后，您将选择正交的方向
+Then you're going to pick
+the direction that orthogonal
+[76:33] 到您选择的向量， 
+to the vector that
+you've picked,
+[76:37] 而且差异最大。 
+and that's carrying
+the most variance.
+[76:38] 那实际上是第二大
+And that's actually
+the second largest--
+[76:40] 与第二大特征值相关的特征向量。 
+the eigenvector associated to
+the second largest eigenvalue.
+[76:44] 而且您将一路过关斩将
+And you're going to go all
+the way to the number of them
+[76:46] 您实际要选择的位置，在这种情况下是d，可以吗？ 
+that you actually want to pick,
+which is in this case, d, OK?
+[76:50] 无论您选择在何处进行此操作， 
+And wherever you choose
+to chop this process,
+[76:53] 不会一直到d，而是会真正给你
+not going all the way to d,
+is going to actually give you
+[76:56] 低维表示
+a lower-dimensional
+representation
+[76:57] 在v1，v2，v3等给出的坐标系中
+in the coordinate system
+that's given by v1, v2, v3, et
+[77:01] 等等，好吗？ 
+cetera, OK?
+[77:02] 因此，我们将在星期二对此进行详细介绍。 
+So we'll see that in
+more details on Tuesday.
+[77:04] 但是我现在不想参加。 
+But I don't want
+to get into it now.
+[77:06] 我们没有足够的时间。 
+We don't have enough time.
+[77:07] 有没有问题？ 
+Are there any questions?

@@ -1,0 +1,2642 @@
+[00:00] 广告素材下提供了以下内容
+The following content is
+provided under a Creative
+[00:02] 普通许可。 
+Commons license.
+[00:03] 您的支持将帮助MIT OpenCourseWare 
+Your support will help
+MIT OpenCourseWare
+[00:06] 继续免费提供高质量的教育资源。 
+continue to offer high-quality
+educational resources for free.
+[00:10] 捐款或查看其他材料
+To make a donation or to
+view additional materials
+[00:12] 从数百门麻省理工学院课程中访问MIT OpenCourseWare 
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+[00:16] 在ocw.mit.edu。 
+at ocw.mit.edu.
+[00:21]  PHILIPPE RIGOLLET：我很抱歉。 
+PHILIPPE RIGOLLET:
+So I apologize.
+[00:23] 我的声音不是100％。 
+My voice is not 100%.
+[00:27] 所以，如果您不明白我在说什么，请问我。 
+So if you don't understand
+what I'm saying, please ask me.
+[00:32] 因此，我们将要进行分析-实际上，不是真正的分析。 
+So we're going to be analyzing--
+actually, not really analyzing.
+[00:36] 我们描述了一种二阶方法
+We described a
+second-order method
+[00:38] 在广义线性模型中优化对数似然， 
+to optimize the log likelihood
+in a generalized linear model,
+[00:42] 当感兴趣的参数是beta时。 
+when the parameter
+of interest was beta.
+[00:45] 因此，在这里，我将整个内容重写为Beta。 
+So here, I'm going to rewrite
+the whole thing as a beta.
+[00:47] 这就是您所看到的方程式。 
+So that's the equation you see.
+[00:49] 但是我们确实有这个测试版。 
+But we really have this beta.
+[00:51] 并且在迭代k加1时，beta由beta k给出。 
+And at iteration k plus 1,
+beta is given by beta k.
+[00:58] 然后我有一个加号。 
+And then I have a plus sign.
+[01:01] 还有，如果您想到Beta版的Fisher信息
+And the plus, if you think of
+the Fisher information at beta
+[01:06]  k是某个数字- 
+k as being some number--
+[01:09] 如果你要说这是否是积极的
+if you were to say
+whether it's a positive
+[01:11] 或负数，实际上是
+or a negative
+number, it's actually
+[01:12] 将是一个正数，因为它是
+going to be a positive
+number, because it's
+[01:14] 一个正半定矩阵。 
+a positive semi-definite matrix.
+[01:15] 因此，由于我们正在进行梯度上升， 
+So since we're doing
+gradient ascent,
+[01:18] 我们在这里有一个加号。 
+we have a plus sign here.
+[01:19] 然后方向基本上是
+And then the
+direction is basically
+[01:21]  beta k处的ln梯度。 
+gradient ln at beta k.
+[01:26] 好？ 
+OK?
+[01:27] 这就是我们要实现的迭代。 
+So this is the iterations that
+we're trying to implement.
+[01:30] 我们可以做到这一点。 
+And we could just do this.
+[01:31] 在每次迭代中，我们都会计算Fisher信息， 
+At each iteration, we compute
+the Fisher information,
+[01:34] 然后我们一次又一次地做。 
+and then we do it
+again and again.
+[01:36] 行。 
+All right.
+[01:36] 这就是所谓的Fisher评分算法。 
+That's called the
+Fisher-scoring algorithm.
+[01:38] 我告诉你这将趋于一致。 
+And I told you that this
+was going to converge.
+[01:41] 在本讲座中我们将尝试做的是
+And what we're going to
+try to do in this lecture
+[01:44] 是为了展示我们如何重新实现这一点， 
+is to show how we can
+re-implement this,
+[01:46] 使用迭代重新加权的最小二乘法， 
+using iteratively
+re-weighted least squares,
+[01:48] 这样该算法的每一步
+so that each step
+of this algorithm
+[01:50] 只需解决加权最小二乘问题即可。 
+consists simply of solving a
+weighted least square problem.
+[01:54] 行。 
+All right.
+[01:54] 因此，让我们快速返回并提醒自己
+So let's go back quickly
+and remind ourselves
+[01:59] 我们是高斯人
+that we are in the Gaussian--
+[02:04] 抱歉，我们属于指数家庭。 
+sorry, we're in the
+exponential family.
+[02:07] 因此，如果我观察一次观察的对数似然， 
+So if I look at the log
+likelihood for one observation,
+[02:10] 所以在这里
+so here it's ln--
+[02:12] 抱歉。 
+sorry.
+[02:13] 这是从i等于yi的n减去n的总和- 
+This is the sum from i
+equal 1 to n of yi minus--
+[02:20] 好的，所以是y倍theta i，抱歉，减去theta i b。 
+OK, so it's yi times theta
+i, sorry, minus b of theta i.
+[02:26] 然后将有一些参数。 
+Then there's going
+to be some parameter.
+[02:28] 然后我有yi phi的加c。 
+And then I have
+plus c of yi phi.
+[02:32] 好。 
+OK.
+[02:33] 所以只是指数消失了
+So just the
+exponential went away
+[02:35] 当我记录可能性的日志时。 
+when I took the log
+of the likelihood.
+[02:36] 我有n个观察值，所以我在总结
+And I have n observations,
+so I'm summing
+[02:38] 在所有n个观察中
+over all n observations.
+[02:40] 行。 
+All right.
+[02:40] 然后我们有了一堆公式。 
+Then we had a bunch of
+formulas that we came up to be.
+[02:43] 所以，如果我看对yi的期望， 
+So if I look at the
+expectation of yi--
+[02:46] 因此，给定xi，这确实是yi的条件。 
+so that's really the
+conditional of yi, given xi.
+[02:49] 但是像这里一样，真的没关系。 
+But like here, it
+really doesn't matter.
+[02:52] 每个i都会有所不同。 
+It's just going to be
+different for each i.
+[02:54] 用mu i表示。 
+This is denoted by mu i.
+[02:55] 我们证明这是theta i的beta素数。 
+And we showed that this
+was beta prime of theta i.
+[03:00] 然后我们发现的另一个等式是。 
+Then the other equation
+that we found was that.
+[03:03] 因此，我们要建模的就是这个东西。 
+And so what we want to
+model is this thing.
+[03:06] 我们希望它等于xi transpose beta-对不起
+We want it to be equal to
+xi transpose beta- sorry
+[03:10] 克这东西。 
+g of this thing.
+[03:14] 行。 
+All right.
+[03:15] 这就是我们的模型。 
+So that's our model.
+[03:19] 然后我们得出方差也是
+And then we had that
+the variance was also
+[03:21] 由二阶导数给出。 
+given by the second derivative.
+[03:23] 我不打算讨论它。 
+I'm not going to go into it.
+[03:24] 真正有趣的是看到
+What's actually
+interesting is to see,
+[03:26] 如果我们想将θi表示为xi的函数，我们会得到什么， 
+if we want to express theta i as
+a function of xi, what we get,
+[03:32] 从xi通过g逆向mu i，然后到theta i 
+going from xi to mu i by g
+inverse, and then to theta i
+[03:38] 通过b逆，我们得到theta i 
+by b inverse, we
+get that theta i
+[03:43] 等于xi换位beta的h，xi换位beta的h 
+is equal to h of xi transpose
+beta, h of xi transpose beta,
+[03:51] 其中h是反数- 
+where h is the inverse--
+[03:56] 那么这是哪个命令？ 
+so which order is --this?
+[03:58] 是g的倒数，然后compose将是质数。 
+Is the inverse of g, and then
+the compose would be prime.
+[04:03] 好？ 
+OK?
+[04:05] 所以我们记得上一次，这些都是计算
+So we remember that last time,
+those are all computations
+[04:09] 我们已经做了，但是他们要去
+that we've made,
+but they're going
+[04:10] 对我们的推导有用。 
+to be useful in our derivation.
+[04:12] 我们上次做的第一件事是
+And the first thing
+we did last time is
+[04:14] 为了证明这一点，如果我现在看一下日志的导数
+to show that, if I look now
+at the derivative of the log
+[04:17] 关于一个beta坐标的可能性，其中
+likelihood with respect to
+one coordinate of beta, which
+[04:20] 如果我全力以赴，将会给我渐变
+is going to give me the
+gradient if I do that for all
+[04:23] 坐标，我们最终发现了什么
+the coordinates, what
+we ended up finding
+[04:25] 是我们可以用这种形式重写它，有些
+is that we can rewrite
+it in this form, some
+[04:28]  yi tilde减去mu tilde。 
+of yi tilde minus mu tilde.
+[04:31] 因此，让我们提醒自己- 
+So let's remind ourselves that--
+[04:36] 所以y波浪号只是y 
+so y tilde is just y divided--
+[04:41] 好吧，你是波浪号，我是- 
+well, OK y tilde i is yi--
+[04:45] 是时代还是分裂- 
+is it times or divided--
+[04:46] 亩我的素数。 
+times g prime of mu i.
+[04:50]  Mu tilde是mu i的素数。 
+Mu tilde i is mu i
+times g prime of mu i.
+[05:00] 然后那只是人为的事情， 
+And then that was just
+an artificial thing,
+[05:02] 这样我们就可以将权重除以g素数。 
+so that we could actually
+divide the weights by g prime.
+[05:07] 但是构成权重的真实事物就是这个质数。 
+But the real thing that built
+the weights are this h prime.
+[05:10] 还有这个归一化因素。 
+And there's this
+normalization factor.
+[05:12] 所以，如果我们这样阅读-如果我也
+And so if we read it
+like that-- so if I also
+[05:14] 写wi是xi的h素转置beta的h素
+write that wi is h prime of
+xi transpose beta divided
+[05:22] 乘以g的素数乘以phi，然后
+by g prime of mu
+i times phi, then
+[05:27] 我实际上可以重写我的渐变
+I could actually rewrite
+my gradient, which
+[05:30] 是向量，具有以下矩阵形式， 
+is a vector, in the
+following matrix form,
+[05:34]  beta处的ln。 
+the gradient ln at beta.
+[05:40] 所以我的对数beta的对数梯度
+So the gradient of my
+log likelihood of beta
+[05:44] 采取以下形式。 
+took the following form.
+[05:45] 它是x转置w，然后是tilde减去mu tilde。 
+It was x transpose w, and
+then y tilde minus mu tilde.
+[05:53] 在这里，w只是具有w1的矩阵， 
+And here, w was just
+the matrix with w1,
+[05:57]  w2，一直到对角线和0 
+w2, all the way to wn
+on the diagonal and 0
+[06:02] 在对角线上。 
+on of the up diagonals.
+[06:04] 好？ 
+OK?
+[06:06] 所以那只是拿导数
+So that was just
+taking the derivative
+[06:08] 并做了一些轻微的操作， 
+and doing a slight
+manipulations that said,
+[06:11] 好吧，让我们将这里的内容除以g 
+well, let's just divide
+whatever is here by g
+[06:14] 素数，再乘以g素数。 
+prime and multiply whatever
+is here by g prime.
+[06:17] 所以今天，我们将了解为什么要进行此划分
+So today, we'll see why
+we make this division
+[06:19] 并乘以g素数，这似乎没有任何意义， 
+and multiplication by g prime,
+which seems to make no sense,
+[06:23] 但是它实际上来自Hessian计算。 
+but it actually comes from
+the Hessian computations.
+[06:26] 因此，Hessian计算正在
+So the Hessian
+computations are going
+[06:28] 有点烦人。 
+to be a little more annoying.
+[06:29] 实际上，让我直接从坐标y开始
+Actually, let me start directly
+with the coordinate y's
+[06:33] 对吗？ 
+derivative, right?
+[06:34] 所以要建立这个渐变，我们最终使用的是
+So to build this gradient,
+what we used, in the end,
+[06:37] 是ln关于gth的偏导数
+was that the partial derivative
+of ln with respect to the gth
+[06:41]  beta的坐标等于i的总和
+coordinate of beta was
+equal to the sum over i
+[06:49]  yi tilde减去mu tilde倍wi倍
+of yi tilde minus mu
+i tilde times wi times
+[06:55]  xi的gth坐标。 
+the gth coordinate of xi.
+[06:59] 好？ 
+OK?
+[07:01] 现在，让我们再取一个导数， 
+So now, let's just take
+another derivative,
+[07:03] 这将为我们提供黑森州的条目。 
+and that's going to give us
+the entries of the Hessian.
+[07:07] 好的，所以我们要去二阶导数。 
+OK, so we're going to
+the second derivative.
+[07:11] 所以我要计算的是关于方面的导数
+So what I want to compute is
+the derivative with respect
+[07:16] 到beta j和beta k。 
+to beta j and beta k.
+[07:21] 好。 
+OK.
+[07:22] 那么beta j- 
+So where does beta j--
+[07:24] 所以在这里，我已经尊重了派生
+so here, I already took
+the derivative with respect
+[07:26] 到beta j。 
+to beta j.
+[07:27] 所以这只是尊重
+So this is just the
+derivative with respect
+[07:29] 相对于βj等于导数的βk。 
+to beta k of the derivative
+with respect to beta j.
+[07:36] 所以我要做的就是拿这个家伙的衍生品
+So what I need to do is to
+take the derivative of this guy
+[07:39] 关于beta k。 
+with respect to beta k.
+[07:40]  beta k在哪里显示？ 
+Where does beta k show up here?
+[07:48] 它设置在两个地方。 
+It's set in, in two places.
+[07:52] 听众：是的？ 
+AUDIENCE: In the y's?
+[07:53]  PHILIPPE RIGOLLET：不，不是y的。 
+PHILIPPE RIGOLLET: No,
+it's not in the y's.
+[07:54]  y是我的数据，对吧？ 
+The y's are my data, right?
+[07:59] 但是我的意思是，它在y波浪号中。 
+But I mean, it's
+in the y tildes.
+[08:02] 是的，因为它在亩里，对吗？ 
+Yeah, because it's in mu, right?
+[08:03]  Mu取决于beta。 
+Mu depends on beta.
+[08:04]  Mu是xi转置beta的g逆。 
+Mu is g inverse of
+xi transpose beta.
+[08:09] 而且它也在无线网络中。 
+And it's also in the wi's.
+[08:12] 实际上，您所看到的一切都是直接的-好吧，好
+Actually, everything that you
+see is directly-- well, OK, w
+[08:17] 明确取决于beta上的mu n。 
+depends on mu n on
+beta explicitly.
+[08:21] 但是其余的仅取决于亩。 
+But the rest depends only on mu.
+[08:24] 因此，我们可能想要一点点- 
+And so we might want
+to be a little--
+[08:27] 好吧，我们实际上可以使用- 
+well, we can actually use the--
+[08:30] 我已经使用链式规则了吗？ 
+did I use the
+chain rule already?
+[08:35] 是的，在这里。 
+Yeah, it's here.
+[08:36] 但是，好的，让我们开始吧。 
+But OK, well, let's go for it.
+[08:49] 哦，是的，好的。 
+Oh yeah, OK.
+[08:50] 抱歉，我不应该这样写
+Sorry, I should not
+write it like that,
+[08:52] 因为那实际上是- 
+because that was actually--
+[08:54] 是的，所以我的生活简直让我悲惨
+right, so I make my life
+miserable by just multiplying
+[08:57] 然后用亩的g素数除。 
+and dividing by
+this g prime of mu.
+[09:00] 我不应该这样做，对吗？ 
+I should not do this, right?
+[09:02] 所以我要写的就是这个人
+So what I should just write
+is say that this guy here--
+[09:04] 我实际上要去掉mu的g素数， 
+I'm actually going to
+remove the g prime of mu,
+[09:09] 因为我只是做一些取决于theta的东西
+because I just make something
+that depends on theta
+[09:11] 当它真的不应该出现时。 
+appear when it
+really should not.
+[09:13] 因此，让我们看一下最后一个平等。 
+So let's just look at the
+last but one equality.
+[09:23] 好。 
+OK.
+[09:23] 那就是那边的那个，然后我有xi j。 
+So that's the one over
+there, and then I have xi j.
+[09:27] 好，所以在这里，这使我的生活变得更加简单， 
+OK, so here, it make my
+life much more simple,
+[09:29] 因为yi不依赖beta， 
+because yi does
+not depend on beta,
+[09:31] 但是这个人依赖beta，这个人依赖beta。 
+but this guy depends on beta,
+and this guy depends on beta.
+[09:34] 行。 
+All right.
+[09:35] 所以当我取导数的时候
+So when I take the
+derivative, I'm
+[09:36] 现在必须要多加注意。 
+going to have to be a
+little more careful now.
+[09:38] 但是我只是产品的衍生品， 
+But I just have a
+derivative of a product,
+[09:40] 没有什么更复杂的了。 
+nothing more complicated.
+[09:42] 那是什么？ 
+So this is what?
+[09:43] 好吧，总和将是线性的， 
+Well, the sum is
+going to be linear,
+[09:45] 所以它会出来。 
+so it's going to come out.
+[09:46] 然后，我将不得不采用该术语的派生词。 
+Then I'm going to have to take
+the derivative of this term.
+[09:51] 因此，它仅比psi高1。 
+So it's just going
+to be 1 over psi.
+[09:54] 那么mu i的导数
+Then the derivative
+of mu i with respect
+[09:58] 到beta k，我会这样写
+to beta k, which I will
+just write like this,
+[10:04]  xi的h次质数转置beta xi j。 
+times h prime of xi
+transpose beta xi j.
+[10:09] 然后我要有另一个，即yi减去mu 
+And then I'm going to have the
+other one, which is yi minus mu
+[10:15]  i是xi转置的h的二阶导数的5倍以上
+i over 5 times the second
+derivative of h of xi transpose
+[10:24]  Beta。 
+beta.
+[10:25] 然后我要取导数
+And then I'm going to
+take the derivative
+[10:27] 这个家伙关于beta j和beta k的关系，这只是
+of this guy with respect to beta
+j with beta k, which is just
+[10:30]  k 
+xi k.
+[10:32] 所以我有xi j乘xi k。 
+So I have xi j times xi k.
+[10:36] 好。 
+OK.
+[10:36] 所以我仍然需要计算这个家伙。 
+So I still need to
+compute this guy.
+[10:40] 那么偏导数是什么
+So what is the
+partial derivative
+[10:42] 关于g的beta k？ 
+with respect to beta k of g?
+[10:46] 所以亩是- 
+So mu is g of--
+[10:49] 担心，它是xi转置beta的g的逆。 
+worry, it's g inverse
+of xi transpose beta.
+[10:56] 好？ 
+OK?
+[10:58] 那我能得到什么呢？ 
+So what do I get?
+[10:59] 好吧，我肯定会得到
+Well, I'm going
+to get definitely
+[11:01]  g的二阶导数
+the second derivative of g.
+[11:11] 好吧，那实际上不是一个坏主意。 
+Well, OK, that's
+actually not a bad idea.
+[11:17] 好吧，不，没关系。 
+Well, no, that's OK.
+[11:18] 我可以再说一遍
+I can make the second--
+[11:21] 是什么让我的生活更轻松？ 
+what makes my life
+easier, actually?
+[11:26] 给我一秒钟。 
+Give me one second.
+[11:31] 好吧，实际上没有人
+Well, there's no
+one that actually
+[11:33] 使我的生活变得如此轻松。 
+makes my life so much easier.
+[11:35] 让我们写吧。 
+Let's just write it.
+[11:36] 让我们和这个家伙一起去。 
+Let's go with this guy.
+[11:37] 所以它将成为xi转置beta的g素数
+So it's going to be g prime
+prime of xi transpose beta
+[11:43] 时代
+times xi k.
+[11:47] 好？ 
+OK?
+[11:50] 那么，现在，如果我收集条款，该怎么办？ 
+So now, what do I have
+if I collect my terms?
+[11:53] 我有这整个东西，二阶导数是
+I have that this whole thing
+here, the second derivative is,
+[12:05] 好吧，我的总和是从1等于1到n。 
+well, I have the sum
+from 1 equal 1 to n.
+[12:10] 然后我有一些我可以排除的条件，对吗？ 
+Then I have terms that
+I can factor out, right?
+[12:13] 这两个家伙都有xi j，这个家伙拿出xi k。 
+Both of these guys have xi j,
+and this guy pulls out an xi k.
+[12:17]  xi j乘xi k也在这里，对吗？ 
+And it's also here, xi
+j times xi k, right?
+[12:21] 所以这里的每个人都是xi j xi k。 
+So everybody here is xi j xi k.
+[12:26] 现在，我只需要遵守我在这里所使用的条款。 
+And now, I just have to take
+the terms that I have here.
+[12:29] 在phi上的1，我实际上可以在前面退出。 
+The 1 over phi, I can
+actually pull out in front.
+[12:33] 我剩下g次的二阶导数
+And I'm left with the
+second derivative of g times
+[12:40]  h的一阶导数，都是在xi处转置beta。 
+the first derivative of h, both
+taken at xi transpose beta.
+[12:46] 然后，我有这个减号
+And then, I have
+this yi minus mu i
+[12:48]  h的二阶导数乘以xi，转置为beta。 
+times the second derivative of
+h, taken at xi transpose beta.
+[13:00] 好。 
+OK.
+[13:00] 但是在这里，我正在研究费舍尔得分。 
+But here, I'm looking
+at Fisher scoring.
+[13:03] 我不是在看牛顿的方法
+I'm not looking at
+Newton's method, which
+[13:07] 意味着我实际上可以接受期望
+means that I can actually
+take the expectation
+[13:09] 二阶导数
+of the second derivative.
+[13:11] 所以当我开始期望的时候
+So when I start taking
+the expectation,
+[13:13] 将会发生什么
+what's going to happen--
+[13:15] 所以如果我把这件事的期望
+so if I take the expectation
+of this whole thing
+[13:17] 在这里，这个家伙，不是
+here, well, this guy, it's not--
+[13:21] 当我说期望时，总是有条件地基于xi。 
+and when I say expectation,
+it's always conditionally on xi.
+[13:24] 所以让我们写吧
+So let's write it--
+[13:27]  x1 xn 
+x1 xn.
+[13:29] 所以我有条件。 
+So I take conditional.
+[13:31] 这只是确定性的。 
+This is just deterministic.
+[13:32] 但是有条件的期望是什么
+But what is the
+conditional expectation
+[13:34]  y减去mu的倍数我乘以此人的时间，有条件地在xi上？ 
+of yi minus mu i times this
+guy, conditionally on xi?
+[13:42]  0，对吧？ 
+0, right?
+[13:43] 因为这只是对yi的条件期望， 
+Because this is just the
+conditional expectation of yi,
+[13:45] 其他一切都只取决于xi 
+and everything else
+depends on xi only,
+[13:47] 因此我可以将其推出有条件的期望。 
+so I can push it out of the
+conditional expectation.
+[13:50] 所以我只剩下这个学期。 
+So I'm left only with this term.
+[14:06] 好。 
+OK.
+[14:13] 所以现在我需要
+So now I need to--
+[14:14] 抱歉，我有xi xj，xi j xi j。 
+sorry, and I have
+xi xj, xi j xi j.
+[14:23] 好
+OK
+[14:26] 所以现在，我想谈一点
+So now, I want to go to
+something that's slightly more
+[14:34] 对我来说方便。 
+convenient for me.
+[14:35] 所以也许我们可以在这里跳过那部分， 
+So maybe we can
+skip that part here,
+[14:37] 因为无论如何这对我来说并不方便。 
+because this is not going to
+be convenient for me anyway.
+[14:40] 所以我只想回到最后看起来
+So I just want to go back to
+something that looks eventually
+[14:45] 像这样。 
+like this.
+[14:48] 好的，这就是我想要的。 
+OK, that's what
+I'm going to want.
+[14:50] 因此，我需要以某种方式使xi出现一些重量。 
+So I need to have my xi show
+up with some weight somehow.
+[14:53] 权重应包括h素数除以g素数。 
+And the weight should involve
+h prime divided by g prime.
+[14:57] 再说一遍，我为什么要看到g素数回来的原因
+Again, the reason why I want
+to see g prime coming back
+[15:00] 是因为我有g素数出现在原始w中。 
+is because I had g prime
+coming in the original w.
+[15:03] 这实际上与w的定义相同
+This is actually the
+same definition as the w
+[15:06] 我在计算梯度时使用的
+that I used when I was
+computing the gradient.
+[15:09] 那些家伙正是这些w。 
+Those are exactly
+these w's, those guys.
+[15:13] 所以我需要显示g素数。 
+So I need to have g
+prime that shows up.
+[15:15] 那就是我要去的地方
+And that's where
+I'm going to have
+[15:17] 在这里进行一些计算。 
+to make a little bit
+of computation here.
+[15:21] 而正是这种考虑。 
+And it's coming from this
+kind of consideration.
+[15:26] 好？ 
+OK?
+[15:27] 所以这件事
+So this thing here--
+[15:33] 好吧，实际上，我想念那边的phi，对吧？ 
+well, actually, I'm missing
+the phi over there, right?
+[15:39] 这里应该有一个phi。 
+There should be a phi here.
+[15:41] 好。 
+OK.
+[15:41] 我们正好拥有这件事，因为这告诉我， 
+So we have exactly this thing,
+because this tells me that,
+[15:46] 如果我看着黑森州- 
+if I look at the Hessian--
+[15:53] 所以这是入门级的，这正是
+so this was entry-wise,
+and this is exactly
+[15:56]  k形式的某物的形式。 
+the form of something
+of the form of the k.
+[15:58] 这恰好是xi移调的第j k个条目。 
+This is exactly the jth kth
+entry of xi xi transpose.
+[16:06] 对？ 
+Right?
+[16:06] 我们以前使用过。 
+We've used that before.
+[16:07] 因此，如果我想以向量形式编写此代码， 
+So if I want to write
+this in a vector form,
+[16:09] 这只是一些东西的总和
+this is just going to be the
+sum of something that depends
+[16:13] 在我的时代西西换位。 
+on i times xi xi transpose.
+[16:15] 所以这是在phi和中从1等于g的n到n 
+So this is 1 over phi sum
+from i equal 1 to n of g
+[16:20] 素数xi换位beta h素数xi换位beta xi xi 
+prime prime xi transpose beta
+h prime xi transpose beta xi xi
+[16:28] 转置。 
+transpose.
+[16:30] 好？ 
+OK?
+[16:31] 这就是整个矩阵。 
+And that's for
+the entire matrix.
+[16:32] 在这里，这只是该矩阵的第j k个条目。 
+Here, that was just the j
+kth entries of this matrix.
+[16:38] 您可以检查一下，如果我采用这个矩阵， 
+And you can just check
+that, if I take this matrix,
+[16:41] 第k个条目只是第j个坐标的乘积
+the j kth entry is just the
+product of the jth coordinate
+[16:45] 和的第k个坐标。 
+and the kth coordinate of xi.
+[16:48] 行。 
+All right.
+[16:51] 所以现在我需要重写。 
+So now I need to
+do my rewriting.
+[16:54] 我可以写这个吗？ 
+Can I write this?
+[16:58] 所以我在这里想念东西，对吗？ 
+So I'm missing
+something here, right?
+[17:11] 哦，我知道它从哪里来。 
+Oh, I know where
+it's coming from.
+[17:18]  Mu不是x beta的g素数。 
+Mu is not g prime of x beta.
+[17:22]  Mu是x beta的g逆，对吗？ 
+Mu is g inverse
+of x beta, right?
+[17:27] 因此x素数的导数不是g素数。 
+So the derivative of x
+prime is not g prime prime.
+[17:34] 就像这个家伙
+It's like this guy--
+[17:44] 不，这个1对吧？ 
+no, 1 over this, right?
+[17:51] 是的
+Yeah.
+[18:06] 好？ 
+OK?
+[18:08]  g逆的导数是基因逆的g素数的1。 
+The derivative of g inverse is
+1 over g prime of gene inverse.
+[18:15] 我需要你们，好吗？ 
+I need you guys, OK?
+[18:18] 行。 
+All right.
+[18:18] 所以现在，我将不得不重写它。 
+So now, I'm going to
+have to rewrite this.
+[18:20] 这个家伙仍会消失。 
+This guy is still
+going to go away.
+[18:21] 没关系，但是现在这东西
+It doesn't matter,
+but now this thing
+[18:23] 在xi转置的g的g的g素数上变为h素数
+is becoming h prime over g prime
+of g inverse of xi transpose
+[18:30]  beta，在此相同，在此相同。 
+beta, which is the same
+here, which is the same here.
+[18:52] 好？ 
+OK?
+[18:53] 大家都认可吗？ 
+Everybody approves?
+[18:55] 行。 
+All right.
+[18:55] 好吧，现在，实际上更好了。 
+Well, now, it's
+actually much nicer.
+[18:58]  xi转置beta的g逆是什么？ 
+What is g inverse of
+xi transpose beta?
+[19:05] 好吧，那正是我刚才犯的错误， 
+Well, that was exactly the
+mistake that I just made,
+[19:07] 对？ 
+right?
+[19:08] 是我自己。 
+It's mu i itself.
+[19:10] 所以这个家伙真的是我的头等大事。 
+So this guy is really
+g prime of mu i.
+[19:18] 对不起，只是底部，对不对？ 
+Sorry, just the bottom, right?
+[19:23] 所以现在，我有一些东西看起来像是我的总和
+So now, I have something
+which looks like a sum from i
+[19:32] 等于xi转置beta的h质数的1到n， 
+equal 1 to n of h prime
+of xi transpose beta,
+[19:38] 除以mu phi的g素乘以xi xi转置， 
+divided by g prime of mu i phi
+times xi xi transpose, which
+[19:46] 我当然可以用矩阵形式写成x转置wx， 
+I can certainly write in
+matrix form as x transpose wx,
+[19:54] 其中w与以前完全相同。 
+where w is exactly
+the same as before.
+[20:00] 所以是w1 wn。 
+So it's w1 wn.
+[20:05]  wi是xi转置beta的h素
+And wi is h prime
+of xi transpose beta
+[20:11] 除以mu的g素数。 
+divided by g prime of mu i.
+[20:16] 这里有一个素数phi， 
+There's a prime here
+times phi, which
+[20:20] 和我们在这里一样。 
+is the same that we had here.
+[20:23] 它应该和我们在这里一样
+And it's supposed to be
+the same that we have here,
+[20:26] 除了phi是白色的。 
+except the phi is in white.
+[20:30] 这就是为什么它不存在的原因。 
+That's why it's not there.
+[20:31] 好。 
+OK.
+[20:37] 行？ 
+All right?
+[20:39] 我想这实际上比幻灯片上的要简单。 
+So it's actually simpler than
+what's on the slides, I guess.
+[20:42] 行。 
+All right.
+[20:43] 所以现在，如果您注意，我实际上
+So now, if you pay
+attention, I actually
+[20:46] 永远不要强迫我这个素素出现在这里。 
+never force this g prime
+of mu i to be here.
+[20:49] 实际上，我什至尝试犯一个没有它的错误。 
+Actually, I even tried to
+make a mistake to not have it.
+[20:52] 因此，mu的g素数自然而然地显示出来。 
+And so this g prime of mu i
+shows up completely naturally.
+[20:57] 如果我从这里开始，您将永远不会质疑
+If I had started with this,
+you would have never questioned
+[21:04] 为什么我实际上没有乘以g素数
+why I actually didn't
+multiply by g prime
+[21:07] 并在这里完全被人为除以g素数。 
+and divided by g prime
+completely artificially here.
+[21:09] 它只是自然地出现在重量中。 
+It just shows up
+naturally in the weights.
+[21:12] 但这对我来说更自然
+But it's just more
+natural for me
+[21:14] 先计算一阶导数
+to compute the first
+derivative first
+[21:15] 比二阶导数秒好吗？ 
+than the second
+derivative second, OK?
+[21:17] 所以我们只是反过来做。 
+And so we just did it
+the other way around.
+[21:20] 但是现在，让我们假设我们忘记了一切。 
+But now, let's assume we
+forgot about everything.
+[21:23] 我们有这个。 
+We have this.
+[21:24] 这是自然的写法，x转置wx。 
+This is a natural way of
+writing it, x transpose wx.
+[21:28] 如果我想要一些涉及重量的东西， 
+If I want something that
+involves some weights,
+[21:30] 我必须用除以g的素数来强迫它们
+I have to force them in by
+dividing by g prime of mu i
+[21:34] 因此，将yi n mu i乘以该wi。 
+and therefore, multiplying
+yi n mu i by this wi.
+[21:40] 好？ 
+OK?
+[21:41] 所以，现在，如果我们回顾一下我们实际发现的内容，我们会得到- 
+So now, if we recap what we've
+actually found, we got that--
+[21:49] 让我在这里写下。 
+let me write it here.
+[21:58] 我们也有期望
+We also have that
+the expectation
+[22:02]  βx的H ln的转置xw。 
+of H ln of beta x transpose xw.
+[22:12] 因此，如果我回到那边的迭代中， 
+So if I go back to my
+iterations over there,
+[22:15] 我实际上应该更新beta k加1 
+I should actually
+update beta k plus 1
+[22:20] 等于beta k加反函数。 
+to be equal to beta
+k plus the inverse.
+[22:25] 所以实际上等于beta k的负i 
+So that's actually equal
+to negative i of beta k--
+[22:30] 好吧，是的
+well, yeah.
+[22:33] 我猜那是beta的负数。 
+That's negative i
+of beta, I guess.
+[22:38] 哦，这里的beta显示在w中，对吗？ w取决于beta。 
+Oh, and beta here shows up in
+w, right? w depends on beta.
+[22:42] 这就是beta k。 
+So that's going to be beta k.
+[22:44] 所以让我称它为wk。 
+So let me call it wk.
+[22:49] 这就是H素xi转置beta的对角线
+So that's the diagonal of
+H prime xi transpose beta
+[22:54] 这次，k除以mu ik phi的g素数。 
+k, this time, divided by
+g prime of mu i k phi.
+[23:01] 好？ 
+OK?
+[23:02] 因此，这个beta k通过观察
+So this beta k induces
+a mu by looking
+[23:06] 在xi的g的逆处转置beta k。 
+at g inverse of xi
+transpose beta k.
+[23:11] 行。 
+All right.
+[23:11] 因此mu ik是xi转置beta k的g的逆。 
+So mu i k is g inverse
+of xi transpose beta k.
+[23:21] 这是2-抱歉，这是一个迭代。 
+So that's 2 to the--
+sorry, that's an iteration.
+[23:25] 所以现在，如果我实际上一起写这些东西， 
+And so now, if I actually
+write these things together,
+[23:28] 我得到负x转置wx逆。 
+I get minus x
+transpose wx inverse.
+[23:37] 这就是周。 
+So that's wk.
+[23:41] 然后我在这里有渐变
+And then I have my
+gradient here that I
+[23:45] 必须在k处申请，即x转置wk。 
+have to apply at k,
+which is x transpose wk.
+[23:50] 然后我有y tilde k减去mu tilde k， 
+And then I have y tilde k minus
+mu tilde k, where, again, the
+[23:58] 指数- 
+indices--
+[23:59] 我的意思是上标k很自然。 
+I mean the superscript
+k are pretty natural.
+[24:01]  y波浪号k只是意味着- 
+y tilde k just means that--
+[24:05] 所以这就是。 
+so that's just yi.
+[24:07] 因此，这只是mu的素数的y倍。 
+So that's just yi times
+g prime of mu i k.
+[24:14] 如果我看i座标，mu tilde k是
+And mu tilde k is, if I
+look at the i coordinate,
+[24:21] 这只会是mu我乘以mu我的素数。 
+it's just going to be mu
+i times g prime of mu i.
+[24:31] 好？ 
+OK?
+[24:32] 因此，我只向所有内容添加上标k。 
+So I just add superscripts
+k to everything.
+[24:34] 所以我知道这些东西会实时更新，对吗？ 
+So I know that those things
+get updated real time, right?
+[24:37] 每次迭代一次，我都会获得一个新的beta值， 
+Every time I make one iteration,
+I get a new value for beta,
+[24:41] 我获得了mu的新价值，因此，我
+I get a new value for
+mu, and therefore, I
+[24:43] 获得w的新值。 
+get a new value for w.
+[24:44] 是？ 
+Yes?
+[24:45] 听众：[听不清] Fisher方程[听不清]？ 
+AUDIENCE: [INAUDIBLE] the
+Fisher equation [INAUDIBLE]??
+[24:50]  PHILIPPE RIGOLLET：是的，这很不错。 
+PHILIPPE RIGOLLET: Yeah,
+that's a good point.
+[24:52] 这绝对是一个加号，因为这
+So that's definitely
+a plus, because this
+[24:54] 是一个正半定矩阵。 
+is a positive,
+semi-definite matrix.
+[24:56] 所以这是一个加号。 
+So this is a plus.
+[24:57] 好吧，那可能就是我删除它的地方。 
+And well, that's probably
+where I erased it.
+[25:15] 好。 
+OK.
+[25:16] 让我们看看我在哪里犯了错误。 
+Let's see where I
+made my mistake.
+[25:23] 因此，这里应该有一个减号。 
+So there should be a minus here.
+[25:28] 这里应该有一个负号。 
+There should be a minus here.
+[25:29] 我认为，即使在开始时也应该有一个减号。 
+There should be a minus even
+at the beginning, I believe.
+[25:32] 所以这意味着我是什么-哦，是的。 
+So that means that what
+is my-- oh, yeah, yeah.
+[25:37] 所以你看，当我们回到第一个， 
+So you see, when we
+go back to the first,
+[25:41] 所以我抹掉的基本上是这件事，减去我。 
+so what I erased was basically
+this thing here, yi minus mu i.
+[25:47] 当我取一阶导数时
+And when I took the
+first derivative--
+[25:49] 因此它是关于H素数的导数。 
+so it was the derivative
+with respect to H prime.
+[25:53] 所以关于第二项的导数
+So the derivative with
+respect to the second term--
+[25:55] 我的意思是第二项的导数
+I mean, the derivative
+of the second term
+[25:57] 真的被杀了，因为我们
+was actually killed,
+because we took
+[25:59] 这个家伙的期望。 
+the expectation of this guy.
+[26:00] 但是当我们采用第一项的导数时， 
+But when we took the derivative
+of the first term, which
+[26:03] 是唯一留下的人，这个家伙走了。 
+is the only one that
+stayed, this guy went away.
+[26:05] 但是这个家伙有一个消极的迹象， 
+But there was a negative
+sign from this guy,
+[26:07] 因为那是我们消除负面因素的原因。 
+because that's the thing
+we took the negative off.
+[26:09] 所以当我拿二阶导数时
+So it's really, when I
+take my second derivative,
+[26:12] 我应该到处进行减号。 
+I should carry out the
+minus signs everywhere.
+[26:22] 好？ 
+OK?
+[26:24] 所以只是我忘记了整个过程。 
+So it's just I forget
+this minus throughout.
+[26:31] 您会看到第一项消失了，在第一行。 
+You see the first term went
+away, on the first line there.
+[26:34] 第一个任期消失了，因为
+The first term
+went away, because
+[26:36] 给定xi 0，表示yi的条件期望。 
+the conditional expectation
+of yi, given xi 0.
+[26:38] 然后我在大家面前看到这个减号
+And then I had this minus
+sign in front of everyone,
+[26:41] 我忘了
+and I forgot it.
+[26:44] 行。 
+All right.
+[26:45] 我还有其他错误吗？ 
+Any other mistake that I made?
+[26:51] 我们好吗？ 
+We're good?
+[26:52] 行。 
+All right.
+[26:54] 现在，这就是我们所拥有的xk-- 
+So now, this is what
+we have, that xk--
+[27:08] 抱歉，beta k加1等于beta k 
+sorry, that beta k plus
+1 is equal to beta k
+[27:14] 再加上这个东西。 
+plus this thing.
+[27:15] 好？ 
+OK?
+[27:16] 如果你看这个东西，它会让人想起
+And if you look at this
+thing, it sort of reminds
+[27:19] 我们的东西。 
+us of something.
+[27:20] 记住最小二乘估计量。 
+Remember the least
+squares estimator.
+[27:22] 所以在这里，我要稍微偏离一下
+So here, I'm going to
+actually deviate slightly
+[27:24] 从幻灯片。 
+from the slides.
+[27:25] 我会告诉你如何。 
+And I will tell you how.
+[27:27] 幻灯片采用beta k并放入
+The slides take
+beta k and put it
+[27:30] 在这里，这是一种方法。 
+in here, which is one way to go.
+[27:33] 并将其视为最大的最小二乘解决方案。 
+And just think of this as a
+big least square solution.
+[27:36] 或者您可以保留beta k，求解另一个最小二乘法， 
+Or you can keep the beta k,
+solve another least squares,
+[27:41] 然后将其添加到您拥有的beta k中。 
+and then add it to the
+beta k that you have.
+[27:43] 这是同一件事。 
+It's the same thing.
+[27:44] 所以我将采取不同的路线。 
+So I will take the
+different routes.
+[27:45] 所以您有两个选择，好吗？ 
+So you have the two
+options, all right?
+[28:07] 好。 
+OK.
+[28:09] 所以当我们做最小二乘时
+So when we did the
+least squares--
+[28:10] 所以括号最小二乘
+so parenthesis least squares--
+[28:19] 我们的y等于x beta加epsilon。 
+we had y equals x
+beta plus epsilon.
+[28:23] 我们的估计器beta帽子是x转置的
+And our estimator beta
+hat was x transpose
+[28:27]  x逆x转置y，对不对？ 
+x inverse x transpose y, right?
+[28:33] 那只是解决一阶条件， 
+And that was just solving
+the first order condition,
+[28:36] 这就是我们所发现的。 
+and that's what we found.
+[28:38] 现在来看这个- 
+Now look at this--
+[28:40]  x反置转折x逆，x转置转折某物。 
+x transpose bleep x inverse,
+x transpose bleep something.
+[28:46] 好？ 
+OK?
+[28:47] 因此，如果这与左面板相同， 
+So this looks like, if this
+is the same as the left board,
+[28:58] 如果wk等于单位矩阵，则意味着
+if wk is equal to the
+identity matrix, meaning we
+[29:04] 没看到，y等于y tilde k减去mu tilde k-- 
+don't see it, and y is equal
+to y tilde k minus mu tilde k--
+[29:13] 这些相似之处，就是我们挤进去的事实- 
+so those similarities, the
+fact that we just squeeze in--
+[29:16] 因此响应变量不同
+so the fact that the response
+variable is different
+[29:19] 真的不是问题。 
+is really not a problem.
+[29:20] 我们只需要假装
+We just have to
+pretend that this
+[29:22] 等于y tilde减去mu tilde。 
+is equal to y tilde
+minus mu tilde.
+[29:24] 我的意思是，那只是最小的平方。 
+I mean, that's just
+the least squares.
+[29:26] 当您调用对您而言平方最小的软件时， 
+When you call a software that
+does least squares for you,
+[29:29] 你只是告诉它y是什么，你告诉x是， 
+you just tell it what y
+is, you tell it with x is,
+[29:31] 并进行计算。 
+and it makes the computation.
+[29:32] 所以你只要撒谎，说出所有实际的
+So you would just lie to
+it and say all the actual y
+[29:35] 我要的是这个东西。 
+I want is this thing.
+[29:37] 然后我们需要以某种方式合并这些权重。 
+And then we need to somehow
+incorporate those weights.
+[29:42] 问题是，这样做容易吗？ 
+And so the question
+is, is that easy to do?
+[29:44] 答案是肯定的，因为这是一种设置
+And the answer is yes,
+because this is a setup where
+[29:48] 这实际上会出现。 
+this would actually arise.
+[29:50] 因此，其中之一是非常具体的
+So one of the things that's
+very specific to what
+[29:52] 我们在这里做了，用最小二乘，我们假设
+we did here and with
+least squares, we assume
+[29:54] 那个ε，当我们至少做了推断时， 
+that epsilon, when we did
+at least the inference,
+[29:58] 我们假设epsilon正常0 
+we assumed that
+epsilon was normal 0
+[30:01] 协方差矩阵就是恒等，对吧？ 
+and the covariance matrix
+was the identity, right?
+[30:04] 如果协方差矩阵不是恒等怎么办？ 
+What if the covariance
+matrix is not the identity?
+[30:07] 如果协方差矩阵不是恒等式， 
+If the covariance matrix
+is not the identity,
+[30:09] 那么你最大的可能性就是不完全
+then your maximum
+likelihood is not exactly
+[30:12] 这些最小二乘。 
+these least squares.
+[30:13] 如果协方差矩阵是任何矩阵
+If the covariance
+matrix is any matrix
+[30:15] 您还有另一种解决方案，其中涉及相反
+you have another solution,
+which involves the inverse
+[30:18] 您拥有的协方差矩阵
+of the covariance
+matrix that you have,
+[30:20] 但是如果您的协方差矩阵特别是对角线， 
+but if your covariance matrix,
+in particular, is diagonal--
+[30:24] 这意味着您的每次观察
+which would mean that
+each observation that you
+[30:26] 进入这个方程组仍然是独立的， 
+get in this system of
+equations is still independent,
+[30:30] 但是方差可以从一行改变
+but the variances can
+change from one line
+[30:32] 到另一个，从一个观察到另一个- 
+to another, from one
+observation to another--
+[30:35] 那就叫做异方差
+then it's called
+heteroscedastic.
+[30:37]  “杂”是指“不一样”。 
+"Hetero" means "not the same."
+[30:39]  “接班人”是“规模”。 
+"Scedastic" is "scale."
+[30:41] 还有一个异方差的情况， 
+And a heteroscedastic
+case, you would have
+[30:45] 有点不同。 
+something slightly different.
+[30:47] 而且，如果您知道
+And it makes sense
+that, if you know
+[30:49] 某些观察结果的变异远小于其他观察结果， 
+that some observations have
+much less variance than others,
+[30:52] 您可能想给他们更多的重量。 
+you might want to
+give them more weight.
+[30:54] 好？ 
+OK?
+[30:55] 因此，如果您考虑平时的绘画， 
+So if you think about
+your usual drawing,
+[31:02] 也许你有这样的事情， 
+and maybe you have
+something like this,
+[31:07] 但实际的路线是
+but the actual line is really--
+[31:08] 好，假设您也有这个人，所以这里只有几个。 
+OK, let's say you have this guy
+as well, so just a few here.
+[31:12] 如果您开始画图，如果您最小二乘， 
+If you start drawing this
+thing, if you do least squares,
+[31:16] 你会看到一些看起来
+you're going to see
+something that looks
+[31:18] 在这些点上是这样的。 
+like this on those points.
+[31:20] 但是现在，如果我告诉你，在这一方面， 
+But now, if I tell you
+that, on this side,
+[31:22] 方差等于100，表示这些点是
+the variance is equal to 100,
+meaning that those points are
+[31:26] 实际上与真正的相去甚远
+actually really far
+from the true one,
+[31:29] 在这一边，方差等于1 
+and here on this side, the
+variance is equal to 1,
+[31:31] 表示这些点实际上接近直线
+meaning that those points are
+actually close to the line
+[31:33] 您在寻找，那么您应该适合的生产线
+you're looking for, then the
+line you should be fitting
+[31:36] 可能是这个家伙，意思是不要
+is probably this
+guy, meaning do not
+[31:38] 相信那些差异很大的人。 
+trust the guys that
+have a lot of variance.
+[31:42] 因此，您需要以某种方式将其合并。 
+And so you need somehow
+to incorporate that.
+[31:44] 如果您知道那些事情的差异更大
+If you know that those things
+have much more variance
+[31:46] 比这些家伙，你想加权。 
+than these guys, you
+want to weight this.
+[31:49] 而您的操作方式是使用加权最小二乘。 
+And the way you do it is by
+using weighted least squares.
+[31:52] 好。 
+OK.
+[31:53] 所以我们将在括号中打开
+So we're going to
+open in parentheses
+[31:54] 在加权最小二乘上。 
+on weighted least squares.
+[31:55] 这不是一个基本的统计问题， 
+It's not a fundamental
+statistical question,
+[31:57] 但这对我们很有用，因为这正是
+but it's useful for us,
+because this is exactly
+[32:00] 会吐出什么
+what's going to spit out--
+[32:01] 矩阵w在那里的东西看起来像这样。 
+something that looks like this
+with this matrix w in there.
+[32:05] 好。 
+OK.
+[32:05] 因此，让我们回到过去。 
+So let's go back in
+time for a second.
+[32:09] 假设我们仍在讨论最小二乘回归。 
+Assume we're still covering
+least squares regression.
+[32:12] 所以现在，我假设y是x beta加epsilon， 
+So now, I'm going to assume
+that y is x beta plus epsilon,
+[32:19] 但是这次，epsilon是多元高斯，例如
+but this time, epsilon is a
+multivariate Gaussian in, say,
+[32:23]  p维度，平均值为0。 
+p dimensions with mean 0.
+[32:25] 和协方差矩阵，我将其写为w逆， 
+And covariance matrix, I
+will write it as w inverse,
+[32:29] 因为w将成为要显示的那个。 
+because w is going to be the
+one that's going to show up.
+[32:32] 好？ 
+OK?
+[32:34] 因此，这就是所谓的异方差。 
+So this is the so-called
+heteroscedastic.
+[32:37] 就是这样拼写的，还有另一个名字
+That's how it's spelled,
+and yet another name
+[32:43] 您可以为您的足球队或无伴奏合奏组选择。 
+that you can pick for your
+soccer team or a capella group.
+[32:47] 行。 
+All right.
+[32:48] 因此，在这种情况下，最大可能性- 
+So the maximum
+likelihood, in this case--
+[32:52] 所以实际上，让我们计算最大可能性
+so actually, let's compute
+the maximum likelihood
+[32:54] 这个问题吧？ 
+for this problem, right?
+[32:55] 那么对数似然是什么？ 
+So the log likelihood is what?
+[32:58] 好吧，我们将拥有一个可以告诉我们的术语
+Well, we're going to have
+the term that tells us
+[33:02] 会的-好的。 
+that it's going to be-- so OK.
+[33:04] 多元高斯的密度是多少？ 
+What is the density of
+a multivariate Gaussian?
+[33:10] 所以它将是多元高斯
+So it's going to be a
+multivariate Gaussian
+[33:12] 在p维度上，具有均值x beta和协方差矩阵w 
+in p dimension with mean x
+beta and covariance matrix w
+[33:17] 相反，对不对？ 
+inverse, right?
+[33:19] 这就是我们想要的密度。 
+So that's the
+density that we want.
+[33:20] 好吧，它的形式是1个W倒数的行列式
+Well, it's of the form 1 over
+determinant of w inverse times
+[33:30]  2 pi至p / 2。 
+2 pi to the p/2.
+[33:35] 好？ 
+OK?
+[33:37] 时间是指数，现在，我的是x减去x beta 
+And times exponential, and now,
+what I have is x minus x beta
+[33:47] 转置w--这就是w逆的逆- 
+transpose w-- so that's
+the inverse of w inverse--
+[33:51]  x减去x beta除以2 
+x minus x beta divided by 2.
+[33:58] 好？ 
+OK?
+[33:59] 所以这是x减去mu转置sigma逆x 
+So this is x minus mu
+transpose sigma inverse x
+[34:03] 减去亩除以2。 
+minus mu divided by 2.
+[34:04] 如果您要进行健全性检查，只需假设sigma- 
+And if you want a sanity
+check, just assume that sigma--
+[34:10] 是啊
+yeah?
+[34:11] 听众：是x减去x beta还是y？ 
+AUDIENCE: Is it x
+minus x beta or y?
+[34:15]  PHILIPPE RIGOLLET：嗯，您知道的，如果您想让它成为y， 
+PHILIPPE RIGOLLET: Well, you
+know, if you want this to be y,
+[34:18] 那是y，对吧？ 
+then this is y, right?
+[34:21] 当然。 
+Sure.
+[34:22] 是的，也许它不那么令人困惑。 
+Yeah, maybe it's less confusing.
+[34:24] 因此，如果您应该使p等于1，那意味着什么？ 
+So if you should do p is equal
+to 1, then what does it mean?
+[34:29] 这意味着您在这里有这个意思。 
+It means that you
+have this mean here.
+[34:31] 因此，让我们忘记它是什么。 
+So let's forget
+about what it is.
+[34:32] 但是这个家伙将只有1 sigma平方，对吗？ 
+But this guy is going to be
+just 1 sigma squared, right?
+[34:35] 因此，您在这里看到的是sigma平方的平方。 
+So what you see here is the
+inverse of sigma squared.
+[34:38] 因此，这将是2比2平方的平方
+So that's going to be 2 over 2
+sigma squared, like we usually
+[34:41] 看见。 
+see it.
+[34:42]  w逆的行列式为
+The determinant of
+w inverse is just
+[34:44]  1的条目的乘积
+the product of
+the entry of the 1
+[34:45]  1矩阵，即sigma平方。 
+by 1 matrix, which
+is just sigma square.
+[34:53] 好？ 
+OK?
+[34:53] 所以实际上应该是
+So that should be actually--
+[34:58] 是的，不，实际上是-是的，是sigma平方。 
+yeah, no, that's actually--
+yeah, that's sigma square.
+[35:01] 然后我有这个2 pi。 
+And then I have this 2 pi.
+[35:02] 这样的平方根，因为p等于1， 
+So square root of this,
+because p is equal to 1,
+[35:04] 我得到sigma平方根2 pi，这是
+I get sigma square
+root 2 pi, which is
+[35:06] 我得到的归一化。 
+the normalization that I get.
+[35:07] 这无关紧要，因为， 
+This is not going
+to matter, because,
+[35:09] 当我看对数似然
+when I look at
+the log likelihood
+[35:12] 作为beta的函数- 
+as a function of beta--
+[35:15] 所以我假设w是已知的
+so I'm assuming
+that w is known--
+[35:17] 我得到的是恒定的东西。 
+what I get is something
+which is a constant.
+[35:19] 所以它是负p负n倍p / 2倍
+So it's minus p minus
+n times p/2 times
+[35:25] 将w倒数2 pi记录下来。 
+log that w inverse times 2 pi.
+[35:31] 好？ 
+OK?
+[35:31] 因此，这将是一个常数。 
+So this is just going
+to be a constant.
+[35:33] 什么时候做最大可能性都没有关系。 
+It won't matter when I do
+the maximum likelihood.
+[35:35] 然后我要吃什么？ 
+And then I'm going to have what?
+[35:36] 我要加上y的1/2减去x beta的转置w 
+I'm going to have plus 1/2
+of y minus x beta transpose w
+[35:44]  y减去x beta。 
+y minus x beta.
+[35:49] 所以，如果我想充分利用这个人， 
+So if I want to take the
+maximum of this guy--
+[35:53] 对不起，这是负号。 
+sorry, there's a minus here.
+[35:56] 所以，如果我想充分利用这个人， 
+So if I want to take
+the maximum of this guy,
+[35:58] 我将不得不花最少的钱。 
+I'm going to have to take
+the minimum of this thing.
+[36:01] 而且，如果采用导数，这件事的最小值
+And the minimum of this thing,
+if you take the derivative,
+[36:04] 你会看到- 
+you get to see--
+[36:05] 这就是我们所拥有的，对不对？ 
+so that's what we have, right?
+[36:07] 我们需要计算y的最小值
+We need to compute
+the minimum of y
+[36:09] 减x Beta转置w减y减x beta。 
+minus x beta transpose
+w minus y minus x beta.
+[36:13] 而您得到的解决方案- 
+And the solution that you get--
+[36:16] 我的意思是，您实际上可以自己检查一下。 
+I mean, you can actually
+check this for yourself.
+[36:20] 您可以通过以下操作来查看此情况。 
+The way you can see this
+is by doing the following.
+[36:24] 如果您懒惰并且不想重做整个事情， 
+If you're lazy and you don't
+want to redo the entire thing--
+[36:27] 也许我应该保留那个家伙。 
+maybe I should keep that guy.
+[36:36]  W是对角线的，对吗？ 
+W is diagonal, right?
+[36:39] 我将假设w逆是对角线， 
+I'm going to assume that
+so w inverse is diagonal,
+[36:42] 我将假设方差不等于0 
+and I'm going to assume that
+no variance is equal to 0
+[36:45] 没有方差等于无穷大
+and no variance is
+equal to infinity,
+[36:47] 这样w的逆和w都只有正项
+so that both w inverse and
+w have only positive entries
+[36:52] 在对角线上。 
+on the diagonal.
+[36:53] 行？ 
+All right?
+[36:53] 所以我可以特别谈谈平方根
+So in particular, I can
+talk about the square root
+[36:55] 的w，它只是矩阵，对角矩阵， 
+of w, which is just the
+matrix, the diagonal matrix,
+[36:58] 平方根在对角线上。 
+with the square roots
+on the diagonal.
+[37:00] 好？ 
+OK?
+[37:01] 所以我想最小化beta y减去x beta转置w 
+And so I want to minimize in
+beta y minus x beta transpose w
+[37:08]  y减去x beta。 
+y minus x beta.
+[37:11] 所以我要写w作为平方根
+So I'm going to write
+w as square root
+[37:13]  w的平方根乘以w的平方根，因为w-- 
+of w times square root of
+w, which I can, because w--
+[37:17] 这只是最简单的事情，对吧？ 
+and it's just the
+simplest thing, right?
+[37:19] 如果w是w1 wn，那是我的w，则w的平方根
+If w is w1 wn, so that's my
+w, then the square root of w
+[37:28] 只是wn的w1平方根的平方根， 
+is just square root of
+w1 square root of wn,
+[37:31] 然后0在其他位置。 
+and then 0 is elsewhere.
+[37:33] 好？ 
+OK?
+[37:35] 所以这两个矩阵的乘积
+So the product of
+those two matrices
+[37:37] 绝对给我我想要的东西
+gives me definitely
+back what I want,
+[37:38] 这是通常的矩阵乘积。 
+and that's the usual
+matrix product.
+[37:41] 现在，我要做的是将一侧推
+Now, what I'm going to do is I'm
+going to push one on one side
+[37:43] 然后将另一只推向另一侧。 
+and push the other
+one on the other side.
+[37:45] 所以这让我知道
+So that gives me
+that this is really
+[37:47] 超过beta的最小值
+the minimum over beta of--
+[37:49] 好吧，这是我的转置， 
+well, here I have
+this transposed,
+[37:50] 所以我必须把它放在另一边。 
+so I have to put it
+on the other side.
+[37:52]  w显然是对称的，因此w的平方根也是对称的。 
+w is clearly symmetric and
+so is square root of w.
+[37:55] 因此，移调无关紧要。 
+So the transpose doesn't matter.
+[37:57] 所以我剩下的是平方根
+And so what I'm left
+with is square root
+[37:59]  wx beta的wy减去平方根的转置，然后乘以
+of wy minus square root of wx
+beta transpose, and then times
+[38:06] 本身。 
+itself.
+[38:07] 这就是平方根wy减去平方根w-- 
+So that's square root
+wy minus square root w--
+[38:15] 哦，我没有足够的空间- 
+oh, I don't have enough space--
+[38:17]  x Beta。 
+x beta.
+[38:20] 好的，到此为止。 
+OK, and that stops here.
+[38:23] 但是，这与我们之前所做的一样。 
+But this is the same thing
+that we've been doing before.
+[38:25] 这是新的。 
+This is a new y.
+[38:26] 我们称它为“素数”。 
+Let's call it y prime.
+[38:28] 这是一个新的x。 
+This is a new x.
+[38:28] 我们称之为x素数。 
+Let's call it x prime.
+[38:31] 现在，这只是最小二乘估计器
+And now, this is just the
+least squares estimator
+[38:33] 与响应y素数和设计矩阵x素数相关联。 
+associated to a response y prime
+and a design matrix x prime.
+[38:39] 所以我知道解决方案是x素数转置x素数逆
+So I know that the solution is x
+prime transpose x prime inverse
+[38:47]  x素数转置y素数。 
+x prime transpose y prime.
+[38:53] 现在，我将再次替换
+And now, I'm just going
+to substitute again
+[38:55] 我的x素数在x方面是什么以及什么
+what my x prime is in
+terms of x and what
+[38:58] 我的y素数是y。 
+my y prime is in terms of y.
+[39:01] 那正好给了我x平方根w平方根w 
+And that gives me exactly x
+square root w square root w
+[39:06]  x逆。 
+x inverse.
+[39:11] 然后我给这个人x转置平方根w。 
+And then I have x transpose
+square root w for this guy.
+[39:17] 然后我为那个家伙开了平方根。 
+And then I have square
+root wy for that guy.
+[39:21] 这正是我想要的。 
+And that's exactly
+what I wanted.
+[39:23] 我剩下x转置wx逆x转置wy。 
+I'm left with x transpose
+wx inverse x transpose wy.
+[39:34] 好？ 
+OK?
+[39:38] 所以这是一种考虑简单的方法
+So that's a simple way
+to take into account
+[39:41] 我们以前的w 
+the w that we had before.
+[39:44] 实际上，您可以使用任何正矩阵
+And you could actually do it
+with any matrix that's positive
+[39:47] 半定的，因为您实际上可以
+semi-definite, because
+you can actually
+[39:48] 谈论那些矩阵的平方根。 
+talk about the square
+root of those matrices.
+[39:52] 它只是矩阵的平方根
+And it's just the square root
+of a matrix is just a matrix
+[39:54] 这样，当您将其自身相乘时， 
+such that, when you
+multiply it by itself,
+[39:58] 它为您提供了原始矩阵。 
+it gives you the
+original matrix.
+[40:00] 好？ 
+OK?
+[40:03] 所以这只是捷径
+So here, that was
+just a shortcut
+[40:06] 就是说，好吧，也许我
+that consisted in
+saying, OK, maybe I
+[40:08] 不想重新计算此量的梯度， 
+don't want to recompute the
+gradient of this quantity,
+[40:12] 将其设置为0，然后查看应使用的beta帽子。 
+set it equal to 0, and see
+what beta hat had should be.
+[40:17] 相反，我将假设我已经
+Instead, I am going to
+assume that I already
+[40:19] 知道，如果我没有w， 
+know that, if I
+did not have the w,
+[40:23] 我会解决的。 
+I would know how to solve it.
+[40:24] 而这正是我所做的。 
+And that's exactly what I did.
+[40:25] 我说，嗯，我知道这是
+I said, well, I
+know that this is
+[40:28] 看起来像这样的最小的东西
+the minimum of something
+that looks like this,
+[40:30] 当我有素数时
+when I have the primes.
+[40:32] 然后我只是将我的w换回那里。 
+And then I just substitute
+back my w in there.
+[40:36] 行。 
+All right.
+[40:36] 所以这只是懒惰的计算。 
+So that' just the
+lazy computation.
+[40:38] 但是再次，如果你不喜欢它，你
+But again, if you
+don't like it, you
+[40:40] 总是可以接受这个家伙的梯度。 
+can always take the
+gradient of this guy.
+[40:42] 是？ 
+Yes?
+[40:42] 听众：为什么写解决方案
+AUDIENCE: Why is
+the solution written
+[40:44] 在幻灯片不同？ 
+in the slides different?
+[40:45]  PHILIPPE RIGOLLET：因为有一个错误。 
+PHILIPPE RIGOLLET:
+Because there's a mistake.
+[40:49] 是的，幻灯片上有错误。 
+Yeah, there's a
+mistake on the slides.
+[40:58] 我是怎么做的？ 
+How did I make that one?
+[40:59] 我实际上正在尝试将其解析。 
+I'm actually trying
+to parse it back.
+[41:11] 我的意思是，这显然是错误的，对吧？ 
+I mean, it's clearly
+wrong, right?
+[41:13] 哦，不，不是。 
+Oh, no, it's not.
+[41:24] 不，是。 
+No, it is.
+[41:27] 因此，这显然不是错误的。 
+So it's not clearly wrong.
+[41:32] 实际上，这显然是错误的。 
+Actually, it is clearly wrong.
+[41:34] 因为如果我把身份放在这里， 
+Because if I put
+the identity here,
+[41:37] 那些还是联想，对吗？ 
+those are still
+associative, right?
+[41:39] 因此，该产品实际上不兼容。 
+So this product is
+actually not compatible.
+[41:42] 错了，但这只是多余的一件事
+So it's wrong, but there's
+just this extra thing
+[41:44] 我可能从某个地方复制粘贴了。 
+that I probably copy-pasted
+from some place.
+[41:46] 由于这是我最新的幻灯片之一， 
+Since this is one
+of my latest slide,
+[41:48] 我只用白色上色。 
+I'll just color it in white.
+[41:51] 但是，是的，很抱歉，有一个错误-这个括号不在这里。 
+But yeah, sorry, there's a mis--
+this parenthesis is not here.
+[41:54] 谢谢。 
+Thank you.
+[41:55] 听众：[听不清]。 
+AUDIENCE: [INAUDIBLE].
+[41:56]  PHILIPPE RIGOLLET：是的。 
+PHILIPPE RIGOLLET: Yeah.
+[42:01] 好？ 
+OK?
+[42:03] 听众：那么为什么不平方根[听不清]？ 
+AUDIENCE: So why not
+square root [INAUDIBLE]??
+[42:06]  PHILIPPE RIGOLLET：因为我有两个人。 
+PHILIPPE RIGOLLET: Because
+I have two of them.
+[42:08] 我有一个来自这里的x素数的家伙。 
+I have one that comes from the
+x prime that's here, this guy.
+[42:11] 然后我有一个来自这个家伙的人。 
+And then I have one that
+comes from this guy here.
+[42:15] 好，所以解决方案- 
+OK, so the solution--
+[42:17] 让我们在一个清晰易读的地方写它- 
+let's write it in some place
+that's actually legible--
+[42:25] 这是对这件事的纠正
+which is the correction
+for this thing
+[42:27] 是x转置wx逆x转置wy。 
+is x transpose wx
+inverse x transpose wy.
+[42:34] 好？ 
+OK?
+[42:35] 因此，您只需要挤压其中的w。 
+So you just squeeze
+in this w in there.
+[42:38] 这正是我们以前的经历， 
+And that's exactly
+what we had before,
+[42:41]  x转置wx逆x转置w y。 
+x transpose wx inverse
+x transpose w some y.
+[42:47] 好？ 
+OK?
+[42:49] 我声称这是例行实施的。 
+And what I claim is that this
+is routinely implemented.
+[42:53] 可以想象，异方差线性
+As you can imagine,
+heteroscedastic linear
+[42:55] 回归是很常见的事情。 
+regression is something
+that's very common.
+[42:57] 因此，每次您使用最小二乘公式时， 
+So every time you a
+least squares formula,
+[43:00] 您还可以增加一些权重。 
+you also have a way to
+put in some weights.
+[43:02] 您不必放对角线的重量， 
+You don't have to
+put diagonal weights,
+[43:04] 但是这就是我们所需要的。 
+but here, that's all we need.
+[43:08] 所以在幻灯片上，我再次选择了beta k， 
+So here on the slides,
+again, I took the beta k,
+[43:12] 我把它放在那里，所以我只有最小的平方
+and I put it in there, so that
+I have only one least square
+[43:15] 解决方案制定。 
+solution to formulate.
+[43:17] 但是，让我们稍微做些不同。 
+But let's do it
+slightly differently.
+[43:19] 我现在要在这里做的是
+What I'm going to
+do here now is I'm
+[43:21] 要说的是，让我们将其填充到最小二乘方格。 
+going to say, OK, let's feed
+it to some least squares.
+[43:24] 因此，让我们对响应进行加权最小二乘， 
+So let's do weighted least
+squares on a response,
+[43:32]  y是y tilde k减去mu tilde k，设计矩阵是
+y being y tilde k minus mu tilde
+k, and design matrix being,
+[43:44] 好吧，只是x本身。 
+well, just the x itself.
+[43:47] 因此，这不会改变。 
+So that doesn't change.
+[43:50] 权重-权重是什么？ 
+And the weights-- so
+the weights are what?
+[44:00] 权重是我在这里拥有的重量。 
+The weights are the
+wk that I had here.
+[44:04] 所以wki是xi转置beta的h素
+So wki is h prime
+of xi transpose beta
+[44:15]  k在时间phi乘以mu i的g素数。 
+k divided by g prime of
+mu i at time k times phi.
+[44:28] 好的，如果我解决了，这会吐出一些东西
+OK, and so this, if I solve
+it, will spit out something
+[44:32] 我将称之为解决方案。 
+that I will call a solution.
+[44:33] 我称它为k + 1。 
+I will call it u hat k plus 1.
+[44:41] 并得到beta hat k加1 
+And to get beta
+hat k plus 1, all I
+[44:44] 需要做的是做beta k加u hat k加1-- 
+need to do is to do beta
+k plus u hat k plus 1--
+[44:53] 抱歉，测试版-是的。 
+sorry, beta-- yeah.
+[44:55] 好？ 
+OK?
+[44:58] 那是因为-所以在这里还不清楚。 
+And that's because-- so
+here, that's not clear.
+[45:01] 但是我从那里开始，还记得吗？ 
+But I started from
+there, remember?
+[45:04] 我从这里的那个家伙开始。 
+I started from this guy here.
+[45:08] 所以我只是求解最小二乘，最小加权
+So I'm just solving a least
+squares, a weighted least
+[45:10] 广场，这将给我这东西。 
+square that's going
+to give me this thing.
+[45:12] 那就是我所说的k + 1。 
+That's what I called
+u hat k plus 1.
+[45:15] 然后将其添加到beta k，这给我beta k减1。 
+And then I add it to beta k, and
+that gives me beta k minus 1.
+[45:18] 所以我只是中间步骤， 
+So I just have this
+intermediate step,
+[45:21] 在幻灯片中将其删除。 
+which is removed in the slides.
+[45:25] 好？ 
+OK?
+[45:28] 因此，您可以重复直到收敛。 
+So then you can repeat
+until convergence.
+[45:29] 重复直到收敛是什么意思？ 
+What does it mean to
+repeat until convergence?
+[45:35] 听众：[听不清]？ 
+AUDIENCE: [INAUDIBLE]?
+[45:37]  PHILIPPE RIGOLLET：好的，是的。 
+PHILIPPE RIGOLLET:
+Yeah, exactly.
+[45:38] 因此，您只需设置一些阈值，然后说， 
+So you just set some
+threshold and you say,
+[45:41] 我向你保证，这将收敛，对吗？ 
+I promise you that this
+will converge, right?
+[45:43] 所以您知道在某个时候，您将在那里。 
+So you know that at some point,
+you're going to be there.
+[45:46] 你要去那里，但是你永远不会
+You're going to go
+there, but you're never
+[45:48] 将完全在那里。 
+going to be exactly there.
+[45:49] 因此，您只是说，好的，我希望我的数据具有这种准确性。 
+And so you just say, OK, I
+want this accuracy on my data.
+[45:52] 实际上，这台机器有些坚固。 
+Actually, the machine
+is a little strong.
+[45:55] 特别是如果您有10个观察开始时， 
+Especially if you have 10
+observations to start with,
+[45:57] 你知道你将要发生的事情
+you know you're going to
+have something that's going
+[46:01] 有一些统计错误。 
+to have some statistical error.
+[46:03] 因此，这实际上应该指导您进行哪种错误
+So that should actually guide
+you into what kind of error
+[46:05] 你想做。 
+you want to be making.
+[46:06] 例如，好的经验法则
+So for example, a
+good rule of thumb
+[46:08] 如果你有n个观察
+is that if you have
+n observations,
+[46:11] 你只要拿些东西- 
+you just take some within--
+[46:13] 如果您想要beta之间的L2距离- 
+if you want the L2
+distance between the beta--
+[46:17] 两个连续的beta小于1 / n， 
+the two consecutive beta
+to be less than 1/n,
+[46:19] 你应该足够好
+you should be good enough.
+[46:20] 不必一定是机器精度。 
+It doesn't have to be
+that machine precision.
+[46:24] 因此很明显，我们如何做到这一点，对吗？ 
+And so it's clear how
+we do this, right?
+[46:27] 所以在这里，我只需要维护一堆东西，对不对？ 
+So here, I just have to maintain
+a bunch of things, right?
+[46:30] 所以请记住，当我想重新计算时-在每一步中
+So remember, when I want to
+recompute-- at every step,
+[46:33] 我必须重新计算一堆东西。 
+I have to recompute
+a bunch of things.
+[46:35] 所以我必须重新计算权重。 
+So I have to
+recompute the weights.
+[46:36] 但是如果我想重新计算权重，不仅
+But if I want to recompute
+the weights, not only do
+[46:39] 我需要先前的迭代，但是我
+I need to previous
+iterate, but I
+[46:40] 需要知道之前的迭代如何影响我的收入。 
+need to know how the previous
+iterate impacts my means.
+[46:46] 所以在每一步中，我必须重新计算mu ik 
+So at each step, I have
+to recalculate mu i k
+[46:50] 通过做g素数，率？ 
+by doing g prime, rate?
+[46:53] 记得mu ik只是xi转置beta k的g逆， 
+Remember mu i k was just g
+inverse of xi transpose beta k,
+[47:02] 对？ 
+right?
+[47:03] 所以我必须重新计算。 
+So I have to recompute that.
+[47:05] 然后我用它来计算我的体重。 
+And then I use this
+to compute my weights.
+[47:09] 我也用这个来计算我的y，对不对？ 
+I also use this to
+compute my y, right?
+[47:15] 所以我的y也取决于mu i k的g素数。 
+so my y depends also
+on g prime of mu i k.
+[47:20] 我将其提供给加权最小二乘引擎。 
+I feed that to my weighted
+least squares engine.
+[47:24] 它吐出了u k，我添加到了先前的beta k。 
+It spits out the u hat k, that
+I add to my previous beta k.
+[47:28] 这给了我新的beta k plus 1。 
+And that gives me my
+new beta k plus 1.
+[47:33] 好。 
+OK.
+[47:33] 所以这是伪代码
+So here's the
+pseudocode, if you want
+[47:35] 需要一些时间来解析它。 
+to take some time to parse it.
+[47:40] 行。 
+All right.
+[47:41] 因此，这里的窍门并不多。 
+So here again, the
+trick is not much.
+[47:43] 只是说，如果您不想实施费舍尔
+It's just saying, if you don't
+feel like implementing Fisher
+[47:49] 在每个步骤中得分或反转您的黑森州， 
+scoring or inverting your
+Hessian at every step,
+[47:52] 那么加权最小二乘实际上就是
+then a weighted least
+squares is actually going
+[47:54] 为您自动完成。 
+to do it for you automatically.
+[47:56] 行。 
+All right.
+[47:56] 那只是一个数字技巧。 
+Then that's just
+a numerical trick.
+[47:58] 真的没有任何统计数据
+There's nothing really
+statistical about this,
+[48:00] 除了这需要为每个解决方案
+except the fact that this
+calls for a solution for each
+[48:04] 这一步使我们想起平方和， 
+of the step reminded us
+of sum of the squares,
+[48:09] 除了有一些额外的重量。 
+except that there was
+some extra weights.
+[48:14] 好。 
+OK.
+[48:14] 总结一下，我们当然需要知道
+So to conclude, we'll
+need to know, of course,
+[48:18]  xy，链接功能。 
+xy, the link function.
+[48:22] 为什么需要方差函数？ 
+Why do we need the
+variance function?
+[48:29] 我不确定我们是否真的需要方差函数。 
+I'm not sure we actually
+need the variance function.
+[48:33] 不，我不知道为什么这么说。 
+No, I don't know why I say that.
+[48:36] 您需要phi，而不是方差函数。 
+You need phi, not the
+variance function.
+[48:39] 那么，您实际上从哪里开始呢？ 
+So where do you start
+actually, right?
+[48:41] 很明显，如果您非常接近解决方案， 
+So clearly, if you start
+very close to your solution,
+[48:44] 您实际上会做得更好。 
+you're actually going
+to do much better.
+[48:46] 一种很好的开始方式- 
+And one good way to start--
+[48:48] 因此对于Beta版本身，尚不清楚会是什么。 
+so for the beta itself, it's
+not clear what it's going to be.
+[48:51] 但是你实际上可以得到一个好主意
+But you can actually
+get a good idea
+[48:53] 只需了解mu是什么，就可以确定beta是什么。 
+of what beta is by just having
+a good idea of what mu is.
+[48:57] 因为mu是xi的g逆转置beta。 
+Because mu is g inverse
+of xi transpose beta.
+[49:01] 因此，您可以尝试
+And so what you
+could do is to try
+[49:04] 将mu设置为您拥有的实际观测值， 
+to set mu to be the actual
+observations that you have,
+[49:07] 因为那是你的最佳猜测
+because that's the
+best guess that you
+[49:09] 有他们的期望值。 
+have for their expected value.
+[49:11] 然后你说，好吧，一旦我有了我的亩， 
+And then you just say,
+OK, once I have my mu,
+[49:14] 我知道我的亩是这个东西的功能。 
+I know that my mu is a
+function of this thing.
+[49:17] 所以我可以用你的最小二乘写g并解决
+So I can write g of mu and solve
+it, using your least squares
+[49:21] 估算员，对不对？ 
+estimator, right?
+[49:22] 所以mu的g的形式为x beta。 
+So g of mu is of
+the form x beta.
+[49:28] 因此，您只需解决-一旦有了亩， 
+So you just solve for--
+once you have your mu,
+[49:33] 您将其传递给g，然后求解beta 
+you pass it through g, and
+then you solve for the beta
+[49:36] 你要的那个。 
+that you want.
+[49:37] 然后就是您用来初始化的Beta。 
+And then that's the beta
+that you initialize with.
+[49:42] 好？ 
+OK?
+[49:44] 实际上，这是您上次提出的问题。 
+And actually, this was your
+question from last time.
+[49:47] 一旦我使用规范链接， 
+As soon as I use
+the canonical link,
+[49:50] 费舍尔得分和牛顿-拉夫森
+Fisher scoring
+and Newton-Raphson
+[49:53] 是同一件事，因为黑森州实际上是
+are the same thing, because
+the Hessian is actually
+[49:57] 在那种情况下是确定性的，只是因为当
+deterministic in that
+case, just because when
+[50:05] 您使用规范链接，H是标识，其中
+you use the canonical link,
+H is the identity, which
+[50:09] 表示其二阶导数等于0。 
+means that its second
+derivative is equal to 0.
+[50:12] 因此，即使没有期望，这个术语也会消失。 
+So this term goes away even
+without taking the expectation.
+[50:15] 所以请记住，这个词已经消失了
+So remember, the
+term that went away
+[50:17] 形式为yi min mu我除
+was of the form yi
+minus mu i divided
+[50:23] 用phi乘以h xi的素数转置beta吧？ 
+by phi times h prime prime
+of xi transpose beta, right?
+[50:29] 那就是我们所说的条件哦
+That's the term that we said,
+oh, the conditional expectation
+[50:32] 这个家伙的是0。 
+of this guy is 0.
+[50:34] 但是如果h质数素数已经等于0， 
+But if h prime prime
+is already equal to 0,
+[50:36] 那么就没有任何变化。 
+then there's nothing
+that changes.
+[50:37] 没有什么可以消失的。 
+There's nothing that goes away.
+[50:39] 它已经等于0。 
+It was already equal to 0.
+[50:40] 当您拥有规范链接时，这总是会发生的， 
+And that always happens when
+you have the canonical link,
+[50:43] 因为h是gb素数逆。 
+because h is g b prime inverse.
+[50:54] 规范链接是b素逆， 
+And the canonical link
+is b prime inverse,
+[50:57] 所以这个东西就是身份。 
+so this thing is the identity.
+[51:00] 因此x的f的二阶导数等于x为0。 
+So the second derivative of
+f of x is equal to x is 0.
+[51:06] 好。 
+OK.
+[51:08] 我的屏幕显示放映结束。 
+My screen says end of show.
+[51:11] 因此，我们可以从一些问题开始。 
+So we can start
+with some questions.
+[51:13] 听众：我只是想澄清一下。 
+AUDIENCE: I just
+wanted to clarify.
+[51:15] 如此迭代-迭代意味着什么- 
+So iterative-- what is
+it say for iterative--
+[51:19]  PHILIPPE RIGOLLET：重新加权最小二乘。 
+PHILIPPE RIGOLLET:
+Reweighted least squares.
+[51:20] 受众群体：加权最小二乘
+AUDIENCE: Reweighted
+least squares
+[51:21] 是Fisher评分[音频不清晰]的实现？？？ 
+is an implementation of the
+Fisher scoring [INAUDIBLE]??
+[51:23]  PHILIPPE RIGOLLET：这是一个实现
+PHILIPPE RIGOLLET:
+That's an implementation
+[51:25] 这只是调用加权最小二乘的预言。 
+that's just making calls to
+weighted least squares oracles.
+[51:29] 有时被称为甲骨文。 
+It's called an oracle sometimes.
+[51:30] 甲骨文就是您认为机器可以为您轻松完成的任务。 
+An oracle is what you assume the
+machine can do easily for you.
+[51:33] 因此，如果您假设您的机器是
+So if you assume
+that your machine is
+[51:35] 非常擅长乘以矩阵的逆， 
+very good at multiplying
+by the inverse of a matrix,
+[51:38] 您最好还是让Fisher自己得分，对吗？ 
+you might as well just do
+Fisher scoring yourself, right?
+[51:40] 这只是一种方法，您不必实际执行此操作。 
+It's just a way so that you
+don't have to actually do it.
+[51:43] 通常，这些事情是被实现的
+And usually, those
+things are implemented--
+[51:46] 我只是在统计软件中例行说。 
+and I just said routinely--
+in statistical software.
+[51:49] 但是它们的实施效率很高
+But they're implemented
+very efficiently
+[51:51] 在统计软件中。 
+in statistical software.
+[51:52] 所以这将是您最快的方法之一
+So this is going to be one
+of the fastest ways you're
+[51:54] 必须解决，执行此步骤， 
+going to have to
+solve, to do this step,
+[51:59] 特别是对于大规模问题。 
+especially for
+large-scale problems.
+[52:01] 听众：计算机可以做得很好
+AUDIENCE: So the thing
+that computers can do well
+[52:03] 是乘数[音频不清晰]。 
+is the multiplier [INAUDIBLE].
+[52:05] 电脑可以快速执行什么操作
+What's the thing that
+the computers can do fast
+[52:07] 那[音频不清晰]是什么？ 
+and what's the thing
+that [INAUDIBLE]??
+[52:09]  PHILIPPE RIGOLLET：所以，如果您
+PHILIPPE RIGOLLET:
+So if you were
+[52:10] 以最简单的方式做到这一点， 
+to do this in the
+simplest possible way,
+[52:13] 您的迭代，例如Fisher得分
+your iterations for,
+say, Fisher scoring
+[52:18] 只是乘以Fisher信息的倒数， 
+is just multiply by the inverse
+of the Fisher information,
+[52:21] 对？ 
+right?
+[52:22] 听众：那么发现逆是缓慢的吗？ 
+AUDIENCE: So finding
+that inverse is slow?
+[52:24]  PHILIPPE RIGOLLET：是的，所以需要一些时间。 
+PHILIPPE RIGOLLET: Yeah,
+so it takes a bit of time.
+[52:26] 鉴于您知道自己将直接相乘
+Whereas, since you know you're
+going to multiply directly
+[52:30] 如果你只是说- 
+by something, if you just say--
+[52:33] 那些事情没有解决问题那样优化
+those things are not
+as optimized as solving
+[52:35] 最小二乘。 
+least squares.
+[52:35] 实际上，它通常的完成方式
+Actually, the way
+it's typically done
+[52:36] 是通过做一些最小二乘。 
+is by doing some least squares.
+[52:38] 因此，您最好只做自己喜欢的最小二乘。 
+So you might as well just do
+least squares that you like.
+[52:41] 而且更少
+And there's also less--
+[52:45] 好吧，没有，没有- 
+well, no, there's no--
+[52:47] 好了，重新计算的次数减少了吧？ 
+well, there is less
+recalculation, right?
+[52:51] 在这里，你的费舍尔，你会
+Here, your Fisher,
+you would have
+[52:52] 重新计算Fisher信息的整个矩阵。 
+to recompute the entire
+matrix of Fisher information.
+[52:54] 而在这里，您不必。 
+Whereas here, you don't have to.
+[52:56] 对？ 
+Right?
+[52:56] 您实际上只需要计算一些向量， 
+You really just have to compute
+some vectors and the vector
+[52:59] 重量吧？ 
+of weights, right?
+[53:00] 因此，费舍尔信息矩阵具有
+So the Fisher information
+matrix has, say,
+[53:03]  n选择两个需要计算的条目，对吗？ 
+n choose two entries that
+you need to compute, right?
+[53:05] 它是对称的，因此顺序为n个平方的条目。 
+It's symmetric, so it's
+order n squared entries.
+[53:08] 但是在这里，您唯一更新的内容，如果您考虑一下， 
+But here, the only things you
+update, if you think about it,
+[53:11] 是这个权重矩阵。 
+are this weight matrix.
+[53:13] 所以只有对角线元素
+So there is only the
+diagonal elements
+[53:15] 您需要更新的内容，这些向量也在那里。 
+that you need to update, and
+these vectors in there also.
+[53:19] 有两个逆n平方。 
+There's two inverses n squared.
+[53:21] 因此，实际上放到那里的东西要少得多。 
+So that's much less thing
+to actually put in there.
+[53:23] 它以某种方式为您完成。 
+It does it for you somehow.
+[53:29] 还有其他问题吗？ 
+Any other question?
+[53:34] 是啊
+Yeah?
+[53:35] 听众：因此，如果我有一个数据集[音频不清晰]， 
+AUDIENCE: So if I have
+a data set [INAUDIBLE],,
+[53:37] 那么我总是可以尝试用最小二乘建模，对吗？ 
+then I can always try to model
+it with least squares, right?
+[53:40]  PHILIPPE RIGOLLET：是的，可以。 
+PHILIPPE RIGOLLET:
+Yeah, you can.
+[53:41] 听众：所以这就像将我的体重设置为1 
+AUDIENCE: And so this is like
+setting my weight equal to 1--
+[53:44] 身份，本质上是吧？ 
+the identity,
+essentially, right?
+[53:46]  PHILIPPE RIGOLLET：恩，不完全是， 
+PHILIPPE RIGOLLET:
+Well, not exactly,
+[53:47] 因为g也出现在此更正中
+because the g also shows
+up in this correction
+[53:50] 你在这里吧？ 
+that you have here, right?
+[53:51] 听众：是的。 
+AUDIENCE: Yeah.
+[53:52]  PHILIPPE RIGOLLET：我的意思是，我不知道您的意思是- 
+PHILIPPE RIGOLLET: I mean, I
+don't know what you mean by--
+[53:55] 听众：我只是想说， 
+AUDIENCE: I'm just
+trying to say,
+[53:56] 在任何情况下我都试图对数据集进行建模
+are there ever situations where
+I'm trying to model a data set
+[53:59] 我想以一种特殊的方式来选择体重吗？ 
+and I would want to pick my
+weights in a particular way?
+[54:03]  PHILIPPE RIGOLLET：是的。 
+PHILIPPE RIGOLLET: Yeah.
+[54:04] 听众：好的。 
+AUDIENCE: OK.
+[54:05]  PHILIPPE RIGOLLET：我的意思是- 
+PHILIPPE RIGOLLET: I mean--
+[54:06] 听众：[听不清]示例[听不清] .. 
+AUDIENCE: [INAUDIBLE]
+example [INAUDIBLE]..
+[54:07]  PHILIPPE RIGOLLET：好的，有
+PHILIPPE RIGOLLET:
+Well, OK, there's
+[54:09] 肯定是异方差情况。 
+the heteroscedastic
+case for sure.
+[54:10] 因此，如果您要实际计算这些东西，等等
+So if you're going to actually
+compute those things-- and more
+[54:13] 总的来说，我不认为你应该考虑
+generally, I don't
+think you should think
+[54:15] 其中作为重量。 
+of those as being weights.
+[54:16] 您应该真正将它们视为矩阵
+You should really think
+of those as being matrices
+[54:18] 你倒过来
+that you invert.
+[54:19] 而且不要以为它是对角线的
+And don't think of
+it as being diagonal,
+[54:21] 但实际上将它们视为完整矩阵。 
+but really think of them
+as being full matrices.
+[54:23] 所以如果你有- 
+So if you have--
+[54:25] 当我们在这里写加权最小二乘时，实际上是
+when we wrote weighted least
+squares here, this was really--
+[54:30] 我说的w是对角线的。 
+the w, I said, is diagonal.
+[54:31] 但是所有的计算实际上从未真正使用过
+But all the computations really
+never really use the fact
+[54:34] 它是对角线的。 
+that it's diagonal.
+[54:35] 所以这里显示的只是逆
+So what shows up here
+is just the inverse
+[54:38] 您的协方差矩阵
+of your covariance matrix.
+[54:40] 因此，如果您具有相关的数据， 
+And so if you have
+data that's correlated,
