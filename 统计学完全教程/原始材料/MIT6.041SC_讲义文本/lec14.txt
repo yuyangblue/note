@@ -1,0 +1,792 @@
+LECTURE 
+14: Introduction 
+to Bayesian inference 
+• The big picture 
+-
+motivation, 
+applications 
+problem types (hypothesis testing, estimation, 
+etc.) 
+• The general framework 
+-
+Bayes' rule 
+> posterior 
+( 4 versions) 
+-
+point estimates (MAP, 
+LMS) 
+-
+performance measures) 
+(prob. of error; mean squared error) 
+-
+examples 
+1
+
+
+===PAGE===
+
+In ere ce: the 
+ig pict re 
+Predictions 
+Probabili 
+y heory
+Real world 
+(Analysis) 
+Data 
+Models 
+Inference/ Statist· cs 
+2
+
+
+===PAGE===
+
+Inference then and now 
+• Then: 
+10 patients were treated: 
+3 died 
+10 patients were not treated: 
+5 died 
+Therefore 
+... 
+Now: 
+• 
+Big data 
+• 
+Big models 
+• 
+Big computers 
+3
+
+
+===PAGE===
+
+ 
+A sample of application domains 
+• Design and interpretation of experiments 
+STATE COUNTS 
+A
+- polling 
+17 SOLIDLY DEMOCRTIC 23 SOLIDLY REPUBLICAN 
+11 TOSSUP 
+ELECTORAL VOTE COUNTS 
+237 LlKELY DEMOCRATIC 
+191 LIKELY REPUBLICAN 
+110 TOSSUP 
+Obama/Biden I Romne /Ryan 
+© Source unknown. All rights reserved. This content is excluded from our Creative 
+Commons license. For more information, see https://ocw.mit.edu/help/faq-fair-use. 
+4
+
+
+===PAGE===
+
+A sample of application 
+domains 
+• marketing, advertising 
+• recommendation 
+systems 
+-
+Netflix competition 
+5
+
+
+===PAGE===
+
+ 
+A sample of application domains 
+• Finance 
+© Source unknown. All rights reserved. This content is excluded from our Creative 
+Commons license. For more information, see https://ocw.mit.edu/help/faq-fair-use. 
+6
+
+
+===PAGE===
+
+·--: =-
+=- 
+H•.409223 
+15011 
+l.....-------.. GPCR 
+FAK 
+------- Akt 
+,,,.,--
+' l 
+I 
+PKC 
+Adenylate 
+t 
+PKA 
+MEKK 
+MAPK 
+Bcl-2 _, 
+'------+-------Ba d -.. 
+-"' Mt._. 
+Abnormality 
+. J 
+A 
+mpl 
+fa 
+systems biology 
+• Life sciences 
+Chemokines 
+Hormones. 
+Survival Factors 
+Transmitters 
+Growth Factors 
+Extracellular
+(e.g., interleukins, 
+(e.g., TGFa, EGF) 
+(e.g., IGFl) 
+Matrix 
+serotonin, etc.)
+genomics 
+, 
+l 
+Ideogra11.:tJ 
+Contia.:tl2Sl 
+HsUniG:t)2Si 
+Gene!_ seq Symbol 
+0
+NT_08692S.
+NT.078US. 
+Int 
+ns 
+GSK-313 
+t
+APCt 
+P.catenin 
+( 
+..
+'•
+l<p22.33 
+RTK ­
+NT_028413,
+'NT_086929, 
+cdc42 'l
+ASB11 
+Wnt 
+I 
+Hedgehog 
+I 
+t
+Xp22.32 
+NT_086931, 
+1
+1011 
+t 
+Grb2?0/
+1 /
+/ 
+PLC 
+Pl3K --+-----= G-Protein 
+"" i 
+, 
+Fyn/Shc ! 
+Src 
+Xp22.31 
+PHKA2
+=
+-i;gi:
+NT:025302. 
+t 
+kp22,2 
+2011 
+t 
+" 
+Akka 
+NT_OU7S7. 
+MAGEBl
+Xp22, 13 
+• 
+_...--tt----.. - Raf 
+cyclase 
+MEK 
+t 
+/ t 
+Ras t 
+t
+ʏp2ʐ.12
+p2 .11
+kp21,3
+)(p21.2
+kp21.I 
+FTHL17 
+t
+3011 
+i 
+NF-KB 
+PHF8 
+t 
+...
+Xp11,4 
+Hl1 I NT 071lS73, 
+.9
+C.
+LOC169981 t
+Xp11.3 
+Ql
+NT_086939. 
+/
+,
+XpU.23 
+5011 
+&l
+f 
+·NT.011638. 
+NLGN3 
+• 
+M K
+XpU.22 
+X.Hll
+k<tll,1
+x.,.11.2 
+IKB
+Cytoklnes 
+• 
+I 
+FADD 
+I NT_Oh630, 
+_._,. JAKs 
+·--: •C 
+-- :::.
+8011 
+l
+NXF2 
+• 
+/
+Cytochrome C 
+ʑaʒrn:c::ʓ p16
+9011 
+ZBTB33 
+• 
+Rb....-CDK4
+T_OU65t. 
+­
+H•.421383
+Hs.380118 
+.... 
+(e.g.. EPC)
+&011 
+J SLC16A2 • 
+.............. STAT3,5
+•:: .. 
+i, 
+l<<112 
+.. §:-:11 
+ZNF6
+NT.011669.
+7011 
+J: s 
+==-=· 
+Bcl-xL
+; .. 
+CAPZA1P 
+t 
+p 
+Gii­
+t 
+!OOH 
+MCTS1 
+• 
+Caspase 9 
+At 
+p15
+..-E2F 
+Gene Regulation 
+ELF4 
+t 
+11011 
+--CycfE ,__ p27 
+Caspase 8 
+1 NT.028405. 
+LOC340581 • 
+e 
+CDK2 
+12011 
+t
+LOC266694 • 
+t 
+-a,m
+Sensor 
+13011 
+NT_011786, 
+SPANXC 
+t 
+'
+o,821
+•• 3$1232 
+H•, 1$2018 
+H•,401929
+Hs.195464 
+MTMR.1 
+• 
+CETN2
+NT.011681, 
+t 
+NT.011726,
+I· 
+, NT.021596S.
+I 
+NT.025307. 
+ATP2B3 • 
+This image is in the public domain. 
+i 
+Death factors 
+Source: Wikimedia. 
+(e.g. FasL. Tnf) 
+This image is in the public domain. Source: Wikimedia. 
+neuroscie ce, etc., tc. 
+7
+14011 
+
+
+===PAGE===
+
+A sample of application 
+domains 
+• 
+Modeling and monitoring 
+the oceans 
+• 
+Modeling and monitoring 
+global climate 
+• 
+Modeling and monitoring 
+pollution 
+• Interpreting 
+data from physics experiments 
+• Interpreting 
+astronomy data 
+8
+
+
+===PAGE===
+
+A sample of application 
+domains 
+• Signal processing 
+-
+communication 
+systems (noisy ... ) 
+-
+speech processing and understanding 
+-
+image processing and understanding 
+-
+tracking of objects 
+-
+positioning 
+systems (e.g., GPS) 
+-
+detection of abnormal events 
+9
+
+
+===PAGE===
+
+Mode 
+buil ·ng v 
+s s infe ring unobserv d vari 
+les 
+Predictions 
+Probability 
+theory
+Real world 
+(Analysis)
+Decisions 
+T
+-
+odel bu.lding .
+• 
+-
+know .. sign a " S, observe X 
+Inference/Statistics 
+-
+in er a 
+• Va iable est·ma ion: 
+-
+know a, observe X 
+-
+infer S 
+10
+
+
+===PAGE===
+
+Hypothesis testing versus estimation 
+• Hypothesis testing: 
+-
+unknown takes one of few possible 
+-
+aim at small probability of incorrect 
+values 
+decision 
+Is it an airplane or a bird? 
+• Estimation: 
+-
+numerical unknown(s) 
+-
+aim at an estimate that is ,.close" to the true but unknown value 
+11
+
+
+===PAGE===
+
+The Bayes-an in e ence framework 
+• Unk own e 
+• Where doest 
+e prior come from? 
+-
+treated as a random variable 
+symmetry 
+prior distribution 
+Pe or f e 
+known range 
+-
+ear ier stud·es 
+• Observatio 
+X 
+subjective or arbitrary 
+observation 
+mode PxIe or f x1e 
+• Use appropriate versio 
+of the Bayes rule 
+to find Pe ( IX -
+x) or fe1xC IX -
+x) 
+12
+
+
+===PAGE===
+
+ 
+e1xC Ix) or PDF fe 
+di 
+Th out u of 
+ELECTORAL VOTE DI TRJBUTION FOR OBAMA 
+R MNEY 14.62 
+84.59% OBAMA 
+.7 ol 
+h 
+C 
+t 
+W 
+i 
+0 
+io 
+6% 
+PM 
+(· 
+5%
+I X 
+t: 4% 
+270 
+...J 
+< 3% 
+
+ 2% 
+1% 
+0% 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+l/) 
+0 
+l/) 
+0 
+l/) 
+a 
+l/) 
+0 
+,... 
+T"" 
+N 
+N 
+M 
+M 
+v 
+v 
+l!) 
+NUMBER OF ELECTORAL VOTES 
+© Source unknown. All rights reserved. This content is 
+excluded from our Creative Commons license. For more 
+information, see https://ocw.mit.edu/help/faq-fair-use. 
+I
+0 
+I 
+I 
+I 
+I 
+13
+
+
+===PAGE===
+
+Po-nt est-mates 
+in Bayesian -nference 
+he co 
+lete a swer · a aster· 
+dis ri 
+io . 
+PMF Psix( Ix) or PDF fs ixC Ix) 
+• Maximum a 
+• 
+Pe 
+(0* I x) 
+f SI (0* Ix) 
+Conditional 
+est-m te: {J-
+g(x) 
+(number) 
+st-mator: 
+§ -
+g(X) 
+(random variab e) 
+osteriori probability (MAP). 
+-
+axePe x(0 I x) 
+-
+· axof SI (0 I x) 
+expectation. 
+e IX -
+x 
+(LMS : Least Mean Squares) 
+14
+
+
+===PAGE===
+
+0.6 
+0.3 
+0.1 
+• 
+-screte e, disc ete X 
+values of e. alternative 
+hypo 
+eses 
+PeJ 
+Px(x 
+Pe(0) p 1e(x I 0) 
+(0 Ix) -
+P~ (x) 
+·) = .___Pe(01)Px 1e(x IB') 
+91 
+• 
+MAP rule: 
+2 
+iJ= 
+3 
+0 
+• 
+• 
+cond·tiona 
+prob of error. 
+(0 -=I=e Ix - x) 
+sma 
+overall probabirty 
+of error. 
+(8 
+e) = EP(§ 
+-=I=e Ix 
+X 
+= EP(§ 
+-=I=e Ie 
+6 
+-
+= 
+x)px(x) 
+B)pe(B) 
+15
+
+
+===PAGE===
+
+Pe(0) f x1e(x I0) 
+Pe 
+( 0 I x) -
+f 
+(x)
+• Standard examp e. 
+send signal e E {1, 2, 3} 
+fx(x) = _Pe(B')fx 
+1e(x IB') 
+6'
+X-8 
+W 
+W 
+N(O, u 2 ), ·ndep. of e
+f"-.J 
+• conditional 
+prob of error : 
+f x1e(x I0) = /w(x - 8) 
+(0:j=. - IX-x) 
+a 
+st u 
+e t e MA 
+r ,e 
+• overa I p obability 
+of er or: 
+(§ :/=-e) = / P(9 :/=-e Ix = x)/x(x) 
+dx 
+=LP(§:/=-
+01e = 0)pe(B) 
+6 
+0.6 
+0.3 
+0.1 
+, 
+1 
+2 
+3 
+0 
+• MAP r le. 0-
+16
+
+
+===PAGE===
+
+Cont-nuo 
+s e, co tinuous X 
+_ fe(0) f 1e(x I 0) 
+f SI (0 I x) -
+f x(x) 
+• linear norm .al models 
+fx(x) = j fe(0 1)f xie(x IB') d01 
+est·ma ion o a noisy signal 
+e 
+e and W: independe - t normals 
+multi-d·mensional 
+versions (many norma para eters, many observatio s) 
+• est·mating t e parameter of a un·form 
+--­
+• 
+8 -
+g(X) 
+• i -terested · :
+oe' 
+e. 
+nI or 
+[ , ] 
+E[(9 - 9) 2 IX = x] 
+E[(9- 9) 2] 
+17
+
+
+===PAGE===
+
+Inferr-ng the unknown bias of a coin and the 
+eta dist ibut-on 
+• S andard exa 
+p e. 
+., 
+(O Ik) = fe(0) PK1e(k I 0 
+-
+coi 
+wit 
+b·as e; 
+prior fe(·) 
+JS[K 
+PK(k) 
+-
+fix n, K =number 
+of heads 
+PK(k) = j fe(0 1)PKle(k I01) d0' 
+• Assume fa(·) 
+is un·form in 0, 1] 
+-
+1 
+0k(l - 0)n - k 
+.. Beta distr·bu ·o , with parameters (k + 1, n - k + 1)"
+d(n,k) 
+• If prior is Beta. 
+fe(0) = .!0°(1 - 0)13 
+C 
+fe1K(B Ik) = 
+18
+
+
+===PAGE===
+
+In 
+r - g the u known b-as o a co-n: point es imates 
+{ 1 a 
+{3 
+-
+a:! ,B! 
+Jo 9 (1 - 9) d0 -
+(a+ 
+,B 
+• S andard examp e. 
+-
+coi 
+with b·as e; 
+prior fe(·) 
+-
+fix n, K =number 
+of heads 
+• Assume fa(·) 
+is un·form in 0, 1] 
+E[9 I K = k] = 
+1 
+k( 
+)n k
+fe1K(8 
+I k) = d(n,k) 0 
+1 - 0 
+­
+• 
+MAP estima e: 
+19
+
+
+===PAGE===
+
+Summary 
+• 
+Problem data: Pe(·), Px 1e(· I ·) 
+• Given the value x of X: 
+find , e.g., Pe1x(· Ix) 
+-
+using appropriate version of the Bayes rule 
+.-... 
+• 
+Estimator e = g(X) 
+Estimate {J= g(x) 
+-
+MAP: UMAP = 9MAP(x) 
+maximizes Peix(B I x) 
+-
+LMS: OLMS = 9LMs(x) 
+= E[e I X = x] 
+.-... 
+• Performance evaluation of an estimator e 
+P(9 -:/=e Ix = x) 
+E((9-
+9) 2 
+1 X = x] 
+P(§-:/= 9) 
+E[(S- e) 2] 
+20
+
+
+===PAGE===
+
+ 
+ 
+ 
+ 
+MIT OpenCourseWare 
+https://ocw.mit.edu 
+Resource: Introduction to Probability 
+John Tsitsiklis and Patrick Jaillet 
+The following may not correspond to a particular course on MIT OpenCourseWare, but has been provided by the author as an individual learning resource. 
+For information about citing these materials or our Terms of Use, visit: https://ocw.mit.edu/terms. 
+21
