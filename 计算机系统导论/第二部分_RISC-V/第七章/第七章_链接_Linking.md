@@ -522,8 +522,31 @@ refaddr = ADDR(s) + r.offset = 0x4004d0 + 0xf = 0x4004df
 
 ![课件 p22：重定位后的 .text 节（PC 相对寻址）](图片/04_重定位后的text节.png)
 
-**练习题 7.4 答案**：A. 对 sum 的重定位引用地址 = 0x4004de；B. 引用值 = 0x5。
-**练习题 7.5 答案**：m.o 中对 swap 的调用 `r.offset=0xa, PC32, addend=-4`；.text 重定位到 0x4004d0、swap 到 0x4004e8 → `refaddr = 0x4004da`，`*refptr = 0x4004e8 - 4 - 0x4004da = 0xa`，即 callq 的位移值为 0x0000000a。
+**练习题 7.4**（书页 482）：本题是关于图 7-12a（重定位后的 .text 节）中的重定位程序的。
+
+- A. 第 5 行中对 sum 的重定位引用的十六进制地址是多少？
+- B. 第 5 行中对 sum 的重定位引用的十六进制值是多少？
+
+**答案**：A. 对 sum 的重定位引用地址 = 0x4004de（第 5 行 `4004de: e8 05 00 00 00 callq 4004e8 <sum>` 的指令地址）；B. 引用值 = 0x5（call 指令内编码的 32 位 PC 相对位移）。
+
+**练习题 7.5**（书页 482–483）：考虑目标文件 m.o 中对 swap 函数的调用（图 7-5）。
+
+```
+9: e8 00 00 00 00    callq e <main+0xe>    swap()
+```
+
+它的重定位条目如下：
+
+```
+r.offset = 0xa
+r.symbol = swap
+r.type = R_X86_64_PC32
+r.addend = -4
+```
+
+现在假设链接器将 m.o 中的 .text 重定位到地址 0x4004d0，将 swap 重定位到地址 0x4004e8，那么 callq 指令中对 swap 的重定位引用的值是什么？
+
+**答案**：`refaddr = ADDR(.text) + r.offset = 0x4004d0 + 0xa = 0x4004da`；`*refptr = ADDR(swap) + (-4) - refaddr = 0x4004e8 - 4 - 0x4004da = 0xa`，即 callq 的位移值为 0x0000000a。
 
 ---
 
@@ -826,24 +849,45 @@ linux> LD_PRELOAD="./mymalloc.so" ./intr
 
 ### 家庭作业 7.6 答案参考（带 static 的 swap.c 版本）
 
+**题目原文**（书页 497）：这道题是关于图 7-5 的 m.o 模块和下面的 swap.c 函数版本的，该函数计算自己被调用的次数：
+
 ```c
 extern int buf[];
+
 int *bufp0 = &buf[0];
-static int *bufp1;      /* 未初始化 static → .bss */
-static void incr()      /* static 函数 → 本地符号，.text */
-static int count = 0;   /* 初始化为 0 的 static → .bss */
-void swap() { int temp; incr(); ... }
+
+static int *bufp1;
+
+static void incr()
+{
+    static int count = 0;
+    count++;
+}
+
+void swap()
+{
+    int temp;
+    incr();
+    bufp1 = &buf[1];
+    temp = *bufp0;
+    *bufp0 = *bufp1;
+    *bufp1 = temp;
+}
 ```
+
+对于每个 swap.o 中定义和引用的符号，请指出它是否在模块 swap.o 的 .symtab 节中有符号表条目。如果是这样，请指出定义该符号的模块（swap.o 或 m.o）、符号类型（局部、全局或外部）以及它在模块中所处的节（.text、.data 或 .bss）。
+
+**答案**：
 
 | 符号 | 条目? | 类型 | 模块 | 节 |
 |---|---|---|---|---|
 | buf | 是 | extern | m.o | .data |
 | bufp0 | 是 | 全局 | swap.o | .data |
-| bufp1 | 是 | **本地** | swap.o | **.bss** |
+| bufp1 | 是 | **局部** | swap.o | **.bss** |
 | swap | 是 | 全局 | swap.o | .text |
 | temp | 否 | — | — | — |
-| incr | 是 | **本地** | swap.o | **.text** |
-| count | 是 | **本地** | swap.o | **.bss** |
+| incr | 是 | **局部** | swap.o | **.text** |
+| count | 是 | **局部** | swap.o | **.bss** |
 
 ---
 
