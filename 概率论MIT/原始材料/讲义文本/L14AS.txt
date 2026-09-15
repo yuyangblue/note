@@ -1,0 +1,733 @@
+===PAGE 1===
+LECTURE 14: Introduction to Bayesian inference  
+•  The big picture 
+motivation, applications 
+problem types (hypothesis testing, estimation, etc.) 
+• The general framework 
+Bayes' rule 
+, posterior  
+(4 versions)  
+point estimates (MAP, LMS)  
+performance measures)  
+(prob. of error; mean squared error)  
+examples  
+1
+
+
+===PAGE 2===
+Inference: the big picture 
+redictions 
+Real world 
+Probability theory 
+Decisions 
+(Analysis) 
+Models 
+In fere n ce IS tatist i cs 
+• 
+2
+
+
+===PAGE 3===
+Inference then and now 
+• Then: 
+0 patients were treated: 3 died 
+0 patients were not treated: 5 died 
+herefore ... 
+w: 
+Big data 
+Big models 
+• 
+Big computers 
+1
+1
+T
+No
+• 
+• 
+• 
+3
+
+
+===PAGE 4===
+A sample of application domains 
+•
+Design and interpretation of experiments
+STATE COUNTS 
+-
+polling
+• 
+17 SOLIDLY DEMOCRATIC 23 SOLIDLY RIPUBLICAN 
+11 TOSSUP 
+ELECTORAL VOTE COUNTS 
+237 LIKELY DEMOCRATIC 
+191 LIKELY REPUBLICAN 
+I IO TOSSUP 
+Obama/Bden I Romne /Ryan
+i
+© Source unknown. All rights reserved. This content is excluded
+from our Creative Commons license. For more information, see
+https://ocw.mit.edu/help/faq-fair-use.
+4
+
+
+===PAGE 5===
+A sample of application domains 
+• 
+marketing, advertising 
+• 
+recommendation systems 
+-
+Netflix competition 
+• • 
+t 
+5
+
+
+===PAGE 6===
+S^P 500 INDEX (STANDARD & POOR' 
+as of 30-Ma r -2007 
+1500 
+1450_-+--- - --+- - - -+-- - --+- - - -
+t-----:""T"'rf"''rt-----l 
+1350 
+1300 
+12001---`.....,.,---,a
+.,..+`b
+b
+`......,.,---,c`.,-L`
+-
+b
+b
+`'-,-:,
+c`,--,..,`
+-
+----1 
+Ma 06 
+Jul06 
+Se 06 
+Nov06 
+Jan07 
+Mar07 
+6.0 
+6 4 .0 l----+-- - --+- - - -
++-- - -+-d-
+-
++-- - -
+-.+-`----1 
+·-
+::: 2 .o 
+0.0 
+Copright 2007 Yahoo! Inc.
+http://financ.ahoo.co•/ 
+A sample of application domains 
+•
+Finance
+•
+© Source unknown. All rights reserved. This content is excluded
+from our Creative Commons license. For more information, see
+https://ocw.mit.edu/help/faq-fair-use.
+6
+
+
+===PAGE 7===
+x,.n.l, 
+tonti
+x,.n.» 
+' .. 
+' 
+·..r:o2e
+a:!JlSI 
+• 
+IIT :l:'ll· 
+-
+-
+-,)I
+1 o
+ll ,
+• 
+.
+` Mo,-3$.,2?
+-.m
+11,.¬n 
+. 
+. 
+it,2:t,21 
+.r: 
+x,.n. 
+)(fon.: 
+n 
+·.;,:,:s,n.
+EI):!
+.. m.
+"' .. • 111'&1, 
+F·- -l"·
+11 ...... "M 
+.:.3I 
+!lH
+llo,1t491
+,. 
+:
+ll't>lJ.'l 
+J(f,21,! 
+... 
+21.1 
+llf -'tf77'4 
+)l'.tll,I 
+,. •. 
+,ou,, 
+, 
+irT_,m-n. 
+t,:o""·'"'"
+llf,O
+lflOI 
+_111 
+-"'l',l, ·
+111.ons. 
+11,,m,1• 
+11,.4 
+_1111,.,,.
+11,,no
+W.
+: 
+41 
+g
+,17t:)2t 
+"·
+M
+ll1
+,'l'Shl
+••w.:zt-
+11 "
+•
+o
+• ·"·
+i , 
+""' 
+E 
+_111w1. 1
+:::*ili 
+llo, ltfl 
+-5•*·
+11,,,..1n 
+,4,
+j llo,2U.S'l 
+110.)11 10 
+. _..... 1 
+11,.,011.t "·'",.,
+"'-11,'26. 
+11, .. ,. 
+i:::1m
+11,,&:tl 
+llf,:!011l 
+, 
+k
+-tn':1259", 
+.;,:,:s,n. 
+•
+llf,019m 
+11,,,,,...,. ia
+Honnones 
+Swvival Fbetors 
+Tfansml11ers 
+Grov.th Factors 
+(e.gF IGFl) 
+(e.g., nter1eukins,
+(e.g., TGFo, EGF) 
+ElCltacelUar 
+i
+serotonin. etc.) 
+Mattix 
+I 
+I 
+I 
+I 
+GPCR ... 
+RT 
+I 
+RTa 
+I
+cdc42'i "i"' 
+Wm 
+1-
+I 
+I 
+G">2f0 / F'yr1Shc I 
+I 
+Pl3K 
+/PC 
+' ...____ 
+G-Protel
+Reis 
+S 
+n 
+/ 
+FAK 
+O
+----- I '\,_ 
+Rt
+Src 
+i$hCVOlltd -
+, 
+Akt 
+PKC 
+,I 
+GSK-30 
+I 
+i 
+..-----rr--
+Adenytate 
+Akka 
+NF-11.8
+i 
+cyclase
+MEK
+I 
+......._ 
+APC 
+/ 
+PKA 
+4 
+,,s 
+/ I 
+" 
+-+-- JAKs 
+MEKK 
+MAPK 
+MKK 
+P,.catenln 
+I 
+-..... STAT3..S 
+Cytoeh'ome C 
+Caspase9 
+I 
+C.SPM08 _::: e 
+ARF 
+mdm2 
+I 
+8C
+'- -+FkO 
+l•2 1
+- -Sad 
+-
+'
+f:asR Abno
+b M1-
+SenSOf 
+rmalily
+-S. 
+p53 
+im J
+Oeath I 
+tactors 
+(e.g. Fast., Tnf) 
+A sample of application domains 
+systems biology 
+•
+Life sciences
+Chemotines. 
+genomics 
+ldeoer-11"C 
+H$UniG:tlD
+neuroscience, etc., etc. 
+• 
+7
+This image is in the public domain. 
+This image is in the public domain. 
+Source: Wikimedia. 
+Source: Wikimedia. 
+
+
+===PAGE 8===
+A sample of application domains 
+• 
+Modeling and monitoring the oceans 
+Modeling and monitoring global climate 
+Modeling and monitoring pollution 
+Interpreting data from physics experiments • 
+Interpreting astronomy data 
+• 
+• 
+• 
+• 
+8
+
+
+===PAGE 9===
+A sample of application domains 
+ignal processing 
+communication systems (noisy ... ) 
+speech processing and understanding 
+image processing and understanding 
+tracking of objects 
+positioning systems (e.g., GPS) 
+detection of abnormal events 
+• 
+• 
+S
+9
+
+
+===PAGE 10===
+10
+
+
+===PAGE 11===
+Hypothesis testing versus estimation 
+• 
+Hypothesis testing: 
+unknown takes one of few possible values 
+aim at small probability of incorrect decision 
+ it an airplane or a bird? 
+Is
+• 
+Estimation: 
+numerical unknown(s) 
+aim at an estimate that is "close" to the true but unknown value 
+11
+
+
+===PAGE 12===
+The Bayesian inference framework 
+• Unknown 
+treated as a random variable 
+prior distribution Pe or Ie 
+Observation X 
+observation model P x le or I x le 
+Use appropriate version of the Bayes rule 
+to find Pelx(· 1 X = x) or Ielx(· 1 X = x) 
+e 
+-
+-
+• 
+-
+• 
+Pr l
+• or Pe 
+Cond itiona
+PX IS 
+• Where does the prior come fro
+symmetry 
+known range 
+earlier studies 
+subjective or arbitrary 
+m ? 
+• 
+PSlx(· I X =x) 
+x 
+Observation 
+Posterior 
+l 
+Process 
+Calculation 
+12
+
+
+===PAGE 13===
+ELECTORAL VOTE DISTRIBUTION FOR OBAMA 
+ROMNEY 14.62% 
+84.59% OBAMA 
+11 " Tlr 
+6% 
+5% 
+>--t: 4%
+...., -
+-< 3% 
+<O 
+0 
+cL 2% 
+"'-
+1 % 
+270 
+0% ___________ ..... 
+NUMBER OF ELECTORAL VOTES 
+The output of Bayesian inference 
+The complete answer is a posterior distribution: 
+PMF PeixC· Ix) or PDF feixC· Ix)
+Pri or 
+.-------------, 
+Pe
+I 
+--
+Observation 
+X 
+I 
+. 
+Posterior 
+Pe1x ( · I X = x) 1
+• I Point Estimates 1
+Process 
+Calculation 
+- I Error Analysis 
+-
+I
+: 
+etc. 
+Cond itional 
+-
+I - - ---- _._ -- -:
+PxJe 
+13
+••
+•
+•
+© Source unknown. All rights reserved. This content is excluded
+from our Creative Commons license. For more information, see
+https://ocw.mit.edu/help/faq-fair-use.
+
+
+===PAGE 14===
+I I 
+r 
+I 
+I 
+, 
+Point estimates in Bayesian inference 
+The complete answer is a posterior distribution:
+PMF PerxC- I x) or PDF ferxC- I x) 
+ 
+• 
+Maximum a posteriori probability (MAP): 
+Perx(O* I x) = mrperx(8 1 x) I 
+fe rx(O* I x) = mrfelx(81 x) , 
+ConditIonal expectation: E[e I X = xl 
+(LMS: L east Mean Squares) 
+estimate: (j = g(x) 
+(number) 
+estimator: e = g(X) 
+= 
+(random variable) 
+• 
+14
+
+
+===PAGE 15===
+0.6 
+0.3 
+0.1 
+1 
+e 
+Discrete 6. discrete X 
+• values of 6: alternative hypotheses 
+• MAP rule: 
+fJ = 2. 
+px(x) = 2>e(8') PXle(x I e
+f
+) 
+0' 
+• conditional prob of error: 
+P (fJ i=6 I X = x) = 0.11 
+smallest under the MAP rule 
+overall probability of error: 
+P(8 i=6 ) =2:P(8i=6 I X=x)px(x) 
+• 
+I x 
+I 
+• 
+I 
+= 2:P(8 i= 6 I 6 = e)pe(e) 
+e 
+• 
+15
+
+
+===PAGE 16===
+Discrete e, continuous X 
+pe(e) fX le(x I e) 
+• 
+Standard example: 
+send signal e E {l, 2, 3} 
+fx(x) = LPe(e')fxle(x I ef) 
+x=e+w 
+8' 
+w ~ N(O ,a 2 ), indep. of e 
+• conditional prob of error: 
+fX le(x I e) = fw(x - e) 
+p(Bi=e l x=x) 
+0.6 
+smallest under the MAP rule • 
+0.3 
+• overall probability of error: 
+0.1 
+'- pee i= e) = f,P(e i= e I X = x)fx(x) dx 
+1 
+1 
+2 
+3 
+e 
+~ 
+= LP(e i= e I e = e)pe(e) 
+MAP rule: 
+e 
+• 
+pelx(e I x) = 
+fx(x) 
+
+
+===PAGE 17===
+Continuous 8, continuous X 
+fe(O) fX leCx ] 0) 
+felxCO ] x) = 
+fx(x) 
+linear normal models 
+fx(x) = 
+fe(O')fxle(x ]0') dO' 
+estimation of a noisy signal 
+J 
+8 and W: independent normals 
+multi-dimensional versions Cmany normal parameters, many observations) 
+estimating the parameter of a uniform 
+-
+MAt 
+• 8 = g(X) 
+I.."?$ 
+• 
+interested in: 
+X: uniform[O, 8] 
+8: uniform [0, 1] 
+E[ce - 8)2 ] X = x] 
+E[ce - 8)2] 
+• 
+• 
+
+
+===PAGE 18===
+Inferring the unknown bias of a coin and the Beta distribution 
+• Standard example: 
+1 
+(0 1 k) = 
+PK le(k 0) 
+coin with bias 8; 
+prior leO 
+e lK 
+PK(k) 
+fix n; K =number of heads 
+PK(k) = 
+le(O')PKle(k 0') dO' 
+ssume leO 
+1
+is uniform in [0, 1) 
+J 
+/, 
+1 • 
+I ~ ) 
+-
+I< e 
+Ie (1-19) 
+.. 
+PI' (k ~ 
+• . 
+1 
+Ok( 1 _ 0) n- k 
+"Beta distribution , with parameters (k + 1, n - k + 1)" 
+d(n,k) 
+f prior is Beta: 
+le(O) = ~ 0"(1 - 0) 13 
+c 
+le(O) 
+I 
+-
+• A
+-
+• I
+
+
+===PAGE 19===
+Inferring the unknown bias of a coin: point estimates 
+• Standard example: 
+-
+coin with bias e; 
+prior feU
+fix n; K =number of heads 
+-
+• Assume 
+is uniform in [0, 1
+1 
+k ( 
+)n k
+0 
+1 - 0 
+-
+MAP estimate: 
+BMAP = kin 
+e 
+e.,r e
+[K €o 1 
+~ 
+Ie) 
+(1-
+.... 
+fo-
+• 
+e) =- 0 
+8 M AP = 
+--
+Ie: t- I 
+~ +-~ 
+1<1 ... 
+feU 
+fe lK(O I k) = d(n, k) 
+• 
+"'" Q)( 
+("'l -
+l> 
+~/e 
+("'-"=) 
+{l " 
+fJ 
+_ 
+",1131 
+1 
+ 
+10 0 (
+- 0) dO -
+('" + 13 + 1) 1 
+, 
+) 
+E[e I K = k) = 
+e fe/K (0 IJddB 
+ 
+o 
+I 
+I 
+Ie + ) 
+... _I: I 
+-:. 
+-
+(J 
+(I-e) 
+of) 
+, o 
+) 
+ 
+I 
+J) 
+~---
+~I 
+
+
+===PAGE 20===
+Summary 
+• 
+Problem data: peO, pXleC I ·) 
+Given the value x of X: find , e.g., pelxC 1 x ) 
+• 
+-
+using appropriate version of the Bayes rule 
+("I Gf20 I'Ges) 
+-
+• 
+Estimator e = g(X) 
+Estimate Ii = g(x) 
+MAP: liMAP = 9MAP(X) maximizes pelx(e 1 x) 
+LMS : liLMS = 9LMS(X) = E[e 1 X = xl 
+• 
+20
+
+
+===PAGE 21===
+MIT OpenCourseWare
+https://ocw.mit.edu
+Resource: Introduction to Probability
+John Tsitsiklis and Patrick Jaillet
+The following may not correspond to a particular course on MIT OpenCourseWare, but has been provided by the author as an individual learning resource.
+For information about citing these materials or our Terms of Use, visit: https://ocw.mit.edu/terms.
