@@ -1,0 +1,319 @@
+Lecture Notes 6
+36-705
+1
+Stochastic Order Notation
+The classical order notation should be familiar to you already.
+1. We say that a sequence an = o(1) if an →0 as n →∞. Similarly, an = o(bn) if
+an/bn = o(1).
+2. We say that a sequence an = O(1) if the sequence is eventually bounded, i.e. for all n
+large, |an| ≤C for some constant C ≥0. Similarly, an = O(bn) if an/bn = O(1).
+3. If an = O(bn) and bn = O(an) then we use either an = Θ(bn) or an ≍bn. Usually in
+Stats we avoid the Θ notation (which is more common in CS) because we usually use
+Θ for the parameter space.
+When we are dealing with random variables we use stochastic order notation.
+1. We say that Xn = op(1) if for every ϵ > 0, as n →∞
+P(|Xn| ≥ϵ) →0,
+i.e. Xn converges to zero in probability.
+2. We say that Xn = Op(1) if for every ϵ > 0 there is a ﬁnite C(ϵ) > 0 such that, for all
+n large enough:
+P(|Xn| ≥C(ϵ)) ≤ϵ.
+The typical use case: suppose we have X1, . . . , Xn which are i.i.d. and have ﬁnite variance,
+and we deﬁne:
+bµ = 1
+n
+n
+X
+i=1
+Xi.
+1. bµ −µ = op(1) (WLLN)
+2. bµ −µ = Op(1/√n) (CLT)
+As with the classical order notation, we can do some simple “calculus” with stochastic order
+notation and observe that for instance: op(1) + Op(1) = Op(1), op(1)Op(1) = op(1) and so
+on.
+1
+
+2
+Only independence but not identically distributed
+Suppose that X1, X2, . . . are independent but not identically distributed. The CLT goes
+through almost exactly as stated, however, we need conditions to ensure that one or a small
+number of random variables do not dominate the sum. There are many such results but
+the most classical is called the Lyapunov CLT. I will state something that is slightly weaker
+than the actual result. Lyapunov is one of the fathers of the theory of dynamical systems
+and a student of Chebyshev’s. As is the case with Chebyshev, there are several foundational
+concepts that are named for him (the CLT is only one).
+Let µi = E[Xi] and σ2
+i = Var[Xi]. Deﬁne
+s2
+n =
+n
+X
+i=1
+σ2
+i .
+Lyapunov CLT: Suppose X1, . . . , Xn are independent but not necessarily identically dis-
+tributed. Let µi = E[Xi] and let σi = Var(Xi). Then if we satisfy the Lyapunov condition:
+lim
+n→∞
+1
+s3
+n
+n
+X
+i=1
+E|Xi −µ|3 = 0,
+then
+1
+sn
+n
+X
+i=1
+[Xi −µi] ⇝N(0, 1).
+In the i.i.d case we just have µi = µ and sn = √nσ so we get back our usual CLT.
+It is worthwhile trying to understand the Lyapunov condition, and when it might be violated.
+In particular, consider the extreme case, when all the random variables are deterministic,
+except X1 which has mean µ1 and variance σ2
+1 > 0. Then s3
+n = σ3
+1 and the third absolute
+moment E|X1 −µ|3 > 0 so that the Lyapunov condition fails. Roughly, what can happen in
+the non-identically distributed case is that only one random variable can dominate the sum
+in which case you are not really averaging many things so you do not have a CLT.
+On the other hand in a more typical case, one might have that the third absolute moments
+are bounded by some constant C > 0 say and the variance of any particular random variable
+is not too small. In this case,
+s2
+n =
+n
+X
+i=1
+σ2
+i ≥nσ2
+min,
+and
+n
+X
+i=1
+E|Xi −µ|3 ≤Cn.
+2
+
+In this case, we will have that the Lyapunov ratio ≤
+C
+√nσ3
+min →0 so that the condition is
+indeed satisﬁed.
+3
+Multivariate CLT
+The next important extension is the multivariate CLT.
+Multivariate CLT:
+If X1, . . . , Xn are i.i.d with mean µ ∈Rd, and covariance matrix
+Σ ∈Rd×d (with ﬁnite entries) then,
+√n(bµ −µ) ⇝N(0, Σ).
+Notes:
+1. You might wonder what convergence in distribution means for random vectors.
+A
+random vector still has a CDF, typically we deﬁne this as:
+FX(x1, . . . , xd) = P(X1 ≤x1, . . . Xd ≤xd),
+so we can still deﬁne convergence in distribution via pointwise convergence of the CDF.
+In order to deﬁne points of continuity it turns out that the correct deﬁnition is that a
+point is a point of continuity of the CDF if the boundary of the rectangle whose upper
+right corner is (x1, . . . , xd) has probability 0.
+2. Although d can be larger than 1, it is taken to be ﬁxed as n →∞. Central limit
+theorems, when d is allowed to grow, i.e. high-dimensional CLTs are quite complicated
+and are an active topic of research.
+3. The proof of this result follows directly from the proof of the univariate CLT and
+a powerful result in asymptotic statistics known as the Cramer-Wold device.
+The
+Cramer-Wold device roughly asserts that if aTXn ⇝aTX for all vectors a ∈Rd then
+Xn ⇝X.
+4
+CLT with estimated variance
+We saw that in our typical use case of the CLT (constructing conﬁdence intervals) we needed
+to know the variance σ. In practice, we most often do not know this. However, we can
+estimate this quantity in the usual way,
+bσ2
+n =
+1
+n −1
+n
+X
+i=1
+(Xi −bµ)2.
+3
+
+It turns out that we can replace the standard deviation in the CLT by bσ and still have the
+same convergence in distribution, i.e.
+√n(bµ −µ)
+bσn
+⇝N(0, 1).
+The proof follows from a sequence of applications of Slutsky’s theorem and the continuous
+mapping theorem.
+Proof:
+First observe that if we can show that
+σ
+bσn ⇝1, then an application of Slutsky’s
+theorem and the CLT gives us the desired result.
+Since square-root is a continuous map, by the continuous mapping theorem, it suﬃces to
+show that σ2
+bσ2n ⇝1. We will instead show the stronger statement that,
+bσ2
+n
+p→σ2,
+which implies the desired statement via the continuous mapping theorem. Note that,
+bσ2
+n =
+1
+n −1
+n
+X
+i=1
+(Xi −bµ)2 =
+n
+n −1
+1
+n
+n
+X
+i=1
+(Xi −bµ)2
+and n/(n −1) →1 so it suﬃces to show that
+1
+n −1
+n
+X
+i=1
+(Xi −bµ)2
+P→σ2.
+Now
+1
+n
+n
+X
+i=1
+(Xi −bµ)2 = 1
+n
+n
+X
+i=1
+X2
+i −
+ 
+1
+n
+n
+X
+i=1
+Xi
+!2
+p→E[X2] −(E[X])2
+using the WLLN. This concludes the proof.
+5
+Rate of convergence in CLT - Berry Esseen
+While the central limit theorem is an asymptotic result (i.e. a statement about n →∞) it
+turns out that under fairly general conditions we can say how close to a standard normal
+the average is, in distribution, for ﬁnite values n. Such results are known as Berry Esseen
+bounds. Roughly, they are proved by carefully tracking the remainder terms in our Taylor
+series proof but we will not do this here.
+4
+
+Berry-Esseen:
+Suppose that X1, . . . , Xn ∼P. Let µ = E[X1], σ2 = E[(X1 −µ)2], and
+µ3 = E[|X1 −µ|3]. Let
+Fn(x) = P
+√n(bµ −µ)
+σ
+≤x
+
+,
+denote the CDF of the normalized sample average. If µ3 < ∞then,
+sup
+x |Fn(x) −Φ(x)| ≤
+9µ3
+σ3√n.
+This bound is roughly saying that if µ3/σ3 is small then the convergence to normality in
+distribution happens quite fast.
+6
+The Delta Method
+A natural question that arises frequently is the following: suppose we have a sequence of
+random variables Xn that converges in distribution to a Gaussian distribution then can we
+characterize the limiting distribution of g(Xn) where g is a smooth function?
+We could work this out by using the continuous mapping theorem (indeed, that is at the
+heart of the proof we are about to give).
+Delta Method:
+Suppose that,
+√n(Xn −µ)
+σ
+⇝N(0, 1),
+and that g is a continuously diﬀerentiable function such that g′(µ)̸ = 0. Then,
+√n(g(Xn) −g(µ))
+σ
+⇝N(0, [g′(µ)]2).
+Proof:
+The basic idea is simply to use Taylor’s approximation. We know that,
+g(Xn) ≈g(µ) + g′(µ)(Xn −µ),
+so that,
+√n(g(Xn) −g(µ))
+σ
+≈g′(µ)
+√n(Xn −µ)
+σ
+⇝N(0, [g′(µ)]2).
+To be rigorous however we need to take care of the remainder terms. Here is a more formal
+proof.
+5
+
+By a rigorous application of Taylor’s theorem we obtain,
+√n(g(Xn) −g(µ))
+σ
+= g′(eµ)
+√n(Xn −µ)
+σ
+,
+where eµ is on the line joining µ to bµ. We know by the WLLN that bµ
+p→µ and so eµ
+p→µ. Since
+g is continuously diﬀerentiable, we can use the continuous mapping theorem to conclude that,
+g′(eµ)
+p→g′(µ).
+Now, we apply Slutsky’s theorem to obtain that,
+g′(eµ)
+√n(Xn −µ)
+σ
+⇝g′(µ)N(0, 1)
+d= N(0, [g′(µ)]2).
+An example:
+Suppose we have X1, . . . , Xn ∼P with E[X] = µ, Var(X) = σ2 < ∞.
+Suppose we are interested in the distribution of Yn = exp(bµn). Using that fact that g′(µ) =
+exp(µ), applying the Delta method we obtain,
+√n
+exp(bµn) −exp(µ)
+σ
+
+⇝N(0, exp(2µ)).
+Multivariate Delta Method:
+There is a multivariate analogue of the Delta method.
+Suppose we have random vectors X1, . . . , Xn ∈Rd, and g : Rd 7→R is a continuously
+diﬀerentiable function, then
+√n(g(Xn) −g(µ)) ⇝N(0, τ 2)
+where Xn = n−1 P
+i Xi,
+τ 2 = ∇µ(g)TΣ∇µ(g))
+and
+∇µ(g) =
+
+
+
+∂g(x)
+∂x1...
+∂g(x)
+∂xd
+
+
+
+x=µ
+,
+is the gradient of g evaluated at µ.
+Example. Let Xi = (Xi1, Xi2) have mean µ = (µ1, µ2) and variance Σ. The CLT implies
+that √n(Xn −µ) ⇝N(0, Σ). Let g(x1, x2) = x1x2. Now ∇g = (x2, x1)T. So
+√n(X1X2 −µ1µ2) ⇝N(0, τ 2)
+where τ 2 = (µ2, µ1)TΣ(µ2, µ1).
+6

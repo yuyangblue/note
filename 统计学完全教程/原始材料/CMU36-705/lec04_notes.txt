@@ -1,0 +1,202 @@
+Lecture Notes 4
+36-705
+In today’s lecture we discuss the convergence of random variables.
+At a high-level, our
+ﬁrst few lectures focused on non-asymptotic properties of averages i.e. the tail bounds we
+derived applied for any ﬁxed sample size n. For the next few lectures we focus on asymptotic
+properties, i.e. we ask the question: what happens to the average of n i.i.d. random variables
+as n →∞.
+Roughly, from a theoretical perspective the idea is that many expressions will consider-
+ably simplify in the asymptotic regime. Rather than have many diﬀerent tail bounds, we
+will derive simple “universal results” that hold under extremely weak conditions. From a
+slightly more practical perspective, asymptotic theory is often useful to obtain approximate
+conﬁdence intervals.
+1
+Reminder: convergence of sequences
+When we think of convergence of deterministic real numbers the corresponding notions are
+classical.
+Formally, we say that a sequence of real numbers a1, a2, . . . converges to a ﬁxed real number a
+if, for every positive number ϵ, there exists a natural number N(ϵ) such that for all n ≥N(ϵ),
+|an −a| < ϵ. We call a the limit of the sequence and write limn→∞an = a.
+Our focus today will in trying to develop analogues of this notion that apply to sequences
+of random variables. We will ﬁrst give some deﬁnitions and then try to circle back to relate
+the deﬁnitions and discuss some examples.
+Throughout, we will focus on the setting where we have a sequence of random variables
+X1, . . . , Xn and another random variable X, and would like to deﬁne what is means for the
+sequence to converge to X. In each case, to simplify things you should also think about the
+case when X is deterministic, i.e. when X = c with probability 1 (for some constant c).
+Importantly, we will not assume that the RVs X1, . . . , Xn are independent.
+2
+Almost sure convergence
+We will not use almost sure convergence in this course so you should feel free to ignore this
+section. A natural analogue of the usual convergence would be to hope that,
+lim
+n→∞Xn = X.
+1
+
+We write Xn
+a.s.
+→X. These are both however random variables so one has to at least specify
+on what event we are hoping for this statement to be true.
+The correct analogue turns out to be to require:
+P
+
+lim
+n→∞Xn = X
+
+= 1.
+There are measure theoretic subtleties to be aware of here. In particular, the sample space in-
+side the probability statement here is set of inﬁnite sequences and it requires some machinery
+to be precise here.
+There are other equivalent (this is somewhat diﬃcult to see) ways to deﬁne almost sure
+convergence. Equivalently, we say that Xn converges almost surely to X if we let Ωbe a set
+of probability mass 1, i.e. P(Ω) = 1, and for every ω ⊆Ω, and for every ϵ > 0, we have that
+there is some n ≥N(ω, ϵ) such that:
+|Xn(ω) −X(ω)| ≤ϵ.
+Roughly, the way to think about this type of convergence is to imagine that there is some
+set of exceptional events on which the random variables can disagree, but these exceptional
+events have probability 0 as n →∞. Barring, these exceptional events the sequence con-
+verges just like sequences of real numbers do. The exceptional events is where the “almost”
+in almost sure arises.
+3
+Convergence in probability
+A sequence of random variables X1, . . . , Xn converges in probability to a random variable X
+if for every ϵ > 0 we have that,
+lim
+n→∞P(|Xn −X| ≥ϵ) = 0.
+We write Xn
+P→X. To build intuition it is perhaps useful to consider the case when X is
+deterministic, i.e. X = c with probability 1. Then convergence in probability is saying that
+as n gets large the distribution of Xn gets more peaked around the value c. Convergence
+in probability can be viewed as a statement about the convergence of probabilities, while
+almost sure convergence is a convergence of the values of a sequence of random variables.
+We will not prove this statement but convergence in probability is implied by almost sure
+convergence. The notes contain a counterexample to the reverse implication which we may
+or may not cover in the lecture.
+2
+
+Weak Law of Large Numbers Suppose that Y1, Y2, . . . are i.i.d. with E[Yi] = µ and
+Var(Yi) = σ2 < ∞. Deﬁne,
+Xn = 1
+n
+n
+X
+j=1
+Yj.
+The WLLN says that the sequence X1, X2, . . . converges in probability to µ. That is Xn
+P→µ.
+Proof:
+The proof is simply an application of Chebyshev’s inequality. We note that by
+Chebyshev’s inequality:
+P(|Xn −E[X]| ≥ϵ) ≤σ2
+nϵ2.
+This in turn implies that,
+lim
+n→∞P(|Xn −E[X]| ≥ϵ) = 0,
+as desired.
+Notes:
+1. Strictly speaking the WLLN is true even without the assumption of ﬁnite variance, as
+long as the ﬁrst absolute moment is ﬁnite. This proof is a bit more diﬃcult.
+2. There is a statement that says that under similar assumptions the average converges
+almost surely to the expectation. This is known as the strong law of large numbers.
+This is actually quite a bit more diﬃcult to prove.
+Consistency:
+Convergence in probability will frequently recur in this course. Usually we
+will construct an estimator bθn for some quantity θ∗. We will then say that the estimator is
+consistent if the sequence of RVs bθn converges in probability to θ∗.
+The WLLN/Chebyshev can already be used to prove some rudimentary consistency guaran-
+tees. For instance, if we consider the sample variance:
+bSn =
+1
+n −1
+n
+X
+i=1
+(Xi −bµn)2,
+then by Chebyshev’s inequality we obtain,
+P(|bSn −σ2| ≥ϵ) ≤Var(bSn)
+ϵ2
+,
+so a suﬃcient condition for consistency is that Var(bSn) →0 as n →∞.
+3
+
+Convergence in probability does not imply almost sure convergence:
+Suppose
+we have a sample space S = [0, 1], with the uniform distribution, we draw s ∼U[0, 1] and
+deﬁne X(s) = s. We deﬁne the sequence as:
+X1(s) = s + I[0,1](s),
+X2(s) = s + I[0,1/2](s),
+X3(s) = s + I[1/2,1](s)
+X4(s) = s + I[0,1/3](s),
+X5(s) = s + I[1/3,2/3](s),
+X6(s) = s + I[2/3,1](s).
+Now one can check that this sequence converges in probability but not almost surely.
+Roughly, the “1 + s” spike becomes less frequent down the sequence (allowing convergence
+in probability) but the limit is not well deﬁned. For any s, Xn(s) alternates between s and
+1 + s.
+4
+Convergence in quadratic mean
+An often useful way to show convergence in probability is to show something stronger known
+as convergence in quadratic mean. We say that a sequence converges to X in quadratic mean
+if:
+E(Xn −X)2 →0,
+as n →∞. We write Xn
+qm
+→X.
+5
+Convergence in distribution
+The other commonly encountered mode of convergence is convergence in distribution. We
+say that a sequence converges to X in distribution if:
+lim
+n→∞FXn(t) = FX(t),
+for all points t where the CDF FX is continuous. We will see why the exception matters in
+a little while but for now it is worth noting that convergence in distribution is the weakest
+form of convergence. We write Xn ⇝X.
+For instance, a sequence of i.i.d. N(0, 1) RVs converge in distribution to an independent
+N(0, 1) RV, even though the values of the random variables are not close in any meaningful
+sense (their distributions are however, identical). A famous result that we will disucss in the
+next lecture is the central limit theorem. The central limit theorem says that an average
+of i.i.d. random variables (appropriately normalized) converges in distribution to a N(0, 1)
+random variable.
+The picture to keep in mind to understand the relationships is the following one:
+4
+
+We will re-visit this in the next lecture and perhaps try to prove some of the implications
+(or disprove some of the non-implications).
+6
+Examples
+Example 1:
+Suppose we consider a sequence Xn = N(0, 1/n). Intuitively, it seems like
+this sequence converges to 0. Let us ﬁrst consider what happens in distribution.
+Let X be such that P(X = 0) = 1. The CDF is FX(x) = 0, for x < 0 and FX(x) = 1 for
+x ≥0. Note that Xn
+d= Z/n where Z ∼N(0, 1). So,
+FXn(x) = P(Xn ≤x) = P(Z ≤√nx),
+where Z ∼N(0, 1). If x > 0 this tends to 1, and if x < 0 this tends to 0. Interestingly, at
+x = 0, FXn(x) = 1/2, and does not converge to FX(0) = 1. Remember, however, that we
+had an exception at points of discontinuity. So Xn ⇝X.
+Example 2:
+Let us consider the same example and consider convergence in probability.
+P(|Xn −X| ≥ϵ) = E[X2
+n]
+ϵ2
+=
+1
+nϵ2 →0,
+so the sequence converges to 0 in probability.
+Example 3:
+Suppose X1, . . . ∼U[0, 1]. Let us deﬁne X(n) = max1≤i≤n Xi. Now, we verify
+two things:
+1. X(n) converges in probability to 1. To see this observe that,
+P(|X(n) −1| ≥ϵ) = P(X(n) ≤1 −ϵ)
+=
+n
+Y
+i=1
+P(Xi ≤1 −ϵ) = (1 −ϵ)n
+→0.
+2. The random variable n(1 −X(n)) converges in distribution to an Exp(1) RV. To see
+this we compute:
+FX(n)(t) = P(n(1 −X(n)) ≤t) = 1 −P(X(n) ≤1 −t/n)
+= 1 −(1 −t/n)n →1 −exp(−t) = FX(t).
+5

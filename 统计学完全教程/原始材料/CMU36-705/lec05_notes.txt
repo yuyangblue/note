@@ -1,0 +1,263 @@
+Lecture Notes 5
+Today we will start oﬀby deriving some of the implications between the diﬀerent modes of
+convergence. Then we will prove the CLT.
+1
+Quadratic mean =⇒convergence in probability
+Suppose that X1, . . . , Xn converges in quadratic mean to X, then ﬁx an ϵ > 0,
+P(|Xn −X| ≥ϵ) = P(|Xn −X|2 ≥ϵ2) ≤E(Xn −X)2
+ϵ2
+→0,
+showing convergence in probability.
+At a high-level the convergence in qm requirement penalizes Xn for having large deviations
+from X by both how frequent the deviation is but also by the magnitude of the deviation. On
+the other hand convergence in probability only penalizes you for how frequent the deviation
+is and hence is a weaker notion of convergence.
+Counterexample to reverse:
+Suppose we take U ∼U[0, 1] and deﬁne Xn = √nI[0,1/n](U),
+then Xn converges in probability to 0 but does not converge in quadratic mean to 0.
+To see this:
+P(|Xn| ≥ϵ) = P(√nI[0,1/n](U) ≥ϵ) = P(U ∈[0, 1/n]) = 1
+n →0.
+On the other hand,
+E(Xn −X)2 = EX2
+n = nP(U ∈[0, 1/n]) = 1.
+Observe that most of the time the RV Xn takes the value 0, but when it does not it takes a
+huge value.
+1.1
+Convergence in probability =⇒convergence in distribution
+This one is a little bit involved but perhaps also useful to know. The idea roughly is to trap
+the CDF of Xn by the CDF of X with an interval whose length converges to 0.
+Suppose that Xn ⇝X. We ﬁx a point x where the CDF FX(x) is continuous. Choose an
+arbitrary ϵ > 0. We have that,
+FXn(x) = P(Xn ≤x) = P(Xn ≤x, X ≤x + ϵ) + P(Xn ≤x, X ≥x + ϵ)
+≤P(X ≤x + ϵ) + P(|Xn −X| ≥ϵ)
+= FX(x + ϵ) + P(|Xn −X| ≥ϵ).
+1
+
+Now,
+FX(x −ϵ) = P(X ≤x −ϵ) = P(X ≤x −ϵ, Xn ≤x) + P(X ≤x −ϵ, Xn ≥x)
+≤FXn(x) + P(|Xn −X| ≥ϵ).
+Putting these two together we have,
+FX(x −ϵ) −P(|Xn −X| ≥ϵ) ≤FXn(x) ≤FX(x + ϵ) + P(|Xn −X| ≥ϵ).
+Intuitively, now as n gets large the two probabilities converge to 0, and since ϵ was chosen
+arbitrarily we can let ϵ →0 and use the continuity of FX(x) at x to conclude that FXn(x) →
+FX(x).
+Slightly more rigorously, we cannot assume that the limit of FXn(x) exists so we instead
+need to use lim infs and lim sups (do not worry about this if you have not seen it before).
+Formally, we would take the lim sup of the ﬁrst half to obtain that,
+lim sup
+n→∞FXn(x) ≤FX(x + ϵ),
+and similarly that,
+lim inf
+n→∞FXn(x) ≥FX(x −ϵ),
+and conclude that,
+FX(x −ϵ) ≤lim inf
+n→∞FXn(x) ≤lim sup
+n→∞FXn(x) ≤FX(x + ϵ).
+Now since ϵ > 0 was arbitrary, we can take the limit as ϵ →0 and use continuity to conclude
+the desired convergence in distribution.
+Counterexample to reverse:
+This is easy since two random variables having the same
+distribution does not in any sense mean that they are close. For example, let X, X1, X2, ∼
+N(0, 1). They all have the same cdf so Xn ⇝X. But P(|Xn −X| > ϵ) does not go to 0.
+An important exception:
+An important exception is that when X is deterministic then
+convergence in distribution implies convergence in probability. Suppose that P(X = c) = 1.
+Fix ϵ > 0. Then
+P(|Xn −c| > ϵ) = P(Xn > ϵ + c) + P(Xn < c −ϵ)
+= FXn(c −ϵ) + 1 −FXn(c + ϵ)
+→FX(c −ϵ) + 1 −FX(c + ϵ) = 0.
+using convergence in distribution and the fact that at both c + ϵ, and c −ϵ, the distribution
+function FX is continuous. So Xn ⇝c implies that Xn
+P→c.
+2
+
+2
+Other things that are very useful to know
+1. Continuous mapping theorem. If a sequence X1, . . . , Xn converges in probability
+to X then for any continuous function h, h(X1), . . . , h(Xn) converges in probability to
+h(X). The same is true for convergence in distribution.
+2. A consequence of the continuous mapping theorem. If Xn
+P→X and Yn
+P→Y then
+Xn + Yn
+P→X + Y . Similarly, XnYn
+P→XY .
+3. Slutsky’s theorem. If Xn ⇝X and Yn ⇝Y we cannot conclude that the sum con-
+verges. The one exception is known as Slutsky’s theorem. It says that if Yn converges
+in distribution to a constant c, and X converges in distribution to X: then Xn + Yn
+converges in distribution to X + c and XnYn converges in distribution to cX.
+4. Convergence of moments is not implied by convergence in probability. Con-
+vergence in probability is actually quite weak as a form of convergence. We have seen
+previously that it does not imply quadratic mean convergence. Now we will see that
+it does not even imply something much simpler.
+If we have Xn converges in probability to some constant c, then it is not the case that
+E[Xn] converges to c. Here is an example of this non-convergence. Let Xn be 0 with
+probability 1−1/n and n2 with probability 1/n. Then Xn converges to 0 in probability,
+but E[Xn] = n →∞.
+This is a manifestation of the same phenomena as we saw in the counterexample to
+qm convergence. On the events when |Xn| ≥ϵ it has a huge value and this aﬀects the
+moments but does not aﬀect the convergence in probability.
+3
+The Central Limit Theorem (CLT)
+We will now state and prove a form of the central limit theorem, which is one of the most
+famous and important examples of convergence in distribution. Let X1, X2, . . . , Xn be a
+sequence of independent random variables with mean µ and variance σ2.
+Theorem 1 Assume that the mgf E[exp(tXi)] is ﬁnite for t in a neighborhood around zero.
+Let Xn = n−1 P
+i Xi. Let
+Zn =
+√n(Xn −µ)
+σ
+.
+then Zn converges in distribution to Z ∼N(0, 1), that is Zn ⇝Z. Hence, as n →∞,
+P(Zn ≤t) →Φ(t)
+3
+
+for all t, where
+Φ(t) =
+Z t
+−∞
+1
+√
+2πe−s2/sds.
+The central limit theorem is incredibly general. It does not matter what the distribution of
+Xi is, the average Sn converges in distribution to a Gaussian (under fairly mild assumptions).
+The most general version of the CLT does not require any assumption about the mgf. It
+just requires that the mean and variance are ﬁnite. The interpretation of the CLT is that
+Zn ≈N(0, 1). In other words,
+Xn ≈N(µ, σ2/n).
+It can be shown that
+sup
+t |P(Zn ≤t) −Φ(t)| ≤33
+4
+µ3
+σ3√n
+where µ3 = E[|Xi −µ|3].
+We should try to understand why the CLT might be useful. Roughly, the CLT allows to
+make approximate probability statements about averages using corresponding statements
+about standard normals. Here is an example that we will discuss in detail later: conﬁdence
+intervals.
+Suppose for now that we are averaging iid random variables with known variance σ (and
+unknown mean µ). Typically one would also estimate the variance but this will not change
+much. We would like to construct a conﬁdence interval for the unknown mean. We specify
+α ∈(0, 1) and we ﬁnd a random set C such that
+P(µ ∈C) ≥1 −α.
+We might take
+C = [bµ −t, bµ + t]
+where bµ = Xn. Then
+P(µ ∈[bµ −t, bµ + t]) = P(|bµ −µ| ≤t).
+So we would like to choose t to make this probability equal to 1 −α. Now
+P(|bµ −µ| ≤t) = P
+√n|bµ −µ|
+σ
+≤
+√nt
+σ
+
+≈P(|Z| ≤t)
+where Z ∼N(0, 1). In the last step we used the CLT. Let Φ denote the cdf of Z and deﬁne
+zα = Φ−1(1 −α).
+Note that
+P(Z > zα/2) = P(Z < −zα/2) = α
+2
+4
+
+so that P(−zα/2 < Z < zα/2) = 1 −α. So we want to set
+√nt
+σ
+= zα/2
+that is,
+t = σzα/2
+√n .
+To summarize: if we deﬁne
+C =
+
+bµ −σzα/2
+√n , bµ + σzα/2
+√n
+
+,
+then
+P(µ ∈C) →1 −α
+as n →∞. The convergence is due to the CLT.
+3.1
+Preliminaries
+First we note that
+E[Zn] = 0
+and
+Var[Zn] = 1.
+Also note that if X1, . . . , Xn ∼N(0, 1) then Zn is exactly N(0, 1).
+Calculus with mgfs:
+We need a few simple facts about mgfs that we will quickly prove.
+Fact 1:
+If X and Y are independent with mgfs MX and MY then Z = X + Y has mgf
+MZ(t) = MX(t)MY (t).
+Proof:
+We note that,
+MZ(t) = E[exp(t(X + Y )] = E[exp(tX)]E[exp(tY )],
+using independence.
+Fact 2:
+If X has mgf MX then Y = a + bX has mgf, MY (t) = exp(at)MX(bt).
+Proof:
+We just use the deﬁnition,
+MY (t) = E[exp(at + btX)] = exp(at)E[exp(btX)].
+Fact 3:
+We will not prove this one (strictly speaking one needs to invoke the dominated
+convergence theorem) but it should be familiar to you. The derivative of the mgf at 0 gives
+us moments, i.e.
+M (r)
+X (0) = E[Xr].
+5
+
+Fact 4:
+The most important result that we also will not prove is that we can show con-
+vergence in distribution by showing convergence of the mgfs. Let X1, . . . , Xn be a sequence
+of random variables with mgfs MX1, . . . , MXn. Let X be a random variable with mfg MX.
+If for all t in an open interval around 0 we have that, MXn(t) →MX(t), then Xn converges
+in distribution to X.
+Fact 5: If Z ∼N(0, 1) then MZ(t) = et2/2.
+3.2
+Proof of the CLT
+Note that
+√n(Xn −µ)
+σ
+=
+1
+√n
+X
+i
+Ai
+where
+Ai = Xi −µ
+σ
+.
+Let M(t) be the mgf for Ai. Since Ai has mean 0 and variance 1, we have that M(0) = 1,
+M ′(0) = 0 and M ′′(0) = 1. Now
+MZn(t) = E[etZn] = E[e
+t
+√n
+P
+i Ai] =
+Y
+i
+E[e
+t
+√nAi] = M(t/√n)n.
+Expanding M:
+M(t/√n) ≈M(0) +
+t
+√nM ′(0) + t2
+2nM ′′(0) = 1 + t2
+2n
+and so
+M(t/√n)n ≈
+
+1 + t2
+2n
+n
+→et2/2
+which is the mgf of a N(0,1). Here we used the fact that,
+lim
+n→∞(1 + x/n)n →exp(x).
+6

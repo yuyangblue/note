@@ -1,0 +1,340 @@
+Lecture Notes 2
+36-705
+Recall in the last class we discussed that we would like to understand the behaviour of
+the average of independent random variables. Towards that goal let us begin by trying to
+understand the tail behaviour of a random variable.
+1
+Markov Inequality
+The most elementary tail bound is Markov’s inequality, which asserts that for a positive
+random variable X ≥0, with ﬁnite mean,
+P(X ≥t) ≤E[X]
+t
+= O
+1
+t
+
+.
+Intuitively, if the mean of a (positive) random variable is small then it is unlikely to be too
+large too often, i.e. the probability that it is large is small. While Markov on its own is
+fairly crude it will form the basis for much more reﬁned tail bounds.
+Proof:
+Note that
+E[X] =
+Z ∞
+0
+xp(x)dx ≥
+Z ∞
+t
+xp(x)dx ≥t
+Z ∞
+t
+p(x)dx = tP(X ≥t).
+2
+Chebyshev Inequality
+Chebyshev’s inequality states that for a random variable X, with Var(X) = σ2, for any t > 0,
+P
+
+|X −E[X]| ≥tσ
+
+≤1
+t2 = O
+ 1
+t2
+
+.
+Before we prove this let’s look at a simple application. In the last lecture we saw that if we
+average i.i.d. random variables with mean µ and variance σ2, we have that the average:
+bµn = 1
+n
+n
+X
+i=1
+Xi,
+has mean µ and variance σ2/n. So applying Chebyshev’s inequality to bµn we obtain that,
+P
+
+|bµn −µ| ≥tσ
+√n
+
+≤1
+t2.
+1
+
+So, with probability at least 0.99 (for instance) the average is within 10σ/√n from the its
+expectation. This is pretty neat and almost directly gives us something called the Weak Law
+of Large Numbers (but we will return to this).
+We will study reﬁnements of this inequality today, but in some sense it already has the
+correct “1/√n” behaviour. The reﬁnements will mainly be to show that in many cases we
+can dramatically improve the constant 10.
+Proof:
+Chebyshev’s inequality is an immediate consequence of Markov’s inequality.
+P(|X −E[X]| ≥tσ) = P(|X −E[X]|2 ≥t2σ2)
+≤E(|X −E[X]|2)
+t2σ2
+= 1
+t2.
+3
+ChernoﬀMethod
+There are several reﬁnements to the Chebyshev inequality. One simple one that is sometimes
+useful is to observe that if the random variable X has a ﬁnite k-th central moment then we
+have that,
+P(|X −E[X]| ≥t) ≤E|X −E[X]|k
+tk
+.
+For many random variables (we will see some examples today), the moment generating
+function will exist in a neighborhood around 0, i.e the mgf is ﬁnite for all |t| ≤b where b > 0
+is some constant. In these cases, we can use the mgf to produce a tail bound.
+Deﬁne, µ = E[X]. For any t > 0, we have that,
+P((X −µ) ≥u) = P(exp(t(X −µ)) ≥exp(tu)) ≤E[exp(t(X −µ))]
+exp(tu)
+by applying Markoov’s inequality. Now t is a parameter we can choose to get a tight upper
+bound, i.e. we can write this bound as:
+P((X −µ) ≥u) ≤inf
+0≤t≤b exp(−t(u + µ))E[exp(tX)].
+This bound is known as Chernoﬀ’s bound.
+3.1
+Gaussian Tail Bounds via Chernoﬀ
+Suppose that, X ∼N(µ, σ2), then a simple calculation gives that the mgf of X is:
+MX(t) = E[exp(tX)] = exp(tµ + t2σ2/2).
+2
+
+The mgf is deﬁned for all t. To apply the Chernoﬀbound we then need to compute:
+inf
+t≥0 exp(−t(u + µ)) exp(tµ + t2σ2/2) = inf
+t≥0 exp(−tu + t2σ2/2),
+which is minimized when t = u/σ2 which in turn yields the tail bound,
+P(X −µ ≥u) ≤exp(−u2/(2σ2)).
+This is often referred to as a one-sided or upper tail bound. We can use the fact that if X has
+distribution N(µ, σ2) then −X has distribution N(−µ, σ2) and repeat the above calculation
+to obtain the analogous lower tail bound,
+P(−X + µ ≤u) ≤exp(−u2/(2σ2)).
+Putting these two pieces together, we have the two-sided Gaussian tail bound:
+P(|X −µ| ≥u) ≤2 exp(−u2/(2σ2)).
+The main thing to observe is that this inequality is much sharper than Chebyshev’s inequality.
+In particular, suppose we consider the average of i.i.d Gaussian random variables, i.e. we
+have X1, . . . , Xn ∼N(µ, σ2) and we construct the estimate:
+bµ = 1
+n
+n
+X
+i=1
+Xi.
+Using the fact that the average of Gaussian RVs is Gaussian we obtain that bµ has a
+N(µ, σ2/n) distribution. In this case, using the Gaussian tail bound we derived we obtain
+that,
+P(|bµ −µ| ≥tσ/√n) ≤2 exp(−t2/2).
+This is an example of an exponential tail inequality. Comparing with Chebyshev’s inequality
+we should observe two things:
+1. Both inequalities say roughly that the deviation of the average from the expected value
+goes down as 1/√n.
+2. However, the Gaussian tail bound says if the random variables are actually Gaussian
+then the chance that the deviation is much bigger than σ/√n goes down exponentially
+fast. Let us look at a concrete example, we say previously that Chebyshev told us the
+average is within 10σ/√n with probability at least 0.99.
+On the other hand the exponential tail bound says that with probability 0.99 the
+average is within,
+p
+2 ln(1/0.005)σ/√n ≈3.25σ/√n.
+3
+
+More generally, Chebyshev tells us that with probability at least 1 −δ,
+|bµ −µ| ≤
+σ
+√
+nδ
+while the exponential tail bound tells us that,
+|bµ −µ| ≤σ
+r
+2 ln(2/δ)
+n
+.
+The ﬁrst goes up polynomially as δ →0, while the second more reﬁned bound goes up
+only logarithmically.
+3.2
+Sub-Gaussian Random Variables
+It turns out that the Gaussian tail inequality from the previous section is much more broadly
+applicable to a class of random variables called sub-Gaussian random variables. Roughly
+these are random variables whose tails decay faster than a Gaussian. Formally, a random
+variable X with mean µ is sub-Gaussian if there exists a positive number σ such that,
+E[exp(t(X −µ))] ≤exp(σ2t2/2),
+for all t ∈R. Gaussian random variables with variance σ2 satisfy the above condition with
+equality, so a σ-sub-Gaussian random variable basically just has an mgf that is dominated
+by a Gaussian with variance σ.
+It is straightforward to go through the above Chernoﬀbound to conclude that for a sub-
+Gaussian random variable we have the same two-sided exponential tail bound,
+P(|X −µ| ≥u) ≤2 exp(−u2/(2σ2)).
+Suppose we have n i.i.d random variables σ sub-Gaussian RVs X1, X2, . . . , Xn. Let bµ =
+n−1 P
+i Xi. Then by independence we obtain that,
+E[exp(t(bµ −µ))] = E[exp(t/n
+n
+X
+i=1
+(Xi −µ)]
+=
+n
+Y
+i=1
+E[exp(t(Xi −µ)/n)]
+≤exp(t2σ2/(2n)).
+Alternatively, the average of n independent σ-sub Gaussian RVs is σ/√n-sub Gaussian. This
+yields the tail bound for the average of sub Gaussian RVs:
+P(|bµ −µ| ≥kσ/√n) ≤2 exp(−k2/2).
+4
+
+3.3
+Bounded Random Variables - Hoeﬀding’s bound
+We claimed in the previous section that many classes of RVs are sub-Gaussian.
+In this
+section, we show this for an important special case: bounded random variables.
+Example 1:
+Let us ﬁrst consider a simple case, of Rademacher random variables, i.e.
+random variables that take the values {+1, −1} equiprobably. In this case we can see that,
+E[exp(tX)] = 1
+2 [exp(t) + exp(−t)]
+= 1
+2
+" ∞
+X
+k=0
+(−t)k
+k!
++
+∞
+X
+k=0
+tk
+k!
+#
+=
+∞
+X
+k=0
+t2k
+(2k)! ≤
+∞
+X
+k=0
+t2k
+2kk!
+= exp(t2/2).
+This shows that Rademacher random variables are 1-sub Gaussian.
+Detour: Jensen’s inequality:
+A function g is convex if
+g(αx + (1 −α)y) ≤αg(x) + (1 −α)g(y)
+for all x, y and all α ∈[0, 1]. For example, g(x) = x2 is convex. Jensen’s inequality states
+that for a convex function g : R 7→R we have that,
+E[g(X)] ≥g(E[X]).
+If g is concave then the reverse inequality holds.
+Proof:
+Let µ = E[X] and let Lµ(x) = a + bx be the tangent line to the function g at µ,
+i.e. we have that Lµ(µ) = g(µ). By convexity we know that g(x) ≥Lµ(x) for every point x.
+Thus we have that,
+E[g(X)] ≥E[Lµ(X)] = E[a + bX]
+= a + bµ = Lµ(µ) = g(µ).
+Example 2: Bounded Random Variables.
+Let X be a random variable with zero
+mean and with support on some bounded interval [a, b].
+You should convince yourself that the zero mean assumption does not matter: you can
+always subtract the mean, i.e. deﬁne a new random variable Y = X −E[X] and use Y in
+the calculation below.
+Let X′ denote an independent copy of X then we have that,
+EX[exp(tX)] = EX[exp(t(X −E[X′])] ≤EX,X′[exp(t(X −X′)],
+5
+
+using Jensen’s inequality, and the convexity of the function g(x) = exp(x).
+Now, let ϵ be a Rademacher random variable. Then note that the distribution of X −X′ is
+identical to the distribution of X′ −X and more importantly of ϵ(X −X′). So we obtain
+that,
+EX,X′[exp(t(X −X′)] = EX,X′[Eϵ[exp(tϵ(X −X′)]]
+≤EX,X′[exp(t2(X −X′)2/2],
+where we just use the result from Example 1, with (X, X′) ﬁxed by conditioning.
+Now
+(X −X′) using boundedness is at most (b −a) so we obtain that,
+EX[exp(tX)] ≤exp(t2(b −a)2/2),
+which in turn shows that bounded random variables are (b −a)-sub Gaussian.
+This in turn yields Hoeﬀding’s bound. Suppose that, X1, . . . , Xn are independent identically
+distribution bounded random variables, with a ≤Xi ≤b for all i with mean 0. Then
+P(Xn ≥ϵ) = P(etXn ≥etϵ) ≤e−tϵent2(b−a)2/2.
+Minimizing over t we get
+P
+ Xn ≥t
+
+≤exp
+
+−
+nt2
+2(b −a)2
+
+.
+Repeating this in the other direction we get
+P
+ |Xn| ≥t
+
+≤2 exp
+
+−
+nt2
+2(b −a)2
+
+.
+More generally, if Xi has mean µ then
+P
+ |Xn −µ| ≥t
+
+≤2 exp
+
+−
+nt2
+2(b −a)2
+
+.
+This is a two-sided exponential tail inequality for the averages of bounded random variables.
+With some eﬀort you can derive a slightly tighter bound on the MGF to obtain the stronger
+bound that:
+P
+ Xn −µ
+ ≥t
+
+≤2 exp
+
+−
+2nt2
+(b −a)2
+
+.
+3.4
+A simple generalization
+It is worth noting that none of the exponential tail inequalities we proved required the random
+variables to be identically distributed. More generally, suppose that we have X1, . . . , Xn
+6
+
+which are each σ1, . . . , σn sub Gaussian. Then using just independence you can verify that
+their average bµ is σ-sub Gaussian, where,
+σ = 1
+n
+v
+u
+u
+t
+n
+X
+i=1
+σ2
+i
+This in turn yields the exponential tail inequality,
+P
+ 
+1
+n
+n
+X
+i=1
+(Xi −E[Xi])
+ ≥t
+!
+≤exp(−t2/(2σ2)).
+Note that the random variables still need to be independent but no longer need to be iden-
+tically distributed (i.e. they can for instance have diﬀerent means and sub-Gaussian param-
+eters).
+7
