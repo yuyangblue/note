@@ -1,0 +1,93 @@
+<html style="margin:0;padding:0;">
+<div style="background-color:transparent;box-sizing:border-box;padding:4px;">
+<div style="font-family:'Roboto','PingFang SC','Segoe UI',Arial,sans-serif;color:#1A1B1C;max-width:960px;box-sizing:border-box;border-radius:16px;background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.08);padding:16px;">
+  <div style="font-size:16px;font-weight:600;margin-bottom:4px;">完全自学每周计划（约 36h/周）</div>
+  <div style="font-size:12px;color:#6B7280;margin-bottom:14px;">工作日 上午2h+下午3h+晚上1h=30h ｜ 周末复习巩固 6h ｜ 前5门专业课单独排，公共课轮换</div>
+  <div id="schedule" style="box-sizing:border-box;"></div>
+  <div id="weekend" style="margin-top:10px;box-sizing:border-box;"></div>
+  <div id="summary" style="margin-top:14px;box-sizing:border-box;"></div>
+  <div id="legend" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:#4B5563;"></div>
+</div>
+<script>
+(function(){
+  try {
+    var colors = {
+      '离散数学':'#9BBBF4','概率论':'#A2DDAA','计算方法':'#E1B98F',
+      '数据结构':'#C9A7E8','CSAPP':'#94D4D0','公共课':'#F4B393','复习':'#D1D5DB'
+    };
+    function block(c, t, sub, h, flex){
+      var col = colors[c] || '#D1D5DB';
+      var d = document.createElement('div');
+      d.style.cssText='flex:'+flex+' 1 0;padding:8px 10px;border-radius:10px;background:'+col+'33;border-left:4px solid '+col+';box-sizing:border-box;min-width:0;';
+      d.innerHTML='<div style="font-size:10px;color:#6B7280;">'+h+'</div><div style="font-size:12px;font-weight:600;margin-top:1px;">'+t+'</div><div style="font-size:10px;color:#4B5563;margin-top:1px;line-height:1.3;">'+sub+'</div>';
+      return d;
+    }
+    var days = [
+      {d:'周一', am:['离散数学','视频+教材','2h'], pm:['概率论','视频+教材+做题','3h'], ev:['概率论','错题整理','1h']},
+      {d:'周二', am:['计算方法','视频+教材','2h'], pm:['数据结构','视频+PTA刷题','3h'], ev:['数据结构','PTA/LeetCode','1h']},
+      {d:'周三', am:['CSAPP','看书+视频','2h'], pm:['公共课','4门轮换','3h'], ev:['CSAPP','做Lab','1h']},
+      {d:'周四', am:['概率论','复习+刷题','2h'], pm:['计算方法','Python复现','3h'], ev:['计算方法','代码调试','1h']},
+      {d:'周五', am:['数据结构','复习+LeetCode','2h'], pm:['混合','离散1.5h+CSAPP1.5h','3h'], ev:['离散数学','做题/休息','1h']}
+    ];
+    var sched = document.getElementById('schedule');
+    days.forEach(function(day){
+      var row = document.createElement('div');
+      row.style.cssText='display:flex;align-items:stretch;gap:6px;margin-bottom:6px;box-sizing:border-box;';
+      var label = document.createElement('div');
+      label.style.cssText='flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#374151;box-sizing:border-box;';
+      label.textContent=day.d;
+      row.appendChild(label);
+      row.appendChild(block(day.am[0],day.am[0],day.am[1],day.am[2],1));
+      row.appendChild(block(day.pm[0],day.pm[0],day.pm[1],day.pm[2],1.4));
+      row.appendChild(block(day.ev[0],day.ev[0],day.ev[1],day.ev[2],0.7));
+      sched.appendChild(row);
+    });
+    // 周末
+    var we = document.getElementById('weekend');
+    var werow = document.createElement('div');
+    werow.style.cssText='display:flex;align-items:stretch;gap:6px;box-sizing:border-box;';
+    var welabel = document.createElement('div');
+    welabel.style.cssText='flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#374151;';
+    welabel.textContent='周末';
+    werow.appendChild(welabel);
+    var sat = block('复习','周六','5门错题重做+笔记整理','3-4h',1);
+    var sun = block('复习','周日','预习下周+公共课补充','2-3h',1);
+    werow.appendChild(sat); werow.appendChild(sun);
+    var spacer = document.createElement('div');
+    spacer.style.cssText='flex:0.7 1 0;';
+    werow.appendChild(spacer);
+    we.appendChild(werow);
+    // 学时汇总
+    var hours = [
+      ['离散数学','~5.5h','周一学新+复习，每2周1章'],
+      ['概率论','~7h','周一学新+周四刷题+晚错题'],
+      ['计算方法','~7h','周二学新+周四Python+晚调试'],
+      ['数据结构','~7h','周二学新+周五刷题+晚PTA'],
+      ['CSAPP','~5.5h','周三学新+复习+晚做Lab'],
+      ['公共课','~4h','周三+周日，4门轮换']
+    ];
+    var sum = document.getElementById('summary');
+    sum.innerHTML='<div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151;">每门课每周学时（合计 ~36h）</div>';
+    var grid = document.createElement('div');
+    grid.style.cssText='display:flex;gap:6px;flex-wrap:wrap;box-sizing:border-box;';
+    hours.forEach(function(h){
+      var c = colors[h[0]] || '#D1D5DB';
+      var card = document.createElement('div');
+      card.style.cssText='flex:1 1 120px;min-width:0;padding:8px 10px;border-radius:8px;background:'+c+'22;border:1px solid '+c+'55;box-sizing:border-box;';
+      card.innerHTML='<div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-size:12px;font-weight:600;">'+h[0]+'</span><span style="font-size:14px;font-weight:700;">'+h[1]+'</span></div><div style="font-size:10px;color:#6B7280;margin-top:3px;line-height:1.4;">'+h[2]+'</div>';
+      grid.appendChild(card);
+    });
+    sum.appendChild(grid);
+    // 图例
+    var legend = document.getElementById('legend');
+    Object.keys(colors).forEach(function(k){
+      var s = document.createElement('span');
+      s.style.cssText='display:inline-flex;align-items:center;gap:4px;';
+      s.innerHTML='<span style="width:12px;height:12px;border-radius:3px;background:'+colors[k]+';display:inline-block;"></span>'+k;
+      legend.appendChild(s);
+    });
+  } catch(e){ console.error(e); }
+})();
+</script>
+</div>
+</html>
