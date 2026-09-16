@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="PingFang SC, Microsoft YaHei, 'Segoe UI', Arial, sans-serif">
+<rect width="960" height="500" fill="#FFFFFF"/>
+<text x="48" y="44" font-size="26" font-weight="700" fill="#2F5597">经典四阶龙格-库塔方法</text>
+<text x="48" y="72" font-size="15" fill="#6B7280">在区间内取4个点计算斜率，加权平均得到更高精度的单步推进</text><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#6B7280"/></marker></defs>
+<line x1="100" y1="350" x2="880" y2="350" stroke="#6B7280" stroke-width="1.5"/>
+<line x1="100" y1="80" x2="100" y2="350" stroke="#6B7280" stroke-width="1.5"/>
+<path d="M 100.0 250.0 L 114.3 244.8 L 128.6 239.6 L 142.9 234.4 L 157.1 229.2 L 171.4 224.1 L 185.7 218.9 L 200.0 213.8 L 214.3 208.7 L 228.6 203.7 L 242.9 198.7 L 257.1 193.7 L 271.4 188.8 L 285.7 183.9 L 300.0 179.1 L 314.3 174.3 L 328.6 169.6 L 342.9 165.0 L 357.1 160.4 L 371.4 156.0 L 385.7 151.5 L 400.0 147.2 L 414.3 143.0 L 428.6 138.8 L 442.9 134.8 L 457.1 130.8 L 471.4 126.9 L 485.7 123.1 L 500.0 119.5 L 514.3 115.9 L 528.6 112.4 L 542.9 109.1 L 557.1 105.9 L 571.4 102.8 L 585.7 99.8 L 600.0 96.9 L 614.3 94.1 L 628.6 91.5 L 642.9 89.0 L 657.1 86.7 L 671.4 84.4 L 685.7 82.3 L 700.0 80.3 L 714.3 78.5 L 728.6 76.8 L 742.9 75.2 L 757.1 73.8 L 771.4 72.5 L 785.7 71.4 L 800.0 70.4" fill="none" stroke="#1A1B1C" stroke-width="2"/>
+<line x1="250" y1="350" x2="250" y2="150" stroke="#C9CDD4" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="550" y1="350" x2="550" y2="150" stroke="#C9CDD4" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="250" y="368" font-size="12" fill="#6B7280" font-weight="600" text-anchor="middle">x_n</text>
+<text x="550" y="368" font-size="12" fill="#6B7280" font-weight="600" text-anchor="middle">x_{n+1}</text>
+<text x="400" y="385" font-size="14" fill="#2F5597" font-weight="700" text-anchor="middle">h</text>
+<circle cx="250" cy="220" r="7" fill="#E7EDFB" stroke="#4A6FB5" stroke-width="2"/><text x="250" y="225" font-size="14" fill="#2F5597" font-weight="600" text-anchor="middle">K1</text>
+<line x1="250" y1="220" x2="310" y2="180" stroke="#4A6FB5" stroke-width="2" marker-end="url(#arr)"/>
+<text x="315" y="175" font-size="11" fill="#2F5597" font-weight="600" text-anchor="start">K1=f(x_n,y_n)</text>
+<circle cx="400" cy="190" r="7" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/><text x="400" y="195" font-size="14" fill="#2F5597" font-weight="600" text-anchor="middle">K2</text>
+<line x1="400" y1="190" x2="460" y2="140" stroke="#70AD47" stroke-width="2" marker-end="url(#arr)"/>
+<text x="465" y="135" font-size="11" fill="#375623" font-weight="600" text-anchor="start">K2=f(x_n+h/2, y_n+hK1/2)</text>
+<circle cx="400" cy="165" r="7" fill="#FFF6DE" stroke="#E0BC5E" stroke-width="2"/><text x="400" y="170" font-size="14" fill="#2F5597" font-weight="600" text-anchor="middle">K3</text>
+<line x1="400" y1="165" x2="460" y2="130" stroke="#E0BC5E" stroke-width="2" marker-end="url(#arr)"/>
+<text x="465" y="125" font-size="11" fill="#8A6D1A" font-weight="600" text-anchor="start">K3=f(x_n+h/2, y_n+hK2/2)</text>
+<circle cx="550" cy="120" r="7" fill="#EDE7F6" stroke="#8E7CC3" stroke-width="2"/><text x="550" y="125" font-size="14" fill="#2F5597" font-weight="600" text-anchor="middle">K4</text>
+<line x1="550" y1="120" x2="600" y2="90" stroke="#8E7CC3" stroke-width="2" marker-end="url(#arr)"/>
+<text x="605" y="85" font-size="11" fill="#6A5ACD" font-weight="600" text-anchor="start">K4=f(x_n+h, y_n+hK3)</text>
+<rect x="60" y="400" width="840" height="70" rx="14" fill="#F3F4F6" stroke="#C9CDD4" stroke-width="1"/>
+<text x="480" y="422" font-size="16" fill="#2F5597" font-weight="700" text-anchor="middle">y_{n+1} = y_n + h/6 (K1 + 2K2 + 2K3 + K4)</text>
+<text x="480" y="448" font-size="12" fill="#1A1B1C" font-weight="400" text-anchor="middle">用4个点的斜率加权平均（权重1:2:2:1），局部误差O(h^5)，四阶精度</text>
+<text x="480" y="465" font-size="12" fill="#375623" font-weight="600" text-anchor="middle">每步算4个函数值，是最常用的ODE数值解法</text>
+<rect x="36" y="438" width="888" height="46" rx="12" fill="#F0F4FA" stroke="#D6E0F0" stroke-width="1"/>
+<text x="480" y="461" font-size="15" fill="#2F5597" font-weight="600">K1+2K2+2K3+K4，四阶精度，最常用</text>
+</svg>
