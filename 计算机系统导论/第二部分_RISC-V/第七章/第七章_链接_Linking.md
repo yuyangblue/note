@@ -44,7 +44,7 @@ linux> ./prog
 
 ![课件 p4：静态链接流程](图片/01_静态链接流程.png)
 
-> **课堂补充**：平时口头说"编译"常把四步全包含；严格说"编译"只是 cc1 那一步。链接耗时很大，所以**只改一个文件时，只需重新编译该文件 + 重新链接**，其他文件不必重编——链接器是必须做的，而"是否要重编"由文件时间戳判断（修改时间变了的文件才重编）。
+> **课堂补充**：平时口头说"编译"常把四步全包含；严格说"编译"只是 cc1 那一步。**链接无法跳过**（每次构建都必须重新链接），但**编译可以跳过**：只改一个文件时，只需重编该文件 + 重新链接，其他文件不必重编——"是否要重编"由文件时间戳判断（修改时间变了的文件才重编）。
 
 **为什么需要链接（两大理由）**：
 
@@ -109,7 +109,7 @@ ELF 头（ELF header）
 
 要点：
 
-- **ELF 头**：16 字节序列开头，描述字大小、字节顺序（小端/大端）；还包含文件类型（.o/exec/.so）、机器类型、节头部表偏移与条目大小数量。
+- **ELF 头**：以一个 16 字节的序列开头（描述生成该文件的系统的字大小、字节顺序即小端/大端），但 ELF 头整体不止 16 字节——还包含文件类型（.o/exec/.so）、机器类型、节头部表的偏移与条目大小数量。
 - **.data vs .bss**：
   - `.bss` 是"Block Started by Symbol"（块存储开始）的缩写，也记作 **"Better Save Space"（更好地节省空间）**。
   - `.bss` 在目标文件中**不占据实际空间**，只是占位符；运行时在内存中分配并初始化为 0。
@@ -130,7 +130,7 @@ ELF 头（ELF header）
 |---|---|---|
 | **全局符号（Global）** | 由模块 m 定义、可被其他模块引用 | 非 static 的 C 函数和全局变量 |
 | **外部符号（External）** | 被模块 m 引用、但在其他模块定义 | 在其他模块定义的非 static 函数/全局变量（extern 引用） |
-| **本地符号（Local）** | 只被模块 m 定义和引用 | 带 static 属性的 C 函数和全局变量 |
+| **本地符号（Local）** | 在模块 m 内定义，且只被模块 m 引用 | 带 static 属性的 C 函数和全局变量 |
 
 > ⚠️ **本地链接器符号 ≠ 本地程序变量**：
 > - 本地**非静态**变量（函数内普通局部变量）在运行时管理在**栈**中，`.symtab` 里**没有**条目，链接器不关心。
@@ -158,7 +158,7 @@ typedef struct {
 } Elf64_Symbol;
 ```
 
-- `value`：可重定位文件中是"距定义目标起始位置的偏移"；可执行文件中是绝对运行时地址。
+- `value`：可重定位文件中是该符号相对**所在节**的偏移量；可执行文件中是该符号的绝对运行时地址。
 - `section` 字段的**三个伪节（pseudosection）**（节头部表中没有条目）：
   - `ABS`：不该被重定位的符号；
   - `UNDEF`：本模块引用但在别处定义的符号（未定义）；
@@ -191,7 +191,7 @@ Symbol table '.symtab' contains 11 entries:
 - `main`：24 字节函数，位于 .text 节（Ndx=1），偏移 0。
 - `array`：8 字节对象，位于 .data 节（Ndx=3），偏移 0。
 - `sum`：**UND**（未定义），本模块引用、定义在 sum.o。
-- 前 8 个条目是链接器内部使用的局部符号（含 FILE 节、SECTION 节等），无实际意义。
+- 前 8 个条目是链接器内部使用的局部符号（含 FILE 节、SECTION 节等），一般无需关注。
 - **Bind（绑定）列**分两类：
   - `LOCAL`：本地符号——FILE、SECTION 及 static 变量，仅本文件可见，链接器内部使用，不会与其他模块冲突；
   - `GLOBAL`：全局符号——非 static 的函数和全局变量，跨模块可见（与 5.1 的三种链接器符号对应）。
@@ -289,10 +289,14 @@ int y = 15212;               double x;       /* 弱，8 字节 */
 int x = 15213;               void f() { x = -0.0; }
 int main() { f(); printf("x = 0x%x y = 0x%x\n", x, y); }
 // 在一台 x86-64 机器上：x 地址 0x601020，y 地址 0x601024
-// bar5 的 double x（8 字节）会覆盖 x 和 y！输出 x = 0x0 y = 80000000
+// 为什么输出 x = 0x0 y = 80000000？
+// ① 链接器按规则 2 选强符号 int x，但分配空间时按弱符号 double x 的 size 给了 8 字节（0x601020~0x601027）
+// ② 强 int x 只占用前 4 字节；紧邻的 y（0x601024）恰好落在后 4 字节里 → 弱符号"吞掉"了 y 的存储
+// ③ f() 执行 x = -0.0，把 8 字节整体写成 -0.0 的位模式 0x8000000000000000
+//    小端存储：低 4 字节 = 0x00000000（→ x = 0x0），高 4 字节 = 0x80000000（→ y = 0x80000000）
 ```
 
-- 链接器只给一条**警告**（alignment 4 of symbol 'x' is smaller than 8），程序运行很久后才表现出来，非常难查。
+- 链接器照常链接成功，只给一条**警告**（alignment 4 of symbol 'x' is smaller than 8），程序运行很久后才表现出来，非常难查。
 - 对策：`-fno-common`（多重定义全局符号时报错）、`-Werror`（所有警告变错误）。
 
 > **课堂补充**：规则 3 的问题在于随机选择一个弱符号，类型还可能不同（int 4 字节 vs double 8 字节），往里面写数据会越界覆盖相邻变量。多人协作时给全局变量/函数加**自己的名字前缀**（如 `sum_`）是业界惯例。
@@ -390,7 +394,7 @@ linux> ar rcs libvector.a addvec.o multvec.o
 
 ```
 linux> gcc -static -o prog2c main2.o ./libvector.a     # 正确
-linux> gcc -static ./libvector.a main2.c               # 错误！
+linux> gcc -static ./libvector.a main2.o               # 错误！
 # 处理 libvector.a 时 U 为空 → 不复制任何成员 → 后面 main2.o 引用 addvec 无法解析
 # undefined reference to 'addvec'
 ```
@@ -478,6 +482,8 @@ foreach section s {
   17:  c3              retq
 ```
 
+> 注：objdump 显示的地址是十六进制，`callq 13` 中的 13 = 0x13 = 19，即下一条指令（add）的地址——此时 call 目标未知，objdump 按"跳到下一条指令"占位显示。
+
 对 `call sum` 的重定位条目：`r.offset = 0xf, r.symbol = sum, r.type = R_X86_64_PC32, r.addend = -4`
 
 假设链接器确定：`ADDR(.text) = 0x4004d0`，`ADDR(sum) = 0x4004e8`：
@@ -501,7 +507,7 @@ refaddr = ADDR(s) + r.offset = 0x4004d0 + 0xf = 0x4004df
 *refptr = ADDR(array) + 0 = 0x601018
 ```
 
-结果：`4004d9: bf 18 10 60 00  mov $0x601018,%rdi  # %rdi = &array`
+结果：`4004d9: bf 18 10 60 00  mov $0x601018,%edi  # %edi = &array`
 
 ### 7.5 重定位后的可执行文件（图 7-12）
 
@@ -509,7 +515,7 @@ refaddr = ADDR(s) + r.offset = 0x4004d0 + 0xf = 0x4004df
 00000000004004d0 <main>:
   4004d0: 48 83 ec 08     sub    $0x8,%rsp
   4004d4: be 02 00 00 00  mov    $0x2,%esi
-  4004d9: bf 18 10 60 00  mov    $0x601018,%rdi   # %rdi = &array
+  4004d9: bf 18 10 60 00  mov    $0x601018,%edi   # %edi = &array
   4004de: e8 05 00 00 00  callq  4004e8 <sum>
   4004e3: 48 83 c4 08     add    $0x8,%rsp
   4004e7: c3              retq
@@ -560,12 +566,12 @@ r.addend = -4
 - 可执行文件的连续片（chunk）被映射到连续内存段，映射关系由**程序头部表（program header table）**描述：
 
 ```
-LOAD off 0x0        vaddr 0x400000  ...  filesz 0x690  memsz 0x690  flags r-x   # 只读代码段
-LOAD off 0x690      vaddr 0x600df8  ...  filesz 0x228  memsz 0x230  flags rw-   # 读写数据段
+LOAD off 0x400      vaddr 0x400000  ...  filesz 0x690  memsz 0x690  flags r-x   # 只读代码段
+LOAD off 0x690      vaddr 0x600df8  ...  filesz 0x220  memsz 0x230  flags rw-   # 读写数据段
 ```
 
 - 代码段（r-x）：ELF 头 + 程序头部表 + .init + .text + .rodata，起始 0x400000。
-- 数据段（rw-）：.data（0x228 字节从文件加载）+ .bss（8 字节，运行时初始化为 0）。
+- 数据段（rw-）：.data（0x220 字节从文件加载）+ .bss（磁盘上 0 字节；内存中 memsz − filesz = 0x10 字节，运行时分配并清零）。
 - **段对齐**：`vaddr mod align = off mod align`（align 通常 2^21 = 0x200000），为了加载时高效传送到内存（与虚拟内存组织有关，第 9 章细讲）。
 
 ---
@@ -614,7 +620,7 @@ linux> gcc -o prog21 main2.c ./libvector.so                   # 链接
 
 ![课件 p33：动态链接（加载时）完整流程](图片/08_动态链接加载时.png)
 
-- 链接时**不复制** libvector.so 的代码/数据进可执行文件，只复制**重定位和符号表信息**。
+- 链接时**不复制** libvector.so 的代码/数据进可执行文件，只记录对共享库符号的重定位信息（保留未解析引用，交给加载时的动态链接器）。
 - 加载时：加载器加载部分链接的可执行文件 prog21 → 注意到 `.interp` 节（含动态链接器路径名，如 ld-linux.so）→ 加载并运行动态链接器 → 动态链接器重定位 libc.so、libvector.so 到内存段，并重定位 prog21 中对它们的引用 → 控制交给应用程序。
 - 动态链接器本身也是一个共享目标。
 
@@ -667,7 +673,7 @@ if (dlclose(handle) < 0) { ... }
 
 ```asm
 # libvec.so 中 addec 例程：
-movq 0x2008b9(%rip), %rax   # %rax = *GOT[3] = &addcnt
+movq 0x2008b9(%rip), %rax   # 取 GOT[3] 的内容 → %rax = &addcnt
 addq $1, (%rax)             # addcnt++
 ```
 
