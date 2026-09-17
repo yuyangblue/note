@@ -7,7 +7,18 @@
 3. 修正自动导航标题：index.md 显示为「首页」。
 """
 
+from urllib.parse import unquote
+
 from mkdocs.structure.files import File, file_sort_key
+
+
+def rel_from_url(url: str, dirname: str) -> str:
+    """把 MkDocs 的 url（URL 编码、相对站点根）转为相对 dirname 页面的相对链接。"""
+    u = unquote(url).replace("\\", "/")
+    prefix = dirname + "/"
+    if u.startswith(prefix):
+        return u[len(prefix):]
+    return u
 
 # 分区顺序与元数据（dict 保持插入顺序，决定分区展示顺序）
 PARTITIONS = {
@@ -132,7 +143,7 @@ def build_partition_index(part: str, fs_by_course: dict) -> str:
         n = len([f for f in fs if f.is_documentation_page()])
         icon = COURSE_ICONS.get(course, "📄")
         desc = COURSE_DESCS.get(course, "")
-        lines.append(f'<a class="course-card" href="{course}/">')
+        lines.append(f'<a class="course-card" href="{course}/index.html">')
         lines.append(f'  <span class="course-icon">{icon}</span>')
         lines.append("  <span class=\"course-body\">")
         lines.append(f'    <span class="course-name">{course}</span>')
@@ -164,8 +175,7 @@ def build_course_index(dirname: str, fs) -> str:
     for f in sorted(notes, key=file_sort_key):
         src = f.src_path.replace("\\", "/")
         rel_src = src[len(dirname) + 1:]
-        url = f.url
-        rel_url = url[len(dirname) + 1:] if url.startswith(dirname + "/") else url
+        rel_url = rel_from_url(f.url, dirname)
         if "/" not in rel_src:
             title = f.name.replace("_", " ").replace("-", " ")
             topfiles.append((title, rel_url))
@@ -179,8 +189,7 @@ def build_course_index(dirname: str, fs) -> str:
                 (x for x in notes if x.src_path.replace("\\", "/").startswith(dirname + "/" + sub + "/")),
                 key=file_sort_key,
             ):
-                sf_url = sf.url
-                first = sf_url[len(dirname) + 1:] if sf_url.startswith(dirname + "/") else sf_url
+                first = rel_from_url(sf.url, dirname)
                 break
             subdirs.append((sub, first))
 

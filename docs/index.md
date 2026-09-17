@@ -3,13 +3,13 @@
   <h1>鱼汤的笔记库</h1>
   <p class="hero-sub">算法竞赛、数据结构、数学与计算机系统的结构化学习笔记，按主题分区整理。<br>由 AI Agent 辅助整理，配有大量公式推导、代码示例与刷题路线。</p>
   <div class="hero-actions">
-    <a class="md-button md-button--primary" href="算法与数据结构/">🚀 开始阅读</a>
+    <a class="md-button md-button--primary" href="算法与数据结构/index.html">🚀 开始阅读</a>
     <a class="md-button" href="https://github.com/yuyangblue/note" target="_blank" rel="noopener">GitHub 仓库</a>
   </div>
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">5</span><span class="stat-label">个内容分区</span></div>
     <div class="stat"><span class="stat-num">10</span><span class="stat-label">门课程</span></div>
-    <div class="stat"><span class="stat-num">321</span><span class="stat-label">篇学习笔记</span></div>
+    <div class="stat"><span class="stat-num">299</span><span class="stat-label">篇学习笔记</span></div>
   </div>
 </div>
 
@@ -17,7 +17,7 @@
 
 <div class="part-grid">
 
-<a class="part-card" href="算法与数据结构/">
+<a class="part-card" href="算法与数据结构/index.html">
   <span class="part-icon">⚔️</span>
   <span class="part-body">
     <span class="part-name">算法与数据结构</span>
@@ -26,25 +26,25 @@
   </span>
 </a>
 
-<a class="part-card" href="数学/">
+<a class="part-card" href="数学/index.html">
   <span class="part-icon">📐</span>
   <span class="part-body">
     <span class="part-name">数学</span>
     <span class="part-desc">概率统计、离散数学与数值计算方法，公式推导全覆盖。</span>
-    <span class="part-meta">概率论与数理统计 · 离散数学 · 计算方法与优化 <b>93</b> 篇</span>
+    <span class="part-meta">概率论与数理统计 · 离散数学 · 计算方法与优化 <b>70</b> 篇</span>
   </span>
 </a>
 
-<a class="part-card" href="计算机与编程/">
+<a class="part-card" href="计算机与编程/index.html">
   <span class="part-icon">🖥️</span>
   <span class="part-body">
     <span class="part-name">计算机与编程</span>
     <span class="part-desc">计算机系统原理（程序执行、RISC-V、存储层次）与 C++ 语言学习。</span>
-    <span class="part-meta">计算机系统导论 · C++ 学习 <b>30</b> 篇</span>
+    <span class="part-meta">计算机系统导论 · C++ 学习 <b>31</b> 篇</span>
   </span>
 </a>
 
-<a class="part-card" href="人工智能/">
+<a class="part-card" href="人工智能/index.html">
   <span class="part-icon">🤖</span>
   <span class="part-body">
     <span class="part-name">人工智能</span>
@@ -53,7 +53,7 @@
   </span>
 </a>
 
-<a class="part-card" href="课程合集/">
+<a class="part-card" href="课程合集/index.html">
   <span class="part-icon">🎓</span>
   <span class="part-body">
     <span class="part-name">课程合集</span>
