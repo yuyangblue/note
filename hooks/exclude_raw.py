@@ -218,4 +218,16 @@ def on_nav(nav, config, files):
     for item in nav.items:
         if getattr(item, "is_page", False) and item.file.src_path == "index.md":
             item.title = "首页"
+
+    # 按分区定义顺序重排顶级导航项（首页最前，分区按 PARTITIONS 顺序）
+    def nav_key(item):
+        title = (getattr(item, "title", "") or "").strip()
+        if getattr(item, "is_page", False):
+            return (0, title)
+        for i, part in enumerate(PARTITIONS):
+            if title == part:
+                return (1, i)
+        return (2, title)
+
+    nav.items.sort(key=nav_key)
     return nav
