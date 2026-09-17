@@ -27,7 +27,7 @@ def fix_file(path):
     lines = s.split("\n")
     out = []
     in_code = False
-    c1 = c2 = c3 = 0
+    c1 = c2 = c3 = c4 = 0
     for i, ln in enumerate(lines):
         if is_fence(ln):
             in_code = not in_code
@@ -56,22 +56,36 @@ def fix_file(path):
                 c3 += 1
             out.append(new)
             continue
+        # 规则4：列表项内的单行块公式 $$...$$ -> $...$（避免 pymdownx 输出 $+span+$ 残留）
+        if not in_code and re.match(r"^\$\$.+\$\$$", ln):
+            prev_i = i - 1
+            while prev_i >= 0 and lines[prev_i].strip() == "":
+                prev_i -= 1
+            next_i = i + 1
+            while next_i < len(lines) and lines[next_i].strip() == "":
+                next_i += 1
+            prev_ind = prev_i >= 0 and lines[prev_i].startswith(" ")
+            next_ind = next_i < len(lines) and lines[next_i].startswith(" ")
+            if prev_ind or next_ind:
+                out.append(ln[1:-1])
+                c4 += 1
+                continue
         out.append(ln)
     ns = "\n".join(out)
     if ns != s:
         with open(path, "w", encoding="utf-8", newline="") as fh:
             fh.write(ns)
-    return c1, c2, c3
+    return c1, c2, c3, c4
 
-total = [0, 0, 0]
+total = [0, 0, 0, 0]
 changed = []
 for p in iter_md():
     r = fix_file(p)
     if any(r):
-        total[0] += r[0]; total[1] += r[1]; total[2] += r[2]
+        total[0] += r[0]; total[1] += r[1]; total[2] += r[2]; total[3] += r[3]
         changed.append((p, r))
 
 print("changed files:", len(changed))
-print("rules applied: indent-$$=%d, table-indent=%d, dbl-escape=%d" % tuple(total))
+print("rules applied: indent-$$=%d, block-indent=%d, dbl-escape=%d, list-$$=%d" % tuple(total))
 for p, r in changed:
     print("  %s -> %s" % (p, r))
