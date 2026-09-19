@@ -1458,6 +1458,52 @@ void swap()
 
 ***
 
+***
+
+### 家庭作业 7.15 答案参考（处理目标文件的工具实操）
+
+**题目**（书页 497）：完成下面任务将帮助你更熟悉处理目标文件的各种工具。
+
+A. 在你的系统上，libc.a 和 libm.a 的版本中包含多少目标文件？
+B. gcc -O2 产生的可执行代码与 gcc -O2 -g 产生的不同吗？
+C. 在你的系统上，GCC 驱动程序使用的是什么共享库？
+
+**答案**：
+
+**A. 数静态库成员个数**：
+
+```
+linux> ls /usr/lib/x86_64-linux-gnu/libc.a /usr/lib/x86_64-linux-gnu/libm.a
+linux> ar -t /usr/lib/x86_64-linux-gnu/libc.a | wc -l
+linux> ar -t /usr/lib/x86_64-linux-gnu/libm.a | wc -l
+```
+
+- 库路径随发行版不同（找不到先用 locate / find 找）；教材参考值：libc.a ≈ 1496 个目标文件，libm.a ≈ 444 个。报告自己系统上 `wc -l` 的实际数字即可。
+
+**B. 机器码相同，-g 只加调试节**：
+
+```
+linux> gcc -O2   -o p1 main.c
+linux> gcc -O2 -g -o p2 main.c
+linux> objdump -d p1 > a.txt && objdump -d p2 > b.txt
+linux> diff a.txt b.txt             # 无输出 → 反汇编完全一致
+linux> readelf -S p2 | grep debug   # p2 多出 .debug* / .line 节
+```
+
+- **.text 节的机器码完全相同**；`-g` 只额外生成 `.debug`、`.line` 等调试信息节（符号名、行号映射），不改指令。
+
+**C. 默认链接 glibc，动态链接器 ld-linux**：
+
+```
+linux> gcc -o hello hello.c
+linux> ldd hello                          # 看运行时依赖的 .so
+linux> gcc -v hello.c -o hello 2>&1 | grep -E "ld-linux|collect2"
+```
+
+- GCC 驱动程序（经 collect2 → ld）默认把程序链接到 **libc.so.6（glibc）**，运行时由动态链接器 **ld-linux-x86-64.so.2** 加载共享库。
+
+***
+
 ## 附：本笔记涉及的命令速查
 
 
