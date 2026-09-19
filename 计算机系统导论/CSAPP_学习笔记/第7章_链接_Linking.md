@@ -337,21 +337,21 @@ int g() { static int x = 1; return x; }
 ```
 typedef struct {
 
-&#x20;   int  name;     /\* 字符串表偏移（指向以 null 结尾的符号名）\*/
+    int  name;     /* 字符串表偏移（指向以 null 结尾的符号名）*/
 
-&#x20;   char type:4,   /\* 函数还是数据（4 位）\*/
+    char type:4,   /* 函数还是数据（4 位）*/
 
-&#x20;        binding:4;/\* 本地还是全局（4 位）\*/
+         binding:4;/* 本地还是全局（4 位）*/
 
-&#x20;   char reserved; /\* 未使用 \*/
+    char reserved; /* 未使用 */
 
-&#x20;   short section; /\* 节头部索引 \*/
+    short section; /* 节头部索引 */
 
-&#x20;   long value;    /\* 节偏移（可重定位文件）或绝对地址（可执行文件）\*/
+    long value;    /* 节偏移（可重定位文件）或绝对地址（可执行文件）*/
 
-&#x20;   long size;     /\* 目标大小（字节）\*/
+    long size;     /* 目标大小（字节）*/
 
-} Elf64\_Symbol;
+} Elf64_Symbol;
 ```
 
 
@@ -391,13 +391,13 @@ linux> readelf -s main.o
 
 Symbol table '.symtab' contains 11 entries:
 
-&#x20; Num:  Value              Size Type    Bind   Vis    Ndx Name
+  Num:  Value              Size Type    Bind   Vis    Ndx Name
 
-&#x20;   8:  0000000000000000    24 FUNC   GLOBAL DEFAULT   1 main
+    8:  0000000000000000    24 FUNC   GLOBAL DEFAULT   1 main
 
-&#x20;   9:  0000000000000000     8 OBJECT GLOBAL DEFAULT   3 array
+    9:  0000000000000000     8 OBJECT GLOBAL DEFAULT   3 array
 
-&#x20;  10:  0000000000000000     0 NOTYPE GLOBAL DEFAULT   UND sum
+   10:  0000000000000000     0 NOTYPE GLOBAL DEFAULT   UND sum
 ```
 
 
@@ -433,27 +433,27 @@ Symbol table '.symtab' contains 11 entries:
 
 
 ```
-/\* m.c \*/                    /\* swap.c \*/
+/* m.c */                    /* swap.c */
 
-void swap();                 extern int buf\[];
+void swap();                 extern int buf[];
 
-int buf\[2] = {1, 2};         int \*bufp0 = \&buf\[0];
+int buf[2] = {1, 2};         int *bufp0 = &buf[0];
 
-int main() { swap();         int \*bufp1;
+int main() { swap();         int *bufp1;
 
-&#x20;            return 0; }     void swap() {
+             return 0; }     void swap() {
 
-&#x20;                                int temp;
+                                 int temp;
 
-&#x20;                                bufp1 = \&buf\[1];
+                                 bufp1 = &buf[1];
 
-&#x20;                                temp = \*bufp0;
+                                 temp = *bufp0;
 
-&#x20;                                \*bufp0 = \*bufp1;
+                                 *bufp0 = *bufp1;
 
-&#x20;                                \*bufp1 = temp;
+                                 *bufp1 = temp;
 
-&#x20;                            }
+                             }
 ```
 
 
@@ -524,7 +524,7 @@ linux> gcc -Wall -Og -o linkerror linkerror.c
 
 * **已初始化的全局变量**必须强：初值只有一个，两个不同初值无法决定取哪个。
 
-* **未初始化全局变量**是弱：C 语言的**暂定定义（tentative definition）机制 —— 文件中的&#x20;**`int x;`**&#x20;被视为 "暂定"，C 标准允许不同模块都写&#x20;**`int x;`（都只算声明，不算重复定义错误），链接器把它们的名字合并成**同一份存储**。因为没有初值冲突，所以可以合并、可以是 "弱"。这正是 COMMON 伪节的来历：它继承了 Fortran 的 COMMON 块机制（Fortran 允许不同文件声明同名公共块，由链接器合并，ELF 伪节名 COMMON 即由此得名）。
+* **未初始化全局变量**是弱：C 语言的**暂定定义（tentative definition）机制 —— 文件中的 **`int x;`** 被视为 "暂定"，C 标准允许不同模块都写 **`int x;`（都只算声明，不算重复定义错误），链接器把它们的名字合并成**同一份存储**。因为没有初值冲突，所以可以合并、可以是 "弱"。这正是 COMMON 伪节的来历：它继承了 Fortran 的 COMMON 块机制（Fortran 允许不同文件声明同名公共块，由链接器合并，ELF 伪节名 COMMON 即由此得名）。
 
 **三条规则**：
 
@@ -541,17 +541,17 @@ linux> gcc -Wall -Og -o linkerror linkerror.c
 
 
 ```
-/\* foo3.c \*/                 /\* bar3.c \*/
+/* foo3.c */                 /* bar3.c */
 
-int x = 15213;               int x;          /\* 弱 \*/
+int x = 15213;               int x;          /* 弱 */
 
 int main() {                 void f() {
 
-&#x20;   f();                         x = 15212;
+    f();                         x = 15212;
 
-&#x20;   printf("x = %d\n", x);   }
+    printf("x = %d\n", x);   }
 
-&#x20;   return 0;
+    return 0;
 
 }
 
@@ -561,9 +561,9 @@ int main() {                 void f() {
 
 
 ```
-/\* foo5.c \*/                 /\* bar5.c \*/
+/* foo5.c */                 /* bar5.c */
 
-int y = 15212;               double x;       /\* 弱，8 字节 \*/
+int y = 15212;               double x;       /* 弱，8 字节 */
 
 int x = 15213;               void f() { x = -0.0; }
 
@@ -605,7 +605,7 @@ int main() { f(); printf("x = 0x%x y = 0x%x\n", x, y); }
 
 
 ```
-/\* A. Module 1 \*/         /\* A. Module 2 \*/
+/* A. Module 1 */         /* A. Module 2 */
 
 int main()                int main;
 
@@ -613,13 +613,13 @@ int main()                int main;
 
 }                         {
 
-&#x20;                         }
+                          }
 
-(a) REF(main.1) → DEF(\_\_\_\_\_\_)
+(a) REF(main.1) → DEF(______)
 
-(b) REF(main.2) → DEF(\_\_\_\_\_\_)
+(b) REF(main.2) → DEF(______)
 
-/\* B. Module 1 \*/         /\* B. Module 2 \*/
+/* B. Module 1 */         /* B. Module 2 */
 
 void main()               int main = 1;
 
@@ -627,13 +627,13 @@ void main()               int main = 1;
 
 }                         {
 
-&#x20;                         }
+                          }
 
-(a) REF(main.1) → DEF(\_\_\_\_\_\_)
+(a) REF(main.1) → DEF(______)
 
-(b) REF(main.2) → DEF(\_\_\_\_\_\_)
+(b) REF(main.2) → DEF(______)
 
-/\* C. Module 1 \*/         /\* C. Module 2 \*/
+/* C. Module 1 */         /* C. Module 2 */
 
 int x;                    double x = 1.0;
 
@@ -643,9 +643,9 @@ void main()               int p2()
 
 }                         }
 
-(a) REF(x.1) → DEF(\_\_\_\_\_\_)
+(a) REF(x.1) → DEF(______)
 
-(b) REF(x.2) → DEF(\_\_\_\_\_\_)
+(b) REF(x.2) → DEF(______)
 ```
 
 **答案**：
@@ -769,9 +769,9 @@ linux> gcc -static -o prog2c main2.o ./libvector.a     # 正确
 
 linux> gcc -static ./libvector.a main2.o               # 错误！
 
-\# 处理 libvector.a 时 U 为空 → 不复制任何成员 → 后面 main2.o 引用 addvec 无法解析
+# 处理 libvector.a 时 U 为空 → 不复制任何成员 → 后面 main2.o 引用 addvec 无法解析
 
-\# undefined reference to 'addvec'
+# undefined reference to 'addvec'
 ```
 
 
@@ -826,15 +826,15 @@ linux> gcc -static ./libvector.a main2.o               # 错误！
 ```
 typedef struct {
 
-&#x20;   long offset;   /\* 需要被修改的引用的节偏移 \*/
+    long offset;   /* 需要被修改的引用的节偏移 */
 
-&#x20;   long type:32,  /\* 重定位类型 \*/
+    long type:32,  /* 重定位类型 */
 
-&#x20;        symbol:32;/\* 符号表索引 \*/
+         symbol:32;/* 符号表索引 */
 
-&#x20;   long addend;   /\* 有符号常数，对引用值做偏移调整 \*/
+    long addend;   /* 有符号常数，对引用值做偏移调整 */
 
-} Elf64\_Rela;
+} Elf64_Rela;
 ```
 
 **字段详解**：
@@ -867,25 +867,25 @@ typedef struct {
 ```
 foreach section s {
 
-&#x20;   foreach relocation entry r {
+    foreach relocation entry r {
 
-&#x20;       refptr = s + r.offset;                     /\* 待重定位引用的地址 \*/
+        refptr = s + r.offset;                     /* 待重定位引用的地址 */
 
-&#x20;       if (r.type == R\_X86\_64\_PC32) {             /\* PC 相对引用 \*/
+        if (r.type == R_X86_64_PC32) {             /* PC 相对引用 */
 
-&#x20;           refaddr = ADDR(s) + r.offset;          /\* 引用的运行时地址 \*/
+            refaddr = ADDR(s) + r.offset;          /* 引用的运行时地址 */
 
-&#x20;           \*refptr = (unsigned)(ADDR(r.symbol) + r.addend - refaddr);
+            *refptr = (unsigned)(ADDR(r.symbol) + r.addend - refaddr);
 
-&#x20;       }
+        }
 
-&#x20;       if (r.type == R\_X86\_64\_32) {               /\* 绝对引用 \*/
+        if (r.type == R_X86_64_32) {               /* 绝对引用 */
 
-&#x20;           \*refptr = (unsigned)(ADDR(r.symbol) + r.addend);
+            *refptr = (unsigned)(ADDR(r.symbol) + r.addend);
 
-&#x20;       }
+        }
 
-&#x20;   }
+    }
 
 }
 ```
@@ -895,25 +895,25 @@ foreach section s {
 
 
 ```
-\# objdump -dx main.o  （重定位条目紧跟在引用指令后）
+# objdump -dx main.o  （重定位条目紧跟在引用指令后）
 
-0000000000000000 \<main>:
+0000000000000000 <main>:
 
-&#x20;  0:  48 83 ec 08     sub    \$0x8,%rsp
+   0:  48 83 ec 08     sub    $0x8,%rsp
 
-&#x20;  4:  be 02 00 00 00  mov    \$0x2,%esi
+   4:  be 02 00 00 00  mov    $0x2,%esi
 
-&#x20;  9:  bf 00 00 00 00  mov    \$0x0,%edi          # %edi = \&array
+   9:  bf 00 00 00 00  mov    $0x0,%edi          # %edi = &array
 
-&#x20;                       a: R\_X86\_64\_32 array     # 重定位条目
+                        a: R_X86_64_32 array     # 重定位条目
 
-&#x20;  e:  e8 00 00 00 00  callq  13 \<main+0x13>     # sum()
+   e:  e8 00 00 00 00  callq  13 <main+0x13>     # sum()
 
-&#x20;                       f: R\_X86\_64\_PC32 sum-0x4 # 重定位条目
+                        f: R_X86_64_PC32 sum-0x4 # 重定位条目
 
-&#x20; 13:  48 83 c4 08     add    \$0x8,%rsp
+  13:  48 83 c4 08     add    $0x8,%rsp
 
-&#x20; 17:  c3              retq
+  17:  c3              retq
 ```
 
 > 注：objdump 显示的地址是十六进制，
@@ -931,7 +931,7 @@ foreach section s {
 ```
 refaddr = ADDR(s) + r.offset = 0x4004d0 + 0xf = 0x4004df
 
-\*refptr = ADDR(sum) + (-4) - refaddr = 0x4004e8 - 4 - 0x4004df = 0x5
+*refptr = ADDR(sum) + (-4) - refaddr = 0x4004e8 - 4 - 0x4004df = 0x5
 ```
 
 结果：`4004de: e8 05 00 00 00  callq 4004e8 <sum>`
@@ -955,7 +955,7 @@ refaddr = ADDR(s) + r.offset = 0x4004d0 + 0xf = 0x4004df
 
 
 ```
-\*refptr = ADDR(array) + 0 = 0x601018
+*refptr = ADDR(array) + 0 = 0x601018
 ```
 
 结果：`4004d9: bf 18 10 60 00  mov $0x601018,%edi  # %edi = &array`
@@ -965,23 +965,23 @@ refaddr = ADDR(s) + r.offset = 0x4004d0 + 0xf = 0x4004df
 
 
 ```
-00000000004004d0 \<main>:
+00000000004004d0 <main>:
 
-&#x20; 4004d0: 48 83 ec 08     sub    \$0x8,%rsp
+  4004d0: 48 83 ec 08     sub    $0x8,%rsp
 
-&#x20; 4004d4: be 02 00 00 00  mov    \$0x2,%esi
+  4004d4: be 02 00 00 00  mov    $0x2,%esi
 
-&#x20; 4004d9: bf 18 10 60 00  mov    \$0x601018,%edi   # %edi = \&array
+  4004d9: bf 18 10 60 00  mov    $0x601018,%edi   # %edi = &array
 
-&#x20; 4004de: e8 05 00 00 00  callq  4004e8 \<sum>
+  4004de: e8 05 00 00 00  callq  4004e8 <sum>
 
-&#x20; 4004e3: 48 83 c4 08     add    \$0x8,%rsp
+  4004e3: 48 83 c4 08     add    $0x8,%rsp
 
-&#x20; 4004e7: c3              retq
+  4004e7: c3              retq
 
-00000000004004e8 \<sum>:   ...（循环求和）
+00000000004004e8 <sum>:   ...（循环求和）
 
-.data: 0000000000601018 \<array>: 01 00 00 02 00 00 00  # {1, 2}
+.data: 0000000000601018 <array>: 01 00 00 02 00 00 00  # {1, 2}
 ```
 
 加载时把这些字节**直接复制到内存**，无需再修改。
@@ -1005,7 +1005,7 @@ refaddr = ADDR(s) + r.offset = 0x4004d0 + 0xf = 0x4004df
 
 
 ```
-9: e8 00 00 00 00    callq e \<main+0xe>    swap()
+9: e8 00 00 00 00    callq e <main+0xe>    swap()
 ```
 
 它的重定位条目如下：
@@ -1017,7 +1017,7 @@ r.offset = 0xa
 
 r.symbol = swap
 
-r.type = R\_X86\_64\_PC32
+r.type = R_X86_64_PC32
 
 r.addend = -4
 ```
@@ -1177,7 +1177,7 @@ linux> gcc -o prog21 main2.c ./libvector.so                   # 链接
 
 
 ```
-handle = dlopen("./libvector.so", RTLD\_LAZY);
+handle = dlopen("./libvector.so", RTLD_LAZY);
 
 if (!handle) { fprintf(stderr, "%s\n", dlerror()); exit(1); }
 
@@ -1185,7 +1185,7 @@ addvec = dlsym(handle, "addvec");
 
 if ((error = dlerror()) != NULL) { fprintf(stderr, "%s\n", error); exit(1); }
 
-addvec(x, y, z, 2);            /\* 像普通函数一样调用 \*/
+addvec(x, y, z, 2);            /* 像普通函数一样调用 */
 
 if (dlclose(handle) < 0) { ... }
 ```
@@ -1225,11 +1225,11 @@ if (dlclose(handle) < 0) { ... }
 
 
 ```
-\# libvec.so 中 addec 例程：
+# libvec.so 中 addec 例程：
 
-movq 0x2008b9(%rip), %rax   # 取 GOT\[3] 的内容 → %rax = \&addcnt
+movq 0x2008b9(%rip), %rax   # 取 GOT[3] 的内容 → %rax = &addcnt
 
-addq \$1, (%rax)             # addcnt++
+addq $1, (%rax)             # addcnt++
 ```
 
 （GOT \[3] 与 addcnt 指令之间的固定距离 0x2008b9 是运行时常量。）
@@ -1277,29 +1277,29 @@ addq \$1, (%rax)             # addcnt++
 
 
 ```
-/\* malloc.h（本地头文件）\*/
+/* malloc.h（本地头文件）*/
 
-\#define malloc(size) mymalloc(size)
+#define malloc(size) mymalloc(size)
 
-\#define free(ptr) myfree(ptr)
+#define free(ptr) myfree(ptr)
 
-void \*mymalloc(size\_t size);
+void *mymalloc(size_t size);
 
-void myfree(void \*ptr);
+void myfree(void *ptr);
 ```
 
 
 
 ```
-/\* mymalloc.c \*/
+/* mymalloc.c */
 
-void \*mymalloc(size\_t size) {
+void *mymalloc(size_t size) {
 
-&#x20;   void \*ptr = malloc(size);          /\* 用标准 malloc.h 编译 \*/
+    void *ptr = malloc(size);          /* 用标准 malloc.h 编译 */
 
-&#x20;   printf("malloc(%d)=%p\n", (int)size, ptr);
+    printf("malloc(%d)=%p\n", (int)size, ptr);
 
-&#x20;   return ptr;
+    return ptr;
 
 }
 ```
@@ -1323,19 +1323,19 @@ linux> gcc -I. -o intc int.c mymalloc.o   # -I. 让预处理器先找本地 mall
 
 
 ```
-/\* mymalloc.c \*/
+/* mymalloc.c */
 
-void \*\_\_real\_malloc(size\_t size);
+void *__real_malloc(size_t size);
 
-void \_\_real\_free(void \*ptr);
+void __real_free(void *ptr);
 
-void \*\_\_wrap\_malloc(size\_t size) {
+void *__wrap_malloc(size_t size) {
 
-&#x20;   void \*ptr = \_\_real\_malloc(size);   /\* 调用 libc malloc \*/
+    void *ptr = __real_malloc(size);   /* 调用 libc malloc */
 
-&#x20;   printf("malloc(%d) = %p\n", (int)size, ptr);
+    printf("malloc(%d) = %p\n", (int)size, ptr);
 
-&#x20;   return ptr;
+    return ptr;
 
 }
 ```
@@ -1363,27 +1363,27 @@ linux> gcc -Wl,--wrap,malloc -Wl,--wrap,free -o intl int.o mymalloc.o
 
 
 ```
-/\* mymalloc.c \*/
+/* mymalloc.c */
 
-\#define \_GNU\_SOURCE
+#define _GNU_SOURCE
 
-\#include \<dlfcn.h>
+#include <dlfcn.h>
 
-void \*malloc(size\_t size) {
+void *malloc(size_t size) {
 
-&#x20;   void \*(\*mallocp)(size\_t size);
+    void *(*mallocp)(size_t size);
 
-&#x20;   char \*error;
+    char *error;
 
-&#x20;   mallocp = dlsym(RTLD\_NEXT, "malloc");   /\* 取 libc malloc 地址 \*/
+    mallocp = dlsym(RTLD_NEXT, "malloc");   /* 取 libc malloc 地址 */
 
-&#x20;   if ((error = dlerror()) != NULL) { fputs(error, stderr); exit(1); }
+    if ((error = dlerror()) != NULL) { fputs(error, stderr); exit(1); }
 
-&#x20;   char \*ptr = mallocp(size);
+    char *ptr = mallocp(size);
 
-&#x20;   printf("malloc(%d) = %p\n", (int)size, ptr);
+    printf("malloc(%d) = %p\n", (int)size, ptr);
 
-&#x20;   return ptr;
+    return ptr;
 
 }
 ```
@@ -1395,7 +1395,7 @@ linux> gcc -DRUNTIME -shared -fpic -o mymalloc.so mymalloc.c -ldl
 
 linux> gcc -o intr int.c
 
-linux> LD\_PRELOAD="./mymalloc.so" ./intr
+linux> LD_PRELOAD="./mymalloc.so" ./intr
 ```
 
 
@@ -1518,19 +1518,19 @@ linux> LD\_PRELOAD="./mymalloc.so" ./intr
 
 
 ```
-extern int buf\[];
+extern int buf[];
 
-int \*bufp0 = \&buf\[0];
+int *bufp0 = &buf[0];
 
-static int \*bufp1;
+static int *bufp1;
 
 static void incr()
 
 {
 
-&#x20;   static int count = 0;
+    static int count = 0;
 
-&#x20;   count++;
+    count++;
 
 }
 
@@ -1538,17 +1538,17 @@ void swap()
 
 {
 
-&#x20;   int temp;
+    int temp;
 
-&#x20;   incr();
+    incr();
 
-&#x20;   bufp1 = \&buf\[1];
+    bufp1 = &buf[1];
 
-&#x20;   temp = \*bufp0;
+    temp = *bufp0;
 
-&#x20;   \*bufp0 = \*bufp1;
+    *bufp0 = *bufp1;
 
-&#x20;   \*bufp1 = temp;
+    *bufp1 = temp;
 
 }
 ```
@@ -1578,7 +1578,7 @@ void swap()
 
 
 ```
-\# 编译链接
+# 编译链接
 
 gcc -Og -o prog main.c sum.c          # 四步一次完成
 
@@ -1590,7 +1590,7 @@ gcc -fno-common ...                   # 多重定义全局符号时报错
 
 gcc -static -o prog2c main2.o -L. -lvector   # 静态链接库（-L. 当前目录找，-lvector = libvector.a）
 
-\# 库
+# 库
 
 ar rcs libvector.a addvec.o multvec.o # 创建静态库
 
@@ -1598,7 +1598,7 @@ ar -t libc.a | sort                   # 列出库成员
 
 gcc -shared -fpic -o libvector.so addvec.c multvec.c  # 创建共享库
 
-\# 查看
+# 查看
 
 objdump -dx main.o                    # 反汇编 + 重定位条目
 
@@ -1612,9 +1612,9 @@ nm prog                               # 列出符号
 
 ldd prog                              # 共享库依赖
 
-\# 运行时动态链接 / 打桩
+# 运行时动态链接 / 打桩
 
 gcc -rdynamic -o prog2r dll.c -ldl
 
-LD\_PRELOAD="./mymalloc.so" ./intr
+LD_PRELOAD="./mymalloc.so" ./intr
 ```
