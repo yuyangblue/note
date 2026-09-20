@@ -8,8 +8,8 @@
   </div>
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">5</span><span class="stat-label">个内容分区</span></div>
-    <div class="stat"><span class="stat-num">10</span><span class="stat-label">门课程</span></div>
-    <div class="stat"><span class="stat-num">299</span><span class="stat-label">篇学习笔记</span></div>
+    <div class="stat"><span class="stat-num">11</span><span class="stat-label">门课程</span></div>
+    <div class="stat"><span class="stat-num">308</span><span class="stat-label">篇学习笔记</span></div>
   </div>
 </div>
 
@@ -31,7 +31,7 @@
   <span class="part-body">
     <span class="part-name">数学</span>
     <span class="part-desc">概率统计、离散数学与数值计算方法，公式推导全覆盖。</span>
-    <span class="part-meta">概率论与数理统计 · 离散数学 · 计算方法与优化 <b>70</b> 篇</span>
+    <span class="part-meta">概率论与数理统计 · 离散数学 · 计算方法与优化 · 数值分析 <b>79</b> 篇</span>
   </span>
 </a>
 
