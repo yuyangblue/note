@@ -31,7 +31,7 @@
   <span class="part-body">
     <span class="part-name">数学</span>
     <span class="part-desc">概率统计、离散数学与数值计算方法，公式推导全覆盖。</span>
-    <span class="part-meta">概率论与数理统计 · 离散数学 · 计算方法与优化 · 数值分析 <b>79</b> 篇</span>
+    <span class="part-meta">概率论与数理统计——宋浩 · 离散数学 · 计算方法与优化 · 数值分析 <b>79</b> 篇</span>
   </span>
 </a>
 
