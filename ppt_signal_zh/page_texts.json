@@ -1,0 +1,1748 @@
+[
+ {
+  "slide_id": "pVR",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bet",
+    "text": "Exceptional Control Flow: Signals and Nonlocal Jumps15-213: Introduction to Computer Systems15th Lecture, Oct. 20, 2015"
+   },
+   {
+    "id": "beX",
+    "text": "Instructors: | Randal E. Bryant and David R. O’Hallaron"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVi",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "beY",
+    "text": "ECF Exists at All Levels of a System"
+   },
+   {
+    "id": "beu",
+    "text": "Exceptions | Hardware and operating system kernel software | Process Context Switch | Hardware timer and kernel software | Signals | Kernel software and application software | Nonlocal jumps | Application code"
+   },
+   {
+    "id": "bev",
+    "text": "Previous Lecture"
+   },
+   {
+    "id": "beK",
+    "text": "This Lecture"
+   },
+   {
+    "id": "beB",
+    "text": "Textbook and | supplemental slides"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVm",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "beI",
+    "text": "Today"
+   },
+   {
+    "id": "beF",
+    "text": "Shells | Signals | Nonlocal jumps"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVd",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "ben",
+    "text": "Linux Process Hierarchy"
+   },
+   {
+    "id": "beQ",
+    "text": "Login shell"
+   },
+   {
+    "id": "beq",
+    "text": "Child"
+   },
+   {
+    "id": "bej",
+    "text": "Child"
+   },
+   {
+    "id": "beS",
+    "text": "Grandchild"
+   },
+   {
+    "id": "bel",
+    "text": "Grandchild"
+   },
+   {
+    "id": "beH",
+    "text": "[0]"
+   },
+   {
+    "id": "beW",
+    "text": "Daemon | e.g. httpd"
+   },
+   {
+    "id": "bef",
+    "text": "init [1]"
+   },
+   {
+    "id": "beV",
+    "text": "Login shell"
+   },
+   {
+    "id": "beh",
+    "text": "Child"
+   },
+   {
+    "id": "beM",
+    "text": "…"
+   },
+   {
+    "id": "beE",
+    "text": "…"
+   },
+   {
+    "id": "beZ",
+    "text": "…"
+   },
+   {
+    "id": "beP",
+    "text": "Note: you can view the hierarchy using the Linux pstree command"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVe",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bww",
+    "text": "Shell Programs"
+   },
+   {
+    "id": "bwi",
+    "text": "A shell is an application program that runs programs on behalf of the user. | sh Original Unix shell (Stephen Bourne, AT&T Bell Labs, 1977) | csh/tcsh BSD Unix C shell | bash “Bourne-Again” Shell (default Linux shell)"
+   },
+   {
+    "id": "bem",
+    "text": "int main() | { | char cmdline[MAXLINE]; /* command line */ | while (1) { | /* read */ | printf(\"> \"); | Fgets(cmdline, MAXLINE, stdin); | if (feof(stdin)) | exit(0); | /* evaluate */ | eval(cmdline); | } | }"
+   },
+   {
+    "id": "beL",
+    "text": "Execution is a sequence of read/evaluate steps"
+   },
+   {
+    "id": "beJ",
+    "text": "shellex.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVf",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "beD",
+    "text": "Simple Shell eval Function"
+   },
+   {
+    "id": "beG",
+    "text": "void eval(char *cmdline) | { | char *argv[MAXARGS]; /* Argument list execve() */ | char buf[MAXLINE];   /* Holds modified command line */ | int bg;              /* Should the job run in bg or fg? */ | pid_t pid;           /* Process id */ | strcpy(buf, cmdline); | bg = parseline(buf, argv); | if (argv[0] == NULL) | return;   /* Ignore empty lines */ | if (!builtin_command(argv)) { | if ((pid = Fork()) == 0) {   /* Child runs user job */ | if (execve(argv[0], argv, environ) < 0) { | printf(\"%s: Command not found.\\n\", argv[0]); | exit(0); | } | } | /* Parent waits for foreground job to terminate */ | if (!bg) { | int status; | if (waitpid(pid, &status, 0) < 0) | unix_error(\"waitfg: waitpid error\"); | } | else | printf(\"%d %s\", pid, cmdline); | } | return; | }"
+   },
+   {
+    "id": "bea",
+    "text": "shellex.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVq",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bwC",
+    "text": "Problem with Simple Shell Example"
+   },
+   {
+    "id": "bwI",
+    "text": "Our example shell correctly waits for and reaps foreground jobs | But what about background jobs? | Will become zombies when they terminate | Will never be reaped because shell (typically) will not terminate | Will create a memory leak that could run the kernel out of memory"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVx",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bws",
+    "text": "ECF to the Rescue!"
+   },
+   {
+    "id": "bwt",
+    "text": "Solution: Exceptional control flow | The kernel will interrupt regular processing to alert us when a background process completes | In Unix, the alert mechanism is called a signal"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVY",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bwh",
+    "text": "Today"
+   },
+   {
+    "id": "bwj",
+    "text": "Shells | Signals | Nonlocal jumps"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVP",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bwE",
+    "text": "Signals"
+   },
+   {
+    "id": "bwV",
+    "text": "A signal is a small message that notifies a process that an event of some type has occurred in the system | Akin to exceptions and interrupts | Sent from the kernel (sometimes at the request of another process) to a process | Signal type is identified by small integer ID’s (1-30) | Only information in a signal is its ID and the fact that it arrived"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVv",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bwR",
+    "text": "Signal Concepts: Sending a Signal"
+   },
+   {
+    "id": "bwb",
+    "text": "Kernel sends (delivers) a signal to a destination process by updating some state in the context of the destination process | Kernel sends a signal for one of the following reasons: | Kernel has detected a system event such as divide-by-zero (SIGFPE) or the termination of a child process (SIGCHLD) | Another process has invoked the kill system call to explicitly request the kernel to send a signal to the destination process"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVE",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bwa",
+    "text": "Signal Concepts: Receiving a Signal"
+   },
+   {
+    "id": "bie",
+    "text": "A destination process receives a signal when it is forced by the kernel to react in some way to the delivery of the signal | Some possible ways to react: | Ignore the signal (do nothing) | Terminate the process (with optional core dump) | Catch the signal by executing a user-level function called signal handler | Akin to a hardware exception handler being called in response to an asynchronous interrupt:"
+   },
+   {
+    "id": "bwL",
+    "text": "(2) Control passes | to signal handler"
+   },
+   {
+    "id": "bii",
+    "text": "(3) Signal  handler runs"
+   },
+   {
+    "id": "bwy",
+    "text": "(4) Signal handler | returns to | next instruction"
+   },
+   {
+    "id": "bwm",
+    "text": "Icurr"
+   },
+   {
+    "id": "biw",
+    "text": "Inext"
+   },
+   {
+    "id": "biI",
+    "text": "(1) Signal received by process"
+   }
+  ]
+ },
+ {
+  "slide_id": "pDV",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bis",
+    "text": "Signal Concepts: Pending and Blocked Signals"
+   },
+   {
+    "id": "biF",
+    "text": "A signal is pending if sent but not yet received | There can be at most one pending signal of any particular type | Important: Signals are not queued | If a process has a pending signal of type k, then subsequent signals of type k that are sent to that process are discarded | A process can block the receipt of certain signals | Blocked signals can be delivered, but will not be received until the signal is unblocked | A pending signal is received at most once"
+   }
+  ]
+ },
+ {
+  "slide_id": "pDD",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "biO",
+    "text": "Signal Concepts: Pending/Blocked Bits"
+   },
+   {
+    "id": "biR",
+    "text": "Kernel maintains pending and blocked bit vectors in the context of each process | pending: represents the set of pending signals | Kernel sets bit k in pending when a signal of type k is delivered | Kernel clears bit k in pending when a signal of type k is received | blocked: represents the set of blocked signals | Can be set and cleared by using the sigprocmask function | Also referred to as the signal mask."
+   }
+  ]
+ },
+ {
+  "slide_id": "pVr",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bix",
+    "text": "Sending Signals: Process Groups"
+   },
+   {
+    "id": "biE",
+    "text": "Every process belongs to exactly one process group"
+   },
+   {
+    "id": "big",
+    "text": "Fore- | ground | job"
+   },
+   {
+    "id": "bid",
+    "text": "Back- | ground | job #1"
+   },
+   {
+    "id": "biY",
+    "text": "Back- | ground | job #2"
+   },
+   {
+    "id": "biA",
+    "text": "Shell"
+   },
+   {
+    "id": "biz",
+    "text": "Child"
+   },
+   {
+    "id": "bic",
+    "text": "Child"
+   },
+   {
+    "id": "biH",
+    "text": "pid=10 | pgid=10"
+   },
+   {
+    "id": "bip",
+    "text": "Foreground | process group 20"
+   },
+   {
+    "id": "biq",
+    "text": "Background | process group 32"
+   },
+   {
+    "id": "biZ",
+    "text": "Background | process group 40"
+   },
+   {
+    "id": "biT",
+    "text": "pid=20 | pgid=20"
+   },
+   {
+    "id": "biu",
+    "text": "pid=32 | pgid=32"
+   },
+   {
+    "id": "biN",
+    "text": "pid=40 | pgid=40"
+   },
+   {
+    "id": "biM",
+    "text": "pid=21 | pgid=20"
+   },
+   {
+    "id": "bin",
+    "text": "pid=22 | pgid=20"
+   },
+   {
+    "id": "biQ",
+    "text": "getpgrp()Return process group of current process | setpgid()Change process group of a process (see text for details)"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVQ",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bij",
+    "text": "Sending Signals with /bin/kill Program"
+   },
+   {
+    "id": "bio",
+    "text": "/bin/kill program sends arbitrary signal to a process or process group | Examples | /bin/kill –9 24818Send SIGKILL to process 24818 | /bin/kill –9 –24817Send SIGKILL to every process in process group 24817"
+   },
+   {
+    "id": "bih",
+    "text": "linux> ./forks 16 | Child1: pid=24818 pgrp=24817 | Child2: pid=24819 pgrp=24817 | linux> ps | PID TTY          TIME CMD | 24788 pts/2    00:00:00 tcsh | 24818 pts/2    00:00:02 forks | 24819 pts/2    00:00:02 forks | 24820 pts/2    00:00:00 ps | linux> /bin/kill -9 -24817 | linux> ps | PID TTY          TIME CMD | 24788 pts/2    00:00:00 tcsh | 24823 pts/2    00:00:00 ps | linux>"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVA",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bCw",
+    "text": "Sending Signals from the Keyboard"
+   },
+   {
+    "id": "bCF",
+    "text": "Typing ctrl-c (ctrl-z) causes the kernel to send a SIGINT (SIGTSTP) to every job in the foreground process group. | SIGINT – default action is to terminate each process | SIGTSTP – default action is to stop (suspend) each process"
+   },
+   {
+    "id": "bCc",
+    "text": "Fore- | ground | job"
+   },
+   {
+    "id": "biL",
+    "text": "Back- | ground | job #1"
+   },
+   {
+    "id": "bCi",
+    "text": "Back- | ground | job #2"
+   },
+   {
+    "id": "bCX",
+    "text": "Shell"
+   },
+   {
+    "id": "bCR",
+    "text": "Child"
+   },
+   {
+    "id": "bCh",
+    "text": "Child"
+   },
+   {
+    "id": "bCP",
+    "text": "pid=10 | pgid=10"
+   },
+   {
+    "id": "bCk",
+    "text": "Foreground | process group 20"
+   },
+   {
+    "id": "bia",
+    "text": "Background | process group 32"
+   },
+   {
+    "id": "bCe",
+    "text": "Background | process group 40"
+   },
+   {
+    "id": "bCI",
+    "text": "pid=20 | pgid=20"
+   },
+   {
+    "id": "bCt",
+    "text": "pid=32 | pgid=32"
+   },
+   {
+    "id": "bCj",
+    "text": "pid=40 | pgid=40"
+   },
+   {
+    "id": "bCS",
+    "text": "pid=21 | pgid=20"
+   },
+   {
+    "id": "bCz",
+    "text": "pid=22 | pgid=20"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVj",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "biy",
+    "text": "Example of ctrl-c and ctrl-z"
+   },
+   {
+    "id": "biD",
+    "text": "bluefish> ./forks 17 | Child: pid=28108 pgrp=28107 | Parent: pid=28107 pgrp=28107 | <types ctrl-z> | Suspended | bluefish> ps w | PID TTY      STAT   TIME COMMAND | 27699 pts/8    Ss     0:00 -tcsh | 28107 pts/8    T      0:01 ./forks 17 | 28108 pts/8    T      0:01 ./forks 17 | 28109 pts/8    R+     0:00 ps w | bluefish> fg | ./forks 17 | <types ctrl-c> | bluefish> ps w | PID TTY      STAT   TIME COMMAND | 27699 pts/8    Ss     0:00 -tcsh | 28110 pts/8    R+     0:00 ps w"
+   },
+   {
+    "id": "biG",
+    "text": "STAT (process state) Legend: | First letter: | S: sleeping | T: stopped | R: running | Second letter: | s: session leader | +: foreground proc group | See “man ps” for more | details"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVg",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bCM",
+    "text": "Sending Signals with kill Function"
+   },
+   {
+    "id": "bCn",
+    "text": "void fork12() | { | pid_t pid[N]; | int i; | int child_status; | for (i = 0; i < N; i++) | if ((pid[i] = fork()) == 0) { | /* Child: Infinite Loop */ | while(1) | ; | } | for (i = 0; i < N; i++) { | printf(\"Killing process %d\\n\", pid[i]); | kill(pid[i], SIGINT); | } | for (i = 0; i < N; i++) { | pid_t wpid = wait(&child_status); | if (WIFEXITED(child_status)) | printf(\"Child %d terminated with exit status %d\\n\", | wpid, WEXITSTATUS(child_status)); | else | printf(\"Child %d terminated abnormally\\n\", wpid); | } | }"
+   },
+   {
+    "id": "bCH",
+    "text": "forks.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVI",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bCq",
+    "text": "Receiving Signals"
+   },
+   {
+    "id": "bCU",
+    "text": "Suppose kernel is returning from an exception handler and is ready to pass control to process p"
+   },
+   {
+    "id": "bIw",
+    "text": "Process A"
+   },
+   {
+    "id": "bCV",
+    "text": "Process B"
+   },
+   {
+    "id": "bIe",
+    "text": "user code"
+   },
+   {
+    "id": "bCd",
+    "text": "kernel code"
+   },
+   {
+    "id": "bCT",
+    "text": "user code"
+   },
+   {
+    "id": "bCv",
+    "text": "kernel code"
+   },
+   {
+    "id": "bCK",
+    "text": "user code"
+   },
+   {
+    "id": "bIC",
+    "text": "context switch"
+   },
+   {
+    "id": "bCD",
+    "text": "context switch"
+   },
+   {
+    "id": "bIi",
+    "text": "Time"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVB",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bCE",
+    "text": "Receiving Signals"
+   },
+   {
+    "id": "bCQ",
+    "text": "Suppose kernel is returning from an exception handler and is ready to pass control to process p | Kernel computes pnb = pending & ~blocked | The set of pending nonblocked signals for process p | If  (pnb == 0) | Pass control to next instruction in the logical flow for p | Else | Choose least nonzero bit k in pnb and force process p to receive signal k | The receipt of the signal triggers some action by p | Repeat for all nonzero k in pnb | Pass control to next instruction in logical flow for p"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVu",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bCf",
+    "text": "Default Actions"
+   },
+   {
+    "id": "bCg",
+    "text": "Each signal type has a predefined default action, which is one of: | The process terminates | The process stops until restarted by a SIGCONT signal | The process ignores the signal"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVL",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bIO",
+    "text": "Installing Signal Handlers"
+   },
+   {
+    "id": "bIR",
+    "text": "The signal function modifies the default action associated with the receipt of signal signum: | handler_t *signal(int signum, handler_t *handler) | Different values for handler: | SIG_IGN: ignore signals of type signum | SIG_DFL: revert to the default action on receipt of signals of type signum | Otherwise, handler is the address of a user-level signal handler | Called when process receives signal of type signum | Referred to as “installing” the handler | Executing handler is called “catching” or “handling” the signal | When the handler executes its return statement, control passes back to instruction in the control flow of the process that was interrupted by receipt of the signal"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVX",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bIj",
+    "text": "Signal Handling Example"
+   },
+   {
+    "id": "bIo",
+    "text": "void sigint_handler(int sig) /* SIGINT handler */ | { | printf(\"So you think you can stop the bomb with ctrl-c, do you?\\n\"); | sleep(2); | printf(\"Well...\"); | fflush(stdout); | sleep(1); | printf(\"OK. :-)\\n\"); | exit(0); | } | int main() | { | /* Install the SIGINT handler */ | if (signal(SIGINT, sigint_handler) == SIG_ERR) | unix_error(\"signal error\"); | /* Wait for the receipt of a signal */ | pause(); | return 0; | }"
+   },
+   {
+    "id": "bIh",
+    "text": "sigint.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVK",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bIN",
+    "text": "Signals Handlers as Concurrent Flows"
+   },
+   {
+    "id": "bIx",
+    "text": "A signal handler is a separate logical flow (not process) that runs concurrently with the main program"
+   },
+   {
+    "id": "bIf",
+    "text": "Process A | while (1) | ;"
+   },
+   {
+    "id": "bIc",
+    "text": "Process A | handler(){ | … | }"
+   },
+   {
+    "id": "bIH",
+    "text": "Process B"
+   },
+   {
+    "id": "bIE",
+    "text": "Time"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVb",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bFf",
+    "text": "Another View of Signal Handlers as Concurrent Flows"
+   },
+   {
+    "id": "bFY",
+    "text": "Signal delivered | to process A"
+   },
+   {
+    "id": "bFP",
+    "text": "Signal received | by process A"
+   },
+   {
+    "id": "bFQ",
+    "text": "Process A"
+   },
+   {
+    "id": "bFT",
+    "text": "Process B"
+   },
+   {
+    "id": "bFc",
+    "text": "user code (main)"
+   },
+   {
+    "id": "bFp",
+    "text": "kernel code"
+   },
+   {
+    "id": "bFr",
+    "text": "user code (main)"
+   },
+   {
+    "id": "bFR",
+    "text": "kernel code"
+   },
+   {
+    "id": "bFN",
+    "text": "user code (handler)"
+   },
+   {
+    "id": "bFd",
+    "text": "context switch"
+   },
+   {
+    "id": "bFk",
+    "text": "context switch"
+   },
+   {
+    "id": "bFu",
+    "text": "kernel code"
+   },
+   {
+    "id": "bFO",
+    "text": "user code (main)"
+   },
+   {
+    "id": "bFl",
+    "text": "Icurr"
+   },
+   {
+    "id": "bFH",
+    "text": "Inext"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVw",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bIG",
+    "text": "Nested Signal Handlers"
+   },
+   {
+    "id": "bIa",
+    "text": "Handlers can be interrupted by other handlers"
+   },
+   {
+    "id": "bID",
+    "text": "(2) Control passes to handler S"
+   },
+   {
+    "id": "bIJ",
+    "text": "Main program"
+   },
+   {
+    "id": "bFC",
+    "text": "(5) Handler T | returns to handler S"
+   },
+   {
+    "id": "bId",
+    "text": "Icurr"
+   },
+   {
+    "id": "bIY",
+    "text": "Inext"
+   },
+   {
+    "id": "bIA",
+    "text": "(1) Program catches signal s"
+   },
+   {
+    "id": "bIy",
+    "text": "Handler S"
+   },
+   {
+    "id": "bIL",
+    "text": "Handler T"
+   },
+   {
+    "id": "bFi",
+    "text": "(3) Program catches signal t"
+   },
+   {
+    "id": "bIB",
+    "text": "(4)  Control passes to handler T"
+   },
+   {
+    "id": "bIu",
+    "text": "(6) Handler S | returns to main program"
+   },
+   {
+    "id": "bIv",
+    "text": "(7) Main program resumes"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVc",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bFA",
+    "text": "Blocking and Unblocking Signals"
+   },
+   {
+    "id": "bFU",
+    "text": "Implicit blocking mechanism | Kernel blocks any pending signals of type currently being handled. | E.g., A SIGINT handler can’t be interrupted by another SIGINT | Explicit blocking and unblocking mechanism | sigprocmask function | Supporting functions | sigemptyset – Create empty set | sigfillset – Add every signal number to set | sigaddset – Add signal number to set | sigdelset – Delete signal number from set"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVS",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bFv",
+    "text": "Temporarily Blocking Signals"
+   },
+   {
+    "id": "bFy",
+    "text": "sigset_t mask, prev_mask; | Sigemptyset(&mask); | Sigaddset(&mask, SIGINT); | /* Block SIGINT and save previous blocked set */ | Sigprocmask(SIG_BLOCK, &mask, &prev_mask); | /* Code region that will not be interrupted by SIGINT */ | /* Restore previous blocked set, unblocking SIGINT */ | Sigprocmask(SIG_SETMASK, &prev_mask, NULL);"
+   },
+   {
+    "id": "bFD",
+    "text": "…"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVC",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bFa",
+    "text": "Safe Signal Handling"
+   },
+   {
+    "id": "bFG",
+    "text": "Handlers are tricky because they are concurrent with main program and share the same global data structures. | Shared data structures can become corrupted. | We’ll explore concurrency issues later in the term. | For now here are some guidelines to help you avoid trouble."
+   }
+  ]
+ },
+ {
+  "slide_id": "pVU",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bFm",
+    "text": "Guidelines for Writing Safe Handlers"
+   },
+   {
+    "id": "bFL",
+    "text": "G0: Keep your handlers as simple as possible | e.g., Set a global flag and return | G1: Call only async-signal-safe functions in your handlers | printf, sprintf,  malloc, and exit are not safe! | G2: Save and restore errno on entry and exit | So that other handlers don’t overwrite your value of errno | G3: Protect accesses to shared data structures by temporarily blocking all signals. | To prevent possible corruption | G4: Declare global variables as volatile | To prevent compiler from storing them in a register | G5: Declare global flags as volatile sig_atomic_t | flag: variable that is only read or written (e.g. flag = 1, not flag++) | Flag declared this way does not need to be protected  like other globals"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVp",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bFJ",
+    "text": "Async-Signal-Safety"
+   },
+   {
+    "id": "bXe",
+    "text": "Function is async-signal-safe if either reentrant (e.g., all variables stored on stack frame, CS:APP3e 12.7.2) or non-interruptible by signals. | Posix guarantees 117 functions to be async-signal-safe | Source: “man 7 signal” | Popular functions on the list: | _exit, write, wait, waitpid, sleep, kill | Popular functions that are not on the list: | printf,  sprintf, malloc, exit | Unfortunate fact: write is the only async-signal-safe output function"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVt",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXw",
+    "text": "Safely Generating Formatted Output"
+   },
+   {
+    "id": "bXi",
+    "text": "Use the reentrant SIO (Safe I/O library) from csapp.c in your handlers. | ssize_t sio_puts(char s[]) /* Put string */ | ssize_t sio_putl(long v)   /* Put long */ | void sio_error(char s[])   /* Put msg & exit */"
+   },
+   {
+    "id": "bXC",
+    "text": "void sigint_handler(int sig) /* Safe SIGINT handler */ | { | Sio_puts(\"So you think you can stop the bomb with ctrl-c, do you?\\n\"); | sleep(2); | Sio_puts(\"Well...\"); | sleep(1); | Sio_puts(\"OK. :-)\\n\"); | _exit(0); | }"
+   },
+   {
+    "id": "bXI",
+    "text": "sigintsafe.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVH",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXX",
+    "text": "Pending signals are not queued | For each signal type, one bit indicates whether or not signal is pending… | …thus at most one pending signal of any particular type. | You can’t use signals to count events, such as children terminating."
+   },
+   {
+    "id": "bXs",
+    "text": "int ccount = 0; | void child_handler(int sig) { | int olderrno = errno; | pid_t pid; | if ((pid = wait(NULL)) < 0) | Sio_error(\"wait error\"); | ccount--; | Sio_puts(\"Handler reaped child \"); | Sio_putl((long)pid); | Sio_puts(\" \\n\"); | sleep(1); | errno = olderrno; | } | void fork14() { | pid_t pid[N]; | int i; | ccount = N; | Signal(SIGCHLD, child_handler); | for (i = 0; i < N; i++) { | if ((pid[i] = Fork()) == 0) { | Sleep(1); | exit(0);  /* Child exits */ | } | } | while (ccount > 0) /* Parent spins */ | ; | }"
+   },
+   {
+    "id": "bXt",
+    "text": "forks.c"
+   },
+   {
+    "id": "bXO",
+    "text": "whaleshark> ./forks 14 | Handler reaped child 23240 | Handler reaped child 23241"
+   },
+   {
+    "id": "bXR",
+    "text": "Correct Signal Handling"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVk",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXj",
+    "text": "Correct Signal Handling"
+   },
+   {
+    "id": "bXo",
+    "text": "Must wait for all terminated child processes | Put  wait in a loop to reap all terminated children"
+   },
+   {
+    "id": "bXh",
+    "text": "void child_handler2(int sig) | { | int olderrno = errno; | pid_t pid; | while ((pid = wait(NULL)) > 0) { | ccount--; | Sio_puts(\"Handler reaped child \"); | Sio_putl((long)pid); | Sio_puts(\" \\n\"); | } | if (errno != ECHILD) | Sio_error(\"wait error\"); | errno = olderrno; | }"
+   },
+   {
+    "id": "bXP",
+    "text": "whaleshark> ./forks 15 | Handler reaped child 23246 | Handler reaped child 23247 | Handler reaped child 23248 | Handler reaped child 23249 | Handler reaped child 23250 | whaleshark>"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVn",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXM",
+    "text": "Portable Signal Handling"
+   },
+   {
+    "id": "bXn",
+    "text": "Ugh! Different versions of Unix can have different signal handling semantics | Some older systems restore action to default after catching signal | Some interrupted system calls can return with errno == EINTR | Some systems don’t block signals of the type being handled | Solution: sigaction"
+   },
+   {
+    "id": "bXz",
+    "text": "handler_t *Signal(int signum, handler_t *handler) | { | struct sigaction action, old_action; | action.sa_handler = handler; | sigemptyset(&action.sa_mask); /* Block sigs of type being handled */ | action.sa_flags = SA_RESTART; /* Restart syscalls if possible */ | if (sigaction(signum, &action, &old_action) < 0) | unix_error(\"Signal error\"); | return (old_action.sa_handler); | }"
+   },
+   {
+    "id": "bXc",
+    "text": "csapp.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVT",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXS",
+    "text": "Synchronizing Flows to Avoid Races"
+   },
+   {
+    "id": "bXl",
+    "text": "int main(int argc, char **argv) | { | int pid; | sigset_t mask_all, prev_all; | Sigfillset(&mask_all); | Signal(SIGCHLD, handler); | initjobs(); /* Initialize the job list */ | while (1) { | if ((pid = Fork()) == 0) { /* Child */ | Execve(\"/bin/date\", argv, NULL); | } | Sigprocmask(SIG_BLOCK, &mask_all, &prev_all); /* Parent */ | addjob(pid);  /* Add the child to the job list */ | Sigprocmask(SIG_SETMASK, &prev_all, NULL); | } | exit(0); | }"
+   },
+   {
+    "id": "bXN",
+    "text": "Simple shell with a subtle synchronization error because it assumes parent runs before child."
+   },
+   {
+    "id": "bXk",
+    "text": "procmask1.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVa",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXH",
+    "text": "Synchronizing Flows to Avoid Races"
+   },
+   {
+    "id": "bXW",
+    "text": "void handler(int sig) | { | int olderrno = errno; | sigset_t mask_all, prev_all; | pid_t pid; | Sigfillset(&mask_all); | while ((pid = waitpid(-1, NULL, 0)) > 0) { /* Reap child */ | Sigprocmask(SIG_BLOCK, &mask_all, &prev_all); | deletejob(pid); /* Delete the child from the job list */ | Sigprocmask(SIG_SETMASK, &prev_all, NULL); | } | if (errno != ECHILD) | Sio_error(\"waitpid error\"); | errno = olderrno; | }"
+   },
+   {
+    "id": "bXE",
+    "text": "SIGCHLD handler for a simple shell"
+   },
+   {
+    "id": "bXQ",
+    "text": "procmask1.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVF",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXp",
+    "text": "Corrected Shell Program without Race"
+   },
+   {
+    "id": "bXf",
+    "text": "int main(int argc, char **argv) | { | int pid; | sigset_t mask_all, mask_one, prev_one; | Sigfillset(&mask_all); | Sigemptyset(&mask_one); | Sigaddset(&mask_one, SIGCHLD); | Signal(SIGCHLD, handler); | initjobs(); /* Initialize the job list */ | while (1) { | Sigprocmask(SIG_BLOCK, &mask_one, &prev_one); /* Block SIGCHLD */ | if ((pid = Fork()) == 0) { /* Child process */ | Sigprocmask(SIG_SETMASK, &prev_one, NULL); /* Unblock SIGCHLD */ | Execve(\"/bin/date\", argv, NULL); | } | Sigprocmask(SIG_BLOCK, &mask_all, NULL); /* Parent process */ | addjob(pid);  /* Add the child to the job list */ | Sigprocmask(SIG_SETMASK, &prev_one, NULL);  /* Unblock SIGCHLD */ | } | exit(0); | }"
+   },
+   {
+    "id": "bXg",
+    "text": "procmask2.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVZ",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXZ",
+    "text": "Explicitly Waiting for Signals"
+   },
+   {
+    "id": "bXq",
+    "text": "volatile sig_atomic_t pid; | void sigchld_handler(int s) | { | int olderrno = errno; | pid = Waitpid(-1, NULL, 0); /* Main is waiting for nonzero pid */ | errno = olderrno; | } | void sigint_handler(int s) | { | }"
+   },
+   {
+    "id": "bXd",
+    "text": "Handlers for program explicitly waiting for SIGCHLD to arrive."
+   },
+   {
+    "id": "bXV",
+    "text": "waitforsignal.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVV",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXT",
+    "text": "Explicitly Waiting for Signals"
+   },
+   {
+    "id": "bXr",
+    "text": "int main(int argc, char **argv) { | sigset_t mask, prev; | Signal(SIGCHLD, sigchld_handler); | Signal(SIGINT, sigint_handler); | Sigemptyset(&mask); | Sigaddset(&mask, SIGCHLD); | while (1) { | Sigprocmask(SIG_BLOCK, &mask, &prev); /* Block SIGCHLD */ | if (Fork() == 0) /* Child */ | exit(0); | /* Parent */ | pid = 0; | Sigprocmask(SIG_SETMASK, &prev, NULL); /* Unblock SIGCHLD */ | /* Wait for SIGCHLD to be received (wasteful!) */ | while (!pid) | ; | /* Do some work after receiving SIGCHLD */ | printf(\".\"); | } | exit(0); | }"
+   },
+   {
+    "id": "bXY",
+    "text": "waitforsignal.c"
+   },
+   {
+    "id": "bXK",
+    "text": "Similar to a shell waiting | for a foreground job to | terminate."
+   }
+  ]
+ },
+ {
+  "slide_id": "pVG",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXu",
+    "text": "Explicitly Waiting for Signals"
+   },
+   {
+    "id": "bXB",
+    "text": "while (!pid)  /* Race! */ | pause();"
+   },
+   {
+    "id": "bXA",
+    "text": "Program is correct, but very wasteful | Other options: | Solution: sigsuspend"
+   },
+   {
+    "id": "bXU",
+    "text": "while (!pid) /* Too slow! */ | sleep(1);"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVh",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXv",
+    "text": "Waiting for Signals with sigsuspend"
+   },
+   {
+    "id": "bXy",
+    "text": "sigprocmask(SIG_BLOCK, &mask, &prev); | pause(); | sigprocmask(SIG_SETMASK, &prev, NULL);"
+   },
+   {
+    "id": "bXD",
+    "text": "int sigsuspend(const sigset_t *mask) | Equivalent to atomic (uninterruptable) version of:"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVM",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXG",
+    "text": "Waiting for Signals with sigsuspend"
+   },
+   {
+    "id": "bXa",
+    "text": "int main(int argc, char **argv) { | sigset_t mask, prev; | Signal(SIGCHLD, sigchld_handler); | Signal(SIGINT, sigint_handler); | Sigemptyset(&mask); | Sigaddset(&mask, SIGCHLD); | while (1) { | Sigprocmask(SIG_BLOCK, &mask, &prev); /* Block SIGCHLD */ | if (Fork() == 0) /* Child */ | exit(0); | /* Wait for SIGCHLD to be received */ | pid = 0; | while (!pid) | Sigsuspend(&prev); | /* Optionally unblock SIGCHLD */ | Sigprocmask(SIG_SETMASK, &prev, NULL); | /* Do some work after receiving SIGCHLD */ | printf(\".\"); | } | exit(0); | }"
+   },
+   {
+    "id": "bXm",
+    "text": "sigsuspend.c"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVJ",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bXL",
+    "text": "Today"
+   },
+   {
+    "id": "bXJ",
+    "text": "Shells | Signals | Nonlocal jumps | Consult your textbook and additional slides"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVy",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bsi",
+    "text": "Summary"
+   },
+   {
+    "id": "bsC",
+    "text": "Signals provide process-level exception handling | Can generate from user programs | Can define effect by declaring signal handler | Be very careful when writing signal handlers | Nonlocal jumps provide exceptional control flow within process | Within constraints of stack discipline"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVN",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bss",
+    "text": "Additional slides"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVD",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bsF",
+    "text": "Nonlocal Jumps: setjmp/longjmp"
+   },
+   {
+    "id": "bsX",
+    "text": "Powerful (but dangerous) user-level mechanism for transferring control to an arbitrary location | Controlled to way to break the procedure call / return discipline | Useful for error recovery and signal handling | int setjmp(jmp_buf j) | Must be called before longjmp | Identifies a return site for a subsequent longjmp | Called once, returns one or more times | Implementation: | Remember where you are by storing  the current register context, stack pointer,  and PC value in jmp_buf | Return 0"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVl",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bsO",
+    "text": "setjmp/longjmp (cont)"
+   },
+   {
+    "id": "bsR",
+    "text": "void longjmp(jmp_buf j, int i) | Meaning: | return from the setjmp remembered by jump buffer j again ... | … this time returning i instead of 0 | Called after setjmp | Called once, but never returns | longjmp Implementation: | Restore register context (stack pointer, base pointer, PC value) from jump buffer j | Set %eax (the return value) to i | Jump to the location indicated by the PC stored in jump buf j"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVO",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bso",
+    "text": "setjmp/longjmp Example"
+   },
+   {
+    "id": "bsh",
+    "text": "Goal: return directly to original caller from a deeply-nested function"
+   },
+   {
+    "id": "bsj",
+    "text": "/* Deeply nested function foo */ | void foo(void) | { | if (error1) | longjmp(buf, 1); | bar(); | } | void bar(void) | { | if (error2) | longjmp(buf, 2); | }"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVs",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bte",
+    "text": "jmp_buf buf; | int error1 = 0; | int error2 = 1; | void foo(void), bar(void); | int main() | { | switch(setjmp(buf)) { | case 0: | foo(); | break; | case 1: | printf(\"Detected an error1 condition in foo\\n\"); | break; | case 2: | printf(\"Detected an error2 condition in foo\\n\"); | break; | default: | printf(\"Unknown error condition in foo\\n\"); | } | exit(0); | }"
+   },
+   {
+    "id": "btw",
+    "text": "setjmp/longjmp Example (cont)"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVW",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bsA",
+    "text": "Limitations of Nonlocal Jumps"
+   },
+   {
+    "id": "bsy",
+    "text": "Works within stack discipline | Can only long jump to environment of function that has been called but not yet completed"
+   },
+   {
+    "id": "bsK",
+    "text": "jmp_buf env; | P1() | { | if (setjmp(env)) { | /* Long Jump to here */ | } else { | P2(); | } | } | P2() | {  . . . P2(); . . . P3(); } | P3() | { | longjmp(env, 1); | }"
+   },
+   {
+    "id": "bsU",
+    "text": "P1"
+   },
+   {
+    "id": "bsD",
+    "text": "P2"
+   },
+   {
+    "id": "bsT",
+    "text": "P2"
+   },
+   {
+    "id": "bsu",
+    "text": "P2"
+   },
+   {
+    "id": "bsG",
+    "text": "P3"
+   },
+   {
+    "id": "bsB",
+    "text": "env"
+   },
+   {
+    "id": "bsv",
+    "text": "P1"
+   },
+   {
+    "id": "bsa",
+    "text": "Before longjmp"
+   },
+   {
+    "id": "bsm",
+    "text": "After longjmp"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVz",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "bsM",
+    "text": "Limitations of Long Jumps (cont.)"
+   },
+   {
+    "id": "bsE",
+    "text": "Works within stack discipline | Can only long jump to environment of function that has been called but not yet completed"
+   },
+   {
+    "id": "bsg",
+    "text": "jmp_buf env; | P1() | { | P2(); P3(); | } | P2() | { | if (setjmp(env)) { | /* Long Jump to here */ | } | } | P3() | { | longjmp(env, 1); | }"
+   },
+   {
+    "id": "bsV",
+    "text": "env"
+   },
+   {
+    "id": "bsN",
+    "text": "P1"
+   },
+   {
+    "id": "bsz",
+    "text": "P2"
+   },
+   {
+    "id": "bsQ",
+    "text": "At setjmp"
+   },
+   {
+    "id": "bsZ",
+    "text": "P1"
+   },
+   {
+    "id": "bsP",
+    "text": "P3"
+   },
+   {
+    "id": "bsc",
+    "text": "env"
+   },
+   {
+    "id": "bsH",
+    "text": "At longjmp"
+   },
+   {
+    "id": "bsp",
+    "text": "X"
+   },
+   {
+    "id": "bsq",
+    "text": "P1"
+   },
+   {
+    "id": "bsS",
+    "text": "P2"
+   },
+   {
+    "id": "bsW",
+    "text": "P2 returns"
+   },
+   {
+    "id": "bsf",
+    "text": "env"
+   },
+   {
+    "id": "bsd",
+    "text": "X"
+   }
+  ]
+ },
+ {
+  "slide_id": "pVo",
+  "texts": [
+   {
+    "id": "bei",
+    "text": "Carnegie Mellon"
+   },
+   {
+    "id": "beC",
+    "text": "Bryant and O’Hallaron, Computer Systems: A Programmer’s Perspective, Third Edition"
+   },
+   {
+    "id": "btF",
+    "text": "Putting It All Together: A Program That Restarts Itself When ctrl-c’d"
+   },
+   {
+    "id": "bts",
+    "text": "#include \"csapp.h\" | sigjmp_buf buf; | void handler(int sig) | { | siglongjmp(buf, 1); | } | int main() | { | if (!sigsetjmp(buf, 1)) { | Signal(SIGINT, handler); | Sio_puts(\"starting\\n\"); | } | else | Sio_puts(\"restarting\\n\"); | while(1) { | Sleep(1); | Sio_puts(\"processing...\\n\"); | } | exit(0); /* Control never reaches here */ | }"
+   },
+   {
+    "id": "btt",
+    "text": "restart.c"
+   },
+   {
+    "id": "bti",
+    "text": "greatwhite> ./restart | starting | processing... | processing... | processing... | restarting | processing... | processing... | restarting | processing... | processing... | processing..."
+   },
+   {
+    "id": "btI",
+    "text": "Ctrl-c"
+   },
+   {
+    "id": "btR",
+    "text": "Ctrl-c"
+   }
+  ]
+ }
+]

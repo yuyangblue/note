@@ -1,0 +1,10296 @@
+[
+ {
+  "slide_id": "pVR",
+  "blocks": [
+   {
+    "id": "bet",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Exceptional Control Flow: "
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Signals and Nonlocal Jumps"
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "15-213: Introduction to Computer Systems"
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "15"
+      },
+      {
+       "tag": "span",
+       "text": "th"
+      },
+      {
+       "tag": "span",
+       "text": " Lecture, Oct. 20, 2015"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beX",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Instructors:"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Randal E. Bryant and David R. O’Hallaron"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVi",
+  "blocks": [
+   {
+    "id": "beY",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "ECF Exists at All Levels of a System"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beu",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Exceptions"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Hardware and operating system kernel software"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Process Context Switch"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Hardware timer and kernel software"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Signals"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Kernel software and application software"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Nonlocal jumps"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Application code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beA",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bev",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Previous Lecture"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "ber",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beK",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "This Lecture"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beB",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Textbook and "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "supplemental slides"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beU",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVm",
+  "blocks": [
+   {
+    "id": "beI",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Today"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beF",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Shells"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Signals"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Nonlocal jumps"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVd",
+  "blocks": [
+   {
+    "id": "ben",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Linux Process Hierarchy"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beQ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Login shell"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beq",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Child"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bej",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Child"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beS",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Grandchild"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bel",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Grandchild"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beH",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "[0]"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beW",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Daemon"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "e.g. "
+      },
+      {
+       "tag": "span",
+       "text": "httpd"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bef",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "init [1]"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beV",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Login shell"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beh",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Child"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beM",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "…"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beE",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "…"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beZ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "…"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beP",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Note: you can view the hierarchy using the Linux "
+      },
+      {
+       "tag": "span",
+       "text": "pstree"
+      },
+      {
+       "tag": "span",
+       "text": " command"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVe",
+  "blocks": [
+   {
+    "id": "bww",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Shell Programs"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwi",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "A "
+      },
+      {
+       "tag": "span",
+       "text": "shell"
+      },
+      {
+       "tag": "span",
+       "text": " is an application program that runs programs on behalf of the user."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "sh"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Original Unix shell (Stephen Bourne, AT&T Bell Labs, 1977)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "csh/tcsh"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "BSD Unix C shell"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "bash"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "“"
+      },
+      {
+       "tag": "span",
+       "text": "Bourne-Again” Shell"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "(default Linux shell)"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bem",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "cmdline"
+      },
+      {
+       "tag": "span",
+       "text": "[MAXLINE]; "
+      },
+      {
+       "tag": "span",
+       "text": "/* command line */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (1) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "/* read */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"> \""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Fgets(cmdline, MAXLINE, stdin);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (feof(stdin))"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            exit(0);"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "/* evaluate */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        eval(cmdline);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beL",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Execution is a sequence of read/evaluate steps"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beJ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "shellex.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVf",
+  "blocks": [
+   {
+    "id": "beD",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Simple Shell "
+      },
+      {
+       "tag": "span",
+       "text": "eval"
+      },
+      {
+       "tag": "span",
+       "text": " Function"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "beG",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "eval"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " *"
+      },
+      {
+       "tag": "span",
+       "text": "cmdline"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " *"
+      },
+      {
+       "tag": "span",
+       "text": "argv"
+      },
+      {
+       "tag": "span",
+       "text": "[MAXARGS]; "
+      },
+      {
+       "tag": "span",
+       "text": "/* Argument list execve() */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "buf"
+      },
+      {
+       "tag": "span",
+       "text": "[MAXLINE];   "
+      },
+      {
+       "tag": "span",
+       "text": "/* Holds modified command line */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "bg"
+      },
+      {
+       "tag": "span",
+       "text": ";              "
+      },
+      {
+       "tag": "span",
+       "text": "/* Should the job run in bg or fg? */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "pid_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": ";           "
+      },
+      {
+       "tag": "span",
+       "text": "/* Process id */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    strcpy(buf, cmdline);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    bg = parseline(buf, argv);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (argv[0] == "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "return"
+      },
+      {
+       "tag": "span",
+       "text": ";   "
+      },
+      {
+       "tag": "span",
+       "text": "/* Ignore empty lines */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (!builtin_command(argv)) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid = Fork()) == 0) {   "
+      },
+      {
+       "tag": "span",
+       "text": "/* Child runs user job */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (execve(argv[0], argv, environ) < 0) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "                printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"%s: Command not found.\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ", argv[0]);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "                exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        }"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "/* Parent waits for foreground job to terminate */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (!bg) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "status"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (waitpid(pid, &status, 0) < 0)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "                unix_error("
+      },
+      {
+       "tag": "span",
+       "text": "\"waitfg: waitpid error\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "else"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"%d %s\""
+      },
+      {
+       "tag": "span",
+       "text": ", pid, cmdline);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "return"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bea",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "shellex.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVq",
+  "blocks": [
+   {
+    "id": "bwC",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Problem with Simple Shell Example"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwI",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Our example shell correctly waits for and reaps foreground jobs"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "But what about background jobs?"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Will become zombies when they terminate"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Will never be reaped because shell (typically) will not terminate"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Will create a memory leak that could run the kernel out of memory"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVx",
+  "blocks": [
+   {
+    "id": "bws",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "ECF to the Rescue!"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwt",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Solution: Exceptional control flow"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "The kernel will interrupt regular processing to alert us when a background process completes"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "In Unix, the alert mechanism is called a "
+      },
+      {
+       "tag": "span",
+       "text": "signal"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVY",
+  "blocks": [
+   {
+    "id": "bwh",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Today"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwj",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Shells"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Signals"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Nonlocal jumps"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVP",
+  "blocks": [
+   {
+    "id": "bwE",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwV",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "A "
+      },
+      {
+       "tag": "span",
+       "text": "signal"
+      },
+      {
+       "tag": "span",
+       "text": " is a small message that notifies a process that an event of some type has occurred in the system"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Akin to exceptions and interrupts"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Sent from the kernel (sometimes at the request of another process) to a process"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Signal type is identified by small integer ID’s (1-30)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Only information in a signal is its ID and the fact that it arrived"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVv",
+  "blocks": [
+   {
+    "id": "bwR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signal Concepts: Sending a Signal"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwb",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Kernel "
+      },
+      {
+       "tag": "span",
+       "text": "sends"
+      },
+      {
+       "tag": "span",
+       "text": " (delivers) a signal to a "
+      },
+      {
+       "tag": "span",
+       "text": "destination process"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "by updating some state in the context of the destination process"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Kernel sends a signal for one of the following reasons:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Kernel has detected a system event such as divide-by-zero (SIGFPE) or the termination of a child process (SIGCHLD)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Another process has invoked the "
+      },
+      {
+       "tag": "span",
+       "text": "kill"
+      },
+      {
+       "tag": "span",
+       "text": " system call to explicitly request the kernel to send a signal to the destination process"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVE",
+  "blocks": [
+   {
+    "id": "bwa",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signal Concepts: Receiving a Signal"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bie",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "A destination process "
+      },
+      {
+       "tag": "span",
+       "text": "receives"
+      },
+      {
+       "tag": "span",
+       "text": " a signal when it is forced by the kernel to react in some way to the delivery of the signal"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Some possible ways to react:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Ignore"
+      },
+      {
+       "tag": "span",
+       "text": " the signal (do nothing)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Terminate"
+      },
+      {
+       "tag": "span",
+       "text": " the process (with optional core dump)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Catch"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "the signal by executing a user-level function called "
+      },
+      {
+       "tag": "span",
+       "text": "signal handler"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Akin to a hardware exception handler being called in response to an asynchronous interrupt:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwL",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(2) Control passes "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "to signal handler "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bii",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(3) Signal  handler runs"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwy",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(4) Signal handler"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "returns to "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "next instruction"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bwm",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "I"
+      },
+      {
+       "tag": "span",
+       "text": "curr"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biw",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "I"
+      },
+      {
+       "tag": "span",
+       "text": "next"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biI",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(1) Signal received by process "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pDV",
+  "blocks": [
+   {
+    "id": "bis",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signal Concepts: Pending and Blocked Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biF",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "A signal is "
+      },
+      {
+       "tag": "span",
+       "text": "pending"
+      },
+      {
+       "tag": "span",
+       "text": " if sent but not yet received"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "There can be at most one pending signal of any particular type"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Important: Signals are not queued"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "If a process has a pending signal of type k, then subsequent signals of type k that are sent to that process are discarded"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "A process can "
+      },
+      {
+       "tag": "span",
+       "text": "block"
+      },
+      {
+       "tag": "span",
+       "text": " the receipt of certain signals"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Blocked signals can be delivered, but will not be received until the signal is unblocked"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "A pending signal is received at most once"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pDD",
+  "blocks": [
+   {
+    "id": "biO",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signal Concepts: Pending/Blocked Bits"
+      },
+      {
+       "tag": "span",
+       "text": ""
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Kernel maintains "
+      },
+      {
+       "tag": "span",
+       "text": "pending"
+      },
+      {
+       "tag": "span",
+       "text": " and "
+      },
+      {
+       "tag": "span",
+       "text": "blocked"
+      },
+      {
+       "tag": "span",
+       "text": " bit vectors in the context of each process"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pending"
+      },
+      {
+       "tag": "span",
+       "text": ": represents the set of pending signals"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Kernel sets bit k in "
+      },
+      {
+       "tag": "span",
+       "text": "pending"
+      },
+      {
+       "tag": "span",
+       "text": " when a signal of type k is delivered"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Kernel clears bit k in "
+      },
+      {
+       "tag": "span",
+       "text": "pending"
+      },
+      {
+       "tag": "span",
+       "text": " when a signal of type k is received "
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "blocked"
+      },
+      {
+       "tag": "span",
+       "text": ": represents the set of blocked signals"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Can be set and cleared by using the "
+      },
+      {
+       "tag": "span",
+       "text": "sigprocmask"
+      },
+      {
+       "tag": "span",
+       "text": " function"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Also referred to as the "
+      },
+      {
+       "tag": "span",
+       "text": "signal mask"
+      },
+      {
+       "tag": "span",
+       "text": "."
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVr",
+  "blocks": [
+   {
+    "id": "biK",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biU",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bil",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bix",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Sending Signals: Process Groups"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biE",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Every process belongs to exactly one process group"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "big",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Fore-"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ground"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "job"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bid",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Back-"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ground"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "job #1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biY",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Back-"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ground"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "job #2"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biA",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Shell"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biz",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Child"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bic",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Child"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biH",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=10"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=10"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bip",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Foreground "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "process group 20"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biq",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Background"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "process group 32"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biZ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Background"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "process group 40"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biT",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=20"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=20"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biu",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=32"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=32"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biN",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=40"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=40"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biM",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=21"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=20"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bin",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=22"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=20"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biQ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "getpgrp()"
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Return process group of current process"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "setpgid()"
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Change process group of a process (see text for details)"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVQ",
+  "blocks": [
+   {
+    "id": "bij",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Sending Signals with "
+      },
+      {
+       "tag": "span",
+       "text": "/bin/kill "
+      },
+      {
+       "tag": "span",
+       "text": "Program"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bio",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "/bin/kill "
+      },
+      {
+       "tag": "span",
+       "text": "program sends arbitrary signal to a process or process group"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Examples"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "/bin/kill –9 24818"
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Send SIGKILL to process 24818"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "/bin/kill –9 –24817"
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Send SIGKILL to every process in process group 24817"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bih",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "linux> ./forks 16 "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Child1: pid=24818 pgrp=24817 "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Child2: pid=24819 pgrp=24817 "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "linux> ps "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  PID TTY          TIME CMD "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "24788 pts/2    00:00:00 tcsh "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "24818 pts/2    00:00:02 forks "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "24819 pts/2    00:00:02 forks "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "24820 pts/2    00:00:00 ps "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "linux> /bin/kill -9 -24817 "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "linux> ps  "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  PID TTY          TIME CMD "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "24788 pts/2    00:00:00 tcsh "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "24823 pts/2    00:00:00 ps "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "linux> "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biP",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biS",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVA",
+  "blocks": [
+   {
+    "id": "bCw",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Sending Signals from the Keyboard"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCF",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Typing ctrl-c (ctrl-z) causes the kernel to send a SIGINT (SIGTSTP) to every job in the foreground process group."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "SIGINT – default action is to terminate each process "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "SIGTSTP – default action is to stop (suspend) each process"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCO",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCo",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCl",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCc",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Fore-"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ground"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "job"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biL",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Back-"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ground"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "job #1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCi",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Back-"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ground"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "job #2"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCX",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Shell"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Child"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCh",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Child"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCP",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=10"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=10"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCk",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Foreground "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "process group 20"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bia",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Background"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "process group 32"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCe",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Background"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "process group 40"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCI",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=20"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=20"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCt",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=32"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=32"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCj",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=40"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=40"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCS",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=21"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=20"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCz",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "pid=22"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pgid=20"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVj",
+  "blocks": [
+   {
+    "id": "biy",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Example of "
+      },
+      {
+       "tag": "span",
+       "text": "ctrl-c"
+      },
+      {
+       "tag": "span",
+       "text": " and "
+      },
+      {
+       "tag": "span",
+       "text": "ctrl-z"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biD",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "bluefish> ./forks 17"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Child: pid=28108 pgrp=28107"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Parent: pid=28107 pgrp=28107"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "<types ctrl-z>"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Suspended"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "bluefish> ps w"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  PID TTY      STAT   TIME COMMAND"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "27699 pts/8    Ss     0:00 -tcsh"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "28107 pts/8    T      0:01 ./forks 17"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "28108 pts/8    T      0:01 ./forks 17"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "28109 pts/8    R+     0:00 ps w"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "bluefish> fg"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "./forks 17"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "<types ctrl-c>"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "bluefish> ps w"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  PID TTY      STAT   TIME COMMAND"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "27699 pts/8    Ss     0:00 -tcsh"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "28110 pts/8    R+     0:00 ps w"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "biG",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "STAT (process state) Legend:"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "First letter:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "S: sleeping"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "T: stopped"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "R: running"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Second letter:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "s: session leader"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "+: foreground proc group"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "See “man ps” for more "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "details"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVg",
+  "blocks": [
+   {
+    "id": "bCM",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Sending Signals with "
+      },
+      {
+       "tag": "span",
+       "text": "kill"
+      },
+      {
+       "tag": "span",
+       "text": " Function"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCn",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "fork12"
+      },
+      {
+       "tag": "span",
+       "text": "()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "pid_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": "[N];"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "i"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "child_status"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "for"
+      },
+      {
+       "tag": "span",
+       "text": " (i = 0; i < N; i++)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid[i] = fork()) == 0) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            "
+      },
+      {
+       "tag": "span",
+       "text": "/* Child: Infinite Loop */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": "(1)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "                ;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "for"
+      },
+      {
+       "tag": "span",
+       "text": " (i = 0; i < N; i++) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"Killing process %d\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ", pid[i]);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        kill(pid[i], SIGINT);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "for"
+      },
+      {
+       "tag": "span",
+       "text": " (i = 0; i < N; i++) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "pid_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "wpid"
+      },
+      {
+       "tag": "span",
+       "text": " = wait(&child_status);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (WIFEXITED(child_status))"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"Child %d terminated with exit status %d\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ","
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "                   wpid, WEXITSTATUS(child_status));"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "else"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"Child %d terminated abnormally\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ", wpid);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCH",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "forks.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVI",
+  "blocks": [
+   {
+    "id": "bCq",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Receiving Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCU",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Suppose kernel is returning from an exception handler and is ready to pass control to process "
+      },
+      {
+       "tag": "span",
+       "text": "p"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCJ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIX",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCZ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCA",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCL",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIw",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Process A"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCV",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Process B"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIe",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "user code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCd",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "kernel code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCT",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "user code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCv",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "kernel code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCK",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "user code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCG",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIC",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "context switch"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCY",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCD",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "context switch"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIi",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Time"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCB",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bII",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVB",
+  "blocks": [
+   {
+    "id": "bCE",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Receiving Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCQ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Suppose kernel is returning from an exception handler and is ready to pass control to process "
+      },
+      {
+       "tag": "span",
+       "text": "p"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Kernel computes"
+      },
+      {
+       "tag": "span",
+       "text": " pnb = pending & ~blocked"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "The set of pending nonblocked signals for process "
+      },
+      {
+       "tag": "span",
+       "text": "p"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "If  ("
+      },
+      {
+       "tag": "span",
+       "text": "pnb == 0"
+      },
+      {
+       "tag": "span",
+       "text": ") "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Pass control to next instruction in the logical flow for "
+      },
+      {
+       "tag": "span",
+       "text": "p"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Else"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Choose least nonzero bit "
+      },
+      {
+       "tag": "span",
+       "text": "k"
+      },
+      {
+       "tag": "span",
+       "text": " in "
+      },
+      {
+       "tag": "span",
+       "text": "pnb"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "and force process "
+      },
+      {
+       "tag": "span",
+       "text": "p"
+      },
+      {
+       "tag": "span",
+       "text": " to "
+      },
+      {
+       "tag": "span",
+       "text": "receive"
+      },
+      {
+       "tag": "span",
+       "text": " signal "
+      },
+      {
+       "tag": "span",
+       "text": "k"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "The receipt of the signal triggers some "
+      },
+      {
+       "tag": "span",
+       "text": "action"
+      },
+      {
+       "tag": "span",
+       "text": " by "
+      },
+      {
+       "tag": "span",
+       "text": "p"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Repeat for all nonzero "
+      },
+      {
+       "tag": "span",
+       "text": "k"
+      },
+      {
+       "tag": "span",
+       "text": " in "
+      },
+      {
+       "tag": "span",
+       "text": "pnb"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Pass control to next instruction in logical flow for "
+      },
+      {
+       "tag": "span",
+       "text": "p"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVu",
+  "blocks": [
+   {
+    "id": "bCf",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Default Actions"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bCg",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Each signal type has a predefined "
+      },
+      {
+       "tag": "span",
+       "text": "default action"
+      },
+      {
+       "tag": "span",
+       "text": ", which is one of:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "The process terminates"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "The process stops until restarted by a SIGCONT signal"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "The process ignores the signal"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVL",
+  "blocks": [
+   {
+    "id": "bIO",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Installing Signal Handlers"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "The "
+      },
+      {
+       "tag": "span",
+       "text": "signal"
+      },
+      {
+       "tag": "span",
+       "text": " function modifies the default action associated with the receipt of signal "
+      },
+      {
+       "tag": "span",
+       "text": "signum"
+      },
+      {
+       "tag": "span",
+       "text": ":"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "handler_t *signal(int signum, handler_t *handler)"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Different values for "
+      },
+      {
+       "tag": "span",
+       "text": "handler"
+      },
+      {
+       "tag": "span",
+       "text": ":"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "SIG_IGN: ignore signals of type "
+      },
+      {
+       "tag": "span",
+       "text": "signum"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "SIG_DFL: revert to the default action on receipt of signals of type "
+      },
+      {
+       "tag": "span",
+       "text": "signum"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Otherwise, "
+      },
+      {
+       "tag": "span",
+       "text": "handler"
+      },
+      {
+       "tag": "span",
+       "text": " is the address of a user-level "
+      },
+      {
+       "tag": "span",
+       "text": "signal handler"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Called when process receives signal of type "
+      },
+      {
+       "tag": "span",
+       "text": "signum"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Referred to as "
+      },
+      {
+       "tag": "span",
+       "text": "“installing” "
+      },
+      {
+       "tag": "span",
+       "text": "the handler"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Executing handler is called "
+      },
+      {
+       "tag": "span",
+       "text": "“catching” "
+      },
+      {
+       "tag": "span",
+       "text": "or "
+      },
+      {
+       "tag": "span",
+       "text": "“handling” "
+      },
+      {
+       "tag": "span",
+       "text": "the signal"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "When the handler executes its return statement, control passes back to instruction in the control flow of the process that was interrupted by receipt of the signal"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVX",
+  "blocks": [
+   {
+    "id": "bIj",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signal Handling Example"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIo",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sigint_handler"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sig"
+      },
+      {
+       "tag": "span",
+       "text": ") "
+      },
+      {
+       "tag": "span",
+       "text": "/* SIGINT handler */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"So you think you can stop the bomb with ctrl-c, do you?\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    sleep(2);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"Well...\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    fflush(stdout);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    sleep(1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"OK. :-)\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "/* Install the SIGINT handler */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (signal(SIGINT, sigint_handler) == SIG_ERR)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        unix_error("
+      },
+      {
+       "tag": "span",
+       "text": "\"signal error\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "/* Wait for the receipt of a signal */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    pause();"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "return"
+      },
+      {
+       "tag": "span",
+       "text": " 0;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIh",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "sigint.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVK",
+  "blocks": [
+   {
+    "id": "bIN",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signals Handlers as Concurrent Flows"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIx",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "A signal handler is a separate logical flow (not process) that runs concurrently with the main program"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIf",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Process A "
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "while (1)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    ;"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIc",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Process A"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "handler(){"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    …"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIH",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Process B"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIE",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Time"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIg",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVb",
+  "blocks": [
+   {
+    "id": "bFh",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFx",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFf",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Another View of Signal Handlers as Concurrent Flows"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFY",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signal delivered"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "to process A"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFP",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signal received"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "by process A"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFg",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFK",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFI",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFj",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFz",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFQ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Process A"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFT",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Process B"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFc",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "user code (main)"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFp",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "kernel code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFr",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "user code (main)"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "kernel code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFN",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "user code (handler)"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFW",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFd",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "context switch"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFb",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFk",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "context switch"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFu",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "kernel code"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFO",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "user code (main)"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFl",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "I"
+      },
+      {
+       "tag": "span",
+       "text": "curr"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFH",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "I"
+      },
+      {
+       "tag": "span",
+       "text": "next"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFq",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFB",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVw",
+  "blocks": [
+   {
+    "id": "bIG",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Nested Signal Handlers"
+      },
+      {
+       "tag": "span",
+       "text": ""
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIa",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Handlers can be interrupted by other handlers"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bID",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(2) Control passes to handler S"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIJ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " Main program"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFC",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(5) Handler T"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "returns to handler S"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bId",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "I"
+      },
+      {
+       "tag": "span",
+       "text": "curr"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIY",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "I"
+      },
+      {
+       "tag": "span",
+       "text": "next"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIA",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(1) Program catches signal s"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIy",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " Handler S"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIL",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " Handler T"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFi",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(3) Program catches signal t"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIB",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(4)  Control passes to handler T"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIu",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(6) Handler S"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "returns to main program"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bIv",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "(7) Main program resumes "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVc",
+  "blocks": [
+   {
+    "id": "bFA",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Blocking and Unblocking Signals"
+      },
+      {
+       "tag": "span",
+       "text": ""
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFU",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Implicit blocking mechanism"
+      },
+      {
+       "tag": "span",
+       "text": ""
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Kernel blocks any pending signals of type currently being handled. "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "E.g., A SIGINT handler can’t be interrupted by another SIGINT"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Explicit blocking and unblocking mechanism"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "sigprocmask "
+      },
+      {
+       "tag": "span",
+       "text": "function"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Supporting functions"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "sigemptyset"
+      },
+      {
+       "tag": "span",
+       "text": " – Create empty set"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "sigfillset "
+      },
+      {
+       "tag": "span",
+       "text": "– Add every signal number to set"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "sigaddset"
+      },
+      {
+       "tag": "span",
+       "text": " – Add signal number to set"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "sigdelset"
+      },
+      {
+       "tag": "span",
+       "text": " – Delete signal number from set"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVS",
+  "blocks": [
+   {
+    "id": "bFv",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Temporarily Blocking Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFy",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "   "
+      },
+      {
+       "tag": "span",
+       "text": "sigset_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "mask"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "prev_mask"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigemptyset(&mask);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigaddset(&mask, SIGINT);"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "/* Block SIGINT and save previous blocked set */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigprocmask(SIG_BLOCK, &mask, &prev_mask);"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "/* Code region that will not be interrupted by SIGINT */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "/* Restore previous blocked set, unblocking SIGINT */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigprocmask(SIG_SETMASK, &prev_mask, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFD",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "…"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVC",
+  "blocks": [
+   {
+    "id": "bFa",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Safe Signal Handling"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFG",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Handlers are tricky because they are concurrent with main program and share the same global data structures."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Shared data structures can become corrupted."
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "We’ll explore concurrency issues later in the term."
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "For now here are some guidelines to help you avoid trouble. "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVU",
+  "blocks": [
+   {
+    "id": "bFm",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Guidelines for Writing Safe Handlers"
+      },
+      {
+       "tag": "span",
+       "text": ""
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bFL",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "G0: Keep your handlers as simple as possible"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "e.g., Set a global flag and return"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "G1: Call only async-signal-safe functions in your handlers"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "printf, sprintf"
+      },
+      {
+       "tag": "span",
+       "text": ",  "
+      },
+      {
+       "tag": "span",
+       "text": "malloc"
+      },
+      {
+       "tag": "span",
+       "text": ", and "
+      },
+      {
+       "tag": "span",
+       "text": "exit"
+      },
+      {
+       "tag": "span",
+       "text": " are not safe!"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "G2: Save and restore "
+      },
+      {
+       "tag": "span",
+       "text": "errno"
+      },
+      {
+       "tag": "span",
+       "text": " on entry and exit"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "So that other handlers don’t overwrite your value of "
+      },
+      {
+       "tag": "span",
+       "text": "errno"
+      },
+      {
+       "tag": "span",
+       "text": ""
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "G3: Protect accesses to shared data structures by temporarily blocking all signals. "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "To prevent possible corruption"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "G4: Declare global variables as "
+      },
+      {
+       "tag": "span",
+       "text": "volatile"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "To prevent compiler from storing them in a register"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "G5: Declare global flags as "
+      },
+      {
+       "tag": "span",
+       "text": "volatile sig_atomic_t"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "flag"
+      },
+      {
+       "tag": "span",
+       "text": ": variable that is only read or written (e.g. flag = 1, not flag++)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Flag declared this way does not need to be protected  like other globals"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVp",
+  "blocks": [
+   {
+    "id": "bFJ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Async-Signal-Safety"
+      },
+      {
+       "tag": "span",
+       "text": ""
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXe",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Function is "
+      },
+      {
+       "tag": "span",
+       "text": "async-signal-safe "
+      },
+      {
+       "tag": "span",
+       "text": "if either reentrant (e.g., all variables stored on stack frame, CS:APP3e 12.7.2) or non-interruptible by signals."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Posix guarantees 117 functions to be async-signal-safe "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Source: “"
+      },
+      {
+       "tag": "span",
+       "text": "man 7 signal"
+      },
+      {
+       "tag": "span",
+       "text": "”"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Popular functions on the list:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "_exit, write, wait, waitpid, sleep, kill"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Popular functions that are "
+      },
+      {
+       "tag": "span",
+       "text": "not"
+      },
+      {
+       "tag": "span",
+       "text": " on the list:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "printf"
+      },
+      {
+       "tag": "span",
+       "text": ",  "
+      },
+      {
+       "tag": "span",
+       "text": "sprintf"
+      },
+      {
+       "tag": "span",
+       "text": ","
+      },
+      {
+       "tag": "span",
+       "text": " malloc, exit "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Unfortunate fact: "
+      },
+      {
+       "tag": "span",
+       "text": "write"
+      },
+      {
+       "tag": "span",
+       "text": " is the only async-signal-safe output function"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVt",
+  "blocks": [
+   {
+    "id": "bXw",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Safely Generating Formatted Output"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXi",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Use the reentrant SIO (Safe I/O library) from "
+      },
+      {
+       "tag": "span",
+       "text": "csapp.c"
+      },
+      {
+       "tag": "span",
+       "text": " in your handlers."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ssize_t sio_puts(char s[]) /* Put string */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "ssize_t sio_putl(long v)   /* Put long */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "void sio_error(char s[])   /* Put msg & exit */"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXC",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sigint_handler"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sig"
+      },
+      {
+       "tag": "span",
+       "text": ") "
+      },
+      {
+       "tag": "span",
+       "text": "/* Safe SIGINT handler */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"So you think you can stop the bomb with ctrl-c, do you?\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    sleep(2);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"Well...\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    sleep(1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"OK. :-)\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    _exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXI",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "sigintsafe.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVH",
+  "blocks": [
+   {
+    "id": "bXX",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Pending signals are not queued"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "For each signal type, one bit indicates whether or not signal is pending…"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "…thus at most one pending signal of any particular type. "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " You can’t use signals to count events, such as children terminating."
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXs",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "ccount"
+      },
+      {
+       "tag": "span",
+       "text": " = 0;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "child_handler"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sig"
+      },
+      {
+       "tag": "span",
+       "text": ") {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "olderrno"
+      },
+      {
+       "tag": "span",
+       "text": " = errno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "pid_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid = wait("
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ")) < 0)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sio_error("
+      },
+      {
+       "tag": "span",
+       "text": "\"wait error\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    ccount--;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"Handler reaped child \""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sio_putl(("
+      },
+      {
+       "tag": "span",
+       "text": "long"
+      },
+      {
+       "tag": "span",
+       "text": ")pid);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\" \\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    sleep(1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    errno = olderrno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "fork14"
+      },
+      {
+       "tag": "span",
+       "text": "() {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "pid_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": "[N];"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "i"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    ccount = N;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Signal(SIGCHLD, child_handler);"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "for"
+      },
+      {
+       "tag": "span",
+       "text": " (i = 0; i < N; i++) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid[i] = Fork()) == 0) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            Sleep(1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            exit(0);  "
+      },
+      {
+       "tag": "span",
+       "text": "/* Child exits */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (ccount > 0) "
+      },
+      {
+       "tag": "span",
+       "text": "/* Parent spins */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        ;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXt",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "forks.c"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXO",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "whaleshark> "
+      },
+      {
+       "tag": "span",
+       "text": "./forks 14"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Handler reaped child 23240"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Handler reaped child 23241"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Correct Signal Handling"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVk",
+  "blocks": [
+   {
+    "id": "bXj",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Correct Signal Handling"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXo",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Must wait for all terminated child processes"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Put  "
+      },
+      {
+       "tag": "span",
+       "text": "wait"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "in a loop to reap all terminated children"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXh",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "child_handler2"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sig"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "olderrno"
+      },
+      {
+       "tag": "span",
+       "text": " = errno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "pid_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid = wait("
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ")) > 0) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        ccount--;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"Handler reaped child \""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sio_putl(("
+      },
+      {
+       "tag": "span",
+       "text": "long"
+      },
+      {
+       "tag": "span",
+       "text": ")pid);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\" \\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (errno != ECHILD)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sio_error("
+      },
+      {
+       "tag": "span",
+       "text": "\"wait error\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    errno = olderrno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXP",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "whaleshark> "
+      },
+      {
+       "tag": "span",
+       "text": "./forks 15"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Handler reaped child 23246"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Handler reaped child 23247"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Handler reaped child 23248"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Handler reaped child 23249"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Handler reaped child 23250"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "whaleshark>"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVn",
+  "blocks": [
+   {
+    "id": "bXM",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Portable Signal Handling"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXn",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Ugh! Different versions of Unix can have different signal handling semantics"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Some older systems restore action to default after catching signal"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Some interrupted system calls can return with errno == EINTR"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Some systems don’t block signals of the type being handled "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Solution: "
+      },
+      {
+       "tag": "span",
+       "text": "sigaction"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXz",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "handler_t"
+      },
+      {
+       "tag": "span",
+       "text": " *"
+      },
+      {
+       "tag": "span",
+       "text": "Signal"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "signum"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "handler_t"
+      },
+      {
+       "tag": "span",
+       "text": " *"
+      },
+      {
+       "tag": "span",
+       "text": "handler"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "struct"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sigaction"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "action"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "old_action"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    action.sa_handler = handler;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    sigemptyset(&action.sa_mask); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Block sigs of type being handled */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    action.sa_flags = SA_RESTART; "
+      },
+      {
+       "tag": "span",
+       "text": "/* Restart syscalls if possible */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (sigaction(signum, &action, &old_action) < 0)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        unix_error("
+      },
+      {
+       "tag": "span",
+       "text": "\"Signal error\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "return"
+      },
+      {
+       "tag": "span",
+       "text": " (old_action.sa_handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXc",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "csapp.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVT",
+  "blocks": [
+   {
+    "id": "bXS",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Synchronizing Flows to Avoid Races"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXl",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "argc"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " **"
+      },
+      {
+       "tag": "span",
+       "text": "argv"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "sigset_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "mask_all"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "prev_all"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigfillset(&mask_all);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Signal(SIGCHLD, handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    initjobs(); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Initialize the job list */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (1) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid = Fork()) == 0) { "
+      },
+      {
+       "tag": "span",
+       "text": "/* Child */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            Execve("
+      },
+      {
+       "tag": "span",
+       "text": "\"/bin/date\""
+      },
+      {
+       "tag": "span",
+       "text": ", argv, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_BLOCK, &mask_all, &prev_all); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Parent */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        addjob(pid);  "
+      },
+      {
+       "tag": "span",
+       "text": "/* Add the child to the job list */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_SETMASK, &prev_all, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXN",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Simple shell with a subtle synchronization error because it assumes parent runs before child."
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXk",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "procmask1.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVa",
+  "blocks": [
+   {
+    "id": "bXH",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Synchronizing Flows to Avoid Races"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXW",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "handler"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sig"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "olderrno"
+      },
+      {
+       "tag": "span",
+       "text": " = errno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "sigset_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "mask_all"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "prev_all"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "pid_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigfillset(&mask_all);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid = waitpid(-1, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ", 0)) > 0) { "
+      },
+      {
+       "tag": "span",
+       "text": "/* Reap child */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_BLOCK, &mask_all, &prev_all);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        deletejob(pid); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Delete the child from the job list */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_SETMASK, &prev_all, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (errno != ECHILD)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sio_error("
+      },
+      {
+       "tag": "span",
+       "text": "\"waitpid error\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    errno = olderrno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXE",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "SIGCHLD handler for a simple shell"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXQ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "procmask1.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVF",
+  "blocks": [
+   {
+    "id": "bXp",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Corrected Shell Program without Race"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXf",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "argc"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " **"
+      },
+      {
+       "tag": "span",
+       "text": "argv"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "sigset_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "mask_all"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "mask_one"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "prev_one"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigfillset(&mask_all);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigemptyset(&mask_one);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigaddset(&mask_one, SIGCHLD);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Signal(SIGCHLD, handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    initjobs(); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Initialize the job list */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (1) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_BLOCK, &mask_one, &prev_one); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Block SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " ((pid = Fork()) == 0) { "
+      },
+      {
+       "tag": "span",
+       "text": "/* Child process */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            Sigprocmask(SIG_SETMASK, &prev_one, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": "); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Unblock SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            Execve("
+      },
+      {
+       "tag": "span",
+       "text": "\"/bin/date\""
+      },
+      {
+       "tag": "span",
+       "text": ", argv, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_BLOCK, &mask_all, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": "); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Parent process */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "addjob(pid);  "
+      },
+      {
+       "tag": "span",
+       "text": "/* Add the child to the job list */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_SETMASK, &prev_one, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");  "
+      },
+      {
+       "tag": "span",
+       "text": "/* Unblock SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXg",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "procmask2.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVZ",
+  "blocks": [
+   {
+    "id": "bXZ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Explicitly Waiting for Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXq",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "volatile"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sig_atomic_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "pid"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sigchld_handler"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "s"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "olderrno"
+      },
+      {
+       "tag": "span",
+       "text": " = errno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    pid = Waitpid(-1, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ", 0); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Main is waiting for nonzero pid */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    errno = olderrno;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sigint_handler"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "s"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXd",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Handlers for program explicitly waiting for SIGCHLD to arrive."
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXV",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "waitforsignal.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVV",
+  "blocks": [
+   {
+    "id": "bXT",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Explicitly Waiting for Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXr",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "argc"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " **"
+      },
+      {
+       "tag": "span",
+       "text": "argv"
+      },
+      {
+       "tag": "span",
+       "text": ") {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "sigset_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "mask"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "prev"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Signal(SIGCHLD, sigchld_handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Signal(SIGINT, sigint_handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigemptyset(&mask);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigaddset(&mask, SIGCHLD);"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (1) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Sigprocmask(SIG_BLOCK, &mask, &prev); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Block SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (Fork() == 0) "
+      },
+      {
+       "tag": "span",
+       "text": "/* Child */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "/* Parent */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "pid = 0;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Sigprocmask(SIG_SETMASK, &prev, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": "); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Unblock SIGCHLD */"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "/* Wait for SIGCHLD to be received (wasteful!) */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (!pid)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            ;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "/* Do some work after receiving SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        printf("
+      },
+      {
+       "tag": "span",
+       "text": "\".\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXY",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "waitforsignal.c"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXK",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Similar to a shell waiting"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "for a foreground job to "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "terminate. "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVG",
+  "blocks": [
+   {
+    "id": "bXu",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Explicitly Waiting for Signals"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXB",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (!pid)  "
+      },
+      {
+       "tag": "span",
+       "text": "/* Race! */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    pause();"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXA",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Program is correct, but very wasteful"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Other options:"
+      }
+     ],
+     [],
+     [],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Solution: "
+      },
+      {
+       "tag": "span",
+       "text": "sigsuspend"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXU",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (!pid) "
+      },
+      {
+       "tag": "span",
+       "text": "/* Too slow! */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    sleep(1);"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVh",
+  "blocks": [
+   {
+    "id": "bXv",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Waiting for Signals with "
+      },
+      {
+       "tag": "span",
+       "text": "sigsuspend"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXy",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "sigprocmask(SIG_BLOCK, &mask, &prev);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "pause();"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "sigprocmask(SIG_SETMASK, &prev, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXD",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "int sigsuspend(const sigset_t *mask)"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Equivalent to atomic (uninterruptable) version of:"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVM",
+  "blocks": [
+   {
+    "id": "bXG",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Waiting for Signals with "
+      },
+      {
+       "tag": "span",
+       "text": "sigsuspend"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXa",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "argc"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "char"
+      },
+      {
+       "tag": "span",
+       "text": " **"
+      },
+      {
+       "tag": "span",
+       "text": "argv"
+      },
+      {
+       "tag": "span",
+       "text": ") {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "sigset_t"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "mask"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "prev"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Signal(SIGCHLD, sigchld_handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Signal(SIGINT, sigint_handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigemptyset(&mask);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    Sigaddset(&mask, SIGCHLD);"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (1) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_BLOCK, &mask, &prev); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Block SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (Fork() == 0) "
+      },
+      {
+       "tag": "span",
+       "text": "/* Child */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "       "
+      },
+      {
+       "tag": "span",
+       "text": "/* Wait for SIGCHLD to be received */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        pid = 0;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": " (!pid)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "            Sigsuspend(&prev);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "       "
+      },
+      {
+       "tag": "span",
+       "text": "/* Optionally unblock SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sigprocmask(SIG_SETMASK, &prev, "
+      },
+      {
+       "tag": "span",
+       "text": "NULL"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "/* Do some work after receiving SIGCHLD */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        printf("
+      },
+      {
+       "tag": "span",
+       "text": "\".\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXm",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "sigsuspend.c"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVJ",
+  "blocks": [
+   {
+    "id": "bXL",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Today"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bXJ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Shells"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Signals"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Nonlocal jumps"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Consult your textbook and additional slides"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVy",
+  "blocks": [
+   {
+    "id": "bsi",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Summary"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsC",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Signals provide process-level exception handling"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Can generate from user programs"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Can define effect by declaring signal handler"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Be very careful when writing signal handlers"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Nonlocal jumps provide exceptional control flow within process"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Within constraints of stack discipline "
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVN",
+  "blocks": [
+   {
+    "id": "bss",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Additional slides"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVD",
+  "blocks": [
+   {
+    "id": "bsF",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Nonlocal Jumps: "
+      },
+      {
+       "tag": "span",
+       "text": "setjmp/longjmp"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsX",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Powerful (but dangerous) user-level mechanism for transferring control to an arbitrary location"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Controlled to way to break the procedure call / return discipline"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Useful for error recovery and signal handling"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "int setjmp(jmp_buf j)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Must be called before longjmp"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Identifies a return site for a subsequent longjmp"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Called "
+      },
+      {
+       "tag": "span",
+       "text": "once"
+      },
+      {
+       "tag": "span",
+       "text": ", returns "
+      },
+      {
+       "tag": "span",
+       "text": "one or more "
+      },
+      {
+       "tag": "span",
+       "text": "times"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "Implementation:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Remember where you are by storing  the current "
+      },
+      {
+       "tag": "span",
+       "text": "register context"
+      },
+      {
+       "tag": "span",
+       "text": ", "
+      },
+      {
+       "tag": "span",
+       "text": "stack pointer"
+      },
+      {
+       "tag": "span",
+       "text": ",  and"
+      },
+      {
+       "tag": "span",
+       "text": " PC value "
+      },
+      {
+       "tag": "span",
+       "text": "in "
+      },
+      {
+       "tag": "span",
+       "text": "jmp_buf"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Return 0"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVl",
+  "blocks": [
+   {
+    "id": "bsO",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "setjmp/longjmp"
+      },
+      {
+       "tag": "span",
+       "text": " (cont)"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "void longjmp(jmp_buf j, int i)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Meaning:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "return from the "
+      },
+      {
+       "tag": "span",
+       "text": "setjmp"
+      },
+      {
+       "tag": "span",
+       "text": " remembered by jump buffer "
+      },
+      {
+       "tag": "span",
+       "text": "j"
+      },
+      {
+       "tag": "span",
+       "text": " again ... "
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "… this time returning"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "i"
+      },
+      {
+       "tag": "span",
+       "text": " instead of 0"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Called after "
+      },
+      {
+       "tag": "span",
+       "text": "setjmp"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Called "
+      },
+      {
+       "tag": "span",
+       "text": "once"
+      },
+      {
+       "tag": "span",
+       "text": ", but "
+      },
+      {
+       "tag": "span",
+       "text": "never"
+      },
+      {
+       "tag": "span",
+       "text": " returns"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "longjmp"
+      },
+      {
+       "tag": "span",
+       "text": " Implementation:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Restore register context (stack pointer, base pointer, PC value) from jump buffer "
+      },
+      {
+       "tag": "span",
+       "text": "j"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Set "
+      },
+      {
+       "tag": "span",
+       "text": "%eax"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "(the return value) to "
+      },
+      {
+       "tag": "span",
+       "text": "i"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Jump to the location indicated by the PC stored in jump buf "
+      },
+      {
+       "tag": "span",
+       "text": "j"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVO",
+  "blocks": [
+   {
+    "id": "bso",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "setjmp"
+      },
+      {
+       "tag": "span",
+       "text": "/"
+      },
+      {
+       "tag": "span",
+       "text": "longjmp"
+      },
+      {
+       "tag": "span",
+       "text": " Example"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsh",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Goal: return directly to original caller from a deeply-nested function"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsj",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "/* Deeply nested function foo */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "foo"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (error1)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "longjmp(buf, 1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    bar();"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "bar"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (error2)"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        longjmp(buf, 2);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVs",
+  "blocks": [
+   {
+    "id": "bsJ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": " "
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bte",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "jmp_buf"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "buf"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "error1"
+      },
+      {
+       "tag": "span",
+       "text": " = 0;"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "error2"
+      },
+      {
+       "tag": "span",
+       "text": " = 1;"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "foo"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": "), "
+      },
+      {
+       "tag": "span",
+       "text": "bar"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "switch"
+      },
+      {
+       "tag": "span",
+       "text": "(setjmp(buf)) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "case"
+      },
+      {
+       "tag": "span",
+       "text": " 0:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        foo();"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "break"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "case"
+      },
+      {
+       "tag": "span",
+       "text": " 1:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"Detected an error1 condition in foo\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "break"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "case"
+      },
+      {
+       "tag": "span",
+       "text": " 2:"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"Detected an error2 condition in foo\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        "
+      },
+      {
+       "tag": "span",
+       "text": "break"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "default"
+      },
+      {
+       "tag": "span",
+       "text": ":"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        printf("
+      },
+      {
+       "tag": "span",
+       "text": "\"Unknown error condition in foo\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    exit(0);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "btw",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "setjmp"
+      },
+      {
+       "tag": "span",
+       "text": "/"
+      },
+      {
+       "tag": "span",
+       "text": "longjmp"
+      },
+      {
+       "tag": "span",
+       "text": " Example (cont)"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVW",
+  "blocks": [
+   {
+    "id": "bsA",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Limitations of Nonlocal Jumps"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsy",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Works within stack discipline"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Can only long jump to environment of function that has been called but not yet completed"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsK",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "jmp_buf env;"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "P1()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  if (setjmp(env)) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "/* Long Jump to here */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  } else {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    P2();"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "P2()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{  . . . P2(); . . . P3(); }"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "P3()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  longjmp(env, 1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsU",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsD",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P2"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsT",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P2"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsu",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P2"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsG",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P3"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsB",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "env"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsv",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsa",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Before longjmp"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsm",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "After longjmp"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVz",
+  "blocks": [
+   {
+    "id": "bsM",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Limitations of Long Jumps (cont.)"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsE",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Works within stack discipline"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "Can only long jump to environment of function that has been called but not yet completed"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsg",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "jmp_buf env;"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "P1()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  P2(); P3();"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "P2()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "   if (setjmp(env)) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "/* Long Jump to here */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "P3()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "  longjmp(env, 1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsV",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "env"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsN",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsz",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P2"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsQ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "At setjmp"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsZ",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsP",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P3"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsc",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "env"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsH",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "At longjmp"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsp",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "X"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsq",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P1"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsS",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P2"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsW",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "P2 returns"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsf",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "env"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bsd",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "X"
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "slide_id": "pVo",
+  "blocks": [
+   {
+    "id": "btF",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Putting It All Together: A Program "
+      },
+      {
+       "tag": "br",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "That Restarts Itself When "
+      },
+      {
+       "tag": "span",
+       "text": "ctrl-c"
+      },
+      {
+       "tag": "span",
+       "text": "’d"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bts",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "#include"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "\"csapp.h\""
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "sigjmp_buf"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "buf"
+      },
+      {
+       "tag": "span",
+       "text": ";"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "void"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "handler"
+      },
+      {
+       "tag": "span",
+       "text": "("
+      },
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "sig"
+      },
+      {
+       "tag": "span",
+       "text": ")"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    siglongjmp(buf, 1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "int"
+      },
+      {
+       "tag": "span",
+       "text": " "
+      },
+      {
+       "tag": "span",
+       "text": "main"
+      },
+      {
+       "tag": "span",
+       "text": "()"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "{"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "if"
+      },
+      {
+       "tag": "span",
+       "text": " (!sigsetjmp(buf, 1)) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Signal(SIGINT, handler);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"starting\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "else"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "        Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"restarting\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [],
+     [
+      {
+       "tag": "span",
+       "text": "    "
+      },
+      {
+       "tag": "span",
+       "text": "while"
+      },
+      {
+       "tag": "span",
+       "text": "(1) {"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Sleep(1);"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": ""
+      },
+      {
+       "tag": "span",
+       "text": "Sio_puts("
+      },
+      {
+       "tag": "span",
+       "text": "\"processing...\\n\""
+      },
+      {
+       "tag": "span",
+       "text": ");"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    }"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "    exit(0); "
+      },
+      {
+       "tag": "span",
+       "text": "/* Control never reaches here */"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "}"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "btt",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "restart.c"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "bti",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "greatwhite> ./restart"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "starting"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "restarting"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "restarting"
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ],
+     [
+      {
+       "tag": "span",
+       "text": "processing..."
+      }
+     ]
+    ]
+   },
+   {
+    "id": "btI",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Ctrl-c"
+      }
+     ]
+    ]
+   },
+   {
+    "id": "btR",
+    "ps": [
+     [
+      {
+       "tag": "span",
+       "text": "Ctrl-c"
+      }
+     ]
+    ]
+   }
+  ]
+ }
+]
