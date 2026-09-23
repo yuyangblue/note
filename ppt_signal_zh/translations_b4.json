@@ -1,0 +1,123 @@
+{
+ "pVc": {
+   "bFA": {"mode": "lines", "lines": ["阻塞与解除阻塞信号"]},
+   "bFU": {"mode": "lines", "lines": [
+     "隐式阻塞机制",
+     "内核阻塞当前正在处理的信号类型的所有待处理信号",
+     "例如，SIGINT 处理程序不会被另一个 SIGINT 中断", "",
+     "显式阻塞与解除阻塞机制",
+     "sigprocmask 函数", "",
+     "辅助函数",
+     "sigemptyset – 创建空集合",
+     "sigfillset – 将每个信号编号加入集合",
+     "sigaddset – 将信号编号加入集合",
+     "sigdelset – 从集合中删除信号编号", " "]}
+ },
+ "pVS": {
+   "bFv": {"mode": "lines", "lines": ["临时阻塞信号"]},
+   "bFy": {"mode": "sub", "pairs": [
+     ["/* Block SIGINT and save previous blocked set */", "/* 阻塞 SIGINT 并保存之前的阻塞集合 */"],
+     ["/* Code region that will not be interrupted by SIGINT */", "/* 不会被 SIGINT 中断的代码区域 */"],
+     ["/* Restore previous blocked set, unblocking SIGINT */", "/* 恢复之前的阻塞集合，解除对 SIGINT 的阻塞 */"]]},
+   "bFD": {"mode": "lines", "lines": ["…"]}
+ },
+ "pVC": {
+   "bFa": {"mode": "lines", "lines": ["安全的信号处理"]},
+   "bFG": {"mode": "lines", "lines": [
+     "处理程序之所以棘手，是因为它们与主程序并发执行，并共享相同的全局数据结构。",
+     "共享数据结构可能被破坏。", "",
+     "本学期后面我们会探讨并发问题。", "",
+     "现在先给出一些帮助你避免麻烦的准则。"]}
+ },
+ "pVU": {
+   "bFm": {"mode": "lines", "lines": ["编写安全处理程序的准则"]},
+   "bFL": {"mode": "lines", "lines": [
+     "G0：让处理程序尽可能简单",
+     "例如，设置一个全局标志然后返回",
+     "G1：在处理程序中只调用异步信号安全函数",
+     "printf、sprintf、malloc 和 exit 都是不安全的！",
+     "G2：进入和退出时保存并恢复 errno",
+     "以免其他处理程序覆盖你的 errno 值",
+     "G3：通过临时阻塞所有信号来保护对共享数据结构的访问。",
+     "以防止可能的破坏",
+     "G4：将全局变量声明为 volatile",
+     "防止编译器把它们存到寄存器中",
+     "G5：将全局标志声明为 volatile sig_atomic_t",
+     "flag：只被读取或写入的变量（例如 flag = 1，而不是 flag++）",
+     "这样声明的标志不需要像其他全局变量那样被保护"]}
+ },
+ "pVp": {
+   "bFJ": {"mode": "lines", "lines": ["异步信号安全"]},
+   "bXe": {"mode": "lines", "lines": [
+     "如果一个函数是可重入的（例如所有变量都存储在栈帧上，CS:APP3e 12.7.2）或不会被信号中断，那么它就是异步信号安全的。",
+     "POSIX 保证 117 个函数是异步信号安全的",
+     "来源：“man 7 signal”",
+     "列表中的常用函数：",
+     "_exit, write, wait, waitpid, sleep, kill",
+     "不在列表中的常用函数：",
+     "printf,  sprintf, malloc, exit ",
+     "不幸的事实：write 是唯一异步信号安全的输出函数"]}
+ },
+ "pVt": {
+   "bXw": {"mode": "lines", "lines": ["安全地生成格式化输出"]},
+   "bXi": {"mode": "lines", "lines": [
+     "在处理程序中使用来自 csapp.c 的可重入 SIO（安全 I/O 库）。",
+     "ssize_t sio_puts(char s[]) /* 输出字符串 */",
+     "ssize_t sio_putl(long v)   /* 输出 long */",
+     "void sio_error(char s[])   /* 输出消息并退出 */"]},
+   "bXC": {"mode": "sub", "pairs": [
+     ["/* Safe SIGINT handler */", "/* 安全的 SIGINT 处理程序 */"],
+     ["\"So you think you can stop the bomb with ctrl-c, do you?\\n\"", "\"你以为用 ctrl-c 就能停掉炸弹吗？\\n\""],
+     ["\"Well...\"", "\"好吧...\""],
+     ["\"OK. :-)\\n\"", "\"好的。:-)\\n\""]]},
+   "bXI": {"mode": "lines", "lines": ["sigintsafe.c"]}
+ },
+ "pVH": {
+   "bXX": {"mode": "lines", "lines": [
+     "待处理信号不会排队",
+     "对于每种信号类型，一个位表示信号是否待处理…",
+     "…因此任何特定类型的待处理信号最多只有一个。",
+     " 你不能用信号来计数事件，比如子进程终止。"]},
+   "bXs": {"mode": "sub", "pairs": [
+     ["\"wait error\"", "\"wait 错误\""],
+     ["\"Handler reaped child \"", "\"处理程序回收了子进程 \""],
+     ["/* Child exits */", "/* 子进程退出 */"]]},
+   "bXt": {"mode": "lines", "lines": ["forks.c"]},
+   "bXO": {"mode": "lines", "lines": [
+     "whaleshark> ./forks 14",
+     "处理程序回收了子进程 23240",
+     "处理程序回收了子进程 23241"]},
+   "bXR": {"mode": "lines", "lines": ["正确的信号处理"]}
+ },
+ "pVk": {
+   "bXj": {"mode": "lines", "lines": ["正确的信号处理"]},
+   "bXo": {"mode": "lines", "lines": [
+     "必须等待所有已终止的子进程",
+     "把 wait 放进循环中，回收所有已终止的子进程"]},
+   "bXh": {"mode": "sub", "pairs": [
+     ["\"Handler reaped child \"", "\"处理程序回收了子进程 \""],
+     ["\"wait error\"", "\"wait 错误\""]]},
+   "bXP": {"mode": "lines", "lines": [
+     "whaleshark> ./forks 15",
+     "处理程序回收了子进程 23246",
+     "处理程序回收了子进程 23247",
+     "处理程序回收了子进程 23248",
+     "处理程序回收了子进程 23249",
+     "处理程序回收了子进程 23250",
+     "whaleshark>"]}
+ },
+ "pVn": {
+   "bXM": {"mode": "lines", "lines": ["可移植的信号处理"]},
+   "bXn": {"mode": "lines", "lines": [
+     "唉！不同版本的 Unix 可能有不同的信号处理语义",
+     "一些较旧的系统在捕获信号后将动作恢复为默认",
+     "一些被中断的系统调用可能以 errno == EINTR 返回",
+     "一些系统不会阻塞正在被处理的信号类型",
+     "解决方案：sigaction"]},
+   "bXz": {"mode": "sub", "pairs": [
+     ["/* Block sigs of type being handled */", "/* 阻塞正在被处理的信号类型 */"],
+     ["/* Restart syscalls if possible */", "/* 如果可能则重启系统调用 */"],
+     ["\"Signal error\"", "\"Signal 错误\""]]},
+   "bXc": {"mode": "lines", "lines": ["csapp.c"]}
+ }
+}

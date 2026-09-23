@@ -1,0 +1,121 @@
+{
+ "pVy": {
+   "bsi": {"mode": "lines", "lines": ["总结"]},
+   "bsC": {"mode": "lines", "lines": [
+     "信号提供进程级的异常处理",
+     "可以从用户程序产生",
+     "可以通过声明信号处理程序来定义其效果",
+     "编写信号处理程序时要非常小心", "",
+     "非本地跳转在进程内提供异常控制流",
+     "在栈纪律的约束范围内"]}
+ },
+ "pVN": {
+   "bss": {"mode": "lines", "lines": ["附加幻灯片"]}
+ },
+ "pVD": {
+   "bsF": {"mode": "lines", "lines": ["非本地跳转：setjmp/longjmp"]},
+   "bsX": {"mode": "lines", "lines": [
+     "一种强大（但危险）的用户级机制，用于把控制转移到任意位置",
+     "一种受控的、打破过程调用/返回纪律的方式",
+     "对错误恢复和信号处理很有用", "",
+     "int setjmp(jmp_buf j)",
+     "必须在 longjmp 之前调用",
+     "为后续的 longjmp 标识一个返回点",
+     "只调用一次，但返回一次或多次", "",
+     "实现：",
+     "把当前寄存器上下文、栈指针和 PC 值存储在 jmp_buf 中，以记住你所在的位置",
+     "返回 0"]}
+ },
+ "pVl": {
+   "bsO": {"mode": "lines", "lines": ["setjmp/longjmp（续）"]},
+   "bsR": {"mode": "lines", "lines": [
+     "void longjmp(jmp_buf j, int i)",
+     "含义：",
+     "再次从跳转缓冲 j 记住的 setjmp 处返回…",
+     "…这次返回 i 而不是 0",
+     "在 setjmp 之后调用",
+     "只调用一次，但从不返回", "",
+     "longjmp 的实现：",
+     "从跳转缓冲 j 恢复寄存器上下文（栈指针、基址指针、PC 值）",
+     "把 %eax（返回值）设为 i",
+     "跳转到跳转缓冲 j 中存储的 PC 所指示的位置"]}
+ },
+ "pVO": {
+   "bso": {"mode": "lines", "lines": ["setjmp/longjmp 示例"]},
+   "bsh": {"mode": "lines", "lines": ["目标：从深度嵌套的函数直接返回到最初的调用者"]},
+   "bsj": {"mode": "sub", "pairs": [
+     ["/* Deeply nested function foo */", "/* 深度嵌套的函数 foo */"]]}
+ },
+ "pVs": {
+   "bte": {"mode": "sub", "pairs": [
+     ["\"Detected an error1 condition in foo\\n\"", "\"在 foo 中检测到 error1 条件\\n\""],
+     ["\"Detected an error2 condition in foo\\n\"", "\"在 foo 中检测到 error2 条件\\n\""],
+     ["\"Unknown error condition in foo\\n\"", "\"foo 中的未知错误条件\\n\""]]},
+   "btw": {"mode": "lines", "lines": ["setjmp/longjmp 示例（续）"]}
+ },
+ "pVW": {
+   "bsA": {"mode": "lines", "lines": ["非本地跳转的限制"]},
+   "bsy": {"mode": "lines", "lines": [
+     "在栈纪律内工作",
+     "只能长跳转到已被调用但尚未完成的函数的环境"]},
+   "bsK": {"mode": "sub", "pairs": [
+     ["/* Long Jump to here */", "/* 长跳转到此处 */"]]},
+   "bsU": {"mode": "lines", "lines": ["P1"]},
+   "bsD": {"mode": "lines", "lines": ["P2"]},
+   "bsT": {"mode": "lines", "lines": ["P2"]},
+   "bsu": {"mode": "lines", "lines": ["P2"]},
+   "bsG": {"mode": "lines", "lines": ["P3"]},
+   "bsB": {"mode": "lines", "lines": ["env"]},
+   "bsv": {"mode": "lines", "lines": ["P1"]},
+   "bsa": {"mode": "lines", "lines": ["longjmp 之前"]},
+   "bsm": {"mode": "lines", "lines": ["longjmp 之后"]}
+ },
+ "pVz": {
+   "bsM": {"mode": "lines", "lines": ["长跳转的限制（续）"]},
+   "bsE": {"mode": "lines", "lines": [
+     "在栈纪律内工作",
+     "只能长跳转到已被调用但尚未完成的函数的环境"]},
+   "bsg": {"mode": "sub", "pairs": [
+     ["/* Long Jump to here */", "/* 长跳转到此处 */"]]},
+   "bsV": {"mode": "lines", "lines": ["env"]},
+   "bsN": {"mode": "lines", "lines": ["P1"]},
+   "bsz": {"mode": "lines", "lines": ["P2"]},
+   "bsQ": {"mode": "lines", "lines": ["在 setjmp 时"]},
+   "bsZ": {"mode": "lines", "lines": ["P1"]},
+   "bsP": {"mode": "lines", "lines": ["P3"]},
+   "bsc": {"mode": "lines", "lines": ["env"]},
+   "bsH": {"mode": "lines", "lines": ["在 longjmp 时"]},
+   "bsp": {"mode": "lines", "lines": ["X"]},
+   "bsq": {"mode": "lines", "lines": ["P1"]},
+   "bsS": {"mode": "lines", "lines": ["P2"]},
+   "bsW": {"mode": "lines", "lines": ["P2 返回"]},
+   "bsf": {"mode": "lines", "lines": ["env"]},
+   "bsd": {"mode": "lines", "lines": ["X"]}
+ },
+ "pVo": {
+   "btF": {"mode": "lines", "lines": [
+     "综合应用：一个程序",
+     "在按下 ctrl-c 时自我重启"]},
+   "bts": {"mode": "sub", "pairs": [
+     ["\"starting\\n\"", "\"开始\\n\""],
+     ["\"restarting\\n\"", "\"重启\\n\""],
+     ["\"processing...\\n\"", "\"处理中...\\n\""],
+     ["/* Control never reaches here */", "/* 控制永远不会到达这里 */"]]},
+   "btt": {"mode": "lines", "lines": ["restart.c"]},
+   "bti": {"mode": "lines", "lines": [
+     "greatwhite> ./restart",
+     "开始",
+     "处理中...",
+     "处理中...",
+     "处理中...",
+     "重启",
+     "处理中...",
+     "处理中...",
+     "重启",
+     "处理中...",
+     "处理中...",
+     "处理中..."]},
+   "btI": {"mode": "lines", "lines": ["Ctrl-c"]},
+   "btR": {"mode": "lines", "lines": ["Ctrl-c"]}
+ }
+}

@@ -1,0 +1,88 @@
+{
+ "pVT": {
+   "bXS": {"mode": "lines", "lines": ["同步流以避免竞态"]},
+   "bXl": {"mode": "sub", "pairs": [
+     ["/* Initialize the job list */", "/* 初始化作业列表 */"],
+     ["/* Child */", "/* 子进程 */"],
+     ["/* Parent */", "/* 父进程 */"],
+     ["/* Add the child to the job list */", "/* 把子进程加入作业列表 */"]]},
+   "bXN": {"mode": "lines", "lines": ["一个简单的 shell，包含微妙的同步错误，因为它假设父进程先于子进程运行。"]},
+   "bXk": {"mode": "lines", "lines": ["procmask1.c"]}
+ },
+ "pVa": {
+   "bXH": {"mode": "lines", "lines": ["同步流以避免竞态"]},
+   "bXW": {"mode": "sub", "pairs": [
+     ["/* Reap child */", "/* 回收子进程 */"],
+     ["/* Delete the child from the job list */", "/* 从作业列表中删除子进程 */"],
+     ["\"waitpid error\"", "\"waitpid 错误\""]]},
+   "bXE": {"mode": "lines", "lines": ["简单 shell 的 SIGCHLD 处理程序"]},
+   "bXQ": {"mode": "lines", "lines": ["procmask1.c"]}
+ },
+ "pVF": {
+   "bXp": {"mode": "lines", "lines": ["无竞态的修正版 shell 程序"]},
+   "bXf": {"mode": "sub", "pairs": [
+     ["/* Initialize the job list */", "/* 初始化作业列表 */"],
+     ["/* Block SIGCHLD */", "/* 阻塞 SIGCHLD */"],
+     ["/* Child process */", "/* 子进程 */"],
+     ["/* Unblock SIGCHLD */", "/* 解除对 SIGCHLD 的阻塞 */"],
+     ["/* Parent process */", "/* 父进程 */"],
+     ["/* Add the child to the job list */", "/* 把子进程加入作业列表 */"]]},
+   "bXg": {"mode": "lines", "lines": ["procmask2.c"]}
+ },
+ "pVZ": {
+   "bXZ": {"mode": "lines", "lines": ["显式等待信号"]},
+   "bXq": {"mode": "sub", "pairs": [
+     ["/* Main is waiting for nonzero pid */", "/* main 正在等待非零 pid */"]]},
+   "bXd": {"mode": "lines", "lines": ["用于显式等待 SIGCHLD 到达的程序的处理程序。"]},
+   "bXV": {"mode": "lines", "lines": ["waitforsignal.c"]}
+ },
+ "pVV": {
+   "bXT": {"mode": "lines", "lines": ["显式等待信号"]},
+   "bXr": {"mode": "sub", "pairs": [
+     ["/* Block SIGCHLD */", "/* 阻塞 SIGCHLD */"],
+     ["/* Child */", "/* 子进程 */"],
+     ["/* Parent */", "/* 父进程 */"],
+     ["/* Unblock SIGCHLD */", "/* 解除对 SIGCHLD 的阻塞 */"],
+     ["/* Wait for SIGCHLD to be received (wasteful!) */", "/* 等待 SIGCHLD 被接收（浪费！） */"],
+     ["/* Do some work after receiving SIGCHLD */", "/* 收到 SIGCHLD 后做一些工作 */"]]},
+   "bXY": {"mode": "lines", "lines": ["waitforsignal.c"]},
+   "bXK": {"mode": "lines", "lines": ["类似于 shell 等待", "一个前台作业", "结束。"]}
+ },
+ "pVG": {
+   "bXu": {"mode": "lines", "lines": ["显式等待信号"]},
+   "bXB": {"mode": "lines", "lines": ["while (!pid)  /* 竞态！ */", "    pause();"]},
+   "bXA": {"mode": "lines", "lines": [
+     "程序是正确的，但非常浪费",
+     "其他选项：", "", "", "",
+     "解决方案：sigsuspend"]},
+   "bXU": {"mode": "lines", "lines": ["while (!pid) /* 太慢了！ */", "    sleep(1);"]}
+ },
+ "pVh": {
+   "bXv": {"mode": "lines", "lines": ["用 sigsuspend 等待信号"]},
+   "bXy": {"mode": "lines", "lines": [
+     "sigprocmask(SIG_BLOCK, &mask, &prev);",
+     "pause();",
+     "sigprocmask(SIG_SETMASK, &prev, NULL);"]},
+   "bXD": {"mode": "lines", "lines": [
+     "int sigsuspend(const sigset_t *mask)", "",
+     "等价于以下代码的原子（不可中断）版本："]}
+ },
+ "pVM": {
+   "bXG": {"mode": "lines", "lines": ["用 sigsuspend 等待信号"]},
+   "bXa": {"mode": "sub", "pairs": [
+     ["/* Block SIGCHLD */", "/* 阻塞 SIGCHLD */"],
+     ["/* Child */", "/* 子进程 */"],
+     ["/* Wait for SIGCHLD to be received */", "/* 等待 SIGCHLD 被接收 */"],
+     ["/* Optionally unblock SIGCHLD */", "/* 可选：解除对 SIGCHLD 的阻塞 */"],
+     ["/* Do some work after receiving SIGCHLD */", "/* 收到 SIGCHLD 后做一些工作 */"]]},
+   "bXm": {"mode": "lines", "lines": ["sigsuspend.c"]}
+ },
+ "pVJ": {
+   "bXL": {"mode": "lines", "lines": ["今日内容"]},
+   "bXJ": {"mode": "lines", "lines": [
+     "Shell",
+     "信号",
+     "非本地跳转",
+     "请参阅教材和附加幻灯片"]}
+ }
+}
