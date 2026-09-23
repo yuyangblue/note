@@ -4,7 +4,7 @@ import io, os, subprocess, json, sys
 
 os.chdir(r"D:\29469\Documents\notes\ppt_signal_zh")
 PRES = "NVAAsrqRMlxzD6d6aLPcA8KUnvc"
-pages = sys.argv[1].split(",")
+pages = [(int(x.split(":")[0]), x.split(":")[1]) for x in sys.argv[1].split(",")]
 
 base = json.load(io.open("source-response.json", encoding="utf-8"))
 iss = base.get("data", {}).get("issues", {})
@@ -40,8 +40,8 @@ def submit(sid, pf, extra):
          "--slide-id", sid, "--parts", "@" + pf] + extra,
         capture_output=True, text=True, encoding="utf-8")
 
-for sid in pages:
-    pf = "parts-%s.json" % sid
+for nidx, sid in pages:
+    pf = "parts-%02d-%s.json" % (nidx, sid)
     if not os.path.exists(pf):
         print("SKIP", sid); continue
     r1 = submit(sid, pf, [])

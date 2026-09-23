@@ -1,0 +1,114 @@
+{
+ "pVg": {
+   "bCM": {"mode": "lines", "lines": ["用 kill 函数发送信号"]},
+   "bCn": {"mode": "sub", "pairs": [
+     ["/* Child: Infinite Loop */", "/* 子进程：无限循环 */"],
+     ["\"Killing process %d\\n\"", "\"正在终止进程 %d\\n\""],
+     ["\"Child %d terminated abnormally\\n\"", "\"子进程 %d 异常终止\\n\""]]},
+   "bCH": {"mode": "lines", "lines": ["forks.c"]}
+ },
+ "pVI": {
+   "bCq": {"mode": "lines", "lines": ["接收信号"]},
+   "bCU": {"mode": "lines", "lines": ["假设内核正从异常处理程序返回，准备把控制权交给进程 p", " "]},
+   "bIw": {"mode": "lines", "lines": ["进程 A"]},
+   "bCV": {"mode": "lines", "lines": ["进程 B"]},
+   "bIe": {"mode": "lines", "lines": ["用户代码"]},
+   "bCd": {"mode": "lines", "lines": ["内核代码"]},
+   "bCT": {"mode": "lines", "lines": ["用户代码"]},
+   "bCv": {"mode": "lines", "lines": ["内核代码"]},
+   "bCK": {"mode": "lines", "lines": ["用户代码"]},
+   "bIC": {"mode": "lines", "lines": ["上下文切换"]},
+   "bCD": {"mode": "lines", "lines": ["上下文切换"]},
+   "bIi": {"mode": "lines", "lines": ["时间"]}
+ },
+ "pVB": {
+   "bCE": {"mode": "lines", "lines": ["接收信号"]},
+   "bCQ": {"mode": "lines", "lines": [
+     "假设内核正从异常处理程序返回，准备把控制权交给进程 p", "",
+     "内核计算 pnb = pending & ~blocked",
+     "即进程 p 的待处理且未阻塞的信号集合", "",
+     "如果（pnb == 0）",
+     "把控制权交给 p 逻辑流中的下一条指令",
+     "否则",
+     "选择 pnb 中最低的非零位 k，强制进程 p 接收信号 k",
+     "信号的接收会触发 p 的某种动作",
+     "对 pnb 中所有非零位 k 重复此过程",
+     "把控制权交给 p 逻辑流中的下一条指令"]}
+ },
+ "pVu": {
+   "bCf": {"mode": "lines", "lines": ["默认动作"]},
+   "bCg": {"mode": "lines", "lines": [
+     "每种信号类型都有一个预定义的默认动作，可能是以下之一：",
+     "进程终止",
+     "进程停止，直到被 SIGCONT 信号重新启动",
+     "进程忽略该信号", "", " "]}
+ },
+ "pVL": {
+   "bIO": {"mode": "lines", "lines": ["安装信号处理程序"]},
+   "bIR": {"mode": "lines", "lines": [
+     "signal 函数修改接收信号 signum 时的默认动作：",
+     "handler_t *signal(int signum, handler_t *handler)", "",
+     "handler 的不同取值：",
+     "SIG_IGN：忽略类型为 signum 的信号",
+     "SIG_DFL：收到类型为 signum 的信号时恢复默认动作",
+     "否则，handler 是用户级信号处理程序的地址",
+     "进程收到类型为 signum 的信号时被调用",
+     "这被称为“安装”处理程序",
+     "执行处理程序称为“捕获”或“处理”信号",
+     "当处理程序执行其 return 语句时，控制权交回被信号接收所中断的进程控制流中的那条指令"]}
+ },
+ "pVX": {
+   "bIj": {"mode": "lines", "lines": ["信号处理示例"]},
+   "bIo": {"mode": "sub", "pairs": [
+     ["/* SIGINT handler */", "/* SIGINT 处理程序 */"],
+     ["\"So you think you can stop the bomb with ctrl-c, do you?\\n\"", "\"你以为用 ctrl-c 就能停掉炸弹吗？\\n\""],
+     ["\"Well...\"", "\"好吧...\""],
+     ["\"OK. :-)\\n\"", "\"好的。:-)\\n\""],
+     ["/* Install the SIGINT handler */", "/* 安装 SIGINT 处理程序 */"],
+     ["/* Wait for the receipt of a signal */", "/* 等待信号的接收 */"],
+     ["\"signal error\"", "\"signal 错误\""]]},
+   "bIh": {"mode": "lines", "lines": ["sigint.c"]}
+ },
+ "pVK": {
+   "bIN": {"mode": "lines", "lines": ["信号处理程序作为并发流"]},
+   "bIx": {"mode": "lines", "lines": ["信号处理程序是一个独立的逻辑流（不是进程），与主程序并发运行"]},
+   "bIf": {"mode": "lines", "lines": ["进程 A ", "", "while (1)", "    ;"]},
+   "bIc": {"mode": "lines", "lines": ["进程 A", "", "handler(){", "    …", "}"]},
+   "bIH": {"mode": "lines", "lines": ["进程 B"]},
+   "bIE": {"mode": "lines", "lines": ["时间"]}
+ },
+ "pVb": {
+   "bFf": {"mode": "lines", "lines": ["信号处理程序作为并发流的另一视角"]},
+   "bFY": {"mode": "lines", "lines": ["信号被递送", "给进程 A"]},
+   "bFP": {"mode": "lines", "lines": ["信号被接收", "由进程 A"]},
+   "bFQ": {"mode": "lines", "lines": ["进程 A"]},
+   "bFT": {"mode": "lines", "lines": ["进程 B"]},
+   "bFc": {"mode": "lines", "lines": ["用户代码（main）"], "fontSize": "14"},
+   "bFp": {"mode": "lines", "lines": ["内核代码"]},
+   "bFr": {"mode": "lines", "lines": ["用户代码（main）"], "fontSize": "14"},
+   "bFR": {"mode": "lines", "lines": ["内核代码"]},
+   "bFN": {"mode": "lines", "lines": ["用户代码（处理程序）"], "fontSize": "13"},
+   "bFd": {"mode": "lines", "lines": ["上下文切换"]},
+   "bFk": {"mode": "lines", "lines": ["上下文切换"]},
+   "bFu": {"mode": "lines", "lines": ["内核代码"]},
+   "bFO": {"mode": "lines", "lines": ["用户代码（main）"], "fontSize": "14"},
+   "bFl": {"mode": "lines", "lines": ["当前"], "fontSize": "13"},
+   "bFH": {"mode": "lines", "lines": ["下一"], "fontSize": "13"}
+ },
+ "pVw": {
+   "bIG": {"mode": "lines", "lines": ["嵌套信号处理程序"]},
+   "bIa": {"mode": "lines", "lines": ["处理程序可能被其他处理程序中断"]},
+   "bID": {"mode": "lines", "lines": ["(2) 控制传递给处理程序 S"]},
+   "bIJ": {"mode": "lines", "lines": [" 主程序"]},
+   "bFC": {"mode": "lines", "lines": ["(5) 处理程序 T", "返回处理程序 S"]},
+   "bId": {"mode": "lines", "lines": ["当前指令"]},
+   "bIY": {"mode": "lines", "lines": ["下一条指令"]},
+   "bIA": {"mode": "lines", "lines": ["(1) 程序捕获信号 s"]},
+   "bIy": {"mode": "lines", "lines": [" 处理程序 S"]},
+   "bIL": {"mode": "lines", "lines": [" 处理程序 T"]},
+   "bFi": {"mode": "lines", "lines": ["(3) 程序捕获信号 t"]},
+   "bIB": {"mode": "lines", "lines": ["(4) 控制传递给处理程序 T"]},
+   "bIu": {"mode": "lines", "lines": ["(6) 处理程序 S", "返回主程序"]},
+   "bIv": {"mode": "lines", "lines": ["(7) 主程序恢复执行"]}
+ }
+}

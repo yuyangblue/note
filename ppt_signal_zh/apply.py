@@ -30,7 +30,7 @@ def seg_count_for_ps(ps):
         n += seg
     return n
 
-def rebuild_ps(shape_text, ps, new_lines):
+def rebuild_ps(shape_text, ps, new_lines, fontsize=None):
     p_pat = re.compile(r'<p\b[^>]*/>|<p\b[^>]*>.*?</p>', re.S)
     pm = list(p_pat.finditer(shape_text))
     if len(pm) != len(ps):
@@ -49,12 +49,12 @@ def rebuild_ps(shape_text, ps, new_lines):
         idx += c
     for pi in range(len(ps) - 1, -1, -1):
         m = pm[pi]
-        new_p = rebuild_p(m.group(0), segs_by_p[pi])
+        new_p = rebuild_p(m.group(0), segs_by_p[pi], fontsize)
         out = shape_text[:m.start()] + new_p + shape_text[m.end():]
         shape_text = out
     return shape_text
 
-def rebuild_p(p_xml, segs):
+def rebuild_p(p_xml, segs, fontsize=None):
     sm = re.match(r'<p\b[^>]*/>', p_xml)
     if sm:
         return sm.group(0)[:-2] + '></p>'
@@ -75,6 +75,8 @@ def rebuild_p(p_xml, segs):
         strong = bool(re.match(r'^\s*<strong[^>]*>', seg))
         if sm2:
             span_open = sm2.group(0)
+            if fontsize:
+                span_open = re.sub(r'fontSize="[^"]*"', 'fontSize="%s"' % fontsize, span_open)
             if strong:
                 out += '<strong>' + span_open + escape(t) + '</span></strong>'
             else:
@@ -93,7 +95,7 @@ def apply_sub(shape_text, pairs):
     return shape_text
 
 all_ok = True
-for page in runs:
+for idx, page in enumerate(runs):
     sid = page["slide_id"]
     if sid not in TR:
         continue
@@ -114,14 +116,14 @@ for page in runs:
                 nseg = seg_count_for_ps(ps)
                 if nseg != len(spec["lines"]):
                     raise ValueError("segment mismatch %d vs %d" % (nseg, len(spec["lines"])))
-                new_sh = rebuild_ps(sh, ps, spec["lines"])
+                new_sh = rebuild_ps(sh, ps, spec["lines"], spec.get("fontSize"))
             else:
                 new_sh = apply_sub(sh, spec["pairs"])
         except ValueError as e:
             print("FAIL", sid, bid, e); all_ok = False; continue
         parts.append({"action": "block_replace", "block_id": bid, "replacement": new_sh})
     if parts:
-        with io.open("parts-%s.json" % sid, "w", encoding="utf-8", newline="\n") as f:
+        with io.open("parts-%02d-%s.json" % (idx + 1, sid), "w", encoding="utf-8", newline="\n") as f:
             json.dump(parts, f, ensure_ascii=False)
         print("OK", sid, len(parts), "parts")
 print("ALL_OK:", all_ok)
