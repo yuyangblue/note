@@ -1,0 +1,132 @@
+{
+ "pVP": {
+   "bwE": {"mode": "lines", "lines": ["信号"]},
+   "bwV": {"mode": "lines", "lines": [
+     "信号是一种小消息，用于通知进程系统中发生了某类事件",
+     "类似于异常和中断",
+     "由内核（有时应另一个进程的请求）发送给进程",
+     "信号类型由小整数 ID（1-30）标识",
+     "信号中仅包含其 ID 和“已到达”这一事实"]}
+ },
+ "pVv": {
+   "bwR": {"mode": "lines", "lines": ["信号概念：发送信号"]},
+   "bwb": {"mode": "lines", "lines": [
+     "内核通过更新目标进程上下文中的某些状态，向目标进程发送（递送）信号", "",
+     "内核因以下原因之一发送信号：",
+     "内核检测到系统事件，如除零（SIGFPE）或子进程终止（SIGCHLD）",
+     "另一进程调用了 kill 系统调用，显式请求内核向目标进程发送信号", " "]}
+ },
+ "pVE": {
+   "bwa": {"mode": "lines", "lines": ["信号概念：接收信号"]},
+   "bie": {"mode": "lines", "lines": [
+     "当内核强制目标进程以某种方式对该信号的递送作出反应时，目标进程就接收了信号", "",
+     "可能的反应方式：",
+     "忽略信号（不做任何事）",
+     "终止进程（可选择转储 core）",
+     "通过执行称为信号处理程序的用户级函数来捕获信号",
+     "类似于响应异步中断而调用硬件异常处理程序：", " "]},
+   "bwL": {"mode": "lines", "lines": ["(2) 控制传递", "给信号处理程序"]},
+   "bii": {"mode": "lines", "lines": ["(3) 信号处理程序运行"]},
+   "bwy": {"mode": "lines", "lines": ["(4) 信号处理程序", "返回到", "下一条指令"]},
+   "bwm": {"mode": "lines", "lines": ["当前指令"]},
+   "biw": {"mode": "lines", "lines": ["下一条指令"]},
+   "biI": {"mode": "lines", "lines": ["(1) 进程接收到信号"]}
+ },
+ "pDV": {
+   "bis": {"mode": "lines", "lines": ["信号概念：待处理信号与阻塞信号"]},
+   "biF": {"mode": "lines", "lines": [
+     "信号已发送但尚未被接收，即为待处理（pending）",
+     "任何特定类型的待处理信号最多只能有一个",
+     "重要：信号不会排队",
+     "如果进程已有类型 k 的待处理信号，那么之后发送给该进程的类型 k 信号都会被丢弃", "",
+     "进程可以阻塞某些信号的接收",
+     "阻塞的信号可以被递送，但在解除阻塞之前不会被接收", "",
+     "待处理信号最多被接收一次", " "]}
+ },
+ "pDD": {
+   "biO": {"mode": "lines", "lines": ["信号概念：待处理/阻塞位"]},
+   "biR": {"mode": "lines", "lines": [
+     "内核在每个进程的上下文中维护待处理（pending）和阻塞（blocked）位向量",
+     "pending：表示待处理信号的集合",
+     "当类型 k 的信号被递送时，内核在 pending 中置位 k",
+     "当类型 k 的信号被接收时，内核清除 pending 中的位 k", "",
+     "blocked：表示被阻塞信号的集合",
+     "可以使用 sigprocmask 函数设置和清除",
+     "也称为信号掩码（signal mask）。"]}
+ },
+ "pVr": {
+   "bix": {"mode": "lines", "lines": ["发送信号：进程组"]},
+   "biE": {"mode": "lines", "lines": ["每个进程恰好属于一个进程组"]},
+   "big": {"mode": "lines", "lines": ["前", "台", "作业"]},
+   "bid": {"mode": "lines", "lines": ["后", "台", "作业 #1"]},
+   "biY": {"mode": "lines", "lines": ["后", "台", "作业 #2"]},
+   "biA": {"mode": "lines", "lines": ["Shell"]},
+   "biz": {"mode": "lines", "lines": ["子进程"]},
+   "bic": {"mode": "lines", "lines": ["子进程"]},
+   "biH": {"mode": "lines", "lines": ["pid=10", "pgid=10"]},
+   "bip": {"mode": "lines", "lines": ["前台", "进程组 20"]},
+   "biq": {"mode": "lines", "lines": ["后台", "进程组 32"]},
+   "biZ": {"mode": "lines", "lines": ["后台", "进程组 40"]},
+   "biT": {"mode": "lines", "lines": ["pid=20", "pgid=20"]},
+   "biu": {"mode": "lines", "lines": ["pid=32", "pgid=32"]},
+   "biN": {"mode": "lines", "lines": ["pid=40", "pgid=40"]},
+   "biM": {"mode": "lines", "lines": ["pid=21", "pgid=20"]},
+   "bin": {"mode": "lines", "lines": ["pid=22", "pgid=20"]},
+   "biQ": {"mode": "lines", "lines": ["getpgrp()", "返回当前进程的进程组", "setpgid()", "改变进程的进程组（详见课本）"]}
+ },
+ "pVQ": {
+   "bij": {"mode": "lines", "lines": ["用 /bin/kill 程序发送信号"]},
+   "bio": {"mode": "lines", "lines": [
+     "/bin/kill 程序可向进程或进程组发送任意信号", "",
+     "示例",
+     "/bin/kill –9 24818", "向进程 24818 发送 SIGKILL", "",
+     "/bin/kill –9 –24817", "向进程组 24817 中的每个进程发送 SIGKILL"]},
+   "bih": {"mode": "lines", "lines": [
+     "linux> ./forks 16 ", "Child1: pid=24818 pgrp=24817 ", "Child2: pid=24819 pgrp=24817 ",
+     " ", "linux> ps ", "  PID TTY          TIME CMD ",
+     "24788 pts/2    00:00:00 tcsh ", "24818 pts/2    00:00:02 forks ",
+     "24819 pts/2    00:00:02 forks ", "24820 pts/2    00:00:00 ps ",
+     "linux> /bin/kill -9 -24817 ", "linux> ps  ",
+     "  PID TTY          TIME CMD ", "24788 pts/2    00:00:00 tcsh ",
+     "24823 pts/2    00:00:00 ps ", "linux> "]}
+ },
+ "pVA": {
+   "bCw": {"mode": "lines", "lines": ["从键盘发送信号"]},
+   "bCF": {"mode": "lines", "lines": [
+     "键入 ctrl-c（ctrl-z）会使内核向前台进程组中的每个作业发送 SIGINT（SIGTSTP）。",
+     "SIGINT – 默认动作是终止每个进程",
+     "SIGTSTP – 默认动作是停止（挂起）每个进程"]},
+   "bCc": {"mode": "lines", "lines": ["前", "台", "作业"]},
+   "biL": {"mode": "lines", "lines": ["后", "台", "作业 #1"]},
+   "bCi": {"mode": "lines", "lines": ["后", "台", "作业 #2"]},
+   "bCX": {"mode": "lines", "lines": ["Shell"]},
+   "bCR": {"mode": "lines", "lines": ["子进程"]},
+   "bCh": {"mode": "lines", "lines": ["子进程"]},
+   "bCP": {"mode": "lines", "lines": ["pid=10", "pgid=10"]},
+   "bCk": {"mode": "lines", "lines": ["前台", "进程组 20"]},
+   "bia": {"mode": "lines", "lines": ["后台", "进程组 32"]},
+   "bCe": {"mode": "lines", "lines": ["后台", "进程组 40"]},
+   "bCI": {"mode": "lines", "lines": ["pid=20", "pgid=20"]},
+   "bCt": {"mode": "lines", "lines": ["pid=32", "pgid=32"]},
+   "bCj": {"mode": "lines", "lines": ["pid=40", "pgid=40"]},
+   "bCS": {"mode": "lines", "lines": ["pid=21", "pgid=20"]},
+   "bCz": {"mode": "lines", "lines": ["pid=22", "pgid=20"]}
+ },
+ "pVj": {
+   "biy": {"mode": "lines", "lines": ["ctrl-c 与 ctrl-z 示例"]},
+   "biD": {"mode": "lines", "lines": [
+     "bluefish> ./forks 17", "Child: pid=28108 pgrp=28107", "Parent: pid=28107 pgrp=28107",
+     "<键入 ctrl-z>", "已挂起", "bluefish> ps w",
+     "  PID TTY      STAT   TIME COMMAND", "27699 pts/8    Ss     0:00 -tcsh",
+     "28107 pts/8    T      0:01 ./forks 17", "28108 pts/8    T      0:01 ./forks 17",
+     "28109 pts/8    R+     0:00 ps w", "bluefish> fg", "./forks 17",
+     "<键入 ctrl-c>", "bluefish> ps w",
+     "  PID TTY      STAT   TIME COMMAND", "27699 pts/8    Ss     0:00 -tcsh",
+     "28110 pts/8    R+     0:00 ps w", " "]},
+   "biG": {"mode": "lines", "lines": [
+     "STAT（进程状态）图例：", "",
+     "第一个字母：", "S：睡眠中", "T：已停止", "R：运行中", "",
+     "第二个字母：", "s：会话首进程", "+：前台进程组", "",
+     "更多信息参见 “man ps”", "详情"]}
+ }
+}

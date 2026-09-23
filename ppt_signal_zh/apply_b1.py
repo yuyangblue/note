@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 """Apply batch translations. Modes: lines (rebuild br-separated segments, keep first span style per segment) / sub (substring pairs, keep all spans)."""
 import io, os, re, json
-from xml.sax.saxutils import escape
+from xml.sax.saxutils import escape as sax_escape
 
 os.chdir(r"D:\29469\Documents\notes\ppt_signal_zh")
 SRC = io.open("source.xml", encoding="utf-8").read()
+
+def escape(s):
+    # PPT XML escapes quotes as &quot; inside text nodes; mimic that
+    return sax_escape(s).replace('"', "&quot;").replace("'", "&apos;")
 
 B1 = {
  "pVR": {
@@ -18,7 +22,7 @@ B1 = {
    "bev": {"mode": "lines", "lines": ["上一讲"]},
    "ber": {"mode": "lines", "lines": [" "]},
    "beK": {"mode": "lines", "lines": ["本讲"]},
-   "beB": {"mode": "lines", "lines": ["课本和补充幻灯片"]},
+   "beB": {"mode": "lines", "lines": ["课本和 ", "补充幻灯片"]},
    "beU": {"mode": "lines", "lines": [" "]},
  },
  "pVm": {
@@ -111,8 +115,8 @@ def seg_count_for_ps(ps):
 def rebuild_ps(shape_text, ps, new_lines):
     """replace each <p> inner text; new_lines flat over segments (br-split, all ps concatenated)."""
     out = shape_text
-    # find all <p>...</p> in shape
-    p_pat = re.compile(r'<p\b[^>]*>.*?</p>', re.S)
+    # find all <p>...</p> in shape (also self-closing <p .../>)
+    p_pat = re.compile(r'<p\b[^>]*/>|<p\b[^>]*>.*?</p>', re.S)
     pm = list(p_pat.finditer(shape_text))
     if len(pm) != len(ps):
         raise ValueError("p count mismatch: %d vs %d" % (len(pm), len(ps)))
@@ -124,17 +128,23 @@ def rebuild_ps(shape_text, ps, new_lines):
             if x["tag"] == "br":
                 c += 1
         counts.append(c)
-    # apply replacements from end to start
+    # slice translated segments per p in order, then apply from END to START
+    segs_by_p = []
     idx = 0
-    for pi in range(len(ps)):
-        segs = new_lines[idx:idx + counts[pi]]
-        idx += counts[pi]
+    for c in counts:
+        segs_by_p.append(new_lines[idx:idx + c])
+        idx += c
+    for pi in range(len(ps) - 1, -1, -1):
         m = pm[pi]
-        new_p = rebuild_p(m.group(0), segs)
+        new_p = rebuild_p(m.group(0), segs_by_p[pi])
         out = out[:m.start()] + new_p + out[m.end():]
     return out
 
 def rebuild_p(p_xml, segs):
+    sm = re.match(r'<p\b[^>]*/>', p_xml)
+    if sm:
+        # self-closing empty paragraph -> keep as empty <p attrs></p>
+        return sm.group(0)[:-2] + '></p>'
     m = re.match(r'<p\b[^>]*>', p_xml)
     p_open = m.group(0)
     inner = p_xml[m.end():]
