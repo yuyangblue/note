@@ -689,6 +689,13 @@ pid_t waitpid(pid_t pid, int *statusp, int options);
 | WIFSTOPPED(status) | 引起返回的子进程当前是停止的 → 真 |
 | WSTOPSIG(status) | 返回导致停止的信号编号（仅 WIFSTOPPED 为真时有效） |
 | WIFCONTINUED(status) | 子进程收到 SIGCONT 重新启动 → 真 |
+> **status 位布局与宏的实现（怎么取回 100、101 的）**：Linux 把"子进程怎么死的"全部编码进一个 int：
+> 低 7 位（0\~6）放**终止信号编号**（正常 exit 退出时为 0）；位 8\~15 放 **exit 的状态码**（低 8 位）；另有 core dump 标志位。
+> 宏就是按这个布局实现的：
+> `WIFEXITED(status)` = `(status & 0x7f) == 0` —— 低 7 位全 0，说明不是被信号杀死的，是正常 exit；
+> `WEXITSTATUS(status)` = `(status >> 8) & 0xff` —— 右移 8 位取出退出码。
+> 完整链条：子进程 `exit(100)` → 内核把 100 编码进 status 的位 8\~15 → 父进程 `waitpid(pid[i], &status, 0)` 内核把编码后的 status 写进调用者的变量 → `WIFEXITED` 验证正常退出、`WEXITSTATUS` 右移 8 位取回 100 → printf 打印 "exit status=100"。
+
 
 **4. 错误条件**：调用进程没有子进程 → 返回 -1 且 errno = ECHILD；被信号中断 → 返回 -1 且 errno = EINTR。
 
@@ -729,6 +736,40 @@ child 22967 terminated normally with exit status=101
 ```
 
 > **非确定性**：回收顺序不确定（这台机器如此，另一台可能相反）。两种结果都对——**绝不可以假设总出现某个结果**，唯一正确的假设是每个可能的结果都可能出现。若要按创建顺序回收，就存下所有 PID 并按序 `waitpid(pid[i], ...)`（waitpid2.c，课件 p48）。
+
+**7. 按创建顺序回收（waitpid2.c，课件 p48）**：
+
+waitpid1 用 `waitpid(-1, ...)` 乱序回收；若想按创建顺序回收，就把每个子进程 PID 存进数组，再逐个 `waitpid(pid[i], ...)`：
+
+```c
+/* waitpid2.c */
+#include "csapp.h"
+#define N 2
+int main() {
+    int status, i;
+    pid_t pid[N];
+    /* Parent creates N children */
+    for (i = 0; i < N; i++)
+        if ((pid[i] = Fork()) == 0) /* Child */
+            exit(100+i);
+    /* Parent reaps N children in order */
+    for (i = 0; i < N; i++) {
+        pid_t wpid = waitpid(pid[i], &status, 0);
+        if (WIFEXITED(status))
+            printf("child %d terminated with exit status %d\n",
+                   wpid, WEXITSTATUS(status));
+        else
+            printf("child %d terminated abnormally\n", wpid);
+    }
+    exit(0);
+}
+```
+
+> 拆解 `if ((pid[i] = fork()) == 0) exit(100+i);`：
+> ① `pid[i] = fork()` 把 fork 返回值存进数组——父进程拿到子进程 PID（正数），子进程拿到 0；
+> ② `== 0` 只在子进程里成立，所以 `exit(100+i)` 只有子进程执行，父进程跳过 if，继续下一次循环 fork 下一个孩子；
+> ③ 子进程以退出状态码 `100+i` 立即终止（exit 状态码低 8 位有效，100/101 在 0~255 内）。这个状态码是给父进程"认人"用的：waitpid 后用 `WEXITSTATUS(status)` 取出来，打印 100、101，一眼看出是第几个孩子。
+
 
 ![课件 p46：wait 与子进程同步（fork9）](图片/ECF_25_wait与子进程同步.png)
 
