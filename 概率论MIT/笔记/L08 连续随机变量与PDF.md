@@ -63,6 +63,28 @@ $$F_X(x) = P(X \le x)$$
 ### 2.2 标准正态
 $N(0,1)$：$f_X(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$，$E[X]=0$（对称），$\text{var}(X)=1$（需要一次微积分算出）；CDF 无闭合形式，用表查 $\Phi(z)$。
 - **系数 $1/\sqrt{2\pi}$ 的来历（p87）**：从 $e^{-x^2/2}$ 出发，为使积分 = 1 乘上归一化常数（用极坐标二重积分那个漂亮的微积分习题）。
+
+**高斯积分推导（补全）**：$\int_{-\infty}^{\infty} e^{-x^2/2} dx = \sqrt{2\pi}$。直接求原函数做不到（$e^{-x^2/2}$ 无初等原函数），核心技巧：平方化二维 → 极坐标。
+
+被积函数是偶函数，先算半轴积分：
+
+$$I = \int_0^{\infty} e^{-x^2/2} dx$$
+
+$$I^2 = \int_0^{\infty} e^{-x^2/2} dx \cdot \int_0^{\infty} e^{-y^2/2} dy = \int_0^{\infty}\int_0^{\infty} e^{-(x^2+y^2)/2}\, dx\, dy$$
+
+极坐标 $x = r\cos\theta,\ y = r\sin\theta$（第一象限 $r \ge 0,\ 0 \le \theta \le \pi/2$），$dx\,dy = r\,dr\,d\theta$，$x^2+y^2 = r^2$：
+
+$$I^2 = \int_0^{\pi/2}\int_0^{\infty} e^{-r^2/2}\, r\, dr\, d\theta$$
+
+内层令 $u = r^2/2$（$du = r\,dr$），恰好凑微分：
+
+$$\int_0^{\infty} r e^{-r^2/2} dr = \int_0^{\infty} e^{-u} du = 1$$
+
+$$I^2 = \int_0^{\pi/2} 1\, d\theta = \frac{\pi}{2} \Rightarrow I = \sqrt{\frac{\pi}{2}}$$
+
+$$\int_{-\infty}^{\infty} e^{-x^2/2} dx = 2I = 2\sqrt{\frac{\pi}{2}} = \sqrt{2\pi} \quad \blacksquare$$
+
+**为什么能这么算**：平方把一维变二维，$e^{-(x^2+y^2)/2}$ 在极坐标下恰好是 $e^{-r^2/2}$，而 $r\,dr = d(r^2/2)$ 完美凑微分 → 化为简单指数积分。标准正态的常数 $1/\sqrt{2\pi}$ 就来自这里（保证 $\int f = 1$）。
 - **形状来历**：先画抛物线 $x^2/2$，取负指数 ⇒ 中间高、两边快速衰减的钟形；$\sigma$ 控制抛物线宽窄（$\sigma$ 小 ⇒ 抛物线陡 ⇒ 密度衰减快、峰窄）；$\mu$ 控制中心位置。
 
 ### 2.3 正态的线性性
