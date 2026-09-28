@@ -966,22 +966,17 @@ envp:   指向环境变量字符串数组，形如 "NAME=value"，envp[?] = NULL
 
 > 新程序启动栈从高地址向下：环境变量字符串 → argv 字符串 → 未使用区 → 参数指针数组 argv[] → 环境指针数组 envp[] → **栈底（%rsp 指向）**。main 通过栈上的 argv[] / envp[] 拿到参数和环境。
 
-**练习题 8.6**（书页 523）：假设 execve 的调用是：
+**教材正文示例：栈上参数的具体布局**（图 8-27，execve 调用后）
+
+假设：
 
 ```c
 execve("echoall", argv, envp);
-```
-
-其中：
-
-```c
 argv = ["echoall", "myarg1", "MY ARG2", NULL];
 envp = ["USER=who", "PATH=/usr/bin", NULL];
 ```
 
-请画出 execve 调用后新程序启动时，栈上参数的布局。
-
-**答案（书页 557）**：栈上（从高地址到低地址，%rsp 指向最低处）：
+新程序启动时栈上从高地址到低地址（%rsp 指向最低处）：
 
 ```text
 （高地址）字符串区：
@@ -1002,12 +997,46 @@ envp = ["USER=who", "PATH=/usr/bin", NULL];
 （低地址）%rsp
 ```
 
-> 可以对比第 3 章过程调用栈帧：两者都是"从高地址往低地址长"，但这里（进程启动栈）是**程序还没开始跑时**由内核/加载器摆好的初始状态；第 3 章的栈帧是**函数运行时**由 call/push 动态建的。它们共用同一块用户栈区域（见 2.4 地址空间图）。
+> 对比第 3 章过程调用栈帧：两者都是"从高地址往低地址长"，但这里（进程启动栈）是**程序还没开始跑时**由内核/加载器摆好的初始状态；第 3 章的栈帧是**函数运行时**由 call/push 动态建的。它们共用同一块用户栈区域（见 2.4 地址空间图）。
 >
 > 🎙️ **录音（课堂补充）：execve 是"变身"**
 >
 > 老师强调：fork 是"复制/生孩子"，execve 是"变身/换人"。fork 完你还是你（两个一样的进程）；execve 把当前进程的整个代码和数据**替换**成新程序——原来的代码全没了。shell 跑 `ls` 就是：先 fork 一个子进程，子进程再 execve 换成 ls 的代码。这就是 **"fork + exec"** 经典组合。
 >
+**练习题 8.6**（书页 523）：编写 `myecho` 程序，打印它的命令行参数和环境变量：
+
+```c
+/* myecho.c */
+#include "csapp.h"
+int main(int argc, char *argv[], char *envp[]) {
+    int i;
+    printf("Command-line arguments:\n");
+    for (i = 0; argv[i] != NULL; i++)
+        printf("  argv[%2d]: %s\n", i, argv[i]);
+    printf("\n");
+    printf("Environment variables:\n");
+    for (i = 0; envp[i] != NULL; i++)
+        printf("  envp[%2d]: %s\n", i, envp[i]);
+    exit(0);
+}
+```
+
+**示例输出**（书页 557）：
+
+```text
+linux> ./myecho arg1 arg2
+Command-line arguments:
+  argv[ 0]: myecho
+  argv[ 1]: arg1
+  argv[ 2]: arg2
+Environment variables:
+  envp[ 0]: PWD=/usr0/droh/ics/code/ecf
+  envp[ 1]: TERM=emacs
+  ...
+```
+
+> **答案（书页 557）**：main 通过 `argv[]`（以 NULL 结尾）和 `envp[]`（以 NULL 结尾）访问全部命令行参数和环境变量——这正是 execve 启动栈上那两块指针区（见上图）。写这个程序就是验证你对"argv/envp 在栈上怎么摆"的理解。
+
 > **exec 系列变体**（录音/课外补充）：`execl`、`execle`、`execv`、`execve`、`execlp`、`execvp` 都是 execve 的包装，区别只在**参数怎么传**（列表 l 还是数组 v）和**要不要在 PATH 里搜**（带 p）和**要不要自定义环境**（带 e）。底层最终都调 execve。
 ---
 
