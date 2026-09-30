@@ -626,6 +626,8 @@ Sigprocmask(SIG_SETMASK, &prev_mask, NULL);
 
 `exit` 为什么不安全：`exit` 是库函数，会做一堆清理——刷新所有 stdio 缓冲区、运行 atexit 注册的清理函数、释放资源——这些都不是异步信号安全的；`_exit` 是直接系统调用，立即终止进程、不做任何清理。所以处理程序里要用 `_exit`。
 
+**cout 也安全吗？不安全，和 printf 同类甚至更危险**：① `cout` 默认与 C 的 stdio 同步（`ios_base::sync_with_stdio` 默认开启），底层还是走 stdout/stdio 缓冲区——printf 的问题它全有；② `operator<<` 是一连串成员函数调用，中间可能持有 iostream 内部锁，还维护一堆格式化状态（width/precision/flags）和异常状态，被信号打断更容易坏；③ 重载的 `<<` 可能触发堆分配与临时对象构造/析构（涉及 malloc、锁），这些全都不在 POSIX 117 个异步信号安全函数列表里。结论：**处理程序里输出只能用 `write`**（或基于它的 `Sio_puts`）；C++ 里同样直接 `write(1, buf, len)`，别用 `cout`。
+
 ### 6.4 安全地生成格式化输出：SIO 库
 
 使用来自 csapp.c 的**可重入 SIO（Safe I/O）库**：
