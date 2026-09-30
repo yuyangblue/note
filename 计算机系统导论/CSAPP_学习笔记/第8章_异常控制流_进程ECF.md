@@ -926,6 +926,19 @@ argv:   指向参数字符串数组，argv[0] 是程序名（惯例），argv[ar
 envp:   指向环境变量字符串数组，形如 "NAME=value"，envp[?] = NULL
 ```
 
+**`environ` 全局变量（execve 第三参数的常用写法）**：
+
+```c
+extern char **environ;   /* 由 C 运行库（libc）维护的全局变量，声明在 <unistd.h> */
+```
+
+- `environ` 就是**当前进程的环境变量表**：一个以 NULL 结尾的指针数组，每个指针指向一个 `"NAME=value"` 字符串。它和 main 的第三个参数 `envp` 指向同一块数据——进程启动时，libc 的启动代码把内核/加载器摆到栈上的 envp 指针数组地址保存进全局 `environ`，此后进程里任何函数都能用。
+- 所以 `execve(argv[0], argv, environ)` 的意思是：**把"当前进程的环境变量表"作为新程序的环境**（shell 里子进程因此继承了父进程的全部环境变量，如 PATH、HOME、USER）。这和把 main 的 `envp` 原样传过去等价；区别只是 `envp` 只在 main 里可见，`environ` 是全局的。
+- `getenv("NAME")` 内部就是遍历 `environ` 找 `NAME=` 前缀的字符串。
+- 不想继承父进程环境时，可以自己拼一个 `"K=V"` 数组传给 execve（或使用 `execle` 变体），新程序的环境就完全由你指定。
+
+> 教材 API 里 execve 第三参数叫 `envp`，源码里常写 `environ`——两者类型相同（`char *envp[]`），指向同一块"环境变量字符串数组"；`environ` 只是 C 语言提供的全局别名。
+
 ![课件 p49：execve 加载新程序](图片/ECF_27_execve示例.png)
 
 **新程序的启动栈（栈的初始布局）**：
