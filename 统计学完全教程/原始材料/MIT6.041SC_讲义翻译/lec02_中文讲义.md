@@ -24,8 +24,8 @@
 - 假设 12 个等可能结果
 - $P(A) = 5/12$，$P(B) = 6/12$
 - 若被告知 $B$ 已发生：
-  - $P(A \mid B) = $（讲义留白）
-  - $P(B \mid B) = $（讲义留白）
+  - $P(A \mid B) =$（讲义留白）
+  - $P(B \mid B) =$（讲义留白）
 
 （图示：Ω 被划分为 A 独有 3/12、A∩B 2/12、B 独有 4/12、其余 3/12）
 
@@ -49,8 +49,8 @@
 
 - 令 $B$ 为事件：$\min(X, Y) = 2$
 - 令 $M = \max(X, Y)$
-- $P(M = 1 \mid B) = $（讲义留白）
-- $P(M = 3 \mid B) = $（讲义留白）
+- $P(M = 1 \mid B) =$（讲义留白）
+- $P(M = 3 \mid B) =$（讲义留白）
 
 （图示：4×4 网格，X = 第一次掷，Y = 第二次掷）
 
@@ -61,8 +61,8 @@
 **条件概率具有普通概率的性质**
 
 - $P(A \mid B) \ge 0$（假设 $P(B) > 0$）
-- $P(\Omega \mid B) = $（讲义留白）
-- $P(B \mid B) = $（讲义留白）
+- $P(\Omega \mid B) =$（讲义留白）
+- $P(B \mid B) =$（讲义留白）
 - 若 $A \cap C = \varnothing$，则 $P(A \cup C \mid B) = P(A \mid B) + P(C \mid B)$
 
 ---
@@ -73,9 +73,9 @@
 
 - 事件 $A$：飞机正在上方飞行
 - 事件 $B$：雷达屏幕上出现信号
-- $P(A \cap B) = $（讲义留白）
-- $P(B) = $（讲义留白）
-- $P(A \mid B) = $（讲义留白）
+- $P(A \cap B) =$（讲义留白）
+- $P(B) =$（讲义留白）
+- $P(A \mid B) =$（讲义留白）
 
 （概率树：$P(A) = 0.05$，$P(A^c) = 0.95$；$P(B \mid A) = 0.99$、$P(B^c \mid A) = 0.01$、$P(B \mid A^c) = 0.10$、$P(B^c \mid A^c) = 0.90$，分别通向 $A \cap B$、$A \cap B^c$、$A^c \cap B$、$A^c \cap B^c$）
 
@@ -88,7 +88,7 @@
 - $P(A \mid B) = P(A \cap B)/P(B)$
 - $P(A \cap B) = P(B)P(A \mid B)$
 - $= P(A)P(B \mid A)$
-- $P(A^c \cap B \cap C^c) = $（讲义留白）
+- $P(A^c \cap B \cap C^c) =$（讲义留白）
 
 （概率树：A / A^c 分支 → B / B^c 分支，叶节点含 $A \cap B \cap C$、$A \cap B^c$、$A^c \cap B$、$A^c \cap B \cap C^c$、$A^c \cap B^c$）
 
@@ -101,7 +101,7 @@
 - 将样本空间划分为 $A_1, A_2, A_3$
 - 已知每个 $i$ 的 $P(A_i)$
 - 已知每个 $i$ 的 $P(B \mid A_i)$
-- $P(B) = $（讲义留白）
+- $P(B) =$（讲义留白）
 - $P(B) = \sum_i P(A_i)P(B \mid A_i)$
 
 （图示：Ω 被划分为 $A_1, A_2, A_3$，$B$ 与各 $A_i$ 相交形成 $A_1 \cap B$、$A_2 \cap B$、$A_3 \cap B$；下方为对应的分支图）
@@ -116,7 +116,7 @@
 - 已知每个 $i$ 的 $P(A_i)$ —— 初始"信念"
 - 已知每个 $i$ 的 $P(B \mid A_i)$
 - 在 $B$ 已发生的条件下修正的"信念"：
-- $P(A_i \mid B) = $（讲义留白）
+- $P(A_i \mid B) =$（讲义留白）
 - $P(A_i \mid B) = \dfrac{P(A_i)P(B \mid A_i)}{\sum_j P(A_j)P(B \mid A_j)}$
 
 ---
