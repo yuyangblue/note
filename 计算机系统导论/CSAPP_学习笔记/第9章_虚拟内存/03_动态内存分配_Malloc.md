@@ -21,8 +21,6 @@
 
 ### 1.1 malloc/free 接口
 
-![课件 p5：malloc 包接口](../图片/MALLOC_02_malloc接口.jpg)
-
 ```c
 #include <stdlib.h>
 void *malloc(size_t size);
@@ -47,8 +45,6 @@ U_k = \frac{\max_{i \le k} P_i}{H_k}
 $$
 
 其中 $P_i$ 是请求 $R_i$ 完成后所有已分配块的有效载荷之和（聚合 payload），$H_k$ 是当前堆大小。$H_k$ 单调不减（堆只增不减，除非显式 sbrk 收缩）。
-
-![课件 p11：峰值内存利用率的定义](../图片/MALLOC_03_峰值利用率.jpg)
 
 两个目标常常打架：想快就少做整理（碎片多、利用率低）；想利用率高就到处合并、分裂（吞吐量掉）。
 
