@@ -829,6 +829,8 @@ int main(int argc, char **argv)
 
 > **为什么这样就安全了**：SIGCHLD 在 fork 前就被阻塞，所以子进程退出触发的 SIGCHLD 只能**待处理**着，处理程序不会立刻跑；父进程 addjob 完成后才解除阻塞，此时 SIGCHLD 处理程序再跑 deletejob，作业一定已经在列表里了。**"先加后删"的顺序被强制保证**。
 
+**逐行读法**：`mask_one={SIGCHLD}` 在 fork 前进入阻塞集合，从此子进程即使立刻退出，SIGCHLD 也只能挂进 pending，handler 不会跑。fork 后子进程继承掩码，exec 前用 `prev_one` 恢复，给新程序干净的信号环境。父进程 addjob 前再阻塞全部信号（`mask_all`），保证改作业列表期间无 handler 插入；addjob 完成后再用 `prev_one` 恢复，此刻 pending 的 SIGCHLD 才交付，handler 跑 deletejob 时作业已在列表里，必然删得到——"先加后删"被强制保证。竞态窗口（fork→addjob）被阻塞窗口完全覆盖。
+
 ***
 
 ## 8. 显式等待信号（8.5.7）
