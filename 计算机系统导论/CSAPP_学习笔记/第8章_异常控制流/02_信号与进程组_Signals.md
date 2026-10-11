@@ -876,9 +876,9 @@ while (!pid)  /* 太慢了！ */
 `sigsuspend` 是下面这段代码的**原子（不可中断）版本**：
 
 ```c
-sigprocmask(SIG_BLOCK, &mask, &prev);   // 阻塞信号
-pause();                                 // 挂起直到收到信号
-sigprocmask(SIG_SETMASK, &prev, NULL);  // 恢复
+sigprocmask(SIG_SETMASK, &mask, &prev);   // 用 mask 整体替换阻塞集合
+pause();                                   // 挂起直到收到信号
+sigprocmask(SIG_SETMASK, &prev, NULL);    // 恢复
 ```
 
 ```c
