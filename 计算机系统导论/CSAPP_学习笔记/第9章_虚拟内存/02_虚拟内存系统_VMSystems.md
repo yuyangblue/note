@@ -327,9 +327,11 @@ void *mmap(void *start, int len, int prot, int flags, int fd, int offset);
 - `len`：映射多长；
 - `prot`：权限（PROT_READ / PROT_WRITE / PROT_EXEC）；
 - `flags`：MAP_PRIVATE（私有 COW）还是 MAP_SHARED（共享）、MAP_ANONYMOUS（匿名、无文件）；
-- `fd`、`offset`：映射哪个文件、从文件哪个偏移开始。
+- `fd`、`offset`：映射哪个文件、从文件哪个偏移开始。**`fd` 就是打开文件后内核返回的整数句柄**——`open` 成功后一切后续操作（读、写、映射）都靠这个整数，不再提文件名。
 
 `munmap` 把一段映射拆掉。教材给了一个用 `mmap` 把整个文件读进内存再写出去的例子：传统 `read/write` 流程是"磁盘 → 内核页缓存 → 用户缓冲区 → 内核 → 网卡"，中间用户缓冲区是一次多余的拷贝；用 `mmap` 把文件映射进虚拟地址空间后，直接对映射区 `write` 到 stdout，数据从内核页缓存走到网卡，省了一次内核→用户→内核的来回。
+
+**课堂实践建议**：`mmap` 以页为基本单位，适合把**大文件**映射进内存——文件常驻内存后频繁访问很快，不用反复走硬盘；申请**小块空间**则用 `malloc`：你申请一个字节，mmap 也可能给你一页，是小题大做。
 
 ---
 
