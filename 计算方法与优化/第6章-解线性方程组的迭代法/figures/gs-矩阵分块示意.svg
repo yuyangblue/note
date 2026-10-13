@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <!-- 标题 -->
+  <text x="440" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Gauss-Seidel 迭代的矩阵分块：本轮新值 vs 上轮旧值</text>
+
+  <!-- 列号 j=1..4 -->
+  <g font-size="14" fill="#555" text-anchor="middle">
+    <text x="130" y="70">j=1</text>
+    <text x="200" y="70">j=2</text>
+    <text x="270" y="70">j=3</text>
+    <text x="340" y="70">j=4</text>
+  </g>
+
+  <!-- 矩阵 A 网格 4x4，格子 70x50 -->
+  <!-- 行 i=1: j=1 对角(蓝), j>1 上三角(绿) -->
+  <g>
+    <!-- i=1 -->
+    <rect x="95" y="85" width="70" height="50" fill="#4A90D9" stroke="#2c5f8d"/>
+    <text x="130" y="115" text-anchor="middle" font-size="14" fill="#fff">a₁₁</text>
+    <rect x="165" y="85" width="70" height="50" fill="#7BC47F" stroke="#3d8b40"/>
+    <text x="200" y="115" text-anchor="middle" font-size="14" fill="#fff">a₁₂</text>
+    <rect x="235" y="85" width="70" height="50" fill="#7BC47F" stroke="#3d8b40"/>
+    <text x="270" y="115" text-anchor="middle" font-size="14" fill="#fff">a₁₃</text>
+    <rect x="305" y="85" width="70" height="50" fill="#7BC47F" stroke="#3d8b40"/>
+    <text x="340" y="115" text-anchor="middle" font-size="14" fill="#fff">a₁₄</text>
+
+    <!-- i=2: j<2 下三角(红), j=2 对角, j>2 上三角(绿) -->
+    <rect x="95" y="135" width="70" height="50" fill="#E07A5F" stroke="#a84a30"/>
+    <text x="130" y="165" text-anchor="middle" font-size="14" fill="#fff">a₂₁</text>
+    <rect x="165" y="135" width="70" height="50" fill="#4A90D9" stroke="#2c5f8d"/>
+    <text x="200" y="165" text-anchor="middle" font-size="14" fill="#fff">a₂₂</text>
+    <rect x="235" y="135" width="70" height="50" fill="#7BC47F" stroke="#3d8b40"/>
+    <text x="270" y="165" text-anchor="middle" font-size="14" fill="#fff">a₂₃</text>
+    <rect x="305" y="135" width="70" height="50" fill="#7BC47F" stroke="#3d8b40"/>
+    <text x="340" y="165" text-anchor="middle" font-size="14" fill="#fff">a₂₄</text>
+
+    <!-- i=3 -->
+    <rect x="95" y="185" width="70" height="50" fill="#E07A5F" stroke="#a84a30"/>
+    <text x="130" y="215" text-anchor="middle" font-size="14" fill="#fff">a₃₁</text>
+    <rect x="165" y="185" width="70" height="50" fill="#E07A5F" stroke="#a84a30"/>
+    <text x="200" y="215" text-anchor="middle" font-size="14" fill="#fff">a₃₂</text>
+    <rect x="235" y="185" width="70" height="50" fill="#4A90D9" stroke="#2c5f8d"/>
+    <text x="270" y="215" text-anchor="middle" font-size="14" fill="#fff">a₃₃</text>
+    <rect x="305" y="185" width="70" height="50" fill="#7BC47F" stroke="#3d8b40"/>
+    <text x="340" y="215" text-anchor="middle" font-size="14" fill="#fff">a₃₄</text>
+
+    <!-- i=4 -->
+    <rect x="95" y="235" width="70" height="50" fill="#E07A5F" stroke="#a84a30"/>
+    <text x="130" y="265" text-anchor="middle" font-size="14" fill="#fff">a₄₁</text>
+    <rect x="165" y="235" width="70" height="50" fill="#E07A5F" stroke="#a84a30"/>
+    <text x="200" y="265" text-anchor="middle" font-size="14" fill="#fff">a₄₂</text>
+    <rect x="235" y="235" width="70" height="50" fill="#E07A5F" stroke="#a84a30"/>
+    <text x="270" y="265" text-anchor="middle" font-size="14" fill="#fff">a₄₃</text>
+    <rect x="305" y="235" width="70" height="50" fill="#4A90D9" stroke="#2c5f8d"/>
+    <text x="340" y="265" text-anchor="middle" font-size="14" fill="#fff">a₄₄</text>
+  </g>
+
+  <!-- 行号 i -->
+  <g font-size="14" fill="#555" text-anchor="middle">
+    <text x="70" y="115">i=1</text>
+    <text x="70" y="165">i=2</text>
+    <text x="70" y="215">i=3</text>
+    <text x="70" y="265">i=4</text>
+  </g>
+
+  <!-- 画括号 -->
+  <path d="M 90 85 L 80 85 L 80 285 L 90 285" stroke="#333" stroke-width="2" fill="none"/>
+  <path d="M 385 85 L 395 85 L 395 285 L 385 285" stroke="#333" stroke-width="2" fill="none"/>
+  <text x="60" y="190" text-anchor="middle" font-size="16" font-style="italic" fill="#333">A</text>
+
+  <!-- 右侧说明 -->
+  <g font-size="15" fill="#222">
+    <!-- 蓝色 对角 -->
+    <rect x="440" y="90" width="22" height="22" fill="#4A90D9" stroke="#2c5f8d"/>
+    <text x="472" y="107">对角 D（aᵢᵢ）：除以它做行归一化</text>
+
+    <!-- 红色 下三角 -->
+    <rect x="440" y="130" width="22" height="22" fill="#E07A5F" stroke="#a84a30"/>
+    <text x="472" y="147">严格下三角（j&lt;i）：本轮已算出的新值 x⁽ᵏ⁺¹⁾</text>
+    <text x="472" y="170" fill="#a84a30" font-size="14">→ 对应系数 −L（A = D − L − U）</text>
+
+    <!-- 绿色 上三角 -->
+    <rect x="440" y="200" width="22" height="22" fill="#7BC47F" stroke="#3d8b40"/>
+    <text x="472" y="217">严格上三角（j&gt;i）：还没轮到，用上轮值 x⁽ᵏ⁾</text>
+    <text x="472" y="240" fill="#3d8b40" font-size="14">→ 对应系数 −U</text>
+  </g>
+
+  <!-- 分量公式 -->
+  <g font-size="15" fill="#222">
+    <text x="100" y="330" font-weight="bold" font-size="16">分量式（以 i=3 为例，第 3 行）：</text>
+    <text x="100" y="360" font-size="16">
+      x₃⁽ᵏ⁺¹⁾ = ( b₃ − <tspan fill="#E07A5F">a₃₁·x₁⁽ᵏ⁺¹⁾ − a₃₂·x₂⁽ᵏ⁺¹⁾</tspan> − <tspan fill="#7BC47F">a₃₄·x₄⁽ᵏ⁾</tspan> ) / <tspan fill="#4A90D9">a₃₃</tspan>
+    </text>
+    <text x="100" y="395" fill="#a84a30" font-size="14">↑ 红色：j&lt;i，本轮 x₁、x₂ 已经算过，直接用新值</text>
+    <text x="100" y="418" fill="#3d8b40" font-size="14">↑ 绿色：j&gt;i，x₄ 还没轮到，只能沿用上一轮 x₄⁽ᵏ⁾</text>
+  </g>
+
+  <!-- 矩阵形式 -->
+  <g font-size="15" fill="#222">
+    <text x="100" y="450" font-size="16" font-style="italic">矩阵形式：x⁽ᵏ⁺¹⁾ = D⁻¹L·x⁽ᵏ⁺¹⁾ + D⁻¹U·x⁽ᵏ⁾ + D⁻¹b</text>
+  </g>
+</svg>
