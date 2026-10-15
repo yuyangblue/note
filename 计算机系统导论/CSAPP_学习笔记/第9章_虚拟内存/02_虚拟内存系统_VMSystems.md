@@ -72,6 +72,8 @@ TLB 每一项里都有一个有效位，以及缓存的 PPN。MMU 拿 VPN 的低
 
 课件用三个例子（虚拟地址 $0x03D4$、$0x0020$、$0x0020$ 的不同情形）手算了 VPN/TLBI/TLBT/TLB 命中、PPN、物理地址、CI/CT/缓存命中、最终取出的字节，是教材配套练习题的标准考法。
 
+教材那张 "Integrating VM and Cache" 总括图里出现过两个术语，别被吓到：**PTEA = Page Table Entry Access，就是 MMU 查 TLB 这一步本身**。PTEA hit 即 TLB 命中，直接拿到 PTE；PTEA miss 即 TLB 未命中，要发请求到主存读 PTE 再填回 TLB。拿到 PA 之后才轮到查 L1 cache：PA hit 直接回数据，PA miss 才去主存取真正的数据块。所以一次访存最多可能 miss 两次——PTEA miss（走主存读页表项）+ PA miss（走主存读数据）。PTEA miss 的常见原因：TLB 容量小（L1 DTLB 通常只有 64~1024 项）、首次访问某页（刚 fork/刚换入/刚 mmap）、进程切换时 TLB 被整体作废、组相联冲突驱逐。
+
 ### 1.6 手算示例 #1：虚拟地址 $0x03D4$
 
 已知条件（见前面 TLB、页表、缓存三张表）：
