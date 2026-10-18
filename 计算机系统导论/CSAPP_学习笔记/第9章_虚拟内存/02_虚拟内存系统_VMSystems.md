@@ -295,6 +295,26 @@ void *mmap(void *start, int len, int prot, int flags, int fd, int offset);
 
 **课堂实践建议**：`mmap` 以页为基本单位，适合把**大文件**映射进内存——文件常驻内存后频繁访问很快，不用反复走硬盘；申请**小块空间**则用 `malloc`：你申请一个字节，mmap 也可能给你一页，是小题大做。
 
+#### 三个典型用法
+
+**① 读文件**：`open` 拿 `fd` → `fstat` 拿长度 → `mmap(NULL, len, PROT_READ, MAP_PRIVATE, fd, 0)` → 返回值直接当 `char*` 读（首字节即文件首字节），不用 `read()`，缺页由内核按需加载。失败时返回值是 `MAP_FAILED` 而不是 `NULL`，要 `perror` 检查。
+
+**② 匿名共享内存（父子/进程间通信）**：`mmap(NULL, n, PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, -1, 0)`——`MAP_ANONYMOUS` 不关联文件，`fd` 传 `-1`；`MAP_SHARED` 让多个进程的虚拟页指向同一个物理页，一方写另一方可见，这正是"不用管道/文件的进程间通信"的底层机制（和 COW 的"假共享"相反）。
+
+**③ 一次要一大块连续内存**：`MAP_PRIVATE|MAP_ANONYMOUS` 拿一块任意大的数组，按需缺页分配物理内存，不用 `malloc` 反复调用。
+
+#### 修改 mmap 映射的文件：三个条件缺一不可
+
+要改映射背后的文件，必须同时满足：**① `open` 用 `O_RDWR`（只读 fd 一写就 SIGSEGV）；② `prot` 给 `PROT_WRITE`；③ `flags` 用 `MAP_SHARED`**。三个都齐了，直接对映射区 `memcpy`/赋值即可——写进的是内核页缓存里的脏页，内核会把它刷回磁盘；想立刻落盘用 `msync(p, len, MS_SYNC)`，不调就等内核按需写回，时机不保证。
+
+| 踩坑写法 | 表现 | 原因 |
+| --- | --- | --- |
+| `O_RDONLY` 打开还写 | 写第一个字节就 `SIGSEGV` | fd 只读，映射页不可写 |
+| `MAP_PRIVATE` + 写 | 程序里看到改了，**文件没变** | COW 私有副本，脏页被丢弃 |
+| 写超出映射长度 | `SIGBUS` | 文件就那么大，映射区就那么大，越界无处落 |
+
+**文件变长**：mmap 长度在建立那一刻固定。要先 `ftruncate(fd, new_len)` 把文件撑大，再用新长度重新 `mmap`（或 `mremap` 原地扩容）；反过来先 mmap 后截断会 `SIGBUS`。
+
 ---
 
 ## 5. 小结
