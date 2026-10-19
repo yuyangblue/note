@@ -99,6 +99,39 @@ $$f(x; \mu, \Sigma) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}}\exp\left\{-\frac{1}{2
 
 > **白话解读**：多元正态 = "标准正态向量做线性变换（旋转+拉伸+平移）"得来。这是模拟多元正态和推导其性质的基本工具。
 
+### 5.4 二维正态的密度、等高线与独立性特例
+
+二维正态 $X,Y\sim N\!\left(\begin{psmallmatrix}\mu_X\\\mu_Y\end{psmallmatrix},\begin{psmallmatrix}\sigma_X^2 & \rho\sigma_X\sigma_Y\\\rho\sigma_X\sigma_Y & \sigma_Y^2\end{psmallmatrix}\right)$ 的联合密度为
+
+$$f(x,y) = \frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}\exp\left\{-\frac{1}{2(1-\rho^2)}\left[\frac{(x-\mu_X)^2}{\sigma_X^2} - 2\rho\frac{(x-\mu_X)(y-\mu_Y)}{\sigma_X\sigma_Y} + \frac{(y-\mu_Y)^2}{\sigma_Y^2}\right]\right\}$$
+
+其中 $\rho$ 是相关系数。均值向量 $(\mu_X,\mu_Y)$ 决定等高线椭圆的中心；协方差矩阵 $(\sigma_X,\sigma_Y,\rho)$ 决定椭圆的形状、大小和倾斜方向。
+
+![[p07_mvn_contours.png]]
+
+**$\rho=0$ 时联合因子分解**：当 $\rho=0$，分母 $\sqrt{1-\rho^2}=1$，指数中的交叉项 $-2\rho\cdots=0$，剩下
+
+$$f(x,y) = \frac{1}{\sqrt{2\pi}\sigma_X}e^{-(x-\mu_X)^2/(2\sigma_X^2)}\cdot\frac{1}{\sqrt{2\pi}\sigma_Y}e^{-(y-\mu_Y)^2/(2\sigma_Y^2)} = f_X(x)f_Y(y)$$
+
+所以对联合正态而言，**不相关 $\rho=0$ 等价于独立**。这与一般随机变量"独立⇒不相关、反向不成立"的规律形成对比——正态家族的密度指数形式使得交叉项一旦消失，整个密度立刻因子分解。
+
+![[p07_rho_compare.png]]
+
+**两分量各自正态 ≠ 联合正态**：设 $X\sim N(0,1)$，$S$ 独立且 $P(S=1)=P(S=-1)=1/2$，令 $Y=SX$。则 $Y\sim N(0,1)$（对称分布与 $X$ 同分布），$\text{Cov}(X,Y)=E[X^2]E[S]-E[X]E[Y]=0$（不相关），但 $X+Y$ 在 $S=-1$ 时恒为 0（概率 1/2），不是正态。$(X,Y)$ 不服从二元正态。这一正例反过来说明：定理 2.44 的四条性质（边际正态、条件正态、线性组合正态、二次型 $\chi^2$）必须以"联合正态"为前提，不能由各分量边际正态推出。
+
+### 5.5 二元正态的条件分布
+
+对上述二维正态，给定 $X=x$ 时 $Y$ 的条件分布仍为正态，参数为
+
+$$Y\mid X=x \sim N\!\left(\mu_Y + \rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X),\ \sigma_Y^2(1-\rho^2)\right)$$
+
+两个值得记住的特点：
+
+- **条件均值是 $x$ 的线性函数**：斜率 $\rho\sigma_Y/\sigma_X$ 就是总体回归系数，这是线性回归的"正态母体"版本；
+- **条件方差不依赖于 $x$**：$\sigma_Y^2(1-\rho^2)$ 是常数，比边际方差 $\sigma_Y^2$ 小一个因子 $(1-\rho^2)$。$\rho$ 越接近 $\pm1$，知道 $X$ 后 $Y$ 的剩余波动越小；$\rho=0$ 时条件方差回到 $\sigma_Y^2$（与独立一致）。
+
+**机器人传感器例**：两传感器独立测量同一位置，校准后 $\mu_X=\mu_Y=0$、$\sigma_X=\sigma_Y=1$，但因共享环境干扰 $\rho=0.8$。已知 $X=1$ 后，$Y$ 的条件均值为 $0.8\cdot1=0.8$，条件方差为 $1-0.64=0.36$——知道 $X=1$ 这一信息把 $Y$ 的方差从 1 降到 0.36，**条件均值解释了 $Y$ 总方差的 64%**（即 $\rho^2$，也是一元线性回归的决定系数 $R^2$）。
+
 **定理 2.44**：令 $X \sim N(\mu, \Sigma)$，分块 $X = (X_a, X_b)$、$\mu = (\mu_a, \mu_b)$、$\Sigma = \begin{pmatrix} \Sigma_{aa} & \Sigma_{ab} \\ \Sigma_{ba} & \Sigma_{bb} \end{pmatrix}$，则：
 
 1. **边际**：$X_a \sim N(\mu_a, \Sigma_{aa})$；

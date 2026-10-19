@@ -31,6 +31,20 @@ $$P\left(\frac{\sqrt{n}(\bar{X}_n - \mu)}{\sigma} \le x\right) \to \Phi(x) = \in
 
 **等价表述**：$\bar{X}_n \approx N(\mu, \sigma^2/n)$，或 $\sum_{i=1}^n X_i \approx N(n\mu, n\sigma^2)$。
 
+![[p14_clt_experiment.png]]
+
+**连续性修正（离散变量用正态近似时）**：当被近似的随机变量 $S$ 只取整数值（如二项、泊松），用连续正态 $Y\approx N(n\mu,n\sigma^2)$ 近似 $P(a\le S\le b)$ 时，应在整数区间两端各向外延伸半个单位：
+
+$$P(a\le S\le b) \approx P(a-1/2 \le Y \le b+1/2)$$
+
+直觉：离散点 $k$ 对应连续近似中长度为 1、中心在 $k$ 的条形；$S\in[a,b]$ 等价于条形覆盖的连续区间是 $[a-1/2, b+1/2]$。
+
+![[p14_continuity_correction.png]]
+
+**例**：$S\sim\text{Bin}(100, 1/2)$，求 $P(45\le S\le 55)$。精确值约为 0.7287。不做修正：$P(45\le Y\le55)=P((45-50)/5\le Z\le(55-50)/5)=\Phi(1)-\Phi(-1)=0.6826$；做半格修正：$P(44.5\le Y\le55.5)=\Phi(1.1)-\Phi(-1.1)=0.7286$，与精确值几乎一致。
+
+**中心近似好 ≠ 尾部近似好**：同一 $n=100$ 二项分布，中心区间 $[45,55]$ 修正后误差仅 $10^{-4}$；但稀有事件 $P(S=0)$ 用 $P(-0.5\le Y\le 0.5)$ 近似约为 0.242，真实值仅 $2^{-100}\approx 10^{-30}$，误差十几个数量级。原因是 CLT 描述的是"中心附近"的分布形状，而尾部被正态的指数衰减严重高估——在稀有事件、尾部风险、极端值推断中不能直接套 CLT。
+
 **证明思路（MGF 法）**：设 $\phi$ 为 $X_i$ 的 MGF（在 0 附近存在）。$Y_i = (X_i - \mu)/\sigma$，$M_{Y}(t) = \phi(t/\sigma)e^{-\mu t/\sigma}$，$M_Y(0) = 0$，$M_Y'(0) = 0$，$M_Y''(0) = 1$。$\bar{X}_n$ 标准化的 MGF：
 
 $$M_n(t) = \left[M_Y\left(\frac{t}{\sqrt{n}}\right)\right]^n$$
@@ -73,6 +87,22 @@ $$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0, \sigma^2(g'(\theta))^2)$$
 
 **证明思路**：对 $g(Y_n)$ 在 $\theta$ 处泰勒展开：$g(Y_n) = g(\theta) + g'(\theta)(Y_n - \theta) + \text{余项}$。余项是 $o_p(Y_n - \theta) = o_p(1/\sqrt{n})$，乘以 $\sqrt{n}$ 消失（需要 $g'(\theta) \ne 0$）。再用 Slutsky 定理整理。
 
+**Slutsky 定理**：若 $X_n\xrightarrow{d}X$、$Y_n\xrightarrow{P}c$（$c$ 为常数），则
+
+$$X_n+Y_n\xrightarrow{d}X+c,\qquad X_nY_n\xrightarrow{d}cX,\qquad X_n/Y_n\xrightarrow{d}X/c\quad(c\ne0)$$
+
+"依分布收敛的项"与"依概率收敛到常数的项"相加/相乘/相除，极限分别是对应组合。Delta 方法证明中把 $g'(\theta)$ 当成常数、把 $o_p(1/\sqrt n)$ 扔掉，靠的就是这条。
+
+**二阶 Delta 方法（$g'(\theta)=0$ 时）**：若 $g'(\theta)=0$，一阶项消失，$\sqrt n$ 尺度退化；泰勒展开到二阶：
+
+$$g(Y_n)-g(\theta) = \frac12 g''(\theta)(Y_n-\theta)^2 + o_p(Y_n-\theta)^2$$
+
+此时 $n$ 替代 $\sqrt n$ 进入尺度：
+
+$$n\bigl(g(Y_n)-g(\theta)\bigr) \xrightarrow{d} \frac12 g''(\theta)\sigma^2 Z^2,\qquad Z\sim N(0,1)$$
+
+而 $Z^2\sim\chi_1^2$。**例**：$X_i\sim\text{Exp}(1)$，$\theta=1$，$h(x)=(x-1)^2$，则 $h'(1)=0$、$h''(1)=2$，故 $n(\bar X_n-1)^2\xrightarrow{d}\chi_1^2$。
+
 > **白话解读**：**"均值的函数 ≈ 均值处的函数 + 斜率×误差"**——一阶泰勒近似把问题线性化。$g$ 是光滑函数时，$g(\bar{X}_n) \approx N(g(\mu),\ (g'(\mu))^2 \sigma^2/n)$。方差乘上"斜率平方"。
 >
 > **用途**：$\hat\theta = 1/\bar{X}$、$e^{\hat\theta}$、$\log \hat\theta$、$\hat p(1-\hat p)$ 等估计量的渐近分布都能由 Delta 方法得到。
@@ -100,6 +130,16 @@ $$Y_n = o_p(a_n) \iff \frac{Y_n}{a_n} \xrightarrow{P} 0$$
 **例 5.17**：$\sqrt{n}(\bar{X}_n - \mu) = O_p(1)$——CLT 说它依分布收敛到 $N(0,\sigma^2)$（分布有界）；$\bar{X}_n - \mu = o_p(1)$——WLLN 说它依概率趋于 0；$\bar{X}_n - \mu = O_p(n^{-1/2})$。
 
 > **白话解读**：$O_p$ 表示"数量级不会超过 $a_n$"（概率意义下的有界），$o_p$ 表示"比 $a_n$ 小得多"（除以 $a_n$ 后趋于 0）。这是渐近论证的"速记语言"——Delta 方法证明里的"余项是 $o_p$ 的所以能扔"就是用它表达。
+
+**学生化（总体 $\sigma$ 未知时仍能用 CLT）**：实践中总体标准差 $\sigma$ 通常未知，只能用样本标准差 $S_n$。由 $S_n^2\xrightarrow{P}\sigma^2$（p10 定理 3.17）及连续映射，$S_n/\sigma\xrightarrow{P}1$。结合 CLT：
+
+$$\frac{\sqrt n(\bar X_n-\mu)}{\sigma}\xrightarrow{d}N(0,1),\qquad \frac{\sigma}{S_n}\xrightarrow{P}1$$
+
+由 Slutsky 定理两式相乘：
+
+$$T_n = \frac{\sqrt n(\bar X_n-\mu)}{S_n}\xrightarrow{d}N(0,1)$$
+
+这就是**学生化统计量**——把 CLT 里的 $\sigma$ 换成样本 $S_n$ 后渐近仍为标准正态。这是构造 $t$ 区间、$t$ 检验的渐近依据（小样本下若总体正态则精确分布是 $t_{n-1}$，见 p05）。
 
 ---
 
