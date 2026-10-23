@@ -109,8 +109,14 @@ $$n\bigl(g(Y_n)-g(\theta)\bigr) \xrightarrow{d} \frac12 g''(\theta)\sigma^2 Z^2,
 
 ### 4.2 多变量 Delta 方法
 
-**定理 5.14（多变量版本）**：$\nabla g$ 为梯度（在 $\theta$ 处取值），$Y_n$ 满足 $\sqrt{n}(Y_n - \theta) \leadsto N(0, \Sigma)$，则：
+**前提定理（多变量 CLT）**：$Y_1,\ldots,Y_n$ 为 $k$ 维 iid 随机向量，均值向量 $\mu$、协方差矩阵 $\Sigma$（有限），则样本均值向量满足：
 
+$$\sqrt{n}(\bar{Y}_n - \mu) \xrightarrow{d} N_k(0,\ \Sigma)$$
+
+**证明思路（Cramér-Wold）**：$k$ 维随机向量 $Z$ 依分布收敛于 $N_k(0,\Sigma)$，当且仅当对任意线性组合 $a\in\mathbb{R}^k$ 有 $a^T Z \xrightarrow{d} N(0,\ a^T\Sigma a)$；而 $a^T(\bar Y_n-\mu)$ 恰是 iid 标量序列 $\{a^T Y_i\}$ 的标准化均值，每个投影用一次单变量 CLT 即可。多变量 Delta 的前提"$\sqrt{n}(Y_n-\theta)\leadsto N(0,\Sigma)$"正是由它提供（第 15 题里 $k=2$，$\sqrt{n}((\bar X,\bar Y)-(\mu_1,\mu_2))\leadsto N(0,\Sigma)$）。
+
+**定理 5.14（多变量版本）**：$\nabla g$ 为梯度（在 $\theta$ 处取值），$Y_n$ 满足 $\sqrt{n}(Y_n - \theta) \leadsto N(0, \Sigma)$，则：
+‘
 $$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0,\ \nabla g(\theta)^T\Sigma\nabla g(\theta))$$
 
 **证明思路**：多变量泰勒展开 $g(y) = g(\theta) + \nabla g(\theta)^T(y-\theta) + \text{余项}$，余项 $= o(\|y - \theta\|)$，处理同上。
