@@ -5,11 +5,15 @@
    - 为每个课程目录生成 index.md 落地页（课程统计 + 快速入口）；
    - 为每个分区目录生成 index.md 落地页（课程卡片入口）。
 3. 修正自动导航标题：index.md 显示为「首页」。
+4. 解析正文里的 `[[wikilink]]`（Obsidian 写法），转成站内相对链接，
+   使同一份笔记在 Obsidian 与站点里都能跳转。
 """
 
+import re
 from urllib.parse import unquote
 
 from mkdocs.structure.files import File, file_sort_key
+from mkdocs.utils import get_relative_url
 
 
 def rel_from_url(url: str, dirname: str) -> str:
@@ -51,6 +55,8 @@ COURSE_ICONS = {
     "离散数学": "🧩",
     "计算方法与优化": "📐",
     "数值分析": "🔢",
+    "概率论MIT": "🎲",
+    "统计学完全教程": "📊",
     "计算机系统导论": "🖥️",
     "C++学习": "💻",
     "深度学习": "🧠",
@@ -65,6 +71,8 @@ COURSE_DESCS = {
     "离散数学": "集合、命题与谓词逻辑、关系、次序关系、函数、图论基础，经典教材章节式学习笔记。",
     "计算方法与优化": "数值计算方法系统笔记：误差分析、非线性方程求根、线性方程组、插值与拟合、数值积分、矩阵特征值与常微分方程。",
     "数值分析": "数值分析课程笔记：误差与数值计算基础、非线性方程求根、线性方程组直接/迭代解法、插值法、函数逼近与曲线拟合、数值积分与微分、矩阵特征值计算、常微分方程数值解法。",
+    "概率论MIT": "MIT 6.041SC 概率论课程笔记：样本空间与公理、离散与一般随机变量、导出分布与卷积、条件期望、极限定理、伯努利与泊松过程、马尔可夫链、贝叶斯与经典统计推断。",
+    "统计学完全教程": "Wasserman《All of Statistics》学习笔记：概率、随机变量与重要分布、数学期望与条件期望、不等式、收敛与大数定律、中心极限定理与 Delta 方法、统计推断与学习。",
     "计算机系统导论": "程序结构与执行、RISC-V 指令系统与处理器、存储层次与链接，附带 Vivado / Verilog 硬件设计入门笔记。",
     "C++学习": "C++ 语言学习笔记：期末复习、二义性、线性群体、多对多实现与高级语言程序设计要点。",
     "深度学习": "深度学习课程笔记：线性回归、神经网络、损失函数、模型训练、梯度与初始化、正则化与模型评价。",
@@ -221,6 +229,91 @@ def build_course_index(dirname: str, fs) -> str:
     lines.append("> 💡 左侧导航栏可按章节浏览全部笔记，顶部支持全文搜索。")
     lines.append("")
     return "\n".join(lines)
+
+
+# ------------------------------------------------------------------ wikilink
+# 正文里的 [[链接]] 由本钩子解析成 MkDocs 站内链接，支持四种写法：
+#   [[路径/文件名]]                  → 目标文件
+#   [[路径/文件名#小节]]              → 目标文件的指定小节
+#   [[路径/文件名#小节|显示文本]]      → 同上，链接文字用显示文本
+#   [[#小节]]                        → 当前页内锚点
+# 前面加 `!` 即图片嵌入（![[图片.png]]），会按文件名在站内静态文件中查找。
+# 目标可写库根相对路径，也可只写文件名；跨分区（笔记在根、站点在 docs/数学/ 下）也能对上。
+
+WIKILINK_RE = re.compile(r"(?P<bang>!?)\[\[(?P<inner>[^\[\]]+)\]\]")
+
+
+def slugify(text: str, sep: str = "-") -> str:
+    """复刻 mkdocs（markdown 的 toc 扩展）的锚点规则：删掉标点 → 小写 → 空白与连字符逐个换成 sep。
+
+    规则由既有构建日志反推：标题「五、完整项目实战：分频器 + 跑马灯」的锚点是
+    `#五完整项目实战分频器--跑马灯`（`+` 被删后留下两个空格，各自变成一个连字符），
+    可见是逐个替换而非合并替换。
+    """
+    s = re.sub(r"[^\w\s-]", "", text).strip().lower()
+    return re.sub(r"[-\s]", sep, s)
+
+
+def wiki_resolve(target: str, pool):
+    """把 wikilink 的目标解析成 File：完整 src_path → 路径后缀 → 文件名，依次尝试。"""
+    t = target.replace("\\", "/").strip().strip("/")
+    if not t:
+        return None
+    for f in pool:  # 1) 完整 src_path（目标可带或不带扩展名）
+        src = f.src_path.replace("\\", "/")
+        if src == t or src == t + ".md":
+            return f
+    for f in pool:  # 2) src_path 后缀（笔记在根目录、站点在分区下时对得上）
+        src = f.src_path.replace("\\", "/")
+        if src.endswith("/" + t) or src.endswith("/" + t + ".md"):
+            return f
+    base = t.rsplit("/", 1)[-1]  # 3) 仅文件名
+    for f in pool:
+        if f.name == base or f.src_path.replace("\\", "/").rsplit("/", 1)[-1] == base:
+            return f
+    return None
+
+
+def on_page_markdown(markdown, page, config, files, **kwargs):
+    """把 [[wikilink]] 转成站内相对链接；解析失败时退化成纯文本，不影响构建。"""
+    if "[[" not in markdown:
+        return markdown
+    try:
+        pages = list(files.documentation_pages())
+        media = [f for f in files if not f.is_documentation_page()]
+    except Exception:
+        return markdown
+
+    def repl(m):
+        inner = m.group("inner")
+        text = None
+        if "|" in inner and "#" not in inner.rsplit("|", 1)[1]:
+            inner, text = inner.rsplit("|", 1)
+        anchor = None
+        if "#" in inner:
+            inner, anchor = inner.split("#", 1)
+        target = inner.strip()
+        label = text or anchor or (target.rsplit("/", 1)[-1] or "链接")
+        bang = m.group("bang")
+
+        if bang:  # ![[图片.png]]：按文件名找站内静态文件
+            img = wiki_resolve(target, media)
+            if img is None:  # 图片缺失（如被排除的原始材料）时保留原文，便于发现
+                return m.group(0)
+            return f"![{label}](<{get_relative_url(img.url, page.file.url)}>)"
+
+        frag = "#" + slugify(anchor) if anchor else ""
+        if not target:  # [[#小节]]：本页锚点
+            return f"[{label}](<{frag}>)" if frag else m.group(0)
+        f = wiki_resolve(target, pages)
+        if f is None:  # 找不到目标就只留文字，避免出现死链
+            return text or label
+        return f"[{label}](<{get_relative_url(f.url, page.file.url) + frag}>)"
+
+    try:
+        return WIKILINK_RE.sub(repl, markdown)
+    except Exception:
+        return markdown
 
 
 def on_nav(nav, config, files):
