@@ -11,6 +11,8 @@ JOBS = [
     ("统计学完全教程", "统计学完全教程", {"原始材料"}, {".py", ".json"}),
 ]
 
+IMG_EXT = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".bmp"}
+
 for src_name, dst_name, skip_dirs, skip_ext in JOBS:
     src = os.path.join(ROOT, src_name)
     dst = os.path.join(DEST, dst_name)
@@ -18,12 +20,14 @@ for src_name, dst_name, skip_dirs, skip_ext in JOBS:
         shutil.rmtree(dst)
     n_file = n_skip = 0
     for dp, dn, fn in os.walk(src):
-        dn[:] = [d for d in dn if d not in skip_dirs and not d.startswith(".")]
+        dn[:] = [d for d in dn if not d.startswith(".")]  # 原始材料也进去，但只取图片
         rel = os.path.relpath(dp, src)
+        in_raw = "原始材料" in rel.split(os.sep)
         out = dst if rel == "." else os.path.join(dst, rel)
         os.makedirs(out, exist_ok=True)
         for f in fn:
-            if os.path.splitext(f)[1] in skip_ext:
+            ext = os.path.splitext(f)[1].lower()
+            if ext in skip_ext or (in_raw and ext not in IMG_EXT):
                 n_skip += 1
                 continue
             shutil.copy2(os.path.join(dp, f), os.path.join(out, f))

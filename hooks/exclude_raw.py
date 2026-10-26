@@ -9,6 +9,7 @@
    使同一份笔记在 Obsidian 与站点里都能跳转。
 """
 
+import os
 import re
 from urllib.parse import unquote
 
@@ -81,15 +82,40 @@ COURSE_DESCS = {
 }
 
 
-def is_raw(f) -> bool:
-    """判断文件是否位于「原始材料」目录中。"""
-    return "/原始材料/" in "/" + f.src_path.replace("\\", "/") + "/"
+EMBED_RE = re.compile(r"!\[\[([^\[\]]+)\]\]")
+
+
+def collect_embeds(files, docs_dir) -> set:
+    """收集正文里 ![[图片]] 引用到的文件名（只看文件名，不管它在哪个目录）。"""
+    refs = set()
+    for f in files.documentation_pages():
+        try:
+            with open(os.path.join(docs_dir, f.src_path), encoding="utf-8") as fp:
+                txt = fp.read()
+        except OSError:
+            continue
+        for m in EMBED_RE.finditer(txt):
+            refs.add(m.group(1).strip().rsplit("/", 1)[-1])
+    return refs
+
+
+def is_raw(f, refs=frozenset()) -> bool:
+    """判断文件是否位于「原始材料」目录中。
+
+    例外：正文用 ![[...]] 真正引用到的图片要放行，否则站点会缺图
+    （例如 统计学完全教程/原始材料/武大课件截图/ 下的配图）。
+    """
+    src = f.src_path.replace("\\", "/")
+    if "/原始材料/" not in "/" + src + "/":
+        return False
+    return os.path.basename(src) not in refs
 
 
 def on_files(files, config):
     """排除原始材料，并为分区与课程目录生成虚拟 index.md。"""
-    # 1. 排除原始材料
-    keep = [f for f in files._files if not is_raw(f)]
+    # 1. 排除原始材料（保留被引用的图片）
+    refs = collect_embeds(files, config.docs_dir)
+    keep = [f for f in files._files if not is_raw(f, refs)]
 
     # 2. 按「分区 → 课程」分组（仅统计文档页）
     by_part = {}
