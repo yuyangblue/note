@@ -8,8 +8,8 @@
   </div>
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">5</span><span class="stat-label">个内容分区</span></div>
-    <div class="stat"><span class="stat-num">10</span><span class="stat-label">门课程</span></div>
-    <div class="stat"><span class="stat-num">277</span><span class="stat-label">篇学习笔记</span></div>
+    <div class="stat"><span class="stat-num">12</span><span class="stat-label">门课程</span></div>
+    <div class="stat"><span class="stat-num">357</span><span class="stat-label">篇学习笔记</span></div>
   </div>
 </div>
 
@@ -31,7 +31,7 @@
   <span class="part-body">
     <span class="part-name">数学</span>
     <span class="part-desc">概率统计、离散数学与数值计算方法，公式推导全覆盖。</span>
-    <span class="part-meta">离散数学 · 计算方法与优化 · 数值分析 <b>38</b> 篇</span>
+    <span class="part-meta">离散数学 · 计算方法与优化 · 数值分析 · 概率论MIT · 统计学完全教程 <b>118</b> 篇</span>
   </span>
 </a>
 
@@ -80,5 +80,5 @@
 本站由 **Obsidian 笔记库** 自动构建发布：笔记用 Markdown 编写，推送到 GitHub 后由 GitHub Actions 调用 MkDocs Material 生成静态站点。左侧导航按「分区 → 课程 → 章节」组织，可展开与收缩。
 
 - 笔记特色：大量 LaTeX 公式与完整推导、真实代码示例、表格对比、知识点交叉引用
-- 原始材料（B 站字幕、素材等）不参与发布，只保留整理后的笔记内容
+- 原始材料（B 站字幕、素材等）不参与发布，只保留整理后的笔记内容与正文引用到的配图
 - 内容持续更新中，欢迎通过 [GitHub](https://github.com/yuyangblue/note) 提出建议

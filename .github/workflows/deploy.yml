@@ -22,7 +22,6 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
-      - run: pip install mkdocs-roamlinks-plugin
       - run: |
           mkdir -p docs/算法与数据结构 docs/数学 docs/计算机与编程 docs/人工智能 docs/课程合集
           cp -r ICPC docs/算法与数据结构/
@@ -37,7 +36,9 @@ jobs:
           cp -r 深度学习 docs/人工智能/
           cp -r 一些讲座 docs/人工智能/
           cp -r 大一下 docs/课程合集/
-          rm -rf docs/数学/概率论MIT/原始材料 docs/数学/统计学完全教程/原始材料
+          # 原始材料只保留正文 ![[...]] 引用到的图片，其余（字幕、PDF、jsonl）不发布
+          find docs/数学/概率论MIT/原始材料 docs/数学/统计学完全教程/原始材料 -type f \
+            ! -name '*.png' ! -name '*.jpg' ! -name '*.jpeg' ! -name '*.gif' ! -name '*.webp' -delete 2>/dev/null || true
           rm -f docs/数学/统计学完全教程/*.py docs/数学/统计学完全教程/notes_manifest.json
       - run: mkdocs build
       - uses: actions/upload-pages-artifact@v3
