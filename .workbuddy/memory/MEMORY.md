@@ -33,6 +33,6 @@
 根目录是 Obsidian vault，`docs/` 是发布目录（`.gitignore` 忽略 `docs/*/`，副本不入库），CI 在 `.github/workflows/deploy.yml` 里把课程目录 `cp` 进 `docs/<分区>/` 再构建。
 
 - **新课程上线三件事**：deploy.yml 加 `cp -r`；`hooks/exclude_raw.py` 的 `COURSE_ICONS`/`COURSE_DESCS` 加条目；`docs/index.md` 的统计数字改一下。
-- **改完根目录的笔记要重跑 `临时作业/_sync_docs.py`**，否则本地 docs 里还是旧副本（CI 那边不受影响）。
+- **不要手动往 `docs/<分区>/` 里拷单个文件**：那份副本只是本地预览缓存，`docs/*/` 被 gitignore、CI 每次重新 `cp -r`。而且它停留在旧命名（`第01讲-基本概念.md` 等），与根目录现在的 `01-绪论.md` 编号体系已经脱节，单独拷一个进去只会新旧混杂。要本地预览就重建整个课程目录。（2026-10-27 核实：`临时作业/_sync_docs.py` 只负责把「概率论MIT」「统计学完全教程」同步到 `docs/数学/`，**其它课程与它无关**。）
 - **`[[wikilink]]` 由 `hooks/exclude_raw.py` 的 `on_page_markdown` 解析**（roamlinks 已移除）：支持路径/锚点/别名/同页锚点/`![[图片]]`，跨分区按路径后缀匹配。锚点 slug 规则是 `re.sub(r"[-\s]", sep, s)`（逐个替换，**不是 `+`**），见当日日志。
 - 原始材料不发布，但**正文 `![[...]]` 引用到的图片会放行**（`is_raw` + `collect_embeds`）。
