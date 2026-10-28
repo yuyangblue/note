@@ -28,6 +28,18 @@
 
 写这类笔记的顺序：**先按课本节号与术语对齐，再挂录音与板书来源**。课本术语与常见叫法不一致时以课本为准并注明，例如徐树方把 $A^TAx=A^Tb$ 叫「正则化方程组／法方程组」、把 QR 解法叫「正交变换法」、把 Cholesky 叫「平方根法」。
 
+## 读 PDF 的可用路径（2026-10-27 实测）
+
+`C:\Users\29469\.workbuddy\binaries\python\envs\default` 里 **pip 装不上包**（`No matching distribution found`，无网络），但 **hermes 的 venv 自带 pymupdf 与 PIL**：
+
+```
+C:\Users\29469\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe
+```
+
+用法：`pymupdf.open(path)` → `page.get_text()` 抽文字；`page.get_pixmap(dpi=110).save(png)` 渲染成图再用 Read 看（课件里的图、公式一定要渲染出来看，光抽文字会漏掉图示）。注意 `import fitz` 会报 deprecated 警告，改用 `import pymupdf`。
+
+系统里没有 pdftotext / ghostscript / magick / mutool；Read 工具直接读大于 256KB 的 PDF 会失败。
+
 ## 站点发布机制（MkDocs，2026-10-26 起）
 
 根目录是 Obsidian vault，`docs/` 是发布目录（`.gitignore` 忽略 `docs/*/`，副本不入库），CI 在 `.github/workflows/deploy.yml` 里把课程目录 `cp` 进 `docs/<分区>/` 再构建。
@@ -36,3 +48,11 @@
 - **不要手动往 `docs/<分区>/` 里拷单个文件**：那份副本只是本地预览缓存，`docs/*/` 被 gitignore、CI 每次重新 `cp -r`。而且它停留在旧命名（`第01讲-基本概念.md` 等），与根目录现在的 `01-绪论.md` 编号体系已经脱节，单独拷一个进去只会新旧混杂。要本地预览就重建整个课程目录。（2026-10-27 核实：`临时作业/_sync_docs.py` 只负责把「概率论MIT」「统计学完全教程」同步到 `docs/数学/`，**其它课程与它无关**。）
 - **`[[wikilink]]` 由 `hooks/exclude_raw.py` 的 `on_page_markdown` 解析**（roamlinks 已移除）：支持路径/锚点/别名/同页锚点/`![[图片]]`，跨分区按路径后缀匹配。锚点 slug 规则是 `re.sub(r"[-\s]", sep, s)`（逐个替换，**不是 `+`**），见当日日志。
 - 原始材料不发布，但**正文 `![[...]]` 引用到的图片会放行**（`is_raw` + `collect_embeds`）。
+
+## 原始材料归档约定（2026-10-27 起）
+
+`计算方法与优化/原始材料/` 下只有四样东西：`课堂录音稿/`、`旧版笔记归档/`、课件 pdf、B 站字幕 `BV.../`。
+
+- **录音稿按课次分文件夹**：`课堂录音稿/<日期>-<主题>/`，内部统一命名 `原文.docx`（语音转写）、`导读.docx`（关键词+摘要）、`整理版逐字稿.docx`（人工通顺稿；也有叫 `逐字整理稿` / `转录稿` 的旧文件）。写笔记时先读整理稿，原文只用来核对细节。
+- **单份 docx 只有几十 KB，进 git 没问题；录音根本不保留**（用户 2026-10-27 明确：有逐字稿就够，不用留音频），转写完即弃。**整批板书照片也不进 vault**，放 `C:\Users\29469\Desktop\计算方法与优化\计算方法与优化课程实录\<日期>\`（照片加 `板书-` 前缀）。vault 里只保留按语义命名的关键图（各章 `figures/`）。这条是硬约束：曾把两段 m4a 拷进 vault，原始材料瞬间 184M。
+- 拿不到日期的材料就写 `补充-<主题>`，**不要猜日期**。
