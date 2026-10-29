@@ -1,5 +1,19 @@
 # 笔记库项目约定
 
+## 示例代码一律用 C++（鱼汤 2026-10-29 明确：她不会 C）
+
+数据结构等课程讲义里的示例代码**统一写成 C++**，不要写 C。课件原码多为 C，改写时对应规则：
+
+- `typedef struct X { ... } X;` → `struct X { ... };`（C++ 里标签名就是类型名，不必重复 typedef）
+- `typedef struct TreeNode *BinTree;` → `using BinTree = TreeNode*;`
+- `malloc(sizeof(T))` → `new T`（失败由异常接管，不必判空）
+- `free(p)` → `delete p`；数组用 `new[]` / `delete[]`
+- `printf` / `scanf` → `cout` / `cin`，文件顶部加 `#include <iostream>` 与 `using namespace std;`
+- 需要 `strlen` / `strcpy` 时加 `#include <cstring>`
+- 代码围栏语言标记写 ` ```cpp `，不要写 ` ```c `
+
+例外：课件里刻意给出的**伪代码**（描述算法流程而非可直接编译的代码）保留为 ` ```text `，并在正文说明"伪代码"。
+
 ## 往已有笔记里增补内容时：必须贴合原文风格（鱼汤 2026-10-20 明确指出）
 
 增补不是「贴补丁」，要长进原文的结构和语气里。踩过的坑与正确做法：
