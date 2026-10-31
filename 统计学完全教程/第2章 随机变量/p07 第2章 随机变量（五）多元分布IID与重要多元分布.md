@@ -117,6 +117,20 @@ $$f(x; \mu, \Sigma) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}}\exp\left\{-\frac{1}{2
 
 > **白话解读**：多元正态 = "标准正态向量做线性变换（旋转+拉伸+平移）"得来。这是模拟多元正态和推导其性质的基本工具。
 
+**两个方向是同一句话**：$X=\mu+\Sigma^{1/2}Z$ 与 $Z=\Sigma^{-1/2}(X-\mu)$ 互为反解。向右读是"造"——取 $k$ 个独立标准正态，乘 $\Sigma^{1/2}$ 再平移，协方差即为 $\Sigma$；向左读是"还原"——任给 $N(\mu,\Sigma)$，乘 $\Sigma^{-1/2}$ 即标准化，这是多元版的 $z=(x-\mu)/\sigma$。两条合起来给出充分必要条件
+
+$$X\sim N(\mu,\Sigma)\iff \Sigma^{-1/2}(X-\mu)\sim N(0,I)$$
+
+即全体 $N(\mu,\Sigma)$ 恰为 $N(0,I)$ 在可逆仿射变换下的像。
+
+**两侧各验两行**：正向 $E[\Sigma^{1/2}Z]=0$、$\mathrm{Cov}(\Sigma^{1/2}Z)=\Sigma^{1/2}I(\Sigma^{1/2})^T=\Sigma$；反向 $E[\Sigma^{-1/2}(X-\mu)]=0$、$\mathrm{Cov}=\Sigma^{-1/2}\Sigma\Sigma^{-1/2}=I$。两处都用到 $\Sigma^{1/2}$ 对称，即 $(\Sigma^{1/2})^T=\Sigma^{1/2}$。
+
+**正态性为何不丢**：$Z$ 的任意线性组合 $a^TZ$ 是独立正态的线性组合，仍是一元正态；乘矩阵、加向量只改系数不改这一点，故 $AZ+b$ 满足 5.2 的特征化定义。
+
+**注意：$\Sigma^{1/2}$ 不是把元素逐个开根号**。它是矩阵意义的平方根，两种算法：谱分解 $\Sigma=Q\Lambda Q^T$ 给出对称平方根 $Q\Lambda^{1/2}Q^T$（唯一）；Cholesky $\Sigma=LL^T$ 给出下三角的 $L$（不唯一）。定理只要求 $AA^T=\Sigma$、并不要求 $A$ 对称，所以 5.4 的 $L$ 同样可以顶替 $\Sigma^{1/2}$。反例：$\Sigma=\begin{pmatrix}5&4\\4&5\end{pmatrix}$ 的对称平方根是 $\begin{pmatrix}2&1\\1&2\end{pmatrix}$（平方回去正好得 $\Sigma$），而元素开根号得 $\begin{pmatrix}\sqrt5&2\\2&\sqrt5\end{pmatrix}$，平方后是 $\begin{pmatrix}9&4\sqrt5\\4\sqrt5&9\end{pmatrix}\neq\Sigma$。
+
+**定理 2.44 第 4 条由此一眼可得**：$(X-\mu)^T\Sigma^{-1}(X-\mu)=\|\Sigma^{-1/2}(X-\mu)\|^2=\|Z\|^2=Z_1^2+\cdots+Z_k^2\sim\chi^2_k$——它就是 $k$ 个独立标准正态的平方和，按定义即卡方，不必另证。
+
 ### 5.4 二维正态的密度、等高线与独立性特例
 
 二维正态 $X,Y\sim N\!\left(\begin{psmallmatrix}\mu_X\\\mu_Y\end{psmallmatrix},\begin{psmallmatrix}\sigma_X^2 & \rho\sigma_X\sigma_Y\\\rho\sigma_X\sigma_Y & \sigma_Y^2\end{psmallmatrix}\right)$ 的联合密度为
@@ -141,7 +155,17 @@ $$f(x,y) = \frac{1}{\sqrt{2\pi}\sigma_X}e^{-(x-\mu_X)^2/(2\sigma_X^2)}\cdot\frac
 
 $$\begin{pmatrix}X_1\\X_2\end{pmatrix} = LZ = \begin{pmatrix}1 & 0\\ \rho & \sqrt{1-\rho^2}\end{pmatrix}\begin{pmatrix}Z_1\\Z_2\end{pmatrix},\quad \text{即 } X_1=Z_1,\ X_2=\rho Z_1+\sqrt{1-\rho^2}Z_2$$
 
+**这个 $L$ 是解出来的**：设 $X_1=Z_1$、$X_2=aZ_1+bZ_2$（$Z_2$ 独立），两个未知数配两个条件——$\mathrm{Cov}(X_1,X_2)=a=\rho$，$\mathrm{Var}(X_2)=a^2+b^2=1$，解得 $a=\rho$、$b=\sqrt{1-\rho^2}$（取正根，取负根只是把 $Z_2$ 换成 $-Z_2$，同分布）。$\sqrt{1-\rho^2}$ 并非凑出，是被"方差必须为 1"逼出来的。
+
 验证：$X_1\sim N(0,1)$；独立正态的线性组合仍正态，故 $X_2\sim N(0,\rho^2+(1-\rho^2))=N(0,1)$；$\text{Cov}(X_1,X_2)=\text{Cov}(Z_1,\rho Z_1+\sqrt{1-\rho^2}Z_2)=\rho$。这正是 $\Sigma=LL^T$（Cholesky 分解）的二维显式形式，也是模拟任意相关结构二元正态的标准方法。
+
+**为什么验三行就够**：正态分布由均值向量与协方差矩阵唯一确定，验完全部一阶二阶矩，分布即唯一，不必碰密度、不必算雅可比。矩阵形式一行可得：$\mathrm{Cov}(LZ)=L\,\mathrm{Cov}(Z)\,L^T=LIL^T=LL^T=\Sigma$，二维那三行只是把它拆开写。
+
+**与条件分布互为逆用**：5.5 给出 $X_2\mid X_1=x\sim N(\rho x,\,1-\rho^2)$，把这句话倒过来读就是构造式——$X_2=\rho X_1+\sqrt{1-\rho^2}Z_2$，前项是条件均值、后项是残差。Cholesky 的统计含义即"把相关拆成能被 $X_1$ 解释的部分与独立残差"，残差方差 $1-\rho^2$ 就是条件方差，$\rho^2$ 就是 $R^2$。
+
+**一般情形**：$\sigma_1\neq\sigma_2$ 时 $L=\begin{pmatrix}\sigma_1&0\\ \rho\sigma_2&\sigma_2\sqrt{1-\rho^2}\end{pmatrix}$，即 $X_2=\rho\frac{\sigma_2}{\sigma_1}X_1+\sigma_2\sqrt{1-\rho^2}Z_2$，斜率正是回归系数。
+
+**边界**：$\rho\to\pm1$ 时短轴 $\sqrt{1-\rho^2}\to0$，$\Sigma$ 不再正定，$X$ 落在直线 $X_2=\pm X_1$ 上、没有二维密度——这正是密度公式分母必须带 $\sqrt{1-\rho^2}$ 的原因。
 
 **不相关 ⇔ 独立的 MGF 证明**：二元正态的联合 MGF 为
 
