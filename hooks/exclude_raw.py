@@ -266,7 +266,7 @@ def build_course_index(dirname: str, fs) -> str:
 # 前面加 `!` 即图片嵌入（![[图片.png]]），会按文件名在站内静态文件中查找。
 # 目标可写库根相对路径，也可只写文件名；跨分区（笔记在根、站点在 docs/数学/ 下）也能对上。
 
-WIKILINK_RE = re.compile(r"(?P<bang>!?)\[\[(?P<inner>[^\[\]]+)\]\]")
+WIKILINK_RE = re.compile(r"(?P<bang>!?)\[\[(?P<inner>.+?)\]\]")
 
 
 def slugify(text: str, sep: str = "-") -> str:

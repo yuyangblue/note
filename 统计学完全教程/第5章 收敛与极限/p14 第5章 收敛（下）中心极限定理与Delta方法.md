@@ -47,6 +47,8 @@ $$P(a\le S\le b) \approx P(a-1/2 \le Y \le b+1/2)$$
 
 **例**：$S\sim\text{Bin}(100, 1/2)$，求 $P(45\le S\le 55)$。（二项正态近似的 De Moivre–Laplace 形式与同类演示见 [[概率论MIT/笔记/05-极限定理/L19 中心极限定理#2.2 二项分布的正态近似（De Moivre-Laplace）|L19 §2.2]]。）精确值约为 0.7287。不做修正：$P(45\le Y\le55)=P((45-50)/5\le Z\le(55-50)/5)=\Phi(1)-\Phi(-1)=0.6826$；做半格修正：$P(44.5\le Y\le55.5)=\Phi(1.1)-\Phi(-1.1)=0.7286$，与精确值几乎一致。
 
+**考点**：[[#3. Berry-Esseen 界|Berry-Esseen]]、[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]
+
 **中心近似好 ≠ 尾部近似好**：同一 $n=100$ 二项分布，中心区间 $[45,55]$ 修正后误差仅 $10^{-4}$；但稀有事件 $P(S=0)$ 用 $P(-0.5\le Y\le 0.5)$ 近似约为 0.242，真实值仅 $2^{-100}\approx 10^{-30}$，误差十几个数量级。原因是 CLT 描述的是"中心附近"的分布形状，而尾部被正态的指数衰减严重高估——在稀有事件、尾部风险、极端值推断中不能直接套 CLT（近似质量的讨论——中心好、尾部差，以及何时该改用泊松近似——见 [[概率论MIT/笔记/05-极限定理/L19 中心极限定理#2.4 近似质量|L19 §2.4]]、§3.2）。
 
 **证明思路（MGF 法）**：设 $\phi$ 为 $X_i$ 的 MGF（在 0 附近存在）。$Y_i = (X_i - \mu)/\sigma$，$M_{Y}(t) = \phi(t/\sigma)e^{-\mu t/\sigma}$，$M_Y(0) = 0$，$M_Y'(0) = 0$，$M_Y''(0) = 1$。$\bar{X}_n$ 标准化的 MGF：
@@ -61,6 +63,8 @@ $$M_n(t) = \left[M_Y\left(\frac{t}{\sqrt{n}}\right)\right]^n$$
 
 $$\frac{\sqrt{n}(\hat p_n - p)}{\sqrt{p(1-p)}} \leadsto N(0,1), \quad \text{即} \quad \hat p_n \approx N\left(p, \frac{p(1-p)}{n}\right)$$
 
+**考点**：[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]、[[统计学完全教程/第6章 模型统计推断与学习/p15 第6章 模型统计推断与学习.md#4.4 抽样分布与标准误|标准误]]
+
 **例 5.10**：$X \sim \text{Poisson}(n)$（均值=方差=$n$），$X = \sum_{i=1}^n Y_i$（$Y_i \sim \text{Poisson}(1)$ 独立）：
 
 $$\frac{X - n}{\sqrt{n}} \leadsto N(0,1), \quad X \approx N(n, n)$$
@@ -68,6 +72,8 @@ $$\frac{X - n}{\sqrt{n}} \leadsto N(0,1), \quad X \approx N(n, n)$$
 （泊松与正态近似的取舍判据见 [[概率论MIT/笔记/05-极限定理/L19 中心极限定理#3.2 泊松 vs 正态近似|L19 §3.2]]。）
 
 > **白话解读**：泊松（参数 $n$ 很大时）可用正态近似——均值 $n$、方差 $n$。这是"大数目的稀有事件计数 ≈ 正态"的体现。
+
+**考点**：[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]、[[统计学完全教程/第6章 模型统计推断与学习/p15 第6章 模型统计推断与学习.md#4.4 抽样分布与标准误|标准误]]
 
 ---
 
@@ -112,6 +118,8 @@ $$n\bigl(g(Y_n)-g(\theta)\bigr) \xrightarrow{d} \frac12 g''(\theta)\sigma^2 Z^2,
 > **白话解读**：**"均值的函数 ≈ 均值处的函数 + 斜率×误差"**——一阶泰勒近似把问题线性化。$g$ 是光滑函数时，$g(\bar{X}_n) \approx N(g(\mu),\ (g'(\mu))^2 \sigma^2/n)$。方差乘上"斜率平方"。
 >
 > **用途**：$\hat\theta = 1/\bar{X}$、$e^{\hat\theta}$、$\log \hat\theta$、$\hat p(1-\hat p)$ 等估计量的渐近分布都能由 Delta 方法得到。
+
+**考点**：[[#2. 中心极限定理 CLT|中心极限定理]]、[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]
 
 ### 4.2 多变量 Delta 方法
 
@@ -159,19 +167,29 @@ $$T_n = \frac{\sqrt n(\bar X_n-\mu)}{S_n}\xrightarrow{d}N(0,1)$$
 
 **例 1（比例估计的 CLT）**：$n = 100$，$X_i \sim \text{Bernoulli}(0.5)$，$\hat p = \bar{X}$。$\hat p \approx N(0.5, 0.25/100)$，$P(|\hat p - 0.5| \le 0.1) \approx \Phi(2) - \Phi(-2) \approx 0.95$。
 
+**考点**：[[#2. 中心极限定理 CLT|中心极限定理]]、[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]
+
 **例 2（Delta 方法：$g(x) = 1/x$）**：$X_i \sim \text{Exp}(\beta)$，$\bar{X}_n \approx N(\beta, \beta^2/n)$，$g'(x) = -1/x^2$，$g'(\beta) = -1/\beta^2$：
 
 $$\sqrt{n}\left(\frac{1}{\bar{X}_n} - \frac{1}{\beta}\right) \leadsto N\left(0,\ \frac{\beta^2}{\beta^4}\right) = N\left(0,\ \frac{1}{\beta^2}\right)$$
+
+**考点**：[[#4.1 单变量 Delta 方法|单变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
 
 **例 3（Delta 方法：$g(x) = \log x$）**：$g'(x) = 1/x$：
 
 $$\sqrt{n}(\log \bar{X}_n - \log \mu) \leadsto N\left(0, \frac{\sigma^2}{\mu^2}\right)$$
 
+**考点**：[[#4.1 单变量 Delta 方法|单变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
+
 **例 4（方差稳定变换思路）**：选择 $g$ 使渐近方差常数（与 $\theta$ 无关），如对泊松 $X \approx N(\lambda, \lambda)$，取 $g(x) = \sqrt{x}$（$g'(\lambda) = 1/(2\sqrt\lambda)$），渐近方差 $= \lambda \cdot \frac{1}{4\lambda} = 1/4$——**开方变换稳定泊松方差**。
+
+**考点**：[[#4.1 单变量 Delta 方法|单变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
 
 **例 5（多变量 Delta：比例差）**：$\hat p_1, \hat p_2$ 独立（样本量 $n_1, n_2$），$g(p_1, p_2) = p_1 - p_2$，$\nabla g = (1, -1)$：
 
 $$\hat p_1 - \hat p_2 \approx N\left(p_1 - p_2,\ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}\right)$$
+
+**考点**：[[#4.2 多变量 Delta 方法|多变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
 
 ---
 
