@@ -311,7 +311,8 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         return markdown
 
     def repl(m):
-        inner = m.group("inner")
+        # 表格里的别名分隔符按 Obsidian 约定写成 `\|`（避免被当成列分隔），这里统一还原
+        inner = m.group("inner").replace("\\|", "|")
         text = None
         if "|" in inner and "#" not in inner.rsplit("|", 1)[1]:
             inner, text = inner.rsplit("|", 1)
