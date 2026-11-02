@@ -268,6 +268,51 @@ def build_course_index(dirname: str, fs) -> str:
 
 WIKILINK_RE = re.compile(r"(?P<bang>!?)\[\[(?P<inner>.+?)\]\]")
 
+# Obsidian callout：> [!note]- 标题（`-` 默认收起，`+` 默认展开，无标记为固定展开）
+CALLOUT_RE = re.compile(r"^>\s*\[!(?P<kind>[A-Za-z]+)\](?P<fold>[-+]?)\s*(?P<title>.*)$")
+
+
+def convert_callouts(markdown: str) -> str:
+    """把 Obsidian 的折叠 callout 转成 pymdownx.details 的 ??? 块。
+
+    笔记源文件里写 `> [!note]- 解答`，Obsidian 靠 callout 折叠；站点侧没有 callout
+    语法，这里翻成 `??? note "解答"`，由 pymdownx.details 渲染成同样的折叠块。两边都合得上。
+    """
+    if "[!" not in markdown:
+        return markdown
+    lines = markdown.split("\n")
+    out, i = [], 0
+    while i < len(lines):
+        m = CALLOUT_RE.match(lines[i])
+        if not m:
+            out.append(lines[i])
+            i += 1
+            continue
+        kind = m.group("kind").lower()
+        title = m.group("title").strip() or kind
+        body = []
+        i += 1
+        while i < len(lines):
+            cur = lines[i]
+            if cur.startswith(">"):
+                body.append(re.sub(r"^>\s?", "", cur))
+                i += 1
+                continue
+            if cur.strip() == "":  # 引用块内部的空行：下一非空行仍是引用才继续
+                j = i + 1
+                while j < len(lines) and lines[j].strip() == "":
+                    j += 1
+                if j < len(lines) and lines[j].startswith(">"):
+                    body.append("")
+                    i += 1
+                    continue
+            break
+        out.append('{} {} "{}"'.format("???+" if m.group("fold") == "+" else "???", kind, title))
+        for b in body:
+            out.append("    " + b if b.strip() else "")
+        out.append("")
+    return "\n".join(out)
+
 
 def slugify(text: str, sep: str = "-") -> str:
     """复刻 mkdocs（markdown 的 toc 扩展）的锚点规则：删掉标点 → 小写 → 空白与连字符逐个换成 sep。
@@ -301,7 +346,8 @@ def wiki_resolve(target: str, pool):
 
 
 def on_page_markdown(markdown, page, config, files, **kwargs):
-    """把 [[wikilink]] 转成站内相对链接；解析失败时退化成纯文本，不影响构建。"""
+    """把 Obsidian 折叠 callout 转成 details 块、[[wikilink]] 转成站内相对链接。"""
+    markdown = convert_callouts(markdown)
     if "[[" not in markdown:
         return markdown
     try:
