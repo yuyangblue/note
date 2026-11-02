@@ -45,7 +45,10 @@ $$P(a\le S\le b) \approx P(a-1/2 \le Y \le b+1/2)$$
 
 ![[p14_continuity_correction.png]]
 
-**例**：$S\sim\text{Bin}(100, 1/2)$，求 $P(45\le S\le 55)$。（二项正态近似的 De Moivre–Laplace 形式与同类演示见 [[概率论MIT/笔记/05-极限定理/L19 中心极限定理#2.2 二项分布的正态近似（De Moivre-Laplace）|L19 §2.2]]。）精确值约为 0.7287。不做修正：$P(45\le Y\le55)=P((45-50)/5\le Z\le(55-50)/5)=\Phi(1)-\Phi(-1)=0.6826$；做半格修正：$P(44.5\le Y\le55.5)=\Phi(1.1)-\Phi(-1.1)=0.7286$，与精确值几乎一致。
+**例**：$S\sim\text{Bin}(100, 1/2)$，求 $P(45\le S\le 55)$。
+
+> [!note]- 解答
+> （二项正态近似的 De Moivre–Laplace 形式与同类演示见 [[概率论MIT/笔记/05-极限定理/L19 中心极限定理#2.2 二项分布的正态近似（De Moivre-Laplace）|L19 §2.2]]。）精确值约为 0.7287。不做修正：$P(45\le Y\le55)=P((45-50)/5\le Z\le(55-50)/5)=\Phi(1)-\Phi(-1)=0.6826$；做半格修正：$P(44.5\le Y\le55.5)=\Phi(1.1)-\Phi(-1.1)=0.7286$，与精确值几乎一致。
 
 **考点**：[[#3. Berry-Esseen 界|Berry-Esseen]]、[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]
 
@@ -63,17 +66,19 @@ $$M_n(t) = \left[M_Y\left(\frac{t}{\sqrt{n}}\right)\right]^n$$
 
 > **白话解读**：**不管 $X_i$ 是什么分布**（只要二阶矩存在），标准化后的样本均值都收敛到标准正态。$n$ 越大，$\bar{X}_n$ 越像 $N(\mu, \sigma^2/n)$。这就是"正态分布无处不在"的原因——大量独立小效应的叠加必正态。这正是第 18 讲之前 Wasserman 说的"CLT 是统计推断的心脏"。
 
-**例 5.9**：$X_1, \cdots, X_n \sim \text{Bernoulli}(p)$，$\hat p_n = \bar{X}_n$，$\sigma^2 = p(1-p)$：
+**例 5.9**：$X_1, \cdots, X_n \sim \text{Bernoulli}(p)$，$\hat p_n = \bar{X}_n$，$\sigma^2 = p(1-p)$。$\hat p_n$ 的渐近分布是什么？
 
-$$\frac{\sqrt{n}(\hat p_n - p)}{\sqrt{p(1-p)}} \leadsto N(0,1), \quad \text{即} \quad \hat p_n \approx N\left(p, \frac{p(1-p)}{n}\right)$$
+> [!note]- 解答
+> $$\frac{\sqrt{n}(\hat p_n - p)}{\sqrt{p(1-p)}} \leadsto N(0,1), \quad \text{即} \quad \hat p_n \approx N\left(p, \frac{p(1-p)}{n}\right)$$
 
 **考点**：[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]、[[统计学完全教程/第6章 模型统计推断与学习/p15 第6章 模型统计推断与学习.md#4.4 抽样分布与标准误|标准误]]
 
-**例 5.10**：$X \sim \text{Poisson}(n)$（均值=方差=$n$），$X = \sum_{i=1}^n Y_i$（$Y_i \sim \text{Poisson}(1)$ 独立）：
+**例 5.10**：$X \sim \text{Poisson}(n)$（均值=方差=$n$），$X = \sum_{i=1}^n Y_i$（$Y_i \sim \text{Poisson}(1)$ 独立）。$X$ 标准化后收敛到什么分布？
 
-$$\frac{X - n}{\sqrt{n}} \leadsto N(0,1), \quad X \approx N(n, n)$$
-
-（泊松与正态近似的取舍判据见 [[概率论MIT/笔记/05-极限定理/L19 中心极限定理#3.2 泊松 vs 正态近似|L19 §3.2]]。）
+> [!note]- 解答
+> $$\frac{X - n}{\sqrt{n}} \leadsto N(0,1), \quad X \approx N(n, n)$$
+>
+> （泊松与正态近似的取舍判据见 [[概率论MIT/笔记/05-极限定理/L19 中心极限定理#3.2 泊松 vs 正态近似|L19 §3.2]]。）
 
 > **白话解读**：泊松（参数 $n$ 很大时）可用正态近似——均值 $n$、方差 $n$。这是"大数目的稀有事件计数 ≈ 正态"的体现。
 
@@ -116,11 +121,14 @@ $$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0, \sigma^2(g'(\theta))^2)$$
 
 **为什么"乘以斜率"就是全部**：$g$ 在 $\theta$ 附近近似为一条直线，直线不改变分布的形状，只把横向距离按斜率放大。所以 $Y_n$ 的误差 $Y_n-\theta$ 被替换成 $g'(\theta)(Y_n-\theta)$：中心从 $\theta$ 搬到 $g(\theta)$，标准差从 $\sigma/\sqrt{n}$ 变成 $|g'(\theta)|\sigma/\sqrt{n}$。$g'$ 取负号不影响结论，方差只认绝对值。
 
-**例（用 $\bar X_n$ 估计速率）**：$X_i\sim\text{Exp}(\beta)$，$\bar X_n \approx N(\beta, \beta^2/n)$，而 $\beta$ 的矩估计是 $\hat\beta = 1/\bar X_n$。取 $g(x)=1/x$、$g'(\beta)=-1/\beta^2$，则
+**例（用 $\bar X_n$ 估计速率）**：$X_i\sim\text{Exp}(\beta)$，$\bar X_n \approx N(\beta, \beta^2/n)$，而 $\beta$ 的矩估计是 $\hat\beta = 1/\bar X_n$。$\hat\beta$ 的渐近分布是什么？
 
-$$\sqrt{n}\left(\frac{1}{\bar X_n}-\frac{1}{\beta}\right)\leadsto N\left(0,\ \beta^2\cdot\frac{1}{\beta^4}\right)=N\left(0,\frac{1}{\beta^2}\right)$$
-
-即 $\hat\beta \approx N\big(1/\beta,\ 1/(n\beta^2)\big)$。这里的近似只管分布形状，不管中心位置：由 Jensen 不等式 $\mathbb{E}[1/\bar X_n] > 1/\beta$，$\hat\beta$ 实际是有偏的，而 Delta 方法对此不作任何保证。
+> [!note]- 解答
+> 取 $g(x)=1/x$、$g'(\beta)=-1/\beta^2$，则
+>
+> $$\sqrt{n}\left(\frac{1}{\bar X_n}-\frac{1}{\beta}\right)\leadsto N\left(0,\ \beta^2\cdot\frac{1}{\beta^4}\right)=N\left(0,\frac{1}{\beta^2}\right)$$
+>
+> 即 $\hat\beta \approx N\big(1/\beta,\ 1/(n\beta^2)\big)$。这里的近似只管分布形状，不管中心位置：由 Jensen 不等式 $\mathbb{E}[1/\bar X_n] > 1/\beta$，$\hat\beta$ 实际是有偏的，而 Delta 方法对此不作任何保证。
 
 **Slutsky 定理**：若 $X_n\xrightarrow{d}X$、$Y_n\xrightarrow{P}c$（$c$ 为常数），则
 
@@ -156,6 +164,8 @@ $$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0,\ \nabla g(\theta)^T\Sigma\nabla g(\
 
 多变量版与单变量版只差一个替换：**斜率 $g'(\theta)$ 换成梯度 $\nabla g(\theta)$，方差 $\sigma^2(g')^2$ 换成二次型 $\nabla g^T\Sigma\nabla g$**。理由同 §4.1 的"直线局部替代"：$g$ 在 $\theta$ 附近是线性的，$g(Y_n)-g(\theta)\approx\nabla g(\theta)^T(Y_n-\theta)$，而线性变换 $y\mapsto\nabla g^T y$ 把协方差矩阵 $\Sigma$ 变换成 $\nabla g^T\Sigma\nabla g$（标量）；当 $\Sigma$ 是对角阵、$\nabla g=(1,-1)$ 时它就退化成方差相加。
 
+**记号**：$n$ 始终是**样本量，是个标量**；$Y_n$、$\theta$、$\nabla g(\theta)$ 是 $k$ 维向量，$\Sigma$ 是 $k\times k$ 矩阵。写法 $\sqrt n(Y_n-\theta)$ 的意思是"把向量的**每个分量都乘上** $\sqrt n$"，并不是向量与向量相乘。而 $g:\mathbb R^k\to\mathbb R$ 是标量值函数，所以 $\sqrt n\big(g(Y_n)-g(\theta)\big)$ 是**标量**，它的极限方差 $\nabla g^T\Sigma\nabla g$ 也是标量——一个 $1\times k$ 的行向量乘 $k\times k$ 矩阵再乘 $k\times1$ 的列向量，维度上就是 $1\times1$。
+
 **证明思路**：多变量泰勒展开 $g(y) = g(\theta) + \nabla g(\theta)^T(y-\theta) + \text{余项}$，余项 $= o_p(\|y - \theta\|)$，乘 $\sqrt{n}$ 后消失，再用多变量 Slutsky 定理整理。
 
 > **白话解读**：方差变成"梯度转置 × 协方差矩阵 × 梯度"（二次型）。$g$ 的每个分量方向上的不确定性按梯度权重累加。**估计多个参数的函数**（如比例差 $g(p_1,p_2) = p_1 - p_2$）时用这个版本。
@@ -170,7 +180,10 @@ $$Y_n = O_p(a_n) \iff \frac{Y_n}{a_n} \xrightarrow{P} 0 \text{ 的补集情形�
 
 $$Y_n = o_p(a_n) \iff \frac{Y_n}{a_n} \xrightarrow{P} 0$$
 
-**例 5.17**：$\sqrt{n}(\bar{X}_n - \mu) = O_p(1)$——CLT 说它依分布收敛到 $N(0,\sigma^2)$（分布有界）；$\bar{X}_n - \mu = o_p(1)$——WLLN 说它依概率趋于 0；$\bar{X}_n - \mu = O_p(n^{-1/2})$。
+**例 5.17**：$\sqrt{n}(\bar{X}_n - \mu)$ 与 $\bar{X}_n - \mu$ 各是什么随机阶？依据是哪条定理？
+
+> [!note]- 解答
+> $\sqrt{n}(\bar{X}_n - \mu) = O_p(1)$——CLT 说它依分布收敛到 $N(0,\sigma^2)$（分布有界）；$\bar{X}_n - \mu = o_p(1)$——WLLN 说它依概率趋于 0；$\bar{X}_n - \mu = O_p(n^{-1/2})$。
 
 > **白话解读**：$O_p$ 表示"数量级不会超过 $a_n$"（概率意义下的有界），$o_p$ 表示"比 $a_n$ 小得多"（除以 $a_n$ 后趋于 0）。这是渐近论证的"速记语言"——Delta 方法证明里的"余项是 $o_p$ 的所以能扔"就是用它表达。
 
@@ -188,29 +201,52 @@ $$T_n = \frac{\sqrt n(\bar X_n-\mu)}{S_n}\xrightarrow{d}N(0,1)$$
 
 ## 6. 例题
 
-**例 1（比例估计的 CLT）**：$n = 100$，$X_i \sim \text{Bernoulli}(0.5)$，$\hat p = \bar{X}$。$\hat p \approx N(0.5, 0.25/100)$，$P(|\hat p - 0.5| \le 0.1) \approx \Phi(2) - \Phi(-2) \approx 0.95$。
+**例 1（比例估计的 CLT）**：$n = 100$，$X_i \sim \text{Bernoulli}(0.5)$，$\hat p = \bar{X}$。求 $\hat p$ 的近似分布与 $P(|\hat p - 0.5| \le 0.1)$。
+
+> [!note]- 解答
+> $\hat p \approx N(0.5, 0.25/100)$，$P(|\hat p - 0.5| \le 0.1) \approx \Phi(2) - \Phi(-2) \approx 0.95$。
 
 **考点**：[[#2. 中心极限定理 CLT|中心极限定理]]、[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.3 依分布收敛|依分布收敛]]
 
-**例 2（Delta 方法：$g(x) = 1/x$）**：$X_i \sim \text{Exp}(\beta)$，$\bar{X}_n \approx N(\beta, \beta^2/n)$，$g'(x) = -1/x^2$，$g'(\beta) = -1/\beta^2$：
+**例 2（Delta 方法：$g(x) = 1/x$）**：$X_i \sim \text{Exp}(\beta)$，$\bar{X}_n \approx N(\beta, \beta^2/n)$，取 $g(x) = 1/x$。求 $\sqrt{n}\left(\frac{1}{\bar{X}_n} - \frac{1}{\beta}\right)$ 的极限分布。
 
-$$\sqrt{n}\left(\frac{1}{\bar{X}_n} - \frac{1}{\beta}\right) \leadsto N\left(0,\ \frac{\beta^2}{\beta^4}\right) = N\left(0,\ \frac{1}{\beta^2}\right)$$
-
-**考点**：[[#4.1 单变量 Delta 方法|单变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
-
-**例 3（Delta 方法：$g(x) = \log x$）**：$g'(x) = 1/x$：
-
-$$\sqrt{n}(\log \bar{X}_n - \log \mu) \leadsto N\left(0, \frac{\sigma^2}{\mu^2}\right)$$
+> [!note]- 解答
+> $g'(x) = -1/x^2$，$g'(\beta) = -1/\beta^2$：
+>
+> $$\sqrt{n}\left(\frac{1}{\bar{X}_n} - \frac{1}{\beta}\right) \leadsto N\left(0,\ \frac{\beta^2}{\beta^4}\right) = N\left(0,\ \frac{1}{\beta^2}\right)$$
 
 **考点**：[[#4.1 单变量 Delta 方法|单变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
 
-**例 4（方差稳定变换思路）**：选择 $g$ 使渐近方差常数（与 $\theta$ 无关），如对泊松 $X \approx N(\lambda, \lambda)$，取 $g(x) = \sqrt{x}$（$g'(\lambda) = 1/(2\sqrt\lambda)$），渐近方差 $= \lambda \cdot \frac{1}{4\lambda} = 1/4$——**开方变换稳定泊松方差**。
+**例 3（Delta 方法：$g(x) = \log x$）**：$\bar{X}_n \approx N(\mu, \sigma^2/n)$，取 $g(x) = \log x$。求 $\sqrt{n}(\log \bar{X}_n - \log \mu)$ 的极限分布。
+
+> [!note]- 解答
+> $g'(x) = 1/x$：
+>
+> $$\sqrt{n}(\log \bar{X}_n - \log \mu) \leadsto N\left(0, \frac{\sigma^2}{\mu^2}\right)$$
 
 **考点**：[[#4.1 单变量 Delta 方法|单变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
 
-**例 5（多变量 Delta：比例差）**：$\hat p_1, \hat p_2$ 独立（样本量 $n_1, n_2$），$g(p_1, p_2) = p_1 - p_2$，$\nabla g = (1, -1)$：
+**例 4（方差稳定变换思路）**：对泊松 $X \approx N(\lambda, \lambda)$ 取 $g(x) = \sqrt{x}$，渐近方差是多少？这说明什么？
 
-$$\hat p_1 - \hat p_2 \approx N\left(p_1 - p_2,\ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}\right)$$
+> [!note]- 解答
+> 选择 $g$ 使渐近方差常数（与 $\theta$ 无关）。$g'(\lambda) = 1/(2\sqrt\lambda)$，渐近方差 $= \lambda \cdot \frac{1}{4\lambda} = 1/4$——**开方变换稳定泊松方差**。
+
+**考点**：[[#4.1 单变量 Delta 方法|单变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
+
+**例 5（多变量 Delta：比例差）**：$\hat p_1, \hat p_2$ 独立，分别来自样本量为 $n_1, n_2$ 的两组观测，$g(p_1, p_2) = p_1 - p_2$。求 $\hat p_1 - \hat p_2$ 的近似分布。
+
+> [!note]- 解答
+> 取 $Y_n=(\hat p_1,\hat p_2)$、$\theta=(p_1,p_2)$，梯度 $\nabla g=(1,-1)$。单组情形 $\hat p_i\approx N\big(p_i,\ \frac{p_i(1-p_i)}{n_i}\big)$，两组独立故协方差为 $0$，$\Sigma=\operatorname{diag}\Big(\frac{p_1(1-p_1)}{n_1},\ \frac{p_2(1-p_2)}{n_2}\Big)$。$\Sigma$ 对角时梯度二次型退化成加权相加：
+>
+> $$\nabla g^T\Sigma\nabla g=\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}$$
+>
+> 于是
+>
+> $$\hat p_1-\hat p_2\approx N\left(p_1-p_2,\ \frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}\right)$$
+>
+> **尺度要小心**：$n_1\ne n_2$ 时没有统一的 $n$，不能直接套定理 5.14 的 $\sqrt n$ 形式，只能写成上面的近似分布。若 $n_1=n_2=n$，定理直接给出 $\sqrt n\big[(\hat p_1-\hat p_2)-(p_1-p_2)\big]\leadsto N\big(0,\ p_1(1-p_1)+p_2(1-p_2)\big)$——与上式是同一句话，只是除以了 $\sqrt n$。
+>
+> 这里 $g$ 是线性的，本来可以直接用"独立正态相减"得到同样结论；写进 Delta 框架只是为了演示 $\nabla g^T\Sigma\nabla g$ 如何退化成分量方差之和。
 
 **考点**：[[#4.2 多变量 Delta 方法|多变量 Delta]]、[[#2. 中心极限定理 CLT|中心极限定理]]
 
