@@ -95,13 +95,32 @@ $$\sup_x |F_n(x) - \Phi(x)| \le \frac{33\gamma}{4\sigma^3\sqrt{n}}$$
 
 ## 4. Delta 方法
 
+**这一节要解决什么问题**：前面几节的终点是 $\bar X_n \approx N(\mu, \sigma^2/n)$，说的是"样本均值本身"的近似分布。但统计里真正要用的往往是**均值的函数**：估计速率时用 $\hat\lambda = 1/\bar X$，估计对数尺度时用 $\log \bar X$，估计变异程度时用 $\hat p(1-\hat p)$。这些量都不是 $\bar X_n$ 的线性函数，所以 $g(\bar X_n)$ 的分布**不能**由 $\bar X_n$ 的正态近似直接读出——$1/\bar X_n$ 并不服从正态，把正态的均值和方差往 $g$ 里一塞是错的。
+
+Delta 方法回答的就是这一步：**已知 $\sqrt n(Y_n-\theta)$ 的极限分布，求 $\sqrt n(g(Y_n)-g(\theta))$ 的极限分布**。它用的工具只有一次一阶泰勒展开，本质是"在 $\theta$ 附近用切线代替曲线"。
+
 ### 4.1 单变量 Delta 方法
 
 **定理 5.12（Delta 方法）**：$Y_n$ 满足 $\sqrt{n}(Y_n - \theta) \leadsto N(0, \sigma^2)$，$g$ 在 $\theta$ 处可导且 $g'(\theta) \ne 0$，则：
 
 $$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0, \sigma^2(g'(\theta))^2)$$
 
-**证明思路**：对 $g(Y_n)$ 在 $\theta$ 处泰勒展开：$g(Y_n) = g(\theta) + g'(\theta)(Y_n - \theta) + \text{余项}$。余项是 $o_p(Y_n - \theta) = o_p(1/\sqrt{n})$，乘以 $\sqrt{n}$ 消失（需要 $g'(\theta) \ne 0$）。再用 Slutsky 定理整理。
+**证明思路**：把"一次一阶泰勒展开"写成可以逐项取极限的形式。
+
+1. 在 $\theta$ 处展开：$g(Y_n) = g(\theta) + g'(\theta)(Y_n - \theta) + R_n$，余项 $R_n = O_p\big((Y_n-\theta)^2\big)$（二阶泰勒的拉格朗日余项，因为 $Y_n\to\theta$）；
+2. 移项并乘 $\sqrt{n}$：$\sqrt{n}\big(g(Y_n) - g(\theta)\big) = g'(\theta)\cdot\sqrt{n}(Y_n - \theta) + \sqrt{n}\,R_n$；
+3. 第一项由题设直接给出 $\leadsto N(0,\sigma^2)$；第二项的量级是 $\sqrt{n}\cdot O_p(n^{-1}) = O_p(n^{-1/2})$，故依概率趋于 $0$，可扔；
+4. 由 Slutsky 定理，常数 $g'(\theta)$ 乘一个依分布收敛的正态仍是正态，加上一个趋于 $0$ 的项不改变极限，得 $N\big(0,\sigma^2(g'(\theta))^2\big)$。
+
+注意第 3 步的量纲：$Y_n-\theta$ 本身是 $O_p(n^{-1/2})$，平方后是 $O_p(n^{-1})$，再乘 $n^{1/2}$ 得 $n^{-1/2}$。**余项能被扔掉，是因为它比一阶项矮了一个 $\sqrt{n}$ 的量级**——这正是 $g'(\theta)\ne0$ 必须写进条件的原因：一阶项一旦为 0，它就压不住余项，$\sqrt{n}$ 的尺度也就不够用了。
+
+**为什么"乘以斜率"就是全部**：$g$ 在 $\theta$ 附近近似为一条直线，直线不改变分布的形状，只把横向距离按斜率放大。所以 $Y_n$ 的误差 $Y_n-\theta$ 被替换成 $g'(\theta)(Y_n-\theta)$：中心从 $\theta$ 搬到 $g(\theta)$，标准差从 $\sigma/\sqrt{n}$ 变成 $|g'(\theta)|\sigma/\sqrt{n}$。$g'$ 取负号不影响结论，方差只认绝对值。
+
+**例（用 $\bar X_n$ 估计速率）**：$X_i\sim\text{Exp}(\beta)$，$\bar X_n \approx N(\beta, \beta^2/n)$，而 $\beta$ 的矩估计是 $\hat\beta = 1/\bar X_n$。取 $g(x)=1/x$、$g'(\beta)=-1/\beta^2$，则
+
+$$\sqrt{n}\left(\frac{1}{\bar X_n}-\frac{1}{\beta}\right)\leadsto N\left(0,\ \beta^2\cdot\frac{1}{\beta^4}\right)=N\left(0,\frac{1}{\beta^2}\right)$$
+
+即 $\hat\beta \approx N\big(1/\beta,\ 1/(n\beta^2)\big)$。这里的近似只管分布形状，不管中心位置：由 Jensen 不等式 $\mathbb{E}[1/\bar X_n] > 1/\beta$，$\hat\beta$ 实际是有偏的，而 Delta 方法对此不作任何保证。
 
 **Slutsky 定理**：若 $X_n\xrightarrow{d}X$、$Y_n\xrightarrow{P}c$（$c$ 为常数），则
 
@@ -109,13 +128,11 @@ $$X_n+Y_n\xrightarrow{d}X+c,\qquad X_nY_n\xrightarrow{d}cX,\qquad X_n/Y_n\xright
 
 "依分布收敛的项"与"依概率收敛到常数的项"相加/相乘/相除，极限分别是对应组合。Delta 方法证明中把 $g'(\theta)$ 当成常数、把 $o_p(1/\sqrt n)$ 扔掉，靠的就是这条。
 
-**二阶 Delta 方法（$g'(\theta)=0$ 时）**：若 $g'(\theta)=0$，一阶项消失，$\sqrt n$ 尺度退化；泰勒展开到二阶：
+**二阶 Delta 方法（$g'(\theta)=0$ 时）**：一阶项消失后，$g(Y_n)-g(\theta)$ 由二阶项主导，而 $(Y_n-\theta)^2$ 是 $O_p(1/n)$ 的量级。此时乘 $\sqrt{n}$ 只能得到 $O_p(n^{-1/2})$，极限是 0——用 $\sqrt{n}$ 已经放大不出非退化的极限了。要放大到 $O_p(1)$，尺度必须换成 $n$：
 
-$$g(Y_n)-g(\theta) = \frac12 g''(\theta)(Y_n-\theta)^2 + o_p(Y_n-\theta)^2$$
+$$g(Y_n)-g(\theta) = \frac12 g''(\theta)(Y_n-\theta)^2 + o_p\big((Y_n-\theta)^2\big)$$
 
-此时 $n$ 替代 $\sqrt n$ 进入尺度：
-
-$$n\bigl(g(Y_n)-g(\theta)\bigr) \xrightarrow{d} \frac12 g''(\theta)\sigma^2 Z^2,\qquad Z\sim N(0,1)$$
+$$n\bigl(g(Y_n)-g(\theta)\bigr) = \frac12 g''(\theta)\Big[\sqrt{n}(Y_n-\theta)\Big]^2 + o_p(1) \xrightarrow{d} \frac12 g''(\theta)\sigma^2 Z^2,\qquad Z\sim N(0,1)$$
 
 而 $Z^2\sim\chi_1^2$。**例**：$X_i\sim\text{Exp}(1)$，$\theta=1$，$h(x)=(x-1)^2$，则 $h'(1)=0$、$h''(1)=2$，故 $n(\bar X_n-1)^2\xrightarrow{d}\chi_1^2$。
 
@@ -131,13 +148,15 @@ $$n\bigl(g(Y_n)-g(\theta)\bigr) \xrightarrow{d} \frac12 g''(\theta)\sigma^2 Z^2,
 
 $$\sqrt{n}(\bar{Y}_n - \mu) \xrightarrow{d} N_k(0,\ \Sigma)$$
 
-**证明思路（Cramér-Wold）**：$k$ 维随机向量 $Z$ 依分布收敛于 $N_k(0,\Sigma)$，当且仅当对任意线性组合 $a\in\mathbb{R}^k$ 有 $a^T Z \xrightarrow{d} N(0,\ a^T\Sigma a)$；而 $a^T(\bar Y_n-\mu)$ 恰是 iid 标量序列 $\{a^T Y_i\}$ 的标准化均值，每个投影用一次单变量 CLT 即可。多变量 Delta 的前提"$\sqrt{n}(Y_n-\theta)\leadsto N(0,\Sigma)$"正是由它提供（第 15 题里 $k=2$，$\sqrt{n}((\bar X,\bar Y)-(\mu_1,\mu_2))\leadsto N(0,\Sigma)$）。
+注意：这一段只交代前提从哪来，不参与 Delta 方法本身。**证明思路（Cramér-Wold）**：$k$ 维随机向量 $Z$ 依分布收敛于 $N_k(0,\Sigma)$，当且仅当对任意线性组合 $a\in\mathbb{R}^k$ 有 $a^T Z \xrightarrow{d} N(0,\ a^T\Sigma a)$；而 $a^T(\bar Y_n-\mu)$ 恰是 iid 标量序列 $\{a^T Y_i\}$ 的标准化均值，每个投影用一次单变量 CLT 即可。多变量 Delta 的前提"$\sqrt{n}(Y_n-\theta)\leadsto N(0,\Sigma)$"正是由它提供（第 15 题里 $k=2$，$\sqrt{n}((\bar X,\bar Y)-(\mu_1,\mu_2))\leadsto N(0,\Sigma)$）。
 
 **定理 5.14（多变量版本）**：$\nabla g$ 为梯度（在 $\theta$ 处取值），$Y_n$ 满足 $\sqrt{n}(Y_n - \theta) \leadsto N(0, \Sigma)$，则：
-‘
+
 $$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0,\ \nabla g(\theta)^T\Sigma\nabla g(\theta))$$
 
-**证明思路**：多变量泰勒展开 $g(y) = g(\theta) + \nabla g(\theta)^T(y-\theta) + \text{余项}$，余项 $= o(\|y - \theta\|)$，处理同上。
+多变量版与单变量版只差一个替换：**斜率 $g'(\theta)$ 换成梯度 $\nabla g(\theta)$，方差 $\sigma^2(g')^2$ 换成二次型 $\nabla g^T\Sigma\nabla g$**。理由同 §4.1 的"直线局部替代"：$g$ 在 $\theta$ 附近是线性的，$g(Y_n)-g(\theta)\approx\nabla g(\theta)^T(Y_n-\theta)$，而线性变换 $y\mapsto\nabla g^T y$ 把协方差矩阵 $\Sigma$ 变换成 $\nabla g^T\Sigma\nabla g$（标量）；当 $\Sigma$ 是对角阵、$\nabla g=(1,-1)$ 时它就退化成方差相加。
+
+**证明思路**：多变量泰勒展开 $g(y) = g(\theta) + \nabla g(\theta)^T(y-\theta) + \text{余项}$，余项 $= o_p(\|y - \theta\|)$，乘 $\sqrt{n}$ 后消失，再用多变量 Slutsky 定理整理。
 
 > **白话解读**：方差变成"梯度转置 × 协方差矩阵 × 梯度"（二次型）。$g$ 的每个分量方向上的不确定性按梯度权重累加。**估计多个参数的函数**（如比例差 $g(p_1,p_2) = p_1 - p_2$）时用这个版本。
 
@@ -202,6 +221,6 @@ $$\hat p_1 - \hat p_2 \approx N\left(p_1 - p_2,\ \frac{p_1(1-p_1)}{n_1} + \frac{
 > **本节重点**：
 > - **CLT**：$\frac{\sqrt{n}(\bar{X}_n - \mu)}{\sigma} \leadsto N(0,1)$，即 $\bar{X}_n \approx N(\mu, \sigma^2/n)$——任何分布（二阶矩有限）的均值近似正态；MGF 泰勒展开证明。
 > - Berry-Esseen：误差 $\le \frac{33\gamma}{4\sigma^3\sqrt{n}}$——偏态厚尾需要更大 $n$。
-> - **Delta 方法**：$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0, \sigma^2(g'(\theta))^2)$；多变量版本用梯度二次型 $\nabla g^T\Sigma\nabla g$。
+> - **Delta 方法**：$\sqrt{n}(g(Y_n) - g(\theta)) \leadsto N(0, \sigma^2(g'(\theta))^2)$——在 $\theta$ 处线性化，方差乘斜率的平方；多变量版本把斜率换成梯度，方差换成二次型 $\nabla g^T\Sigma\nabla g$。
 > - 随机阶：$O_p$（数量级有界）、$o_p$（相对 $a_n$ 可忽略）；$\bar{X}_n - \mu = O_p(n^{-1/2})$。
 > - **常见坑**：$g'(\theta) = 0$ 时 Delta 方法失效（退化，需要二阶展开）；CLT 要求 $\sigma < \infty$；正态近似在小 $n$ + 强偏态时误差大（Berry-Esseen）。
