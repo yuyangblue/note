@@ -187,6 +187,32 @@ $$E[e^{t_1 X_1+t_2 X_2}] = E[e^{t_1 X_1}]\,E[e^{t_2 X_2}]$$
 
 $$Y\mid X=x \sim N\!\left(\mu_Y + \rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X),\ \sigma_Y^2(1-\rho^2)\right)$$
 
+**这两个参数是怎么来的（正交分解）**：把 $Y$ 的偏差拆成"能被 $X$ 解释的部分"与"残差"两块，
+
+$$Y-\mu_Y=\underbrace{\frac{\sigma_{XY}}{\sigma_X^2}(X-\mu_X)}_{\text{线性可解释部分}}+\underbrace{\varepsilon}_{\text{残差}},\qquad \beta:=\frac{\sigma_{XY}}{\sigma_X^2}$$
+
+残差的两条性质直接代进去算：
+
+$$\operatorname{Cov}(\varepsilon,X)=\sigma_{XY}-\beta\sigma_X^2=0,\qquad \operatorname{Var}(\varepsilon)=\sigma_Y^2-2\beta\sigma_{XY}+\beta^2\sigma_X^2=\sigma_Y^2-\frac{\sigma_{XY}^2}{\sigma_X^2}$$
+
+$(X,\varepsilon)$ 是 $(X,Y)$ 的线性变换，故仍为二元正态；由协方差为 $0$ 及 §5.4 的"二元正态内不相关即独立"得 $\varepsilon\perp X$。于是给定 $X=x$ 时 $\varepsilon$ 的分布一点没变，整条式子只剩常数平移：
+
+$$\mathbb{E}[Y\mid X=x]=\mu_Y+\beta(x-\mu_X)+\mathbb{E}\varepsilon=\mu_Y+\beta(x-\mu_X),\qquad \operatorname{Var}(Y\mid X=x)=\operatorname{Var}(\varepsilon)=\sigma_Y^2-\frac{\sigma_{XY}^2}{\sigma_X^2}$$
+
+条件方差之所以**不含 $x$**，正是因为 $\varepsilon\perp X$：残差里没有 $X$ 的任何信息，$X$ 取什么值都不改变它的大小。用 $\sigma_{XY}=\rho\sigma_X\sigma_Y$ 换算即得 $\sigma_Y^2(1-\rho^2)$。
+
+**同一件事的密度算法（配方）**：把 §5.4 联合密度指数里的二次型按 $y$ 配平方。记 $u=(x-\mu_X)/\sigma_X$、$v=(y-\mu_Y)/\sigma_Y$，则
+
+$$u^2-2\rho uv+v^2=(v-\rho u)^2+(1-\rho^2)u^2$$
+
+代回密度，$e^{-u^2/2}$ 那一块连同系数 $1/(\sqrt{2\pi}\sigma_X)$ 正好凑成 $f_X(x)$，剩下
+
+$$f_{Y\mid X}(y\mid x)=\frac{1}{\sqrt{2\pi(1-\rho^2)}\,\sigma_Y}\exp\left(-\frac{(v-\rho u)^2}{2(1-\rho^2)}\right)$$
+
+而 $v-\rho u=\dfrac{1}{\sigma_Y}\Big[y-\big(\mu_Y+\rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X)\big)\Big]$，所以这是均值为 $\mu_Y+\rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X)$、方差为 $\sigma_Y^2(1-\rho^2)$ 的正态密度。**配方的全部作用就是把联合密度拆成"边际 × 条件"，条件那部分自动落成正态**，均值和方差就写在指数和系数里。
+
+**哪些性质不需要正态**：$\mu_Y+\frac{\sigma_{XY}}{\sigma_X^2}(X-\mu_X)$ 作为**最优线性预测** $L(Y\mid X)$，对任意二阶矩有限的联合分布都成立（斜率和截距由 $\operatorname{Cov}(\varepsilon,X)=0$ 这条正交条件解出，与 §5.4 的 Cholesky 构造同源）。差别在于：一般分布下 $\mathbb{E}[Y\mid X]$ 未必是 $X$ 的线性函数，$\operatorname{Var}(Y\mid X)$ 也是随机变量，只能说它的期望等于 $\sigma_Y^2(1-\rho^2)$（全方差公式）；只有联合正态时，这两条才恰好变成"条件期望就是这条直线、条件方差恒等于这个常数"。
+
 两个值得记住的特点：
 
 - **条件均值是 $x$ 的线性函数**：斜率 $\rho\sigma_Y/\sigma_X$ 就是总体回归系数，这是线性回归的"正态母体"版本；
