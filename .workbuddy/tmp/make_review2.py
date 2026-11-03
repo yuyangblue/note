@@ -16,21 +16,11 @@ CARDS = [
          had="「斜着一层层往右下推」「每层只用到左边和上边已填好的数」",
          new="min(i,j) 这条规律文字里没有——原来只能靠 r=2、r=3 两步手算去体会；还有「对角元必须先算，否则同一列的除法没法做」这个顺序约束，图上一根绿箭头。",
          conf="高", why="这是手算时脑子里要有的那张表，纯文字写不出来。"),
-    dict(no="3", title="网格与三对角矩阵的对应", file=r"第6章-解线性方程组的迭代法\figures\tridiag-structure.svg",
-         where="6.2.4 §5 · 三对角矩阵公式与符号口径之后",
-         had="三对角矩阵的完整公式（结构其实已经给全了）",
-         new="「第 i 行 = 点 xᵢ」这条对应关系公式里看不出来；还有边界 u₀=u_N=0 为什么让首末行只剩两个非零元。",
-         conf="中", why="公式已在，可能被判为冗余。它的价值全在「行与点的一一对应」这一点上。"),
     dict(no="4", title="Aitken 加速的序列图", file=r"第7章-非线性方程\figures\aitken-sequence.svg",
          where="7.2 §6.4 序列图与用法 · 正文原本写「板书画了一张图…」，而图已丢失",
          had="一段文字描述（上面一行、每三个数向下一行引箭头）+ §6.5 的数字表",
          new="把「震荡收敛」和「外推值一步贴到根上」摆在一起；表格里的 9 个数看不出这个形状。这是补回丢失的板书图，不是新增。",
          conf="高", why="正文在描述一张不存在的图，这是硬缺口。"),
-    dict(no="5", title="谱半径的单位圆盘", file=r"第6章-解线性方程组的迭代法\figures\spectral-radius.svg",
-         where="6.1 §4 定理 5 之后 · 紧接课本例 3/例 4 那两个 ρ 值",
-         had="ρ(B)<1 的充要判据，以及 ρ(B₀)=0.3592、ρ=√6 两个数值",
-         new="把这两个数值放到同一张图上对比；另外「贴圆周虽然收敛但几乎不动」这件事，文字没有明说。",
-         conf="中", why="最可能被判成教材标配图。它能立住的地方只有「ρ 是最远那个点」和「贴边=实际不可用」。"),
     dict(no="6", title="条件数的椭圆解释", file=r"第5章-解线性方程组的直接法\figures\cond-ellipse.svg",
          where="5.5 §4 条件数 · 公式之后（原先这里那张平行线图已删）",
          had="cond 的定义、以及「两条近平行直线」的几何解释",
@@ -46,7 +36,8 @@ def read_svg(p):
 
 
 parts = []
-for c in CARDS:
+for idx, c in enumerate(CARDS, 1):
+    c["no"] = str(idx)
     svg = read_svg(os.path.join(ROOT, c["file"]))
     parts.append(f"""
     <section class="card">
@@ -66,7 +57,7 @@ for c in CARDS:
 
 html_doc = """<!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8">
-<title>第二批插图 · 6 张候选</title>
+<title>第二批插图 · 保留 4 张</title>
 <style>
   *{box-sizing:border-box}
   body{margin:0;padding:36px 28px 64px;background:#f5f6f8;color:#1f2933;
@@ -98,7 +89,7 @@ html_doc = """<!DOCTYPE html>
   @media (max-width:720px){.cmp{grid-template-columns:1fr}}
 </style></head>
 <body><div class="wrap">
-  <p class="lead">第二批插图 · 6 张候选</p>
+  <p class="lead">第二批插图 · 保留 4 张</p>
   <p class="sub">全部按「结构 / 过程 / 几何映射」来画，不做静态示意。每张标明文字已经说过什么、图还多给了什么——
      如果某一栏「图新加了」读下来没有你原本不知道的东西，那张就该删。</p>
 """ + "".join(parts) + """
