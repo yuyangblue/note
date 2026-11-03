@@ -1,0 +1,1731 @@
+[0:00:00.80 -> 0:00:02.02] Good afternoon everyone
+[0:00:00.80 -> 0:00:02.02] 大家下午好
+[0:00:04.12 -> 0:00:07.60] So today we're going to transition into a topic that
+[0:00:04.12 -> 0:00:07.60] 所以今天我们将转变为一个主题
+[0:00:08.10 -> 0:00:17.24] To me is sort of the reward for having slugged through all the low-level stuff you've done up to this point
+[0:00:08.10 -> 0:00:17.24] 对我来说，这是一种奖励，因为你已经完成了迄今为止所做的所有低级别的工作
+[0:00:17.68 -> 0:00:23.54] To be able to really understand and become adept at programming network software
+[0:00:17.68 -> 0:00:23.54] 能够真正理解并擅长编程网络软件
+[0:00:24.12 -> 0:00:27.20] Now there's a lot to networking that we're not going to cover
+[0:00:24.12 -> 0:00:27.20] 现在网络上有很多我们不会涉及的内容
+[0:00:27.20 -> 0:00:29.86] But at least to have some familiarity with it
+[0:00:27.20 -> 0:00:29.86] 但至少要熟悉它
+[0:00:30.46 -> 0:00:34.88] So I know that a lot of you are sort of in the midst of trying to figure out
+[0:00:30.46 -> 0:00:34.88] 所以我知道你很多人都想要弄明白
+[0:00:34.88 -> 0:00:37.12] How to make malloc run and make it run fast
+[0:00:34.88 -> 0:00:37.12] 如何使malloc运行并使其快速运行
+[0:00:37.92 -> 0:00:43.52] And so this topic is really more pointing toward the future
+[0:00:37.92 -> 0:00:43.52] 因此，这个主题更加注重未来
+[0:00:43.52 -> 0:00:46.70] But it's very relevant to the final web lab you'll do for the course
+[0:00:43.52 -> 0:00:46.70] 但它与你为该课程所做的最终网络实验室非常相关
+[0:00:47.58 -> 0:00:50.32] And so we're starting to get ready for that
+[0:00:47.58 -> 0:00:50.32] 所以我们开始为此做好准备
+[0:00:56.90 -> 0:01:00.58] So like I said this course is not really a full course in networking
+[0:00:56.90 -> 0:01:00.58] 就像我说的那样，这门课程并不是一个完整的网络课程
+[0:01:00.58 -> 0:01:03.38] There's many other courses at the university that are
+[0:01:00.58 -> 0:01:03.38] 大学还有很多其他课程
+[0:01:03.80 -> 0:01:07.28] And so what we're going to try and do is give you just a little flavor of it
+[0:01:03.80 -> 0:01:07.28] 所以我们要尝试做的就是给你一点点味道
+[0:01:07.28 -> 0:01:10.86] And particularly as everything in the course of programmers perspective
+[0:01:07.28 -> 0:01:10.86] 特别是作为程序员视角的一切
+[0:01:11.04 -> 0:01:20.80] So how you as a software developer would make use of the C level api's that are relevant to network programming
+[0:01:11.04 -> 0:01:20.80] 因此，作为软件开发人员，你将如何利用与网络编程相关的C级API
+[0:01:24.44 -> 0:01:26.74] And why isn't this working
+[0:01:24.44 -> 0:01:26.74] 为什么这不起作用
+[0:01:31.68 -> 0:01:32.70] Okay so
+[0:01:31.68 -> 0:01:32.70] 可以，然后呢
+[0:01:33.68 -> 0:01:39.92] The idea behind most networking systems is what's called  the client-server model
+[0:01:33.68 -> 0:01:39.92] 大多数网络系统背后的想法是所谓的客户端 - 服务器模型
+[0:01:40.44 -> 0:01:44.38] And the idea is that there's a service out there that you want access to
+[0:01:40.44 -> 0:01:44.38] 我们的想法是，你需要访问的服务
+[0:01:44.88 -> 0:01:49.58] And you as a customer or a client are making a request to that server
+[0:01:44.88 -> 0:01:49.58] 而你作为客户或客户正在向该服务器发出请求
+[0:01:49.72 -> 0:01:54.14] So an example would be when you order something on amazon
+[0:01:49.72 -> 0:01:54.14] 所以当你在亚马逊上订购东西时就是一个例子
+[0:01:54.20 -> 0:01:56.34] Amazon has a bunch of servers
+[0:01:54.20 -> 0:01:56.34] 亚马逊有很多服务器
+[0:01:57.10 -> 0:02:04.12] And you go to your web browser and contacts the amazon a web server
+[0:01:57.10 -> 0:02:04.12] 然后你去你的网络浏览器并联系亚马逊网络服务器
+[0:02:04.50 -> 0:02:08.90] And you make transactions you request something you provide information
+[0:02:04.50 -> 0:02:08.90] 并且你在交易时要求提供信息
+[0:02:09.32 -> 0:02:14.56] And it gives you back pretty pictures of things you might want to buy
+[0:02:09.32 -> 0:02:14.56] 它会为你提供你可能想要购买的漂亮照片
+[0:02:14.84 -> 0:02:17.06] It acknowledges your credit card transactions
+[0:02:14.84 -> 0:02:17.06] 它承认你的信用卡交易
+[0:02:17.42 -> 0:02:21.20] Those are all very classic client-server types of interactions
+[0:02:17.42 -> 0:02:21.20] 这些都是非常经典的客户端 - 服务器类型的交互
+[0:02:21.64 -> 0:02:24.36] You as the client,amazon is the server
+[0:02:21.64 -> 0:02:24.36] 你作为客户端，亚马逊是服务器
+[0:02:24.84 -> 0:02:27.36] Another interesting example is a telephone
+[0:02:24.84 -> 0:02:27.36] 另一个有趣的例子是电话
+[0:02:28.14 -> 0:02:32.40] So if you think about it a telephone is both a client and a server in that
+[0:02:28.14 -> 0:02:32.40] 所以如果你考虑一下，电话既是客户又是服务器
+[0:02:33.18 -> 0:02:36.62] When I'm making a placing a call to somebody else
+[0:02:33.18 -> 0:02:36.62] 当我打电话给别人时
+[0:02:37.08 -> 0:02:41.46] I'm the client and that person's phone is the server right
+[0:02:37.08 -> 0:02:41.46] 我是客户端，那个人的电话就是服务器权利
+[0:02:41.96 -> 0:02:45.92] It's sitting there waiting for calls to come in
+[0:02:41.96 -> 0:02:45.92] 它正坐在那里等待来电
+[0:02:46.44 -> 0:02:49.42] And when that call comes in it makes a connection
+[0:02:46.44 -> 0:02:49.42] 当那个电话进来时它会建立联系
+[0:02:49.90 -> 0:02:54.86] We talk over the phone and then I hang up either side hangs up
+[0:02:49.90 -> 0:02:54.86] 我们通过电话交谈，然后我挂断了任何一方挂断电话
+[0:02:54.94 -> 0:02:59.92] So there's a lot of instances out there of some variation of client and server
+[0:02:54.94 -> 0:02:59.92] 因此，客户端和服务器的某些变体有很多实例
+[0:02:59.92 -> 0:03:06.76] And it's a much richer idea in that you can often switch back and forth  the roles of those two parties
+[0:02:59.92 -> 0:03:06.76] 这是一个更丰富的想法，因为你经常可以来回切换这两方的角色
+[0:03:06.88 -> 0:03:15.18] But it's a pretty universal and a ubiquitous way of thinking about how to set up a network system
+[0:03:06.88 -> 0:03:15.18] 但它是一种非常普遍且无处不在的思考如何建立网络系统的方式
+[0:03:16.30 -> 0:03:21.82] So in general then the idea is that there's a...system working
+[0:03:16.30 -> 0:03:21.82] 所以一般来说，这个想法就是......系统正在运行
+[0:03:23.44 -> 0:03:26.90] The client is making some requests to the server
+[0:03:23.44 -> 0:03:26.90] 客户端正在向服务器发出一些请求
+[0:03:27.70 -> 0:03:30.96] The server does something locally to deal with it
+[0:03:27.70 -> 0:03:30.96] 服务器在本地执行某些操作来处理它
+[0:03:31.04 -> 0:03:37.28] It receive it gets information that retrieves from its database the things you might want to buy
+[0:03:31.04 -> 0:03:37.28] 它接收它获取的信息，从其数据库中检索你可能想要购买的东西
+[0:03:38.34 -> 0:03:44.38] And then it sends back information say a nicely formatted a web page with all kinds of shopping suggestions
+[0:03:38.34 -> 0:03:44.38] 然后它发回信息说一个格式很好的网页，上面有各种购物建议
+[0:03:45.28 -> 0:03:47.34] And then the client decides what to do next
+[0:03:45.28 -> 0:03:47.34] 然后客户决定下一步该做什么
+[0:03:49.22 -> 0:03:51.66] So from a hardware perspective the
+[0:03:49.22 -> 0:03:51.66] 所以从硬件角度来看
+[0:03:52.28 -> 0:03:56.75] Interface to a between the network and
+[0:03:52.28 -> 0:03:56.75] 网络与网络之间的接口
+[0:03:57.44 -> 0:04:02.92] Your computer is called the NIC or network interface card even though it's not always on a card
+[0:03:57.44 -> 0:04:02.92] 你的计算机称为NIC或网络接口卡，即使它并非总是在卡上
+[0:04:03.66 -> 0:04:08.90] And we really won't talk about hardware at all
+[0:04:03.66 -> 0:04:08.90] 我们真的不会谈论硬件
+[0:04:08.90 -> 0:04:13.16] But what's most interesting from it is that
+[0:04:08.90 -> 0:04:13.16] 但最令人感兴趣的是
+[0:04:14.44 -> 0:04:18.36] It looks to your computer like an I/O device
+[0:04:14.44 -> 0:04:18.36] 它看起来像你的计算机I / O设备
+[0:04:19.00 -> 0:04:23.92] And in fact the UNIX of api for dealing with networks
+[0:04:19.00 -> 0:04:23.92] 事实上，用于处理网络的api的UNIX
+[0:04:24.38 -> 0:04:25.68] Makes it look like a file
+[0:04:24.38 -> 0:04:25.68] 使它看起来像一个文件
+[0:04:26.38 -> 0:04:30.66] So in particular just as a disk sits off of a bus
+[0:04:26.38 -> 0:04:30.66] 所以特别是当磁盘离开总线时
+[0:04:31.42 -> 0:04:34.46] And you write data to a disk
+[0:04:31.42 -> 0:04:34.46] 并且你将数据写入磁盘
+[0:04:35.08 -> 0:04:36.60] Or you read it from a disk
+[0:04:35.08 -> 0:04:36.60] 或者你从磁盘上读取它
+[0:04:37.12 -> 0:04:40.74] Similarly the network sits of a similar bus
+[0:04:37.12 -> 0:04:40.74] 类似地，网络位于类似的总线上
+[0:04:41.18 -> 0:04:44.44] And when you want to send a message you actually do it by writing
+[0:04:41.18 -> 0:04:44.44] 当你想发送信息时，你实际上是通过写作来实现的
+[0:04:44.92 -> 0:04:47.92] To a sort of virtual file that's called the network
+[0:04:44.92 -> 0:04:47.92] 对于一种称为网络的虚拟文件
+[0:04:48.72 -> 0:04:52.14] And if you want...when you're receiving data you do it by reading
+[0:04:48.72 -> 0:04:52.14] 如果你想...当你收到数据时，你可以通过阅读来实现
+[0:04:52.28 -> 0:04:56.48] So just as several weeks ago I gave the lecture on I/O
+[0:04:52.28 -> 0:04:56.48] 就像几个星期前我就I / O进行了演讲
+[0:04:57.18 -> 0:05:00.56] It turns out that it's extremely relevant to network programming
+[0:04:57.18 -> 0:05:00.56] 事实证明，它与网络编程非常相关
+[0:05:00.56 -> 0:05:08.48] That's the basic model that was created by the early developers of the sort of standard UNIX
+[0:05:00.56 -> 0:05:08.48] 这是由标准UNIX的早期开发人员创建的基本模型
+[0:05:08.98 -> 0:05:14.02] And now that's carried over not just to UNIX but it's the same model for windows and other operating systems
+[0:05:08.98 -> 0:05:14.02] 现在，这不仅仅延续到UNIX，而且它与Windows和其他操作系统的模型相同
+[0:05:15.50 -> 0:05:16.74] So
+[0:05:15.50 -> 0:05:16.74] 所以
+[0:05:19.90 -> 0:05:24.24] And now let's just talk a little about what computer networking means
+[0:05:19.90 -> 0:05:24.24] 现在让我们谈谈计算机网络的意义
+[0:05:24.70 -> 0:05:31.16] The idea of a network is a collection of systems that are referred to as hosts
+[0:05:24.70 -> 0:05:31.16] 网络的概念是被称为主机的系统的集合
+[0:05:32.08 -> 0:05:40.18] That are able to communicate with each other over some kind of communication fabric let's call
+[0:05:32.08 -> 0:05:40.18] 这可以通过某种通信结构让我们彼此通信
+[0:05:40.68 -> 0:05:41.94] It communications system
+[0:05:40.68 -> 0:05:41.94] 它是通讯系统
+[0:05:42.36 -> 0:05:44.60] And they're sort of partitioned into
+[0:05:42.36 -> 0:05:44.60] 它们有点被划分为
+[0:05:45.36 -> 0:05:48.56] Mostly referred to as lands or local area networks
+[0:05:45.36 -> 0:05:48.56] 主要称为陆地或局域网
+[0:05:48.74 -> 0:05:51.90] That you establish within a small region
+[0:05:48.74 -> 0:05:51.90] 你在一个小区域内建立
+[0:05:52.42 -> 0:05:58.68] And then a wide area network which would be over something the size of a city or perhaps more
+[0:05:52.42 -> 0:05:58.68] 然后是一个广阔的区域网络，可能超过一个城市或更大的东西
+[0:06:00.10 -> 0:06:06.12] And over a enterprise such as CMU it's a very complex set of
+[0:06:00.10 -> 0:06:06.12] 而对于像CMU这样的企业来说，它是一个非常复杂的组合
+[0:06:06.16 -> 0:06:12.62] For example there's wireless base stations that right in this room
+[0:06:06.16 -> 0:06:12.62] 例如，这个房间里就有无线基站
+[0:06:12.96 -> 0:06:16.94] That you're interacting with when you're using a wireless system or your your phone
+[0:06:12.96 -> 0:06:16.94] 当你使用无线系统或手机时，你正在与之交互
+[0:06:17.49 -> 0:06:21.56] And then there's a whole networking infrastructure within the university
+[0:06:17.49 -> 0:06:21.56] 然后在大学里面有一个完整的网络基础设施
+[0:06:21.92 -> 0:06:24.42] The then goes to some commercial providers
+[0:06:21.92 -> 0:06:24.42] 然后去一些商业提供商
+[0:06:25.06 -> 0:06:31.32] At&t in particular that give it access to the commercial internet
+[0:06:25.06 -> 0:06:31.32] 特别是，它可以访问商业互联网
+[0:06:31.66 -> 0:06:36.40] And then there's another set of network connections hosted by the supercomputing center
+[0:06:31.66 -> 0:06:36.40] 然后是超级计算中心托管的另一组网络连接
+[0:06:36.70 -> 0:06:43.28] That give you access to what's called internet 2 which is the resource that's used for communicating among universities
+[0:06:36.70 -> 0:06:43.28] 这使你可以访问所谓的互联网2，这是用于大学之间通信的资源
+[0:06:43.98 -> 0:06:48.61] So underneath you know when you're doing your networking stuff
+[0:06:43.98 -> 0:06:48.61] 所以你知道什么时候你正在做你的网络工作
+[0:06:48.61 -> 0:06:52.06] There's this amazingly complex combination of things going on
+[0:06:48.61 -> 0:06:52.06] 这种惊人的复杂组合正在进行中
+[0:06:53.02 -> 0:06:57.78] The idea of an internet is supposed is refers to the idea
+[0:06:53.02 -> 0:06:57.78] 假设互联网的概念是指这个想法
+[0:06:58.24 -> 0:07:01.34] The general idea of a network of networks
+[0:06:58.24 -> 0:07:01.34] 网络网络的总体思路
+[0:07:01.62 -> 0:07:06.46] Taking for example the local area network that this base station provides
+[0:07:01.62 -> 0:07:06.46] 以该基站提供的局域网为例
+[0:07:06.94 -> 0:07:10.57] And connecting it up to other networks on campus and across the world
+[0:07:06.94 -> 0:07:10.57] 并将其连接到校园和世界各地的其他网络
+[0:07:11.28 -> 0:07:14.36] And when we refer to the capital i internet
+[0:07:11.28 -> 0:07:14.36] 当我们提到首都互联网时
+[0:07:15.22 -> 0:07:20.32] That refers to the one instance the most significant instance of an internet
+[0:07:15.22 -> 0:07:20.32] 这指的是互联网最重要的一个实例
+[0:07:20.32 -> 0:07:25.68] So i means the sort of general idea of creating a network of networks
+[0:07:20.32 -> 0:07:25.68] 所以我的意思是创建网络网络的一般概念
+[0:07:26.22 -> 0:07:31.74] Uppercase i(I) is the specific example that we all know and use all the time
+[0:07:26.22 -> 0:07:31.74] 大写i（I）是我们都知道并且一直使用的具体示例
+[0:07:32.14 -> 0:07:37.42] That's organized by a certain set of principles that uses a particular set of protocols and so forth
+[0:07:32.14 -> 0:07:37.42] 这是由一组使用特定协议等的原则组织的
+[0:07:37.98 -> 0:07:41.20] And of course we tend to just talk the internet
+[0:07:37.98 -> 0:07:41.20] 当然，我们倾向于只谈互联网
+[0:07:41.40 -> 0:07:49.54] And most people know that what that really implies is the sort of existing network structure that there is
+[0:07:41.40 -> 0:07:49.54] 大多数人都知道，真正意味着现有的网络结构
+[0:07:51.44 -> 0:07:53.84] And that's good enough for the purpose of this course
+[0:07:51.44 -> 0:07:53.84] 这对于本课程来说已经足够了
+[0:07:53.84 -> 0:07:57.56] We're not going to talk much about other possible designs one might have for a network
+[0:07:53.84 -> 0:07:57.56] 我们不打算谈论可能为网络设计的其他可能的设计
+[0:07:58.60 -> 0:08:04.76] So most of the low level networking is supported by something called Ethernet
+[0:07:58.60 -> 0:08:04.76] 因此大多数低级网络都被称为以太网的东西支持
+[0:08:05.22 -> 0:08:08.76] And the term Ethernet actually has evolved tremendously over time
+[0:08:05.22 -> 0:08:08.76] 以太网这个术语实际上随着时间的推移发展得非常迅速
+[0:08:09.24 -> 0:08:13.84] So that it's almost more like a brand name that it is in specific technology
+[0:08:09.24 -> 0:08:13.84] 因此它几乎更像是一个品牌名称，它在特定的技术中
+[0:08:14.32 -> 0:08:18.50] And the version you're familiar with the wired version of it
+[0:08:14.32 -> 0:08:18.50] 你熟悉它的有线版本的版本
+[0:08:18.50 -> 0:08:23.98] You have a wire to some sort of a box
+[0:08:18.50 -> 0:08:23.98] 你有一个电线到某种盒子
+[0:08:24.70 -> 0:08:28.24] Like that you plug the your Ethernet jacks into
+[0:08:24.70 -> 0:08:28.24] 就像你插入以太网插孔一样
+[0:08:28.68 -> 0:08:30.58] And historically those were called hubs
+[0:08:28.68 -> 0:08:30.58] 历史上那些被称为枢纽
+[0:08:31.08 -> 0:08:36.88] And the idea of a hub, it was just a repeater that whatever came into it from one computer
+[0:08:31.08 -> 0:08:36.88] 而对于一个集线器的想法，它只是一个转发器，无论从一台计算机进入它
+[0:08:36.88 -> 0:08:39.04] It would broadcast to all the connected machines
+[0:08:36.88 -> 0:08:39.04] 它将广播到所有连接的机器
+[0:08:39.70 -> 0:08:43.86] And so you only want to do this for maybe a dozen or
+[0:08:39.70 -> 0:08:43.86] 所以你只想做十几个或者那个
+[0:08:43.88 -> 0:08:49.80] So machines that it's like a party-line they're all hearing what everybody else is saying
+[0:08:43.88 -> 0:08:49.80] 所以机器就像派对线一样，他们都听到了其他人所说的话
+[0:08:50.40 -> 0:08:59.38] And in fact the original first version the Ethernet did that by everyone interacting over a single cable
+[0:08:50.40 -> 0:08:59.38] 事实上，以太网最初的第一个版本是由每个人通过单根电缆进行交互而实现的
+[0:08:59.70 -> 0:09:02.00] Carrying essentially radio signals and
+[0:08:59.70 -> 0:09:02.00] 基本上承载无线电信号和
+[0:09:02.44 -> 0:09:06.10] And similarly when you're in this room using a wireless internet
+[0:09:02.44 -> 0:09:06.10] 同样，当你在这个房间使用无线互联网时
+[0:09:06.98 -> 0:09:09.60] A wireless internet is sort of like a hub and that
+[0:09:06.98 -> 0:09:09.60] 无线互联网有点像集线器
+[0:09:10.30 -> 0:09:15.88] All the packets that you're sending all across the room
+[0:09:10.30 -> 0:09:15.88] 你在整个房间发送的所有数据包
+[0:09:15.88 -> 0:09:21.30] They're all sort of making use of the same radio frequencies the same communication channel
+[0:09:15.88 -> 0:09:21.30] 他们都使用相同的无线电频率和相同的通信频道
+[0:09:21.64 -> 0:09:28.80] And there's a protocol for how they detect when two messages get set at the same time and therefore interfere with each other
+[0:09:21.64 -> 0:09:28.80] 并且有一个协议，用于检测两个消息何时同时设置并因此相互干扰
+[0:09:29.44 -> 0:09:34.38] So that can only sort of scale up to maybe at most a hundred different
+[0:09:29.44 -> 0:09:34.38] 所以这只能扩展到最多可能达到一百种不同
+[0:09:36.68 -> 0:09:41.02] Hosts communicating because they're all sharing a single communication channel
+[0:09:36.68 -> 0:09:41.02] 主持通信，因为它们都共享一个通信通道
+[0:09:41.78 -> 0:09:46.68] Now in the wired world what's evolved is usually when you buy a box
+[0:09:41.78 -> 0:09:46.68] 现在在有线世界中，通常在你购买盒子时会发展
+[0:09:47.48 -> 0:09:49.32] Or you get one from your cable company
+[0:09:47.48 -> 0:09:49.32] 或者你从有线电视公司那里得到一个
+[0:09:49.94 -> 0:09:56.48] With all those ports in it, it's actually called a router or sometimes a switch in that
+[0:09:49.94 -> 0:09:56.48] 有了所有这些端口，它实际上被称为路由器或有时称为交换机
+[0:09:59.16 -> 0:10:01.68] It doesn't broadcast to everyone
+[0:09:59.16 -> 0:10:01.68] 它不向所有人广播
+[0:10:01.70 -> 0:10:04.38] It selectively tries to guess
+[0:10:01.70 -> 0:10:04.38] 它有选择地试图猜测
+[0:10:05.12 -> 0:10:08.74] Is this particular message bound for this particular host
+[0:10:05.12 -> 0:10:08.74] 此特定邮件是否绑定到此特定主机
+[0:10:09.48 -> 0:10:11.94] And only send to that one
+[0:10:09.48 -> 0:10:11.94] 只发送给那个
+[0:10:12.34 -> 0:10:14.86] And as you know you can take these and wire up
+[0:10:12.34 -> 0:10:14.86] 如你所知，你可以把它们连接起来
+[0:10:15.36 -> 0:10:18.82] I think about up to 6 levels deep in and hub
+[0:10:15.36 -> 0:10:18.82] 我认为最多有6个级别和hub
+[0:10:19.48 -> 0:10:24.66] And basically create a network of wired connections
+[0:10:19.48 -> 0:10:24.66] 并且基本上创建了有线连接网络
+[0:10:25.18 -> 0:10:27.60] And they'll all get from one to the other somehow
+[0:10:25.18 -> 0:10:27.60] 他们都会以某种方式从一个到另一个
+[0:10:28.82 -> 0:10:35.23] And then after that it gets more complicated you can add more sophisticated types of switching on top of it
+[0:10:28.82 -> 0:10:35.23] 然后，它会变得更加复杂，你可以在其上添加更复杂的切换类型
+[0:10:35.90 -> 0:10:40.52] But so the general idea of even an Ethernet is actually a fairly complex thing
+[0:10:35.90 -> 0:10:40.52] 但是，甚至以太网的总体思路实际上也是一件相当复杂的事情
+[0:10:41.28 -> 0:10:44.92] But it's some sort of conceptual level we can just think of it as a bunch of hosts
+[0:10:41.28 -> 0:10:44.92] 但它是某种概念层面我们可以把它想象成一堆主机
+[0:10:45.48 -> 0:10:47.26] That can talk directly to one another
+[0:10:45.48 -> 0:10:47.26] 这可以直接相互对话
+[0:10:49.42 -> 0:10:56.14] And then an internet then refers to the idea of taking those local area networks and connecting them together
+[0:10:49.42 -> 0:10:56.14] 然后互联网就是指采用这些局域网并将它们连接在一起的想法
+[0:10:56.74 -> 0:11:02.46] Via routers and routers obey a particular protocol based on the address
+[0:10:56.74 -> 0:11:02.46] 通过路由器和路由器遵循基于地址的特定协议
+[0:11:02.70 -> 0:11:04.42] That you're trying to send data to
+[0:11:02.70 -> 0:11:04.42] 你正在尝试将数据发送到
+[0:11:05.34 -> 0:11:06.18] And
+[0:11:05.34 -> 0:11:06.18] 和
+[0:11:08.78 -> 0:11:16.72] And so what you end up with conceptually is a whole bunch of hosts spread potentially all across the world
+[0:11:08.78 -> 0:11:16.72] 因此，你最终在概念上最终会在全世界范围内传播一大堆主机
+[0:11:17.26 -> 0:11:20.02] And then some magical system of routers
+[0:11:17.26 -> 0:11:20.02] 然后是一些神奇的路由器系统
+[0:11:20.42 -> 0:11:22.96] That will get a message from one place to the other
+[0:11:20.42 -> 0:11:22.96] 这将从一个地方到另一个地方收到消息
+[0:11:23.24 -> 0:11:29.08] Based on a mode of addressing where there's some known address of the hosts
+[0:11:23.24 -> 0:11:29.08] 基于寻址模式，其中存在一些已知的主机地址
+[0:11:29.08 -> 0:11:30.50] That you're trying to send to
+[0:11:29.08 -> 0:11:30.50] 那你要发送给
+[0:11:30.96 -> 0:11:36.90] And it will hub through multiple routers to get from one place to the other
+[0:11:30.96 -> 0:11:36.90] 它将通过多个路由器集中到一个地方到另一个地方
+[0:11:36.92 -> 0:11:38.90] And that's true whether it's on campus
+[0:11:36.92 -> 0:11:38.90] 这是真的，无论是在校园里
+[0:11:40.88 -> 0:11:44.35] Or whether it's hopping all the way around the world
+[0:11:40.88 -> 0:11:44.35] 或者它是否一直在世界各地跳跃
+[0:11:45.04 -> 0:11:50.82] And so again there's this huge body of information and knowledge about how that routing works
+[0:11:45.04 -> 0:11:50.82] 因此，有关该路由如何工作的大量信息和知识
+[0:11:50.94 -> 0:11:52.62] And how its reliable and all that
+[0:11:50.94 -> 0:11:52.62] 它的可靠性如何
+[0:11:53.16 -> 0:11:56.64] But we're going to just assume that somebody else has figured that out
+[0:11:53.16 -> 0:11:56.64] 但我们只是假设其他人已经想到了这一点
+[0:11:57.02 -> 0:12:01.86] And our job as programmers is just to be able to communicate from one host to another
+[0:11:57.02 -> 0:12:01.86] 我们作为程序员的工作就是能够从一个主机到另一个主机进行通信
+[0:12:06.42 -> 0:12:10.42] And so how could you design a system where all these diverse systems
+[0:12:06.42 -> 0:12:10.42] 那么你怎么能设计一个所有这些不同系统的系统
+[0:12:10.42 -> 0:12:22.00] Made by computers made by different manufacturers operating under different countries with different telecommunications bodies governing bodies and so forth
+[0:12:10.42 -> 0:12:22.00] 由在不同国家运营的不同制造商制造的计算机制造，具有不同的电信机构管理机构等
+[0:12:22.00 -> 0:12:23.80] How can they all work with each other
+[0:12:22.00 -> 0:12:23.80] 他们怎么能互相合作
+[0:12:24.38 -> 0:12:29.34] And the requirement is you have to have a protocol you have to have some common set of conventions
+[0:12:24.38 -> 0:12:29.34] 要求是你必须有一个协议，你必须有一些共同的约定
+[0:12:30.02 -> 0:12:33.18] For what messages look like how they get sent
+[0:12:30.02 -> 0:12:33.18] 对于什么消息看起来如何发送
+[0:12:33.66 -> 0:12:39.48] What happens if one of them doesn't make it how do you recover from that and so forth
+[0:12:33.66 -> 0:12:39.48] 如果他们中的一个没有成功，你会如何从中恢复等等会发生什么
+[0:12:44.14 -> 0:12:49.46] And so what does a protocol include well it has to include some way of naming things so that
+[0:12:44.14 -> 0:12:49.46] 所以协议包括什么，它必须包括一些命名事物的方式
+[0:12:49.94 -> 0:12:53.08] If I want to send to some host I have some way of designating
+[0:12:49.94 -> 0:12:53.08] 如果我想发送给某些主机我有一些指定方式
+[0:12:53.52 -> 0:12:54.80] Who that host is
+[0:12:53.52 -> 0:12:54.80] 谁是主持人
+[0:12:55.32 -> 0:13:01.82] And then there's the routing system has to have some reliable way of getting my data to that named host
+[0:12:55.32 -> 0:13:01.82] 然后，路由系统必须有一些可靠的方法将我的数据传送到该命名主机
+[0:13:03.02 -> 0:13:04.66] And that's the delivery mechanism
+[0:13:03.02 -> 0:13:04.66] 这就是交付机制
+[0:13:05.54 -> 0:13:11.70] And that's usually done and one of the things that we now accept  as universal
+[0:13:05.54 -> 0:13:11.70] 这通常已经完成，我们现在接受的其中一项是普遍的
+[0:13:11.70 -> 0:13:17.46] But it really wasn't when it first came out was idea of you take all your data and you divide it into packets
+[0:13:11.70 -> 0:13:17.46] 但它真的不是第一次出现的时候就是你把所有数据都拿出来然后把它分成数据包
+[0:13:17.48 -> 0:13:21.38] And packets are typically about a thousand to two thousand bytes
+[0:13:17.48 -> 0:13:21.38] 数据包通常大约一千到两千字节
+[0:13:22.36 -> 0:13:27.72] And so if you have a longer message it chops it up into individual packets and sends it across
+[0:13:22.36 -> 0:13:27.72] 因此，如果你有更长的消息，它会将其切换为单个数据包并将其发送出去
+[0:13:28.24 -> 0:13:30.52] And all the communication occurs at the packet level
+[0:13:28.24 -> 0:13:30.52] 并且所有通信都发生在数据包级别
+[0:13:31.16 -> 0:13:33.76] That's different than the historic phone system
+[0:13:31.16 -> 0:13:33.76] 这与历史悠久的电话系统不同
+[0:13:35.22 -> 0:13:37.36] I was a connection based system meaning that
+[0:13:35.22 -> 0:13:37.36] 我是一个基于连接的系统，意思是
+[0:13:37.76 -> 0:13:45.30] If I was calling somebody there is a dedicated wire set of wires maintained by the phone company
+[0:13:37.76 -> 0:13:45.30] 如果我打电话给某人，电话公司会维护一条专用的电线
+[0:13:45.78 -> 0:13:49.16] That would be reserved and locked down for our own use
+[0:13:45.78 -> 0:13:49.16] 这将被保留并锁定以供我们自己使用
+[0:13:49.56 -> 0:13:51.38] During the entire duration of that phone call
+[0:13:49.56 -> 0:13:51.38] 在整个电话通话期间
+[0:13:56.62 -> 0:13:57.56] So
+[0:13:56.62 -> 0:13:57.56] 所以
+[0:13:58.94 -> 0:14:03.42] To get them from one host say A to B
+[0:13:58.94 -> 0:14:03.42] 从一个主人那里得到他们说A到B.
+[0:14:03.80 -> 0:14:05.86] What happens is we want to send a packet
+[0:14:03.80 -> 0:14:05.86] 我们想要发送一个数据包
+[0:14:06.66 -> 0:14:09.30] And that packet will contain some amount of data
+[0:14:06.66 -> 0:14:09.30] 该数据包将包含一些数据
+[0:14:10.32 -> 0:14:15.04] And the idea of a packet communication then is you put little headers on
+[0:14:10.32 -> 0:14:15.04] 然后，分组通信的想法是你把小标题放在上面
+[0:14:15.34 -> 0:14:20.80] That contain certain routing information see on the front of an envelope of a letter perhaps
+[0:14:15.34 -> 0:14:20.80] 包含某些信息的信封前面可能包含某些路由信息
+[0:14:21.72 -> 0:14:24.42] And so and at different points in the way
+[0:14:21.72 -> 0:14:24.42] 所以以及在不同的方式
+[0:14:24.42 -> 0:14:30.82] They'll have different numbers of headers and different protocols or formats for what those headers look like
+[0:14:24.42 -> 0:14:30.82] 它们将具有不同数量的标头和不同的协议或格式，以用于这些标头的外观
+[0:14:31.58 -> 0:14:33.74] So in particular within
+[0:14:31.58 -> 0:14:33.74] 所以特别是在内
+[0:14:34.92 -> 0:14:37.10] I want to send a message and I'll
+[0:14:34.92 -> 0:14:37.10] 我想发一条消息，我会
+[0:14:37.76 -> 0:14:42.32] I'll do that and then the software that runs on my machine that handles this
+[0:14:37.76 -> 0:14:42.32] 我会这样做，然后在我的机器上运行的软件处理这个
+[0:14:42.76 -> 0:14:50.06] Will put a header in front of that describes the internet routing
+[0:14:42.76 -> 0:14:50.06] 将前面的标题放在描述互联网路由的位置
+[0:14:50.44 -> 0:14:55.62] And then it will tack a header in front of that talks about the local area network routing that gets used
+[0:14:50.44 -> 0:14:55.62] 然后，在谈论前面将讨论使用的局域网路由
+[0:14:56.42 -> 0:15:02.06] And that's what's referred to as the a PH the packet header for the internet protocol
+[0:14:56.42 -> 0:15:02.06] 这就是所谓的互联网协议的数据包标头
+[0:15:02.74 -> 0:15:08.30] And FH1 the frame header for this particular message being sent within this local network
+[0:15:02.74 -> 0:15:08.30] 并且FH1在该本地网络内发送该特定消息的帧头
+[0:15:10.90 -> 0:15:15.24] And then the network interface card or the adapter here
+[0:15:10.90 -> 0:15:15.24] 然后是网络接口卡或适配器
+[0:15:16.10 -> 0:15:23.48] Is then responsible for putting that out over this local communication of capability
+[0:15:16.10 -> 0:15:23.48] 然后负责将这种能力放在本地通信上
+[0:15:23.78 -> 0:15:31.44] And then that gets received at the other end by the network adapter at the receivers direction
+[0:15:23.78 -> 0:15:31.44] 然后，网络适配器在接收方向接收到另一端
+[0:15:32.14 -> 0:15:40.00] It will put up its own frame header on it to pass it in
+[0:15:32.14 -> 0:15:40.00] 它将在其上放置自己的帧头以传递它
+[0:15:40.94 -> 0:15:42.94] And that then gets tripped off
+[0:15:40.94 -> 0:15:42.94] 然后被绊倒了
+[0:15:43.80 -> 0:15:48.58] So that all hosts be set sees is the the data that gets sent
+[0:15:43.80 -> 0:15:48.58] 因此，设置所有主机看到的是发送的数据
+[0:15:49.18 -> 0:15:55.44] But this idea of putting headers in front and at times sort of what they call encapsulation that
+[0:15:49.18 -> 0:15:55.44] 但是这种把头放在前面的想法有时与他们所谓的封装有关
+[0:15:55.93 -> 0:16:02.50] I'll take this big packet and I'll just tack some more information on top to the front of it header information
+[0:15:55.93 -> 0:16:02.50] 我将采取这个大包，我只是在它的头部信息的前面添加更多信息
+[0:16:02.94 -> 0:16:06.24] And I'll send through the rest of it just as a set of bytes
+[0:16:02.94 -> 0:16:06.24] 我将通过其余部分发送，就像一组字节一样
+[0:16:14.24 -> 0:16:18.92] So the internet that we know and love the capital I internet
+[0:16:14.24 -> 0:16:18.92] 所以我们知道并喜欢互联网的互联网互联网
+[0:16:18.94 -> 0:16:23.10] Then has a particular set of protocols that are you've probably heard the terms
+[0:16:18.94 -> 0:16:23.10] 然后有一组特定的协议，你可能已经听过这些术语
+[0:16:23.94 -> 0:16:26.54] One is called the IP the internet protocol
+[0:16:23.94 -> 0:16:26.54] 一个被称为IP的互联网协议
+[0:16:26.92 -> 0:16:33.16] Which is the one that defines ideas about how do you get how do you name hosts on the internet
+[0:16:26.92 -> 0:16:33.16] 哪个定义了关于如何获得如何在互联网上命名主机的想法
+[0:16:33.94 -> 0:16:36.02] And how do you send packets
+[0:16:33.94 -> 0:16:36.02] 你如何发送数据包
+[0:16:36.64 -> 0:16:40.76] And they're referred to sometimes is datagrams
+[0:16:36.64 -> 0:16:40.76] 他们有时提到的是数据报
+[0:16:41.04 -> 0:16:46.86] Meaning that a packet is just a single entity that gets sent from point A to point B
+[0:16:41.04 -> 0:16:46.86] 这意味着数据包只是从A点发送到B点的单个实体
+[0:16:48.80 -> 0:16:53.36] And the underlying IP doesn't guarantee delivery so
+[0:16:48.80 -> 0:16:53.36] 而基础知识产权并不能保证交付
+[0:16:54.14 -> 0:16:57.28] So it's based on what they call best
+[0:16:54.14 -> 0:16:57.28] 所以这是基于他们最好的
+[0:16:58.04 -> 0:17:01.60] Effort communication meaning that at each step along the way
+[0:16:58.04 -> 0:17:01.60] 努力沟通意味着在整个过程中的每一步
+[0:17:02.34 -> 0:17:06.94] If for example things are good then it will just send this packet along
+[0:17:02.34 -> 0:17:06.94] 例如，如果事情是好的话，它就会发送这个数据包
+[0:17:06.94 -> 0:17:08.82] If there's too much congestion
+[0:17:06.94 -> 0:17:08.82] 如果有太多的拥堵
+[0:17:09.34 -> 0:17:13.46] There's been a you know somebody's turned on their microwave oven and
+[0:17:09.34 -> 0:17:13.46] 你知道有人打开他们的微波炉和
+[0:17:14.06 -> 0:17:16.66] It's set up some radio frequency interface interference
+[0:17:14.06 -> 0:17:16.66] 它设置了一些射频接口干扰
+[0:17:17.24 -> 0:17:22.06] Then at the IP level it just drops that packet and says whoops
+[0:17:17.24 -> 0:17:22.06] 然后在IP级别，它只丢弃该数据包并说哎呀
+[0:17:22.88 -> 0:17:26.48] I screwed up sorry it doesn't even say sorry it just does it silently
+[0:17:22.88 -> 0:17:26.48] 我搞砸了抱歉它甚至没有说对不起只是默默地说
+[0:17:28.60 -> 0:17:32.38] And then you can as a programmer make use of that very global level
+[0:17:28.60 -> 0:17:32.38] 然后你可以作为一个程序员利用这个非常全球化的水平
+[0:17:32.42 -> 0:17:36.76] So normally as a programmer you don't really want to program at that level
+[0:17:32.42 -> 0:17:36.76] 所以通常作为一个程序员，你真的不想在那个级别编程
+[0:17:36.90 -> 0:17:39.56] Because you'll send packets and they will get there
+[0:17:36.90 -> 0:17:39.56] 因为你会发送数据包，他们会到达那里
+[0:17:40.14 -> 0:17:44.78] But you can if you want to and it's called UDP a protocol
+[0:17:40.14 -> 0:17:44.78] 但是你可以，如果你想，它被称为UDP协议
+[0:17:44.86 -> 0:17:47.76] It's just a small software layer over IP
+[0:17:44.86 -> 0:17:47.76] 它只是一个基于IP的小软件层
+[0:17:47.76 -> 0:17:49.16] And there's some applications
+[0:17:47.76 -> 0:17:49.16] 还有一些应用程序
+[0:17:49.70 -> 0:17:58.48] That you'll see for example in the computer game world where you want to send information really fast and if some information gets dropped it's not a big deal
+[0:17:49.70 -> 0:17:58.48] 你会在计算机游戏世界中看到你想要快速发送信息的例子，如果一些信息被丢弃，这不是什么大不了的事
+[0:17:58.78 -> 0:18:00.56] That people actually program at that level
+[0:17:58.78 -> 0:18:00.56] 人们实际上在那个级别编程
+[0:18:01.12 -> 0:18:02.54] We won't really talk about that
+[0:18:01.12 -> 0:18:02.54] 我们不会真的谈论这个
+[0:18:02.54 -> 0:18:11.78] The more common protocol that gets used and carries 99% of internet traffic is what's called TCP(transmission control protocol)
+[0:18:02.54 -> 0:18:11.78] 使用更常见的协议并承载99％的互联网流量就是所谓的TCP（传输控制协议）
+[0:18:12.34 -> 0:18:17.68] And that provides a reliable the equivalent of telephone connection
+[0:18:12.34 -> 0:18:17.68] 这提供了相当于电话连接的可靠性
+[0:18:18.12 -> 0:18:22.94] That I can reliably send data from point A to point B
+[0:18:18.12 -> 0:18:22.94] 我可以可靠地将数据从A点发送到B点
+[0:18:24.18 -> 0:18:25.46] As many bytes as I like
+[0:18:24.18 -> 0:18:25.46] 像我喜欢的那么多字节
+[0:18:26.40 -> 0:18:28.24] It's a guaranteed
+[0:18:26.40 -> 0:18:28.24] 这是有保障的
+[0:18:28.92 -> 0:18:32.36] Every it's sometimes fast and sometimes not but it's there
+[0:18:28.92 -> 0:18:32.36] 每一次它有时都很快，有时不会，但它就在那里
+[0:18:32.86 -> 0:18:36.96] And it's built on top of the IP of this datagram
+[0:18:32.86 -> 0:18:36.96] 它建立在这个数据报的IP之上
+[0:18:37.18 -> 0:18:41.50] Meaning that it has to take whatever you're sending and slice it up into these single packets
+[0:18:37.18 -> 0:18:41.50] 这意味着它必须采取你发送的任何内容并将其切片到这些单个数据包中
+[0:18:42.24 -> 0:18:46.30] If one of them doesn't get sent it will resend it until it gets there
+[0:18:42.24 -> 0:18:46.30] 如果其中一个没有被发送，它将重新发送它直到它到达那里
+[0:18:46.84 -> 0:18:54.02] They have to deal with the fact that packets can travel different paths and one can get ahead of the other in transmission
+[0:18:46.84 -> 0:18:54.02] 他们必须处理这样一个事实，即数据包可以通过不同的路径，并且可以在传输中领先于另一个
+[0:18:54.04 -> 0:18:56.40] And so it has to reorder them in the correct sequence
+[0:18:54.04 -> 0:18:56.40] 所以它必须按正确的顺序重新排序
+[0:18:56.98 -> 0:18:59.24] And so there's a lot of stuff under it but
+[0:18:56.98 -> 0:18:59.24] 所以它下面有很多东西但是
+[0:18:59.82 -> 0:19:01.64] We'll just assume that it kind of works
+[0:18:59.82 -> 0:19:01.64] 我们只是假设它有点工作
+[0:19:02.40 -> 0:19:06.34] And so you can just rely think about it is I have a stream connection
+[0:19:02.40 -> 0:19:06.34] 所以你可以依靠它来思考它是否有流连接
+[0:19:06.78 -> 0:19:11.56] I can send from A to B and B can send a stream of data back to me
+[0:19:06.78 -> 0:19:11.56] 我可以从A发送到B，B可以向我发送数据流
+[0:19:12.06 -> 0:19:13.66] And we're all happy
+[0:19:12.06 -> 0:19:13.66] 我们都很开心
+[0:19:15.20 -> 0:19:18.04] And so that's the version that looks like file I/O
+[0:19:15.20 -> 0:19:18.04] 这就是看起来像文件I / O的版本
+[0:19:18.04 -> 0:19:23.58] I just keep writing to a file and it's sending packets over the network to the other end
+[0:19:18.04 -> 0:19:23.58] 我只是继续写一个文件，它通过网络发送数据包到另一端
+[0:19:24.24 -> 0:19:28.18] And then the other side can be sending stuff to me
+[0:19:24.24 -> 0:19:28.18] 然后另一方可以向我发送东西
+[0:19:28.54 -> 0:19:31.66] And I'm just reading it and I'm just reading bytes of data
+[0:19:28.54 -> 0:19:31.66] 而我只是在阅读它，而我只是在阅读数据字节
+[0:19:32.00 -> 0:19:35.12] Not worrying about how that got broken up into individual packets
+[0:19:32.00 -> 0:19:35.12] 不用担心如何将其分解为单个数据包
+[0:19:36.48 -> 0:19:39.18] And so that's referred to as the sockets interface
+[0:19:36.48 -> 0:19:39.18] 所以这被称为套接字接口
+[0:19:39.78 -> 0:19:43.32] And you'll hear the term socket programming and that's exactly what we're talking about
+[0:19:39.78 -> 0:19:43.32] 你会听到套接字编程这个术语，这正是我们所说的
+[0:19:48.58 -> 0:19:56.00] And so from a sort of software system
+[0:19:48.58 -> 0:19:56.00] 从某种软件系统来看
+[0:19:56.08 -> 0:19:58.44] Than software hardware system then
+[0:19:56.08 -> 0:19:58.44] 然后比软件硬件系统
+[0:19:58.90 -> 0:20:03.26] The client and the server are both implemented as application programs
+[0:19:58.90 -> 0:20:03.26] 客户端和服务器都实现为应用程序
+[0:20:03.74 -> 0:20:07.18] At the respective endpoints on their hosts
+[0:20:03.74 -> 0:20:07.18] 在其主机上的相应端点
+[0:20:08.18 -> 0:20:17.82] And they make use of software and libraries that run at some combination of the user level and at the kernel level
+[0:20:08.18 -> 0:20:17.82] 并且他们使用在用户级别和内核级别的某种组合运行的软件和库
+[0:20:18.40 -> 0:20:20.86] And therefore I have access to direct resources
+[0:20:18.40 -> 0:20:20.86] 因此我可以获得直接资源
+[0:20:21.56 -> 0:20:22.78] And so
+[0:20:21.56 -> 0:20:22.78] 所以
+[0:20:24.88 -> 0:20:31.26] I is a program or an application programmer then make use of this software api
+[0:20:24.88 -> 0:20:31.26] 我是一个程序或应用程序员然后使用这个软件API
+[0:20:31.54 -> 0:20:33.64] That lets me do socket programming
+[0:20:31.54 -> 0:20:33.64] 这让我可以做套接字编程
+[0:20:34.12 -> 0:20:38.84] And it's based on gives directly supports TCP/IP
+[0:20:34.12 -> 0:20:38.84] 它基于直接支持TCP / IP
+[0:20:42.90 -> 0:20:48.04] So first of all we're going to talk most of the time about what's called IPV4
+[0:20:42.90 -> 0:20:48.04] 首先，我们大部分时间都会谈论所谓的IPV4
+[0:20:48.80 -> 0:20:55.80] A version 4 which is the one that's been running for since the 1980s I think early 1980s
+[0:20:48.80 -> 0:20:55.80] 从20世纪80年代早期开始，我认为是一个版本4，它是自20世纪80年代早期以来一直在运行的版本
+[0:20:56.58 -> 0:21:04.10] And is this the standard and we'll talk very only mentioned very briefly the idea of what's called IPV6
+[0:20:56.58 -> 0:21:04.10] 这是标准，我们只会简单地谈谈所谓的IPV6的想法
+[0:21:04.76 -> 0:21:07.16] Which is sort of a next-generation version
+[0:21:04.76 -> 0:21:07.16] 哪种是下一代版本
+[0:21:08.00 -> 0:21:12.80] So the idea of a IPV4 and this is now we're talking about IP
+[0:21:08.00 -> 0:21:12.80] 所以IPV4的想法现在我们正在讨论IP
+[0:21:13.36 -> 0:21:18.60] And and this is true of TCP as well is that an address is actually just 32 bits
+[0:21:13.36 -> 0:21:18.60] 并且TCP也是如此，地址实际上只是32位
+[0:21:20.92 -> 0:21:24.28] But it's usually expressed in what they call dotted decimal form
+[0:21:20.92 -> 0:21:24.28] 但它通常用他们称之为点分十进制形式表示
+[0:21:24.54 -> 0:21:26.44] And you've seen these addresses before
+[0:21:24.54 -> 0:21:26.44] 你以前见过这些地址
+[0:21:26.86 -> 0:21:29.86] That it's 4 decimal numbers
+[0:21:26.86 -> 0:21:29.86] 这是4个十进制数
+[0:21:30.50 -> 0:21:33.52] And they can only range between 0 and 255
+[0:21:30.50 -> 0:21:33.52] 它们只能在0到255之间
+[0:21:34.32 -> 0:21:37.74] Because each one of them is a single bytes worth of information
+[0:21:34.32 -> 0:21:37.74] 因为它们中的每一个都是单个字节的信息
+[0:21:37.76 -> 0:21:40.36] So we're used to writing things in hex now in this course
+[0:21:37.76 -> 0:21:40.36] 因此，我们习惯于在本课程中以十六进制编写内容
+[0:21:40.86 -> 0:21:44.96] But we're going to write it as each byte is written as a decimal digit
+[0:21:40.86 -> 0:21:44.96] 但是我们要把它写成每个字节写成十进制数字
+[0:21:45.78 -> 0:21:49.50] And they're actually passed and stored in
+[0:21:45.78 -> 0:21:49.50] 它们实际上是通过并存储的
+[0:21:49.82 -> 0:21:53.34] What's called network byte order which is big endian byte order
+[0:21:49.82 -> 0:21:53.34] 什么叫做大字节字节顺序的网络字节顺序
+[0:21:54.04 -> 0:21:58.10] And so we have to worry about the whole big endian vs. good endian thing
+[0:21:54.04 -> 0:21:58.10] 所以我们不得不担心整个大端和好端的事情
+[0:21:58.54 -> 0:22:00.02] When we're doing network programming
+[0:21:58.54 -> 0:22:00.02] 当我们进行网络编程时
+[0:22:01.26 -> 0:22:07.14] And you can actually learn a lot there's a whole levels of how the different bytes mean
+[0:22:01.26 -> 0:22:07.14] 实际上你可以学到很多不同字节的含义
+[0:22:07.14 -> 0:22:13.30] But for example any ip address it starts with 128.2.  is at CMU
+[0:22:07.14 -> 0:22:13.30] 但是例如任何ip地址都以128.2开头。在CMU
+[0:22:15.86 -> 0:22:18.24] I think and then
+[0:22:15.86 -> 0:22:18.24] 我想，然后
+[0:22:19.14 -> 0:22:24.34] And so essentially CMU owns that part of the IP address space
+[0:22:19.14 -> 0:22:24.34] 因此，基本上CMU拥有IP地址空间的那部分
+[0:22:26.02 -> 0:22:29.98] Which if you think about that's approximately 2^64
+[0:22:26.02 -> 0:22:29.98] 如果你认为这大约是2 ^ 64
+[0:22:31.02 -> 0:22:41.52] 2 to the...no,not 2^6,2^16 different IP addresses available for use by campus
+[0:22:31.02 -> 0:22:41.52] 2到...不，不是2 ^ 6,2 ^ 16个不同的IP地址可供校园使用
+[0:22:46.96 -> 0:22:50.62] And as I mentioned there's a newer version called IPv6
+[0:22:46.96 -> 0:22:50.62] 正如我所提到的那样，有一个名为IPv6的新版本
+[0:22:50.86 -> 0:22:54.84] That gives you a 128-bit addresses
+[0:22:50.86 -> 0:22:54.84] 这给你一个128位的地址
+[0:22:55.52 -> 0:23:01.30] You can imagine actually that if you think about how many nodes are there in the internet
+[0:22:55.52 -> 0:23:01.30] 实际上你可以想象，如果你想到互联网中有多少个节点
+[0:23:01.42 -> 0:23:07.10] If a 4 byte address is only to the 32 so that's 4 billion
+[0:23:01.42 -> 0:23:07.10] 如果一个4字节的地址只有32个那么就是40亿
+[0:23:08.50 -> 0:23:12.96] And I don't know about you but I have a lot of different things that use IP
+[0:23:08.50 -> 0:23:12.96] 我不了解你，但我有很多不同的东西使用IP
+[0:23:12.96 -> 0:23:18.28] I have a phone,I have two laptops,I have a couple desktops
+[0:23:12.96 -> 0:23:18.28] 我有一部手机，我有两台笔记本电脑，我有几台台式机
+[0:23:19.10 -> 0:23:25.86] So if all of..if every one of us used multiple IP addresses then actually the world would be out of them right
+[0:23:19.10 -> 0:23:25.86] 因此，如果我们每个人都使用多个IP地址，那么实际上世界将是正确的
+[0:23:25.86 -> 0:23:30.12] There's seven billion people in the world not all of whom have access to the internet
+[0:23:25.86 -> 0:23:30.12] 世界上有70亿人并非所有人都可以访问互联网
+[0:23:30.18 -> 0:23:31.70] But a large fraction of them do
+[0:23:30.18 -> 0:23:31.70] 但其中很大一部分都有
+[0:23:32.40 -> 0:23:39.58] And so there's a whole kind of crazy way of dealing with the multitude of possible IP addresses
+[0:23:32.40 -> 0:23:39.58] 因此，有一种处理大量可能IP地址的疯狂方式
+[0:23:40.18 -> 0:23:44.20] So the obvious thing would be well let's just allocate a lot more addresses
+[0:23:40.18 -> 0:23:44.20] 所以显而易见的事情就是让我们分配更多的地址
+[0:23:44.46 -> 0:23:49.92] And jump let's just skip 64 bits and go right to 128 and that's the idea behind IPv6
+[0:23:44.46 -> 0:23:49.92] 跳转让我们跳过64位然后直到128，这就是IPv6背后的想法
+[0:23:50.58 -> 0:23:56.44] But quite honestly this has been one of those technologies that's been out there for over 15 years
+[0:23:50.58 -> 0:23:56.44] 但老实说，这已经是那些已经存在超过15年的技术之一
+[0:23:57.00 -> 0:24:01.48] And still has a very low level of adoption so
+[0:23:57.00 -> 0:24:01.48] 并且仍然具有非常低的采用率
+[0:24:02.52 -> 0:24:05.08] It's still a future technology
+[0:24:02.52 -> 0:24:05.08] 它仍然是未来的技术
+[0:24:06.40 -> 0:24:12.36] People have basically figured out all these crazy schemes to make use of just stick within the 4 byte limit
+[0:24:06.40 -> 0:24:12.36] 人们基本上已经找到了所有这些疯狂的方案，只使用4字节限制
+[0:24:20.04 -> 0:24:26.80] Okay so let's start talking the program the sort of programmer perspective on this
+[0:24:20.04 -> 0:24:26.80] 好的，让我们开始讨论程序员对此的看法
+[0:24:27.74 -> 0:24:34.32] And this is one area where you'll wish you weren't programming in C
+[0:24:27.74 -> 0:24:34.32] 这是一个你希望你不用C语言编程的领域
+[0:24:34.42 -> 0:24:35.56] But you are
+[0:24:34.42 -> 0:24:35.56] 但你是
+[0:24:36.10 -> 0:24:38.72] So there's a lot of really crufty stuff
+[0:24:36.10 -> 0:24:38.72] 所以有很多非常苛刻的东西
+[0:24:38.72 -> 0:24:46.83] And it was all developed most of the software protocols were conceived before C even was what it is today
+[0:24:38.72 -> 0:24:46.83] 所有开发的大部分软件协议都是在C甚至是今天之前构思出来的
+[0:24:47.58 -> 0:24:51.40] So like the Kernighan and Ritchie book you have is called the second edition
+[0:24:47.58 -> 0:24:51.40] 所以像Kernighan和Ritchie这本书一样被称为第二版
+[0:24:51.40 -> 0:24:55.14] And it's based on what was called ANSI C or ISO C
+[0:24:51.40 -> 0:24:55.14] 它基于所谓的ANSI C或ISO C.
+[0:24:55.76 -> 0:25:00.50] But these all date before that they date back to the original Kernighan and Ritchie
+[0:24:55.76 -> 0:25:00.50] 但是这些都是在他们追溯到最初的Kernighan和Ritchie之前
+[0:25:00.50 -> 0:25:04.42] So for example void* did not exist in that era
+[0:25:00.50 -> 0:25:04.42] 因此，例如在那个时代不存在void *
+[0:25:04.80 -> 0:25:07.48] And so you use char * as a generic pointer
+[0:25:04.80 -> 0:25:07.48] 所以你使用char *作为通用指针
+[0:25:08.24 -> 0:25:11.36] And so there's just a lot of stuff in this programming
+[0:25:08.24 -> 0:25:11.36] 所以这个编程中有很多东西
+[0:25:11.76 -> 0:25:16.72] Interface where you go wow that is really crufty and that that truth is yes you're right
+[0:25:11.76 -> 0:25:16.72] 你哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇
+[0:25:17.64 -> 0:25:20.80] So in particular there's a lot of different structures that are defined and
+[0:25:17.64 -> 0:25:20.80] 所以特别是定义了很多不同的结构
+[0:25:20.80 -> 0:25:23.98] One of them is called an in_addr which means internet address
+[0:25:20.80 -> 0:25:23.98] 其中一个叫做in_addr，意思是互联网地址
+[0:25:24.64 -> 0:25:28.12] And it's just defined to be a 32-bit unsigned number
+[0:25:24.64 -> 0:25:28.12] 它只是被定义为32位无符号数
+[0:25:30.00 -> 0:25:32.88] And in general as I mentioned there
+[0:25:30.00 -> 0:25:32.88] 就像我在那里提到的那样
+[0:25:33.02 -> 0:25:39.78] The so called network byte order whoever designed the original protocols was a fan of big endian addressing
+[0:25:33.02 -> 0:25:39.78] 所谓的网络字节顺序无论谁设计了原始协议，都是大端寻址的粉丝
+[0:25:39.90 -> 0:25:46.40] And so that's what it is even though actually most of the machines that are out there in this world are little endian
+[0:25:39.90 -> 0:25:46.40] 事实就是如此，即使实际上这个世界上大多数机器都是小端的
+[0:25:46.96 -> 0:25:50.86] And so there's a set of standard library functions
+[0:25:46.96 -> 0:25:50.86] 所以有一套标准的库函数
+[0:25:50.86 -> 0:25:54.46] That you use to convert between network order and host order
+[0:25:50.86 -> 0:25:54.46] 你用于在网络订​​单和主机订单之间进行转换
+[0:25:55.00 -> 0:26:01.64] And the idea of it is now if I run my software on a little endian or a big endian machine
+[0:25:55.00 -> 0:26:01.64] 如果我在一个小端或大端机器上运行我的软件，那么它的想法就是现在
+[0:26:02.10 -> 0:26:04.44] These functions will do the right thing
+[0:26:02.10 -> 0:26:04.44] 这些功能将做正确的事情
+[0:26:04.46 -> 0:26:07.10] So if I just use these standard libraries
+[0:26:04.46 -> 0:26:07.10] 所以，如果我只是使用这些标准库
+[0:26:07.50 -> 0:26:12.62] Then I don't have to worry about porting it every time I change the word ordering of a machine
+[0:26:07.50 -> 0:26:12.62] 然后，每次我更改机器的字顺序时，我都不必担心移植它
+[0:26:13.46 -> 0:26:16.08] One of the things you'll notice here is
+[0:26:13.46 -> 0:26:16.08] 你会注意到的一件事是
+[0:26:16.48 -> 0:26:25.24] There is no function to convert 64-bit data between a network order and host order so
+[0:26:16.48 -> 0:26:25.24] 没有在网络订单和主机订单之间转换64位数据的功能
+[0:26:25.98 -> 0:26:31.40] I don't know what people do when I do it I just write my own saw,my own to do it
+[0:26:25.98 -> 0:26:31.40] 我不知道人们在做什么时会做什么我只是写自己的锯，我自己做
+[0:26:32.92 -> 0:26:35.86] Or I don't because I know my other end is a little endian machine
+[0:26:32.92 -> 0:26:35.86] 或者我没有，因为我知道我的另一端是一个小端机器
+[0:26:37.42 -> 0:26:47.06] So anyways these are already some functions you'll start seeing for that look like network conversion software
+[0:26:37.42 -> 0:26:47.06] 所以无论如何，这些已经是你将开始看到的一些功能，就像网络转换软件一样
+[0:26:50.70 -> 0:26:54.99] And as I mentioned the addresses are written in a dotted decimal form
+[0:26:50.70 -> 0:26:54.99] 正如我所提到的，地址是以点分十进制形式写的
+[0:26:55.52 -> 0:26:58.36] And it's also big endian
+[0:26:55.52 -> 0:26:58.36] 它也是大端
+[0:26:58.38 -> 0:27:03.64] So if I were to write in hex 128 is of course 0x80
+[0:26:58.38 -> 0:27:03.64] 所以如果我用十六进制写128当然是0x80
+[0:27:03.68 -> 0:27:07.32] So that's the most significant byte of the IP address
+[0:27:03.68 -> 0:27:07.32] 这是IP地址中最重要的字节
+[0:27:11.14 -> 0:27:18.38] And then there is a set of functions api calls you can use to convert between this dotted decimal format
+[0:27:11.14 -> 0:27:18.38] 然后有一组函数api调用，你可以使用它们在这个点分十进制格式之间进行转换
+[0:27:18.48 -> 0:27:23.56] And the actual just a 32-bit unsigned int
+[0:27:18.48 -> 0:27:23.56] 而实际只是一个32位的unsigned int
+[0:27:25.16 -> 0:27:27.46] And actually it used to be there is
+[0:27:25.16 -> 0:27:27.46] 实际上它曾经存在
+[0:27:27.90 -> 0:27:31.66] You might see some older presentations where they use different names for this
+[0:27:27.90 -> 0:27:31.66] 你可能会看到一些较旧的演示文稿，其中使用了不同的名称
+[0:27:31.80 -> 0:27:35.48] But the most recent version api calls this
+[0:27:31.80 -> 0:27:35.48] 但是最新版本的api称之为
+[0:27:36.32 -> 0:27:42.48] The presentation version the dotted decimal they referred to it as a presentation
+[0:27:36.32 -> 0:27:42.48] 演示版本点缀小数，他们称之为演示文稿
+[0:27:45.32 -> 0:27:50.92] Then you can look up the and it's in the book to what the calls to these look like
+[0:27:45.32 -> 0:27:50.92] 然后你可以查看书中的内容，看看它们的调用是什么样的
+[0:27:53.24 -> 0:27:56.40] But you probably don't or very seldom
+[0:27:53.24 -> 0:27:56.40] 但你可能不会或很少
+[0:27:58.02 -> 0:27:59.96] When you're thinking about I want to go to Google
+[0:27:58.02 -> 0:27:59.96] 当你想到我想去谷歌的时候
+[0:27:59.98 -> 0:28:05.26] You don't think about what its IP address is you just go to www.google.com
+[0:27:59.98 -> 0:28:05.26] 你只需访问www.google.com即可考虑其IP地址
+[0:28:06.08 -> 0:28:09.58] And for everything you do you refer to it by this
+[0:28:06.08 -> 0:28:09.58] 对于你所做的一切，你都可以参考它
+[0:28:10.24 -> 0:28:15.83] It would have referred called internet domain names which is a hierarchical naming system
+[0:28:10.24 -> 0:28:15.83] 它会称为互联网域名，这是一个分层命名系统
+[0:28:16.40 -> 0:28:21.74] Whereas you know there's .edu is for educational institutions
+[0:28:16.40 -> 0:28:21.74] 虽然你知道.edu是教育机构
+[0:28:22.14 -> 0:28:23.90] .com is for commercial
+[0:28:22.14 -> 0:28:23.90] .com是商业用途
+[0:28:24.08 -> 0:28:30.66] .net is general networking of many countries have their own suffix
+[0:28:24.08 -> 0:28:30.66] .net是许多国家的通用网络都有自己的后缀
+[0:28:30.82 -> 0:28:35.18] So you know .de is for Germany and so forth
+[0:28:30.82 -> 0:28:35.18] 所以你知道.de是德国等等
+[0:28:35.70 -> 0:28:38.50] And so those are called the first level domain names
+[0:28:35.70 -> 0:28:38.50] 所以那些被称为一级域名
+[0:28:38.82 -> 0:28:41.46] And then there's a hierarchical naming structure under that
+[0:28:38.82 -> 0:28:41.46] 然后在那下面有一个分层的命名结构
+[0:28:42.50 -> 0:28:43.40] And
+[0:28:42.50 -> 0:28:43.40] 和
+[0:28:45.60 -> 0:28:49.14] There's actually an interesting question of okay
+[0:28:45.60 -> 0:28:49.14] 实际上有一个有趣的问题
+[0:28:49.14 -> 0:28:58.72] How do I then map from those hierarchical names those domain names into this dotted decimal or the 32 bit IP address
+[0:28:49.14 -> 0:28:58.72] 然后，我如何从这些分层名称将这些域名映射到此点分十进制或32位IP地址
+[0:29:00.24 -> 0:29:07.94] And the job of that is by a very large distributed system called the DNS the domain name system
+[0:29:00.24 -> 0:29:07.94] 而这个工作就是由一个非常大的分布式系统称为DNS域名系统
+[0:29:08.42 -> 0:29:14.66] Where the only sort of centrally managed part of it is at the top level
+[0:29:08.42 -> 0:29:14.66] 其中唯一的集中管理部分位于顶层
+[0:29:15.26 -> 0:29:18.08] So for each of these first level domain names
+[0:29:15.26 -> 0:29:18.08] 因此，对于这些一级域名中的每一个
+[0:29:18.20 -> 0:29:28.60] There's a collection a very large collection of machines that keep track of all the IP addresses
+[0:29:18.20 -> 0:29:28.60] 有一个非常大的机器集合，可以跟踪所有IP地址
+[0:29:29.22 -> 0:29:32.60] That map to one of those first level domain names
+[0:29:29.22 -> 0:29:32.60] 该映射到其中一个第一级域名
+[0:29:32.96 -> 0:29:36.46] And then for example CMU maintains its own naming authority
+[0:29:32.96 -> 0:29:36.46] 然后例如CMU维护自己的命名权限
+[0:29:36.90 -> 0:29:41.30] So anything that says something .cmu.edu
+[0:29:36.90 -> 0:29:41.30] 所以任何东西都说.cmu.edu
+[0:29:41.70 -> 0:29:45.42] There's local DNS servers within CMU
+[0:29:41.70 -> 0:29:45.42] CMU中有本地DNS服务器
+[0:29:45.82 -> 0:29:50.38] That are picking apart ok where should you know
+[0:29:45.82 -> 0:29:50.38] 这是分开确定你应该知道哪里
+[0:29:51.10 -> 0:29:57.92] If I say cs.cum.edu what would be the IP address for that
+[0:29:51.10 -> 0:29:57.92] 如果我说cs.cum.edu那将是什么IP地址
+[0:30:00.22 -> 0:30:05.72] Well and it's actually pretty interesting how this is managed because it's all it's totally decentralized
+[0:30:00.22 -> 0:30:05.72] 嗯，这实际上非常有趣，因为它完全是分散的
+[0:30:05.72 -> 0:30:12.48] There's a whole set of protocols that govern how naming is done
+[0:30:05.72 -> 0:30:12.48] 有一整套协议可以控制命名的完成方式
+[0:30:15.84 -> 0:30:19.28] But conceptually we can think of it as just this big database
+[0:30:15.84 -> 0:30:19.28] 但从概念上讲，我们可以将其视为这个大数据库
+[0:30:19.40 -> 0:30:20.74] That gives me a mapping
+[0:30:19.40 -> 0:30:20.74] 这给了我一个映射
+[0:30:21.46 -> 0:30:27.98] Where I can give a domain name and it will get back to me a one or more IP addresses
+[0:30:21.46 -> 0:30:27.98] 在哪里我可以提供一个域名，它会回复给我一个或多个IP地址
+[0:30:28.44 -> 0:30:31.92] I can give an IP address and it will come back with one or more domain names
+[0:30:28.44 -> 0:30:31.92] 我可以提供一个IP地址，它将返回一个或多个域名
+[0:30:37.68 -> 0:30:40.92] Oh and so there's actually an application you can run
+[0:30:37.68 -> 0:30:40.92] 哦，所以实际上你可以运行一个应用程序
+[0:30:41.58 -> 0:30:45.38] On most machines called nslookup and there's another one called dig
+[0:30:41.58 -> 0:30:45.38] 在大多数名为nslookup的机器上，还有一个名为dig的机器
+[0:30:46.02 -> 0:30:49.88] That you can use to find basically probe the DNS
+[0:30:46.02 -> 0:30:49.88] 你可以用来查找基本探测DNS
+[0:30:50.46 -> 0:30:56.60] And find in either direction you can look at the given a domain name you can find its IP address
+[0:30:50.46 -> 0:30:56.60] 并找到任何一个方向，你可以查看给定的域名，你可以找到它的IP地址
+[0:30:57.14 -> 0:30:59.56] Given an IP address you can find its domain name
+[0:30:57.14 -> 0:30:59.56] 给定IP地址，你可以找到其域名
+[0:31:01.70 -> 0:31:04.24] And we also I'll show you some code that
+[0:31:01.70 -> 0:31:04.24] 我们还会向你展示一些代码
+[0:31:05.62 -> 0:31:08.54] Just as an example of how you do the programming
+[0:31:05.62 -> 0:31:08.54] 就像你如何编程一样
+[0:31:08.98 -> 0:31:12.48] I'll just show that momentarily called hostname
+[0:31:08.98 -> 0:31:12.48] 我只是简单地说明了这个主机名
+[0:31:14.12 -> 0:31:17.04] So just some examples
+[0:31:14.12 -> 0:31:17.04] 所以只是一些例子
+[0:31:29.72 -> 0:31:37.68] You know if I look up some address like the website for the computer science school computer science
+[0:31:29.72 -> 0:31:37.68] 你知道我是否在查找计算机科学学院计算机科学网站的地址
+[0:31:38.54 -> 0:31:40.00] Using nslookup
+[0:31:38.54 -> 0:31:40.00] 使用nslookup
+[0:31:40.70 -> 0:31:42.72] It comes back can people see this okay
+[0:31:40.70 -> 0:31:42.72] 它回来后可以让人看到这个没关系
+[0:31:44.16 -> 0:31:45.62] Doing it bigger?It's okay
+[0:31:44.16 -> 0:31:45.62] 做得更大？没关系
+[0:31:46.28 -> 0:31:50.70] So this is what nslookup like and this stuff here just tells you
+[0:31:46.28 -> 0:31:50.70] 所以这就是nslookup所喜欢的，这里的内容告诉你
+[0:31:51.46 -> 0:31:59.50] You know who where was the actual directory entry in the which DNS  server actually gave this information back
+[0:31:51.46 -> 0:31:59.50] 你知道哪个DNS服务器实际提供此信息的实际目录条目在哪里
+[0:32:00.28 -> 0:32:02.00] And it says that
+[0:32:00.28 -> 0:32:02.00] 它说
+[0:32:03.02 -> 0:32:15.34] www.cs.cum is actually a synonym for a weirder one called WEB-LB.SRV.cum.edu
+[0:32:03.02 -> 0:32:15.34] www.cs.cum实际上是一个名为WEB-LB.SRV.cum.edu的奇怪的同义词
+[0:32:15.74 -> 0:32:19.38] And its IP address is 128.2 like you'd expect
+[0:32:15.74 -> 0:32:19.38] 它的IP地址是128.2，就像你期望的那样
+[0:32:19.80 -> 0:32:21.42] 217.13
+[0:32:19.80 -> 0:32:21.42] 217.13
+[0:32:23.16 -> 0:32:25.88] And of course that works not just at CMU but I can
+[0:32:23.16 -> 0:32:25.88] 当然，这不仅仅适用于CMU，但我可以
+[0:32:29.94 -> 0:32:33.18] You know go ask about what Stanford is up to
+[0:32:29.94 -> 0:32:33.18] 你知道去问斯坦福大学的目标
+[0:32:35.64 -> 0:32:42.56] And it will come back and its IP addresses of something 171.64
+[0:32:35.64 -> 0:32:42.56] 它会回来，其IP地址为171.64
+[0:32:45.84 -> 0:32:49.76] And that's been managed by that and you'll see again it's
+[0:32:45.84 -> 0:32:49.76] 那是由那管理的，你会再次看到它
+[0:32:50.38 -> 0:32:57.03] I asked for www.cs.stanford.edu it said well the real name of that is cs.stanford.edu
+[0:32:50.38 -> 0:32:57.03] 我要求www.cs.stanford.edu它说得好，真正的名字是cs.stanford.edu
+[0:32:57.32 -> 0:33:00.48] And this actually is a point that the
+[0:32:57.32 -> 0:33:00.48] 而这实际上是一个点
+[0:33:01.42 -> 0:33:04.36] The mapping between domain names
+[0:33:01.42 -> 0:33:04.36] 域名之间的映射
+[0:33:05.76 -> 0:33:08.12] And internet addresses is not one-to-one
+[0:33:05.76 -> 0:33:08.12] 互联网地址不是一对一的
+[0:33:08.22 -> 0:33:12.02] You can have multiple domain names that refer to the same internet address
+[0:33:08.22 -> 0:33:12.02] 你可以拥有多个引用相同Internet地址的域名
+[0:33:13.70 -> 0:33:18.70] But you can also have multiple internet addresses
+[0:33:13.70 -> 0:33:18.70] 但你也可以拥有多个互联网地址
+[0:33:22.66 -> 0:33:23.36] Excuse me
+[0:33:22.66 -> 0:33:23.36] 打扰一下
+[0:33:30.16 -> 0:33:31.18] That's weird
+[0:33:30.16 -> 0:33:31.18] 这很奇怪
+[0:33:36.98 -> 0:33:42.10] So like twitter.com when I ask for it it comes back with four different addresses
+[0:33:36.98 -> 0:33:42.10] 就像twitter.com一样，当我要求它时，它会返回四个不同的地址
+[0:33:45.88 -> 0:33:49.56] And if I do the exact same thing again
+[0:33:45.88 -> 0:33:49.56] 如果我再做同样的事情
+[0:33:51.46 -> 0:33:53.28] Mmm came back but yeah
+[0:33:51.46 -> 0:33:53.28] 嗯回来了，但是
+[0:33:53.80 -> 0:33:55.62] You see it came back with
+[0:33:53.80 -> 0:33:55.62] 你看它回来了
+[0:33:57.68 -> 0:34:00.22] The same no not even the same addresses
+[0:33:57.68 -> 0:34:00.22] 同样没有甚至不同的地址
+[0:34:02.08 -> 0:34:08.86] It came back for example here the one that ends with .6 that wasn't in that first was
+[0:34:02.08 -> 0:34:08.86] 例如，它回来了以.6结尾的那个不是第一个的
+[0:34:09.22 -> 0:34:13.98] So it came back with a slightly different set of addresses and a somewhat different order
+[0:34:09.22 -> 0:34:13.98] 所以它回来时的地址略有不同，订单也有所不同
+[0:34:14.32 -> 0:34:17.92] And the idea of that is that actually has multiple servers
+[0:34:14.32 -> 0:34:17.92] 而这个想法实际上是有多个服务器
+[0:34:17.96 -> 0:34:22.18] So when I send to twitter.com or Google or any of these major servers
+[0:34:17.96 -> 0:34:22.18] 所以当我发送到twitter.com或Google或任何这些主要服务器时
+[0:34:22.58 -> 0:34:26.62] There's not just one place in the internet that's handling everybody's google traffic
+[0:34:22.58 -> 0:34:26.62] 互联网上不只有一个地方处理每个人的谷歌流量
+[0:34:26.62 -> 0:34:29.70] Through thousands of places spread around the world
+[0:34:26.62 -> 0:34:29.70] 通过遍布世界各地的数千个地方
+[0:34:30.18 -> 0:34:35.88] And the way they get you there is by playing tricks with the DNS
+[0:34:30.18 -> 0:34:35.88] 他们让你到达那里的方式是通过DNS玩弄技巧
+[0:34:36.74 -> 0:34:41.98] That Google is constantly sending updates to the it maintains its own DNS servers
+[0:34:36.74 -> 0:34:41.98] Google不断向其发送更新，维护自己的DNS服务器
+[0:34:42.40 -> 0:34:43.98] So it's constantly changing them
+[0:34:42.40 -> 0:34:43.98] 所以它不断改变它们
+[0:34:43.98 -> 0:34:48.34] And it will actually give you different addresses depending on where in the world you're located as well
+[0:34:43.98 -> 0:34:48.34] 它实际上会根据你所在的世界位置为你提供不同的地址
+[0:34:48.76 -> 0:34:53.80] To try and provide a server that's sort of reasonably close to you geographically so
+[0:34:48.76 -> 0:34:53.80] 尝试提供一种在地理位置上合理接近你的服务器
+[0:34:54.86 -> 0:34:58.60] There's all just all kinds of tricks that happen through DNS
+[0:34:54.86 -> 0:34:58.60] 所有这些都是通过DNS发生的技巧
+[0:34:58.68 -> 0:35:04.62] That is part of the way they can sort of manage this huge set of addresses
+[0:34:58.68 -> 0:35:04.62] 这是他们管理这一大量地址的方式的一部分
+[0:35:08.20 -> 0:35:12.46] And then there's some other domain names that don't have any IP address
+[0:35:08.20 -> 0:35:12.46] 然后还有一些其他域名没有任何IP地址
+[0:35:13.34 -> 0:35:17.02] That they're somewhere in the hierarchy that hierarchical naming system
+[0:35:13.34 -> 0:35:17.02] 他们在层次结构命名系统的层次结构中
+[0:35:17.02 -> 0:35:19.80] But they're not actually referring to a particular host
+[0:35:17.02 -> 0:35:19.80] 但他们实际上并不是指特定的主持人
+[0:35:21.10 -> 0:35:23.96] So it's a multi multi mapping
+[0:35:21.10 -> 0:35:23.96] 所以这是一个多重映射
+[0:35:27.13 -> 0:35:32.14] In the...the api set reflects
+[0:35:27.13 -> 0:35:32.14] 在......中，api集反映出来
+[0:35:40.16 -> 0:35:44.00] It so this is just going what I told you they sometimes one-to-one
+[0:35:40.16 -> 0:35:44.00] 所以这就是我告诉你他们有时一对一的事情
+[0:35:44.06 -> 0:35:47.28] Sometimes many domain names refer to the same address
+[0:35:44.06 -> 0:35:47.28] 有时许多域名引用相同的地址
+[0:35:48.20 -> 0:35:53.12] Sometimes of one name maps to multiple addresses that change over time
+[0:35:48.20 -> 0:35:53.12] 有时，一个名称会映射到多个随时间变化的地址
+[0:35:53.96 -> 0:35:57.10] And then there's some where it's a valid name
+[0:35:53.96 -> 0:35:57.10] 然后有一些地方是有效的名字
+[0:35:57.42 -> 0:36:01.20] But it doesn't have an IP address it doesn't have a host associated with a question
+[0:35:57.42 -> 0:36:01.20] 但它没有IP地址，它没有与问题相关的主机
+[0:36:01.34 -> 0:36:10.52] [student speaking]
+[0:36:10.52 -> 0:36:12.80] How do I get...how do you get your own IP address
+[0:36:10.52 -> 0:36:12.80] 我怎么得到......你如何获得自己的IP地址
+[0:36:13.66 -> 0:36:17.48] Well all you have to beg borrow or you have to either borrow or buy them
+[0:36:13.66 -> 0:36:17.48] 那么你只需要借钱，或者你必须借或买它们
+[0:36:17.70 -> 0:36:24.36] So for example at CMU there is some number of what they call statically allocated ip addresses
+[0:36:17.70 -> 0:36:24.36] 因此，例如在CMU，有一些他们称之为静态分配的IP地址
+[0:36:24.38 -> 0:36:31.20] Where it's just fixed assigned to that machine and you can register form and request them through computing services
+[0:36:24.38 -> 0:36:31.20] 只需将其固定分配给该机器，你就可以注册表单并通过计算服务请求它们
+[0:36:32.76 -> 0:36:38.44] But most you don't have that most you get one that's I signed dynamically
+[0:36:32.76 -> 0:36:38.44] 但大多数人没有那么多，你得到的是我动态签名的那个
+[0:36:38.52 -> 0:36:43.42] So there's a pool of addresses that you basically they call them leasing
+[0:36:38.52 -> 0:36:43.42] 所以有一个地址池，你基本上他们称之为租赁
+[0:36:43.42 -> 0:36:45.62] That you are assigned with for a while
+[0:36:43.42 -> 0:36:45.62] 你被分配了一段时间
+[0:36:46.26 -> 0:36:49.92] And then but it could possibly be reassigned to someone else
+[0:36:46.26 -> 0:36:49.92] 然后它可能会被重新分配给其他人
+[0:36:53.06 -> 0:36:54.68] And that's part of the way it can manage
+[0:36:53.06 -> 0:36:54.68] 这是它可以管理的方式的一部分
+[0:36:55.30 -> 0:36:57.54] You know somewhat limited set of IP addresses
+[0:36:55.30 -> 0:36:57.54] 你知道一些有限的IP地址
+[0:37:03.24 -> 0:37:07.88] So the idea of like I said that the main
+[0:37:03.24 -> 0:37:07.88] 所以这个想法就像我说的那样主要
+[0:37:15.02 -> 0:37:19.50] A way we'll think about it is in terms of what's called TCP
+[0:37:15.02 -> 0:37:19.50] 我们将考虑的方式就是所谓的TCP
+[0:37:20.18 -> 0:37:22.36] And it says connection oriented protocol
+[0:37:20.18 -> 0:37:22.36] 它说面向连接的协议
+[0:37:22.36 -> 0:37:27.42] Where I establish a connection from one host establishes a connection to another host
+[0:37:22.36 -> 0:37:27.42] 我从一个主机建立连接的位置建立与另一个主机的连接
+[0:37:28.18 -> 0:37:34.52] And they can communicate to each other sending arbitrarily long streams of bytes to each other
+[0:37:28.18 -> 0:37:34.52] 并且它们可以相互通信，相互之间发送任意长的字节流
+[0:37:35.30 -> 0:37:39.44] And so the connection is then two hosts that can talk to each other
+[0:37:35.30 -> 0:37:39.44] 因此，连接是两个可以相互通信的主机
+[0:37:39.78 -> 0:37:42.86] And each of those endpoints is referred to as a socket
+[0:37:39.78 -> 0:37:42.86] 每个端点都称为套接字
+[0:37:46.42 -> 0:37:50.26] And so I can and a socket is both an IP address
+[0:37:46.42 -> 0:37:50.26] 所以我可以和一个套接字都是一个IP地址
+[0:37:51.24 -> 0:37:52.82] And what's called a port number
+[0:37:51.24 -> 0:37:52.82] 什么叫做端口号
+[0:37:52.92 -> 0:37:58.22] So there's a 16 byte, 16 bit number for every connection
+[0:37:52.92 -> 0:37:58.22] 因此每个连接都有一个16字节，16位的数字
+[0:37:58.66 -> 0:38:00.50] That's referred to as its port
+[0:37:58.66 -> 0:38:00.50] 那被称为它的端口
+[0:38:00.96 -> 0:38:04.98] And the reason for that is just because I'm talking to a particular machine
+[0:38:00.96 -> 0:38:04.98] 原因只是因为我正在和一台特定的机器交谈
+[0:38:05.44 -> 0:38:08.12] That machine can support different services
+[0:38:05.44 -> 0:38:08.12] 该机器可以支持不同的服务
+[0:38:08.12 -> 0:38:14.06] It can provide SSH connections it can provide FTP connections
+[0:38:08.12 -> 0:38:14.06] 它可以提供SSH连接，可以提供FTP连接
+[0:38:14.06 -> 0:38:18.04] It can host a mail server,it can host a web server
+[0:38:14.06 -> 0:38:18.04] 它可以托管邮件服务器，它可以托管Web服务器
+[0:38:18.62 -> 0:38:22.68] So a particular machine might have a multitude of different services
+[0:38:18.62 -> 0:38:22.68] 因此，特定的机器可能具有多种不同的服务
+[0:38:23.10 -> 0:38:26.88] And so those are differentiated from each other with what are called port numbers
+[0:38:23.10 -> 0:38:26.88] 因此，这些与所谓的端口号相互区别
+[0:38:27.44 -> 0:38:33.04] And similarly isaac client might have connections to dozens of hosts going at any given time
+[0:38:27.44 -> 0:38:33.04] 同样，isaac客户端可能会在任何给定时间与数十台主机建立连接
+[0:38:33.56 -> 0:38:38.12] I'm cruising the web I'm you know doing all that different stuff
+[0:38:33.56 -> 0:38:38.12] 我正在巡航网络我知道你正在做所有不同的事情
+[0:38:38.52 -> 0:38:42.40] And that's all differentiated the client end that there's different ports
+[0:38:38.52 -> 0:38:42.40] 这就是客户端区别于不同的端口
+[0:38:42.40 -> 0:38:46.72] Associated with your different programs that are running
+[0:38:42.40 -> 0:38:46.72] 与你正在运行的不同程序相关联
+[0:38:47.92 -> 0:38:51.52] And so a port then is a 16-bit integer
+[0:38:47.92 -> 0:38:51.52] 所以端口则是16位整数
+[0:38:51.94 -> 0:38:56.74] That identifies which particular endpoint is
+[0:38:51.94 -> 0:38:56.74] 这标识了哪个特定端点
+[0:38:56.88 -> 0:39:00.40] Being communicated with it either the client side of the server side
+[0:38:56.88 -> 0:39:00.40] 与服务器端的客户端进行通信
+[0:39:01.06 -> 0:39:04.10] And typically at the client side these are assigned dynamically
+[0:39:01.06 -> 0:39:04.10] 通常在客户端，这些是动态分配的
+[0:39:04.50 -> 0:39:06.80] And the referred to as ephemeral ports meaning
+[0:39:04.50 -> 0:39:06.80] 而称为短暂的港口意义
+[0:39:06.80 -> 0:39:11.96] They only are assigned for the limited duration that you have a connection with that
+[0:39:06.80 -> 0:39:11.96] 它们仅在与你有连接的有限时间内分配
+[0:39:12.60 -> 0:39:14.76] That you're maintaining that connection
+[0:39:12.60 -> 0:39:14.76] 你正在维持这种联系
+[0:39:15.38 -> 0:39:19.18] And then there has to be some way if I'm going to contact
+[0:39:15.38 -> 0:39:19.18] 如果我要联系，那么必须有一些方法
+[0:39:19.50 -> 0:39:26.38] And I want to know the dns will tell me what the IP address is of say google.com
+[0:39:19.50 -> 0:39:26.38] 我想知道dns会告诉我google.com的IP地址是什么
+[0:39:26.92 -> 0:39:28.88] But I have to know that
+[0:39:26.92 -> 0:39:28.88] 但我必须知道
+[0:39:29.62 -> 0:39:38.42] Am I communicating with its web service which is port 80 or https secure socket is a different report number
+[0:39:29.62 -> 0:39:38.42] 我与其Web服务进行通信，即端口80或https安全套接字是不同的报告编号
+[0:39:38.80 -> 0:39:40.84] So which service I'm asking for
+[0:39:38.80 -> 0:39:40.84] 那我要求的服务
+[0:39:41.30 -> 0:39:44.38] And there's a standard list what are called well-known ports
+[0:39:41.30 -> 0:39:44.38] 还有一个标准列表，称为众所周知的端口
+[0:39:45.08 -> 0:39:52.58] That are that I can contact at the server end to get the particular service I'm looking for
+[0:39:45.08 -> 0:39:52.58] 那就是我可以在服务器端联系以获得我正在寻找的特定服务
+[0:39:54.14 -> 0:39:58.38] And those are assigned there's a big waste of port assignments
+[0:39:54.14 -> 0:39:58.38] 那些被分配在那里是一个很大的浪费端口分配
+[0:40:00.20 -> 0:40:05.50] And so the again that's part of the sort
+[0:40:00.20 -> 0:40:05.50] 所以这又是那种类型的一部分
+[0:40:06.22 -> 0:40:11.30] Of a whole set of internet standards is the identifiers for the different ports
+[0:40:06.22 -> 0:40:11.30] 一整套互联网标准是不同端口的标识符
+[0:40:11.88 -> 0:40:15.70] What services those are and how those particular protocols work
+[0:40:11.88 -> 0:40:15.70] 这些是什么服务以及这些特定协议如何工作
+[0:40:20.42 -> 0:40:22.64] So when I have a connection then
+[0:40:20.42 -> 0:40:22.64] 所以，当我有一个连接然后
+[0:40:28.38 -> 0:40:32.06] As I mentioned I'll think of it as a connection then is as
+[0:40:28.38 -> 0:40:32.06] 正如我所提到的，我会把它视为连接然后就是这样
+[0:40:32.88 -> 0:40:39.70] A link between two machines based on some known port typically at the server end
+[0:40:32.88 -> 0:40:39.70] 两台计算机之间的链接，基于通常位于服务器端的某些已知端口
+[0:40:40.12 -> 0:40:44.24] And a dynamically assigned or ephemeral port assigned at the client in
+[0:40:40.12 -> 0:40:44.24] 并在客户端分配动态分配或临时端口
+[0:40:45.00 -> 0:40:50.90] And I can refer to then that connection then is identified by the combination of the hosts at the two ends
+[0:40:45.00 -> 0:40:50.90] 然后我可以参考那个连接然后通过两端主机的组合来识别
+[0:40:51.38 -> 0:40:52.70] And the ports that they're using
+[0:40:51.38 -> 0:40:52.70] 以及他们正在使用的端口
+[0:40:59.00 -> 0:41:08.74] And in general then it's the job of the kernel to differentiate the different connections that are coming into a machine
+[0:40:59.00 -> 0:41:08.74] 通常情况下，内核的工作是区分进入机器的不同连接
+[0:41:08.74 -> 0:41:13.20] And figure out which software which process to wake up
+[0:41:08.74 -> 0:41:13.20] 并找出哪个软件处理唤醒
+[0:41:13.78 -> 0:41:20.54] When a data you know when some data arrives from another machine
+[0:41:13.78 -> 0:41:20.54] 当某些数据从另一台机器到达时你知道的数据
+[0:41:20.54 -> 0:41:26.36] In which actual program running on that machine will make use of that data
+[0:41:20.54 -> 0:41:26.36] 在该机器上运行的实际程序将使用该数据
+[0:41:26.78 -> 0:41:35.56] And that's done by associating for each of the ports, a particular process executing program
+[0:41:26.78 -> 0:41:35.56] 这是通过关联每个端口，特定进程执行程序来完成的
+[0:41:35.98 -> 0:41:38.10] That's going to handle those particular requests
+[0:41:35.98 -> 0:41:38.10] 这将处理这些特定请求
+[0:41:41.80 -> 0:41:50.62] And it's totally possible for a client to be interacting with a single server over different ports
+[0:41:41.80 -> 0:41:50.62] 并且客户端完全可以通过不同的端口与单个服务器进行交互
+[0:41:51.06 -> 0:41:54.46] But those are considered to be different connections and
+[0:41:51.06 -> 0:41:54.46] 但那些被认为是不同的联系和
+[0:41:56.06 -> 0:41:59.28] And so they don't really interfere with each other
+[0:41:56.06 -> 0:41:59.28] 所以他们并没有真正互相干扰
+[0:42:05.08 -> 0:42:10.44] So that's what I mentioned is this is what we refer to as sockets programming or the sockets interface
+[0:42:05.08 -> 0:42:10.44] 所以我所提到的是这就是我们所说的套接字编程或套接字接口
+[0:42:11.94 -> 0:42:17.42] It was developed sort of as the internet was evolving in the late 70s and early 80s
+[0:42:11.94 -> 0:42:17.42] 它的开发有点像互联网在70年代末和80年代初期不断发展
+[0:42:20.48 -> 0:42:24.34] So socket then as I said is certain logically one end
+[0:42:20.48 -> 0:42:24.34] 所以socket就像我说的那样在某种程度上是逻辑上的一端
+[0:42:24.60 -> 0:42:26.02] One of the two ends of a connection
+[0:42:24.60 -> 0:42:26.02] 连接的两端之一
+[0:42:27.12 -> 0:42:31.88] And from an application point of view you'll see it as a file descriptor
+[0:42:27.12 -> 0:42:31.88] 从应用程序的角度来看，你会将其视为文件描述符
+[0:42:32.52 -> 0:42:37.22] Just the low-level file stuff that you've already seen that you can do reading and writing from
+[0:42:32.52 -> 0:42:37.22] 只是你已经看过的低级文件，你可以从中读取和写入
+[0:42:37.96 -> 0:42:38.34] Um
+[0:42:37.96 -> 0:42:38.34] 一
+[0:42:40.10 -> 0:42:47.40] And so that's the sort of mental model that is provided by the socket interface
+[0:42:40.10 -> 0:42:47.40] 这就是套接字接口提供的那种心智模型
+[0:42:50.66 -> 0:42:54.96] But it's a very different you know the actual implementation of network
+[0:42:50.66 -> 0:42:54.96] 但是你知道网络的实际实现是非常不同的
+[0:42:55.46 -> 0:42:57.10] When you write to a socket
+[0:42:55.46 -> 0:42:57.10] 当你写入套接字时
+[0:42:57.56 -> 0:43:01.20] It's firing up all kinds of network stuff whereas you write to a disk
+[0:42:57.56 -> 0:43:01.20] 当你写入磁盘时，它会启动所有类型的网络
+[0:43:01.84 -> 0:43:03.82] It's operating a disk controller
+[0:43:01.84 -> 0:43:03.82] 它正在运行磁盘控制器
+[0:43:03.88 -> 0:43:08.10] So at the hardware level and even at the lower levels of software they're very different beasts
+[0:43:03.88 -> 0:43:08.10] 因此，在硬件层面，甚至在较低级别的软件中，它们都是非常不同的野兽
+[0:43:08.72 -> 0:43:11.64] But you as an application programmer see some commonality there
+[0:43:08.72 -> 0:43:11.64] 但是作为应用程序员，你在那里看到了一些共性
+[0:43:12.90 -> 0:43:15.84] Okay so let's jump right into the API
+[0:43:12.90 -> 0:43:15.84] 好的，让我们直接进入API
+[0:43:16.52 -> 0:43:20.74] And again this is a place where you'll wish you were programming in a language
+[0:43:16.52 -> 0:43:20.74] 再次，这是一个你希望你用语言编程的地方
+[0:43:20.94 -> 0:43:24.40] That had a type hierarchy
+[0:43:20.94 -> 0:43:24.40] 那有一个类型层次结构
+[0:43:24.60 -> 0:43:26.58] But you aren't,you're programming in C
+[0:43:24.60 -> 0:43:26.58] 但你不是，你在用C编程
+[0:43:29.22 -> 0:43:34.26] There's a type, there's a zillion struck's that you kind of have to get familiar with
+[0:43:29.22 -> 0:43:34.26] 有一种类型，你必须要熟悉它
+[0:43:34.26 -> 0:43:40.14] But one's called a sockaddr and basically it's just a 16 bytes worth of stuff
+[0:43:34.26 -> 0:43:40.14] 但是有人称之为sockaddr，基本上它只是一个16字节的东西
+[0:43:40.96 -> 0:43:45.20] Where the only thing that's special here is that the leading two bytes
+[0:43:40.96 -> 0:43:45.20] 这里唯一特别的东西是前两个字节
+[0:43:45.84 -> 0:43:48.24] A designate what type of socket this is
+[0:43:45.84 -> 0:43:48.24] A指定这是什么类型的插座
+[0:43:48.62 -> 0:43:51.72] And particularly be different whether it's a TCP socket
+[0:43:48.62 -> 0:43:51.72] 特别是它是否是TCP套接字是不同的
+[0:43:52.10 -> 0:43:57.06] An IPv6 socket a UDP socket
+[0:43:52.10 -> 0:43:57.06] IPv6套接字是UDP套接字
+[0:43:57.06 -> 0:43:59.02] And all those will have different numbers
+[0:43:57.06 -> 0:43:59.02] 而所有这些都会有不同的数字
+[0:43:59.60 -> 0:44:04.08] A different constant in there that tells you which type of socket it is
+[0:43:59.60 -> 0:44:04.08] 那里有一个不同的常量，告诉你它是哪种类型的套接字
+[0:44:04.58 -> 0:44:10.08] And then the high level the sockets in a lot of the programs don't need to know
+[0:44:04.58 -> 0:44:10.08] 然后高级别的许多程序中的套接字不需要知道
+[0:44:10.46 -> 0:44:12.60] You know which type of connection this is
+[0:44:10.46 -> 0:44:12.60] 你知道这是什么类型的连接
+[0:44:12.72 -> 0:44:16.58] They can just deal with they basically call other software to deal with that
+[0:44:12.72 -> 0:44:16.58] 他们可以只处理他们基本上调用其他软件来处理它
+[0:44:17.78 -> 0:44:20.34] So that's why it's referred to as being families specific
+[0:44:17.78 -> 0:44:20.34] 所以这就是为什么它被称为特定的家庭
+[0:44:22.06 -> 0:44:28.50] And then the socket stuff isn't even necessarily referred to the internet the Internet
+[0:44:22.06 -> 0:44:28.50] 然后套接字的东西甚至不一定被称为互联网上网
+[0:44:29.10 -> 0:44:34.02] And so there's a more specific one called a socket or underscore in
+[0:44:29.10 -> 0:44:34.02] 因此，有一个更具体的称为套接字或下划线
+[0:44:34.98 -> 0:44:39.42] That is used for IPv4 sockets
+[0:44:34.98 -> 0:44:39.42] 那用于IPv4套接字
+[0:44:42.22 -> 0:44:43.52] Well not IPv6
+[0:44:42.22 -> 0:44:43.52] 不是IPv6
+[0:44:43.58 -> 0:44:49.22] And so in particular it fills in fields one is called the port which as I mentioned is 16 bits
+[0:44:43.58 -> 0:44:49.22] 所以特别是它填写了一个被称为端口的字段，正如我所提到的那样是16位
+[0:44:49.96 -> 0:44:51.92] And then the IP address
+[0:44:49.96 -> 0:44:51.92] 然后是IP地址
+[0:44:52.54 -> 0:44:56.16] The 4 byte IP address both of which are in
+[0:44:52.54 -> 0:44:56.16] 两个都在的4字节IP地址
+[0:44:57.04 -> 0:45:00.82] Even if you're running the software on a x86 machine
+[0:44:57.04 -> 0:45:00.82] 即使你在x86计算机上运行该软件
+[0:45:00.82 -> 0:45:03.56] These should be in big endian order
+[0:45:00.82 -> 0:45:03.56] 这些应该是大端序
+[0:45:05.16 -> 0:45:08.86] And you'll see that this is what I mean that this is sort of a
+[0:45:05.16 -> 0:45:08.86] 你会发现这就是我的意思，这就是一种
+[0:45:09.16 -> 0:45:13.38] C version of subtyping if you know something like C++ or java
+[0:45:09.16 -> 0:45:13.38] 如果你知道像C ++或java这样的东西，那就是C版的子类型
+[0:45:13.58 -> 0:45:16.56] Or you know a language with type inheritance
+[0:45:13.58 -> 0:45:16.56] 或者你知道具有类型继承的语言
+[0:45:17.28 -> 0:45:25.48] That you can think of it as a sockaddr_in a sort of a subclass of a sockaddr
+[0:45:17.28 -> 0:45:25.48] 你可以把它想象成一个sockaddr，它是一个sockaddr的子类
+[0:45:25.90 -> 0:45:28.68] Right it has more information it's compatible with
+[0:45:25.90 -> 0:45:28.68] 它拥有更多与之兼容的信息
+[0:45:28.74 -> 0:45:32.12] But has more information than a socket
+[0:45:28.74 -> 0:45:32.12] 但是有比socket更多的信息
+[0:45:33.56 -> 0:45:38.00] And then there's another type of for IPv6 has a different kind of
+[0:45:33.56 -> 0:45:38.00] 然后还有另一种类型的IPv6有不同的类型
+[0:45:38.42 -> 0:45:41.14] Struck that they fill in for its information
+[0:45:38.42 -> 0:45:41.14] 打动他们填写信息
+[0:45:42.36 -> 0:45:46.38] And then they pat it out with 8 bytes of zeros
+[0:45:42.36 -> 0:45:46.38] 然后他们用8个字节的零填充它
+[0:45:47.04 -> 0:45:50.48] Just because this particular protocol doesn't require the full 16 bytes
+[0:45:47.04 -> 0:45:50.48] 仅仅因为这个特定的协议不需要完整的16个字节
+[0:45:53.92 -> 0:46:03.42] Okay so this is sort of what it looks like to operate a full-blown Client-server system from a programmers perspective
+[0:45:53.92 -> 0:46:03.42] 好的，这就是从程序员的角度来看，运行一个完整的客户端 - 服务器系统的样子
+[0:46:03.94 -> 0:46:09.96] And we're going to for the rest of today and all of Thursday go through all these steps
+[0:46:03.94 -> 0:46:09.96] 我们将在今天的剩余时间内完成所有这些步骤
+[0:46:10.36 -> 0:46:15.84] And you as a programmer are actually going to have to understand each of these steps
+[0:46:10.36 -> 0:46:15.84] 作为程序员，你实际上必须了解每个步骤
+[0:46:16.00 -> 0:46:19.56] What they do?what they mean?And how to use them
+[0:46:16.00 -> 0:46:19.56] 他们做了什么？他们的意思是什么？以及如何使用它们
+[0:46:19.82 -> 0:46:23.42] The good news is there's some pretty standard patterns here
+[0:46:19.82 -> 0:46:23.42] 好消息是这里有一些非常标准的模式
+[0:46:23.44 -> 0:46:31.98] And so you can often grab some existing code say out of the book to use that will make this not as painful as it might look
+[0:46:23.44 -> 0:46:31.98] 因此，你可以经常抓住一些现有的代码，从书中说出使用，这将使它不像它看起来那么痛苦
+[0:46:33.76 -> 0:46:37.18] So but the overall idea of this this picture then is
+[0:46:33.76 -> 0:46:37.18] 所以，这个图片的总体思路是
+[0:46:39.28 -> 0:46:41.52] Sorry kick it used to fit my remote doesn't work
+[0:46:39.28 -> 0:46:41.52] 抱歉踢它以适合我的遥控器不起作用
+[0:46:45.16 -> 0:46:49.96] On the the right hand side refers to the steps that the server has to go through
+[0:46:45.16 -> 0:46:49.96] 在右侧是指服务器必须经历的步骤
+[0:46:50.32 -> 0:46:52.54] And the left hand side is what the client does
+[0:46:50.32 -> 0:46:52.54] 而左手边是客户所做的
+[0:46:53.14 -> 0:46:57.68] So the upper right is what it takes to set up a server
+[0:46:53.14 -> 0:46:57.68] 所以右上角是设置服务器所需的
+[0:46:58.00 -> 0:47:01.60] That is then a program that's running there
+[0:46:58.00 -> 0:47:01.60] 那是一个在那里运行的程序
+[0:47:02.04 -> 0:47:07.34] Ready to receive connections  from a client and perform various services
+[0:47:02.04 -> 0:47:07.34] 准备好接收来自客户端的连接并执行各种服务
+[0:47:09.48 -> 0:47:15.76] And so obviously before the client can do anything the server has to exist
+[0:47:09.48 -> 0:47:15.76] 显然，在客户端可以执行任何操作之前，服务器必须存在
+[0:47:15.86 -> 0:47:18.16] So that has to be the first step in setting things up
+[0:47:15.86 -> 0:47:18.16] 所以这必须是设置的第一步
+[0:47:19.64 -> 0:47:25.60] And then we have to...we'll fire up a cert a client that will make use of this service
+[0:47:19.64 -> 0:47:25.60] 然后我们必须......我们将启动一个将使用此服务的客户证书
+[0:47:26.90 -> 0:47:29.14] And then there'll be what's referred to as a session
+[0:47:26.90 -> 0:47:29.14] 然后就会有一个被称为会话的东西
+[0:47:29.16 -> 0:47:33.68] Meaning a kind of back and forth communication between the client and server
+[0:47:29.16 -> 0:47:33.68] 意味着客户端和服务器之间的一种来回通信
+[0:47:33.68 -> 0:47:38.08] Doing whatever they're going to do,this is not specific to any particular application
+[0:47:33.68 -> 0:47:38.08] 做任何他们要做的事情，这不是特定于任何特定的应用程序
+[0:47:38.76 -> 0:47:44.76] And like I said it will involve you'll see rio_ remember those who are reliable I/O
+[0:47:38.76 -> 0:47:44.76] 就像我说的那样，你会看到rio_记得那些可靠的I / O.
+[0:47:45.32 -> 0:47:48.66] Functions we talked about as part of the UNIX I/O
+[0:47:45.32 -> 0:47:48.66] 我们作为UNIX I / O的一部分讨论过的函数
+[0:47:49.64 -> 0:47:59.66] So it's a way to read and write in a room and handle some of the quirks of low-level I/O
+[0:47:49.64 -> 0:47:59.66] 因此，这是一种在房间中读写的方法，并处理一些低级I / O的怪癖
+[0:47:59.68 -> 0:48:03.25] But basically this is sending and receiving messages over the internet
+[0:47:59.68 -> 0:48:03.25] 但基本上这是通过互联网发送和接收消息
+[0:48:04.76 -> 0:48:06.12] And then once that's done
+[0:48:04.76 -> 0:48:06.12] 然后一旦完成
+[0:48:07.30 -> 0:48:12.22] Typically then the client will close its connection sort of equivalent of hanging up its phone
+[0:48:07.30 -> 0:48:12.22] 通常情况下，客户端将关闭其连接等同于挂断其电话
+[0:48:13.02 -> 0:48:14.70] And say ok I'm done
+[0:48:13.02 -> 0:48:14.70] 说好的我已经完成了
+[0:48:15.12 -> 0:48:21.56] And then sometime later or maybe never depending on what kind of web you know service this is
+[0:48:15.12 -> 0:48:21.56] 然后某个时候或者可能永远不会取决于你知道服务的网络类型
+[0:48:22.10 -> 0:48:24.54] If the server wants to shut down
+[0:48:22.10 -> 0:48:24.54] 如果服务器想要关闭
+[0:48:24.54 -> 0:48:29.90] It has its own a collection of calls that it makes to stop that service
+[0:48:24.54 -> 0:48:29.90] 它有自己的一系列调用来阻止该服务
+[0:48:31.22 -> 0:48:36.64] So anyways just to kind of give you the landscape of what this picture means
+[0:48:31.22 -> 0:48:36.64] 所以无论如何只是为了给你这个图片的意义
+[0:48:41.08 -> 0:48:43.78] So we're going to sort of jump into
+[0:48:41.08 -> 0:48:43.78] 所以我们要跳进去
+[0:48:45.21 -> 0:48:48.30] The middle this the top level up and we'll focus
+[0:48:45.21 -> 0:48:48.30] 中间这是顶级，我们将关注
+[0:48:52.06 -> 0:48:53.84] Actually which will we focus on
+[0:48:52.06 -> 0:48:53.84] 实际上我们将关注哪些
+[0:48:54.42 -> 0:48:56.90] Well we'll talk to some level in parallel
+[0:48:54.42 -> 0:48:56.90] 那么我们会在某种程度上并行谈论
+[0:48:58.26 -> 0:49:03.12] Because there's a lot of commonality as you can see between what goes on with the server and what goes on with the client
+[0:48:58.26 -> 0:49:03.12] 因为你可以看到服务器发生的事情与客户端发生的事情之间存在很多共性
+[0:49:07.88 -> 0:49:12.64] Yeah and so actually the top level call this one called getaddrinfo is the way that
+[0:49:07.88 -> 0:49:12.64] 是的，实际上顶级调用这个名为getaddrinfo的方式就是这样
+[0:49:13.16 -> 0:49:14.34] It sort of...
+[0:49:13.16 -> 0:49:14.34] 有点......
+[0:49:18.14 -> 0:49:25.90] Initiate things and actually does the lookup to map from a domain name to a IP address
+[0:49:18.14 -> 0:49:25.90] 启动事物并实际执行查找以从域名映射到IP地址
+[0:49:26.52 -> 0:49:27.76] So we'll cover that later
+[0:49:26.52 -> 0:49:27.76] 所以我们稍后会介绍
+[0:49:28.28 -> 0:49:35.14] So the first step in on either side then and creating a connection is a call to a function called socket
+[0:49:28.28 -> 0:49:35.14] 因此，在任何一方创建连接的第一步是调用一个名为socket的函数
+[0:49:37.76 -> 0:49:42.82] And the reason I wanted to blackboard was to help you keep track of this
+[0:49:37.76 -> 0:49:42.82] 我想黑板的原因是帮助你跟踪这个
+[0:50:05.84 -> 0:50:08.96] So the first call is a doesn't do much
+[0:50:05.84 -> 0:50:08.96] 所以第一次打电话是做不了多少
+[0:50:09.36 -> 0:50:12.84] Oh and that's why the function call is socket
+[0:50:09.36 -> 0:50:12.84] 哦，这就是函数调用是socket的原因
+[0:50:13.38 -> 0:50:14.48] But the
+[0:50:13.38 -> 0:50:14.48] 但是
+[0:50:17.72 -> 0:50:19.52] It only happens within the application
+[0:50:17.72 -> 0:50:19.52] 它只发生在应用程序中
+[0:50:19.52 -> 0:50:24.64] It doesn't make a use of any part of the operating system doesn't send anything over the network
+[0:50:19.52 -> 0:50:24.64] 它不会使用操作系统的任何部分，也不会通过网络发送任何内容
+[0:50:25.12 -> 0:50:28.86] And the idea is to basically say hey I want to create a socket
+[0:50:25.12 -> 0:50:28.86] 而这个想法基本上就是说我想要创建一个套接字
+[0:50:31.08 -> 0:50:33.66] And it's given three arguments
+[0:50:31.08 -> 0:50:33.66] 它有三个论点
+[0:50:34.18 -> 0:50:37.10] The first two which is AF_INET
+[0:50:34.18 -> 0:50:37.10] 前两个是AF_INET
+[0:50:37.14 -> 0:50:45.44] All these upper case on names are constants that are built in or included in the various .h files that
+[0:50:37.14 -> 0:50:45.44] 名称上的所有这些大写都是内置或包含在各种.h文件中的常量
+[0:50:45.52 -> 0:50:47.28] That you include in writing this code
+[0:50:45.52 -> 0:50:47.28] 你在编写此代码时包含的内容
+[0:50:47.64 -> 0:50:53.62] And AF_INET just means it's a IPv4 so 32-bit addresses
+[0:50:47.64 -> 0:50:53.62] 而AF_INET只是意味着它是一个IPv4 32位地址
+[0:50:54.66 -> 0:50:58.52] And then the second parameter is says you want a SOCK_STREAM
+[0:50:54.66 -> 0:50:58.52] 然后第二个参数表示你想要一个SOCK_STREAM
+[0:50:58.92 -> 0:51:01.14] And that refers to a TCP connection
+[0:50:58.92 -> 0:51:01.14] 这指的是TCP连接
+[0:51:01.18 -> 0:51:07.68] It's referred to as a stream connection because like I said you get to send as many bytes as you like a stream of bytes
+[0:51:01.18 -> 0:51:07.68] 它被称为流连接，因为正如我所说，你可以发送尽可能多的字节流
+[0:51:08.24 -> 0:51:09.82] Either direction
+[0:51:08.24 -> 0:51:09.82] 无论哪个方向
+[0:51:10.94 -> 0:51:12.08] And then
+[0:51:10.94 -> 0:51:12.08] 接着
+[0:51:15.94 -> 0:51:18.86] Zero protocol
+[0:51:15.94 -> 0:51:18.86] 零协议
+[0:51:18.92 -> 0:51:22.36] Well I guess it must not be very interesting because I set it to zero
+[0:51:18.92 -> 0:51:22.36] 嗯，我想它一定不是很有趣，因为我把它设置为零
+[0:51:23.32 -> 0:51:26.16] So we don't need to do anything in this particular case
+[0:51:23.32 -> 0:51:26.16] 所以我们不需要在这种特殊情况下做任何事情
+[0:51:27.14 -> 0:51:29.02] There are man pages on this by the way which
+[0:51:27.14 -> 0:51:29.02] 通过这种方式有关于此的手册页
+[0:51:29.72 -> 0:51:33.68] If you just tried to learn all sockets programming by reading men pages you'd go crazy
+[0:51:29.72 -> 0:51:33.68] 如果你只是通过阅读男性页面来尝试学习所有套接字编程，那么你会发疯
+[0:51:33.68 -> 0:51:37.28] But once you kind of have the idea of it the man pages are pretty useful
+[0:51:33.68 -> 0:51:37.28] 但是一旦你有了它的想法，那么手册页非常有用
+[0:51:39.82 -> 0:51:41.48] And then the next part
+[0:51:39.82 -> 0:51:41.48] 然后是下一部分
+[0:51:42.82 -> 0:51:48.16] You'll see,we're looking only now on the server side is called bind
+[0:51:42.82 -> 0:51:48.16] 你会看到，我们现在只在服务器端看起来叫做bind
+[0:51:50.24 -> 0:51:51.12] And
+[0:51:50.24 -> 0:51:51.12] 和
+[0:51:58.64 -> 0:52:02.60] What bind does then is that specific then to a server
+[0:51:58.64 -> 0:52:02.60] 那么什么绑定才是特定于服务器的绑定
+[0:52:03.32 -> 0:52:07.08] And now this is a make this interfaces to the kernel
+[0:52:03.32 -> 0:52:07.08] 现在这是一个使这个接口连接到内核
+[0:52:07.10 -> 0:52:10.38] It says I want to
+[0:52:07.10 -> 0:52:10.38] 它说我想
+[0:52:20.65 -> 0:52:23.02] Designate which IP address
+[0:52:20.65 -> 0:52:23.02] 指定哪个IP地址
+[0:52:24.46 -> 0:52:27.92] And let me just...
+[0:52:24.46 -> 0:52:27.92] 让我......
+[0:52:29.10 -> 0:52:32.86] So I'm going to cheat a little bit and let me by making sure I don't say anything that's not true
+[0:52:29.10 -> 0:52:32.86] 所以我要欺骗一点，让我确保我不说任何不真实的东西
+[0:52:34.80 -> 0:52:36.54] Yeah I'm right sorry
+[0:52:34.80 -> 0:52:36.54] 是的，我很对不起
+[0:52:37.14 -> 0:52:38.36] I just want to make sure
+[0:52:37.14 -> 0:52:38.36] 我只是想确定一下
+[0:52:39.12 -> 0:52:40.62] Bind actually
+[0:52:39.12 -> 0:52:40.62] 实际上绑定
+[0:52:43.72 -> 0:52:44.42] Tells you
+[0:52:43.72 -> 0:52:44.42] 告诉你
+[0:52:47.20 -> 0:52:48.34] Oh excuse me
+[0:52:47.20 -> 0:52:48.34] 哦，对不起
+[0:52:48.92 -> 0:52:52.62] You'll see that a socket the call to socket returns an int
+[0:52:48.92 -> 0:52:52.62] 你将看到套接字对套接字的调用返回一个int
+[0:52:53.30 -> 0:52:57.28] But it's what it's returning is a file descriptor remember we said that
+[0:52:53.30 -> 0:52:57.28] 但是它返回的是文件描述符，记得我们说过
+[0:52:57.82 -> 0:53:04.90] If you refer to a file a low-level file just by an integer id typically a small integer value
+[0:52:57.82 -> 0:53:04.90] 如果仅通过整数id引用文件低级文件，通常是一个小整数值
+[0:53:05.32 -> 0:53:08.74] There's some standard ones for standard in,standard out,standard error
+[0:53:05.32 -> 0:53:08.74] 标准输入，标准输出，标准错误有一些标准
+[0:53:09.08 -> 0:53:11.30] And then beyond that they're just assigned incrementally
+[0:53:09.08 -> 0:53:11.30] 除此之外，他们只是逐步分配
+[0:53:12.02 -> 0:53:14.18] So socket will return a number
+[0:53:12.02 -> 0:53:14.18] 所以socket会返回一个数字
+[0:53:14.72 -> 0:53:18.48] That you then refer used to refer to this as a file
+[0:53:14.72 -> 0:53:18.48] 然后你引用用于将其称为文件
+[0:53:20.48 -> 0:53:27.44] So bind then you've pass in that the name of your socket file descriptor
+[0:53:20.48 -> 0:53:27.44] 所以绑定然后你传递了你的套接字文件描述符的名称
+[0:53:27.92 -> 0:53:33.60] And you provide a whether is a socketaddr int
+[0:53:27.92 -> 0:53:33.60] 并且你提供了一个是否是socketaddr int
+[0:53:38.78 -> 0:53:41.62] SA and I'm using the the notation
+[0:53:38.78 -> 0:53:41.62] SA和我正在使用符号
+[0:53:42.12 -> 0:53:46.50] SA as a shortcut for sockaddr struct sockaddr
+[0:53:42.12 -> 0:53:46.50] SA作为sockaddr struct sockaddr的快捷方式
+[0:53:49.56 -> 0:53:52.54] And then you have to also say what the length of the address is
+[0:53:49.56 -> 0:53:52.54] 然后你还要说出地址的长度是多少
+[0:53:52.62 -> 0:53:55.44] So in the case of IPv4 that would be four
+[0:53:52.62 -> 0:53:55.44] 因此，在IPv4的情况下，将是四个
+[0:53:56.42 -> 0:53:59.38] But you don't usually use that number directly there's a
+[0:53:56.42 -> 0:53:59.38] 但是你通常不会直接使用那个号码
+[0:54:00.00 -> 0:54:04.24] We'll talk about it but that top-level call called gedit or addr info
+[0:54:00.00 -> 0:54:04.24] 我们将讨论它，但顶层调用称为gedit或addr信息
+[0:54:04.24 -> 0:54:11.02] As a relatively new api that was created and in this addition to the book but not in previous ones
+[0:54:04.24 -> 0:54:11.02] 作为一个相对较新的api，它是在本书中添加的，而不是之前的
+[0:54:11.40 -> 0:54:17.44] Become the now the standard way that you get all the parameters that you're supposed to pass into all these different calls
+[0:54:11.40 -> 0:54:17.44] 成为现在标准的方式，你得到你应该传递给所有这些不同的电话的所有参数
+[0:54:18.02 -> 0:54:25.44] And the idea of it then is it's a pretty small adjustment to then write code that's good for either IPv4 or IPv6
+[0:54:18.02 -> 0:54:25.44] 然后它的想法是，这是一个非常小的调整，然后编写对IPv4或IPv6有利的代码
+[0:54:28.48 -> 0:54:33.60] So you don't normally give the actual number from that you get it from another place and passage it
+[0:54:28.48 -> 0:54:33.60] 因此，你通常不会给出实际的数字，而是从另一个地方获得它并通过它
+[0:54:38.70 -> 0:54:40.02] So binding then
+[0:54:38.70 -> 0:54:40.02] 那么绑定呢
+[0:54:44.74 -> 0:54:47.66] It's a kernel call
+[0:54:44.74 -> 0:54:47.66] 这是一个内核调用
+[0:55:03.76 -> 0:55:06.00] That designates which particular service
+[0:55:03.76 -> 0:55:06.00] 这指定了哪种特定服务
+[0:55:06.68 -> 0:55:09.36] This program is going to be hosting
+[0:55:06.68 -> 0:55:09.36] 这个计划将主持
+[0:55:10.43 -> 0:55:13.66] But which will be the server for and that's given by its port number
+[0:55:10.43 -> 0:55:13.66] 但是它的服务器是由端口号给出的
+[0:55:23.88 -> 0:55:26.54] And then the next step is to
+[0:55:23.88 -> 0:55:26.54] 然后下一步是
+[0:55:27.66 -> 0:55:30.68] To listen and that's just a call that says
+[0:55:27.66 -> 0:55:30.68] 听，这只是一个电话说
+[0:55:41.02 -> 0:55:47.48] That will now convert this socket to a listening socket which you need as a server
+[0:55:41.02 -> 0:55:47.48] 现在，它将此套接字转换为你需要作为服务器的侦听套接字
+[0:55:55.44 -> 0:55:58.56] So it's a way of telling the kernel that this will be
+[0:55:55.44 -> 0:55:58.56] 所以这是告诉内核这将是一种方式
+[0:56:00.46 -> 0:56:01.60] It will be a server sar
+[0:56:00.46 -> 0:56:01.60] 这将是一个服务器sar
+[0:56:07.80 -> 0:56:11.80] So obviously bind and listen are related ideas
+[0:56:07.80 -> 0:56:11.80] 显然，绑定和倾听是相关的想法
+[0:56:11.94 -> 0:56:18.86] But you have to do both steps and in that particular order to create a listening socket or one for a server
+[0:56:11.94 -> 0:56:18.86] 但是你必须按照特定的顺序执行这两个步骤来创建一个侦听套接字或一个用于服务器的套接字
+[0:56:22.80 -> 0:56:27.24] And then the final part of that to operate us is to say except
+[0:56:22.80 -> 0:56:27.24] 然后，操作我们的最后一部分是说除外
+[0:56:33.46 -> 0:56:34.24] And
+[0:56:33.46 -> 0:56:34.24] 和
+[0:56:39.68 -> 0:56:45.72] Oh that means okay now we've established this now I'm actually ready to receive phone calls
+[0:56:39.68 -> 0:56:45.72] 哦，这意味着好了，现在我们已经建立了这个我现在准备好接听电话了
+[0:56:46.24 -> 0:56:49.46] Is essentially what it says is this is the final step to say
+[0:56:46.24 -> 0:56:49.46] 基本上它说的是这是最后一步
+[0:56:50.08 -> 0:56:53.68] Okay this one's ready to accept connection requests
+[0:56:50.08 -> 0:56:53.68] 好的，这个已经准备好接受连接请求了
+[0:56:54.88 -> 0:56:56.58] It has a similar
+[0:56:54.88 -> 0:56:56.58] 它有类似的
+[0:57:03.00 -> 0:57:05.28] Set of arguments to sock it is sock it
+[0:57:03.00 -> 0:57:05.28] 袜子的一组参数是袜子
+[0:57:06.34 -> 0:57:06.94] But slight difference
+[0:57:06.34 -> 0:57:06.94] 但略有不同
+[0:57:07.32 -> 0:57:09.96] And now the interesting thing is acceptable return
+[0:57:07.32 -> 0:57:09.96] 而现在有趣的事情是可以接受的回报
+[0:57:10.38 -> 0:57:12.74] Yet another file descriptor
+[0:57:10.38 -> 0:57:12.74] 又一个文件描述符
+[0:57:14.98 -> 0:57:18.60] I'll so the first file descriptor is the sort of generic
+[0:57:14.98 -> 0:57:18.60] 我会这样，第一个文件描述符就是那种泛型
+[0:57:21.00 -> 0:57:23.98] Accept and base basically except we'll
+[0:57:21.00 -> 0:57:23.98] 除了我们之外，基本上接受和基础
+[0:57:24.54 -> 0:57:28.12] Just hang there and wait until some client makes a connection
+[0:57:24.54 -> 0:57:28.12] 只需挂起并等到某个客户端建立连接
+[0:57:29.10 -> 0:57:33.86] And when it does then it will set up a new socket
+[0:57:29.10 -> 0:57:33.86] 当它发生时，它将设置一个新的套接字
+[0:57:35.98 -> 0:57:42.82] And a new with a new file descriptor that then the server communicates to the client via that one
+[0:57:35.98 -> 0:57:42.82] 然后是一个带有新文件描述符的新文件，然后服务器通过该文件描述符与客户端通信
+[0:57:42.90 -> 0:57:46.24] And I'll talk about why it's a different file descriptor in just a second
+[0:57:42.90 -> 0:57:46.24] 我将在一秒钟内讨论为什么它是一个不同的文件描述符
+[0:57:47.88 -> 0:57:54.28] Okay over on the client side goes through similar steps of socket
+[0:57:47.88 -> 0:57:54.28] 好吧，在客户端方面经历了socket的类似步骤
+[0:57:54.28 -> 0:57:58.18] But it doesn't have to bind or listen or accept because this is a client
+[0:57:54.28 -> 0:57:58.18] 但它不必绑定，倾听或接受，因为这是一个客户端
+[0:57:58.72 -> 0:58:02.10] And instead what it does is it makes a call to connect
+[0:57:58.72 -> 0:58:02.10] 而它所做的就是呼叫连接
+[0:58:06.14 -> 0:58:07.40] So let me finish this off
+[0:58:06.14 -> 0:58:07.40] 所以让我完成这个
+[0:58:22.48 -> 0:58:24.82] So these are all on this the server side
+[0:58:22.48 -> 0:58:24.82] 所以这些都在服务器端
+[0:58:32.42 -> 0:58:33.80] And on the client side
+[0:58:32.42 -> 0:58:33.80] 在客户端
+[0:58:37.00 -> 0:58:39.22] It will make a call to connect
+[0:58:37.00 -> 0:58:39.22] 它将拨打电话进行连接
+[0:58:43.98 -> 0:58:49.38] From a client side is to set up a connection to server
+[0:58:43.98 -> 0:58:49.38] 从客户端来说是建立与服务器的连接
+[0:59:05.84 -> 0:59:06.84] And so
+[0:59:05.84 -> 0:59:06.84] 所以
+[0:59:16.30 -> 0:59:20.44] It's arguments it's a little easier to understand how connect to work
+[0:59:16.30 -> 0:59:20.44] 它的论点是，更容易理解连接是如何工作的
+[0:59:21.84 -> 0:59:22.78] So in particular
+[0:59:21.84 -> 0:59:22.78] 特别是
+[0:59:24.32 -> 0:59:28.68] The call to socket that was made beforehand returns a file descriptor
+[0:59:24.32 -> 0:59:28.68] 事先调用socket会返回一个文件描述符
+[0:59:29.16 -> 0:59:34.30] And what this says is I want to on that particular using that particular socket
+[0:59:29.16 -> 0:59:34.30] 这就是我想要使用特定套接字的特定内容
+[0:59:34.80 -> 0:59:39.66] Connect to this gives a combination of an address and a port number
+[0:59:34.80 -> 0:59:39.66] 连接到此给出了地址和端口号的组合
+[0:59:40.58 -> 0:59:44.74] And it has to give this address length which I said like I said as before
+[0:59:40.58 -> 0:59:44.74] 它必须给出这个地址长度，就像我之前说过的那样
+[0:59:44.74 -> 0:59:50.26] It's usually that number is filled in using the return value of of getaddrinfo
+[0:59:44.74 -> 0:59:50.26] 通常使用getaddrinfo的返回值填充该数字
+[0:59:52.94 -> 0:59:55.72] But that's sort of the equivalent of poisoning the core
+[0:59:52.94 -> 0:59:55.72] 但这相当于中毒核心
+[0:59:57.42 -> 1:00:00.14] And it returns just a code which is
+[0:59:57.42 -> 1:00:00.14] 它只返回一个代码
+[1:00:00.98 -> 1:00:02.94] Whether the connection was successful or not
+[1:00:00.98 -> 1:00:02.94] 连接是否成功
+[1:00:06.40 -> 1:00:10.44] So let me just talk about these different ports and
+[1:00:06.40 -> 1:00:10.44] 那么让我来谈谈这些不同的端口和
+[1:00:11.02 -> 1:00:12.68] What it all means when you setup a connection
+[1:00:11.02 -> 1:00:12.68] 设置连接时这意味着什么
+[1:00:13.32 -> 1:00:14.64] So when the
+[1:00:13.32 -> 1:00:14.64] 所以当
+[1:00:15.94 -> 1:00:18.66] The server went through bind and listen
+[1:00:15.94 -> 1:00:18.66] 服务器经历了绑定和监听
+[1:00:19.84 -> 1:00:22.64] It created a listening port from that
+[1:00:19.84 -> 1:00:22.64] 它创建了一个监听端口
+[1:00:23.60 -> 1:00:26.94] Which is the one that it's listening for connection requests on
+[1:00:23.60 -> 1:00:26.94] 它正在侦听连接请求的那个
+[1:00:27.94 -> 1:00:36.82] And then the client when it called socket it was given a particular file descriptor for that socket
+[1:00:27.94 -> 1:00:36.82] 然后客户端在调用socket时为该套接字提供了一个特定的文件描述符
+[1:00:37.94 -> 1:00:39.88] And it sends out a connection request
+[1:00:37.94 -> 1:00:39.88] 它发出连接请求
+[1:00:40.74 -> 1:00:42.78] That goes out over the network
+[1:00:40.74 -> 1:00:42.78] 这通过网络发出
+[1:00:43.46 -> 1:00:53.06] And lands at the server and then the kernel hands that off to the program that's running on that particular port
+[1:00:43.46 -> 1:00:53.06] 然后登陆服务器，然后内核将其移交给在该特定端口上运行的程序
+[1:00:53.82 -> 1:01:00.96] And hands it off to the that call will be handled by the accept
+[1:00:53.82 -> 1:01:00.96] 并将其交给该电话将由接受处理
+[1:01:02.02 -> 1:01:04.40] Call to accept by the server
+[1:01:02.02 -> 1:01:04.40] 呼叫服务器接受
+[1:01:06.44 -> 1:01:12.38] And then as I mentioned except actually returns a new file descriptor
+[1:01:06.44 -> 1:01:12.38] 然后正如我所提到的，除了实际返回一个新的文件描述符
+[1:01:12.90 -> 1:01:18.84] Which the server will then use as its connection point to this particular client
+[1:01:12.90 -> 1:01:18.84] 然后，服务器将使用哪个服务器作为其与此特定客户端的连接点
+[1:01:19.50 -> 1:01:23.58] And the theory of that is you want to be able to in general
+[1:01:19.50 -> 1:01:23.58] 而那个理论就是你想要的
+[1:01:24.10 -> 1:01:27.94] As a server be handling multiple clients at the same time
+[1:01:24.10 -> 1:01:27.94] 作为服务器同时处理多个客户端
+[1:01:28.48 -> 1:01:35.02] But if I'm communicating with Google or amazon
+[1:01:28.48 -> 1:01:35.02] 但如果我正在与谷歌或亚马逊进行沟通
+[1:01:36.76 -> 1:01:39.00] You should be able to do so at the same time
+[1:01:36.76 -> 1:01:39.00] 你应该能够同时这样做
+[1:01:39.10 -> 1:01:43.96] So you want a possibility of from a single host to be able to serve multiple clients
+[1:01:39.10 -> 1:01:43.96] 因此，你希望单个主机能够为多个客户端提供服务
+[1:01:44.08 -> 1:01:51.84] And that's why they're all assigned different file descriptors at the server end for that particular connection
+[1:01:44.08 -> 1:01:51.84] 这就是为什么他们在服务器端为该特定连接分配了不同的文件描述符
+[1:01:52.22 -> 1:01:57.88] So you can think of it as the listening file descriptor is just listening for incoming requests for connections
+[1:01:52.22 -> 1:01:57.88] 因此，你可以将其视为侦听文件描述符只是侦听传入的连接请求
+[1:01:58.50 -> 1:02:01.70] But once it sets up a session and communicates back and forth
+[1:01:58.50 -> 1:02:01.70] 但是一旦它建立了一个会话并来回沟通
+[1:02:02.30 -> 1:02:08.12] Those are going through different ports on the server side of things or different file descriptors I'm sorry
+[1:02:02.30 -> 1:02:08.12] 那些通过服务器端的不同端口或不同的文件描述符我很抱歉
+[1:02:08.96 -> 1:02:10.70] Same port different file descriptors
+[1:02:08.96 -> 1:02:10.70] 相同端口的不同文件描述符
+[1:02:11.42 -> 1:02:14.56] From the software that's running on the server
+[1:02:11.42 -> 1:02:14.56] 从服务器上运行的软件
+[1:02:22.44 -> 1:02:27.80] Okay and then during the actual communication then as I mentioned it uses reads and writes
+[1:02:22.44 -> 1:02:27.80] 好的，然后在实际通信期间，然后正如我所提到的，它使用读写
+[1:02:27.90 -> 1:02:30.90] As a way to send and receive messages
+[1:02:27.90 -> 1:02:30.90] 作为发送和接收消息的方式
+[1:02:31.28 -> 1:02:34.02] And that goes on for as long as
+[1:02:31.28 -> 1:02:34.02] 这种情况一直持续下去
+[1:02:34.70 -> 1:02:41.60] You know and according to whatever low level particular protocol is being supported by this application
+[1:02:34.70 -> 1:02:41.60] 你知道并且根据此应用程序支持的任何低级别特定协议
+[1:02:46.14 -> 1:02:47.10] And then
+[1:02:46.14 -> 1:02:47.10] 接着
+[1:02:49.44 -> 1:02:51.60] In the end then when the client the
+[1:02:49.44 -> 1:02:51.60] 到底那时客户端了
+[1:02:52.14 -> 1:02:54.60] Client is done it causes a request
+[1:02:52.14 -> 1:02:54.60] 客户端完成它会导致请求
+[1:02:55.28 -> 1:03:01.62] And what that looks like from the server end is it tries to read from a file
+[1:02:55.28 -> 1:03:01.62] 从服务器端看起来是什么，它试图从文件中读取
+[1:03:01.94 -> 1:03:04.68] And it receives an end of file a signal instead
+[1:03:01.94 -> 1:03:04.68] 并且它接收文件的结尾而不是信号
+[1:03:07.18 -> 1:03:11.76] And that tells the server okay this particular connection is gone
+[1:03:07.18 -> 1:03:11.76] 这告诉服务器好了这个特定的连接消失了
+[1:03:12.50 -> 1:03:13.18] And so
+[1:03:12.50 -> 1:03:13.18] 所以
+[1:03:14.38 -> 1:03:20.78] Now it will close that particular one as this picture shows here
+[1:03:14.38 -> 1:03:20.78] 现在它将关闭那个特定的一个，如图所示
+[1:03:22.50 -> 1:03:25.70] Potentially the server could loop back around
+[1:03:22.50 -> 1:03:25.70] 服务器可能会循环回来
+[1:03:26.90 -> 1:03:30.22] And accept a connection from another program and in fact
+[1:03:26.90 -> 1:03:30.22] 并接受来自另一个程序的连接
+[1:03:30.80 -> 1:03:35.34] This can be done,this is what we call a serial or a internet
+[1:03:30.80 -> 1:03:35.34] 这可以做到，这就是我们所说的串口或互联网
+[1:03:37.70 -> 1:03:42.28] A serial server where can only manage one connection request at a time
+[1:03:37.70 -> 1:03:42.28] 一个串行服务器，一次只能管理一个连接请求
+[1:03:42.84 -> 1:03:47.52] And when we get later in the course and we stock talk about multi threading
+[1:03:42.84 -> 1:03:47.52] 当我们稍后进入课程时，我们会谈论多线程
+[1:03:48.10 -> 1:03:53.44] We'll be able to set it up,so this thing can start accepting requests for another connection
+[1:03:48.10 -> 1:03:53.44] 我们将能够进行设置，因此这件事可以开始接受另一个连接的请求
+[1:03:53.84 -> 1:03:57.08] Even while it's handling one particular client
+[1:03:53.84 -> 1:03:57.08] 即使它正在处理一个特定的客户端
+[1:03:58.52 -> 1:04:02.46] But anyways what it will look like is the server will read
+[1:03:58.52 -> 1:04:02.46] 但无论如何它将是什么样的服务器将读取
+[1:04:02.60 -> 1:04:06.48] The attempt to read that we'll get an end of file it will close that particular connection
+[1:04:02.60 -> 1:04:06.48] 尝试读取我们将获得文件结束它将关闭该特定连接
+[1:04:06.98 -> 1:04:10.26] And it will go back and it will accept a new connection from a new client
+[1:04:06.98 -> 1:04:10.26] 它将返回，它将接受来自新客户端的新连接
+[1:04:13.54 -> 1:04:19.80] Okay I'm going to jump ahead and actually start talking about some slides from
+[1:04:13.54 -> 1:04:19.80] 好的，我要继续前进，然后开始谈论一些幻灯片
+[1:04:20.44 -> 1:04:25.58] That we're if you look online they're actually from a Thursday's lecture  because
+[1:04:20.44 -> 1:04:25.58] 如果你在网上看，我们实际上是在周四的讲座上，因为
+[1:04:26.06 -> 1:04:29.28] There's a lot of ground to cover in that lecture and I'd like to get a little head start
+[1:04:26.06 -> 1:04:29.28] 在那次演讲中有很多理由可以覆盖，我想先了解一下
+[1:04:31.66 -> 1:04:33.36] So I mentioned this
+[1:04:31.66 -> 1:04:33.36] 所以我提到了这个
+[1:04:34.48 -> 1:04:43.48] This function called get a door info which is sort of the modern way in C at least to find information about
+[1:04:34.48 -> 1:04:43.48] 这个函数被称为获取门信息，这是C中的现代方式，至少可以找到有关的信息
+[1:04:43.86 -> 1:04:47.72] That deals with all the funkiness of host names host addresses
+[1:04:43.86 -> 1:04:47.72] 这涉及主机名主机地址的所有功能
+[1:04:48.14 -> 1:04:52.76] All the conventions about ports and some of these various structures and things like that
+[1:04:48.14 -> 1:04:52.76] 所有关于端口的约定和一些这样的各种结构和类似的东西
+[1:04:54.02 -> 1:04:57.18] And the advantage of doing it this way instead of the old way
+[1:04:54.02 -> 1:04:57.18] 以这种方式做到这一点的优势，而不是旧的方式
+[1:04:57.78 -> 1:05:04.82] Is first of all now it sort of unifies IPv4 and IPv6 have very similar looking interfaces
+[1:04:57.78 -> 1:05:04.82] 首先，现在它有点统一IPv4和IPv6具有非常相似的外观
+[1:05:05.24 -> 1:05:08.02] And it's fairly easy to write code that can handle either
+[1:05:05.24 -> 1:05:08.02] 编写可以处理的代码也相当容易
+[1:05:08.56 -> 1:05:14.36] And the other was there is problems with these old ones that they were designed in an ear before multi-threading
+[1:05:08.56 -> 1:05:14.36] 另一个是这些旧的问题，他们是在多线程之前设计的耳朵
+[1:05:15.06 -> 1:05:18.42] And so they have various statically allocated buffers
+[1:05:15.06 -> 1:05:18.42] 因此他们有各种静态分配的缓冲区
+[1:05:18.44 -> 1:05:24.74] Which gave a lot of bad conditions that you had to watch out for in writing code
+[1:05:18.44 -> 1:05:24.74] 这给了你编写代码时必须注意的许多不良条件
+[1:05:24.74 -> 1:05:27.46] And we're prone to errors of various sorts
+[1:05:24.74 -> 1:05:27.46] 而且我们容易出现各种各样的错误
+[1:05:28.04 -> 1:05:33.96] And so this new format it's actually harder to use in many levels
+[1:05:28.04 -> 1:05:33.96] 所以这种新格式实际上很难在很多层面上使用
+[1:05:35.86 -> 1:05:39.04] Because it can't hide away as many details as it used to
+[1:05:35.86 -> 1:05:39.04] 因为它无法隐藏尽可能多的细节
+[1:05:39.04 -> 1:05:42.16] But it has the advantage it works better in a multi-threaded environment
+[1:05:39.04 -> 1:05:42.16] 但它具有在多线程环境中更好地工作的优点
+[1:05:43.12 -> 1:05:49.86] The other thing that makes it hard is it's trying to be sort of the kitchen sink of protocol managers
+[1:05:43.12 -> 1:05:49.86] 另一件令人困难的事情是它试图成为协议管理者的厨房水槽
+[1:05:49.92 -> 1:05:53.26] And that makes it a little bit nasty and messy
+[1:05:49.92 -> 1:05:53.26] 这使它有点讨厌和凌乱
+[1:05:54.34 -> 1:05:59.22] And so we're only going to sort of focus in on the parts that we really need to make use of for this course
+[1:05:54.34 -> 1:05:59.22] 因此，我们只关注我们真正需要在本课程中使用的部分
+[1:06:02.92 -> 1:06:05.96] So in particular there's this function called getaddrinfo
+[1:06:02.92 -> 1:06:05.96] 所以特别是这个函数名为getaddrinfo
+[1:06:06.68 -> 1:06:11.14] Where the information you're passing is a host
+[1:06:06.68 -> 1:06:11.14] 你传递的信息是主机
+[1:06:11.94 -> 1:06:19.32] Which can be either a...it's a string as it shows most these are care stars are actual real strings not fake strings
+[1:06:11.94 -> 1:06:19.32] 这可能是...它是一个字符串，因为它显示大多数这些是关心明星是实际真正的字符串而不是假字符串
+[1:06:20.02 -> 1:06:22.88] It used to be back in the old days
+[1:06:20.02 -> 1:06:22.88] 它曾经是过去的时代
+[1:06:23.30 -> 1:06:26.78] You use char* of generic pointer because there weren't void*
+[1:06:23.30 -> 1:06:26.78] 你使用泛型指针的char *，因为没有void *
+[1:06:26.88 -> 1:06:28.24] But these are actual strings
+[1:06:26.88 -> 1:06:28.24] 但这些都是实际的字符串
+[1:06:28.80 -> 1:06:34.42] So you give the name like the domain name of a host or you can give the dotted decimal name
+[1:06:28.80 -> 1:06:34.42] 因此，你可以给出类似主机域名的名称，也可以给出点分十进制名称
+[1:06:34.94 -> 1:06:41.44] But written as you know sequence of characters one to eight dot so forth
+[1:06:34.94 -> 1:06:41.44] 但是如果你知道字符序列一到八点那么写
+[1:06:42.24 -> 1:06:48.12] A service for example that this is IPv4 TCP service
+[1:06:42.24 -> 1:06:48.12] 例如，这是IPv4 TCP服务的服务
+[1:06:48.56 -> 1:06:54.24] Some other information that's associated with this particular connection they refer to as hints
+[1:06:48.56 -> 1:06:54.24] 与此特定连接相关联的其他一些信息，它们称为提示
+[1:06:54.28 -> 1:06:57.66] Because again this is trying to be a very generic looking call
+[1:06:54.28 -> 1:06:57.66] 因为这又是一个非常通用的呼叫
+[1:06:58.16 -> 1:07:05.62] And then you pass it in a pointer and it will fill in and return back a pointer to a data structure
+[1:06:58.16 -> 1:07:05.62] 然后在指针中传递它，它将填充并返回指向数据结构的指针
+[1:07:05.94 -> 1:07:09.42] Which is essentially the way it's returning results back to you
+[1:07:05.94 -> 1:07:09.42] 这基本上是它将结果返回给你的方式
+[1:07:10.24 -> 1:07:17.08] And then associated with that is a called free adder info that will then deallocate this space
+[1:07:10.24 -> 1:07:17.08] 然后与之关联的是一个名为free free adder的信息，然后将释放此空间
+[1:07:17.82 -> 1:07:21.96] That's used by this data structure from the result
+[1:07:17.82 -> 1:07:21.96] 这个数据结构从结果中使用了它
+[1:07:22.62 -> 1:07:27.32] And then there's one called getaddrinfo string error
+[1:07:22.62 -> 1:07:27.32] 然后有一个名为getaddrinfo字符串错误
+[1:07:27.68 -> 1:07:34.28] Which lets you interpret the various error codes that get created by this routine of the value that it returns
+[1:07:27.68 -> 1:07:34.28] 这使你可以解释由它返回的值的此例程创建的各种错误代码
+[1:07:36.14 -> 1:07:36.82] So
+[1:07:36.14 -> 1:07:36.82] 所以
+[1:07:37.98 -> 1:07:40.48] Let's just look a little about this and
+[1:07:37.98 -> 1:07:40.48] 我们来看看这个和
+[1:07:41.82 -> 1:07:46.44] So the result that's returned by getaddrinfo is a link twist
+[1:07:41.82 -> 1:07:46.44] 所以getaddrinfo返回的结果是链接扭曲
+[1:07:48.40 -> 1:07:52.74] Oh that is null terminated just like...most link lists are
+[1:07:48.40 -> 1:07:52.74] 哦，就像...大多数链接列表都是空终止
+[1:07:53.38 -> 1:07:59.72] Where it gives some combination of the name
+[1:07:53.38 -> 1:07:59.72] 它给出了名称的某种组合
+[1:08:00.60 -> 1:08:02.38] Of this particular
+[1:08:00.60 -> 1:08:02.38] 这个特别的
+[1:08:05.68 -> 1:08:10.20] Some naming information for the first top-level one is the
+[1:08:05.68 -> 1:08:10.20] 第一个顶级的一些命名信息是
+[1:08:10.38 -> 1:08:15.38] What I showed you the canonical name for this particular IP address
+[1:08:10.38 -> 1:08:15.38] 我向你展示了此特定IP地址的规范名称
+[1:08:16.54 -> 1:08:20.74] And then it gives some address information which is
+[1:08:16.54 -> 1:08:20.74] 然后它给出了一些地址信息
+[1:08:21.60 -> 1:08:27.92] You know an IPv4 them that will encode the IP address
+[1:08:21.60 -> 1:08:27.92] 你知道一个IPv4将编码IP地址
+[1:08:28.40 -> 1:08:31.16] And as a next pointer to change this link list together
+[1:08:28.40 -> 1:08:31.16] 并作为下一个指针一起更改此链接列表
+[1:08:31.74 -> 1:08:35.50] And so this is actually one interesting thing about this is it sort of...
+[1:08:31.74 -> 1:08:35.50] 所以这实际上是一个有趣的事情是它有点......
+[1:08:35.94 -> 1:08:43.56] This link voice together many too many mapping potentially of of names
+[1:08:35.94 -> 1:08:43.56] 这个链接可以将很多可能的名称映射到一起
+[1:08:43.58 -> 1:08:46.40] So if I give for example google.com
+[1:08:43.58 -> 1:08:46.40] 所以如果我举个例子google.com
+[1:08:46.86 -> 1:08:48.92] It will return a link list of all
+[1:08:46.86 -> 1:08:48.92] 它将返回所有的链接列表
+[1:08:49.50 -> 1:08:54.38] However many or you saw with twitter it was returning about four different addresses
+[1:08:49.50 -> 1:08:54.38] 然而很多人或者你在推特上看到它返回了四个不同的地址
+[1:08:54.40 -> 1:08:59.60] So this will return actually five missed entries the first will be the canonical name
+[1:08:54.40 -> 1:08:59.60] 所以这将实际返回五个错过的条目，第一个将是规范名称
+[1:08:59.98 -> 1:09:03.58] And then it will give each of the four IP addresses
+[1:08:59.98 -> 1:09:03.58] 然后它将给出四个IP地址中的每一个
+[1:09:04.14 -> 1:09:07.06] That's relevant at this particular time
+[1:09:04.14 -> 1:09:07.06] 这在这个特定的时间是相关的
+[1:09:08.64 -> 1:09:10.68] And then you as a programmer
+[1:09:08.64 -> 1:09:10.68] 然后你作为程序员
+[1:09:11.26 -> 1:09:15.34] Then sort of walk this list you step down this list and typically
+[1:09:11.26 -> 1:09:15.34] 然后，按照此列表的顺序走一步，通常是这个列表
+[1:09:15.90 -> 1:09:18.74] Try to use each address one after the other
+[1:09:15.90 -> 1:09:18.74] 尝试一个接一个地使用每个地址
+[1:09:19.18 -> 1:09:24.98] And if you fail on one then you try the next and try the next until you hit the end of the list and then you say loops
+[1:09:19.18 -> 1:09:24.98] 如果你失败，那么你尝试下一个并尝试下一个，直到你到达列表的末尾，然后你说循环
+[1:09:25.36 -> 1:09:26.00] Can't do it
+[1:09:25.36 -> 1:09:26.00] 做不到
+[1:09:28.78 -> 1:09:31.24] And that goes whether you're writing a client or a server
+[1:09:28.78 -> 1:09:31.24] 无论你是在编写客户端还是服务器，都可以
+[1:09:33.48 -> 1:09:35.44] So that addrinfo
+[1:09:33.48 -> 1:09:35.44] 所以addrinfo
+[1:09:36.74 -> 1:09:38.50] Let's look back at what that is
+[1:09:36.74 -> 1:09:38.50] 让我们回顾一下那是什么
+[1:09:40.66 -> 1:09:42.28] Oh so
+[1:09:40.66 -> 1:09:42.28] 哦，所以
+[1:09:43.62 -> 1:09:49.44] Addrinfo then is what gets returned is a list of addrinfo struct
+[1:09:43.62 -> 1:09:49.44] Addrinfo然后返回的是addrinfo结构列表
+[1:09:50.84 -> 1:09:54.04] And so the addrinfo struck contains various fields
+[1:09:50.84 -> 1:09:54.04] 因此addrinfo hitck包含各种字段
+[1:09:56.66 -> 1:10:05.40] Which talks about what type of data is here
+[1:09:56.66 -> 1:10:05.40] 其中讨论了这里的数据类型
+[1:10:05.86 -> 1:10:07.42] What type of socket is it
+[1:10:05.86 -> 1:10:07.42] 它是什么类型的插座
+[1:10:08.88 -> 1:10:15.24] What its canonical name is how long are its addresses you saw that it's an argument to some of the calls
+[1:10:08.88 -> 1:10:15.24] 它的规范名称是它的地址有多长，你看到它是一些调用的参数
+[1:10:16.40 -> 1:10:19.66] A pointer to a sockaddr struct
+[1:10:16.40 -> 1:10:19.66] 指向sockaddr结构的指针
+[1:10:20.26 -> 1:10:24.28] That's the way that is encoded for IPv
+[1:10:20.26 -> 1:10:24.28] 这就是为IPv编码的方式
+[1:10:24.98 -> 1:10:29.52] What we've already seen sock adders is a sort of low-level data structure that gets used
+[1:10:24.98 -> 1:10:29.52] 我们已经看到的袜子加法器是一种被使用的低级数据结构
+[1:10:29.98 -> 1:10:32.80] And then an next pointer to chain the link list together
+[1:10:29.98 -> 1:10:32.80] 然后是将链接列表链接在一起的下一个指针
+[1:10:33.34 -> 1:10:36.16] And so you'll see some of these are the arguments
+[1:10:33.34 -> 1:10:36.16] 所以你会看到其中一些是争论
+[1:10:36.16 -> 1:10:41.70] That then you will use to pass into the other functions like bind and with list links and connect
+[1:10:36.16 -> 1:10:41.70] 那么你将使用传递到其他函数，如bind和list链接和connect
+[1:10:47.36 -> 1:10:50.40] And then there's another version called getnameinfo
+[1:10:47.36 -> 1:10:50.40] 然后是另一个名为getnameinfo的版本
+[1:10:51.32 -> 1:10:53.62] Which you use when you've got an IP address
+[1:10:51.32 -> 1:10:53.62] 当你有一个IP地址时使用的
+[1:10:53.80 -> 1:10:56.88] And you want to find what is its domain name
+[1:10:53.80 -> 1:10:56.88] 你想找到它的域名是什么
+[1:10:57.50 -> 1:11:01.36] And because you remember that mapping is also potentially a one-to-many
+[1:10:57.50 -> 1:11:01.36] 而且因为你记得映射也可能是一对多的
+[1:11:01.36 -> 1:11:03.96] There can be multiple domain names associated with it
+[1:11:01.36 -> 1:11:03.96] 可以有多个与之关联的域名
+[1:11:04.94 -> 1:11:11.64] And so it has a similar general thing
+[1:11:04.94 -> 1:11:11.64] 所以它有类似的一般性
+[1:11:11.70 -> 1:11:14.00] We'll just look right now it getaddrinfo
+[1:11:11.70 -> 1:11:14.00] 我们现在就看看它是getaddrinfo
+[1:11:16.04 -> 1:11:22.42] So just as an example of how you'd write code to make use of this
+[1:11:16.04 -> 1:11:22.42] 所以，这只是一个如何编写代码来使用它的例子
+[1:11:22.42 -> 1:11:26.26] Essentially just as a way of probing the DNS server
+[1:11:22.42 -> 1:11:26.26] 基本上只是一种探测DNS服务器的方式
+[1:11:27.18 -> 1:11:31.84] Is I want to set up an argument a call to getaddrinfo
+[1:11:27.18 -> 1:11:31.84] 我想设置一个参数来调用getaddrinfo
+[1:11:32.36 -> 1:11:36.12] Where the string I'm going to pass the name is
+[1:11:32.36 -> 1:11:36.12] 我要传递名字的字符串是
+[1:11:36.12 -> 1:11:41.48] Whatever I type in there to this application to main
+[1:11:36.12 -> 1:11:41.48] 无论我输入什么，这个应用程序主要
+[1:11:42.80 -> 1:11:52.30] And it just for hints just passes a bunch of zeros
+[1:11:42.80 -> 1:11:52.30] 它只是为了提示只是传递了一堆零
+[1:11:53.68 -> 1:12:00.24] And listp again these are this will just be a pointers
+[1:11:53.68 -> 1:12:00.24] 而listp再次这些只是一个指针
+[1:12:00.30 -> 1:12:02.48] That I haven't actually
+[1:12:00.30 -> 1:12:02.48] 我实际上并没有
+[1:12:09.16 -> 1:12:12.94] Oh okay so you'll notice hints is actually a struct itself
+[1:12:09.16 -> 1:12:12.94] 哦好的，所以你会注意到提示实际上是一个结构本身
+[1:12:13.54 -> 1:12:18.36] Whereas listp and *p are just listsp andp are just pointers to structs
+[1:12:13.54 -> 1:12:18.36] listp和* p只是listsp，而isp只是指向结构的指针
+[1:12:18.38 -> 1:12:19.94] They don't have any allocated data
+[1:12:18.38 -> 1:12:19.94] 他们没有任何分配的数据
+[1:12:20.48 -> 1:12:23.66] So the hints I'm just going to fill in that struct with all zeros
+[1:12:20.48 -> 1:12:23.66] 所以提示我只是用全零来填充该结构
+[1:12:24.02 -> 1:12:26.30] Because I don't really need to provide any hints
+[1:12:24.02 -> 1:12:26.30] 因为我真的不需要提供任何提示
+[1:12:27.68 -> 1:12:32.70] I am telling it that I want an IPv6 TCP connection here
+[1:12:27.68 -> 1:12:32.70] 我告诉它我想要一个IPv6 TCP连接
+[1:12:34.54 -> 1:12:35.94] And then
+[1:12:34.54 -> 1:12:35.94] 接着
+[1:12:36.32 -> 1:12:38.80] So what it will do is it will return back
+[1:12:36.32 -> 1:12:38.80] 那么它会做什么就会回来
+[1:12:39.84 -> 1:12:41.62] What returns an error code
+[1:12:39.84 -> 1:12:41.62] 什么返回错误代码
+[1:12:41.96 -> 1:12:45.36] But it will fill in returned to me a pointer
+[1:12:41.96 -> 1:12:45.36] 但它会填补给我一个指针
+[1:12:45.82 -> 1:12:49.58] To a this link twist data structure I showed before
+[1:12:45.82 -> 1:12:49.58] 对于此链接扭曲数据结构我之前显示
+[1:12:52.76 -> 1:12:54.96] And now I can step through that list
+[1:12:52.76 -> 1:12:54.96] 现在我可以逐步完成这个清单
+[1:12:55.94 -> 1:13:03.24] Using standard linked list code and make calls to the getnameinfo function which will return back domain names
+[1:12:55.94 -> 1:13:03.24] 使用标准链表代码并调用getnameinfo函数，该函数将返回域名
+[1:13:07.38 -> 1:13:13.76] And then when it's all done I have to free up that whisk that got returned otherwise all great memory stuff
+[1:13:07.38 -> 1:13:13.76] 然后当它全部完成时，我必须释放那些返回的拂尘，否则所有伟大的记忆内容
+[1:13:14.78 -> 1:13:16.66] So just as a demo
+[1:13:14.78 -> 1:13:16.66] 所以就像一个演示
+[1:13:26.98 -> 1:13:27.92] What I'm
+[1:13:26.98 -> 1:13:27.92] 我是什么
+[1:13:31.60 -> 1:13:32.86] On oh host info sorry
+[1:13:31.60 -> 1:13:32.86] 哦主持人信息抱歉
+[1:13:38.24 -> 1:13:41.38] Ah so you can think of it this is like
+[1:13:38.24 -> 1:13:41.38] 啊所以你可以想到这就像
+[1:13:42.70 -> 1:13:47.16] A not very fancy implementation of nslookup
+[1:13:42.70 -> 1:13:47.16] 一个不太花哨的nslookup实现
+[1:13:49.34 -> 1:13:54.04] So the kind of stuff we already saw before but let's
+[1:13:49.34 -> 1:13:54.04] 所以我们之前已经看过的东西，但是让我们看看
+[1:13:58.50 -> 1:14:02.80] All it's returning are the different addresses and one of the things that I found curious is
+[1:13:58.50 -> 1:14:02.80] 所有它返回的是不同的地址和我发现好奇的事情之一
+[1:14:04.04 -> 1:14:06.68] It returns them in the same order all the time
+[1:14:04.04 -> 1:14:06.68] 它始终以相同的顺序返回它们
+[1:14:09.82 -> 1:14:12.78] Instead of within a slow cup it kept changing it
+[1:14:09.82 -> 1:14:12.78] 而不是在缓慢的杯子里，它不断改变它
+[1:14:13.50 -> 1:14:15.94] And I think that has to do with caching
+[1:14:13.50 -> 1:14:15.94] 我认为这与缓存有关
+[1:14:24.48 -> 1:14:25.68] No that changed
+[1:14:24.48 -> 1:14:25.68] 没有改变
+[1:14:28.36 -> 1:14:31.54] I know it's kind of interesting if it's
+[1:14:28.36 -> 1:14:31.54] 我知道如果它是有趣的
+[1:14:32.28 -> 1:14:36.98] It you might want to play with this code, it's kind of you can see what's going on in different places
+[1:14:32.28 -> 1:14:36.98] 你可能想要使用此代码，你可以看到在不同的地方发生了什么
+[1:14:44.02 -> 1:14:47.10] And so you can see though that it's
+[1:14:44.02 -> 1:14:47.10] 所以你可以看到它
+[1:14:47.52 -> 1:14:50.40] Basically getting the same kind of information
+[1:14:47.52 -> 1:14:50.40] 基本上得到同样的信息
+[1:14:50.68 -> 1:14:55.46] That you would from nslookup it's really just creating the DNS server to do this
+[1:14:50.68 -> 1:14:55.46] 你想从nslookup那里创建DNS服务器就可以了
+[1:14:56.60 -> 1:14:59.22] But that's the start of what some of this code looks like
+[1:14:56.60 -> 1:14:59.22] 但这是一些代码看起来的开始
+[1:15:10.52 -> 1:15:12.32] One of the things you
+[1:15:10.52 -> 1:15:12.32] 你做的事情之一
+[1:15:12.44 -> 1:15:16.78] By the way when you're writing your own code,you often make use of what's called localhost
+[1:15:12.44 -> 1:15:16.78] 顺便说一句，当你编写自己的代码时，你经常使用所谓的localhost
+[1:15:17.36 -> 1:15:20.48] And that always just refers to the machine that you're running on it
+[1:15:17.36 -> 1:15:20.48] 而这总是指你正在运行的机器
+[1:15:20.50 -> 1:15:22.88] Always has this particular IP address
+[1:15:20.50 -> 1:15:22.88] 始终拥有此特定IP地址
+[1:15:22.98 -> 1:15:27.00] So that address just refers to the machine and as a programmer
+[1:15:22.98 -> 1:15:27.00] 所以这个地址只是指机器和程序员
+[1:15:27.54 -> 1:15:29.58] You do all your testing on one machine
+[1:15:27.54 -> 1:15:29.58] 你在一台机器上进行所有测试
+[1:15:29.96 -> 1:15:34.56] You just set up both the client and the server on the same machine and play with it so
+[1:15:29.96 -> 1:15:34.56] 你只需在同一台计算机上设置客户端和服务器，然后使用它
+[1:15:35.60 -> 1:15:40.12] Localhost is a very useful way of doing code development
+[1:15:35.60 -> 1:15:40.12] Localhost是一种非常有用的代码开发方式
+[1:15:42.88 -> 1:15:47.80] And if this shows you can request host info for others
+[1:15:42.88 -> 1:15:47.80] 如果这表明你可以请求其他人的主机信息
+[1:15:50.06 -> 1:15:52.80] Thanksgiving and you can also by the way
+[1:15:50.06 -> 1:15:52.80] 感恩节，你也可以顺便说一下
+[1:15:58.48 -> 1:16:00.86] Always give a dotted decimal address
+[1:15:58.48 -> 1:16:00.86] 始终给出点分十进制地址
+[1:16:08.78 -> 1:16:10.04] And I'm just making it up here
+[1:16:08.78 -> 1:16:10.04] 而我只是在这里弥补
+[1:16:11.54 -> 1:16:14.64] What and it's not very interesting because it returns back the same address
+[1:16:11.54 -> 1:16:14.64] 什么，它不是很有趣，因为它返回相同的地址
+[1:16:17.84 -> 1:16:19.94] It's more interesting to run nslookup on that
+[1:16:17.84 -> 1:16:19.94] 运行nslookup更有趣
+[1:16:27.82 -> 1:16:28.68] So
+[1:16:27.82 -> 1:16:28.68] 所以
+[1:16:29.76 -> 1:16:32.16] That just gives you a sense
+[1:16:29.76 -> 1:16:32.16] 这只是给你一个感觉
+[1:16:32.46 -> 1:16:36.90] And as you've seen this code is pretty messy stuff to work with there's a lot of struck
+[1:16:32.46 -> 1:16:36.90] 正如你所看到的那样，这段代码非常麻烦，可以解决很多问题
+[1:16:36.98 -> 1:16:40.31] So you have to initialize,you don't initialize you pass pointers
+[1:16:36.98 -> 1:16:40.31] 所以你必须初始化，你没有初始化你传递指针
+[1:16:40.68 -> 1:16:42.72] And so the code always looks a bit crufty
+[1:16:40.68 -> 1:16:42.72] 所以代码总是看起来有点夸张
+[1:16:42.72 -> 1:16:46.82] But that sort of the the interfaces it exists
+[1:16:42.72 -> 1:16:46.82] 但它存在的那种接口
+[1:16:47.16 -> 1:16:49.12] And you'll just have to get somewhat comfortable with it
+[1:16:47.16 -> 1:16:49.12] 而且你只需要对它感到满意
+[1:16:49.74 -> 1:16:53.32] So that will do us for today then thanks
+[1:16:49.74 -> 1:16:53.32] 那么今天我们会这样做，谢谢
