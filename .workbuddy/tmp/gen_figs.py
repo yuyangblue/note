@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-"""生成计算方法与优化笔记的 SVG 插图（v2）。"""
+"""生成计算方法与优化笔记的 SVG 插图（v3）。"""
 import math, os, sys
-from xml.sax.saxutils import escape
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -32,9 +31,24 @@ def head(w, h):
     )
 
 
+def esc(s):
+    """转义 & < >，但保护已经写好的实体。"""
+    s = str(s)
+    s = s.replace("&lt;", "\x00L").replace("&gt;", "\x00G").replace("&amp;", "\x00A")
+    s = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    return s.replace("\x00L", "&lt;").replace("\x00G", "&gt;").replace("\x00A", "&amp;")
+
+
 def t(x, y, s, size=13, anchor="start", fill=INK, weight="400"):
     return (f'<text x="{x:.1f}" y="{y:.1f}" font-size="{size}" fill="{fill}" '
-            f'font-weight="{weight}" text-anchor="{anchor}">{escape(str(s))}</text>')
+            f'font-weight="{weight}" text-anchor="{anchor}">{esc(s)}</text>')
+
+
+def norms(x, y, which, size=13, anchor="start", fill=INK, weight="400"):
+    """渲染 ‖x‖下标 = 1 形式。"""
+    return (f'<text x="{x:.1f}" y="{y:.1f}" font-size="{size}" fill="{fill}" font-weight="{weight}" '
+            f'text-anchor="{anchor}">‖x‖<tspan dy="4" font-size="{size-3}">{which}</tspan>'
+            f'<tspan dy="-4"> = 1</tspan></text>')
 
 
 def save(rel, svg):
@@ -44,7 +58,7 @@ def save(rel, svg):
     print("写出", rel, "%.1f KB" % (len(svg.encode("utf-8")) / 1024))
 
 
-# ------------------------------------------------------------ 1 三种范数的单位球
+# ------------------------------------------------------------ 1 单位球
 def fig_norm_balls():
     W, H = 720, 430
     cx, cy, R = 250, 240, 106
@@ -63,33 +77,35 @@ def fig_norm_balls():
     for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
         b.append(f'<circle cx="{cx+dx*R}" cy="{cy+dy*R}" r="3.2" fill="{INK}"/>')
 
-    lx, ly = 480, 130
-    items = [(GREEN, "正方形", "‖x‖∞ = 1", "最外层：每边到 ±1"),
-             (INK, "单位圆", "‖x‖₂ = 1", "中间：欧氏长度"),
-             (BLUE, "菱形", "‖x‖₁ = 1", "最内层：四个顶点在轴上")]
-    for i, (c, name, f_, desc) in enumerate(items):
-        yy = ly + i * 66
+    lx, ly = 480, 126
+    items = [(GREEN, "正方形", "∞", "最外层：每边到 ±1"),
+             (INK, "单位圆", "2", "中间：欧氏长度"),
+             (BLUE, "菱形", "1", "最内层：顶点落在坐标轴上")]
+    for i, (c, name, sub, desc) in enumerate(items):
+        yy = ly + i * 70
         if name == "正方形":
             b.append(f'<rect x="{lx}" y="{yy-12}" width="24" height="24" fill="none" stroke="{c}" stroke-width="2.2"/>')
         elif name == "单位圆":
             b.append(f'<circle cx="{lx+12}" cy="{yy}" r="12" fill="none" stroke="{c}" stroke-width="2.2"/>')
         else:
             b.append(f'<polygon points="{lx},{yy} {lx+12},{yy-12} {lx+24},{yy} {lx+12},{yy+12}" fill="none" stroke="{c}" stroke-width="2.2"/>')
-        b.append(t(lx + 38, yy - 3, name, 13, "start", INK, "600"))
-        b.append(t(lx + 38, yy + 14, f_, 11.5, "start", c, "600"))
-        b.append(t(lx + 38, yy + 30, desc, 11, "start", DIM))
+        b.append(t(lx + 38, yy - 4, name, 13, "start", INK, "600"))
+        b.append(norms(lx + 38, yy + 15, sub, 12, "start", c, "600"))
+        b.append(t(lx + 38, yy + 33, desc, 11, "start", DIM))
 
-    b.append(f'<line x1="480" y1="330" x2="688" y2="330" stroke="{GRID}" stroke-width="1" stroke-dasharray="3 3"/>')
-    b.append(t(480, 356, "包含关系", 12, "start", DIM, "600"))
-    b.append(f'<text x="480" y="382" font-size="14" fill="{INK}">B<tspan dy="4" font-size="10">1</tspan>'
+    b.append(f'<line x1="480" y1="338" x2="688" y2="338" stroke="{GRID}" stroke-width="1" stroke-dasharray="3 3"/>')
+    b.append(t(480, 364, "包含关系", 12, "start", DIM, "600"))
+    b.append(f'<text x="480" y="390" font-size="14" fill="{INK}">B<tspan dy="4" font-size="10">1</tspan>'
              f'<tspan dy="-4"> ⊂ B</tspan><tspan dy="4" font-size="10">2</tspan><tspan dy="-4"> ⊂ B</tspan>'
              f'<tspan dy="4" font-size="10">∞</tspan></text>')
-    b.append(t(480, 408, "‖x‖∞ ≤ ‖x‖₂ ≤ ‖x‖₁", 13.5, "start", INK))
+    b.append(f'<text x="480" y="416" font-size="13.5" fill="{INK}">‖x‖<tspan dy="4" font-size="10">∞</tspan>'
+             f'<tspan dy="-4"> ≤ ‖x‖</tspan><tspan dy="4" font-size="10">2</tspan>'
+             f'<tspan dy="-4"> ≤ ‖x‖</tspan><tspan dy="4" font-size="10">1</tspan></text>')
     b.append("</svg>")
     return "".join(b)
 
 
-# ------------------------------------------------------------ 2 病态方程组
+# ------------------------------------------------------------ 2 病态
 def fig_ill_cond():
     W, H = 720, 430
     xmin, xmax, ymin, ymax = 0.0, 5.0, 0.0, 4.2
@@ -109,7 +125,6 @@ def fig_ill_cond():
     b.append(t(ox + sw + 24, oy + 18, "x₁", 12, "end", DIM))
     b.append(t(ox - 12, oy - sh - 16, "x₂", 12, "end", DIM))
 
-    # L1: y = x + 0.15 ；L2: y = 0.85x + 0.55 ；L2': y = 0.85x + 0.67
     l1a, l1b = P(0, 0.15), P(4.7, 4.85)
     l2a, l2b = P(0, 0.55), P(4.3, 4.205)
     l3a, l3b = P(0, 0.67), P(4.15, 4.195)
@@ -117,59 +132,54 @@ def fig_ill_cond():
     b.append(f'<line x1="{l2a[0]:.1f}" y1="{l2a[1]:.1f}" x2="{l2b[0]:.1f}" y2="{l2b[1]:.1f}" stroke="{INK}" stroke-width="2.2"/>')
     b.append(f'<line x1="{l3a[0]:.1f}" y1="{l3a[1]:.1f}" x2="{l3b[0]:.1f}" y2="{l3b[1]:.1f}" stroke="{RED}" stroke-width="2" stroke-dasharray="7 5"/>')
 
-    # 交点 (2.667, 2.817) 与扰动后 (3.467, 3.617)
     pA, pB = P(2.667, 2.817), P(3.467, 3.617)
-    b.append(f'<circle cx="{pA[0]:.1f}" cy="{pA[1]:.1f}" r="5" fill="{INK}"/>')
-    b.append(f'<circle cx="{pB[0]:.1f}" cy="{pB[1]:.1f}" r="5" fill="{RED}"/>')
-    b.append(t(pA[0] - 12, pA[1] + 20, "x*", 13.5, "end", INK, "600"))
-    b.append(t(pB[0] + 12, pB[1] - 8, "x* + δx", 13.5, "start", RED, "600"))
-    b.append(f'<line x1="{pA[0]+6:.1f}" y1="{pA[1]-6:.1f}" x2="{pB[0]-7:.1f}" y2="{pB[1]+7:.1f}" stroke="{RED}" stroke-width="1.8" marker-end="url(#ar-r)"/>')
+    b.append(f'<circle cx="{pA[0]:.1f}" cy="{pA[1]:.1f}" r="5" fill="{INK}" stroke="#ffffff" stroke-width="1.6"/>')
+    b.append(f'<circle cx="{pB[0]:.1f}" cy="{pB[1]:.1f}" r="5" fill="{RED}" stroke="#ffffff" stroke-width="1.6"/>')
+    b.append(t(pA[0] - 14, pA[1] + 30, "x*", 13.5, "end", INK, "600"))
+    b.append(t(pB[0] + 16, pB[1] + 30, "x* + δx", 13.5, "start", RED, "600"))
+    b.append(f'<line x1="{pA[0]+7:.1f}" y1="{pA[1]-7:.1f}" x2="{pB[0]-8:.1f}" y2="{pB[1]+8:.1f}" stroke="{RED}" stroke-width="1.8" marker-end="url(#ar-r)"/>')
 
-    # δb 箭头（x=0 处，两条线截距差）
     q1, q2 = P(0, 0.55), P(0, 0.67)
-    b.append(f'<line x1="{q1[0]-26:.1f}" y1="{q1[1]:.1f}" x2="{q2[0]-26:.1f}" y2="{q2[1]-3:.1f}" stroke="{RED}" stroke-width="1.8" marker-end="url(#ar-r)"/>')
-    b.append(t(q1[0] - 34, q1[1] + 14, "δb₂", 12, "end", RED, "600"))
+    b.append(f'<line x1="{q1[0]-24:.1f}" y1="{q1[1]:.1f}" x2="{q2[0]-24:.1f}" y2="{q2[1]-3:.1f}" stroke="{RED}" stroke-width="1.8" marker-end="url(#ar-r)"/>')
+    b.append(t(q1[0] - 32, q1[1] + 16, "δb₂", 12, "end", RED, "600"))
 
-    # 线标注：右端
     b.append(t(P(4.62, 4.77)[0], P(4.62, 4.77)[1] - 14, "F₁ = 0", 12.5, "end", INK, "600"))
-    b.append(t(P(4.24, 4.154)[0] + 8, P(4.24, 4.154)[1] + 16, "F₂ = 0", 12.5, "start", INK, "600"))
-    b.append(t(P(4.08, 4.138)[0] + 8, P(4.08, 4.138)[1] + 34, "F₂ = δb₂", 12, "start", RED, "600"))
+    b.append(t(P(4.24, 4.154)[0] + 10, P(4.24, 4.154)[1] + 18, "F₂ = 0", 12.5, "start", INK, "600"))
+    b.append(t(P(4.08, 4.138)[0] + 10, P(4.08, 4.138)[1] + 38, "F₂ = δb₂", 12, "start", RED, "600"))
 
     b.append(t(48, 404, "δb₂ 只挪了 0.12，交点从 (2.67, 2.82) 跳到 (3.47, 3.62)", 12, "start", DIM))
     b.append("</svg>")
     return "".join(b)
 
 
-# ------------------------------------------------------------ 3 收敛速度对比
+# ------------------------------------------------------------ 3 收敛速度
 def fig_cg():
-    W, H = 720, 430
-    L, Rr, T, B = 96, 660, 108, 352
+    W, H = 720, 440
+    L, Rr, T, B = 104, 646, 116, 356
     kmax = 40
-    ymin, ymax = -3.6, 0.05
+    ymin, ymax = -3.6, 0.1
 
     def P(k, v):
         return (L + (k / kmax) * (Rr - L), B - (v - ymin) / (ymax - ymin) * (B - T))
 
     b = [head(W, H)]
     b.append(t(48, 44, "同一个 κ = 100，两条误差界衰减得有多快", 16, "start", INK, "600"))
-    b.append(t(48, 68, "竖轴是对数刻度：直线下降代表按固定比例缩小，斜得越陡越快", 12, "start", DIM))
+    b.append(t(48, 68, "竖轴取对数：画成直线表示按固定比例缩小，越陡越快", 12, "start", DIM))
 
-    # 网格
-    for v in [0, -1, -2, -3]:
+    for v, lab in [(0, "1"), (-1, "10⁻¹"), (-2, "10⁻²"), (-3, "10⁻³")]:
         y = P(0, v)[1]
         b.append(f'<line x1="{L}" y1="{y:.1f}" x2="{Rr}" y2="{y:.1f}" stroke="{GRID}" stroke-width="1"/>')
-        b.append(t(L - 12, y + 4, "10" if v == 0 else f"10^{v}", 11.5, "end", DIM))
+        b.append(t(L - 14, y + 4, lab, 11.5, "end", DIM))
     for k in range(0, kmax + 1, 10):
         x = P(k, 0)[0]
         b.append(f'<line x1="{x:.1f}" y1="{T}" x2="{x:.1f}" y2="{B}" stroke="{GRID}" stroke-width="1" stroke-dasharray="2 4"/>')
-        b.append(t(x, B + 22, str(k), 11.5, "middle", DIM))
+        b.append(t(x, B + 24, str(k), 11.5, "middle", DIM))
 
-    b.append(f'<line x1="{L}" y1="{B}" x2="{Rr+20}" y2="{B}" stroke="{LIGHT}" stroke-width="1.3" marker-end="url(#ar)"/>')
-    b.append(f'<line x1="{L}" y1="{B}" x2="{L}" y2="{T-16}" stroke="{LIGHT}" stroke-width="1.3" marker-end="url(#ar)"/>')
-    b.append(t(Rr + 14, B + 22, "k", 12.5, "end", DIM))
-    b.append(t(L - 6, T - 22, "相对误差", 11.5, "start", DIM))
+    b.append(f'<line x1="{L}" y1="{B}" x2="{Rr+18}" y2="{B}" stroke="{LIGHT}" stroke-width="1.3" marker-end="url(#ar)"/>')
+    b.append(f'<line x1="{L}" y1="{B}" x2="{L}" y2="{T-20}" stroke="{LIGHT}" stroke-width="1.3" marker-end="url(#ar)"/>')
+    b.append(t(Rr + 16, B + 46, "k", 12.5, "end", DIM))
+    b.append(t(L - 14, T - 26, "相对误差", 11.5, "end", DIM))
 
-    # SD: log10(0.9802^k)
     kap = 100.0
     sd = [P(k, k * math.log10((kap - 1) / (kap + 1))) for k in range(kmax + 1)]
     cg = []
@@ -182,24 +192,22 @@ def fig_cg():
     b.append('<polyline points="' + " ".join(f"{x:.1f},{y:.1f}" for x, y in cg) +
              f'" fill="none" stroke="{RED}" stroke-width="2.4"/>')
 
-    # 标注
-    b.append(t(sd[-1][0] + 10, sd[-1][1] + 4, "最速下降", 12.5, "start", BLUE, "600"))
-    b.append(t(cg[-1][0] - 6, cg[-1][1] + 20, "共轭梯度", 12.5, "end", RED, "600"))
+    b.append(t(P(26, -0.06)[0], P(26, -0.06)[1], "最速下降", 12.5, "middle", BLUE, "600"))
+    b.append(t(P(31, -1.35)[0], P(31, -1.35)[1], "共轭梯度", 12.5, "middle", RED, "600"))
 
-    # 24 步处对比
     k0 = 24
     x24 = P(k0, 0)[0]
     b.append(f'<line x1="{x24:.1f}" y1="{T}" x2="{x24:.1f}" y2="{B}" stroke="{DIM}" stroke-width="1" stroke-dasharray="4 3"/>')
-    b.append(f'<circle cx="{x24:.1f}" cy="{P(k0, k0*math.log10(0.9802))[1]:.1f}" r="3.5" fill="{BLUE}"/>')
-    b.append(f'<circle cx="{x24:.1f}" cy="{P(k0, 0.301+k0*math.log10((math.sqrt(kap)-1)/(math.sqrt(kap)+1)))[1]:.1f}" r="3.5" fill="{RED}"/>')
+    b.append(f'<circle cx="{x24:.1f}" cy="{P(k0, k0*math.log10(0.9802))[1]:.1f}" r="3.6" fill="{BLUE}"/>')
+    b.append(f'<circle cx="{x24:.1f}" cy="{P(k0, 0.301+k0*math.log10((math.sqrt(kap)-1)/(math.sqrt(kap)+1)))[1]:.1f}" r="3.6" fill="{RED}"/>')
 
-    b.append(t(48, 396, "24 步时：最速下降还剩 0.62，共轭梯度已经到 1.6 × 10⁻²", 12.5, "start", INK))
-    b.append(t(48, 418, "两式分别是 ((κ−1)/(κ+1))^k 与 2((√κ−1)/(√κ+1))^k，κ = 100", 11.5, "start", DIM))
+    b.append(t(48, 400, "24 步时：最速下降还剩 0.62，共轭梯度已经到 1.6 × 10⁻²", 12.5, "start", INK))
+    b.append(t(48, 424, "两式分别是 ((κ−1)/(κ+1))^k 与 2((√κ−1)/(√κ+1))^k，κ = 100", 11.5, "start", DIM))
     b.append("</svg>")
     return "".join(b)
 
 
-# ------------------------------------------------------------ 4 不动点蛛网
+# ------------------------------------------------------------ 4 蛛网
 def cobweb(px, py, w, h, g, x0, lo, hi, steps, color, title):
     sx, sy = w / (hi - lo), h / (hi - lo)
 
@@ -240,7 +248,7 @@ def cobweb(px, py, w, h, g, x0, lo, hi, steps, color, title):
         nxt = seq[i + 1]
         if nxt > hi:
             p1, p2 = P(cur, cur), P(cur, hi)
-            b.append(f'<line x1="{p1[0]:.1f}" y1="{p1[1]:.1f}" x2="{p2[0]:.1f}" y2="{p2[1]-2:.1f}" stroke="{color}" stroke-width="1.6" marker-end="url(#ar)"/>')
+            b.append(f'<line x1="{p1[0]:.1f}" y1="{p1[1]:.1f}" x2="{p2[0]:.1f}" y2="{p2[1]-6:.1f}" stroke="{color}" stroke-width="1.6" marker-end="url(#ar)"/>')
             break
         p1, p2, p3 = P(cur, cur), P(cur, nxt), P(nxt, nxt)
         b.append(f'<line x1="{p1[0]:.1f}" y1="{p1[1]:.1f}" x2="{p2[0]:.1f}" y2="{p2[1]:.1f}" stroke="{color}" stroke-width="1.6"/>')
@@ -260,9 +268,9 @@ def fig_cobweb():
     b.append(t(44, 66, "先竖直走到曲线上，再水平走到 y = x；折线往里收就是收敛，往外散就是发散", 12, "start", DIM))
 
     b.append(cobweb(52, 96, 208, 208, lambda x: (x + 1) ** (1 / 3) if x > -1 else 0,
-                    1.50, 0.95, 1.72, 6, BLUE, "(a)  0 &lt; g′ &lt; 1"))
-    b.append(cobweb(292, 96, 208, 208, math.cos, 1.05, 0.15, 1.15, 8, RED, "(b)  −1 &lt; g′ &lt; 0"))
-    b.append(cobweb(532, 96, 208, 208, lambda x: x ** 3 - 1, 1.50, 0.9, 3.1, 3, "#6d28d9", "(c)  |g′| &gt; 1"))
+                    1.50, 0.95, 1.72, 6, BLUE, "(a)  0 < g′ < 1"))
+    b.append(cobweb(292, 96, 208, 208, math.cos, 1.05, 0.15, 1.15, 8, RED, "(b)  −1 < g′ < 0"))
+    b.append(cobweb(532, 96, 208, 208, lambda x: x ** 3 - 1, 1.50, 0.9, 3.1, 3, "#6d28d9", "(c)  |g′| > 1"))
 
     b.append(t(156, 332, "单调收敛，从一侧逼近", 11.5, "middle", DIM))
     b.append(t(396, 332, "振荡收敛，绕成螺旋", 11.5, "middle", DIM))
@@ -276,42 +284,43 @@ def fig_cobweb():
 
 # ------------------------------------------------------------ 5 压缩映射
 def fig_contraction():
-    W, H = 720, 420
+    W, H = 720, 430
     b = [head(W, H)]
     b.append(t(48, 44, "压缩映射：任意两点的像，距离被同一个 L 倍缩短", 16, "start", INK, "600"))
-    b.append(t(48, 68, "L &lt; 1 时反复迭代必然挤到同一点——这就是压缩映射原理", 12, "start", DIM))
+    b.append(t(48, 68, "L < 1 时反复迭代必然挤到同一点——这就是压缩映射原理", 12, "start", DIM))
 
-    c1, r1 = (198, 240), 112
-    c2, r2 = (548, 240), 67
+    c1, r1 = (296, 252), 132
+    c2, r2 = (348, 278), 68
     Lr = r2 / r1
 
-    b.append(f'<circle cx="{c1[0]}" cy="{c1[1]}" r="{r1}" fill="#f8fafc" stroke="{BLUE}" stroke-width="1.8" stroke-dasharray="6 4"/>')
-    b.append(f'<circle cx="{c2[0]}" cy="{c2[1]}" r="{r2}" fill="#fef6f2" stroke="{RED}" stroke-width="1.8"/>')
-    b.append(t(c1[0] - r1 + 6, c1[1] - r1 - 10, "D₀", 13, "start", BLUE, "600"))
-    b.append(t(c2[0] + r2 - 14, c2[1] - r2 - 10, "Φ(D₀)", 13, "start", RED, "600"))
+    b.append(f'<circle cx="{c1[0]}" cy="{c1[1]}" r="{r1}" fill="#f8fafc" stroke="{BLUE}" stroke-width="1.8" stroke-dasharray="7 5"/>')
+    b.append(f'<circle cx="{c2[0]}" cy="{c2[1]}" r="{r2}" fill="#fdf2ee" stroke="{RED}" stroke-width="1.8"/>')
+    b.append(t(c1[0] - r1 + 4, c1[1] - r1 - 10, "D₀", 13.5, "start", BLUE, "600"))
+    b.append(t(c2[0] + r2 + 8, c2[1] + 22, "Φ(D₀)", 13.5, "start", RED, "600"))
 
-    x = (132, 196)
-    y = (262, 306)
+    x = (200, 175)
+    y = (250, 352)
     fx = (c2[0] + (x[0] - c1[0]) * Lr, c2[1] + (x[1] - c1[1]) * Lr)
     fy = (c2[0] + (y[0] - c1[0]) * Lr, c2[1] + (y[1] - c1[1]) * Lr)
 
-    for p, q, name, col in [(x, fx, "x", INK), (y, fy, "y", INK)]:
+    for p, q, name in [(x, fx, "x"), (y, fy, "y")]:
         b.append(f'<line x1="{p[0]}" y1="{p[1]}" x2="{q[0]:.1f}" y2="{q[1]:.1f}" stroke="{LIGHT}" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ar-d)"/>')
         b.append(f'<circle cx="{p[0]}" cy="{p[1]}" r="4.5" fill="{INK}"/>')
         b.append(f'<circle cx="{q[0]:.1f}" cy="{q[1]:.1f}" r="4.2" fill="{RED}"/>')
-        b.append(t(p[0] - 12, p[1] - 6, name, 12.5, "end", INK, "600"))
-        b.append(t(q[0] + 10, q[1] - 6, "Φ(" + name + ")", 12, "start", RED))
+        b.append(t(p[0] - 12, p[1] - 8, name, 12.5, "end", INK, "600"))
+        b.append(t(q[0] + 9, q[1] + 4, "Φ(" + name + ")", 11.5, "start", RED))
 
-    b.append(f'<line x1="{x[0]}" y1="{x[1]}" x2="{y[0]}" y2="{y[1]}" stroke="{INK}" stroke-width="1.6"/>')
-    b.append(f'<line x1="{fx[0]:.1f}" y1="{fx[1]:.1f}" x2="{fy[0]:.1f}" y2="{fy[1]:.1f}" stroke="{RED}" stroke-width="1.6"/>')
-    b.append(t(196, 234, "‖x − y‖", 11.5, "end", INK))
-    b.append(t(552, 300, "‖Φ(x) − Φ(y)‖", 11.5, "start", RED))
+    b.append(f'<line x1="{x[0]}" y1="{x[1]}" x2="{y[0]}" y2="{y[1]}" stroke="{INK}" stroke-width="1.7"/>')
+    b.append(f'<line x1="{fx[0]:.1f}" y1="{fx[1]:.1f}" x2="{fy[0]:.1f}" y2="{fy[1]:.1f}" stroke="{RED}" stroke-width="1.7"/>')
+    b.append(t(212, 272, "‖x − y‖", 11.5, "end", INK))
+    # 像的距离：引出到小圆下方
+    b.append(f'<line x1="{(fx[0]+fy[0])/2:.1f}" y1="{(fx[1]+fy[1])/2:.1f}" x2="346" y2="374" stroke="{RED}" stroke-width="0.9" stroke-dasharray="3 3"/>')
+    b.append(t(352, 390, "‖Φ(x) − Φ(y)‖", 11.5, "start", RED))
 
-    # 不动点
-    b.append(f'<circle cx="{c1[0]+30}" cy="{c1[1]-16}" r="4.5" fill="{GREEN}"/>')
-    b.append(t(c1[0] + 40, c1[1] - 20, "x*", 12.5, "start", GREEN, "600"))
+    b.append(f'<circle cx="{c2[0]-16}" cy="{c2[1]-16}" r="4.5" fill="{GREEN}"/>')
+    b.append(t(c2[0] - 6, c2[1] - 22, "x*", 12.5, "start", GREEN, "600"))
 
-    b.append(t(48, 388, "L < 1 时两点像的距离缩到 L 倍；反复作用，像会收缩到唯一的不动点 x*", 12, "start", DIM))
+    b.append(t(48, 406, "像落在 D₀ 里面（自映射），距离又缩到 L 倍——所以不动点唯一，且任意初值都收敛", 12, "start", DIM))
     b.append("</svg>")
     return "".join(b)
 
@@ -321,4 +330,3 @@ save(os.path.join("第5章-解线性方程组的直接法", "figures", "ill-cond
 save(os.path.join("第6章-解线性方程组的迭代法", "figures", "cg-vs-sd.svg"), fig_cg())
 save(os.path.join("第7章-非线性方程", "figures", "fixed-point-cobweb.svg"), fig_cobweb())
 save(os.path.join("第7章-非线性方程", "figures", "contraction-map.svg"), fig_contraction())
-print("旧的 newton-system-2d.svg 不再生成")
