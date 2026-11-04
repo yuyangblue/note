@@ -53,6 +53,8 @@
 
 **去重原则**：定义各留一处、证明各留一处；向量版／推广版只标注「这是定理 X 的向量版」，不重写。
 
+**枝节要压，压到一段为止**（鱼汤 2026-11-04 明确：和主要知识没有关系的可以简约说一下或删掉，举例 P2P）。判据同样是「它是否改变读者对主线的理解」，不是「内容难不难」。四类可压：课堂问答与轶事、历史来龙去脉（除非它解释某个设计选择）、商业运营背景（版权、带宽、ISP 封端口、市场规模）、与主线无关的名词补充。压法固定——保留**概念定义** + **它在这条主线里的位置**，其余删净；不是全删，是压成一段。网络笔记 01 篇的 P2P 由 4 小节 45 行压成 3 段，就是模板。
+
 ## 笔记增补的来源标注
 
 - 头部引用块里加一行来源（课件 + B站视频链接 + BV 号），不另起「附录」。
@@ -103,6 +105,30 @@ C:\Users\29469\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe
 用法：`pymupdf.open(path)` → `page.get_text()` 抽文字；`page.get_pixmap(dpi=110).save(png)` 渲染成图再用 Read 看（课件里的图、公式一定要渲染出来看，光抽文字会漏掉图示）。注意 `import fitz` 会报 deprecated 警告，改用 `import pymupdf`。
 
 系统里没有 pdftotext / ghostscript / magick / mutool；Read 工具直接读大于 256KB 的 PDF 会失败。
+
+## 课件插图：从 pptx 取图并插进笔记（2026-11-04 起）
+
+**不能抠 media**：CSAPP 中译课件里的示意图几乎全是 PowerPoint 矢量形状（`ppt/media/` 空的），图形由几十个零散 shape 拼成（一张硬件结构图 50 个）、也没有 group 包裹，`Shape.Export` 用不上。
+
+**正解是 PowerPoint COM 渲染整页再裁**（本机 Office 16.0 可用，没装 LibreOffice）：
+
+1. `New-Object -ComObject PowerPoint.Application` → `Presentations.Open($p,$true,$false,$false)`。
+2. `Slide.Export($png,"PNG",页宽*3,页高*3)`——**3 倍**才够清晰（720×540 的 4:3 课件→2160×1620，裁完仍有 800 宽）。
+3. 算图形区包围盒：遍历 `Slide.Shapes`，**排除 `Type -eq 14`**（占位符＝标题/正文），取其余 shape 的 L/T/R/B 极值。
+4. 用 `System.Drawing` 裁剪（`Add-Type -AssemblyName System.Drawing`），不必装 Pillow。
+5. 收尾 `$pres.Close()` + `$app.Quit()` + 两次 `ReleaseComObject`，否则 POWERPNT.EXE 留在后台。
+
+**包围盒只是起点，几乎每页都要手工微调**（按页号覆盖）：
+- 标题在上、正文在下时，下边界会吃进正文首行笔画 → 按正文占位符 `T` 收紧；
+- 页脚作者名与页码在 y≈525–540，下边界收到 522 内；但内容顶到 533 的（如调用序列图的 `close` 框）**宁可留页脚**，裁多会切主体；
+- 顶部主题红条延伸到 y≈22，上边界从 22 起；
+- 调完必须 `ViewImage` 回看，别凭坐标猜——这次 3/5/27/33 四页都返工过。
+
+**命名与图注**（沿用 9/10 章惯例）：`图片/<前缀>_<两位页序>_<中文说明>.png`，前缀按章取（`ECF_`／`VM_`／`IO_`／`NET_`）；正文 `![课件 pN：说明](../图片/名字.png)`，**页号必须是真实页码**（按 `presentation.xml` 的 `sldIdLst` + `_rels` 还原，不是 slideN.xml 文件名）。
+
+**PowerShell 脚本只能写纯 ASCII**：`Write` 存 UTF-8 而 PS 5.1 按 ANSI 读 .ps1，中文和 `…` 变乱码直接 ParseError。中文路径用 `[char]0x4E2D` 拼；或脚本只写 ASCII 临时名，最后用 Bash 改名。
+
+**插几张的取舍**：判据和画图一样，图必须携带文字给不出的信息。这次 19 张候选留 17，弃的两种正是「一根线上的三台主机」（文字已说清）和与另一张重复的序列图。
 
 ## 站点发布机制（MkDocs，2026-10-26 起）
 
