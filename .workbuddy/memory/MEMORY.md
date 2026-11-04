@@ -106,6 +106,12 @@ C:\Users\29469\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe
 
 系统里没有 pdftotext / ghostscript / magick / mutool；Read 工具直接读大于 256KB 的 PDF 会失败。
 
+## CSAPP 教材：`C:\Users\29469\Desktop\大一下计算机科学导论\深入理解计算机系统原书第三版\`（2026-11-04 核实）
+
+- **PDF 是扫描件、没有文字层**（pymupdf `get_text()` 全空），但同目录有**分卷 docx**：`深入理解计算机系统原书第三版_1-260.docx` / `_261-520.docx` / `_521-775.docx`。`zipfile` 读 `word/document.xml` 去标签即出全文，第三卷 38.8 万字 / 9872 段。核教材一律用 docx，别翻 PDF。
+- 第 11 章网络编程在第三卷：§11.3.1 IP 地址、§11.3.2 域名、§11.3.3 连接、§11.4 套接字接口（含 §11.4.7 主机与服务的转换）。
+- **教材没讲地址分类／子网／CIDR**（这三个词在第三卷各 0 次）。A/B/C 类来自课件 `21-netprog1` p47 与课堂，写笔记时别标成教材内容。
+
 ## 课件插图：从 pptx 取图并插进笔记（2026-11-04 起）
 
 **不能抠 media**：CSAPP 中译课件里的示意图几乎全是 PowerPoint 矢量形状（`ppt/media/` 空的），图形由几十个零散 shape 拼成（一张硬件结构图 50 个）、也没有 group 包裹，`Shape.Export` 用不上。
