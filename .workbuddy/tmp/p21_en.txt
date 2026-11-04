@@ -1,0 +1,70 @@
+--- slide1 (中文块2 英文块3) ---
+  Randal E. Bryant | and David R. | O’Hallaron
+--- slide2 (中文块16 英文块5) ---
+  Client | process | Server | process | Resource
+--- slide3 (中文块1 英文块24) ---
+  main | memory | bridge | MI | ALU | register file | CPU chip | system bus | memory bus | disk | controller | graphics | adapter | USB | controller | mouse | keyboard | monitor | disk | I/O bus | Expansion slots | network | adapter | network
+--- slide4 (中文块10 英文块2) ---
+  Switched | Ethernet, Quadrics QSW, …
+--- slide5 (中文块10 英文块7) ---
+  host | host | host | hub | 100 Mb/ | 100 Mb/ | port
+--- slide6 (中文块3 英文块23) ---
+  host | host | host | host | host | hub | hub | bridge | 100 Mb/s | 100 Mb/s | host | host | hub | 100 Mb/s | 100 Mb/s | Gb | host | host | host | bridge | host | host | hub
+--- slide7 (中文块2 英文块3) ---
+  host | host | host
+--- slide8 (中文块5 英文块13) ---
+  host | host | host | host | host | host | WAN | WAN | router | router | router | LAN 1 | LAN  2
+--- slide9 (中文块7 英文块8) ---
+  router | router | router | router | router | router | host | host
+--- slide12 (中文块3 英文块44) ---
+  LAN2 | protocol | software | client | LAN1 | adapter | Host A | LAN1 | data | data | PH | FH1 | data | PH | FH2 | data | data | PH | FH2 | LAN2 frame | protocol | software | LAN1 | adapter | LAN2 | adapter | Router | data | PH | FH1 | data | PH | FH1 | internet packet | LAN1 frame | data | PH | FH2 | protocol | software | server | LAN2 | adapter | Host B
+--- slide15 (中文块9 英文块11) ---
+  TCP/IP | Client | Network | adapter | Global IP Internet | TCP/IP | Server | Network | adapter | Internet client host | Internet server host
+--- slide18 (中文块5 英文块6) ---
+  /* Internet address structure */ | struct | in_addr | uint32_t | s_addr | /* network byte order (big-endian) */
+--- slide20 (中文块4 英文块16) ---
+  .net | edu | gov | .com | cmu | berkeley | mit | cs | ece | whaleshark | ics | unnamed root | pdl | www | amazon | www
+--- slide22 (中文块5 英文块8) ---
+  linux | &gt; | nslookup | localhost | Address: 127.0.0.1 | linux | &gt; hostname | whaleshark.ics.cs.cmu.edu
+--- slide23 (中文块3 英文块15) ---
+  linux | &gt; | nslookup | whaleshark.ics.cs.cmu.edu | Address: 128.2.210.175 | linux | &gt; | nslookup | cs.mit.edu | Address: 18.62.1.6 | linux | &gt; | nslookup | eecs.mit.edu | Address: 18.62.1.6
+--- slide24 (中文块3 英文块23) ---
+  linux | &gt; | nslookup | www.twitter.com | Address: 199.16.156.6 | Address: 199.16.156.70 | Address: 199.16.156.102 | Address: | linux | &gt; | nslookup | twitter.com | Address: 199.16.156.102 | Address: 199.16.156.230 | Address: 199.16.156.6 | Address: | linux | &gt; | nslookup | ics.cs.cmu.edu | *** Can't find | ics.cs.cmu.edu | No answer
+--- slide27 (中文块12 英文块4) ---
+  cliaddr:cliport | servaddr:servport | Server | Client
+--- slide28 (中文块11 英文块8) ---
+  Web server | Echo server | Web server | Echo server | Kernel | Kernel | Client | Client
+--- slide29 (中文块4 英文块1) ---
+  Unix variants, Windows, OS X, IOS, Android, ARM
+--- slide30 (中文块6 英文块5) ---
+  Client | Server | Sockets | clientfd | serverfd
+--- slide31 (中文块6 英文块15) ---
+  typedef | struct | sockaddr | SA; | struct | sockaddr | uint16_t | sa_family | Protocol | family */ | char | sa_data | Address | data.  */ | sa_family
+--- slide32 (中文块4 英文块24) ---
+  sa_family | struct sockaddr_in  { | uint16_t | sin_family | Protocol family | (always AF_INET) */ | uint16_t | sin_port | Port | num | in network byte order */ | struct in_addr  sin_addr; | /* IP addr in network byte order */ | unsigned char | sin_zero | Pad | to | sizeof | struct | sockaddr | sin_port | AF_INET | sin_addr | sin_family
+--- slide33 (中文块13 英文块21) ---
+  Client / Server | Client | Server | socket | socket | bind | listen | rio_readlineb | rio_writen | rio_readlineb | rio_writen | rio_readlineb | close | close | EOF | open_listenfd | open_clientfd | accept | connect | getaddrinfo | getaddrinfo
+--- slide34 (中文块7 英文块21) ---
+  Client / Server | Client | Server | socket | socket | bind | listen | rio_readlineb | rio_writen | rio_readlineb | rio_writen | rio_readlineb | close | close | EOF | open_listenfd | open_clientfd | accept | connect | getaddrinfo | getaddrinfo
+--- slide36 (中文块5 英文块30) ---
+  int | getaddrinfo | const | char *host, | ostname or address */ | const | char *service, | /* Port or service name */ | const | struct | addrinfo | *hints, | /* Input parameters */ | struct | addrinfo | **result); | /* Output linked list */ | void | freeaddrinfo | struct | addrinfo | *result); | /* Free linked list */ | const | char * | gai_strerror | int | errcode | /* Return error | msg
+--- slide37 (中文块5 英文块10) ---
+  ai_canonname | result | ai_addr | ai_next | NULL | ai_addr | ai_next | NULL | ai_addr | NULL
+--- slide38 (中文块3 英文块38) ---
+  struct | addrinfo | int | ai_flags | /* Hints argument flags */ | int | ai_family | /* First | arg | to socket function */ | int | ai_socktype | /* Second | arg | to socket function */ | int | ai_protocol | /* Third | arg | to socket function  */ | char | ai_canonname | /* Canonical host name */ | size_t | ai_addrlen | /* Size of | ai_addr | struct | struct | sockaddr | ai_addr | Ptr | to socket address structure */ | struct | addrinfo | ai_next | Ptr | to next item in linked list */
+--- slide39 (中文块4 英文块21) ---
+  int | getnameinfo | const | SA * | sa | socklen_t | salen | In: socket | addr | char *host, | size_t | hostlen | /* Out: host */ | char * | serv | size_t | servlen | Out: service */ | int | flags); | optional flags */
+--- slide40 (中文块1 英文块50) ---
+  #include | &quot; | csapp.h | &quot; | int | main | int | argc | char | argv | struct | addrinfo | listp | hints | char | buf | [MAXLINE]; | int | rc | flags | /* Get a list of | addrinfo | records */ | memset | (&amp;hints, 0, | sizeof | struct | addrinfo | hints.ai_family | = AF_INET; | /* IPv4 only * | hints.ai_socktype | = SOCK_STREAM; | /* Connections only * | if | rc | getaddrinfo | argv | NULL | , &amp;hints, &amp; | listp | fprintf | stderr | &quot; | getaddrinfo | error: %s\n&quot; | gai_strerror | rc | exit(1); | hostinfo.c
+--- slide41 (中文块1 英文块25) ---
+  * Walk the list and display each IP address */ | flags = NI_NUMERICHOST; | /* Display | address instead of name */ | for | listp | ; p; p = p-&gt; | ai_next | Getnameinfo | (p-&gt; | ai_addr | , p-&gt; | ai_addrlen | buf | , MAXLINE, | NULL | , 0, flags); | printf( | &quot;%s\n&quot; | , buf); | /* Clean up */ | Freeaddrinfo | listp | exit(0); | hostinfo.c
+--- slide42 (中文块1 英文块12) ---
+  whaleshark | &gt; | hostinfo | localhost | whaleshark | &gt; | hostinfo | whaleshark.ics.cs.cmu.edu | whaleshark | &gt; | hostinfo | twitter.com
+--- slide46 (中文块11 英文块32) ---
+  IXP | IXP | Backbone | Backbone | Backbone | Backbone | IXP | POP | POP | POP | Regional net | POP | POP | POP | POP | POP | Small Business | Big Business | ISP | POP | POP | POP | POP | Pgh | employee | Cable | modem | DC employee | POP | POP | DSL | IXP
+--- slide47 (中文块15 英文块5) ---
+  Class A | Class B | Class C | Class D | Class E
+--- slide49 (中文块11 英文块3) ---
+  IP address | bryant-tp4.cs.cmu.edu | IP address
+--- slide50 (中文块10 英文块2) ---
+  Firewall | Internet
