@@ -58,10 +58,9 @@ $$
 
 **表1：学习率调度（LRS）对幂律核回归标度效率的强烈影响。** 效率由两个关键因素决定：相对任务难度$s \in (0,\infty)$和模型容量$\beta > 1$。我们区分"易学习regime"（$s \geqslant 1-1/\beta$）和"难学习regime"（$s < 1-1/\beta$）。
 
-| 学习率调度（LRS） | 数据最优标度律 | 计算最优标度律 |
-|---|---|---|
-| | 易学习 | 难学习 | 易学习 | 难学习 |
-| 常数 | $D^{-\frac{s}{s+1}}$ | $C^{-\frac{s\beta}{1+s\beta+\beta}}$ |
+| 学习率调度（LRS） | 数据最优·易学习 | 数据最优·难学习 | 计算最优·易学习 | 计算最优·难学习 |
+|---|---|---|---|---|
+| 常数 | $D^{-\frac{s}{s+1}}$ | | $C^{-\frac{s\beta}{1+s\beta+\beta}}$ | |
 | 指数衰减 | $D^{-\frac{s\beta}{1+s\beta}}(\log D)^{\frac{s\beta}{1+s\beta}}$ | $D^{-s}(\log D)^{s}$ | $C^{-\frac{s\beta}{2+s\beta}}(\log C)^{\frac{s\beta}{2+s\beta}}$ | $C^{-\frac{s\beta}{1+\beta}}(\log C)^{\frac{s\beta}{1+\beta}}$ |
 | 预热-稳定-衰减（WSD） | $D^{-\frac{s\beta}{1+s\beta}}(\log D)^{\frac{s\beta-s}{1+s\beta}}$ | $D^{-s}$ | $C^{-\frac{s\beta}{2+s\beta}}(\log C)^{\frac{s\beta-s}{2+s\beta}}$ | $C^{-\frac{s\beta}{1+\beta}}$ |
 
