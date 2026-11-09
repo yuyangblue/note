@@ -64,7 +64,9 @@ $$\int \log\frac{f(x;\theta_*)}{f(x;\theta)}f(x;\theta_*)\,dx \ =\ -D(\theta_*, 
 > 由 $\widehat{\theta}_n$ 是最大点，$M_n(\widehat{\theta}_n) \ge M_n(\theta_*)$，于是
 > $$M(\theta_*) - M(\widehat{\theta}_n) = \underbrace{\left[M_n(\widehat{\theta}_n) - M(\widehat{\theta}_n)\right]}_{\text{一致性控制}} + \underbrace{\left[M(\theta_*) - M_n(\theta_*)\right]}_{\to 0} \le 2\sup_\theta \lvert M_n(\theta) - M(\theta)\rvert \xrightarrow{P} 0$$
 > 即 $M(\widehat{\theta}_n) \xrightarrow{P} M(\theta_*)$。任给 $\varepsilon > 0$，取 $\delta > 0$ 使 $\lvert\theta-\theta_*\rvert \ge \varepsilon$ 时 $M(\theta) \le M(\theta_*) - \delta$，则
-> $$\mathbb{P}\left(\lvert\widehat{\theta}_n - \theta_*\rvert > \varepsilon\right) \le \mathbb{P}\left(M(\widehat{\theta}_n) < M(\theta_*) - \delta\right) \to 0\ \qedsym$$
+> $$\mathbb{P}\left(\lvert\widehat{\theta}_n - \theta_*\rvert > \varepsilon\right) \le \mathbb{P}\left(M(\widehat{\theta}_n) < M(\theta_*) - \delta\right) \to 0$$
+>
+> ∎
 
 注意（正则条件失效则结论失效，CMU L15 的例子）：取 $Y_{i1}, Y_{i2} \sim N(\mu_i, \sigma^2)$ 并强制 $\mu_1 = \mu_2$（参数落在更大家族的边界上），MLE 变成 $\widehat{\sigma}^2 = \frac{1}{4n}\sum_i (Y_{i1} - Y_{i2})^2$，期望只有真值的一半——**不相合**。同 p16 例 9.12 一样，这类反例都出在正则条件被破坏的地方。
 
@@ -84,7 +86,9 @@ $n=1$ 时记 $I(\theta)$。
 
 > [!note]- 证明
 > 归一化 $1 = \int f(x;\theta)\,dx$ 两边对 $\theta$ 求导（积分号下求导）：
-> $$0 = \int \frac{\partial f(x;\theta)}{\partial\theta}dx = \int \frac{\partial f / \partial\theta}{f}\,f(x;\theta)\,dx = \int s(x;\theta)f(x;\theta)\,dx = \mathbb{E}_\theta\,s(X;\theta)\ \qedsym$$
+> $$0 = \int \frac{\partial f(x;\theta)}{\partial\theta}dx = \int \frac{\partial f / \partial\theta}{f}\,f(x;\theta)\,dx = \int s(x;\theta)f(x;\theta)\,dx = \mathbb{E}_\theta\,s(X;\theta)$$
+>
+> ∎
 
 **定理 9.17**：$I_n(\theta) = n\,I(\theta)$，且有第二种算法
 
@@ -263,7 +267,7 @@ $X_1,\cdots,X_n \sim N(\mu,1)$，$T = e^\mu$。比较 Delta 方法、参数 Boot
 > - **非参数 Bootstrap**：从经验分布 $\widehat{F}_n$（即对原数据有放回重抽）做同样的事。
 > 三者在大样本下应给出接近的答案；课本这题还要求把 Bootstrap 直方图与真实抽样分布（模拟获得）叠着比——教材的结论方向是 Bootstrap 直方图通常比单一的正态近似更贴近真实分布，代价是计算量。
 
-**考点**：[[#7. Delta 方法|Delta 方法]]、[[#9. 参数 Bootstrap|参数 Bootstrap]]、[[#5.2 同变性|同变性]]
+**考点**：[[#7. Delta 方法|Delta 方法]]、[[#9. 参数 Bootstrap|参数 Bootstrap]]、[[统计学完全教程/第9章 参数推断/p16 第9章 参数推断（一）矩估计与极大似然.md#5.2 同变性|同变性]]
 
 ## 12. 本节重点
 
