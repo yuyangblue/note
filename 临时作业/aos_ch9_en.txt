@@ -1,0 +1,1157 @@
+===== PDF p131 =====
+9 
+Parametric Inference 
+We now turn our attention to parametric models, that is, models of the form 
+.;y = {f(x; 8): 8 E 8 } 
+(9.1) 
+where the 8 c ~k is the parameter space and 8 = (81, ... , 8k ) is the param-
+eter. The problem of inference then reduces to the problem of estimating the 
+parameter 8. 
+Students learning statistics often ask: how would we ever know that the 
+distribution that generated the data is in some parametric model? This is 
+an excellent question. Indeed, we would rarely have such knowledge which 
+is why non parametric methods are preferable. Still, studying methods for 
+parametric models is useful for two reasons. First, there are some cases where 
+background knowledge suggests that a parametric model provides a reasonable 
+approximation. For example, counts of traffic accidents are known from prior 
+experience to follow approximately a Poisson model. Second, the inferential 
+concepts for parametric models provide background for understanding certain 
+nonparametric methods. 
+We begin with a brief discussion about parameters of interest and nuisance 
+parameters in the next section, then we will discuss two methods for estimat-
+ing 8, the method of moments and the method of maximum likelihood. 
+===== PDF p132 =====
+120 
+9. Parametric Inference 
+9.1 
+Pararneter of Interest 
+Often, we are only interested in some function T(8). For example, if X rv 
+N(IL, 0"2) then the parameter is 8 = (IL,O")' If our goal is to estimate IL then 
+IL = T(8) is called the parameter of interest and 0" is called a nuisance 
+parameter. The parameter of interest might be a complicated function of 8 
+as in the following example. 
+9.1 Example. Let Xl"'" Xn rv Normal(IL, 0"2). The parameter is 8 = (IL,O") 
+and the parameter space is e = {(IL, 0"): IL E Jl{, 0" > O}. Suppose that Xi is 
+the outcome of a blood test and suppose we are interested in T, the fraction 
+of the population whose test score is larger than 1. Let Z denote a standard 
+Normal random variable. Then 
+T 
+J1D(X> 1) = 1 _ J1D(X < 1) = 1 _ JID (X; It < 1: IL) 
+1-JID(Z< l:IL) =l-<I>C:IL). 
+The parameter of interest is T = T(IL, 0") = 1 -
+<I> ( (1 - IL) /0"). _ 
+9.2 Example. Recall that X has a Gamma(a, p) distribution if 
+where a, p > 0 and 
+is the Gamma function. The parameter is 8 = (a, p). The Gamma distri-
+bution is sometimes used to model lifetimes of people, animals, and elec-
+tronic equipment. Suppose we want to estimate the mean lifetime. Then 
+T(a, p) = JEg(Xd = ap. _ 
+9.2 
+The Method of Moments 
+The first method for generating parametric estimators that we will study 
+is called the method of moments. We will see that these estimators are not 
+optimal but they are often easy to compute. They are are also useful as starting 
+values for other methods that require iterative numerical routines. 
+===== PDF p133 =====
+9.2 The Method of Moments 
+121 
+Suppose that the parameter () = (()l, ... , ()k) has k components. For 1 < 
+j ::.; k, define the jth moment 
+and the jth sample moment 
+~ _ 1 ~ j 
+O:j -
+-
+~Xi' 
+n i=1 
+(9.2) 
+(9.3) 
+9.3 Definition. The method of moments estimator ()n is defined to be 
+the value of () such that 
+0:1 (en) 
+0:1 
+0:2(en ) 
+0:2 
+(9.4) 
+Formula (9.4) defines a system of k equations with k unknowns. 
+9.4 Example. Let Xl"",Xn rv Bernoulli(p). Then 0:1 = JEp(X) = p and 
+a1 = n-1 L~=1 Xi' By equating these we get the estimator 
+9.5 Example. Let Xl"'" Xn rv Normal(IL, (J2). Then, 0:1 = JEg(XI) = 
+IL 
+and 0:2 = JEg(Xf) = Vg(Xl) + (JEg(XI)j2 = (J2 + fL2. We need to solve the 
+equations1 
+1 n 
+-LXi 
+n i=1 
+1 
+n 
+-LX;. 
+n i=1 
+This is a system of 2 equations with 2 unknowns. The solution is 
+1 Recall that VeX) = JE(X2) - (JE(X))2 Hence, JE(X2) = VeX) + (JE(X))2 
+===== PDF p134 =====
+122 
+9. Parametric Inference 
+2 
+1 ~ 
+-
+2 
+(j 
+- L.)Xi - Xn). 
+• 
+n i=l 
+9.6 Theorem. Let en denote the method of moments estimator. Under appro-
+priate conditions on the model, the following statements hold: 
+1. The estimate en exists with probability tending to 1. 
+2. The estimate is consistent: en ~ 
+e. 
+3. The estimate is asymptotically Normal: 
+where 
+~ = gJEg(yyT)gT, 
+Y = (X,x 2 , ... ,Xk)T, g = (gl,'" ,gk) and gj = 8c£/(e)/8e. 
+The last statement in the theorem above can be used to find standard errors 
+and confidence intervals. However, there is an easier way: the bootstrap. We 
+defer discussion of this until the end of the chapter. 
+9.3 
+Maxirnurn Likelihood 
+The most common method for estimating parameters in a parametric model is 
+the maximum likelihood method. Let Xl, ... , Xn be IID with PDF f(x; e). 
+9.7 Definition. The likelihood function is defined by 
+n 
+Ln(e) = II f(Xi ; e). 
+(9.5) 
+i=l 
+The log-likelihood function is defined by fl.n (e) = log Ln (e). 
+The likelihood function is just the joint density of the data, except that we 
+treat it is a function of the parameter e. Thus, Ln : 8 --+ [0, (0). The 
+likelihood function is not a density function: in general, it is not true that 
+Ln (e) integrates to 1 (with respect to e). 
+9.8 Definition. The maximum likelihood estimator MLE, denoted by 
+en, is the value of e that maximizes Ln(e). 
+===== PDF p135 =====
+9.3 Maximum Likelihood 
+123 
+p 
+0.0 
+0.2 
+0.4 
+0.6 
+0.8 
+1.0 
+FIGURE 9.1. Likelihood function for Bernoulli with n = 20 and ~~=1 Xi = 12. The 
+MLE is Pn = 12/20 = 0.6. 
+The maximum of £n (e) occurs at the same place as the maximum of Ln (e), 
+so maximizing the log-likelihood leads to the same answer as maximizing the 
+likelihood. Often, it is easier to work with the log-likelihood. 
+9.9 Remark. If we multiply Ln(e) by any positive constant c (not depending 
+on e) then this will not change the MLE. Hence, we shall often drop constants 
+in the likelihood function. 
+9.10 Example. Suppose that Xl' ... ' Xn rv Bernoulli(p). The probability func-
+tion is f(x; p) = pX (1- p)l-x for x = 0,1. The unknown parameter is p. Then, 
+n 
+n 
+i=l 
+i=l 
+where S = Li Xi. Hence, 
+£n(P) = Slogp+ (n - S)log(l- p). 
+Take the derivative of £n(P), set it equal to 0 to find that the MLE is fin = Sjn. 
+See Figure 9.1. • 
+9.11 Example. Let Xl, ... ,Xn rv N(j1,(}2). The parameter is e = (j1,(}) and 
+the likelihood function (ignoring some constants) is: 
+===== PDF p136 =====
+124 
+9. Parametric Inference 
+where X = n-l2::iXi is the sample mean and S2 = n- l 2::i(Xi - X)2. The 
+last equality above follows from the fact that 2::i (Xi -It? = nS2 + n(X -It)2 
+which can be verified by writing 2::i(Xi - fL)2 = 2::i(Xi - X + X - fL)2 and 
+then expanding the square. The log-likelihood is 
+nS2 
+n(X -It? 
+Ji.(fL, a) = -n log a -
+-2a-2 -
+----'--::-2-a""'2--'--
+Solving the equations 
+we conclude that Ii = X and (j = S. It can be verified that these are indeed 
+global maxima of the likelihood. _ 
+9.12 Example (A Hard Example). Here is an example that many people find 
+confusing. Let XI"",Xn rv Uni!(O,B). Recall that 
+!(x' B) = {l/B 0::'; x ~ B 
+, 
+0 
+otherWIse. 
+Consider a fixed value of B. Suppose B < Xi for some i. Then, !(Xi; B) = 0 
+and hence Ln(B) = IIi !(Xi; B) = O. It follows that Ln(B) = 0 if any Xi > B. 
+Therefore, Ln(B) = 0 if B < X(n) where X(n) = max{XI"'" X n}. Now 
+consider any B ~ XCn)' For every Xi we then have that !(Xi; B) = l/B so that 
+Ln(B) = IIi !(Xi; B) = B-n. In conclusion, 
+See Fig~re 9.2. Now Ln(B) is strictly decreasing over the interval [XCn)' (0). 
+Hence, Bn = XCn)' -
+The maximum likelihood estimators for the multivariate Normal and the 
+multinomial can be found in Theorems 14.5 and 14.3. 
+9.4 
+Properties of Maxirnurn Likelihood Estirnators 
+Under certain conditions on the model, the maximum likelihood estimator Bn 
+possesses many properties that make it an appealing choice of estimator. The 
+main properties of the MLE are: 
+===== PDF p137 =====
+o .,; 
+'" 
+.,; 
+0 .,; 
+9.4 Properties of Maximum Likelihood Estimators 
+125 
+I I 
+I III 
+" 
+I III 
+" 
+0.0 
+0.5 
+1.0 
+e = .75 
+'R ?m 
+? m 
+" " 
+'" 
+" 
+'" 
+" 
+0.0 
+0.5 
+1.0 
+() = 1.25 
+<t;' 
+H 
+'-"" 
+"-, 
+1.5 
+2.0 
+x 
+~ 
+~ 
+t..l 
+1.5 
+2.0 
+x 
+"l 
+co 
+on 
+.,; 
+0 .,; 
+"l 
+0 
+on 
+d 
+0 .,; 
+" " 
+" 
+0.0 
+0.6 
+0.5 
+e = 1 
+0.8 
+'" 
+'" 
+1.0 
+1.0 
+1.5 
+2 .0 
+x 
+1.2 
+I .' 
+e 
+FIGURE 9.2. Likelihood function for Uniform (0, e). The vertical lines show the 
+observed data. The first three plots show f(x; e) for three different values of e. 
+When e < XCn) 
+= max{X1 , ... , X n}, as in the first plot, f(XCn); e) = ° 
+and 
+hence Ln(e) = rr~=l f(Xi; e) = 0. Otherwise f(Xi; e) = lie for each i and hence 
+Ln(e) = rr~=l f(Xi; e) = (l/e)n. The last plot shows the likelihood function. 
+===== PDF p138 =====
+126 
+9. Parametric Inference 
+1. The MLE is consistent: en ~ 
+8* where 8* denotes the true value of the 
+parameter 8; 
+2. The MLE is equivariant: if en is the MLE of 8 then g(en) is the MLE of 
+g( 8); 
+3. The MLE is asymptotically Normal: (e - 8*)/se ~ N(O, 1); also, the 
+estimated standard error Se can often be computed analytically; 
+4. The MLE is asymptotically optimal or efficient: roughly, this means 
+that among all well-behaved estimators, the MLE has the smallest vari-
+ance, at least for large samples; 
+5. The MLE is approximately the Bayes estimator. (This point will be ex-
+plained later.) 
+We will spend some time explaining what these properties mean and why 
+they are good things. In sufficiently complicated problems, these properties 
+will no longer hold and the MLE will no longer be a good estimator. For now 
+we focus on the simpler situations where the MLE works well. The properties 
+we discuss only hold if the model satisfies certain regularity conditions. 
+These are essentially smoothness conditions on f(x; 8). Unless otherwise 
+stated, we shall tacitly assume that these conditions hold. 
+9.5 
+Consistency of Maxirnurn Likelihood Estirnators 
+Consistency means that the MLE converges in probability to the true value. 
+To proceed, we need a definition. If f and g are PDF'S, define the Kullback-
+Leibler distance 2 between f and g to be 
+D(j,g) = J 
+f(x) log (~~:D dx. 
+(9.6) 
+It can be shown that D(j, g) ~ 0 and D(j,1) = O. For any 8, VJ E 8 write 
+D( 8, 1/;) to mean D(j(x; 8), f( x; 1/;)). 
+We will say that the model ~ is identifiable if 8 # 1/; implies that D(8, 1/;) > 
+O. This means that different values of the parameter correspond to different 
+distributions. We will assume from now on the the model is identifiable. 
+2This is not a distance in the formal sense because D(f, g) is not symmetric. 
+===== PDF p139 =====
+9.6 Equivariance of the MLE 
+127 
+Let e* denote the true value of e. Maximizing t;n(e) is equivalent to maxi-
+mizing 
+This follows since Mn(e) = n- 1(t;n(e) -t;n(e*)) and t;n(e*) is a constant (with 
+respect to e). By the law of large numbers, lvIn (e) converges to 
+J (f(X; e)) . 
+log 
+f(x; e*) 
+j(x; e*)dx 
+J (f(X; e*)) 
+-
+log 
+f(x; e) 
+f(x; e*)dx 
+-D(e*, e). 
+Hence, Mn(e) ;:::; -D(e*, e) which is maximized at e* since -D(e*, e*) = 0 
+and - D( e*, e) < 0 for e i=- e*. Therefore, we expect that the maximizer will 
+tend to e*. To prove this formally, we need more than .l'vln(e)~ - D(e*, e). 
+We need this convergence to be uniform over e. We also have to make sure 
+that the function D( e*, e) is well behaved. Here are the formal details. 
+9.13 Theorem. Let e* denote the true value of e. Define 
+and M(e) = -D(e*, e). Suppose that 
+(9.7) 
+and that, for every E > 0, 
+sup 
+M(e) < M(e*). 
+(9.8) 
+II:III-II.I::>E 
+~ p 
+Let en denote the MLE. Then en ---+ e*. 
+The proof is in the appendix. 
+9.6 
+Equivariance of the MLE 
+9.14 Theorem. Let T = g(e) be a function of e. Let en be the MLE of e. Then 
+Tn = g(en) is the MLE of T. 
+===== PDF p140 =====
+128 
+9. Parametric Inference 
+PROOF. Let h = g-l denote the inverse of g. Then en = h(Tn). For any T, 
+£(T) = TId(Xi; h(T)) = TId(Xi; 8) = £(8) where 8 = h(T). Hence, for any T, 
+£n(T) = £(8) s: £(e) = £n(T) .• 
+9.15 Example. Let Xl, ... , Xn rv N(8,1). The MLEfor 8 is 8n = X n. Let 
+e Th 
+h 
+f 
+. -
+e 
+X 
+T = e. 
+en, t e MLE or T IS T = e = e .• 
+9.7 
+Asymptotic Normality 
+It turns out that the distribution of 8n is approximately Normal and we can 
+compute its approximate variance analytically. To explore this, we first need 
+a few definitions. 
+9.16 Definition. The score function is defined to be 
+(X , 8) = 8log f(X; 8) 
+s, 
+a8' 
+(9.9) 
+The Fisher information is defined to be 
+n L V e(s(Xi;8)). 
+(9.10) 
+i=l 
+For n = 1 we will sometimes write 1(8) instead of h (8). It can be shown 
+that lEe(s(X; 8)) = O. It then follows that Ve(s(X; 8)) = lEe(s2(X; 8)). In fact, 
+a further simplification of In (8) is given in the next result. 
+9.17 Theorem. In(8) = nI(8). Also, 
+1(8) 
+= 
+-lEe ( a2lo~;;X; 8) ) 
+-J ( 
+a2lo~:2(X; 8) ) f(x; 8)dx. 
+(9.11) 
+===== PDF p141 =====
+9.7 Asymptotic Normality 
+129 
+9.18 Theorem (Asymptotic Normality of the MLE). Let se = VV(en ). 
+Under appropriate regularity conditions, the following hold: 
+(en - 8) ~ N(O, 1). 
+se 
+(9.12) 
+2. Let se = V1/In(en). Then, 
+(en:: 8) ~ N(O, 1). 
+se 
+(9.13) 
+The proof is in the appendix. The first statement says that en ~ N (8, se) 
+where the approximate standard error of en is se = J1/In(8). The second 
+statement says that this is still true even if we replace the standard error by 
+its estimated standard error se = V1/In(en). 
+Informally, the theorem says that the distribution of the MLE can be ap-
+proximated with N(8,se2 ). From this fact we can construct an (asymptotic) 
+confidence interval. 
+9.19 Theorem. Let 
+en = (en - Za/2 se, en + Za/2 se ). 
+Then, lP'e(8 E en) ---+ 1- Q as n ---+ 00. 
+PROOF. Let Z denote a standard normal random variable. Then, 
+lP'e(8 E en) 
+lP'e (en - Za/2 se ::.; 8 ::.; en + Za/2 se) 
+lP'e ( -Za/2 ::.; 8n ~ 8 ::.; Za/2 ) 
+---+ 
+IP'( -Za/2 < Z < Za/2) = 1 -
+Q. 
+_ 
+For Q = .05, Za/2 = 1.96 ~ 2, so: 
+is an approximate 95 percent confidence interval. 
+(9.14) 
+===== PDF p142 =====
+130 
+9. Parametric Inference 
+When you read an opinion poll in the newspaper, you often see a statement 
+like: the poll is accurate to within one point, 95 percent of the time. They are 
+simply giving a 95 percent confidence interval of the form en ± 2 se. 
+9.20 Example. Let Xl, ... , Xn rv Bernoulli(p). The lVILE is Pn = Li Xdn 
+and J(x;p) = pX(1- p)l-x, log J(x;p) = x logp + (1 - x) 10g(1 - p), 
+X 
+I-X 
+8(X;p) = -
+- --, 
+p 
+I-p 
+and 
+X 
+I-X 
+-s'(X;p) = p2 + (1- p)2' 
+Thus, 
+, 
+p 
+(1 - p) 
+1 
+I(p) = lEp ( -8 (X;p)) = p2 + (1 _ p)2 = p(1 _ p) 
+Hence, 
+1 
+= {P(1 _ p) }1/2 
+JnI(Pn) 
+n 
+1 
+se = ----=== 
+J1n(Pn) 
+An approximate 95 percent confidence interval is 
+{
+~ (1 
+~ )}1/2 
+Pn ± 2 
+Pn ;: Pn 
+-
+9.21 Example. Let Xl, ... , Xn rv N(e, cr2 ) where cr2 is known. The score 
+function is 8(X; e) = (X - e)/cr2 and 8'(X; e) = -1/cr2 so that h(e) = l/cr2. 
+The lVILE is en = X n. According to Theorem 9.18, Xn ~ N(e,cr2/n). In this 
+case, the Normal approximation is actually exact. _ 
+9.22 Example. Let Xl"'" Xn rv Poisson(A). Then Xn = Xn and some cal-
+culations show that h (A) = 1/ A, so 
+se = 
+1 fi 
+VnI(Xn) = 
+-;;:. 
+Therefore, an approximate 1- ex confidence interval for A is Xn ± Za/2VXn/n. 
+-
+9.8 
+Optirnality 
+Suppose that Xl"'" Xn rv N(e, cr2). The lVILE is en = X n. Another reason-
+able estimator of e is the sample median en. The lVILE satisfies 
+===== PDF p143 =====
+9.9 The Delta Method 
+131 
+It can be proved that the median satisfies 
+This means that the median converges to the right value but has a larger 
+variance than the MLE. 
+More generally, consider two estimators Tn and Un and suppose that 
+and that 
+We define the asymptotic relative efficiency of U to T by ARE(U, T) = t2/u2. 
+In the Normal example, ARE(en, en) = 2/7r = .63. The interpretation is that 
+if you use the median, you are effectively using only a fraction of the data. 
+9.23 Theorem. If en is the MLE and en is any other estimator then 3 
+Thus, the MLE has the smallest (asymptotic) variance and we say that the 
+MLE is efficient or asymptotically optimal. 
+This result is predicated upon the assumed model being correct. If the model 
+is wrong, the MLE may no longer be optimal. We will discuss optimality in 
+more generality when we discuss decision theory in Chapter 12. 
+9.9 
+The Delta Method 
+Let T = g( e) where g is a smooth function. The maximum likelihood esti-
+mator of T is T = g(e). Now we address the following question: what is the 
+distribution of T? 
+9.24 Theorem (The Delta Method). If T = g( e) where g is differentiable 
+and g'(e) -=I- 0 then 
+(9.15) 
+3The result is actually more subtle than this but the details are too complicated to consider 
+here. 
+===== PDF p144 =====
+132 
+9. Parametric Inference 
+Hence, if 
+Cn = (Tn - Za/2 seWn), Tn + Za/2 seWn)) 
+then lP'e(T E Cn) --+ 1 - a as n --+ 00. 
+(9.16) 
+(9.17) 
+9.25 Example. Let Xl, ... , Xn rv Bernoulli(p) and let 1jJ = g(p) = 10g(p/(I-
+p)). The Fisher information function is J(p) = 1/(p(1 - p)) so the estimated 
+standard error of the !viLE Pn is 
+The !viLE of 1jJ is :j; = log P / (1 - p). Since, g' (p) = 1/ (p( 1 - p)), according to 
+the delta method 
+An approximate 95 percent confidence interval is 
+9.26 Example. Let Xl"'" Xn rv N(/L, er2). Suppose that fL is known, er is 
+unknown and that we want to estimate '1jJ = loger. The log-likelihood is £(er) = 
+-n log er - 2!2 Li (Xi - fL)2. Differentiate and set equal to 0 and conclude that 
+To get the standard error we need the Fisher information. First, 
+(X 
+fL)2 
+log f (X; er) = - log er -
+-'----2er----=-2-'----
+with second derivative 
+and hence 
+===== PDF p145 =====
+9.10 Multiparameter Models 
+133 
+Therefore, se = &n/J2n. Let .1jJ = g(u) = logu. Then,~n = logan. Since 
+g' = l/u, 
+~ ~ 
+1 &n 
+1 
+se(~n) = =-
+roL = 
+roL' 
+Un V 2n 
+V 2n 
+and an approximate 95 percent confidence interval is ~ ± 2/ J2n .• 
+9.10 
+Multiparameter Models 
+These ideas can directly be extended to models with several parameters. Let 
+e = (e 1 , ... , ek) and let e = (e1 , ... , ek) be the MLE. Let fin = L~=11og f(Xi; e), 
+Define the Fisher Information Matrix by 
+r 
+lEe(H11) 
+lEe(H12) 
+lEe(H2d 
+lEe (H22) 
+In(e)=-
+. 
+. 
+. 
+. 
+. 
+. 
+lEe (Hk1 ) 
+lEe (Hk2) 
+Let In(e) = I;;l(e) be the inverse of In. 
+lEe(Hlk) 1 
+lEe (H2k ) 
+. 
+lEe (Hkk ) 
+9.27 Theorem. Under appropriate regularity conditions, 
+Also, if e
+j is the jth component of e, then 
+(9.18) 
+(9.19) 
+where se; = In(j,j) is the /h diagonal element of In- The approximate co-
+variance of ej and ek is Cov(ej , ed :::::: In (j, k). 
+There is also a multiparameter delta method. Let T = g(e1 , ... , ek ) be a 
+function and let 
+"ilg= 
+be the gradient of g. 
+8g 
+8e1 
+8g 
+8ek 
+===== PDF p146 =====
+134 
+9. Parametric Inference 
+9.28 Theorem (Multiparameter delta method). Suppose that '\1g evaluated at 
+e is not O. Let l' = g(1i). Then 
+(T - T) 
+~(~) ~ N(O, 1) 
+se T 
+where 
+se(1') = V(Vg)T in(Vg), 
+(9.20) 
+in = In(en) and Vg is '\1g evaluated at e = e. 
+9.29 Example. Let Xl, ... , Xn rv N(fJ, (j2). Let T = g(fJ, (j) = (j / fJ. In Excer-
+cise 8 you will show that 
+Hence, 
+The gradient of 9 is 
+'\1g= 
+Thus, 
+2~ ] . 
+,,2 
+( 
+(Y) 
+-
+1,2 
+~ 
+. 
+1 
+a2 
+Ji4 + 2Ji2' 
+9.11 
+The Parametric Bootstrap 
+• 
+For parametric models, standard errors and confidence intervals may also be 
+estimated using the bootstrap. There is only one change. In the nonparametric 
+bootstrap, we sampled Xr, ... ,X~ from the empirical distribution Fn. In the 
+parametric bootstrap we sample instead from f(x; en). Here, en could be the 
+MLE or the method of moments estimator. 
+9.30 Example. Consider example 9.29. To get the bootstrap standard er-
+ror, simulate XI""'X~ rv N(Ji,a2), compute Ji* = n-1LiX;* and a2* = 
+n- l Li (X;* - Ji*)2. Then compute 1'* = g(Ji*, a*) = a* /Ji*. Repeating this B 
+times yields bootstrap replications 
+===== PDF p147 =====
+9.12 Checking Assumptions 
+135 
+and the estimated standard error is 
+seboot = 
+• 
+The bootstrap is much easier than the delta method. On the other hand, 
+the delta method has the advantage that it gives a closed form expression for 
+the standard error. 
+9.12 
+Checking Assurnptions 
+If we assume the data come from a parametric model, then it is a good idea to 
+check that assumption. One possibility is to check the assumptions informally 
+by inspecting plots of the data. For example, if a histogram of the data looks 
+very bimodal, then the assumption of Normality might be questionable. A 
+formal way to test a parametric model is to use a goodness-of-fit test. See 
+Section 10.S. 
+9.13 
+Appendix 
+9.13.1 
+Proofs 
+PROOF OF THEOREM 9.13. Since en maximizes Mn(e), we have Mn(en) ::;, 
+l'vln (e*). Hence, 
+M(e*) - M(en) 
+Mn(e*) - M(en) + M(e*) - Mn(e*) 
+< 
+Mn(en) - M(en) + M(e*) - Mn(e*) 
+< 
+sup IMn(e) - M(e)1 + M(e*) - Mn(e*) 
+e 
+~o 
+where the last line follows from (9.7). It follows that, for any 6 > 0, 
+Pick any E > O. By (9.S), there exists 6 > 0 such that Ie - e*1 ::;, E implies that 
+M(e) < M(e*) - 6. Hence, 
+1F'(len - e*1 > E) <::: IF' (M(en) < M(e*) - 6) --+ O .• 
+Next we want to prove Theorem 9.1S. First we need a lemma. 
+===== PDF p148 =====
+136 
+9. Parametric Inference 
+9.31 lemma. The score function satisfies 
+lEe [s(X; 8)] = O. 
+PROOF. Note that 1 = I f(x; 8)dx. Differentiate both sides of this equation 
+to conclude that 
+o = :8 J 
+f(x; 8)dx = J :8f(x; 8)dx 
+J 
+8j(x;e) 
+J 
+81 
+f'( 
+8) 
+f(~~ 8) f(x; 8)dx = 
+og a8 X; 
+f(x; 8)dx 
+J 
+s(x; 8)f(x; 8)dx = lEes(X; 8). 
+• 
+PROOF OF THEOREM 9.18. Let £.(8) = log£(8). Then, 
+0= tee) ~ t(8) + (e - 8)£."(8). 
+Rearrange the above equation to get e - 8 = -£.'(8)/£."(8) or, in other words, 
+~ 
+.fiJ(8) 
+TOP 
+vn(8 - 8) = -~£."(8) = BOTTOM' 
+Let Yi = a log f (Xi; 8) / a8. Recall that IE(Yi) = 0 from the previous lemma 
+and also V(Yi) = 1(8). Hence, 
+by the central limit theorem. Let Ai = -a2 log f(Xi; 8)/a82 . Then IE(Ai) = 
+1(8) and 
+BOTTOM = A~1(8) 
+by the law of large numbers. Apply Theorem 5.5 part (e), to conclude that 
+~ 
+W 
+d 
+( 1) 
+vn(8 - 8) ~ 1(8) = N 
+0, 1(8) 
+. 
+Assuming that 1(8) is a continuous function of 8, it follows that I (en) ~ 
+I (8). 
+Now 
+8n - 8 
+se 
+===== PDF p149 =====
+9.13 Appendix 
+137 
+The first term tends in distribution to N(O,l). The second term tends in 
+probability to 1. The result follows from Theorem 5.5 part (e). _ 
+OUTLINE OF PROOF OF THEOREM 9.24. Write 
+Thus, 
+and hence 
+fol(ij(Tn - T) ~ Cjffl\(8)(e _ 8) 
+g' (8) 
+~ V n1 \ U) 
+n 
+. 
+Theorem 9.18 tells us that the right-hand side tends in distribution to a N(O,l). 
+Hence, 
+or, in other words, 
+where 
+fol(ij(Tn - T) 
+() 
+g'(8) 
+~ !V 0,1 
+2(~ ) _ (g'(8))2 
+se 
+Tn 
+-
+nI(8) 
+The result remains true if we substitute en for 8 by Theorem 5.5 part (e). _ 
+9.13.2 Sufficiency 
+A statistic is a function T(xn) of the data. A sufficient statistic is a statistic 
+that contains all the information in the data. To make this more formal, we 
+need some definitions. 
+9.32 Definition. Write xn ++ yn if f(xn; 8) = cf(yn; 8) for some constant 
+c that might depend on xn and yn but not 8. A statistic T(xn) is 
+sufficient ifT(xn) ++ T(yn) implies that xn ++ yn. 
+Notice that if xn ++ yn, then the likelihood function based on xn has the 
+same shape as the likelihood function based on yn. Roughly speaking, a statis-
+tic is sufficient if we can calculate the likelihood function knowing only T(xn). 
+9.33 Example. Let Xl, ... , Xn rv Bernoulli(p). Then £(p) = pS (1 _ p)n-S 
+where S = L:i Xi, so S is sufficient. -
+===== PDF p150 =====
+138 
+9. Parametric Inference 
+9.34 Example. Let Xl"'" Xn rv N(/L, 0-) and let T = (X, S). Then 
+f(xn; IL, 0-) = (o-~) n exp { _ ~~:} exp { _ n(~~/)2} 
+where S2 is the sample variance. The last expression depends on the data 
+only through T and therefore, T = (X, S) is a sufficient statistic. Note that 
+U = (17 X, S) is also a sufficient statistic. If I tell you the value of U then you 
+can easily figure out T and then compute the likelihood. Sufficient statistics 
+are far from unique. Consider the following statistics for the N(/L, 0- 2 ) model: 
+TI(xn) 
+(Xl,'" ,Xn) 
+T2(xn) 
+(X,S) 
+T3(xn) 
+X 
+T4(xn) 
+(X,S,X3). 
+The first statistic is just the whole data set. This is sufficient. The second 
+is also sufficient as we proved above. The third is not sufficient: you can't 
+compute £(/L, 0-) if I only tell you X. The fourth statistic T4 is sufficient. The 
+statistics TI and T4 are sufficient but they contain redundant information. 
+Intuitively, there is a sense in which T2 is a "more concise" sufficient statistic 
+than either TI or T4. We can express this formally by noting that T2 is a 
+function of TI and similarly, T2 is a function of T4. For example, T2 = g(T4) 
+where g(al' a2, a3) = (aI, a2) .• 
+9.35 Definition. A statistic T is minimal sufficient if (i) it is 
+sufficient; and (ii) it is a function of every other sufficient statistic. 
+9.36 Theorem. T is minimal sufficient if the following is true: 
+A statistic induces a partition on the set of outcomes. We can think of 
+sufficiency in terms of these partitions. 
+9.37 Example. Let X I ,X2 rv Bernoulli(8). Let V = Xl, T 
+U = (T, Xd. Here is the set of outcomes and the statistics: 
+o 
+0 
+o 
+1 
+1 
+0 
+1 
+1 
+V 
+T 
+o 
+0 
+o 
+1 
+1 
+1 
+1 
+2 
+U 
+(0,0) 
+(1,0) 
+(1,1) 
+(2,1) 
+===== PDF p151 =====
+9.13 Appendix 
+139 
+The partitions induced by these statistics are: 
+v 
+---+ 
+{(O,O), (O,ln, {(I,O),(I,ln 
+T 
+---+ 
+{(O, On, {(O, 1), (1, on, {(I, In 
+u ---+ 
+{(O, on, {(O, In, {(I, on, {(I, In. 
+Then V is not sufficient but T and U are sufficient. T is minimal sufficient; 
+U is not minimal since if xn = (1,0) and yn = (0,1), then xn B 
+yn yet 
+U(xn) cI u(yn). The statistic W = 17T generates the same partition as T. It 
+is also minimal sufficient. _ 
+9.38 Example. For a N(/-L, (J2) model, T = (X, S) is a minimal sufficient 
+statistic. For the Bernoulli model, T = Li Xi is a minimal sufficient statistic. 
+For the Poisson model, T = Li Xi is a minimal sufficient statistic. Check that 
+T = (Li Xi, Xd is sufficient but not minimal sufficient. Check that T = Xl 
+is not sufficient. _ 
+I did not give the usual definition of sufficiency. The usual definition is this: 
+T is sufficient if the distribution of xn given T(xn) = t does not depend on 
+B. In other words, T is sufficient if f(Xl,"" xnlt; B) = h(Xl,"" Xn, t) where 
+h is some function that does not depend on B. 
+9.39 Example. Two coin flips. Let X = (Xl, X 2 ) rv Bernoulli(p). Then T = 
+Xl + X 2 is sufficient. To see this, we need the distribution of (Xl, X 2 ) given 
+T = t. Since T can take 3 possible values, there are 3 conditional distributions 
+to check. They are: (i) the distribution of (Xl, X 2 ) given T = 0: 
+P(XI = 0, X 2 = 0lt = 0) = 1, P(XI = 0, X 2 = lit = 0) = 0, 
+P(XI = 1, X 2 = 0lt = 0) = 0, P(XI = 1, X 2 = lit = 0) = 0; 
+(ii) the distribution of (Xl ,X2 ) given T = 1: 
+1 
+P(XI = 0,X2 = 0lt = 1) = 0, P(XI = 0,X2 = lit = 1) = 2' 
+1 
+P(XI = I,X2 = 0lt = 1) = 2,P(XI = I,X2 = lit = 1) = 0; and 
+(iii) the distribution of (Xl, X 2 ) given T = 2: 
+P(XI = 0, X 2 = 0lt = 2) = 0, P(XI = 0, X 2 = lit = 2) = 0, 
+P(XI = 1, X 2 = 0lt = 2) = 0, P(XI = 1, X 2 = lit = 2) = 1. 
+None of these depend on the parameter p. Thus, the distribution of Xl, X 21T 
+does not depend on B, so T is sufficient. _ 
+===== PDF p152 =====
+140 
+9. Parametric Inference 
+9.40 Theorem (Factorization Theorem). T is sufficient if and only if there are 
+functions g(t, 8) and h(x) such that f(xn; 8) = g(t(xn), 8)h(xn). 
+9.41 Example. Return to the two coin flips. Let t = Xl + X2. Then 
+f(XI; 8)f(X2; 8) 
+8X1(1 _ 8)I-X18X2(1 _ 8)I-X2 
+g(t,8)h(XI,X2) 
+) 
+t 
+2-t 
+) 
+where g(t,8 = 8 (1 - 8) 
+and h(XI, X2 
+= l. Therefore, T = Xl + X 2 is 
+sufficient. _ 
+Now we discuss an implication of sufficiency in point estimation. Let 8 be 
+an estimator of 8. The Rao-Blackwell theorem says that an estimator should 
+only depend on the sufficient statistic, otherwise it can be improved. Let 
+R( 8, 8) = lEe (8 - e) 2 denote the !VISE of the estimator. 
+9.42 Theorem (Rao-Blackwell). Let e be an estimator and let T be a sufficient 
+statistic. Define a new estimator by 
+8 = lE(eIT). 
+Then, for every 8, R(8,8) :S R(8, B). 
+9.43 Example. Consider flipping a coin twice. Let 8 = Xl. This is a well-
+defined (and unbiased) estimator. But it is not a function of the sufficient 
+statistic T = Xl + X 2 . However, note that (j = lE(XIIT) = (Xl + X 2 )/2. By 
+the Rao-Blackwell Theorem, 8 has MSE at least as small as 8 = Xl. The 
+same applies with n coin flips. Again define 8 = Xl and T = Li Xi. Then 
+(j = lE(XIIT) = n- l LiXi has improved !VISE. _ 
+9.13.3 Exponential Families 
+Most of the parametric models we have studied so far are special cases of 
+a general class of models called exponential families. We say that {f(x; 8) : 
+8 E 8} is a one-parameter exponential family if there are functions T/(8), 
+B(8), T(x) and h(x) such that 
+f(x; 8) = h(x)er)(e)T(x)-B(e). 
+It is easy to see that T(X) is sufficient. We call T the natural sufficient 
+statistic. 
+===== PDF p153 =====
+9.13 Appendix 
+141 
+9.44 Example. Let X rv Poisson(e). Then 
+ex -e 
+1 
+f(x; e) = + = ,eX]oge-e 
+x. 
+x. 
+and hence, this is an exponential family with '17 ( e) = log e, B( e) = e, T(x) = x, 
+h(x) = l/x!. _ 
+9.45 Example. Let X rv Binomial(n, e). Then 
+f(x; e) = (~)ex(1- e)n-x = (~) exp {x log C 
+~ e) + nlog(l- e)}. 
+In this case, 
+17(e) = log C 
+~ e) ,B(e) = -nlog(e) 
+and 
+T(x) = x, h(x) = (n). 
+x 
+-
+We can rewrite an exponential family as 
+f(x; 71) = h(x)eT1T(x)-A(r1) 
+where 71 = 71(e) is called the natural parameter and 
+A(I7) = log J 
+h(x)e'7T(xl dx. 
+For example a Poisson can be written as f(x; 17) = e'7x- e" Ix! where the natural 
+parameter is '17 = log e. 
+Let Xl, ... , Xn be IID from an exponential family. Then f(xn; e) is an 
+exponential family: 
+where hn(xn) = IIi h(Xi), Tn(xn) = L:i T(Xi) and Bn(e) 
+implies that L:i T(Xi) is sufficient. 
+9.46 Example. Let Xl,"" Xn rv Uniform(O, e). Then 
+. 
+1 
+j(xn; e) = en J(X(n) <::: e) 
+nB(e). This 
+where J is 1 if the term inside the brackets is true and 0 otherwise, and 
+x(n) = max{xl, ... ,Xn}. Thus T(xn) = max{Xl, ... ,Xn} is sufficient. But 
+since T(xn) cJ L:i T(Xi)' this cannot be an exponential family. _ 
+===== PDF p154 =====
+142 
+9. Parametric Inference 
+9.47 Theorem. Let X have density in an exponential family. Then, 
+lE(T(X)) = A'(rl), V(T(X)) = A"(f)). 
+If () = (()ll"" ()k) is a vector, then we say that f(x; ()) has exponential 
+family form if 
+f(x; 0) ~ h(x) exp {t 
+ryj(B)Tj(x) - nt~) } . 
+Again, T = (Tl , ... , Tk ) is sufficient. An IID sample of size n also has expo-
+nential form with sufficient statistic (Li Tl (Xi)' ... , Li Tk (Xi)). 
+9.48 Example. Consider the normal family with () = (,L,O) Now, 
+This is exponential with 
+Hence, with n lID samples, (Li Xi, Li Xl) is sufficient. -
+As before we can write an exponential family as 
+where A(f)) = log I h(x)eTTex)r]dx. It can be shown that 
+lE(T(X)) = A(f)) V(T(X)) = A(rl), 
+where the first expression is the vector of partial derivatives and the second 
+is the matrix of second derivatives. 
+9.13.4 
+Computin9 Maximum Likelihood Estimates 
+In some cases we can find the MLE () analytically. More often, we need to 
+find the MLE by numerical methods. We will briefly discuss two commonly 
+===== PDF p155 =====
+9.13 Appendix 
+143 
+used methods: (i) Newton-Raphson, and (ii) the EM algorithm. Both are 
+iterative methods that produce a sequence of values eo, e1 , ... that, under 
+ideal conditions, converge to the MLE e. In each case, it is helpful to use a 
+good starting value eO. Often, the method of moments estimator is a good 
+starting value. 
+NEWTON-RAPHSON. To motivate Newton-Raphson, let's expand the deriva-
+tive of the log-likelihood around ej : 
+Solving for e gives 
+~ 
+. l (ej ) 
+e';:::j eJ - r(e j )" 
+This suggests the following iterative scheme: 
+In the multiparameter case, the mle 8 = (81, ... , 8k ) is a vector and the 
+method becomes 
+8H1 = ej - H-1g' (ej ) 
+where l (ej ) is the vector of first derivatives and H is the matrix of second 
+derivatives of the log-likelihood. 
+THE EM ALGORITHM. The letters EM stand for Expectation-Maximization. 
+The idea is to iterate between taking an expectation then maximizing. Sup-
+pose we have data Y whose density f(y; e) leads to a log-likelihood that is 
+hard to maximize. But suppose we can find another random variable Z such 
+that f(y; e) = I f(y, z; e) dz and such that the likelihood based on f(y, z; e) 
+is easy to maximize. In other words, the model of interest is the marginal of a 
+model with a simpler likelihood. In this case, we call Y the observed data and 
+Z the hidden (or latent or missing) data. If we could just "fill in" the missing 
+data, we would have an easy problem. Conceptually, the EM algorithm works 
+by filling in the missing data, maximizing the log-likelihood, and iterating. 
+9.49 Example (Mixture of Normals). Sometimes it is reasonable to assume that 
+the distribution of the data is a mixture of two normals. Think of heights of 
+people being a mixture of men and women's heights. Let ¢(y; IL, (J) denote 
+a normal density with mean IL and standard deviation (J. The density of a 
+mixture of two Normals is 
+===== PDF p156 =====
+144 
+9. Parametric Inference 
+The idea is that an observation is drawn from the first normal with probability 
+p and the second with probability I-p. However, we don't know which Normal 
+it was drawn from. The parameters are 8 = (fLo,uo,fLl,Ul,P). The likelihood 
+function is 
+n 
+£(8) = II [(1 - P)¢(Yi; fLo, uo) + P¢(Yi; ILl, udl· 
+i=l 
+Maximizing this function over the five parameters is hard. Imaging that we 
+were given extra information telling us which of the two normals every observa-
+tion came from. These "complete" data are of the form (Y1 , Zd,···, (Yn, Zn), 
+where Zi = 0 represents the first normal and Zi = 1 represents the second. 
+Note that JP'(Zi = 1) = p. We shall soon see that the likelihood for the com-
+plete data (Y1 , Zd, ... , (Yn, Zn) is much simpler than the likelihood for the 
+observed data Y1 , ... , Yn .• 
+Now we describe the EM algorithm. 
+The EM Algorithm 
+(0) Pick a starting value 8°. Now for j = 1,2, ... , repeat steps 1 and 2 
+below: 
+(1) (The E-step): Calculate 
+The expectation is over the missing data zn treating 8i and the observed 
+data yn as fixed. 
+(2) Find 81+1 to maximize J(818j ). 
+We now show that the EM algorithm always increases the likelihood, that 
+is, £(81+1) ~ £(8j ). Note that 
+and hence 
+===== PDF p157 =====
+9.13 Appendix 
+145 
+J(eJ+llej ) _ IE .. (log f(znlYn;eJ+l) I yn = yn) 
+BJ 
+f(ZnlYn; eJ ) 
+.+1 
+. 
+J(eJ 
+leJ ) + K(iJ, iJ+d 
+where fj = f(yn; ej ) and fJ+l = f(yn; eJ+l) and K(j, g) = I f(x) log(j(x)/g(x)) dx 
+is the Kullback-Leibler distance. Now, eJ+l was chosen to maximize J(elej ). 
+Hence, J( eJ+llej ) 2: J( ej lej ) = O. Also, by the properties of Kullback-Leibler 
+divergence, K(iJ,iJ+d 2: O. Hence, £(eJ+l) 2: £(ej ) as claimed. 
+9.50 Example (Continuation of Example 9.49). Consider again the mixture of 
+two normals but, for simplicity assume that p = 1/2, (}l = (}2 = l. The density 
+is 
+1 
+1 
+f(y; /.Ll, IL2) = 2"¢(Y; /.La, 1) + 2"¢(Y; ILl, 1). 
+Directly maximizing the likelihood is hard. Introduce latent variables Zl, ... , Zn 
+where Zi = 0 if Yi is from ¢(y; /.La, 1), and Zi = 1 if Yi is from ¢(y; /.Ll, 1), 
+IP'(Zi = 1) = P(Zi = 0) = 1/2, f(YilZi = 0) = ¢(y; /.La, 1) and f(YilZi = 1) = 
+¢(y; /.Ll, 1). So f(y) = 2::;=0 f(y, z) where we have dropped the parameters 
+from the density to avoid notational overload. We can write 
+f(z, y) = f(z)f(ylz) = ~¢(y; /.La, l)l-z¢(y; /.Ll, l)z. 
+Hence, the complete likelihood is 
+n 
+i=l 
+The complete log-likelihood is then 
+~ 
+1 n 
+1 n 
+£. = -2" 2.:(1 - Zi)(Yi - /.La) - 2" 2.: Zi(Yi - /.Ld· 
+i=l 
+i=l 
+And so 
+J(elej ) = -~ t(l - IE(Zilyn, ej))(Yi - /.La) - ~ t 
+IE(Zilyn, ej))(Yi - ILd· 
+i=l 
+i=l 
+Since Zi is binary, IE(Zilyn,ej ) = IP'(Zi = 1Iyn,ej ) and, by Bayes' theorem, 
+f(ynlZi = 1; ej )IP'(Zi = 1) 
+IP'(Zi = llyn, ei) 
+= 
+f(ynlZi = 1; ej )IP'(Zi = 1) + f(ynlZi = 0; ej )IP'(Zi = 0) 
+¢(Yi; ILL 1)~ 
+¢(Yi;/.L{,l)~ +¢(Yi;/.Lb,l)~ 
+¢(Yi; /.L{, 1) 
+¢(Yi; /.L{, 1) + ¢(Yi; /.Lb, 1) 
+T( i). 
+===== PDF p158 =====
+146 
+9. Parametric Inference 
+Take the derivative of J(elej ) with respect to /Ll and /L2, set them equal to 0 
+to get 
+and 
+~Hl 
+L~=l (1 - Ti)Yi 
+/Lo 
+= 
+L~=l (1 -
+Ti) 
+We then recompute Ti using p,{+l and P,b+l and iterate. _ 
+9.14 
+Exercises 
+1. Let Xl, ... ,Xn '" Gamma( ex, (3). Find the method of moments estimator 
+for ex and (3. 
+2. Let Xl, ... , Xn '" Uniform(a, b) where a and b are unknown parameters 
+and a < b. 
+(a) Find the method of moments estimators for a and b. 
+(b) Find the MLE a and b. 
+(c) Let T = J xdF(x). Find the MLE of T. 
+(d) Let T be the MLE of T. Let T be the nonparametric plug-in estimator 
+of T = J x dF(x). Suppose that a = 1, b = 3, and n = 10. Find the MSE 
+of T by simulation. Find the MSE of T analytically. Compare. 
+3. Let Xl"'" Xn '" N(/L, ()2). Let T be the .95 percentile, i.e. IP'(X < T) = 
+.95. 
+(a) Find the MLE of T. 
+(b) Find an expression for an approximate 1 - ex confidence interval for 
+T. 
+(c) Suppose the data are: 
+3.23 -2.50 
+1. 88 -0.68 4.43 0.17 
+1.03 -0.07 -0.01 0.76 
+1. 76 
+3.18 
+0.33 -0.31 0.30 -0.61 
+1. 52 
+5.43 
+1. 54 
+2.28 0.42 2.33 -1. 03 
+4.00 
+0.39 
+Find the MLE T. Find the standard error using the delta method. Find 
+the standard error using the parametric bootstrap. 
+===== PDF p159 =====
+9.14 Exercises 
+147 
+4. Let Xl"'" Xn rv Uniform(O, e). Show that the !VILE is consistent. Hint: 
+Let Y = max{XI, ... , X n }. For any c, J1D(Y < c) = J1D(XI < C, X 2 < 
+C, ... , Xn < c) = J1D(XI < C)JID(X2 < c) ... JID(Xn < c). 
+5. Let Xl, ... , Xn rv Poisson(.\). Find the method of moments estimator, 
+the maximum likelihood estimator and the Fisher information 1(,\). 
+6. Let Xl, "',Xn rv N(e, 1). Define 
+{ 1 
+if Xi> 0 
+Yi= 
+0 
+if Xi ::.; O. 
+Let 7/J = J1D(YI = 1). 
+(a) Find the maximum likelihood estimator :J; of .1jJ. 
+(b) Find an approximate 95 percent confidence interval for 7/J. 
+(c) Define 7/J = (lin) L:i Yi. Show that 0 is a consistent estimator ofljJ. 
+(d) Compute the asymptotic relative efficiency of 7/J toJ;. Hint: Use the 
+delta method to get the standard error of the !VILE. Then compute the 
+standard error (i.e. the standard deviation) of 7/J. 
+(e) Suppose that the data are not really normal. Show that 7/J is not 
+consistent. What, if anything, doesljJ converge to? 
+7. (Comparing two treatments.) nl people are given treatment 1 and n2 
+people are given treatment 2. Let Xl be the number of people on treat-
+ment 1 who respond favorably to the treatment and let X 2 be the 
+number of people on treatment 2 who respond favorably. Assume that 
+Xl rv Binomial(nl,pI) X 2 rv Binomial(n2,P2)' LetljJ = PI - P2. 
+(a) Find the !VILE :J; for VJ. 
+(b) Find the Fisher information matrix I(PI,P2). 
+(c) Use the multiparameter delta method to find the asymptotic stan-
+dard error of 7/J. 
+(d) Suppose that nl = n2 = 200, Xl = 160 and X 2 = 148. Find:J;. Find 
+an approximate 90 percent confidence interval for VJ using (i) the delta 
+method and (ii) the parametric bootstrap. 
+8. Find the Fisher information matrix for Example 9.29. 
+9. Let Xl, ... , Xn rv Normal(/L, 1). Let e = eM and let (j = eX be the !VILE. 
+Create a data set (using fL = 5) consisting of n=100 observations. 
+===== PDF p160 =====
+148 
+9. Parametric Inference 
+(a) Use the delta method to get se and a 95 percent confidence interval 
+for B. Use the parametric bootstrap to get se and 95 percent confidence 
+interval for B. Use the nonparametric bootstrap to get se and 95 percent 
+confidence interval for B. Compare your answers. 
+(b) Plot a histogram of the bootstrap replications for the parametric 
+and nonparametric bootstraps. These are estimates of the distribution 
+of B. The delta method also gives an approximation to this distribution 
+namely, Normal(e,se2). Compare these to the true sampling distribu-
+tion of e (which you can get by simulation). Which approximation -
+parametric bootstrap, bootstrap, or delta method -
+is closer to the true 
+distri bution? 
+10. Let Xl, ... , Xn rv Uniform(O, B). The MLE is e 
+= XCn) = max{Xl' ... , X n}. 
+Generate a dataset of size 50 with B = l. 
+(a) Find the distribution of e analytically. Compare the true distribu-
+tion of B to the histograms from the parametric and nonparametric 
+bootstraps. 
+(b) This is a case where the nonparametric bootstrap does very poorly. 
+Show that for the parametric bootstrap lP'(e* = e) = 0, but for the 
+non parametric bootstrap lP'(e* = e) RO .632. Hint: show that, lP'(e* = 
+e) = 1 - (1 - (l/n))n then take the limit as n gets large. What is the 
+implication of this? 
