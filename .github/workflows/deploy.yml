@@ -1,8 +1,15 @@
 name: Deploy MkDocs
 
+# 触发方式：每 2 小时定时 + 手动。
+# 不用 push 触发的原因：仓库每 ~10 分钟有一次自动备份（vault backup），
+# 每次都部署 90MB 站点，一天上百次；而 GitHub Pages 目前 publish 延迟接近
+# deploy-pages 写死的 600s 上限（平台侧回归），部署成功率约五成，且失败会
+# 占用 github-pages 环境整整 10 分钟，导致后续部署排队并联锁超时。
+# 改成定时后，每次都能拿到空闲环境，笔记最多晚 2 小时上线。
 on:
-  push:
-    branches: [master]
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
