@@ -153,6 +153,13 @@ $$C_n = \left(\widehat{\theta} - z_{\alpha/2}\,\widehat{\text{se}},\ \widehat{\t
 > 令 $Z \sim N(0,1)$：
 > $$\mathbb{P}_\theta(\theta \in C_n) = \mathbb{P}_\theta\left(-z_{\alpha/2} \le \frac{\widehat{\theta} - \theta}{\widehat{\text{se}}} \le z_{\alpha/2}\right) \to \mathbb{P}(-z_{\alpha/2} < Z < z_{\alpha/2}) = 1-\alpha$$
 > 第一步只是移项，第二步用定理 9.18 第 2 条。∎
+>
+> **严格化（课件 Lecture_4 p77–p78：分布函数收敛 + 夹逼）**：上面第二步 "$Z_n\leadsto Z\Rightarrow$ 区间概率收敛"需要一点小心——依分布收敛只保证在 $F_Z$ 的连续点有 $F_{Z_n}(x)\to F_Z(x)$，而 $F_Z=\Phi$ 虽处处连续，左端点涉及**严格不等号** $\{Z_n<-z\}$，必须用夹逼。记 $F_n(x)=\mathbb{P}_\theta(Z_n\le x)$、$z=z_{\alpha/2}$：
+> - 右端点直接由收敛得 $F_n(z)\to\Phi(z)$；
+> - 左端点：对任意 $\delta>0$，$F_n(-z-\delta)\le\mathbb{P}_\theta(Z_n<-z)\le F_n(-z)$。取 $n\to\infty$ 再令 $\delta\downarrow0$，两边都趋于 $\Phi(-z)$，故 $\mathbb{P}_\theta(Z_n<-z)\to\Phi(-z)$。
+> 于是 $\mathbb{P}_\theta(\theta\in C_n)=F_n(z)-\mathbb{P}_\theta(Z_n<-z)\to\Phi(z)-\Phi(-z)=1-\alpha$。∎
+>
+> **注意**：这正是课本定理 6.16 的一般形式（$T_n$ 不必是 MLE，只需 $(T_n-\theta)/s_n\leadsto N(0,1)$；见 [[统计学完全教程/第6章 模型统计推断与学习/p15 第6章 模型统计推断与学习.md#5.3 基于正态的置信区间|p15 §5.3]]）。$Z_n$ 对每个 $n$ 精确正态时（如 $\sigma$ 已知的正态均值），覆盖率对每个 $n$ 精确为 $1-\alpha$；这里只有极限保证，有限样本可能明显低于 nominal 水平。
 
 硬币把链条走完：$\widehat{\text{se}} = \sqrt{1/I_n(\widehat{\theta})} = \sqrt{\widehat{\theta}(1-\widehat{\theta})/n} = \sqrt{0.7 \times 0.3 / 10} = \sqrt{0.021} \approx 0.145$。$\alpha = 0.05$ 时 $z_{\alpha/2} = 1.96 \approx 2$，95% 区间
 
