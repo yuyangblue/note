@@ -72,12 +72,12 @@ $$\int \log\frac{f(x;\theta_*)}{f(x;\theta)}f(x;\theta_*)\,dx \ =\ -D(\theta_*, 
 
 **定理 9.13**：上述两条成立时，MLE $\widehat{\theta}_n \xrightarrow{P} \theta_*$。
 
-> [!note]- 证明骨架（课本附录 9.13.1）
-> 整段只做一件事：把"$\widehat{\theta}_n$ 离真值远"翻译成"$M(\widehat{\theta}_n)$ 明显低于 $M(\theta_*)$"，再说明前者概率趋于零。由 $\widehat{\theta}_n$ 是最大点，$M_n(\widehat{\theta}_n) \ge M_n(\theta_*)$，于是
-> $$M(\theta_*) - M(\widehat{\theta}_n) = \underbrace{\left[M_n(\widehat{\theta}_n) - M(\widehat{\theta}_n)\right]}_{\text{一致性控制}} + \underbrace{\left[M(\theta_*) - M_n(\theta_*)\right]}_{\to 0} \le 2\sup_\theta \lvert M_n(\theta) - M(\theta)\rvert \xrightarrow{P} 0$$
-> （先展开：把想控制的量拆成"两个 $M_n$ 与 $M$ 的偏差"之和；再用 $M_n(\widehat{\theta}_n) \ge M_n(\theta_*)$ 把右边整体封顶。）即 $M(\widehat{\theta}_n) \xrightarrow{P} M(\theta_*)$。任给 $\varepsilon > 0$，取 $\delta > 0$ 使 $\lvert\theta-\theta_*\rvert \ge \varepsilon$ 时 $M(\theta) \le M(\theta_*) - \delta$（可识别性保证这样的 $\delta$ 存在），则
-> $$\mathbb{P}\left(\lvert\widehat{\theta}_n - \theta_*\rvert > \varepsilon\right) \le \mathbb{P}\left(M(\widehat{\theta}_n) < M(\theta_*) - \delta\right) \to 0$$
-> （控制右端："$\widehat{\theta}_n$ 跑出 $\varepsilon$ 邻域"时 $M(\widehat{\theta}_n)$ 必须比 $M(\theta_*)$ 低至少 $\delta$，而左段已证这种情况罕见。）∎
+**证明骨架（课本附录 9.13.1）**：
+整段只做一件事：把"$\widehat{\theta}_n$ 离真值远"翻译成"$M(\widehat{\theta}_n)$ 明显低于 $M(\theta_*)$"，再说明前者概率趋于零。由 $\widehat{\theta}_n$ 是最大点，$M_n(\widehat{\theta}_n) \ge M_n(\theta_*)$，于是
+$$M(\theta_*) - M(\widehat{\theta}_n) = \underbrace{\left[M_n(\widehat{\theta}_n) - M(\widehat{\theta}_n)\right]}_{\text{一致性控制}} + \underbrace{\left[M(\theta_*) - M_n(\theta_*)\right]}_{\to 0} \le 2\sup_\theta \lvert M_n(\theta) - M(\theta)\rvert \xrightarrow{P} 0$$
+（先展开：把想控制的量拆成"两个 $M_n$ 与 $M$ 的偏差"之和；再用 $M_n(\widehat{\theta}_n) \ge M_n(\theta_*)$ 把右边整体封顶。）即 $M(\widehat{\theta}_n) \xrightarrow{P} M(\theta_*)$。任给 $\varepsilon > 0$，取 $\delta > 0$ 使 $\lvert\theta-\theta_*\rvert \ge \varepsilon$ 时 $M(\theta) \le M(\theta_*) - \delta$（可识别性保证这样的 $\delta$ 存在），则
+$$\mathbb{P}\left(\lvert\widehat{\theta}_n - \theta_*\rvert > \varepsilon\right) \le \mathbb{P}\left(M(\widehat{\theta}_n) < M(\theta_*) - \delta\right) \to 0$$
+（控制右端："$\widehat{\theta}_n$ 跑出 $\varepsilon$ 邻域"时 $M(\widehat{\theta}_n)$ 必须比 $M(\theta_*)$ 低至少 $\delta$，而左段已证这种情况罕见。）∎
 
 注意（正则条件失效则结论失效，CMU L15 的例子）：取 $Y_{i1}, Y_{i2} \sim N(\mu_i, \sigma^2)$ 并强制 $\mu_1 = \mu_2$（参数落在更大家族的边界上），MLE 变成 $\widehat{\sigma}^2 = \frac{1}{4n}\sum_i (Y_{i1} - Y_{i2})^2$，期望只有真值的一半——**不相合**。同 p16 例 9.12 一样，这类反例都出在正则条件被破坏的地方。
 
@@ -105,10 +105,10 @@ $n=1$ 时记 $I(\theta)$。
 
 **引理 9.31**：$\mathbb{E}_\theta\left[s(X;\theta)\right] = 0$，从而 $\mathbb{V}_\theta(s) = \mathbb{E}_\theta(s^2)$。
 
-> [!note]- 证明
-> 整段只做一件事：对"密度积分为 1"这条恒等式求导。归一化 $1 = \int f(x;\theta)\,dx$ 两边对 $\theta$ 求导（先展开：积分号下求导）：
-> $$0 = \int \frac{\partial f(x;\theta)}{\partial\theta}dx = \int \frac{\partial f / \partial\theta}{f}\,f(x;\theta)\,dx = \int s(x;\theta)f(x;\theta)\,dx = \mathbb{E}_\theta\,s(X;\theta)$$
-> （再除：除以 $f$ 把导数改写成 $\log f$ 的导数即得分；积分回来正好是期望。）∎
+**证明**：
+整段只做一件事：对"密度积分为 1"这条恒等式求导。归一化 $1 = \int f(x;\theta)\,dx$ 两边对 $\theta$ 求导（先展开：积分号下求导）：
+$$0 = \int \frac{\partial f(x;\theta)}{\partial\theta}dx = \int \frac{\partial f / \partial\theta}{f}\,f(x;\theta)\,dx = \int s(x;\theta)f(x;\theta)\,dx = \mathbb{E}_\theta\,s(X;\theta)$$
+（再除：除以 $f$ 把导数改写成 $\log f$ 的导数即得分；积分回来正好是期望。）∎
 
 硬币复算：$\mathbb{E}_\theta\,s = \dfrac{\mathbb{E}(X)}{\theta} - \dfrac{1-\mathbb{E}(X)}{1-\theta} = \dfrac{\theta}{\theta} - \dfrac{1-\theta}{1-\theta} = 0$。得分正负相抵、期望为零——观察到正面想把 $\theta$ 往上调、观察到反面想往下调，平均不偏不倚。
 
@@ -135,13 +135,13 @@ $$I(\theta) = \mathbb{V}(s) = \left(\frac{1}{\theta} + \frac{1}{1-\theta}\right)
 
 即 $\widehat{\theta}_n \approx N(\theta, \widehat{\text{se}}^2)$。读法：MLE 逼近真值的误差，分布近似正态，尺度是 $1/\sqrt{I_n}$——**Fisher 信息越大（数据越能暴露参数），标准误越小**。
 
-> [!note]- 证明思路（课本附录 9.13.1；每步用了哪个工具要认出来）
-> 整段只做一件事：从"MLE 是驻点"推出一个"分子分母都能用大数定律/CLT 处理"的比值。
-> **先展开**：MLE 是驻点，$\ell'(\widehat{\theta}) = 0$；在 $\theta$ 处一阶泰勒展开 $0 \approx \ell'(\theta) + (\widehat{\theta}-\theta)\ell''(\theta)$，整理得
-> $$\sqrt{n}(\widehat{\theta} - \theta) = \frac{-\frac{1}{\sqrt{n}}\sum_i Y_i}{\frac{1}{n}\sum_i \Lambda_i} = \frac{\text{TOP}}{\text{BOTTOM}}$$
-> 其中 $Y_i = \partial\log f(X_i;\theta)/\partial\theta$（即得分，期望 0、方差 $I(\theta)$），$\Lambda_i = -\partial^2 \log f(X_i;\theta)/\partial\theta^2$（期望 $I(\theta)$）。分母故意配成 $n^{-1}\sum$ 的平均形式、分子配成 $n^{-1/2}\sum$，就是为了让下面两条大数定律/CLT 各自就位。
-> **再分而治之**：分子由 **CLT** 收敛到 $N(0, I(\theta))$（均值为零的 IID 和，方差正是 $I(\theta)$——引理 9.31 在这里接上）；分母由**大数定律**收敛到 $I(\theta)$；两式相除由 **Slutsky**（定理 5.5(e)）得 $\sqrt{n}(\widehat{\theta}-\theta) \rightsquigarrow N(0, 1/I(\theta))$。
-> **最后换掉真值**：$I(\theta)$ 连续时 $I(\widehat{\theta}) \xrightarrow{P} I(\theta)$（相合性的直接推论），再用一次 Slutsky 得第 2 条——真值 $\theta$ 未知时也能算出 $\widehat{\text{se}}$。∎
+**证明思路（课本附录 9.13.1；每步用了哪个工具要认出来）**：
+整段只做一件事：从"MLE 是驻点"推出一个"分子分母都能用大数定律/CLT 处理"的比值。
+**先展开**：MLE 是驻点，$\ell'(\widehat{\theta}) = 0$；在 $\theta$ 处一阶泰勒展开 $0 \approx \ell'(\theta) + (\widehat{\theta}-\theta)\ell''(\theta)$，整理得
+$$\sqrt{n}(\widehat{\theta} - \theta) = \frac{-\frac{1}{\sqrt{n}}\sum_i Y_i}{\frac{1}{n}\sum_i \Lambda_i} = \frac{\text{TOP}}{\text{BOTTOM}}$$
+其中 $Y_i = \partial\log f(X_i;\theta)/\partial\theta$（即得分，期望 0、方差 $I(\theta)$），$\Lambda_i = -\partial^2 \log f(X_i;\theta)/\partial\theta^2$（期望 $I(\theta)$）。分母故意配成 $n^{-1}\sum$ 的平均形式、分子配成 $n^{-1/2}\sum$，就是为了让下面两条大数定律/CLT 各自就位。
+**再分而治之**：分子由 **CLT** 收敛到 $N(0, I(\theta))$（均值为零的 IID 和，方差正是 $I(\theta)$——引理 9.31 在这里接上）；分母由**大数定律**收敛到 $I(\theta)$；两式相除由 **Slutsky**（定理 5.5(e)）得 $\sqrt{n}(\widehat{\theta}-\theta) \rightsquigarrow N(0, 1/I(\theta))$。
+**最后换掉真值**：$I(\theta)$ 连续时 $I(\widehat{\theta}) \xrightarrow{P} I(\theta)$（相合性的直接推论），再用一次 Slutsky 得第 2 条——真值 $\theta$ 未知时也能算出 $\widehat{\text{se}}$。∎
 
 **定理 9.19（渐近置信区间）**：令
 
@@ -149,17 +149,17 @@ $$C_n = \left(\widehat{\theta} - z_{\alpha/2}\,\widehat{\text{se}},\ \widehat{\t
 
 则 $\mathbb{P}_\theta(\theta \in C_n) \to 1 - \alpha$。
 
-> [!note]- 证明
-> 令 $Z \sim N(0,1)$：
-> $$\mathbb{P}_\theta(\theta \in C_n) = \mathbb{P}_\theta\left(-z_{\alpha/2} \le \frac{\widehat{\theta} - \theta}{\widehat{\text{se}}} \le z_{\alpha/2}\right) \to \mathbb{P}(-z_{\alpha/2} < Z < z_{\alpha/2}) = 1-\alpha$$
-> 第一步只是移项，第二步用定理 9.18 第 2 条。∎
->
-> **严格化（课件 Lecture_4 p77–p78：分布函数收敛 + 夹逼）**：上面第二步 "$Z_n\leadsto Z\Rightarrow$ 区间概率收敛"需要一点小心——依分布收敛只保证在 $F_Z$ 的连续点有 $F_{Z_n}(x)\to F_Z(x)$，而 $F_Z=\Phi$ 虽处处连续，左端点涉及**严格不等号** $\{Z_n<-z\}$，必须用夹逼。记 $F_n(x)=\mathbb{P}_\theta(Z_n\le x)$、$z=z_{\alpha/2}$：
-> - 右端点直接由收敛得 $F_n(z)\to\Phi(z)$；
-> - 左端点：对任意 $\delta>0$，$F_n(-z-\delta)\le\mathbb{P}_\theta(Z_n<-z)\le F_n(-z)$。取 $n\to\infty$ 再令 $\delta\downarrow0$，两边都趋于 $\Phi(-z)$，故 $\mathbb{P}_\theta(Z_n<-z)\to\Phi(-z)$。
-> 于是 $\mathbb{P}_\theta(\theta\in C_n)=F_n(z)-\mathbb{P}_\theta(Z_n<-z)\to\Phi(z)-\Phi(-z)=1-\alpha$。∎
->
-> **注意**：这正是课本定理 6.16 的一般形式（$T_n$ 不必是 MLE，只需 $(T_n-\theta)/s_n\leadsto N(0,1)$；见 [[统计学完全教程/第6章 模型统计推断与学习/p15 第6章 模型统计推断与学习.md#5.3 基于正态的置信区间|p15 §5.3]]）。$Z_n$ 对每个 $n$ 精确正态时（如 $\sigma$ 已知的正态均值），覆盖率对每个 $n$ 精确为 $1-\alpha$；这里只有极限保证，有限样本可能明显低于 nominal 水平。
+**证明**：
+令 $Z \sim N(0,1)$：
+$$\mathbb{P}_\theta(\theta \in C_n) = \mathbb{P}_\theta\left(-z_{\alpha/2} \le \frac{\widehat{\theta} - \theta}{\widehat{\text{se}}} \le z_{\alpha/2}\right) \to \mathbb{P}(-z_{\alpha/2} < Z < z_{\alpha/2}) = 1-\alpha$$
+第一步只是移项，第二步用定理 9.18 第 2 条。∎
+
+**严格化（课件 Lecture_4 p77–p78：分布函数收敛 + 夹逼）**：上面第二步 "$Z_n\leadsto Z\Rightarrow$ 区间概率收敛"需要一点小心——依分布收敛只保证在 $F_Z$ 的连续点有 $F_{Z_n}(x)\to F_Z(x)$，而 $F_Z=\Phi$ 虽处处连续，左端点涉及**严格不等号** $\{Z_n<-z\}$，必须用夹逼。记 $F_n(x)=\mathbb{P}_\theta(Z_n\le x)$、$z=z_{\alpha/2}$：
+- 右端点直接由收敛得 $F_n(z)\to\Phi(z)$；
+- 左端点：对任意 $\delta>0$，$F_n(-z-\delta)\le\mathbb{P}_\theta(Z_n<-z)\le F_n(-z)$。取 $n\to\infty$ 再令 $\delta\downarrow0$，两边都趋于 $\Phi(-z)$，故 $\mathbb{P}_\theta(Z_n<-z)\to\Phi(-z)$。
+于是 $\mathbb{P}_\theta(\theta\in C_n)=F_n(z)-\mathbb{P}_\theta(Z_n<-z)\to\Phi(z)-\Phi(-z)=1-\alpha$。∎
+
+**注意**：这正是课本定理 6.16 的一般形式（$T_n$ 不必是 MLE，只需 $(T_n-\theta)/s_n\leadsto N(0,1)$；见 [[统计学完全教程/第6章 模型统计推断与学习/p15 第6章 模型统计推断与学习.md#5.3 基于正态的置信区间|p15 §5.3]]）。$Z_n$ 对每个 $n$ 精确正态时（如 $\sigma$ 已知的正态均值），覆盖率对每个 $n$ 精确为 $1-\alpha$；这里只有极限保证，有限样本可能明显低于 nominal 水平。
 
 硬币把链条走完：$\widehat{\text{se}} = \sqrt{1/I_n(\widehat{\theta})} = \sqrt{\widehat{\theta}(1-\widehat{\theta})/n} = \sqrt{0.7 \times 0.3 / 10} = \sqrt{0.021} \approx 0.145$。$\alpha = 0.05$ 时 $z_{\alpha/2} = 1.96 \approx 2$，95% 区间
 
