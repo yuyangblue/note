@@ -279,6 +279,7 @@ $X_1,\cdots,X_n \sim \text{Unif}(0,\theta)$，MLE $\widehat{\theta} = X_{(n)} = 
 > 对任意 $\varepsilon > 0$（取 $0 < \varepsilon < \theta$）：
 > $$\mathbb{P}\left(\lvert\widehat{\theta} - \theta\rvert > \varepsilon\right) = \mathbb{P}(X_{(n)} < \theta - \varepsilon) = \mathbb{P}(X_1 < \theta-\varepsilon, \cdots, X_n < \theta-\varepsilon) = \left(\frac{\theta-\varepsilon}{\theta}\right)^n \to 0$$
 > 第二个等号用独立性、第三个等号用 $\mathbb{P}(X_i < c) = c/\theta$。结论：依概率收敛，$\widehat{\theta}$ 相合。
+>
 > 注意这是 p16 例 9.12 的续篇：正则条件失效的模型里 MLE 仍可能相合（定理 9.13 只是充分条件），但收敛**速度**变了——$((\theta-\varepsilon)/\theta)^n$ 是指数速度，比通常的 $1/\sqrt{n}$ 快得多，$\sqrt{n}(\widehat{\theta}-\theta)$ 的极限分布退化，定理 9.18 的正态近似在这里不成立。
 
 **考点**：[[#3. MLE 的相合性|相合性]]、[[统计学完全教程/第5章 收敛与极限/p13 第5章 收敛（上）收敛类型与大数定律.md#2.1 依概率收敛|依概率收敛]]
@@ -287,11 +288,19 @@ $X_1,\cdots,X_n \sim \text{Unif}(0,\theta)$，MLE $\widehat{\theta} = X_{(n)} = 
 $X_1,\cdots,X_n \sim N(\theta,1)$。令 $Y_i = \mathbb{1}(X_i > 0)$，$\psi = \mathbb{P}(Y_1 = 1)$。(a) 求 $\psi$ 的 MLE $\widehat{\psi}$ 及其 Delta 方法标准误；(b) $\widehat{\psi} = \frac{1}{n}\sum Y_i$ 也是相合估计，求渐近相对效率 $\text{ARE}(\overline{\psi}, \widehat{\psi})$；(c) 若数据其实不正态，两者各收敛到什么？
 
 > [!note]- 解答
-> (a) $\psi = \mathbb{P}(X > 0) = \Phi(\theta)$，由同变性 $\widehat{\psi} = \Phi(\overline{X}_n)$。Delta 方法：$g(\theta) = \Phi(\theta)$，$g'(\theta) = \phi(\theta)$（标准正态密度），$I(\theta) = 1$，故 $\text{se}(\widehat{\psi}) = \phi(\theta)/\sqrt{n}$，估计为 $\phi(\overline{X}_n)/\sqrt{n}$。
-> (b) $\overline{\psi} = \frac{1}{n}\sum Y_i$ 是 IID 均值，CLT 给 $\sqrt{n}(\overline{\psi} - \psi) \rightsquigarrow N(0, \psi(1-\psi))$，即 $u^2 = \psi(1-\psi)$；而 MLE 的 $t^2 = \phi(\theta)^2$。于是
+> (a) $\psi = \mathbb{P}(X > 0) = \Phi(\theta)$，由同变性 $\widehat{\psi} = \Phi(\overline{X}_n)$。
+>
+> Delta 方法：$g(\theta) = \Phi(\theta)$，$g'(\theta) = \phi(\theta)$（标准正态密度），$I(\theta) = 1$，故 $\text{se}(\widehat{\psi}) = \phi(\theta)/\sqrt{n}$，估计为 $\phi(\overline{X}_n)/\sqrt{n}$。
+>
+> (b) $\overline{\psi} = \frac{1}{n}\sum Y_i$ 是 IID 均值，CLT 给 $\sqrt{n}(\overline{\psi} - \psi) \rightsquigarrow N(0, \psi(1-\psi))$，即 $u^2 = \psi(1-\psi)$；而 MLE 的 $t^2 = \phi(\theta)^2$。
+>
+> 于是
 > $$\text{ARE}(\overline{\psi}, \widehat{\psi}) = \frac{\phi(\theta)^2}{\psi(1-\psi)}$$
 > 在 $\theta = 0$ 处：$\psi = 1/2$，$\phi(0) = 1/\sqrt{2\pi}$，ARE $= \frac{1/(2\pi)}{1/4} = \frac{2}{\pi} \approx 0.64$——与中位数对 MLE 的效率比完全相同（$Y_i = \mathbb{1}(X_i>0)$ 恰是中位数的数据压缩版）。
-> (c) 若 $X_i$ 的真实分布是 $F \ne N(\theta,1)$，则 $\widehat{\psi} = \Phi(\overline{X}_n)$ 收敛到 $\Phi(\mathbb{E}_F X)$，一般不等于真实的 $\mathbb{P}_F(X>0)$——**MLE 收敛到了错误的靶子**；而 $\overline{\psi}$ 由大数定律仍收敛到真实的 $\mathbb{P}_F(X>0)$。模型错了，"渐近最优"的 MLE 可以输给笨办法：定理 9.23 的前提是模型正确。
+>
+> (c) 若 $X_i$ 的真实分布是 $F \ne N(\theta,1)$，则 $\widehat{\psi} = \Phi(\overline{X}_n)$ 收敛到 $\Phi(\mathbb{E}_F X)$，一般不等于真实的 $\mathbb{P}_F(X>0)$——**MLE 收敛到了错误的靶子**；而 $\overline{\psi}$ 由大数定律仍收敛到真实的 $\mathbb{P}_F(X>0)$。
+>
+> 模型错了，"渐近最优"的 MLE 可以输给笨办法：定理 9.23 的前提是模型正确。
 
 **考点**：[[#6. 最优性与渐近相对效率|ARE]]、[[#7. Delta 方法|Delta 方法]]、[[#5. 渐近正态与置信区间|渐近正态]]
 
@@ -300,11 +309,15 @@ $n_1$ 人接受处理 1，$n_2$ 人接受处理 2；有效人数 $X_1 \sim \text
 
 > [!note]- 解答
 > (a) 同变性 + 各自的 MLE：$\widehat{p}_1 = X_1/n_1$、$\widehat{p}_2 = X_2/n_2$，$\widehat{\psi} = \widehat{p}_1 - \widehat{p}_2$。
+>
 > (b) 两组独立，对数似然可加，Fisher 信息矩阵是对角的：
 > $$I(p_1,p_2) = \begin{pmatrix} \dfrac{n_1}{p_1(1-p_1)} & 0 \\ 0 & \dfrac{n_2}{p_2(1-p_2)} \end{pmatrix} \qquad\Longrightarrow\qquad I^{-1} = \begin{pmatrix} \dfrac{p_1(1-p_1)}{n_1} & 0 \\ 0 & \dfrac{p_2(1-p_2)}{n_2} \end{pmatrix}$$
 > (c) $\nabla g = (1, -1)^T$，代入定理 9.28：
 > $$\text{se}(\widehat{\psi}) = \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}$$
-> (d) $\widehat{p}_1 = 0.8$、$\widehat{p}_2 = 0.74$、$\widehat{\psi} = 0.06$；$\text{se} = \sqrt{0.0008 + 0.000962} \approx 0.042$。$z_{0.05} = 1.645$，90% 区间
+> (d) $\widehat{p}_1 = 0.8$、$\widehat{p}_2 = 0.74$、$\widehat{\psi} = 0.06$；
+>
+> $\text{se} = \sqrt{0.0008 + 0.000962} \approx 0.042$。
+> $z_{0.05} = 1.645$，90% 区间
 > $$0.06 \pm 1.645 \times 0.042 = 0.06 \pm 0.069 \approx (-0.01,\ 0.13)$$
 > 区间包含 0——在这个置信水平下没有证据表明两种处理有效比例不同。
 
