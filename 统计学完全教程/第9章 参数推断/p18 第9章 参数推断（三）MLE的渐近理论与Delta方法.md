@@ -207,7 +207,7 @@ $$\mathbb{V}(\widetilde{\theta}_n) \ \gtrsim\ \mathbb{V}(\widehat{\theta}_n)$$
 ## 7. Delta 方法
 
 现在处理关注参数：$T = g(\theta)$，$g$ 光滑。MLE 的同变性（p16 定理 9.14）给出 $\widehat{T} = g(\widehat{\theta})$；问题变成：$\widehat{T}$ 的分布是什么、给它配什么标准误？
-
+ 
 **定理 9.24（Delta 方法）**：若 $g$ 可微且 $g'(\theta) \ne 0$，则
 
 $$\frac{\widehat{T} - \tau}{\widehat{\text{se}}(\widehat{T})} \rightsquigarrow N(0,1), \qquad \widehat{\text{se}}(\widehat{T}) = \left\lvert g'(\widehat{\theta})\right\rvert \widehat{\text{se}} \qquad (9.15)$$
@@ -235,8 +235,7 @@ $$I_n(\theta) = -\begin{pmatrix} \mathbb{E}_\theta(H_{11}) & \cdots & \mathbb{E}
 
 **定理 9.27**：正则条件下 $\widehat{\theta} \approx N(\theta, I_n(\theta)^{-1})$（即 $\sqrt{n}(\widehat{\theta}-\theta) \rightsquigarrow N(0, I(\theta)^{-1})$）。第 $j$ 个分量的标准误 $se_j = \sqrt{I_n^{-1}(j,j)}$（$I_n^{-1}$ 的第 $j$ 个对角元开方），近似协方差 $\text{Cov}(\widehat{\theta}_j, \widehat{\theta}_k) \approx I_n^{-1}(j,k)$。
 
-注意：多参数情形方差和协方差**一起**由 $I_n^{-1}$ 给出——参数之间的相关性藏在矩阵的非对角元里，这是单参数公式 $\text{se} = 1/\sqrt{I_n}$ 的正确推广（先取逆、再取对角元；不是把各参数的 $I_n$ 分别取倒数）。
-
+注意：多参数情形方差和协方差**一起**由 $I_n^{-1}$ 给出——参数之间的相关性藏在矩阵的非对角元里，这是单参数公式 $\text{se} = 1/\sqrt{I_n}$ 的正确推广（先取逆、再取对角元；不是把各参数的 $I_n$ 分别取倒数）
 **定理 9.28（多参数 Delta 方法）**：设 $T = g(\theta_1,\cdots,\theta_k)$，梯度 $\nabla g = \left(\frac{\partial g}{\partial\theta_1},\cdots,\frac{\partial g}{\partial\theta_k}\right)^T$ 在 $\theta$ 处非零。$\widehat{T} = g(\widehat{\theta})$ 满足
 
 $$\frac{\widehat{T} - \tau}{\widehat{\text{se}}(\widehat{T})} \rightsquigarrow N(0,1), \qquad \widehat{\text{se}}(\widehat{T}) = \sqrt{(\nabla g)^T\, I_n^{-1}(\widehat{\theta})\, \nabla g} \qquad (9.20)$$
