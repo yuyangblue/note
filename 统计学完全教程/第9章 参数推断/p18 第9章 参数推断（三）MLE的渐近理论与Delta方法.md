@@ -120,6 +120,7 @@ $$I(\theta) = -\mathbb{E}_\theta\left(\frac{\partial^2 \log f(X;\theta)}{\partia
 
 **动机（Fisher 信息在测什么）**：得分期望为零（引理 9.31），但它的**波动幅度**取决于数据对 $\theta$ 有多敏感——数据越能"暴露"参数（分布越尖、越依赖 $\theta$），单条观测的得分越舍得给大数值，方差越大，Fisher 信息越大。期望为零、方差非零：得分本质是一个**均值为零的噪声项**，这正是 §5 的证明里分子走 CLT 的原因。
 
+
 硬币复算：$s = X/\theta - (1-X)/(1-\theta)$ 是 $X$ 的线性函数，斜率 $\frac{1}{\theta} + \frac{1}{1-\theta}$，故
 
 $$I(\theta) = \mathbb{V}(s) = \left(\frac{1}{\theta} + \frac{1}{1-\theta}\right)^2 \mathbb{V}(X) = \frac{\mathbb{V}(X)}{\theta^2(1-\theta)^2} = \frac{\theta(1-\theta)}{\theta^2(1-\theta)^2} = \frac{1}{\theta(1-\theta)}$$
