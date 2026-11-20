@@ -529,6 +529,39 @@
   box-shadow: 0 8px 20px rgb(15 23 42 / 0.08);
 }
 
+/* ---------- 顶栏前景色 ----------
+   Material 的顶栏文字/图标默认用 --md-primary-bg-color（原值 #fff），
+   而本样式把 .md-header 背景改成了近白色，白字配白底会完全看不见，
+   连同左侧菜单按钮一起消失。这里把该变量按配色反转。 */
+[data-md-color-scheme="default"] {
+  --md-primary-bg-color: #0f172a;
+  --md-primary-bg-color--light: rgb(15 23 42 / 0.72);
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-bg-color: #e6edf3;
+  --md-primary-bg-color--light: rgb(230 237 243 / 0.72);
+}
+
+/* ---------- 公式与表格：超宽时横向滚动，不撑破版面 ---------- */
+.md-typeset mjx-container {
+  max-width: 100%;
+}
+.md-typeset mjx-container[display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35em 0;
+}
+.md-typeset .md-typeset__table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 中文与行内公式混排时，减少孤字、孤标点掉行 */
+.md-typeset p,
+.md-typeset li {
+  text-wrap: pretty;
+}
+
 /* ---------- 响应式 ---------- */
 @media screen and (max-width: 60em) {
   .hero {
@@ -539,5 +572,78 @@
   }
   .course-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* 平板与手机：正文卡片去掉边角，全宽阅读 */
+@media screen and (max-width: 44em) {
+  .md-main__inner {
+    margin-top: 0.6rem;
+  }
+  .md-content {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+  }
+  .md-typeset {
+    font-size: 0.9rem;
+    line-height: 1.85;
+  }
+  .md-typeset h1 {
+    font-size: 1.55em;
+  }
+  .md-typeset h2 {
+    font-size: 1.18em;
+  }
+  .md-typeset table:not([class]) {
+    font-size: 0.78rem;
+  }
+  .md-typeset pre > code {
+    font-size: 0.76rem;
+  }
+}
+
+/* 窄屏手机（≤480px） */
+@media screen and (max-width: 30em) {
+  .hero {
+    padding: 1.5rem 1.15rem 1.3rem;
+    border-radius: 14px;
+  }
+  .hero h1 {
+    font-size: 1.55rem;
+    letter-spacing: 0.5px;
+  }
+  .hero-sub {
+    font-size: 0.92rem;
+    margin-bottom: 1.3rem;
+  }
+  .hero-badge {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.7rem;
+  }
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 0.9rem 0;
+    margin-top: 1.6rem;
+  }
+  .stat {
+    flex: 1 1 33.33%;
+  }
+  .part-grid,
+  .course-grid,
+  .guide-list,
+  .course-list {
+    grid-template-columns: 1fr;
+  }
+  .part-card,
+  .course-card {
+    padding: 1.05rem 1rem;
+  }
+  .md-typeset h1 {
+    font-size: 1.42em;
+  }
+  .md-typeset h2 {
+    font-size: 1.12em;
   }
 }
