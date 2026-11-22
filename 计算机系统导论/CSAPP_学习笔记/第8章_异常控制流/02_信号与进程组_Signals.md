@@ -5,6 +5,7 @@
 > `15-ecf-signals.pptx`（中译版）
 >
 > （Bryant & O'Hallaron）+ 《深入理解计算机系统》原书第 3 版第八章 8.5–8.6 节（中文版）+ 课堂录音（《进程回收与僵尸进程讲解》《进程与线程及信号相关讲解》《计算机相关课程教学内容说明》）。
+> 📌 配套实验：[[实验8_迷你Shell_msh|实验课：迷你 Shell msh（SIGALRM/SIGCHLD/SIGINT 实战）]]
 > 环境假设：Linux x86-64 系统。
 
 ***
