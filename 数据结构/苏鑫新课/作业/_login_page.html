@@ -1,0 +1,486 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    
+    <meta http-equiv="Expires" CONTENT="0"> 
+    <meta http-equiv="Cache-Control" CONTENT="no-cache"> 
+    <meta http-equiv="Pragma" CONTENT="no-cache"> 
+    <link rel="shortcut icon" href="/images/cgicon.png">
+
+    <TITLE></TITLE>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="/sv2/css/bootstrap4/bootstrap.min.css" rel="stylesheet">
+   
+    <link href="/sv2/css/bootstrap4/fontawesome/css/all.css" rel="stylesheet">
+    
+    <link href="/css/cg_sv2.css" rel="stylesheet">
+    
+    <script src="/sv2/css/bootstrap4/jquery-3.5.1.min.js"></script>
+    
+    <script src="/sv2/css/bootstrap4/bootstrap.bundle.min.js"></script>
+
+  </head>
+
+<body>
+<link href="css/simplestyle.css" rel="stylesheet">
+<link href="/css/studentCommonv1.css" rel="stylesheet">
+<script src="/third/echart/echarts.min.js" charset="UTF-8"></script>
+<script>
+    document.title = "武汉大学人工智能学院专业课一体化平台";
+</script>
+
+    
+    
+    
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function clearInputBox(INPUTOBJ, tipText) {
+            var textInput = document.getElementById(INPUTOBJ).value;
+            if(tipText === textInput) {
+                document.getElementById(INPUTOBJ).value = "";
+            }
+        }
+    </SCRIPT>
+    
+    <div class="anjing-tz d-none" id="anjing-tz">
+        <div class="f" style="width:103px;height:35px;"><img src="images/toptz.png" width="100%"/></div>
+        <div style="flex:1;margin:0 10px;font-size:16px;color:#333" id="vipNotice"></div>
+        <div class="l" style="margin-left:30px;cursor: pointer;" onclick="colse()">
+            <svg class="icon" width="16" height="16">
+                <use href="/images/nav/stusidev1.svg#close"></use>
+            </svg>    
+        </div>
+    </div>
+ 
+    
+    <nav class="navbar navbar-expand-lg navbar-light  py-4 anjing" role="navigation" id="cgclientNAV">
+       
+            <!-- Brand and toggle get grouped for better mobile display -->   
+        <div style="    display: flex;    height: 100%;align-items: center;">
+            
+            <a class="navbar-brand" href="#">
+                <img src="/userfiles/skin/logoCG7413466348.png" alt="CourseGrading" height="56" class="img-rounded" />
+                
+                <span class="title-left">人工智能学院专业课一体化平台</span>
+            </a>
+            
+            
+            <div class="collapse navbar-collapse" id="navbarSimple">
+                
+                <ul class="navbar-nav">
+
+                    
+
+                    
+                        <li class="nav-item ml-2 active"> <a class="nav-link" href="/pages">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#opencourse"></use>
+                            </svg> 开放课程</a></li>                
+                    
+                    
+                        <li class="nav-item ml-2 active"> <a class="nav-link" href="/sv2/indexexp/index.jsp">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#traintitle"></use>
+                            </svg> 实训</a></li>
+                    
+
+                    
+                        <li class="nav-item ml-2 active"> <a class="nav-link" href="/pages/pai/publicProjects.jsp">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#pai"></use>
+                            </svg> 算力平台</a></li>
+                    
+
+                    
+                        <li class="nav-item ml-2 active"> <a class="nav-link" href="/pages/contest/index.jsp">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#contest"></use>
+                            </svg> 比赛</a></li>
+                    
+
+                    
+                        <li class="nav-item ml-2 active"> <a class="nav-link" href="/acm/index.jsp">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#oj"></use>
+                            </svg> OnlineJudge</a></li>
+                    
+
+
+
+                    
+                        <li class="nav-item ml-2 active"> <a class="nav-link" href="/graduation/index.jsp">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#practice"></use>
+                            </svg> 综合实践</a></li>                    
+                    
+
+                    
+                        <li class="nav-item ml-2 active"> <a class="nav-link" href="/graduation/index.jsp">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#graduate"></use>
+                            </svg> 毕业设计</a></li>                    
+                    
+
+
+                    
+                        <li class="nav-item ml-2 active"><a class="nav-link" href="/gitlab/index.jsp" target="_blank">
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#gitlab"></use>
+                            </svg> GitLab</a></li>
+                    
+                    
+                    
+                    
+                    
+                     <!---适配移动端-->
+                                                                    
+                        <li class="nav-item ml-2 active teachermobel teacherclass">
+                            <a class="nav-link" href="/admin/login.jsp"><strong>
+                            <svg class="icon" width="16" height="16">
+                                <use href="/images/nav/stusidev1.svg#teacherlogin"></use>
+                            </svg> 教师登录</strong></a>
+                        </li>
+                        
+                        
+                    
+
+                </ul>
+            </div>    
+        </div>    <!-- /.navbar-collapse -->
+        
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSimple"
+            aria-controls="navbarSimple" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="anjing-flex-right">
+            <div class="anjing-right-line"></div>
+            <div class="nav-item active langswitch anjing-langswitch lang-dropdown-wrapper">
+                
+                <a class="nav-link dropdown-toggle" href="#" id="languageMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-globe"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageMenuLink">
+                    
+                    <a class="dropdown-item text-dark" href="?lang=en-US">English</a>
+                    
+                    <a class="dropdown-item text-dark" href="?lang=zh-CN">中文</a>
+                    
+                </div>
+            </div>
+            <div class="nav-item active teacher teacherclass">
+                
+                    <a class="nav-link" href="/admin/login.jsp"><strong>
+                        <svg class="icon" width="16" height="16">
+                            <use href="/images/nav/stusidev1.svg#teacherlogin"></use>
+                        </svg> 教师登录</strong>
+                    </a>
+                            
+
+            </div>
+        </div>
+        
+        
+    </nav>
+
+        
+       
+    <div class="container pt-0 mt-0 anjing" id="cgcontainerID">    
+        
+
+<div style="display: none;" id="browerWarnDIV">
+    <div class="alert alert-danger" role="alert">
+        <p class="text-center" id="browserAlertText"></p>
+    </div>
+</div>
+<script>
+    
+    function checkIEOldVers() {        
+        if (!navigator.cookieEnabled) {
+            document.getElementById("browerWarnDIV").style.display='inline';
+            document.getElementById("browserAlertText").innerHTML='您的浏览器禁用了cookie，将会影响正常使用，请启用cookie 或者更换推荐的浏览器(Chrome、Firefox等)访问！';      
+            return;
+        }
+        
+        var normalUserAgent = (navigator.userAgent.indexOf("chrome") > -1 || navigator.userAgent.indexOf("Safari") > -1 || navigator.userAgent.indexOf("Firefox") > -1) && navigator.userAgent.indexOf("MicroMessenger") < 0;
+        if (!normalUserAgent) {
+            document.getElementById("browerWarnDIV").style.display='inline';
+            document.getElementById("browserAlertText").innerHTML='您的浏览器与平台不兼容，会影响正常使用，推荐您更换为目前主流的浏览器： Chrome、Firefox、Edge、360（注意切换到<b>极速模式</b>）、Safari 等。'; 
+        }
+    }  
+    checkIEOldVers();
+</script>
+        
+        <!-- Heading Row -->
+        <div class="row pt-2 anjing">
+            <div class="col-md-3" id="bulletins" style="display: flex;flex-direction: column;justify-content:space-between;">      
+                <div id="submitsChartDIV"></div>
+                <div id="codelineChartDIV" class="pt-1"></div>
+                <div id="expChartDIV" class="pt-1"></div>
+            </div>
+            
+            <div class="col-md-6">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:100%">
+                
+                    <ol class="carousel-indicators">
+                           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                           <li data-target="#myCarousel" data-slide-to="1"></li>
+                           <li data-target="#myCarousel" data-slide-to="2"></li>
+                           <li data-target="#myCarousel" data-slide-to="3"></li>
+                    </ol>  
+                  
+                    <div class="carousel-inner" style="height:100%">
+                           <div class="carousel-item  active" style="height:100%">
+                                
+                                  <a href="#" ><img src="/userfiles/skin/libraryCG4089994181.jpg" class="d-block w-100" alt="First slide" style="height:100%"></a>
+                                   <div class="carousel-caption d-none d-md-block"><h1>32</h1>在线用户</div>
+                           </div>
+                           <div class="carousel-item " style="height:100%">
+                                
+                                  <a href="#" ><img class="d-block w-100" src="/userfiles/skin/mathCG4089346337.jpg" alt="Second slide" style="height:100%"></a>
+                                   <div class="carousel-caption d-none d-md-block"><h1>5560614</h1>评测次数</div>
+                           </div>
+                           <div class="carousel-item " style="height:100%">
+                                
+                                  <a href="#" ><img class="d-block w-100" src="/userfiles/skin/knowledgeCG4090070141.jpg" alt="Third slide" style="height:100%"></a>
+                                   <div class="carousel-caption d-none d-md-block"><h1>7739527</h1>代码行</div>
+                            </div>
+                            <div class="carousel-item " style="height:100%">
+                                
+                                  <a href="#" ><img class="d-block w-100" src="/userfiles/skin/appleCG4090443120.png" alt="Fourth slide" style="height:100%"></a>
+                                   <div class="carousel-caption d-none d-md-block"><h1>21</h1>在线课程</div>
+                                  
+                                  
+                           </div>
+                    </div>
+                           
+                    
+                    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+             </div>			
+				   
+					
+            </div>
+            <!-- /.col-md-3 -->
+            <div class="col-md-3 student-style">
+                
+                
+                
+                
+                
+                <h3 class="studen-h3">学生登录</h3>
+                        
+                
+
+                <div class="login-box">
+                    
+                    <div id="myLoginContent" class=" show active">                       
+
+                        
+
+<script language="javascript" src="/login/js/crypto-js.min.js"></script>
+<script language="javascript" src="/login/js/loginencode.js"></script>
+
+        
+        
+            
+
+
+                        <form class="forms" name="loginForm" action="/login/loginproc.jsp" method="post" onsubmit="return cgStuLoginSubmit();">
+
+                        
+                                <input name="IndexStyle" type="hidden" value="1">
+                                <div class="form-group">
+                                    <input name="stid" type="text" placeholder="学号" class="form-control" id="username" required />
+                                </div>
+                                <div class="form-group">
+                                    <input name="pwd" type="password" placeholder="密码"  class="form-control" id="password" required />
+                                </div>
+                                
+
+                                    <div class="form-group" style="display: flex;justify-content: space-between;align-items: center;">      
+                                        <input id="captchaCode" type="text" name="captchaCode" class="form-control" placeholder="请输入验证码" required />
+                                        <img src="/cgjiaoyan" class="img-responsive" style="cursor: pointer;" onclick="this.src='/cgjiaoyan?t=' + Date.now()" />
+                                    </div>                                           
+
+                                
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block btn-primary-bg" id="cgstuloginbtn">登 录</button>
+                                </div>
+                                <div class="text-right">
+                                    <a href="/findpasswd/findpasswd.jsp" class="help-block">忘记密码</a>
+                                </div>
+                            
+                        </form>
+                    </div> 
+                    <span id="cgmessagecards"></span>
+                </div>    
+                        
+                <script>
+                    // 1. 给li绑定点击事件
+                    $('.login-tab li').click(function () {
+                        // 获取当前li的索引
+                        var currentIndex = $(this).data('index');
+                        console.log('当前选中索引：', currentIndex); // 控制台打印索引，方便调试
+
+                        // 2. 切换li的激活样式（可选，提升视觉体验）
+                        $('.login-tab li').removeClass('active');
+                        $(this).addClass('active');
+
+                        // 3. 根据索引显示对应div，隐藏其他div
+                        // 方式1：用Bootstrap的tab切换（推荐，兼容原有样式）
+                        $('.login-box>div').removeClass('show active');
+                        $('.login-box>div').eq(currentIndex).addClass('show active');
+
+                        if(currentIndex === 2){
+                            window.location.href = "/admin/login.jsp";
+                        }
+                        // 方式2：纯jQuery手动控制显示隐藏（若不用Bootstrap，注释方式1，启用方式2）
+                        // $('#myLoginContent .tab-pane').hide();
+                        // $('#myLoginContent .tab-pane').eq(currentIndex).show();
+                    });
+                </script>                            
+				
+            </div><!-- /.col-md-3 -->
+            
+        </div>
+                        
+        <div id="servicesDIV"></div>     
+        <div id="openCoursesDIV"></div>  
+        <div id="bankCoursesDIV"></div>               
+        <div id="courses"></div>                
+        <script>
+            function colse(){
+                $("#anjing-tz").hide();
+            }
+            $(document).ready(function(){
+                $("#vipNotice").load("/bulletin/showvipnotice_cs.jsp", {}, function() {$(window).trigger('resize');});
+                $("#cgmessagecards").load("/bulletin/clientbulletins_toutiao.jsp");
+                
+                
+                    document.getElementById("submitsChartDIV").innerHTML = "<div class=\" text-center\"><div class=\"spinner-grow text-primary\" role=\"status\"></div></div>";
+                    $("#submitsChartDIV").load("submitsChart.jsp", {}, function() {$(window).trigger('resize');});     
+                    $("#codelineChartDIV").load("codelineChart.jsp", {}, function() {$(window).trigger('resize');});  
+                    $("#expChartDIV").load("expChart.jsp", {}, function() {$(window).trigger('resize');}); 
+
+                    $("#statisticDIV").load("statistic.jsp", {}, function() {$(window).trigger('resize');}); 
+                    $("#servicesDIV").load("services.jsp", {}, function() {$(window).trigger('resize');}); 
+                    $("#bankCoursesDIV").load("bankCourses.jsp", {}, function() {$(window).trigger('resize');}); 
+                
+                
+                
+                $("#openCoursesDIV").load("openCourses.jsp", {}, function() {$(window).trigger('resize');}); 
+                
+                
+                
+            });
+            
+            try{
+                new QWebChannel(qt.webChannelTransport, function(channel) {
+                    var client = channel.objects.examClient;
+                    
+                    client.set_prevent_switch(false);
+                    
+                    // 显示最小化按钮
+                    client.set_show_minimize_button(true);
+
+                    // 显示关闭按钮
+                    client.set_show_close_button(true);
+                    
+                    const elements = document.getElementsByClassName('teacherclass');
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].classList.add('d-none');
+                    }
+                }); 
+                
+            } catch(err){
+            }
+        </script>                        
+        
+        <br><br>
+        
+    </div>
+    <!-- /.container -->
+    
+    
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container text-center">
+            <div class="footercontent">
+                <span class="style-big">武汉大学人工智能学院专业课一体化平台</span>
+                <small>Copyright &copy; CourseGrading 8.3.0 旗舰版</small>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(window).resize(function (){           
+           setTimeout(cgfooterByResize, 500);
+        });
+        function cgfooterByResize() {
+           
+            var cgclientNAVHeight = 72;
+            var cgclientNAV = document.getElementById('cgclientNAV');
+            if (typeof(cgclientNAV) != 'undefined' && cgclientNAV != null) {  
+                cgclientNAVHeight = document.getElementById('cgclientNAV').clientHeight;
+            }
+            
+            var cgcontainerID =  document.getElementById('cgcontainerID');
+            if (typeof(cgcontainerID) != 'undefined' && cgcontainerID != null) {                
+                var cgPageBodyHeight = document.getElementById('cgcontainerID').clientHeight;
+                var cgFooterHeight = document.getElementById('footer').clientHeight;   
+                
+                var winMinHeight =  window.innerHeight - cgFooterHeight - cgclientNAVHeight;               
+                
+                $("#cgcontainerID").attr('style', "min-height:" + winMinHeight + "px");
+                if(cgPageBodyHeight < winMinHeight){ 
+                    $("#footer").css("position","fixed");                           
+                }else{
+                    $("#footer").css("position","relative");          
+                }                
+            }    
+        }  
+        
+        $(document).ready(function(){            
+           cgfooterByResize();
+        });     
+        
+       
+        
+    </script>
+        <!-- EduCGRunning -->
+
+</body>
+
+</html>
+<script src="/admin/js/anjingCommon.js"></script>
+<script>
+    setThemeByUrl('blue');
+</script>
